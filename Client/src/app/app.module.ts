@@ -10,13 +10,19 @@ import { AppProxy } from './services/app.proxy';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
 import { SettingComponent } from './components/setting/setting.component';
+import { UsersComponent } from './components/app/users/users.component';
+import { UserDetailsComponent } from './components/app/users/user-details/user-details.component';
+import { EventsComponent } from './components/events/events.component';
 
 
 @NgModule({
   declarations: [
     //components
     AppComponent,
-    SettingComponent    
+    SettingComponent ,
+    UsersComponent,
+    UserDetailsComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,
@@ -24,9 +30,9 @@ import { SettingComponent } from './components/setting/setting.component';
     HttpModule,
     HttpClientModule,   
     RouterModule.forRoot([
-      {
-        path: "setting", component: SettingComponent
-      },
+        {path: "setting", component: SettingComponent},
+        {path: "user-details",component:UserDetailsComponent},,
+        {path: "events", component:EventsComponent,}       
     ], { useHash: true }) 
   ],
   providers: [AppProxy],
