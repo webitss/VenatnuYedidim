@@ -8,28 +8,27 @@ import { RouterModule, Route } from '@angular/router';
 import { AppProxy } from './services/app.proxy';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
+import { UsersComponent } from './components/app/users/users.component';
+import { UserDetailsComponent } from './components/app/users/user-details/user-details.component';
+
 
 @NgModule({
   declarations: [
     //components
-    AppComponent    
+    AppComponent,
+    UsersComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     HttpClientModule,   
-    // RouterModule.forRoot([
-    //   {
-    //     path: ":uGameId", component: ?,
-    //     children: [
-    //       { path: "", component: ? },
-    //       { path: "opening", component: ? },
-    //       { path: "clickers/:uDivisionId/:step", component: ? },
-    //       { path: "summary/:mode", component: ? },
-    //     ]
-    //   },
-    // ], { useHash: true }) 
+    RouterModule.forRoot([
+      {
+        path:"user-details",component:UserDetailsComponent
+      },
+    ], { useHash: true }) 
   ],
   providers: [AppProxy],
   bootstrap: [AppComponent]
