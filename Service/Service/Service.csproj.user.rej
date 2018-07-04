@@ -1,0 +1,10 @@
+diff a/Service/Service/Service.csproj.user b/Service/Service/Service.csproj.user	(rejected hunks)
+@@ -3,7 +3,7 @@
+   <PropertyGroup>
+     <ProjectView>ShowAllFiles</ProjectView>
+     <NameOfLastUsedPublishProfile>FolderProfile</NameOfLastUsedPublishProfile>
+-    <UseIISExpress>true</UseIISExpress>
++    <UseIISExpress>false</UseIISExpress>
+     <Use64BitIISExpress />
+     <IISExpressSSLPort />
+     <IISExpressAnonymousAuthentication />
