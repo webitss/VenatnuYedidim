@@ -8,28 +8,25 @@ import { RouterModule, Route } from '@angular/router';
 import { AppProxy } from './services/app.proxy';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
+import { EventsComponent } from './components/events/events.component';
 
 @NgModule({
   declarations: [
     //components
-    AppComponent    
+    AppComponent,
+    EventsComponent    
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     HttpClientModule,   
-    // RouterModule.forRoot([
-    //   {
-    //     path: ":uGameId", component: ?,
-    //     children: [
-    //       { path: "", component: ? },
-    //       { path: "opening", component: ? },
-    //       { path: "clickers/:uDivisionId/:step", component: ? },
-    //       { path: "summary/:mode", component: ? },
-    //     ]
-    //   },
-    // ], { useHash: true }) 
+    RouterModule.forRoot([
+      {
+        path: "events", component:EventsComponent,
+       
+      },
+    ], { useHash: true }) 
   ],
   providers: [AppProxy],
   bootstrap: [AppComponent]
