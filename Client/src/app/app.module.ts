@@ -8,28 +8,24 @@ import { RouterModule, Route } from '@angular/router';
 import { AppProxy } from './services/app.proxy';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
+import { AvrechimComponent } from './components/app/avrechim/avrechim.component';
 
 @NgModule({
   declarations: [
     //components
-    AppComponent    
+    AppComponent,
+    AvrechimComponent    
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     HttpClientModule,   
-    // RouterModule.forRoot([
-    //   {
-    //     path: ":uGameId", component: ?,
-    //     children: [
-    //       { path: "", component: ? },
-    //       { path: "opening", component: ? },
-    //       { path: "clickers/:uDivisionId/:step", component: ? },
-    //       { path: "summary/:mode", component: ? },
-    //     ]
-    //   },
-    // ], { useHash: true }) 
+    RouterModule.forRoot([
+      {
+        path: "/Avrechim", component: AvrechimComponent,     
+      },
+    ], { useHash: true }) 
   ],
   providers: [AppProxy],
   bootstrap: [AppComponent]
