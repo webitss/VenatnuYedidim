@@ -1,5 +1,5 @@
 import { NgModule, Component } from '@angular/core';
-import { BrowserModule} from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from "@angular/http";
@@ -19,7 +19,7 @@ import { EventsComponent } from './components/events/events.component';
   declarations: [
     //components
     AppComponent,
-    SettingComponent ,
+    SettingComponent,
     UsersComponent,
     UserDetailsComponent,
     EventsComponent
@@ -28,12 +28,12 @@ import { EventsComponent } from './components/events/events.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    HttpClientModule,   
+    HttpClientModule,
     RouterModule.forRoot([
-        {path: "setting", component: SettingComponent},
-        {path: "user-details",component:UserDetailsComponent},,
-        {path: "events", component:EventsComponent,}       
-    ], { useHash: true }) 
+      { path: "setting", component: SettingComponent },
+      { path: "user-details", component: UserDetailsComponent }, ,
+      { path: "events", component: EventsComponent, }
+    ], { useHash: true })
   ],
   providers: [AppProxy],
   bootstrap: [AppComponent]
