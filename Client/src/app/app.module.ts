@@ -9,6 +9,7 @@ import { RouterModule, Route } from '@angular/router';
 import { AppProxy } from './services/app.proxy';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
+import { AvrechimComponent } from './components/avrechim/avrechim.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
@@ -16,18 +17,25 @@ import { EventsComponent } from './components/events/events.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { EventParticipantsComponent } from './components/event-participants/event-participants.component';
 import { EventComponent } from './components/event/event.component';
+import { AvrechimDetailsComponent } from './components/avrechim-details/avrechim-details.component';
+import { StudentsComponent } from './components/students/students.component';
+import { StudentDetailsComponent } from './components/student-details/student-details.component';
 
 @NgModule({
   declarations: [
     //components
     AppComponent,
+    AvrechimComponent,
     SettingsComponent,
     UsersComponent,
     UserDetailsComponent,
     EventsComponent,
     EventDetailsComponent,
     EventParticipantsComponent,
-    EventComponent
+    EventComponent,
+    AvrechimDetailsComponent,
+    StudentsComponent,
+    StudentDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,15 +44,19 @@ import { EventComponent } from './components/event/event.component';
     HttpClientModule,
     RouterModule.forRoot([
       // { path: "students", component: StudentsComponent },
-      // { path: "avrechim", component: AvrechimComponent },
+      { path: "avrechim", component: AvrechimComponent },
+      { path: "avrechim/avrechimDetails/:id", component: AvrechimDetailsComponent },
+      // { path: "avrechimDetails/:id", component: AvrechimDetailsComponent },    
       { path: "events", component: EventsComponent },
-      { path: "events/event", component: EventComponent
-       ,children:([ { path: "event-participants", component: EventParticipantsComponent }
-       ,{ path: "event-details", component:  EventDetailsComponent}])
+      {
+        path: "events/event", component: EventComponent,
+        children: ([{ path: "event-participants", component: EventParticipantsComponent }
+          , { path: "event-details", component: EventDetailsComponent }])
       },
       { path: "users", component: UsersComponent },
       { path: "users/user-details", component: UserDetailsComponent },
-      { path: "settings", component: SettingsComponent }
+      { path: "settings", component: SettingsComponent },
+      { path: "students", component: StudentsComponent }
     ], { useHash: true })
   ],
   providers: [AppProxy],
