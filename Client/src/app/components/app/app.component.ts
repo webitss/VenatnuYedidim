@@ -10,11 +10,11 @@ export class AppComponent implements OnInit {
   constructor(private appProxy: AppProxy) { }
 
   ngOnInit() {
-    this.appProxy.post('Login', { nvUserName: 'מערכת', nvPassword: '1234' })
-      .then(user => {
-        if (user) alert('שם משתמש: ' + user.nvUserName + ', סיסמה:' + user.nvPassword);
-        else alert('משתמש לא קיים');
-      });
+    // this.appProxy.post('Login', { nvUserName: 'מערכת', nvPassword: '1234' })
+    //   .then(user => {
+    //     if (user) alert('שם משתמש: ' + user.nvUserName + ', סיסמה:' + user.nvPassword);
+    //     else alert('משתמש לא קיים');
+    //   });
   }
 
 }

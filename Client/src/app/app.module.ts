@@ -9,19 +9,16 @@ import { RouterModule, Route } from '@angular/router';
 import { AppProxy } from './services/app.proxy';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
-import { UsersComponent } from './components/app/users/users.component';
-import { UserDetailsComponent } from './components/app/users/user-details/user-details.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { UsersComponent } from './components/users/users.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { EventsComponent } from './components/events/events.component';
-import { SettingComponent } from './components/setting/setting.component';
 
 @NgModule({
   declarations: [
     //components
     AppComponent,
-    UsersComponent,
-    UserDetailsComponent,
-    EventsComponent,
-    SettingComponent,
+    SettingsComponent,
     UsersComponent,
     UserDetailsComponent,
     EventsComponent
@@ -32,9 +29,12 @@ import { SettingComponent } from './components/setting/setting.component';
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: "setting", component: SettingComponent },
-      { path: "user-details", component: UserDetailsComponent }, ,
-      { path: "events", component: EventsComponent, }
+      // { path: "students", component: StudentsComponent },
+      // { path: "avrechim", component: AvrechimComponent },
+      { path: "events", component: EventsComponent },
+      { path: "users", component: UsersComponent },
+      { path: "users/user-details", component: UserDetailsComponent },
+      { path: "settings", component: SettingsComponent }
     ], { useHash: true })
   ],
   providers: [AppProxy],
