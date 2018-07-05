@@ -1,8 +1,5 @@
 
-<div *ngIf="flag==1">
-  <h2>תלמיד חדש</h2>
 
-</div>
 <router-outlet></router-outlet>
 
 
@@ -11,16 +8,16 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div *ngIf="flag==0">
     <ul class="navbar-nav mr-auto">
-      <li><span >שם תלמיד</span></li>
+      <li> <a class="navbar-brand" href="#">שם תלמיד </a></li>
       
       <li class="nav-item active">
-        <a class="nav-link" href="#">  פרטים אישיים<span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/students/student/0/student-details">  פרטים אישיים<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">  פגישות</a>
+        <a class="nav-link" routerLink="/students/student/0/meetings">  פגישות</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">  שיחות</a>
+        <a class="nav-link" routerLink="/students/student/0/calls">  שיחות</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"> ארועים שהשתתף</a>
@@ -32,7 +29,7 @@
   </div>
   <div *ngIf="flag==1">
       <ul class="navbar-nav mr-auto">
-      <li>    תלמיד חדש<span class="sr-only">(current)</span></li>
+      <li>   <a class="navbar-brand" href="#">תלמיד חדש</a></li>
       <li>פרטים אישיים   <span class="sr-only">(current)</span></li>
       </ul>
     

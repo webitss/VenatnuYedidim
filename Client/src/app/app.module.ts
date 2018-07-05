@@ -57,7 +57,7 @@ import { CallsComponent } from './components/calls/calls.component';
     CodeTableComponent,
     GraduatesComponent,
     ReportsComponent,
-    
+
     DocumentsComponent,
     ImagesComponent,
     YeshivotComponent,
@@ -91,19 +91,24 @@ import { CallsComponent } from './components/calls/calls.component';
       {
         path: "events/event/:iEventId", component: EventComponent,
         children: ([{ path: "", component: EventDetailsComponent },
-                    { path: "event-participants", component: EventParticipantsComponent },
-                    { path: "event-details", component: EventDetailsComponent }])
+        { path: "event-participants", component: EventParticipantsComponent },
+        { path: "event-details", component: EventDetailsComponent }])
       },
       { path: "users", component: UsersComponent },
       { path: "users/user-details", component: UserDetailsComponent },
-      { path: "settings", component: SettingsComponent ,
-      children:[
-        { path: "reports", component: ReportsComponent },
-        {path:"documents",component:DocumentsComponent},
-        {path:"images",component:ImagesComponent}
-      ]},
-      {path: "students", component: StudentsComponent },
-      {path:"students/student/:id",component:StudentComponent,children:[{ path: "student-details", component: StudentDetailsComponent }] }
+      {
+        path: "settings", component: SettingsComponent,
+        children: [
+          { path: "reports", component: ReportsComponent },
+          { path: "documents", component: DocumentsComponent },
+          { path: "images", component: ImagesComponent }
+        ]
+      },
+      { path: "students", component: StudentsComponent },
+      { path: "students/student/:id", component: StudentComponent, children: [{ path: "student-details", component: StudentDetailsComponent },
+       { path: "meetings", component: MeetingsComponent },
+      { path: "calls", component: CallsComponent },
+      ] },
       { path: "graduates", component: GraduatesComponent },
       {
         path: "settings", component: SettingsComponent,
@@ -114,7 +119,7 @@ import { CallsComponent } from './components/calls/calls.component';
           { path: "code-tables", component: CodeTableComponent },
         ]
       },
-      { path: "students", component: StudentsComponent, children: ([{ path: "student-details", component: StudentDetailsComponent }]) }
+     
 
     ], { useHash: true })
   ],
