@@ -13,6 +13,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { EventsComponent } from './components/events/events.component';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EventsComponent } from './components/events/events.component';
     SettingsComponent,
     UsersComponent,
     UserDetailsComponent,
-    EventsComponent
+    EventsComponent,
+    EventDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,7 @@ import { EventsComponent } from './components/events/events.component';
       // { path: "students", component: StudentsComponent },
       // { path: "avrechim", component: AvrechimComponent },
       { path: "events", component: EventsComponent },
+      { path: "events/event-details", component: EventDetailsComponent },
       { path: "users", component: UsersComponent },
       { path: "users/user-details", component: UserDetailsComponent },
       { path: "settings", component: SettingsComponent }
