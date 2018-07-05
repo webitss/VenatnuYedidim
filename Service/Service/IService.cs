@@ -22,7 +22,7 @@ namespace Service
         [OperationContract]
         [WebInvoke(
             Method = "POST",
-            UriTemplate = "Login",
+            UriTemplate = "GetAllAvrechim",
             BodyStyle = WebMessageBodyStyle.WrappedRequest,
             ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json)]
