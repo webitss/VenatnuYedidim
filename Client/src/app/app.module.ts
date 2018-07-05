@@ -16,6 +16,7 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { EventsComponent } from './components/events/events.component';
 import { AvrechimDetailsComponent } from './components/avrechim-details/avrechim-details.component';
 import { StudentsComponent } from './components/students/students.component';
+import { VyTableComponent } from './templates/vy-table/vy-table.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { StudentsComponent } from './components/students/students.component';
     UserDetailsComponent,
     EventsComponent,
     AvrechimDetailsComponent,
-    StudentsComponent
+    StudentsComponent,
+    VyTableComponent
   ],
   imports: [
     BrowserModule,
