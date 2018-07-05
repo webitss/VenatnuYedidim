@@ -1,0 +1,18 @@
+.event-menu{
+    background-color: #D9D9D9;
+    display: table-cell;
+    height: 60px;
+}
+li{
+    list-style-type: none;
+}
+.name{
+    color: #333333;
+    text-align: left;
+    text-decoration: none;
+    /* font-family: 'Arial',Arial; */
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 0px;
+}
