@@ -26,7 +26,7 @@ import { StudentsComponent } from './components/students/students.component';
     UsersComponent,
     UserDetailsComponent,
     EventsComponent,
-    AvrechimDetailsComponent
+    AvrechimDetailsComponent,
     StudentsComponent
   ],
   imports: [
