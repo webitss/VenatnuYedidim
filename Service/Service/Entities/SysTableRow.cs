@@ -59,6 +59,23 @@ namespace Service.Entities
             }
 
         }
+        public bool UpdateValue(int iSysTableId, string nvValue)
+        {
+            try
+            {
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iSysTableId", iSysTableId));
+                parameters.Add(new SqlParameter("nvValue", nvValue));
+                SqlDataAccess.ExecuteDatasetSP("TSysTableRow_UPD", parameters);
+                Log.LogError("AddValue / TSysTableRow_UPD", "iSysTableId: " + iSysTableId + "nvValue" + nvValue + ex + " , ex");
+                return false;
+            }
+        }
 
         #endregion
 

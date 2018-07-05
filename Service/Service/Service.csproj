@@ -103,6 +103,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\SysTableRow.cs" />
+    <Compile Include="Entities\SysTables.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
