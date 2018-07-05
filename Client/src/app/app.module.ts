@@ -13,6 +13,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { EventsComponent } from './components/events/events.component';
+import { StudentComponent } from './components/student/student.component';
+import { StudentsComponent } from './components/students/students.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { EventsComponent } from './components/events/events.component';
     SettingsComponent,
     UsersComponent,
     UserDetailsComponent,
-    EventsComponent
+    EventsComponent,
+    StudentComponent,
+    StudentsComponent
   ],
   imports: [
     BrowserModule,
