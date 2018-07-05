@@ -63,8 +63,8 @@ namespace Service.Entities
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();
                 parameters.Add(new SqlParameter("iPersonId", iPersonId));
-                DataRowCollection dt = SqlDataAccess.ExecuteDatasetSP("TUser_GetUsersByPermission_SLCT", parameters).Tables[0].Rows;
-                List<User> users = ObjectGenerator<User>.GeneratListFromDataRowCollection(dt);
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TUser_GetUsersByPermission_SLCT", parameters).Tables[0].Rows;
+                List<User> users = ObjectGenerator<User>.GeneratListFromDataRowCollection(drc);
                 return users;
             }
             catch (Exception ex)
