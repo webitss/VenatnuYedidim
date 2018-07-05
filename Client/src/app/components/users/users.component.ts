@@ -16,11 +16,10 @@ export class UsersComponent implements OnInit {
   id:number=1;
 
   ngOnInit() {
-    alert("on init")
-   this.appProxy.post("GetUsersByPermittion",this.id)
+   this.appProxy.post("GetUsersByPermittion",{iPersonId: this.id})
     .then(
       data=>{
-      this.users=data
+      this.users=data;
        }).catch(err=>{
          alert(err);
        });
