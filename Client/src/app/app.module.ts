@@ -1,31 +1,42 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule} from '@angular/platform-browser';
+import { NgModule, Component } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from "@angular/http";
 import { RouterModule, Route } from '@angular/router';
+
 //--- services ---
 import { AppProxy } from './services/app.proxy';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
 import { AvrechimComponent } from './components/app/avrechim/avrechim.component';
+import { SettingComponent } from './components/setting/setting.component';
+import { UsersComponent } from './components/app/users/users.component';
+import { UserDetailsComponent } from './components/app/users/user-details/user-details.component';
+import { EventsComponent } from './components/events/events.component';
+
 
 @NgModule({
   declarations: [
     //components
     AppComponent,
-    AvrechimComponent    
+    AvrechimComponent,
+    SettingComponent,
+    UsersComponent,
+    UserDetailsComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    HttpClientModule,   
+    HttpClientModule,
     RouterModule.forRoot([
-      {
-        path: "/Avrechim", component: AvrechimComponent,     
-      },
-    ], { useHash: true }) 
+      { path: "setting", component: SettingComponent },
+      { path: "avrechim", component: AvrechimComponent },
+      { path: "user-details", component: UserDetailsComponent }, ,
+      { path: "events", component: EventsComponent, }
+    ], { useHash: true })
   ],
   providers: [AppProxy],
   bootstrap: [AppComponent]
