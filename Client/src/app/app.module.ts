@@ -37,6 +37,10 @@ import { StudentComponent } from './components/student/student.component';
   declarations: [
     //components
     AppComponent,
+    SettingsComponent,
+    UsersComponent,
+    UserDetailsComponent,
+    EventsComponent,
     AvrechimComponent,
     AvrechComponent,
     AvrechDetailsComponent,
@@ -79,11 +83,6 @@ import { StudentComponent } from './components/student/student.component';
         ]
       },
       { path: "events", component: EventsComponent },
-      {
-        path: "events/event", component: EventComponent,
-        children: ([{ path: "event-participants", component: EventParticipantsComponent }
-          , { path: "event-details", component: EventDetailsComponent }])
-      },
       { path: "users", component: UsersComponent },
       { path: "users/user-details", component: UserDetailsComponent },
       { path: "graduates", component: GraduatesComponent },
