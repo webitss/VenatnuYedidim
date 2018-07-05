@@ -41,5 +41,10 @@ namespace Service.Entities
         [NoSendToSQL]
         [DataMember]
         public string nvStatus { get; set; }
+
+        [DataMember]
+        public Dictionary<string, string> lstObject { get; set; }
+
+
     }
 }
