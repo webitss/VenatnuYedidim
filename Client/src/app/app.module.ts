@@ -9,24 +9,24 @@ import { RouterModule, Route } from '@angular/router';
 import { AppProxy } from './services/app.proxy';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
-import { AvrechimComponent } from './components/avrechim/avrechim.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { EventsComponent } from './components/events/events.component';
-import { AvrechimDetailsComponent } from './components/avrechim-details/avrechim-details.component';
+//import { StudentComponent } from './components/student/student.component';
 import { StudentsComponent } from './components/students/students.component';
+
+
 
 @NgModule({
   declarations: [
     //components
     AppComponent,
-    AvrechimComponent,
     SettingsComponent,
     UsersComponent,
     UserDetailsComponent,
     EventsComponent,
-    AvrechimDetailsComponent,
+    
     StudentsComponent
   ],
   imports: [
@@ -36,9 +36,7 @@ import { StudentsComponent } from './components/students/students.component';
     HttpClientModule,
     RouterModule.forRoot([
       // { path: "students", component: StudentsComponent },
-      { path: "avrechim", component: AvrechimComponent },
-      { path: "avrechim/avrechimDetails/:id", component: AvrechimDetailsComponent },       
-      // { path: "avrechimDetails/:id", component: AvrechimDetailsComponent },    
+      // { path: "avrechim", component: AvrechimComponent },
       { path: "events", component: EventsComponent },
       { path: "users", component: UsersComponent },
       { path: "users/user-details", component: UserDetailsComponent },

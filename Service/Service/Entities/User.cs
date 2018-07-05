@@ -56,6 +56,23 @@ namespace Service.Entities
             }
         }
 
+
+        public static List<User> GetUsersByPermittion(int iPersonId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iPersonId", iPersonId));
+                DataRowCollection dt = SqlDataAccess.ExecuteDatasetSP("TUser_GetUsersByPermission_SLCT", parameters).Tables[0].Rows;
+                List<User> users = ObjectGenerator<User>.GeneratListFromDataRowCollection(dt);
+                return users;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("users / TUser_GetUsersByPermission_SLCT", "iPersonId:"+iPersonId + ",ex " + ex);
+                return null;
+            }
+        }
         #endregion
     }
 
