@@ -21,6 +21,18 @@ namespace Service
 
         [OperationContract]
         [WebInvoke(
+            Method = "POST",
+            UriTemplate = "GetAllAvrechim",
+            BodyStyle = WebMessageBodyStyle.WrappedRequest,
+            ResponseFormat = WebMessageFormat.Json,
+            RequestFormat = WebMessageFormat.Json)]
+        List<Avrech> GetAllAvrechim(int iPersonId);
+
+        #endregion
+    
+	
+		[OperationContract]
+        [WebInvoke(
            Method = "POST",
            UriTemplate = "GetUsersByPermittion",
            BodyStyle = WebMessageBodyStyle.WrappedRequest,
@@ -40,8 +52,7 @@ namespace Service
                 ResponseFormat = WebMessageFormat.Json,
                 RequestFormat = WebMessageFormat.Json)]
         string SaveFileByBase64(string base64File, string fileName);
-
-        #endregion
-    }
-
+	
+		#endregion
+	}
 }

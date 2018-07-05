@@ -28,10 +28,12 @@ namespace Service.Entities
                 parameters.Add(new SqlParameter("iEventId", iEventId));
                 DataTable dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_SLCT",parameters).Tables[0];
                 DataRowCollection drc = dt.Rows;
-                List<Person> participants = ObjectGenerator<Person>.GeneratListFromDataRowCollection(drc);
-                foreach (var item in participants)
+              
+                List<Person> participants = new List<Person>();
+                //לגמור!
+                foreach (var item in drc)
                 {
-                    Person p = new Person() { };
+                    //ObjectGenerator<Person>.GeneratFromDataRow(item);
                 }
            
                 return participants;

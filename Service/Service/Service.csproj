@@ -103,8 +103,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Entities\SysTableRow.cs" />
     <Compile Include="Entities\SysTables.cs" />
+=======
+    <Compile Include="Entities\Avrech.cs" />
+    <Compile Include="Entities\Event.cs" />
+    <Compile Include="Entities\Participant.cs" />
+    <Compile Include="Entities\Person.cs" />
+>>>>>>> 075d8fc6f6480a80caca53865a522e0838de2bd2
     <Compile Include="Entities\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
