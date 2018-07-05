@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AvrechimDetailsComponent } from './avrechim-details.component';
+import { AvrechDiaryComponent } from './avrech-diary.component';
 
-describe('AvrechimDetailsComponent', () => {
-  let component: AvrechimDetailsComponent;
-  let fixture: ComponentFixture<AvrechimDetailsComponent>;
+describe('AvrechDiaryComponent', () => {
+  let component: AvrechDiaryComponent;
+  let fixture: ComponentFixture<AvrechDiaryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AvrechimDetailsComponent ]
+      declarations: [ AvrechDiaryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AvrechimDetailsComponent);
+    fixture = TestBed.createComponent(AvrechDiaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
