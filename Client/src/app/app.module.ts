@@ -42,7 +42,8 @@ import { StudentsComponent } from './components/students/students.component';
       { path: "events", component: EventsComponent },
       { path: "users", component: UsersComponent },
       { path: "users/user-details", component: UserDetailsComponent },
-      { path: "settings", component: SettingsComponent }
+      { path: "settings", component: SettingsComponent },
+      {path: "students", component: StudentsComponent }
     ], { useHash: true })
   ],
   providers: [AppProxy],

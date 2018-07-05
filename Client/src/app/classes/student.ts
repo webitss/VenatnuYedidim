@@ -19,5 +19,21 @@ export class Student implements Person {
     nvMobile: String;
     nvEmail: String;
 
+
+    iStudentId	:number;
+    nvBornDate:string;
+    dtBornDate:Date;
+    nvFatherDeathDate:string;
+    bDeathFather	:boolean;
+    nvMotherDeathDate:string;
+    bDeathMother	:Boolean;
+    nvCauseOfDeathFather:string;
+    nvCauseOfDeathMother:string;
+    nvImgStudent:string
+    nvYeshiva:string
+    nvYeshivaAddress:string
+    nvYeshivaCity	:string
+    dtAddStudentDate:Date;
+    nvComment:string;
     
 }
