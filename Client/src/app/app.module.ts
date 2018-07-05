@@ -9,22 +9,23 @@ import { RouterModule, Route } from '@angular/router';
 import { AppProxy } from './services/app.proxy';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
-import { AvrechimComponent } from './components/app/avrechim/avrechim.component';
-import { SettingComponent } from './components/setting/setting.component';
-import { UsersComponent } from './components/app/users/users.component';
-import { UserDetailsComponent } from './components/app/users/user-details/user-details.component';
+import { AvrechimComponent } from './components/avrechim/avrechim.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { UsersComponent } from './components/users/users.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { EventsComponent } from './components/events/events.component';
-
+import { AvrechimDetailsComponent } from './components/avrechim-details/avrechim-details.component';
 
 @NgModule({
   declarations: [
     //components
     AppComponent,
     AvrechimComponent,
-    SettingComponent,
+    SettingsComponent,
     UsersComponent,
     UserDetailsComponent,
-    EventsComponent
+    EventsComponent,
+    AvrechimDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -32,10 +33,14 @@ import { EventsComponent } from './components/events/events.component';
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: "setting", component: SettingComponent },
+      // { path: "students", component: StudentsComponent },
       { path: "avrechim", component: AvrechimComponent },
-      { path: "user-details", component: UserDetailsComponent }, ,
-      { path: "events", component: EventsComponent, }
+      { path: "avrechim/avrechimDetails/:id", component: AvrechimDetailsComponent },       
+      // { path: "avrechimDetails/:id", component: AvrechimDetailsComponent },    
+      { path: "events", component: EventsComponent },
+      { path: "users", component: UsersComponent },
+      { path: "users/user-details", component: UserDetailsComponent },
+      { path: "settings", component: SettingsComponent }
     ], { useHash: true })
   ],
   providers: [AppProxy],
