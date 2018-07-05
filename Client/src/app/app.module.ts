@@ -105,10 +105,14 @@ import { CallsComponent } from './components/calls/calls.component';
         ]
       },
       { path: "students", component: StudentsComponent },
-      { path: "students/student/:id", component: StudentComponent, children: [{ path: "student-details", component: StudentDetailsComponent },
-       { path: "meetings", component: MeetingsComponent },
-      { path: "calls", component: CallsComponent },
-      ] },
+      {
+        path: "students/student/:id", component: StudentComponent, children: [{ path: "student-details", component: StudentDetailsComponent },
+        { path: "meetings", component: MeetingsComponent },
+        { path: "calls", component: CallsComponent },
+        ]
+      },
+      { path: "graduates", component: GraduatesComponent },      
+      { path: "students", component: StudentsComponent },   
       { path: "graduates", component: GraduatesComponent },
       {
         path: "settings", component: SettingsComponent,
@@ -119,7 +123,7 @@ import { CallsComponent } from './components/calls/calls.component';
           { path: "code-tables", component: CodeTableComponent },
         ]
       },
-     
+
 
     ], { useHash: true })
   ],

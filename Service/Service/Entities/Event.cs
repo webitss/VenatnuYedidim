@@ -23,13 +23,13 @@ namespace Service.Entities
         [DataMember]
         public string nvComments { get; set; }
 
-        public static List<Event> GetEventsList()
+        public static List<Event> GetEventsList(int iUserId)
         {
             try
             {
-                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TEvent_SLCT").Tables[0];
-                DataRowCollection drc = dt.Rows;
-                List<Event> events=ObjectGenerator<Event>.GeneratListFromDataRowCollection(drc);
+                SqlParameter UserId = new SqlParameter("iUserId", iUserId);
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_SLCT", UserId).Tables[0].Rows;
+                List<Event> events = ObjectGenerator<Event>.GeneratListFromDataRowCollection(drc);
                 return events;
             }
             catch (Exception ex)
@@ -39,11 +39,16 @@ namespace Service.Entities
             }
         }
 
-        public static bool AddEvent()
+        public static bool AddEvent(Event e)
         {
             try
             {
-                SqlDataAccess.ExecuteDatasetSP("TEvent_INS");
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("nvName",e.nvName));
+                parameters.Add(new SqlParameter("dDate",e.dDate));
+                parameters.Add(new SqlParameter("nvPlace",e.nvPlace));
+                parameters.Add(new SqlParameter("nvComments",e.nvComments));
+                SqlDataAccess.ExecuteDatasetSP("TEvent_INS",parameters);
                 return true;
             }
             catch (Exception ex)
