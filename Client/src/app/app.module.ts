@@ -19,6 +19,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { InstitutesComponent } from './components/institutes/institutes.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { ImagesComponent } from './components/images/images.component';
+import { YeshivotComponent } from './yeshivot/yeshivot.component';
 =======
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { EventParticipantsComponent } from './components/event-participants/event-participants.component';
@@ -41,7 +42,8 @@ import { StudentDetailsComponent } from './components/student-details/student-de
     ReportsComponent,
     InstitutesComponent,
     DocumentsComponent,
-    ImagesComponent
+    ImagesComponent,
+    YeshivotComponent
 =======
     EventDetailsComponent,
     EventParticipantsComponent,
