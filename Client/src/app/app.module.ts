@@ -14,6 +14,8 @@ import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { EventsComponent } from './components/events/events.component';
 import { CodeTableComponent } from './code-table/code-table.component';
+import { GraduatesComponent } from './graduates/graduates.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { CodeTableComponent } from './code-table/code-table.component';
     UsersComponent,
     UserDetailsComponent,
     EventsComponent,
-    CodeTableComponent
+    CodeTableComponent,
+    GraduatesComponent
   ],
   imports: [
     BrowserModule,
@@ -37,8 +40,9 @@ import { CodeTableComponent } from './code-table/code-table.component';
       { path: "users", component: UsersComponent },
       { path: "users/user-details", component: UserDetailsComponent },
       { path: "settings", component: SettingsComponent },
-      { path: "settings/code-tables", component: CodeTableComponent }
-
+      { path: "settings/code-tables", component: CodeTableComponent },
+      { path: "graduates", component: GraduatesComponent }
+      
     ], { useHash: true })
   ],
   providers: [AppProxy],
