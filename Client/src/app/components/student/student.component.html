@@ -1,3 +1,47 @@
-<p>
-  student works!
-</p>
+
+
+<router-outlet></router-outlet>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div *ngIf="flag==0">
+    <ul class="navbar-nav mr-auto">
+      <li> <a class="navbar-brand" href="#">שם תלמיד </a></li>
+      
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/students/student/0/student-details">  פרטים אישיים<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/students/student/0/meetings">  פגישות</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/students/student/0/calls">  שיחות</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"> ארועים שהשתתף</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">מסמכים</a>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="flag==1">
+      <ul class="navbar-nav mr-auto">
+      <li>   <a class="navbar-brand" href="#">תלמיד חדש</a></li>
+      <li>פרטים אישיים   <span class="sr-only">(current)</span></li>
+      </ul>
+    
+  </div>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="#">שמור</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">סגור</a>
+            </li>
+    </ul>
+    
+  </div>
+</nav>

@@ -1,9 +1,0 @@
-# Service
-Service/.vs
-Service/packages
-Service/Service/obj
-Service/Service/bin/Service.dll
-Service/Service/bin/Service.pdb
-Service/Service/Properties/PublishProfiles
-Service/Service/Files
-Service/Service/Logs

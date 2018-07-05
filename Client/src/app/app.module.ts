@@ -31,6 +31,8 @@ import { AvrechDiaryComponent } from './components/avrech-diary/avrech-diary.com
 import { AvrechPresenceComponent } from './components/avrech-presence/avrech-presence.component';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
 import { StudentComponent } from './components/student/student.component';
+import { MeetingsComponent } from './components/meetings/meetings.component';
+import { CallsComponent } from './components/calls/calls.component';
 
 
 @NgModule({
@@ -55,7 +57,7 @@ import { StudentComponent } from './components/student/student.component';
     CodeTableComponent,
     GraduatesComponent,
     ReportsComponent,
-    InstitutesComponent,
+
     DocumentsComponent,
     ImagesComponent,
     YeshivotComponent,
@@ -65,6 +67,8 @@ import { StudentComponent } from './components/student/student.component';
     StudentsComponent,
     StudentDetailsComponent,
     StudentComponent,
+    MeetingsComponent,
+    CallsComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,23 +91,39 @@ import { StudentComponent } from './components/student/student.component';
       {
         path: "events/event/:iEventId", component: EventComponent,
         children: ([{ path: "", component: EventDetailsComponent },
-                    { path: "event-participants", component: EventParticipantsComponent },
-                    { path: "event-details", component: EventDetailsComponent }])
+        { path: "event-participants", component: EventParticipantsComponent },
+        { path: "event-details", component: EventDetailsComponent }])
       },
       { path: "users", component: UsersComponent },
       { path: "users/user-details", component: UserDetailsComponent },
+      {
+        path: "settings", component: SettingsComponent,
+        children: [
+          { path: "reports", component: ReportsComponent },
+          { path: "documents", component: DocumentsComponent },
+          { path: "images", component: ImagesComponent }
+        ]
+      },
+      { path: "students", component: StudentsComponent },
+      {
+        path: "students/student/:id", component: StudentComponent, children: [{ path: "student-details", component: StudentDetailsComponent },
+        { path: "meetings", component: MeetingsComponent },
+        { path: "calls", component: CallsComponent },
+        ]
+      },
+      { path: "graduates", component: GraduatesComponent },      
+      { path: "students", component: StudentsComponent },   
       { path: "graduates", component: GraduatesComponent },
       {
         path: "settings", component: SettingsComponent,
         children: [
           { path: "reports", component: ReportsComponent },
-          { path: "institutes", component: InstitutesComponent },
           { path: "documents", component: DocumentsComponent },
           { path: "images", component: ImagesComponent },
           { path: "code-tables", component: CodeTableComponent },
         ]
       },
-      { path: "students", component: StudentsComponent, children: ([{ path: "student-details", component: StudentDetailsComponent }]) }
+
 
     ], { useHash: true })
   ],
