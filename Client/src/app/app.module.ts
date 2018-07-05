@@ -19,9 +19,9 @@ import { EventsComponent } from './components/events/events.component';
 import { CodeTableComponent } from './code-table/code-table.component';
 import { GraduatesComponent } from './graduates/graduates.component';
 import { ReportsComponent } from './components/reports/reports.component';
-import { InstitutesComponent } from './components/institutes/institutes.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { ImagesComponent } from './components/images/images.component';
+import { YeshivotComponent } from './components/yeshivot/yeshivot.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { EventParticipantsComponent } from './components/event-participants/event-participants.component';
 import { EventComponent } from './components/event/event.component';
@@ -37,6 +37,10 @@ import { StudentComponent } from './components/student/student.component';
   declarations: [
     //components
     AppComponent,
+    SettingsComponent,
+    UsersComponent,
+    UserDetailsComponent,
+    EventsComponent,
     AvrechimComponent,
     AvrechComponent,
     AvrechDetailsComponent,
@@ -54,6 +58,7 @@ import { StudentComponent } from './components/student/student.component';
     InstitutesComponent,
     DocumentsComponent,
     ImagesComponent,
+    YeshivotComponent,
     EventDetailsComponent,
     EventParticipantsComponent,
     EventComponent,
