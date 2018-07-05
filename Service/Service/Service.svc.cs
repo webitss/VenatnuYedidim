@@ -1,4 +1,5 @@
 ﻿using Service.Entities;
+using System.Collections.Generic;
 
 namespace Service
 {
@@ -10,7 +11,14 @@ namespace Service
         {
             return User.Login(nvUserName, nvPassword);
         }
-     
-        #endregion       
+
+        #endregion
+      public List<Avrech> GetAllAvrechim(int iPersonId)
+        {
+            return Avrech.GetAllAvrechim(iPersonId);
+        }
+
     }
+
+
 }

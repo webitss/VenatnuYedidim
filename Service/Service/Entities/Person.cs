@@ -23,23 +23,6 @@ namespace Service.Entities
         public string nvAddress { get; set; }
         [DataMember]
         public string nvCity { get; set; }
-        [NoSendToSQL]
-        [DataMember]
-        public int iCreatedByUserId { get; set; }
-        [NoSendToSQL]
-        [DataMember]
-        public DateTime dtCreatedate { get; set; }
-        [NoSendToSQL]
-        [DataMember]
-        public int? iLastModifyUserId { get; set; }
-        [NoSendToSQL]
-        [DataMember]
-        public DateTime? dtLastModifyDate { get; set; }
-        [NoSendToSQL]
-        [DataMember]
-        public bool bSysRowStatus { get; set; }
-        [NoSendToSQL]
-        [DataMember]
-        public string nvStatus { get; set; }
+        
     }
 }
