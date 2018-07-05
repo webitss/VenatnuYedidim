@@ -21,12 +21,12 @@ namespace Service
 
         [OperationContract]
         [WebInvoke(
-           Method = "POST",
-           UriTemplate = "GetUsersByPermittion",
-           BodyStyle = WebMessageBodyStyle.WrappedRequest,
-           ResponseFormat = WebMessageFormat.Json,
-           RequestFormat = WebMessageFormat.Json)]
-        List<User> GetUsersByPermittion(int personId);
+            Method = "POST",
+            UriTemplate = "GetAllAvrechim",
+            BodyStyle = WebMessageBodyStyle.WrappedRequest,
+            ResponseFormat = WebMessageFormat.Json,
+            RequestFormat = WebMessageFormat.Json)]
+        List<Avrech> GetAllAvrechim(int iPersonId);
 
         #endregion
     }

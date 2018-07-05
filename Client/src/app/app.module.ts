@@ -104,7 +104,7 @@ import { CallsComponent } from './components/calls/calls.component';
       ]},
       {path: "students", component: StudentsComponent },
       {path:"students/student/:id",component:StudentComponent,children:[{ path: "student-details", component: StudentDetailsComponent }] }
-      { path: "graduates", component: GraduatesComponent },
+      ,{ path: "graduates", component: GraduatesComponent },
       {
         path: "settings", component: SettingsComponent,
         children: [
