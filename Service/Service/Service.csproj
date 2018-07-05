@@ -103,6 +103,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Student.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
