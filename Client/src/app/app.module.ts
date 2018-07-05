@@ -20,6 +20,7 @@ import { StudentsComponent } from './components/students/students.component';
 import { AvrechStudentsComponent } from './components/avrech-students/avrech-students.component';
 import { AvrechDiaryComponent } from './components/avrech-diary/avrech-diary.component';
 import { AvrechPresenceComponent } from './components/avrech-presence/avrech-presence.component';
+import { StudentDetailsComponent } from './components/student-details/student-details.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { AvrechPresenceComponent } from './components/avrech-presence/avrech-pre
     StudentsComponent,
     AvrechStudentsComponent,
     AvrechDiaryComponent,
-    AvrechPresenceComponent
+    AvrechPresenceComponent,
+    StudentsComponent,
+    StudentDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import { AvrechPresenceComponent } from './components/avrech-presence/avrech-pre
       { path: "events", component: EventsComponent },
       { path: "users", component: UsersComponent },
       { path: "users/user-details", component: UserDetailsComponent },
-      { path: "settings", component: SettingsComponent }
+      { path: "settings", component: SettingsComponent },
+      {path: "students", component: StudentsComponent }
     ], { useHash: true })
   ],
   providers: [AppProxy],
