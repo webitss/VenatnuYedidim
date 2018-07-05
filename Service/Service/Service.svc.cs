@@ -1,6 +1,6 @@
+﻿using Service.Entities;
+using Service.Utilities;
 ﻿using System.Collections.Generic;
-using Service.Entities;
-
 namespace Service
 {
     public class Service : IService
@@ -15,7 +15,15 @@ namespace Service
         {
             return User.Login(nvUserName, nvPassword);
         }
-     
-        #endregion       
+        #endregion
+
+        #region files
+
+        public string SaveFileByBase64(string base64File, string fileName)
+        {
+            return Fileshandler.SaveFileByBase64(base64File,fileName);
+        }
+
+        #endregion
     }
 }

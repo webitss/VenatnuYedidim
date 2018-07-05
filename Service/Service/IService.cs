@@ -29,5 +29,19 @@ namespace Service
         List<User> GetUsersByPermittion(int personId);
 
         #endregion
+
+        #region files
+
+        [OperationContract]
+        [WebInvoke(
+                Method = "POST",
+                UriTemplate = "SaveFileByBase64",
+                BodyStyle = WebMessageBodyStyle.WrappedRequest,
+                ResponseFormat = WebMessageFormat.Json,
+                RequestFormat = WebMessageFormat.Json)]
+        string SaveFileByBase64(string base64File, string fileName);
+
+        #endregion
     }
+
 }

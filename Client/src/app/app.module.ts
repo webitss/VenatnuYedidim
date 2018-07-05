@@ -19,9 +19,9 @@ import { EventsComponent } from './components/events/events.component';
 import { CodeTableComponent } from './code-table/code-table.component';
 import { GraduatesComponent } from './graduates/graduates.component';
 import { ReportsComponent } from './components/reports/reports.component';
-import { InstitutesComponent } from './components/institutes/institutes.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { ImagesComponent } from './components/images/images.component';
+import { YeshivotComponent } from './components/yeshivot/yeshivot.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { EventParticipantsComponent } from './components/event-participants/event-participants.component';
 import { EventComponent } from './components/event/event.component';
@@ -31,6 +31,8 @@ import { AvrechDiaryComponent } from './components/avrech-diary/avrech-diary.com
 import { AvrechPresenceComponent } from './components/avrech-presence/avrech-presence.component';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
 import { StudentComponent } from './components/student/student.component';
+import { MeetingsComponent } from './components/meetings/meetings.component';
+import { CallsComponent } from './components/calls/calls.component';
 
 
 @NgModule({
@@ -55,15 +57,18 @@ import { StudentComponent } from './components/student/student.component';
     CodeTableComponent,
     GraduatesComponent,
     ReportsComponent,
-    InstitutesComponent,
+    
     DocumentsComponent,
     ImagesComponent,
+    YeshivotComponent,
     EventDetailsComponent,
     EventParticipantsComponent,
     EventComponent,
     StudentsComponent,
     StudentDetailsComponent,
     StudentComponent,
+    MeetingsComponent,
+    CallsComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,14 +88,27 @@ import { StudentComponent } from './components/student/student.component';
         ]
       },
       { path: "events", component: EventsComponent },
+      {
+        path: "events/event/:iEventId", component: EventComponent,
+        children: ([{ path: "", component: EventDetailsComponent },
+                    { path: "event-participants", component: EventParticipantsComponent },
+                    { path: "event-details", component: EventDetailsComponent }])
+      },
       { path: "users", component: UsersComponent },
       { path: "users/user-details", component: UserDetailsComponent },
+      { path: "settings", component: SettingsComponent ,
+      children:[
+        { path: "reports", component: ReportsComponent },
+        {path:"documents",component:DocumentsComponent},
+        {path:"images",component:ImagesComponent}
+      ]},
+      {path: "students", component: StudentsComponent },
+      {path:"students/student/:id",component:StudentComponent,children:[{ path: "student-details", component: StudentDetailsComponent }] }
       { path: "graduates", component: GraduatesComponent },
       {
         path: "settings", component: SettingsComponent,
         children: [
           { path: "reports", component: ReportsComponent },
-          { path: "institutes", component: InstitutesComponent },
           { path: "documents", component: DocumentsComponent },
           { path: "images", component: ImagesComponent },
           { path: "code-tables", component: CodeTableComponent },
