@@ -13,6 +13,10 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { EventsComponent } from './components/events/events.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { InstitutesComponent } from './components/institutes/institutes.component';
+import { DocumentsComponent } from './components/documents/documents.component';
+import { ImagesComponent } from './components/images/images.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { EventsComponent } from './components/events/events.component';
     SettingsComponent,
     UsersComponent,
     UserDetailsComponent,
-    EventsComponent
+    EventsComponent,
+    ReportsComponent,
+    InstitutesComponent,
+    DocumentsComponent,
+    ImagesComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +42,13 @@ import { EventsComponent } from './components/events/events.component';
       { path: "events", component: EventsComponent },
       { path: "users", component: UsersComponent },
       { path: "users/user-details", component: UserDetailsComponent },
-      { path: "settings", component: SettingsComponent }
+      { path: "settings", component: SettingsComponent ,
+      children:[
+        { path: "reports", component: ReportsComponent },
+        {path:"institutes",component: InstitutesComponent},
+        {path:"documents",component:DocumentsComponent},
+        {path:"images",component:ImagesComponent}
+      ]},
     ], { useHash: true })
   ],
   providers: [AppProxy],
