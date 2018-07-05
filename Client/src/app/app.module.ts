@@ -14,6 +14,8 @@ import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { EventsComponent } from './components/events/events.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { EventParticipantsComponent } from './components/event-participants/event-participants.component';
+import { EventComponent } from './components/event/event.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { EventDetailsComponent } from './components/event-details/event-details.
     UsersComponent,
     UserDetailsComponent,
     EventsComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    EventParticipantsComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,10 @@ import { EventDetailsComponent } from './components/event-details/event-details.
       // { path: "students", component: StudentsComponent },
       // { path: "avrechim", component: AvrechimComponent },
       { path: "events", component: EventsComponent },
-      { path: "events/event-details", component: EventDetailsComponent },
+      { path: "events/event", component: EventComponent
+       ,children:([ { path: "event-participants", component: EventParticipantsComponent }
+       ,{ path: "event-details", component:  EventDetailsComponent}])
+      },
       { path: "users", component: UsersComponent },
       { path: "users/user-details", component: UserDetailsComponent },
       { path: "settings", component: SettingsComponent }
