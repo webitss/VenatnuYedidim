@@ -25,6 +25,8 @@ import { AvrechimDetailsComponent } from './components/avrechim-details/avrechim
 import { StudentsComponent } from './components/students/students.component';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
 import { StudentComponent } from './components/student/student.component';
+import { MeetingsComponent } from './components/meetings/meetings.component';
+import { CallsComponent } from './components/calls/calls.component';
 
 
 @NgModule({
@@ -47,6 +49,8 @@ import { StudentComponent } from './components/student/student.component';
     StudentsComponent,
     StudentDetailsComponent,
     StudentComponent,
+    MeetingsComponent,
+    CallsComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,8 +76,8 @@ import { StudentComponent } from './components/student/student.component';
         {path:"documents",component:DocumentsComponent},
         {path:"images",component:ImagesComponent}
       ]},
-      {path: "students", component: StudentsComponent,children:([{ path: "student-details", component: StudentDetailsComponent }] ) }
-      
+      {path: "students", component: StudentsComponent },
+      {path:"students/student/:id",component:StudentComponent,children:[{ path: "student-details", component: StudentDetailsComponent }] }
     ], { useHash: true })
   ],
   providers: [AppProxy],
