@@ -113,6 +113,7 @@
     <Compile Include="Entities\Person.cs" />
 >>>>>>> 075d8fc6f6480a80caca53865a522e0838de2bd2
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\Yeshivot.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
