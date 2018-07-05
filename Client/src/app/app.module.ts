@@ -49,9 +49,10 @@ import { StudentDetailsComponent } from './components/student-details/student-de
       // { path: "avrechimDetails/:id", component: AvrechimDetailsComponent },    
       { path: "events", component: EventsComponent },
       {
-        path: "events/event", component: EventComponent,
-        children: ([{ path: "event-participants", component: EventParticipantsComponent }
-          , { path: "event-details", component: EventDetailsComponent }])
+        path: "events/event/:iEventId", component: EventComponent,
+        children: ([{ path: "", component: EventDetailsComponent },
+                    { path: "event-participants", component: EventParticipantsComponent },
+                    { path: "event-details", component: EventDetailsComponent }])
       },
       { path: "users", component: UsersComponent },
       { path: "users/user-details", component: UserDetailsComponent },
