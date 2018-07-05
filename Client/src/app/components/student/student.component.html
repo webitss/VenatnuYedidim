@@ -1,3 +1,50 @@
-<p>
-  student works!
-</p>
+
+<div *ngIf="flag==1">
+  <h2>תלמיד חדש</h2>
+
+</div>
+<router-outlet></router-outlet>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div *ngIf="flag==0">
+    <ul class="navbar-nav mr-auto">
+      <li><span >שם תלמיד</span></li>
+      
+      <li class="nav-item active">
+        <a class="nav-link" href="#">  פרטים אישיים<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">  פגישות</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">  שיחות</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"> ארועים שהשתתף</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">מסמכים</a>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="flag==1">
+      <ul class="navbar-nav mr-auto">
+      <li>    תלמיד חדש<span class="sr-only">(current)</span></li>
+      <li>פרטים אישיים   <span class="sr-only">(current)</span></li>
+      </ul>
+    
+  </div>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="#">שמור</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">סגור</a>
+            </li>
+    </ul>
+    
+  </div>
+</nav>
