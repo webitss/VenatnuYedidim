@@ -1,5 +1,12 @@
 .control {
-width: 10px;
-height: 20px;
+width: 150px;
+height: 25px;
+list-style-type: none;
 background-color: blueviolet;
+float: right;
+margin-right: 5%;
+color: white;
+text-align: center;
+font-size: 15px;
+
 }

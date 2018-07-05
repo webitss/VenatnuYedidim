@@ -1,0 +1,13 @@
+<div class="col-sm-12 event-menu">
+  <div class="name col-sm-2">שם ארוע</div>
+  <div class="col-sm-1"></div>
+  <ul>
+    <li (click)="eventDetails()" class="col-sm-1">פרטים</li>
+    <li (click)="eventParticipants()" class="col-sm-1">משתתפים</li>
+  </ul>
+  <div class="col-sm-5"></div>
+  <button *ngIf="isDetails==true">שמירה</button>
+  <button>סגור</button>
+</div>
+
+<router-outlet></router-outlet>
