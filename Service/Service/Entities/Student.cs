@@ -63,7 +63,6 @@ namespace Service.Entities
         {
             try
             {
-               
                 SqlDataAccess.ExecuteDatasetSP("TStudent_INS");
                 return true;
             }
