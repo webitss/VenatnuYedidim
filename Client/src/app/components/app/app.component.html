@@ -1,15 +1,37 @@
-<div class="titele col-sm-12" >
-  <p class="flout" >ונתנו ידידים</p>
-  <a class="flout">תלמידים</a>
-  <a class="flout" routerLink='/graduates'>אברכים</a>
-  <a class="flout" routerLink='/events' >ארועים</a>
-  <a class="flout" routerLink='/graduates'>בוגרים</a>
-  <a class="flout" routerLink='/users'>משתמשים</a>
-  <a class="flout" routerLink='/settings' >הגדרות</a>
-  
-  <a>שלום משתמש </a>|
-  <a>התנתק  </a>
 
-  <router-outlet></router-outlet>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">ונתנו ידידים</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+          <li class="nav-item">
+              <a class="nav-link" routerLink='/graduates'>תלמידים</a>
+            </li>
+          <li class="nav-item">
+              <a class="nav-link" routerLink='/graduates'>אברכים</a>
+            </li>
+          <li class="nav-item">
+              <a class="nav-link" routerLink='/events' >ארועים</a>
+            </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/graduates'>בוגרים</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/users'>משתמשים</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/settings'>הגדרות</a>
+        </li>    
+      </ul>
 
-</div>
+    </div> 
+   <ul class="navbar-nav">
+     <li class="nav-item"> 
+    <a class="nav-link">שלום משתמש </a></li>
+    <li class="nav-item"> 
+    <a class="nav-link">התנתק</a></li>
+  </ul> 
+  </nav>
+<router-outlet></router-outlet>
