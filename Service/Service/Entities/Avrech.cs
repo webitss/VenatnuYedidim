@@ -9,6 +9,7 @@ using System.Web;
 
 namespace Service.Entities
 {
+    [DataContract]
     public class Avrech : Person
     {
         public static List<Avrech> GetAllAvrechim(int? iPersonId)
@@ -17,6 +18,23 @@ namespace Service.Entities
             {
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrech_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
                 List<Avrech> avrech = ObjectGenerator<Avrech>.GeneratListFromDataRowCollection(drc);
+
+                return avrech;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetAvrechim / TAvrech_SLCT", ", ex " + ex);
+                return null;
+            }
+        }
+
+        public static Avrech GetAvrechById(int? iPersonId)
+        {
+            try
+            {
+
+                DataRow drc = SqlDataAccess.ExecuteDatasetSP("TAvrech_GetAvrechById_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
+                Avrech avrech = ObjectGenerator<Avrech>.GeneratFromDataRow(drc);
 
                 return avrech;
             }

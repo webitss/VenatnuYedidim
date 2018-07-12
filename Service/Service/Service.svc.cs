@@ -25,7 +25,10 @@ namespace Service
         {
             return Avrech.GetAllAvrechim(iPersonId);
         }
-
+        public Avrech GetAvrechById(int? iPersonId)
+        {
+            return Avrech.GetAvrechById(iPersonId);
+        }
         #region files
 
         public string SaveFileByBase64(string base64File, string fileName)

@@ -39,6 +39,15 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Avrech> GetAllAvrechim(int? iPersonId);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetAvrechById",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        Avrech GetAvrechById(int? iPersonId);
+
         #region files
 
         [OperationContract]
