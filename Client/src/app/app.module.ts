@@ -43,6 +43,7 @@ import { SettingsReportsComponent } from './components/settings-reports/settings
 import { SettingsYeshivotComponent } from './components/settings-yeshivot/settings-yeshivot.component';
 import { SettingsDocumentsComponent } from './components/settings-documents/settings-documents.component';
 import { SettingsFrontendComponent } from './components/settings-frontend/settings-frontend.component';
+import { NewYeshivaComponent } from './components/new-yeshiva/new-yeshiva.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { SettingsFrontendComponent } from './components/settings-frontend/settin
     SettingsYeshivotComponent,
     SettingsDocumentsComponent,
     SettingsFrontendComponent,
+    NewYeshivaComponent,
   ],
   imports: [
     BrowserModule,
@@ -135,7 +137,10 @@ import { SettingsFrontendComponent } from './components/settings-frontend/settin
           { path: "", component: SettingsCodeTableComponent },
           { path: "settings-code-tables", component: SettingsCodeTableComponent },
           { path: "settings-reports", component: SettingsReportsComponent },
-          { path: "settings-yeshivot", component: SettingsYeshivotComponent },
+          { path: "settings-yeshivot", component: SettingsYeshivotComponent,
+        children: [
+          { path:"new-yeshiva", component:NewYeshivaComponent}
+          ] },
           { path: "settings-documents", component: SettingsDocumentsComponent },
           { path: "settings-frontend", component: SettingsFrontendComponent },
         ]

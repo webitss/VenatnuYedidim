@@ -23,7 +23,7 @@ namespace Service
 
         public List<Avrech> GetAllAvrechim(int iPersonId)
         {
-            return Avrech.GetAllAvrechim(iPersonId);
+            return Avrech.GetAvrechim(iPersonId);
         }
 
         #region files
@@ -33,8 +33,11 @@ namespace Service
             return Fileshandler.SaveFileByBase64(base64File, fileName);
         }
 
-        #endregion
+# endregion
     }
 
-
+    //public bool AddYeshiva(Yeshivot yeshiva)
+    //{
+    //    return Yeshivot.AddYeshiva();
+    //}
 }
