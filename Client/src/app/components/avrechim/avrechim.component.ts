@@ -20,8 +20,7 @@ export class AvrechimComponent implements OnInit {
       data=>
       {
     this.avrechimList=data;
-    alert(this.avrechimList[0].nvFirstName+" "+this.avrechimList[0].nvLastName);
-    debugger;
+
     },
       err=>("err")
     );
