@@ -34,6 +34,19 @@ namespace Service
         }
 
         #endregion
+        #region SysTableRow
+        public List<SysTableRow> GetValues(int iSysTableId)
+        {
+            return SysTableRow.GetValues(iSysTableId);
+        }
+        #endregion
+        #region SysTables
+        public List<SysTables> GetAllNames(int iSysTableId)
+        {
+            return SysTables.GetAllNames();
+        }
+        #endregion
+
     }
 
 
