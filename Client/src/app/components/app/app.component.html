@@ -2,7 +2,7 @@
   <a class="navbar-brand tital" href="#">ונתנו ידידים</a>
 
   
-    <ul class="navbar-nav">
+    <ul class="navbar-nav" *ngIf="currentComponent">
       <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Student') != -1}" class="nav-item   li" >
         <a class="closed link" routerLink='/students'>תלמידים</a>
       </li>
@@ -32,5 +32,5 @@
 <!-- <div id="s-Image_1" class="pie image firer ie-background commentable" alt="image" style="left: 1088px; top: 231px;">
     <img src="PicUrl">
 </div> -->
-<input type="file" value="העלה תמונה" (change)="LoadImage($event,saveFile)"/>
+<!-- <input type="file" value="העלה תמונה" (change)="LoadImage($event,saveFile)"/> -->
 <router-outlet (activate)="onRouterOutletActivate($event)" ></router-outlet>

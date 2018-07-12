@@ -47,7 +47,6 @@ import { NewYeshivaComponent } from './components/new-yeshiva/new-yeshiva.compon
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
 import { StudentConversationComponent } from './components/student-conversation/student-conversation.component';
 import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
-//import { StudentMeetingDetailsComponent } from './student-meeting-details/student-meeting-details.component';
 import { StudentMeetingDetailsComponent } from './components/student-meeting-details/student-meeting-details.component';
 
 @NgModule({
@@ -100,6 +99,7 @@ import { StudentMeetingDetailsComponent } from './components/student-meeting-det
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot([
+      { path: "", component: StudentsComponent },
       { path: "students", component: StudentsComponent },
       {
         path: "students/student/:iPersonId", component: StudentComponent,
