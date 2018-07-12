@@ -44,6 +44,8 @@ import { SettingsYeshivotComponent } from './components/settings-yeshivot/settin
 import { SettingsDocumentsComponent } from './components/settings-documents/settings-documents.component';
 import { SettingsFrontendComponent } from './components/settings-frontend/settings-frontend.component';
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
+import { StudentConversationComponent } from './components/student-conversation/student-conversation.component';
+import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,8 @@ import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-sel
     SettingsDocumentsComponent,
     SettingsFrontendComponent,
     VyMultySelectComponent,
+    StudentConversationComponent,
+    StudentConversationDetailsComponent,    
   ],
   imports: [
     BrowserModule,
