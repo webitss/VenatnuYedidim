@@ -14,7 +14,7 @@ flag:number;
 // subscription:Subscription;
   ngOnInit() {
    this.sub=this.route.params.subscribe(params=>{
-     this.flag=+params['id'];
+     this.flag=+params['iPersonId'];
    });
   }
   ngOnDestroy() {

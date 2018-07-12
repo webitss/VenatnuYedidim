@@ -10,6 +10,7 @@ export class StudentDetailsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

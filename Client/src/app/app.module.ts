@@ -46,6 +46,7 @@ import { SettingsFrontendComponent } from './components/settings-frontend/settin
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
 import { StudentConversationComponent } from './components/student-conversation/student-conversation.component';
 import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
+import { StudentMeetingDetailsComponent } from './student-meeting-details/student-meeting-details.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { StudentConversationDetailsComponent } from './components/student-conver
     SettingsFrontendComponent,
     VyMultySelectComponent,
     StudentConversationComponent,
-    StudentConversationDetailsComponent,    
+    StudentConversationDetailsComponent,
+    StudentMeetingDetailsComponent,    
   ],
   imports: [
     BrowserModule,
@@ -101,7 +103,9 @@ import { StudentConversationDetailsComponent } from './components/student-conver
         children: [
           { path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
-          { path: "student-meetings", component: StudentMeetingsComponent },
+          { path: "student-meetings/:iMeetingId", component: StudentMeetingsComponent ,children:[
+          {path:"student-meeting-details",component:StudentMeetingDetailsComponent}
+          ]},
           { path: "student-conversations", component: StudentConversationsComponent },
         ]
       },
