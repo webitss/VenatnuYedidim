@@ -23,6 +23,7 @@ export class AvrechDetailsComponent implements OnInit {
       data=>
       {
     this.avrech=data;
+    
     debugger;
     },
       err=>("err")
