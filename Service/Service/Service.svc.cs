@@ -29,7 +29,7 @@ namespace Service
 
         public List<Avrech> GetAllAvrechim(int? iPersonId)
         {
-            return Avrech.GetAllAvrechim(iPersonId);
+            return Avrech.GetAvrechim(iPersonId);
         }
 
         public List<Student> GetAvrechStudents(int iPersonId)

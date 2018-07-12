@@ -1,0 +1,38 @@
+.li:hover
+{
+    background-color:rgba(169, 169, 169, 0.37) ;
+}
+.kk1{
+    background-color:rgb(102, 56, 151);
+    
+    color: white;
+}
+.link{
+   color: black;
+  
+ 
+  font-size: 15px;
+  
+  text-decoration: none;
+}
+.tital{
+    color:orange;
+    padding-left: 50px;
+}
+.nav{
+    background-color:rgba(220, 220, 220, 0.945);
+}
+.n{
+    padding-right: 175px; 
+    font-size: 15px;
+}
+.li{
+    padding-left:10px;
+    border: rgba(31, 0, 0, 0.185);
+    padding: 10px 50px;
+   margin: 10px;
+    border: 2px solid rgb(102, 56, 151);
+    border-top: 0;
+    border-right: 0;
+    border-left: 0; 
+}
