@@ -25,13 +25,7 @@ export class AvrechimComponent implements OnInit {
     },
       err=>("err")
     );
-    // this.appProxy.get("GetAllAvrechim?iPersonId=1")
-    // .then(
-    //   data=>{
-    //   alert("success")
-    //    }).catch(err=>{
-    //      alert("err");
-    //    });
+    
   }
 
 }
