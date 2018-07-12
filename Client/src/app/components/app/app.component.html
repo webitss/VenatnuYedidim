@@ -1,7 +1,5 @@
 <nav class="navbar navbar-expand-sm nav">
   <a class="navbar-brand tital" href="#">ונתנו ידידים</a>
-
-
   <ul class="navbar-nav" *ngIf="currentComponent">
     <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Student') != -1}" class="nav-item   li">
       <a class="closed link" routerLink='/students'>תלמידים</a>
@@ -22,7 +20,7 @@
       <a class="nav-item link" routerLink='/settings'>הגדרות</a>
     </li>
   </ul>
-  
+
   <div id="t-Text_2" class="n pie label singleline autofit firer click ie-background commentable" style="float: left">
     <div class="backgroundLayer"></div>
     <div class="paddingLayer">
