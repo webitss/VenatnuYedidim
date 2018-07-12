@@ -18,8 +18,17 @@ namespace Service
             ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json)]
         User Login(string nvUserName, string nvPassword);
-    
-		[OperationContract]
+
+        [OperationContract]
+        [WebInvoke(
+            Method = "GET",
+            UriTemplate = "GetEventsList",
+            BodyStyle = WebMessageBodyStyle.WrappedRequest,
+            ResponseFormat = WebMessageFormat.Json,
+            RequestFormat = WebMessageFormat.Json)]
+        List<Event> GetEventsList(int iUserId);
+
+        [OperationContract]
         [WebInvoke(
            Method = "POST",
            UriTemplate = "GetUsersByPermittion",
@@ -38,6 +47,15 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         List<Avrech> GetAllAvrechim(int iPersonId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "AddEvent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool AddEvent(Event oEvent);
 
         #region files
 

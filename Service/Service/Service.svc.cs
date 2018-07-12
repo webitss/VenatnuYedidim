@@ -26,6 +26,16 @@ namespace Service
             return Avrech.GetAllAvrechim(iPersonId);
         }
 
+        public bool AddEvent(Event oEvent)
+        {
+            return Event.AddEvent(oEvent);
+        }
+
+        public List<Event> GetEventsList(int iUserId)
+        {
+            return Event.GetEventsList(iUserId);
+        }
+
         #region files
 
         public string SaveFileByBase64(string base64File, string fileName)

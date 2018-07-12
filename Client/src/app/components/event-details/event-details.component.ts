@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { AppProxy } from '../../services/app.proxy';
+import { Event } from '../../classes/event';
 
 @Component({
   selector: 'app-event-details',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventDetailsComponent implements OnInit {
 
-  constructor() { }
+ 
+  event: Event;
+
+
+ save() {
+   debugger;
+    this.appProxy.post("AddEvent",{oEvent: this.event})
+    .then(
+      data=>{
+      alert(data);
+       }).catch(err=>{
+         alert(err);
+       });
+  }
+
+
+ 
+  constructor( private appProxy: AppProxy) { }
 
   ngOnInit() {
+    this.event = new Event();
   }
 
 }
