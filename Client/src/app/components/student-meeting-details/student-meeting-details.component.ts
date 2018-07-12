@@ -1,27 +1,25 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-student',
-  templateUrl: './student.component.html',
-  styleUrls: ['./student.component.css']
+  selector: 'app-student-meeting-details',
+  templateUrl: './student-meeting-details.component.html',
+  styleUrls: ['./student-meeting-details.component.css']
 })
-export class StudentComponent implements OnInit,OnDestroy {
+export class StudentMeetingDetailsComponent implements OnInit,OnDestroy {
   private sub: any;
-flag:number;
+  meetingId:number;
   constructor(private route: ActivatedRoute) { }
 // subscription:Subscription;
   ngOnInit() {
    this.sub=this.route.params.subscribe(params=>{
-     this.flag=+params['iPersonId'];
+     this.meetingId=+params['iMeetingId'];
    });
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
     }
+  
+  
+
 }
-
-
-
-

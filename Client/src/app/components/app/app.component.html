@@ -1,41 +1,36 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">ונתנו ידידים</a>
+ <nav class="navbar navbar-expand-sm nav">
+  <a class="navbar-brand tital" href="#">ונתנו ידידים</a>
 
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+  
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink='/students'>תלמידים</a>
+      <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Student') != -1}" class="nav-item   li" >
+        <a class="closed link" routerLink='/students'>תלמידים</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink='/avrechim'>אברכים</a>
+      <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Avrechim') != -1}" class="nav-item   li" >
+        <a class="closed link" routerLink='/avrechim'>אברכים</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink='/events'>ארועים</a>
+      <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Events') != -1}" class="nav-item li " >
+        <a class="closed link" routerLink='/events'>ארועים</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink='/graduates'>בוגרים</a>
+      <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Graduates') != -1}" class="nav-item  li" >
+        <a class="closed link" routerLink='/graduates'>בוגרים</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink='/users'>משתמשים</a>
+      <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Users') != -1}"class="nav-item   li" >
+        <a class="closed link" routerLink='/users'>משתמשים</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink='/settings'>הגדרות</a>
+      <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Settings') != -1}"class="nav-item   li" >
+        <a class="nav-item link" routerLink='/settings'>הגדרות</a>
       </li>
     </ul>
-
-  </div>
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link">שלום משתמש </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link">התנתק</a>
-    </li>
-  </ul>
-</nav>
-
-<router-outlet></router-outlet>
+    <div id="t-Text_2" class="n pie label singleline autofit firer click ie-background commentable" style="float: left">
+        <div class="backgroundLayer"></div><div class="paddingLayer"><div class="content"><div class="valign">
+        <span id="rtr-t-Text_2_0">שלום משתמש &nbsp;| התנתק</span></div></div></div></div>
+ 
+  
+ </nav> 
+ 
 <!-- <div id="s-Image_1" class="pie image firer ie-background commentable" alt="image" style="left: 1088px; top: 231px;">
-    <img src="resources/_jim/images/common/cross.svg">
-</div>
-<input type="button" value="העלה תמונה" (click)="LoudImage()"/> -->
+    <img src="PicUrl">
+</div> -->
+<input type="file" value="העלה תמונה" (change)="LoadImage($event,saveFile)"/>
+<router-outlet (activate)="onRouterOutletActivate($event)" ></router-outlet>
