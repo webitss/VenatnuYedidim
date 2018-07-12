@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class VyTableComponent implements OnInit {
 
   private lstColumns = [{
-    title: 'a',
+    title: 'עריכה',
     filter: '',
     name: 'aa',
     titleStyle: {
@@ -23,8 +23,8 @@ export class VyTableComponent implements OnInit {
       background: 'red'
     }
   },
-  {
-    title: 'b',
+  {    
+    title: 'שם פרטי',
     filter: '',
     name: 'bb',
     titleStyle: {
@@ -40,7 +40,7 @@ export class VyTableComponent implements OnInit {
     }
   },
   {
-    title: 'c',
+    title: 'שם משפחה',
     filter: '',
     name: 'cc',
     titleStyle: {
@@ -56,7 +56,7 @@ export class VyTableComponent implements OnInit {
     }
   },
   {
-    title: 'd',
+    title: 'נייד',
     filter: '',
     name: 'dd',
     titleStyle: {

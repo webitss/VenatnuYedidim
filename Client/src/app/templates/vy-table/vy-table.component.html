@@ -1,14 +1,14 @@
 <div>
-  <div *ngFor="let col of lstColumns" class="col">
-    <div [ngStyle]="col.titleStyle">
-      {{col.title}}
-    </div>
-    <div [ngStyle]="col.filterStyle">{{col.filter}}
-      <input type="text" [(ngModel)]="col.filter">
+  <div class="row">
+    <div *ngFor="let col of lstColumns" class="col">
+      <div [ngStyle]="col.titleStyle"> {{col.title}} </div>
+      <div [ngStyle]="col.filterStyle">{{col.filter}}
+        <input type="text" [(ngModel)]="col.filter">
+      </div>
     </div>
   </div>
 
-  <div *ngFor="let row of lstDataRows">
+  <div *ngFor="let row of lstDataRows" class="row">
     <div *ngFor="let col of lstColumns" [ngStyle]="col.cellStyle">
       <div>{{row[col.name]}}</div>
     </div>
