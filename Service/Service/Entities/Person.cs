@@ -7,6 +7,7 @@ using System.Web;
 
 namespace Service.Entities
 {
+    [DataContract]
     public class Person
     {
         #region Data Members
@@ -23,6 +24,8 @@ namespace Service.Entities
         public string nvPhone { get; set; }
         [DataMember]
         public string nvMobile { get; set; }
+        [DataMember]
+        public string nvEmail { get; set; }
         [DataMember]
         public string nvAddress { get; set; }
         [DataMember]

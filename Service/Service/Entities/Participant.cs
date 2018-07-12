@@ -32,12 +32,18 @@ namespace Service.Entities
                 DataTable dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_SLCT", new SqlParameter("iEventId", iEventId)).Tables[0];                
               
                 List<Person> participants = new List<Person>();
-                //לגמור!
-                foreach (var item in dt.Rows)
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    //ObjectGenerator<Person>.GeneratFromDataRow(item);
+                    Person p = new Person();
+                    p.nvLastName = dt.Rows[i]["nvLastName"].ToString();
+                    p.nvFirstName = dt.Rows[i]["nvFirstName"].ToString();
+                    p.nvPhone = dt.Rows[i]["nvPhone"].ToString();
+                    p.nvMobile = dt.Rows[i]["nvMobile"].ToString();
+                    p.nvEmail = dt.Rows[i]["nvEmail"].ToString();
+                    p.lstObject.Add("iArrivalStatusType", dt.Rows[i]["iArrivalStatusType"].ToString());
+                    participants.Add(p);
                 }
-           
+
                 return participants;
             }
             catch (Exception ex)

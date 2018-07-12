@@ -18,8 +18,8 @@ namespace Service
             ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json)]
         User Login(string nvUserName, string nvPassword);
-    
-		[OperationContract]
+
+        [OperationContract]
         [WebInvoke(
            Method = "POST",
            UriTemplate = "GetUsersByPermittion",
@@ -28,7 +28,18 @@ namespace Service
            RequestFormat = WebMessageFormat.Json)]
         List<User> GetUsersByPermittion(int personId);
 
+        [OperationContract]
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "SetUser",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+        void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvPhone, string nvEmail, string nvUserName, string nvPassword, int iPermissionType);
+
         #endregion
+
+        #region Avrech
 
         [OperationContract]
         [WebInvoke(
@@ -37,7 +48,27 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Avrech> GetAllAvrechim(int iPersonId);
+        List<Avrech> GetAllAvrechim(int? iPersonId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetAvrechById",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        Avrech GetAvrechById(int? iPersonId);
+
+        #endregion
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetAvrechStudents",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Student> GetAvrechStudents(int iPersonId);
 
         #region files
 
@@ -51,6 +82,7 @@ namespace Service
         string SaveFileByBase64(string base64File, string fileName);
 
         #endregion
+<<<<<<< HEAD
 
         [OperationContract]
         [WebInvoke(
@@ -60,5 +92,7 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         bool AddYeshiva(Yeshivot yeshiva);
+=======
+>>>>>>> 41451d74e73ad3601800b86b7f547cfb53c20335
     }
 }
