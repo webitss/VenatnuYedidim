@@ -59,6 +59,16 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         Avrech GetAvrechById(int? iPersonId);
 
+<<<<<<< HEAD
+        [OperationContract]
+        [WebInvoke(
+           Method = "POST",
+           UriTemplate = "GetConversations",
+           BodyStyle = WebMessageBodyStyle.WrappedRequest,
+           ResponseFormat = WebMessageFormat.Json,
+           RequestFormat = WebMessageFormat.Json)]
+        List<Conversation> GetConversations(int iPersonId);
+=======
         #endregion
 
         [OperationContract]
@@ -69,6 +79,7 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         List<Student> GetAvrechStudents(int iPersonId);
+>>>>>>> 41451d74e73ad3601800b86b7f547cfb53c20335
 
         #region files
 
@@ -82,5 +93,17 @@ namespace Service
         string SaveFileByBase64(string base64File, string fileName);
 
         #endregion
+<<<<<<< HEAD
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetAllAvrechim",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool AddYeshiva(Yeshivot yeshiva);
+=======
+>>>>>>> 41451d74e73ad3601800b86b7f547cfb53c20335
     }
 }

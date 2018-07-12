@@ -42,8 +42,15 @@ namespace Service
             return Avrech.GetAvrechById(iPersonId);
         }
 
+<<<<<<< HEAD
+        public List<Conversation> GetConversations(int iPersonId)
+        {
+            return Conversation.GetConversations(iPersonId);
+        }
+=======
         #endregion
 
+>>>>>>> 41451d74e73ad3601800b86b7f547cfb53c20335
         #region files
 
         public string SaveFileByBase64(string base64File, string fileName)
@@ -51,8 +58,11 @@ namespace Service
             return Fileshandler.SaveFileByBase64(base64File, fileName);
         }
 
-        #endregion
+# endregion
     }
 
-
+    //public bool AddYeshiva(Yeshivot yeshiva)
+    //{
+    //    return Yeshivot.AddYeshiva();
+    //}
 }
