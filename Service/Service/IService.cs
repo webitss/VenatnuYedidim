@@ -28,7 +28,18 @@ namespace Service
            RequestFormat = WebMessageFormat.Json)]
         List<User> GetUsersByPermittion(int personId);
 
+        [OperationContract]
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "SetUser",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+        void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvPhone, string nvEmail, string nvUserName, string nvPassword, int iPermissionType);
+
         #endregion
+
+        #region Avrech
 
         [OperationContract]
         [WebInvoke(
@@ -37,7 +48,18 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Avrech> GetAllAvrechim(int iPersonId);
+        List<Avrech> GetAllAvrechim(int? iPersonId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetAvrechById",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        Avrech GetAvrechById(int? iPersonId);
+
+        #endregion
 
         [OperationContract]
         [WebInvoke(

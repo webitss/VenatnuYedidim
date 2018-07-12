@@ -2,9 +2,13 @@
   avrech works!
 </p>
 <ul>
-  <li><a routerLink="avrech-details">פרטי אברך</a></li>
+  <li><a routerLink="avrech-details">פרטים אישיים</a></li>
   <li><a routerLink="avrech-students">תלמידים</a></li>
   <li><a routerLink="avrech-diary">יומן</a></li>
   <li><a routerLink="avrech-presence">נוכחות</a></li>
 </ul>
+
+<button (click)="save()">שמירה</button>
+<button (click)="close()">סגור</button>
+
 <router-outlet></router-outlet>
