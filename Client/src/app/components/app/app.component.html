@@ -2,7 +2,7 @@
   <a class="navbar-brand tital" href="#">ונתנו ידידים</a>
 
   
-    <ul class="navbar-nav">
+    <ul class="navbar-nav" *ngIf="currentComponent">
       <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Student') != -1}" class="nav-item   li" >
         <a class="closed link" routerLink='/students'>תלמידים</a>
       </li>

@@ -97,6 +97,7 @@ import { StudentMeetingDetailsComponent } from './components/student-meeting-det
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot([
+      { path: "", component: StudentsComponent },
       { path: "students", component: StudentsComponent },
       {
         path: "students/student/:iPersonId", component: StudentComponent,
