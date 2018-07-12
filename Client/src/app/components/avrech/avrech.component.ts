@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import {AvrechDetailsComponent} from '../avrech-details/avrech-details.component'
+
 
 @Component({
   selector: 'app-avrech',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AvrechComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activatedRoute:ActivatedRoute) { }
 
   ngOnInit() {
   }
 
+  save()
+  {
+  }
 }

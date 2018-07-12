@@ -43,6 +43,10 @@ import { SettingsReportsComponent } from './components/settings-reports/settings
 import { SettingsYeshivotComponent } from './components/settings-yeshivot/settings-yeshivot.component';
 import { SettingsDocumentsComponent } from './components/settings-documents/settings-documents.component';
 import { SettingsFrontendComponent } from './components/settings-frontend/settings-frontend.component';
+import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
+import { StudentConversationComponent } from './components/student-conversation/student-conversation.component';
+import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
+import { StudentMeetingDetailsComponent } from './student-meeting-details/student-meeting-details.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +86,10 @@ import { SettingsFrontendComponent } from './components/settings-frontend/settin
     SettingsYeshivotComponent,
     SettingsDocumentsComponent,
     SettingsFrontendComponent,
+    VyMultySelectComponent,
+    StudentConversationComponent,
+    StudentConversationDetailsComponent,
+    StudentMeetingDetailsComponent,    
   ],
   imports: [
     BrowserModule,
@@ -95,7 +103,9 @@ import { SettingsFrontendComponent } from './components/settings-frontend/settin
         children: [
           { path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
-          { path: "student-meetings", component: StudentMeetingsComponent },
+          { path: "student-meetings", component: StudentMeetingsComponent ,children:[
+          {path:"student-meeting-details/:iMeetingId",component:StudentMeetingDetailsComponent}
+          ]},
           { path: "student-conversations", component: StudentConversationsComponent },
         ]
       },

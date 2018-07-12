@@ -9,7 +9,7 @@ namespace Service
         #region User
         public List<User> GetUsersByPermittion(int personId)
         {
-            throw new System.NotImplementedException();
+            return User.GetUsers(personId);
         }
 
 
@@ -18,14 +18,25 @@ namespace Service
             return User.Login(nvUserName, nvPassword);
         }
 
+       public void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvPhone, string nvEmail, string nvUserName, string nvPassword, int iPermissionType)
+        {
+            User.SetUser(iPersonId, iUserId, nvLastName, nvFirstName, nvPhone, nvEmail, nvUserName, nvPassword, iPermissionType);
+        }
+
+
 
         #endregion
+        #region Avrech
 
-        public List<Avrech> GetAllAvrechim(int iPersonId)
+        public List<Avrech> GetAllAvrechim(int? iPersonId)
         {
             return Avrech.GetAvrechim(iPersonId);
         }
-
+        public Avrech GetAvrechById(int? iPersonId)
+        {
+            return Avrech.GetAvrechById(iPersonId);
+        }
+        #endregion
         #region files
 
         public string SaveFileByBase64(string base64File, string fileName)
