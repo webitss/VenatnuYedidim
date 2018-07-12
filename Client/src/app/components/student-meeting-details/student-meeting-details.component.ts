@@ -8,12 +8,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class StudentMeetingDetailsComponent implements OnInit,OnDestroy {
   private sub: any;
-flag:number;
+  meetingId:number;
   constructor(private route: ActivatedRoute) { }
 // subscription:Subscription;
   ngOnInit() {
    this.sub=this.route.params.subscribe(params=>{
-     this.flag=+params['iMeetingId'];
+     this.meetingId=+params['iMeetingId'];
    });
   }
   ngOnDestroy() {
