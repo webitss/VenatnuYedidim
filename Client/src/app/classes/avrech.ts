@@ -1,5 +1,5 @@
-// import { Person } from "./person";
+import { Person } from "./person";
 
-// export class Avrech extends Person{
+export class Avrech extends Person{
    
-// }
+}
