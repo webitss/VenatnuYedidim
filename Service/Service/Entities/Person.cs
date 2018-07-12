@@ -7,6 +7,7 @@ using System.Web;
 
 namespace Service.Entities
 {
+    [DataContract]
     public class Person
     {
         #region Data Members

@@ -32,7 +32,7 @@ namespace Service
 
         [OperationContract]
         [WebInvoke(
-        Method = "GET",
+        Method = "POST",
         UriTemplate = "GetAllAvrechim",
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,

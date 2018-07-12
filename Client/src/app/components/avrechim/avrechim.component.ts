@@ -13,10 +13,10 @@ export class AvrechimComponent implements OnInit {
   constructor(private appProxy:AppProxy) { }
 
   ngOnInit() {
-    // this.appProxy.post("GetAllAvrechim",{iPersonId:1}).then(
-    //   data=>alert("ssucces!!"),
-    //   err=>("err")
-    // );
+    this.appProxy.post("GetAllAvrechim",{iPersonId:1}).then(
+      data=>alert("ssucces!!"),
+      err=>("err")
+    );
     // this.appProxy.get("GetAllAvrechim?iPersonId=1")
     // .then(
     //   data=>{
