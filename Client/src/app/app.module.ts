@@ -103,8 +103,8 @@ import { StudentMeetingDetailsComponent } from './student-meeting-details/studen
         children: [
           { path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
-          { path: "student-meetings/:iMeetingId", component: StudentMeetingsComponent ,children:[
-          {path:"student-meeting-details",component:StudentMeetingDetailsComponent}
+          { path: "student-meetings", component: StudentMeetingsComponent ,children:[
+          {path:"student-meeting-details/:iMeetingId",component:StudentMeetingDetailsComponent}
           ]},
           { path: "student-conversations", component: StudentConversationsComponent },
         ]
