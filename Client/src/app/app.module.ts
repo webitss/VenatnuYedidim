@@ -43,6 +43,7 @@ import { SettingsReportsComponent } from './components/settings-reports/settings
 import { SettingsYeshivotComponent } from './components/settings-yeshivot/settings-yeshivot.component';
 import { SettingsDocumentsComponent } from './components/settings-documents/settings-documents.component';
 import { SettingsFrontendComponent } from './components/settings-frontend/settings-frontend.component';
+import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { SettingsFrontendComponent } from './components/settings-frontend/settin
     SettingsYeshivotComponent,
     SettingsDocumentsComponent,
     SettingsFrontendComponent,
+    VyMultySelectComponent,
   ],
   imports: [
     BrowserModule,
