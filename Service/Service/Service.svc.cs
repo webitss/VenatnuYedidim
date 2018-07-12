@@ -7,6 +7,7 @@ namespace Service
     public class Service : IService
     {
         #region User
+
         public List<User> GetUsersByPermittion(int personId)
         {
             return User.GetUsers(personId);
@@ -18,12 +19,16 @@ namespace Service
             return User.Login(nvUserName, nvPassword);
         }
 
-
         #endregion
 
         public List<Avrech> GetAllAvrechim(int iPersonId)
         {
             return Avrech.GetAllAvrechim(iPersonId);
+        }
+
+        public List<Student> GetAvrechStudents(int iPersonId)
+        {
+            return Avrech.GetAvrechStudents(iPersonId);
         }
 
         #region files

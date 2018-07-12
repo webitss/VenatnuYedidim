@@ -18,8 +18,8 @@ namespace Service
             ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json)]
         User Login(string nvUserName, string nvPassword);
-    
-		[OperationContract]
+
+        [OperationContract]
         [WebInvoke(
            Method = "POST",
            UriTemplate = "GetUsersByPermittion",
@@ -39,6 +39,15 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Avrech> GetAllAvrechim(int iPersonId);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetAvrechStudents",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Student> GetAvrechStudents(int iPersonId);
+
         #region files
 
         [OperationContract]
@@ -49,7 +58,7 @@ namespace Service
                 ResponseFormat = WebMessageFormat.Json,
                 RequestFormat = WebMessageFormat.Json)]
         string SaveFileByBase64(string base64File, string fileName);
-	
-		#endregion
-	}
+
+        #endregion
+    }
 }
