@@ -38,7 +38,9 @@ namespace Service
         void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvPhone, string nvEmail, string nvUserName, string nvPassword, int iPermissionType);
 
         #endregion
+
         #region Avrech
+
         [OperationContract]
         [WebInvoke(
         Method = "POST",
@@ -59,6 +61,14 @@ namespace Service
 
         #endregion
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetAvrechStudents",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Student> GetAvrechStudents(int iPersonId);
 
         #region files
 
