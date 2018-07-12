@@ -1,0 +1,51 @@
+﻿using Service.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Web;
+
+namespace Service.Entities
+{
+    [DataContract]
+    public class Participant
+    {
+        #region Data Members
+
+        [DataMember]
+        public int iEventId { get; set; }
+        [DataMember]
+        public int iPersonId { get; set; }
+        [DataMember]
+        public int iArrivalStatus { get; set; }
+
+        #endregion
+
+        //להוסיף iPersonId
+        //של היוזר ולשלוף את המשתתפים לפיו
+        public static List<Person> GetParticipantsList(int iEventId)
+        {
+            try
+            {
+                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_SLCT", new SqlParameter("iEventId", iEventId)).Tables[0];                
+              
+                List<Person> participants = new List<Person>();
+                //לגמור!
+                foreach (var item in dt.Rows)
+                {
+                    //ObjectGenerator<Person>.GeneratFromDataRow(item);
+                }
+           
+                return participants;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetParticipantsList / TParticipant_SLCT", "ex" + ex);
+                return null;
+            }
+        }
+
+    }
+}
