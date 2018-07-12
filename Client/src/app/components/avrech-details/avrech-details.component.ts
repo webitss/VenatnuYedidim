@@ -9,12 +9,13 @@ import { AppProxy } from '../../services/app.proxy';
 })
 export class AvrechDetailsComponent implements OnInit {
 
+  id:number;
   constructor(private activatedRoute: ActivatedRoute ,private appProxy:AppProxy) { }
 
   ngOnInit() {
-    // this.activatedRoute.parent.params.subscribe(params => {
-    //   params['iPersonId'];
-    // })   
+    this.activatedRoute.parent.params.subscribe(params => {
+      this.id=params['iPersonId'];
+    })   
 
   }
 

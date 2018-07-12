@@ -21,7 +21,7 @@ namespace Service
 
         #endregion
 
-        public List<Avrech> GetAllAvrechim(int iPersonId)
+        public List<Avrech> GetAllAvrechim(int? iPersonId)
         {
             return Avrech.GetAllAvrechim(iPersonId);
         }
