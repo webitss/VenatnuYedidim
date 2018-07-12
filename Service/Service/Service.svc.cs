@@ -29,6 +29,11 @@ namespace Service
         {
             return Avrech.GetAvrechById(iPersonId);
         }
+
+        public List<Conversation> GetConversations(int iPersonId)
+        {
+            return Conversation.GetConversations(iPersonId);
+        }
         #region files
 
         public string SaveFileByBase64(string base64File, string fileName)
