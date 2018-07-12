@@ -2,5 +2,8 @@
   vy-multy-select works!
 </p>
 <select>
-  <option *ngFor=myList></option>
+  <option></option>
+  <option>בחר הכל</option>
+  <option><input type="text" placeholder="חפש" style="border: 1px solid black"></option>
+  <option *ngFor="let item of myList"><input type="checkbox">{{item}}</option>
 </select>

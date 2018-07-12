@@ -142,6 +142,8 @@ import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-sel
           { path: "settings-frontend", component: SettingsFrontendComponent },
         ]
       },
+      {path:"vy-multy-select",component:VyMultySelectComponent}
+
     ], { useHash: true })
   ],
   providers: [AppProxy],
