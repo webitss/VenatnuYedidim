@@ -1,5 +1,0 @@
-C:\sari korlanski\VenatnuYedidim\Service\Service\bin\Service.dll
-C:\sari korlanski\VenatnuYedidim\Service\Service\bin\Service.pdb
-C:\sari korlanski\VenatnuYedidim\Service\Service\obj\Debug\Service.csprojResolveAssemblyReference.cache
-C:\sari korlanski\VenatnuYedidim\Service\Service\obj\Debug\Service.dll
-C:\sari korlanski\VenatnuYedidim\Service\Service\obj\Debug\Service.pdb
