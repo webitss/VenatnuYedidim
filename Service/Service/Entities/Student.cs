@@ -3,12 +3,14 @@ using Service.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
 namespace Service.Entities
 {
+    [DataContract]
     public class Student : Person
     {
         #region Data Members
@@ -40,14 +42,13 @@ namespace Service.Entities
 
         #endregion
 
-        //להוסיף iPersonId
-        //של היוזר ולשלוף את התלמידים לפיו
-        public static List<Student> GetStudentList()
+       
+        public static List<Student> GetStudentList(int iUserId)
         {
             try
             {
-                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TStudent_SLCT").Tables[0];                
-                List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(dt.Rows);
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TStudent_SLCT", new SqlParameter("iPersonId", iUserId)).Tables[0].Rows;
+                List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
                 return students;
             }
             catch (Exception ex)
@@ -57,12 +58,15 @@ namespace Service.Entities
             }
         }
 
-        public static bool AddStudent(Student student)
+
+        public static bool AddStudent(Student student,int iUserId)
         {
             try
             {
-                ///ObjectGenerator<Student>.GetSqlParametersFromObject(student)
-                SqlDataAccess.ExecuteDatasetSP("TStudent_INS");
+                List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TStudent_INS", parameters).Tables[0].Rows[0];
+              
                 return true;
             }
             catch (Exception ex)
@@ -72,5 +76,8 @@ namespace Service.Entities
             }
         }
       
+
+
+
     }
 }

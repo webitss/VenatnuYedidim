@@ -25,18 +25,18 @@ namespace Service.Entities
 
         #region Methods
 
-        public List<SysTableRow> GetValues(string nvSysTableName)
+        public static List<SysTableRow> GetValues(int iSysTableId)
         {
             try
             {
-                SqlParameter parameter = new SqlParameter("nvSysTableName", nvSysTableName);
+                SqlParameter parameter = new SqlParameter("iSysTableId", iSysTableId);
                 DataTable dt = SqlDataAccess.ExecuteDatasetSP("TSysTableRow_ByTableId_SLCT", parameter).Tables[0];
                 DataRowCollection drc = dt.Rows;
                 return ObjectGenerator<SysTableRow>.GeneratListFromDataRowCollection(drc);
             }
             catch (Exception ex)
             {
-                Log.LogError("GetValues / TSysTableRow_ByTableId_SLCT", "nvSysTableName: " + nvSysTableName + ", ex " + ex);
+                Log.LogError("GetValues / TSysTableRow_ByTableId_SLCT", "iSysTableId: " + iSysTableId + ", ex " + ex);
                 return null;
             }
 
@@ -63,20 +63,19 @@ namespace Service.Entities
 
         //להחליף את iSysTableId
         //ב iSysTableRowId
-        public bool UpdateValue(int iSysTableId, string nvValue)
+        public bool UpdateValue(int iSysTableRowId, string nvValue)
         {
             try
             {
-
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iSysTableId", iSysTableRowId));
+                parameters.Add(new SqlParameter("nvValue", nvValue));
+                SqlDataAccess.ExecuteDatasetSP("TSysTableRow_UPD", parameters);
                 return true;
             }
             catch (Exception ex)
             {
-                List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("iSysTableId", iSysTableId));
-                parameters.Add(new SqlParameter("nvValue", nvValue));
-                SqlDataAccess.ExecuteDatasetSP("TSysTableRow_UPD", parameters);
-                Log.LogError("AddValue / TSysTableRow_UPD", "iSysTableId: " + iSysTableId + "nvValue" + nvValue + ex + " , ex");
+                Log.LogError("AddValue / TSysTableRow_UPD", "iSysTableId: " + iSysTableRowId + "nvValue" + nvValue + ex + " , ex");
                 return false;
             }
         }

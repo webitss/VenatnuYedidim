@@ -7,19 +7,19 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './student.component.html',
   styleUrls: ['./student.component.css']
 })
-export class StudentComponent implements OnInit,OnDestroy {
+export class StudentComponent implements OnInit, OnDestroy {
   private sub: any;
-flag:number;
+  flag: number;
   constructor(private route: ActivatedRoute) { }
-// subscription:Subscription;
+  // subscription:Subscription;
   ngOnInit() {
-   this.sub=this.route.params.subscribe(params=>{
-     this.flag=+params['id'];
-   });
+    this.sub = this.route.params.subscribe(params => {
+      this.flag = +params['iPersonId'];
+    });
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
-    }
+  }
 }
 
 

@@ -43,7 +43,11 @@ import { SettingsReportsComponent } from './components/settings-reports/settings
 import { SettingsYeshivotComponent } from './components/settings-yeshivot/settings-yeshivot.component';
 import { SettingsDocumentsComponent } from './components/settings-documents/settings-documents.component';
 import { SettingsFrontendComponent } from './components/settings-frontend/settings-frontend.component';
+import { NewYeshivaComponent } from './components/new-yeshiva/new-yeshiva.component';
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
+import { StudentConversationComponent } from './components/student-conversation/student-conversation.component';
+import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
+import { StudentMeetingDetailsComponent } from './components/student-meeting-details/student-meeting-details.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +87,11 @@ import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-sel
     SettingsYeshivotComponent,
     SettingsDocumentsComponent,
     SettingsFrontendComponent,
+    NewYeshivaComponent,
     VyMultySelectComponent,
+    StudentConversationComponent,
+    StudentConversationDetailsComponent,
+    StudentMeetingDetailsComponent,    
   ],
   imports: [
     BrowserModule,
@@ -91,13 +99,16 @@ import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-sel
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot([
+     // { path: "", component: StudentsComponent },
       { path: "students", component: StudentsComponent },
       {
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
           { path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
-          { path: "student-meetings", component: StudentMeetingsComponent },
+          { path: "student-meetings", component: StudentMeetingsComponent ,children:[
+          {path:"student-meeting-details/:iMeetingId",component:StudentMeetingDetailsComponent}
+          ]},
           { path: "student-conversations", component: StudentConversationsComponent },
         ]
       },
@@ -137,11 +148,16 @@ import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-sel
           { path: "", component: SettingsCodeTableComponent },
           { path: "settings-code-tables", component: SettingsCodeTableComponent },
           { path: "settings-reports", component: SettingsReportsComponent },
-          { path: "settings-yeshivot", component: SettingsYeshivotComponent },
+          { path: "settings-yeshivot", component: SettingsYeshivotComponent,
+        children: [
+          { path:"new-yeshiva", component:NewYeshivaComponent}
+          ] },
           { path: "settings-documents", component: SettingsDocumentsComponent },
           { path: "settings-frontend", component: SettingsFrontendComponent },
         ]
       },
+      {path:"vy-multy-select",component:VyMultySelectComponent}
+
     ], { useHash: true })
   ],
   providers: [AppProxy],

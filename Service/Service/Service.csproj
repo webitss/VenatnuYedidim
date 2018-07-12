@@ -103,6 +103,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Conversation.cs" />
     <Compile Include="Entities\SysTableRow.cs" />
     <Compile Include="Entities\SysTables.cs" />
     <Compile Include="Entities\Avrech.cs" />

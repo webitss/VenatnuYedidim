@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SysTableService } from '../../services/sys-table.service';
+import { error } from 'util';
 
 @Component({
   selector: 'app-settings-code-tables',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsCodeTableComponent implements OnInit {
 
-  constructor() { }
+  tableNames: string[];
+  constructor(private sysTableService: SysTableService) { }
 
   ngOnInit() {
+    // this.sysTableService.getTableNames().then(data=>this.tableNames=data,error=>alert(error) );
   }
 
 }
