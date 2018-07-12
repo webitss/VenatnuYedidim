@@ -11,7 +11,7 @@ namespace Service.Entities
 {
     public class Avrech : Person
     {
-        public static List<Avrech> GetAvrechim(int iPersonId)
+        public static List<Avrech> GetAllAvrechim(int? iPersonId)
         {
             try
             {

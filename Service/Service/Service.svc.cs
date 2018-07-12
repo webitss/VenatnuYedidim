@@ -9,7 +9,7 @@ namespace Service
         #region User
         public List<User> GetUsersByPermittion(int personId)
         {
-            throw new System.NotImplementedException();
+            return User.GetUsers(personId);
         }
 
 
@@ -21,7 +21,7 @@ namespace Service
 
         #endregion
 
-        public List<Avrech> GetAllAvrechim(int iPersonId)
+        public List<Avrech> GetAllAvrechim(int? iPersonId)
         {
             return Avrech.GetAllAvrechim(iPersonId);
         }

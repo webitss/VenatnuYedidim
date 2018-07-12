@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
-// import { Avrech } from '../../classes/avrech';
+import { AvrechComponent } from '../avrech/avrech.component';
+
+import {Avrech} from '../../classes/avrech';
 
 @Component({
   selector: 'app-avrechim',
@@ -9,14 +11,27 @@ import { AppProxy } from '../../services/app.proxy';
 })
 export class AvrechimComponent implements OnInit {
 
-  // avrechimList:Avrech[];
+ avrech:Avrech
+   avrechimList:Avrech[];
   constructor(private appProxy:AppProxy) { }
 
   ngOnInit() {
-    this.appProxy.post("GetAllAvrechim",{iPersonId:1}).then(
-      data=>alert("ssucces!!"),
+    this.appProxy.post("GetAllAvrechim",{iPersonId:null}).then(
+      data=>
+      {
+    this.avrechimList=data;
+    alert(this.avrechimList[0].nvFirstName+" "+this.avrechimList[0].nvLastName);
+    debugger;
+    },
       err=>("err")
     );
+    // this.appProxy.get("GetAllAvrechim?iPersonId=1")
+    // .then(
+    //   data=>{
+    //   alert("success")
+    //    }).catch(err=>{
+    //      alert("err");
+    //    });
   }
 
 }

@@ -37,7 +37,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Avrech> GetAllAvrechim(int iPersonId);
+        List<Avrech> GetAllAvrechim(int? iPersonId);
 
         #region files
 
