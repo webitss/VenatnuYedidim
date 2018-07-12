@@ -9,7 +9,7 @@ namespace Service
         #region User
         public List<User> GetUsersByPermittion(int personId)
         {
-            throw new System.NotImplementedException();
+            return User.GetUsers(personId);
         }
 
 

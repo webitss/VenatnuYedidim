@@ -24,6 +24,8 @@ namespace Service.Entities
         [DataMember]
         public string nvMobile { get; set; }
         [DataMember]
+        public string nvEmail { get; set; }
+        [DataMember]
         public string nvAddress { get; set; }
         [DataMember]
         public string nvCity { get; set; }
