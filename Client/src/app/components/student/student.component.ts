@@ -13,7 +13,7 @@ flag:number;
   constructor(private route: ActivatedRoute) { }
 // subscription:Subscription;
   ngOnInit() {
-   this.sub=this.route.parent.params.subscribe(params=>{
+   this.sub=this.route.params.subscribe(params=>{
      this.flag=+params['iPersonId'];
    });
   }
