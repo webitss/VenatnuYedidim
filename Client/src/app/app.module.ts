@@ -46,7 +46,7 @@ import { SettingsFrontendComponent } from './components/settings-frontend/settin
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
 import { StudentConversationComponent } from './components/student-conversation/student-conversation.component';
 import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
-import { StudentMeetingDetailsComponent } from './student-meeting-details/student-meeting-details.component';
+import { StudentMeetingDetailsComponent } from './components/student-meeting-details/student-meeting-details.component';
 
 @NgModule({
   declarations: [
@@ -150,6 +150,8 @@ import { StudentMeetingDetailsComponent } from './student-meeting-details/studen
           { path: "settings-frontend", component: SettingsFrontendComponent },
         ]
       },
+      {path:"vy-multy-select",component:VyMultySelectComponent}
+
     ], { useHash: true })
   ],
   providers: [AppProxy],
