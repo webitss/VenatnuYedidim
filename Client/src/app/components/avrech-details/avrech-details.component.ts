@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AppProxy } from '../../services/app.proxy';
 
 @Component({
   selector: 'app-avrech-details',
@@ -8,12 +9,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AvrechDetailsComponent implements OnInit {
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute ,private appProxy:AppProxy) { }
 
   ngOnInit() {
     // this.activatedRoute.parent.params.subscribe(params => {
     //   params['iPersonId'];
-    // })    
+    // })   
+
   }
 
 }
