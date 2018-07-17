@@ -6,7 +6,7 @@
     <li (click)="eventParticipants()" class="col-sm-1">משתתפים</li>
   </ul>
   <div class="col-sm-5"></div>
-  <button *ngIf="isDetails==true">שמירה</button>
+  <button *ngIf="isDetails==true" (click)="save()">שמירה</button>
   <button>סגור</button>
 </div>
 

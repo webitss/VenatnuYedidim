@@ -97,4 +97,5 @@ export class AppProxy {
     }
     return isArr ? arrayData : objectData;
   }
+  
 }

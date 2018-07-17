@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,13 @@ export class AppComponent implements OnInit {
 
   protected currentComponent: any;
   protected PicUrl: any;
-protected nvBase64File:string;
-protected name:string;
-  constructor(private appProxy: AppProxy) { }
+  protected nvBase64File: string;
+  protected name: string;
+  constructor(private appProxy: AppProxy, private router: Router) { }
 
   ngOnInit() {
+    this.router.navigate(['students']);
+
     // this.appProxy.post('Login', { nvUserName: 'מערכת', nvPassword: '1234' })
     //   .then(user => {
     //     if (user) alert('שם משתמש: ' + user.nvUserName + ', סיסמה:' + user.nvPassword);
@@ -28,7 +31,7 @@ protected name:string;
 
 
   saveFile() {
-    this.appProxy.post('SaveFileByBase64',this.nvBase64File)
+    this.appProxy.post('SaveFileByBase64', this.nvBase64File)
       .then(result => {
         if (result) alert('שמירת הקובץ התבצעה בהצלחה')
         else alert('שמירת הקובץ נכשלה')
