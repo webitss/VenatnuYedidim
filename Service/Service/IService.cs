@@ -9,7 +9,7 @@ namespace Service
     public interface IService
     {
         #region User
-      
+
         [OperationContract]
         [WebInvoke(
            Method = "POST",
@@ -31,6 +31,15 @@ namespace Service
 
         [OperationContract]
         [WebInvoke(
+           Method = "POST",
+           UriTemplate = "GetUserByPersonId",
+           BodyStyle = WebMessageBodyStyle.WrappedRequest,
+           ResponseFormat = WebMessageFormat.Json,
+           RequestFormat = WebMessageFormat.Json)]
+        User GetUserByPersonId(int iPersonId);
+
+        [OperationContract]
+        [WebInvoke(
           Method = "POST",
           UriTemplate = "SetUser",
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
@@ -48,7 +57,7 @@ namespace Service
          BodyStyle = WebMessageBodyStyle.WrappedRequest,
          ResponseFormat = WebMessageFormat.Json,
          RequestFormat = WebMessageFormat.Json)]
-         List<Student> GetStudentList(int iUserId);
+        List<Student> GetStudentList(int iUserId);
 
 
 
@@ -113,8 +122,17 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool UpdateAvrech(Avrech avrech);
+        bool UpdateAvrech(Avrech avrech, int iUserId);
 
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "DeleteAvrechStudent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool DeleteAvrechStudent(int iAvrechId, int iStudentId);
         #endregion
 
         #region student
@@ -126,15 +144,9 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Student> GetAvrechStudents(int iPersonId);
+        List<Person> GetAvrechStudents(int iPersonId);
 
-<<<<<<< HEAD
-
-
-
-=======
         #endregion
->>>>>>> 4ab549154798ef6d833c5ecec50222d1087e77eb
 
         [OperationContract]
         [WebInvoke(
@@ -149,7 +161,6 @@ namespace Service
 
         [OperationContract]
         [WebInvoke(
-<<<<<<< HEAD
           Method = "POST",
           UriTemplate = "GetConversations",
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
@@ -157,25 +168,52 @@ namespace Service
           RequestFormat = WebMessageFormat.Json)]
         List<Conversation> GetConversations(int? iPersonId);
 
+        //[OperationContract]
+        //[WebInvoke(
+        //  Method = "POST",
+        //  UriTemplate = "AddConversations",
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //  ResponseFormat = WebMessageFormat.Json,
+        //  RequestFormat = WebMessageFormat.Json)]
+        //bool AddConversations(Conversation conversation,int iUserId);
+
+        #endregion Conversation
+
+        #region Meeting
+
         [OperationContract]
         [WebInvoke(
           Method = "POST",
-          UriTemplate = "AddConversations",
+          UriTemplate = "GetMeetingsByStudentId",
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        bool AddConversations(Conversation conversation,int iUserId);
+        List<Meeting> GetMeetingsByStudentId(int iPersonId);
 
-=======
-           Method = "POST",
-           UriTemplate = "GetConversations",
-           BodyStyle = WebMessageBodyStyle.WrappedRequest,
-           ResponseFormat = WebMessageFormat.Json,
-           RequestFormat = WebMessageFormat.Json)]
-        List<Conversation> GetConversations(int? iPersonId);
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "AddMeeting",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+        bool AddMeeting(Meeting meeting, int iUserId);
 
->>>>>>> 4ab549154798ef6d833c5ecec50222d1087e77eb
-        #endregion Conversation
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "UpdateMeeting",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+        bool UpdateMeeting(Meeting meeting, int iUserId);
+
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "DeleteMeeting",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+        bool DeleteMeeting(int iMeetingId, int iUserId);
+        #endregion Meeting
 
         #region files
 
@@ -203,36 +241,36 @@ namespace Service
         #endregion
 
         #region SysTables
-        //[OperationContract]
-        //[WebInvoke(
-        //Method = "GET",
-        //UriTemplate = "GetAllNames",
-        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //ResponseFormat = WebMessageFormat.Json,
-        //RequestFormat = WebMessageFormat.Json)]
-        //List<SysTableRow> GetAllNames();
+        [OperationContract]
+        [WebInvoke(
+        Method = "GET",
+        UriTemplate = "GetAllNames",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<SysTables> GetAllNames();
 
         #endregion
 
         #region yeshivot
 
-        //[OperationContract]
-        //[WebInvoke(
-        //Method = "POST",
-        //UriTemplate = "AddYeshiva",
-        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //ResponseFormat = WebMessageFormat.Json,
-        //RequestFormat = WebMessageFormat.Json)]
-        //bool AddYeshiva(Yeshivot yeshiva);
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "AddYeshiva",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool AddYeshiva(Yeshivot yeshiva);
 
-        //[OperationContract]
-        //[WebInvoke(
-        //Method = "POST",
-        //UriTemplate = "GetAllYeshivot",
-        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //ResponseFormat = WebMessageFormat.Json,
-        //RequestFormat = WebMessageFormat.Json)]
-        //List<Yeshivot> GetAllYeshivot(int iYeshivaId);
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetAllYeshivot",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Yeshivot> GetAllYeshivot(int iYeshivaId);
 
         #endregion
     }
