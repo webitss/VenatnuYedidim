@@ -29,4 +29,16 @@ export class AvrechDetailsComponent implements OnInit {
     );
   }
 
+  save()
+  {
+    debugger;
+    this.appProxy.post("UpdateAvrech",{avrech:this.avrech}).then(
+      data=>
+      {
+    alert("העדכון הצליח");
+    },
+      err=>("err")
+    );
+  }
+
 }

@@ -70,6 +70,25 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         Avrech GetAvrechById(int? iPersonId);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "UpdateAvrech",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool UpdateAvrech(Avrech avrech);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetAvrechStudents",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Student> GetAvrechStudents(int iPersonId);
+
+
         //[OperationContract]
         //[WebInvoke(
         //   Method = "POST",
@@ -81,15 +100,7 @@ namespace Service
 
         #endregion
 
-        [OperationContract]
-        [WebInvoke(
-        Method = "POST",
-        UriTemplate = "GetAvrechStudents",
-        BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        ResponseFormat = WebMessageFormat.Json,
-        RequestFormat = WebMessageFormat.Json)]
-        List<Student> GetAvrechStudents(int iPersonId);
-
+        
 
         [OperationContract]
         [WebInvoke(

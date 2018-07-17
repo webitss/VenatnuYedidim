@@ -32,6 +32,11 @@ namespace Service
             return Avrech.GetAllAvrechim(iPersonId);
         }
 
+      public bool UpdateAvrech(Avrech avrech)
+    {
+        return avrech.UpdateAvrech(avrech);
+    }
+
 
         public bool AddEvent(Event oEvent)
         {
