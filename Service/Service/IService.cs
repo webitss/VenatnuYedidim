@@ -37,7 +37,7 @@ namespace Service
            BodyStyle = WebMessageBodyStyle.WrappedRequest,
            ResponseFormat = WebMessageFormat.Json,
            RequestFormat = WebMessageFormat.Json)]
-        List<User> GetUsersByPermittion(int personId);
+        List<User> GetUsersByPermittion(int iPersonId);
 
         [OperationContract]
         [WebInvoke(
