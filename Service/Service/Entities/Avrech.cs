@@ -60,9 +60,20 @@ namespace Service.Entities
             }
         }
 
-        public bool UpdateAvrech(Avrech avrech)
+        public bool UpdateAvrech(Avrech avrech,int iUserId)
         {
-            return true;
+            try
+            {
+                List<SqlParameter> parameters = ObjectGenerator<Avrech>.GetSqlParametersFromObject(avrech);
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TPerson_UPD", parameters);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("UpdateAvrech / TPerson_UPD", "ex" + ex);
+                return false;
+            }
         }
 
     }

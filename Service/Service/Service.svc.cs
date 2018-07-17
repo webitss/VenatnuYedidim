@@ -32,9 +32,9 @@ namespace Service
             return Avrech.GetAllAvrechim(iPersonId);
         }
 
-      public bool UpdateAvrech(Avrech avrech)
+      public bool UpdateAvrech(Avrech avrech,int iUserId )
     {
-        return avrech.UpdateAvrech(avrech);
+        return avrech.UpdateAvrech(avrech,iUserId);
     }
 
 
