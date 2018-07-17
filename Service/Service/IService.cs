@@ -100,9 +100,19 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Student> GetAvrechStudents(int iPersonId);
+        List<Person> GetAvrechStudents(int iPersonId);
 
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "DeleteAvrechStudent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool DeleteAvrechStudent(int iAvrechId,int iStudentId);
+
+        
         //[WebInvoke(
         //   Method = "POST",
         //   UriTemplate = "GetConversations",
@@ -112,7 +122,7 @@ namespace Service
         //List<Conversation> GetConversations(int iPersonId);
 
 
-        
+
 
         [OperationContract]
         [WebInvoke(

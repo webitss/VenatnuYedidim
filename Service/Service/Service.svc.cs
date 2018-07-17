@@ -49,11 +49,16 @@ namespace Service
         }
 
 
-        public List<Student> GetAvrechStudents(int iPersonId)
+        public List<Person> GetAvrechStudents(int iPersonId)
         {
             return Avrech.GetAvrechStudents(iPersonId);
         }
 
+        public bool DeleteAvrechStudent(int iAvrechId, int iStudentId)
+        {
+            return Avrech.DeleteAvrechStudent(iAvrechId, iStudentId);
+        }
+        
         public Avrech GetAvrechById(int? iPersonId)
         {
             return Avrech.GetAvrechById(iPersonId);
