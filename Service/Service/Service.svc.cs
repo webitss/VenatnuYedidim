@@ -156,18 +156,16 @@ namespace Service
 
         #region yeshivot
 
-        //public List<Yeshivot> GetAllYeshivot(int iYeshivaId)
-        //{
-        //    return Yeshivot.GetAllYeshivot(iYeshivaId);
-        //}
+        public List<Yeshivot> GetAllYeshivot(int iYeshivaId)
+        {
+            return Yeshivot.GetAllYeshivot(iYeshivaId);
+        }
 
 
-        //public bool AddYeshiva(Yeshivot yeshiva)
-        //{
-        //    return Yeshivot.AddYeshiva(yeshiva);
-        //}
-
-        #endregion
-        //}
+        public bool AddYeshiva(Yeshivot yeshiva)
+        {
+            return Yeshivot.AddYeshiva(yeshiva);
+        }
     }
+    #endregion
 }
