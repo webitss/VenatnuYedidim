@@ -3,7 +3,7 @@ import { AppProxy } from './app.proxy';
 
 @Injectable()
 export class SysTableService {
-
+  Mykey:string;
   public static dataTables = {
     deathType: {
       iSysTableId: 1,
@@ -40,26 +40,30 @@ export class SysTableService {
   }
 
   constructor(private appProxy: AppProxy) { }
- 
+ ////#region מקבל ID של טבלה מחזיר ערכים מאותה טבלה 
    getValues(iSysTableId: number) {
-    
+ 
      console.log(iSysTableId+"arived");
     for (let key in SysTableService.dataTables) {
-       if (SysTableService.dataTables[key].iSysTableId===iSysTableId && SysTableService.dataTables[key].SysTableRow.length > 0 ) {
+      console.log(key)
+       if (SysTableService.dataTables[key].iSysTableId===iSysTableId ){
+        this.Mykey=key;
+       if (SysTableService.dataTables[key].SysTableRow.length > 0 )
+       {
          return SysTableService.dataTables[key].SysTableRow;
         
        }
-
-   
+      }
+      }
+     
    console.log(this.appProxy.post("GetValues", iSysTableId));
-      this.appProxy.post("GetValues", iSysTableId).then(l=>SysTableService.dataTables[key]=l);
+      this.appProxy.post("GetValues", iSysTableId).then(l=>SysTableService.dataTables[this.Mykey]=l);
   }
-  
-  // #region  getTableNames
-  // getTableNames(): Promise<string[]> {
-  //   return this.appProxy.get("GetAllNames");
-  // }
+  ////#endregion
+ //#region  מחזיר את שמות כל הטבלאות
+  getTableNames(): Promise<string[]> {
+    return this.appProxy.get("GetAllNames");
+  }
 
-  // #endregion
-}
+  //#endregion
 }
