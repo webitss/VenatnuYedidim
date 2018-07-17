@@ -130,6 +130,15 @@ namespace Service
 
         #endregion
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "AddEvent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool AddEvent(Event oEvent);
+
         #region Conversation
 
         [OperationContract]

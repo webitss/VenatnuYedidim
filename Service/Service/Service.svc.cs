@@ -53,10 +53,10 @@ namespace Service
 
         #region Avrech
 
-        //public bool AddEvent(Event oEvent)
-        //{
-        //    return Event.AddEvent(oEvent);
-        //}
+        public bool AddEvent(Event oEvent)
+        {
+            return Event.AddEvent(oEvent);
+        }
 
         //public List<Event> GetEventsList(int iUserId)
         //{
