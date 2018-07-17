@@ -148,7 +148,11 @@ namespace Service
         List<Student> GetAvrechStudents(int iPersonId);
 
 
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> fa0334f5e1983a73343cfd7ea5b08ed2d0e73f53
 
 
         [OperationContract]
