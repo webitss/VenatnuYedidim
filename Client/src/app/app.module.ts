@@ -88,7 +88,9 @@ import { SysTableService } from './services/sys-table.service';
     SettingsYeshivotComponent,
     SettingsDocumentsComponent,
     SettingsFrontendComponent,
+
     NewYeshivaComponent,
+
     VyMultySelectComponent,
     StudentConversationComponent,
     StudentConversationDetailsComponent,

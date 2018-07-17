@@ -28,12 +28,12 @@ namespace Service.Entities
             }
         }
 
-        public static List<Person> GetAvrechStudents(int iPersonId)
+        public static List<Student> GetAvrechStudents(int iPersonId)
         {
             try
             {
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TStudent_ByAvrechId_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
-                List<Person> students = ObjectGenerator<Person>.GeneratListFromDataRowCollection(drc);
+                List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
                 return students;
             }
             catch (Exception ex)
@@ -73,7 +73,7 @@ namespace Service.Entities
             }
         }
 
-        public static bool UpdateAvrech(Avrech avrech,int iUserId)
+        public static bool UpdateAvrech(Avrech avrech, int iUserId)
         {
             try
             {
