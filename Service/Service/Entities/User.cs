@@ -61,6 +61,7 @@ namespace Service.Entities
         }
 
 
+        public static void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvMobile, string nvEmail, string nvUserName, string nvPassword, int iPermissionType)
         {
             try
             {
