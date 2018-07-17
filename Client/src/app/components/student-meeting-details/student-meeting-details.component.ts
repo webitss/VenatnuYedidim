@@ -8,11 +8,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class StudentMeetingDetailsComponent implements OnInit,OnDestroy {
   private sub: any;
-  @Input() 
+@Input() 
 protected meetingId:number;
   
 
-  iMeetingId:number;
   constructor(private route: ActivatedRoute) { }
 // subscription:Subscription;
   ngOnInit() {
