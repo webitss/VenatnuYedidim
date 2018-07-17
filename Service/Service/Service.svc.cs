@@ -93,10 +93,10 @@ namespace Service
         {
             return Conversation.GetConversations(iPersonId);
         }
-        public bool AddConversations( Conversation conversation, int iUserId)
-        {
-            return Conversation.AddConversations(conversation,iUserId);
-        }
+        //public bool AddConversations( Conversation conversation, int iUserId)
+        //{
+        //    return Conversation.AddConversations(conversation,iUserId);
+        //}
 
 
         #endregion
