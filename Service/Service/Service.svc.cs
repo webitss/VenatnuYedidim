@@ -25,6 +25,27 @@ namespace Service
 
         #endregion
 
+        #region Meeting
+
+        public List<Meeting> GetMeetingsByStudentId(int iPersonId)
+        {
+            return Meeting.GetMeetingsByStudentId(iPersonId);
+        }
+        public bool AddMeeting(Meeting meeting, int iUserId)
+        {
+            return Meeting.AddMeeting(meeting, iUserId);
+        }
+        public bool UpdateMeeting(Meeting meeting, int iUserId)
+        {
+            return Meeting.UpdateMeeting(meeting, iUserId);
+        }
+        public bool DeleteMeeting(int iMeetingId, int iUserId)
+        {
+            return Meeting.DeleteMeeting(iMeetingId, iUserId);
+        }
+
+        #endregion
+                       
         #region Student
 
         public List<Student> GetStudentList(int iUserId)
@@ -32,6 +53,11 @@ namespace Service
             return Student.GetStudentList(iUserId);
         }
 
+
+        public bool UpdateAvrech(Avrech avrech, int iUserId)
+        {
+            return Avrech.UpdateAvrech(avrech, iUserId);
+        }
 
         public bool AddStudent(Student student, int iUserId)
         {
@@ -72,12 +98,7 @@ namespace Service
         {
             return Avrech.GetAvrechById(iPersonId);
         }
-
-        public bool UpdateAvrech(Avrech avrech, int iUserId)
-        {
-            return Avrech.UpdateAvrech(avrech,  iUserId);
-        }
-
+              
         public List<Student> GetAvrechStudents(int iPersonId)
         {
             return Avrech.GetAvrechStudents(iPersonId);
@@ -86,7 +107,6 @@ namespace Service
         #endregion
 
         #region Conversation
-
         public List<Conversation> GetConversations(int? iPersonId)
         {
             return Conversation.GetConversations(iPersonId);
@@ -106,29 +126,32 @@ namespace Service
         #endregion
 
         #region SysTableRow
-        public List<SysTableRow> GetValues(int iSysTableId)
-        {
-            return SysTableRow.GetValues(iSysTableId);
-        }
+       
         #endregion
 
         #region SysTables
 
-        //public List<SysTables> GetAllNames(int iSysTableId)
-        //{
-        //    return SysTables.GetAllNames();
-        //}
+        public List<SysTables> GetAllNames()
+        {
+            return SysTables.GetAllNames();
+        }
+
+
+
+        public List<SysTableRow> GetValues(int iSysTableId)
+        {
+
+            return SysTableRow.GetValues(iSysTableId);
+        }
 
         #endregion
 
         #region Conversation
-
-        //public bool AddConversations(Conversation conversation, int iUserId)
+       
+        //public bool AddConversations( Conversation conversation, int iUserId)
         //{
-        //    return Conversation.AddConversations(conversation, iUserId);
+        //    return Conversation.AddConversations(conversation,iUserId);
         //}
-
-
         #endregion
 
         #region yeshivot
@@ -143,7 +166,6 @@ namespace Service
         //{
         //    return Yeshivot.AddYeshiva(yeshiva);
         //}
-
 
         #endregion
         //}

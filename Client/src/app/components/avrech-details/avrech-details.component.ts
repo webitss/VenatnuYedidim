@@ -35,7 +35,6 @@ export class AvrechDetailsComponent implements OnInit {
 
   save()
   {
- 
     this.appProxy.post("UpdateAvrech",{avrech:this.avrech,iUserId:1}).then(
       data=>
       {

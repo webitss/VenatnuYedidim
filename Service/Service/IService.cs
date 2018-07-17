@@ -161,6 +161,42 @@ namespace Service
 
         #endregion Conversation
 
+        #region Meeting
+
+        [OperationContract]
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "GetMeetingsByStudentId",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+        List<Meeting> GetMeetingsByStudentId(int iPersonId);
+
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "AddMeeting",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+        bool AddMeeting(Meeting meeting, int iUserId);
+
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "UpdateMeeting",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+        bool UpdateMeeting(Meeting meeting, int iUserId);
+
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "DeleteMeeting",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+          bool DeleteMeeting(int iMeetingId, int iUserId);
+        #endregion Meeting
+
         #region files
 
         [OperationContract]
@@ -187,14 +223,14 @@ namespace Service
         #endregion
 
         #region SysTables
-        //[OperationContract]
-        //[WebInvoke(
-        //Method = "GET",
-        //UriTemplate = "GetAllNames",
-        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //ResponseFormat = WebMessageFormat.Json,
-        //RequestFormat = WebMessageFormat.Json)]
-        //List<SysTableRow> GetAllNames();
+        [OperationContract]
+        [WebInvoke(
+        Method = "GET",
+        UriTemplate = "GetAllNames",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<SysTables> GetAllNames();
 
         #endregion
 

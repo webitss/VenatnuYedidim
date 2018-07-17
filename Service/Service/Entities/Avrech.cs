@@ -41,7 +41,20 @@ namespace Service.Entities
                 Log.LogError("GetAvrechStudents / TAvrechStudents_ByAvrechId_SLCT", ", ex " + ex);
                 return null;
             }
-        }     
+        }
+
+        public static bool DeleteAvrechStudent(int iAvrechId, int iStudentId)
+        {
+            try
+            {
+                SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_DEL", new SqlParameter("iAvrechId", iAvrechId), new SqlParameter("iStudentId", iStudentId));
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         public static Avrech GetAvrechById(int? iPersonId)
         {
@@ -60,7 +73,7 @@ namespace Service.Entities
             }
         }
 
-        public static bool UpdateAvrech(Avrech avrech,int iUserId)
+        public static bool UpdateAvrech(Avrech avrech, int iUserId)
         {
             try
             {

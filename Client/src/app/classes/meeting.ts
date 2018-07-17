@@ -1,5 +1,4 @@
     export class Meeting{
-
     iMeetingId:number;
     iPersonId:number;
     iMeetingType:number;
@@ -9,6 +8,5 @@
     dtCreatedate:Date;	
     iLastModifyUserId:number;
     dtLastModifyDate:Date;
-    bSysRowStatus:boolean;
-    
+    bSysRowStatus:boolean;    
     }
