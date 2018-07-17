@@ -33,7 +33,6 @@ namespace Service
         }
 
 
-
         public bool AddStudent(Student student, int iUserId)
         {
             return Student.AddStudent(student, iUserId);
@@ -54,31 +53,19 @@ namespace Service
 
         #region Avrech
 
-        public List<Avrech> GetAllAvrechim(int? iPersonId)
-        {
-            return Avrech.GetAllAvrechim(iPersonId);
-        }
-
-      public bool UpdateAvrech(Avrech avrech)
-    {
-        return avrech.UpdateAvrech(avrech);
-    }
-
-
         public bool AddEvent(Event oEvent)
         {
             return Event.AddEvent(oEvent);
         }
 
-        public List<Event> GetEventsList(int iUserId)
-        {
-            return Event.GetEventsList(iUserId);
-        }
+        //public List<Event> GetEventsList(int iUserId)
+        //{
+        //    return Event.GetEventsList(iUserId);
+        //}
 
-
-        public List<Student> GetAvrechStudents(int iPersonId)
+        public List<Avrech> GetAllAvrechim(int? iPersonId)
         {
-            return Avrech.GetAvrechStudents(iPersonId);
+            return Avrech.GetAllAvrechim(iPersonId);
         }
 
         public Avrech GetAvrechById(int? iPersonId)
@@ -86,8 +73,23 @@ namespace Service
             return Avrech.GetAvrechById(iPersonId);
         }
 
+        public bool UpdateAvrech(Avrech avrech)
+        {
+            return avrech.UpdateAvrech(avrech);
+        }
+
+        public List<Student> GetAvrechStudents(int iPersonId)
+        {
+            return Avrech.GetAvrechStudents(iPersonId);
+        }
 
         #endregion
+
+        #region Conversation
+        public List<Conversation> GetConversations(int? iPersonId)
+        {
+            return Conversation.GetConversations(iPersonId);
+        }
 
         #region files
 
@@ -98,13 +100,16 @@ namespace Service
 
 
         #endregion
+
+
+        #endregion
+
         #region SysTableRow
         public List<SysTableRow> GetValues(int iSysTableId)
         {
             return SysTableRow.GetValues(iSysTableId);
         }
         #endregion
-
 
         #region SysTables
 
@@ -115,22 +120,21 @@ namespace Service
 
         #endregion
 
-        #region Conversation
-        public List<Conversation> GetConversations(int iPersonId)
-        {
-            return Conversation.GetConversations(iPersonId);
-        }
 
-        #endregion
+        #region yeshivot
 
-
+        //public List<Yeshivot> GetAllYeshivot(int iYeshivaId)
+        //{
+        //    return Yeshivot.GetAllYeshivot(iYeshivaId);
+        //}
 
 
         //public bool AddYeshiva(Yeshivot yeshiva)
         //{
-        //    return Yeshivot.AddYeshiva();
+        //    return Yeshivot.AddYeshiva(yeshiva);
         //}
-      
 
+        #endregion
+        //}
     }
 }
