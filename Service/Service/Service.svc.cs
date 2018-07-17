@@ -66,12 +66,12 @@ namespace Service
             return SysTableRow.GetValues(iSysTableId);
         }
         #endregion
-        #region SysTables
-        public List<SysTables> GetAllNames(int iSysTableId)
-        {
-            return SysTables.GetAllNames();
-        }
-        #endregion
+        //#region SysTables
+        //public List<SysTables> GetAllNames(int iSysTableId)
+        //{
+        //    return SysTables.GetAllNames();
+        //}
+        //#endregion
         #region Conversation
         public List<Conversation> GetConversations(int? iPersonId)
         {
