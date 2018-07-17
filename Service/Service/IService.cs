@@ -20,6 +20,17 @@ namespace Service
         User Login(string nvUserName, string nvPassword);
 
         [OperationContract]
+
+        [WebInvoke(
+            Method = "POST",
+            UriTemplate = "GetEventsList",
+            BodyStyle = WebMessageBodyStyle.WrappedRequest,
+            ResponseFormat = WebMessageFormat.Json,
+            RequestFormat = WebMessageFormat.Json)]
+        List<Event> GetEventsList(int iUserId);
+
+        [OperationContract]
+
         [WebInvoke(
            Method = "POST",
            UriTemplate = "GetUsersByPermittion",
@@ -59,14 +70,14 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         Avrech GetAvrechById(int? iPersonId);
 
-        [OperationContract]
-        [WebInvoke(
-           Method = "POST",
-           UriTemplate = "GetConversations",
-           BodyStyle = WebMessageBodyStyle.WrappedRequest,
-           ResponseFormat = WebMessageFormat.Json,
-           RequestFormat = WebMessageFormat.Json)]
-        List<Conversation> GetConversations(int iPersonId);
+        //[OperationContract]
+        //[WebInvoke(
+        //   Method = "POST",
+        //   UriTemplate = "GetConversations",
+        //   BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //   ResponseFormat = WebMessageFormat.Json,
+        //   RequestFormat = WebMessageFormat.Json)]
+        //List<Conversation> GetConversations(int iPersonId);
 
         #endregion
 
@@ -78,6 +89,16 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         List<Student> GetAvrechStudents(int iPersonId);
+
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "AddEvent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool AddEvent(Event oEvent);
 
         #region Conversation
         [OperationContract]

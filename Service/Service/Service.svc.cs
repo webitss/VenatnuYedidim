@@ -32,6 +32,18 @@ namespace Service
             return Avrech.GetAllAvrechim(iPersonId);
         }
 
+
+        public bool AddEvent(Event oEvent)
+        {
+            return Event.AddEvent(oEvent);
+        }
+
+        public List<Event> GetEventsList(int iUserId)
+        {
+            return Event.GetEventsList(iUserId);
+        }
+
+
         public List<Student> GetAvrechStudents(int iPersonId)
         {
             return Avrech.GetAvrechStudents(iPersonId);
@@ -50,7 +62,6 @@ namespace Service
 
         #endregion
 
-
         #region files
 
         public string SaveFileByBase64(string base64File, string fileName)
@@ -67,15 +78,17 @@ namespace Service
         }
         #endregion
 
-        //#region SysTables
         #region SysTables
+
         //public List<SysTables> GetAllNames(int iSysTableId)
         //{
         //    return SysTables.GetAllNames();
         //}
 
-        //#endregion
+
+
         #endregion
+
         #region Conversation
         public List<Conversation> GetConversations(int? iPersonId)
         {
@@ -84,10 +97,12 @@ namespace Service
 
         #endregion
 
-    }
 
-    //public bool AddYeshiva(Yeshivot yeshiva)
-    //{
-    //    return Yeshivot.AddYeshiva();
-    //}
+
+
+        //public bool AddYeshiva(Yeshivot yeshiva)
+        //{
+        //    return Yeshivot.AddYeshiva();
+        //}
+    }
 }

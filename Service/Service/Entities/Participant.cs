@@ -30,7 +30,6 @@ namespace Service.Entities
             try
             {
                 DataTable dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_SLCT", new SqlParameter("iEventId", iEventId)).Tables[0];                
-              
                 List<Person> participants = new List<Person>();
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
