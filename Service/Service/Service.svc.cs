@@ -10,7 +10,7 @@ namespace Service
 
         public List<User> GetUsersByPermittion(int iPersonId)
         {
-            return User.GetUsers(iPpersonId);
+            return User.GetUsers(iPersonId);
         }
 
         public User Login(string nvUserName, string nvPassword)
