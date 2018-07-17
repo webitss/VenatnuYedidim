@@ -148,14 +148,6 @@ namespace Service
         List<Student> GetAvrechStudents(int iPersonId);
 
 
-        [WebInvoke(
-           Method = "POST",
-           UriTemplate = "GetConversations",
-           BodyStyle = WebMessageBodyStyle.WrappedRequest,
-           ResponseFormat = WebMessageFormat.Json,
-           RequestFormat = WebMessageFormat.Json)]
-        List<Conversation> GetConversations(int iPersonId);
-
 
 
 
