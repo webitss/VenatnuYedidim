@@ -32,6 +32,18 @@ namespace Service
             return Avrech.GetAllAvrechim(iPersonId);
         }
 
+
+        public bool AddEvent(Event oEvent)
+        {
+            return Event.AddEvent(oEvent);
+        }
+
+        public List<Event> GetEventsList(int iUserId)
+        {
+            return Event.GetEventsList(iUserId);
+        }
+
+
         public List<Student> GetAvrechStudents(int iPersonId)
         {
             return Avrech.GetAvrechStudents(iPersonId);
@@ -43,13 +55,7 @@ namespace Service
         }
 
 
-        public List<Conversation> GetConversations(int iPersonId)
-        {
-            return Conversation.GetConversations(iPersonId);
-        }
-
         #endregion
-
 
         #region files
 
@@ -66,31 +72,40 @@ namespace Service
             return SysTableRow.GetValues(iSysTableId);
         }
         #endregion
+
 <<<<<<< HEAD
         //#region SysTables
+
 =======
+>>>>>>> 510478dabe485e544355be4c5d7fcfca0dfb3f1f
         #region SysTables
->>>>>>> 3c53cb33dd536c77e4e3aeb2b0bc4d6127062913
+
         //public List<SysTables> GetAllNames(int iSysTableId)
         //{
         //    return SysTables.GetAllNames();
         //}
+
 <<<<<<< HEAD
         //#endregion
-=======
+
         #endregion
->>>>>>> 3c53cb33dd536c77e4e3aeb2b0bc4d6127062913
+=======
+
+
+        #endregion
+
+>>>>>>> 510478dabe485e544355be4c5d7fcfca0dfb3f1f
         #region Conversation
-        public List<Conversation> GetConversations(int? iPersonId)
+        public List<Conversation> GetConversations(int iPersonId)
         {
             return Conversation.GetConversations(iPersonId);
         }
 
         #endregion
 
-    }
 
 
+<<<<<<< HEAD
     public bool AddYeshiva(Yeshivot yeshiva)
     {
         return Yeshivot.AddYeshiva(yeshiva.nvYeshivaName, yeshiva.nvAddress, 
@@ -100,5 +115,12 @@ namespace Service
     public List<Yeshivot> GetAllYeshivot(int iYeshivaId)
     {
         return Yeshivot.GetAllYeshivot(iYeshivaId);
+=======
+
+        //public bool AddYeshiva(Yeshivot yeshiva)
+        //{
+        //    return Yeshivot.AddYeshiva();
+        //}
+>>>>>>> 801415ac721b923d46b0ef5190bce2dd6a62ba21
     }
 }

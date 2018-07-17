@@ -20,6 +20,17 @@ namespace Service
         User Login(string nvUserName, string nvPassword);
 
         [OperationContract]
+
+        [WebInvoke(
+            Method = "POST",
+            UriTemplate = "GetEventsList",
+            BodyStyle = WebMessageBodyStyle.WrappedRequest,
+            ResponseFormat = WebMessageFormat.Json,
+            RequestFormat = WebMessageFormat.Json)]
+        List<Event> GetEventsList(int iUserId);
+
+        [OperationContract]
+
         [WebInvoke(
            Method = "POST",
            UriTemplate = "GetUsersByPermittion",
@@ -59,14 +70,18 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         Avrech GetAvrechById(int? iPersonId);
 
-        [OperationContract]
-        [WebInvoke(
-           Method = "POST",
-           UriTemplate = "GetConversations",
-           BodyStyle = WebMessageBodyStyle.WrappedRequest,
-           ResponseFormat = WebMessageFormat.Json,
-           RequestFormat = WebMessageFormat.Json)]
-        List<Conversation> GetConversations(int iPersonId);
+<<<<<<< HEAD
+       
+=======
+        //[OperationContract]
+        //[WebInvoke(
+        //   Method = "POST",
+        //   UriTemplate = "GetConversations",
+        //   BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //   ResponseFormat = WebMessageFormat.Json,
+        //   RequestFormat = WebMessageFormat.Json)]
+        //List<Conversation> GetConversations(int iPersonId);
+>>>>>>> 510478dabe485e544355be4c5d7fcfca0dfb3f1f
 
         #endregion
 
@@ -79,16 +94,26 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Student> GetAvrechStudents(int iPersonId);
 
-        #region Conversation
+
         [OperationContract]
         [WebInvoke(
         Method = "POST",
-        UriTemplate = "GetConversations",
+        UriTemplate = "AddEvent",
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Conversation> GetConversations(int? iPersonId);
+        bool AddEvent(Event oEvent);
 
+        #region Conversation
+
+        [OperationContract]
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "GetConversations",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+        List<Conversation> GetConversations(int iPersonId);
         #endregion Conversation
 
         #region files
