@@ -70,9 +70,7 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         Avrech GetAvrechById(int? iPersonId);
 
-<<<<<<< HEAD
-       
-=======
+
         //[OperationContract]
         //[WebInvoke(
         //   Method = "POST",
@@ -81,7 +79,7 @@ namespace Service
         //   ResponseFormat = WebMessageFormat.Json,
         //   RequestFormat = WebMessageFormat.Json)]
         //List<Conversation> GetConversations(int iPersonId);
->>>>>>> 510478dabe485e544355be4c5d7fcfca0dfb3f1f
+
 
         #endregion
 

@@ -58,14 +58,14 @@ namespace Service.Entities
         }
 
 
-        public static bool AddStudent(Student student,int iUserId)
+        public static bool AddStudent(Student student, int iUserId)
         {
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
                 DataRow dr = SqlDataAccess.ExecuteDatasetSP("TStudent_INS", parameters).Tables[0].Rows[0];
-              
+
                 return true;
             }
             catch (Exception ex)
@@ -89,10 +89,10 @@ namespace Service.Entities
             {
                 Log.LogError("UpdateStudent / TStudent_UPD", "ex" + ex);
                 return false;
-            }     
+            }
         }
 
-        public bool UpdateStatusStudent(int iPersonId,int iStatusType)
+        public bool UpdateStatusStudent(int iPersonId, int iStatusType)
         {
             try
             {
@@ -102,20 +102,13 @@ namespace Service.Entities
                 SqlDataAccess.ExecuteDatasetSP("TStudentUpdateStatus_UPD", parameters);
                 return true;
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
 
                 Log.LogError("UpdateStatusStudent / TStudentUpdateStatus_UPD", "ex" + ex);
                 return false;
             }
         }
-
-
-
-
-
-
-
-
+    }
 
 }

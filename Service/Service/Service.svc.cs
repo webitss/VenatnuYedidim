@@ -73,28 +73,16 @@ namespace Service
         }
         #endregion
 
-<<<<<<< HEAD
-        //#region SysTables
 
-=======
->>>>>>> 510478dabe485e544355be4c5d7fcfca0dfb3f1f
         #region SysTables
 
         //public List<SysTables> GetAllNames(int iSysTableId)
         //{
         //    return SysTables.GetAllNames();
         //}
-
-<<<<<<< HEAD
-        //#endregion
-
-        #endregion
-=======
-
-
+        
         #endregion
 
->>>>>>> 510478dabe485e544355be4c5d7fcfca0dfb3f1f
         #region Conversation
         public List<Conversation> GetConversations(int iPersonId)
         {
