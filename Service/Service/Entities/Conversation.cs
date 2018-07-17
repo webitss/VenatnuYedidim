@@ -3,6 +3,7 @@ using Service.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
@@ -32,7 +33,7 @@ namespace Service.Entities
 
         #endregion
 
-        public static List<Conversation> GetConversations(int iPersonId)
+        public static List<Conversation> GetConversations(int? iPersonId)
         {
             try
             {
@@ -46,37 +47,80 @@ namespace Service.Entities
                 return null;
             }
         }
-      
-      
-        //public static List<Student> GetStudentList()
-        //{
-        //    try
-        //    {
-        //        DataTable dt = SqlDataAccess.ExecuteDatasetSP("TStudent_SLCT").Tables[0];                
-        //        List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(dt.Rows);
-        //        return students;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.LogError("GetStudentList / TStudent_SLCT", "ex" + ex);
-        //        return null;
-        //    }
-        //}
 
-        //public static bool AddStudent(Student student)
+        //public static bool DeleteConversation(int iConversationId)
         //{
         //    try
         //    {
-        //        ///ObjectGenerator<Student>.GetSqlParametersFromObject(student)
-        //        SqlDataAccess.ExecuteDatasetSP("TStudent_INS");
+        //        SqlParameter parameters=new SqlParameter();
+        //        parameters.Add(new SqlParameter("iConversationId", iConversationId));
+        //        DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters).Tables[0].Rows[0];
+        //        SqlParameter parameters = new SqlParameter();
+        //        parameters.Add(new SqlParameter("iConversationId", iConversationId));
+        //        DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_DEL", parameters).Tables[0].Rows[0];
+
         //        return true;
         //    }
         //    catch (Exception ex)
         //    {
-        //        Log.LogError("AddStudent / TStudent_INS", "ex" + ex);
+        //        Log.LogError("DeleteConversation / TConversation_DEL", "ex" + ex);
         //        return false;
         //    }
         //}
-      
+
+        public static bool AddConversation(Conversation conversation,int iUserId)
+        {
+            
+            try
+            {
+                List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
+               
+                parameters.Add(new SqlParameter("iCreatedByUserId", conversation.iConversationType));
+
+
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters).Tables[0].Rows[0];
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("AddConversation / TConversation_INS", "ex" + ex);
+                return false;
+            }
+        }
+
+        public static bool UpdateConversation(Conversation conversation,int iUserId)
+        {
+
+            try
+            {
+                List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
+                parameters.Add(new SqlParameter("iLastModifyUserId", conversation.iConversationType));
+
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_UPD", parameters).Tables[0].Rows[0];
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("UpdateConversation / TConversation_UPD", "ex" + ex);
+                return false;
+            }
+        }
+        public static bool DeleteConversation(int iConversationId, int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iConversationId", iConversationId));
+                parameters.Add(new SqlParameter("iLastModifyUserId", iUserId));
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_DEL", parameters).Tables[0].Rows[0];
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("DeleteConversation / TConversation_DEL", "ex" + ex);
+                return false;
+            }
+        }
     }
 }

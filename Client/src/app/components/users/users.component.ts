@@ -13,9 +13,10 @@ export class UsersComponent implements OnInit {
   constructor(private appProxy: AppProxy) { }
 
   users: user[];
-  id:number=1;
+  id:number;
 
   ngOnInit() {
+    this.id=1;
    this.appProxy.post("GetUsersByPermittion",{iPersonId: this.id})
     .then(
       data=>{

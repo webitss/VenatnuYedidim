@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -8,7 +8,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class StudentMeetingDetailsComponent implements OnInit,OnDestroy {
   private sub: any;
-  meetingId:number;
+@Input() 
+protected meetingId:number;
+  
+
   constructor(private route: ActivatedRoute) { }
 // subscription:Subscription;
   ngOnInit() {

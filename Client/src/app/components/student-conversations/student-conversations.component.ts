@@ -8,13 +8,34 @@ import {Conversation} from '../../classes/conversation';
   styleUrls: ['./student-conversations.component.css']
 })
 export class StudentConversationsComponent implements OnInit {
-
-  constructor(private appProxy:AppProxy) { }
   id:number=1;
   conversations:Conversation[];
 
+  constructor(private appProxy:AppProxy) { }
+  deleteConversation(iConversationId:number,iUserId:number)
+  {
+    this.appProxy.post("DeleteConversations",{iConversationId:iConversationId,iUserId:iUserId})
+    .then(
+      data=>{
+        this.conversations=data;
+        alert("sucsses");
+      }).catch(err=>{
+      alert(err);
+      });
+  }  
+
+
   ngOnInit() {
-    this.appProxy.post("GetConversations",{iPersonId:this.id});
+  this.appProxy.post("GetConversations",{iPersonId:this.id})
+  .then(
+    data=>{
+      this.conversations=data;
+      alert("good");
+    }).catch(err=>{
+    alert(err);
+    });
   }
+  
+   
 
 }

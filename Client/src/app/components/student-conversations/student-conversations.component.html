@@ -1,1 +1,5 @@
-<button name="addConversation">הוסף שיחה</button>
+<button name="addConversation" routerLink="student-conversation-details/0">הוסף שיחה</button>
+<button name="UpdateConversation" routerLink="student-conversation-details/1">ערוך שיחה</button>
+<button name="delete" (click)="deleteConversation(1,1)" >מחק שיחה</button>
+
+<router-outlet></router-outlet>

@@ -5,20 +5,21 @@
   {{id}}
 </p> -->
 <label for="firstName">שם פרטי</label>
-<input type="text" id="firstName" value="{{avrech.nvFirstName}}"/>
+<input type="text" id="firstName" [(ngModel)]="avrech.nvFirstName"/>
 <label for="firstName">שם משפחה</label>
-<input type="text" id="firstName" value="{{avrech.nvLastName}}"/>
+<input type="text" id="firstName" [(ngModel)]="avrech.nvLastName"/>
 <label for="firstName">ת.ז</label>
-<input type="text" id="firstName" value="{{avrech.nvIdentityCard}}"/>
+<input type="text" id="firstName" [(ngModel)]="avrech.nvIdentityCard"/>
 <label for="firstName">טלפון נייד</label>
-<input type="text" id="firstName" value="{{avrech.nvMobile}}"/>
+<input type="text" id="firstName" [(ngModel)]="avrech.nvMobile"/>
 <label for="firstName">מייל</label>
-<input type="text" id="firstName" value="{{avrech.nvEmail}}"/>
+<input type="text" id="firstName" [(ngModel)]="avrech.nvEmail"/>
 <label for="firstName"> כתובת</label>
-<input type="text" id="firstName" value="{{avrech.nvAddress}}"/>
+<input type="text" id="firstName" [(ngModel)]="avrech.nvAddress"/>
 <label for="firstName">עיר</label>
-<input type="text" id="firstName" value="{{avrech.nvCity}}"/>
+<input type="text" id="firstName" [(ngModel)]="avrech.nvCity"/>
 <label for="firstName">שם משתמש</label>
-<input type="text" id="firstName" value="{{avrech.nvUserName}}"/>
+<input type="text" id="firstName" [(ngModel)]="avrech.nvUserName"/>
 <label for="firstName"> סיסמה</label>
-<input type="text" id="firstName" value="{{avrech.nvLPassword}}"/>
+<input type="text" id="firstName" [(ngModel)]="avrech.nvLPassword"/>
+<button (click)="save()">שמירה</button>

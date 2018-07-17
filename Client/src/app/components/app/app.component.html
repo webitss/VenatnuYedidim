@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm nav">
-  <a class="navbar-brand tital" href="#">ונתנו ידידים</a>
+  <a class="navbar-brand tital" href="#"><img src="./assets/images/Lighthouse.jpg"></a>
   <ul class="navbar-nav" *ngIf="currentComponent">
     <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Student') != -1}" class="nav-item   li">
       <a class="closed link" routerLink='/students'>תלמידים</a>
@@ -26,7 +26,7 @@
     <div class="paddingLayer">
       <div class="content">
         <div class="valign">
-          <span id="rtr-t-Text_2_0">שלום משתמש &nbsp;| התנתק</span>
+          <span id="rtr-t-Text_2_0">שלום ישראל ישראלי &nbsp;<img src="./assets/icons/user.png"></span>
         </div>
       </div>
     </div>
@@ -38,3 +38,5 @@
 </div> -->
 <!-- <input type="file" value="העלה תמונה" (change)="LoadImage($event,saveFile)"/> -->
 <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
+
+<!-- <app-vy-table></app-vy-table> -->

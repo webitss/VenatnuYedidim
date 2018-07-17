@@ -28,12 +28,12 @@ namespace Service.Entities
             }
         }
 
-        public static List<Student> GetAvrechStudents(int iPersonId)
+        public static List<Person> GetAvrechStudents(int iPersonId)
         {
             try
             {
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TStudent_ByAvrechId_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
-                List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
+                List<Person> students = ObjectGenerator<Person>.GeneratListFromDataRowCollection(drc);
                 return students;
             }
             catch (Exception ex)
@@ -41,7 +41,20 @@ namespace Service.Entities
                 Log.LogError("GetAvrechStudents / TAvrechStudents_ByAvrechId_SLCT", ", ex " + ex);
                 return null;
             }
-        }     
+        }
+
+        public static bool DeleteAvrechStudent(int iAvrechId, int iStudentId)
+        {
+            try
+            {
+                SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_DEL", new SqlParameter("iAvrechId", iAvrechId), new SqlParameter("iStudentId", iStudentId));
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         public static Avrech GetAvrechById(int? iPersonId)
         {
@@ -59,5 +72,22 @@ namespace Service.Entities
                 return null;
             }
         }
+
+        public static bool UpdateAvrech(Avrech avrech, int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = ObjectGenerator<Avrech>.GetSqlParametersFromObject(avrech);
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TPerson_UPD", parameters);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("UpdateAvrech / TPerson_UPD", "ex" + ex);
+                return false;
+            }
+        }
+
     }
 }
