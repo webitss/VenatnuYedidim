@@ -64,7 +64,7 @@ namespace Service.Entities
             {
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
-                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TStudent_INS", parameters).Tables[0].Rows[0];
+                SqlDataAccess.ExecuteDatasetSP("TStudent_INS", parameters);
 
                 return true;
             }
@@ -82,7 +82,7 @@ namespace Service.Entities
             {
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
-                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TStudent_UPD", parameters).Tables[0].Rows[0];
+                SqlDataAccess.ExecuteDatasetSP("TStudent_UPD", parameters);
                 return true;
             }
             catch (Exception ex)
