@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from "@angular/http";
 import { RouterModule, Route } from '@angular/router';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 //--- templates ---
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
@@ -94,12 +95,14 @@ import { StudentMeetingDetailsComponent } from './components/student-meeting-det
     StudentMeetingDetailsComponent,    
   ],
   imports: [
+    Ng2SearchPipeModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot([
      // { path: "", component: StudentsComponent },
+     {path:"vy-multy-select",component:VyMultySelectComponent},
       { path: "students", component: StudentsComponent },
       {
         path: "students/student/:iPersonId", component: StudentComponent,
@@ -158,8 +161,7 @@ import { StudentMeetingDetailsComponent } from './components/student-meeting-det
           { path: "settings-documents", component: SettingsDocumentsComponent },
           { path: "settings-frontend", component: SettingsFrontendComponent },
         ]
-      },
-      {path:"vy-multy-select",component:VyMultySelectComponent}
+      }
 
     ], { useHash: true })
   ],

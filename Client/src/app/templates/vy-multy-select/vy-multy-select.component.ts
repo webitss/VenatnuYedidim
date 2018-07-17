@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { forEach } from '@angular/router/src/utils/collection';
-
+//import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @Component({
   selector: 'app-vy-multy-select',
   templateUrl: './vy-multy-select.component.html',
@@ -8,26 +8,29 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class VyMultySelectComponent implements OnInit {
 
-  constructor() { }
+  constructor() { this.filterList = new Array<any>(); }
   @Input()
   @Output()
-  fullList: any[] = [{ iPersonId: 1, mane: "aaa" }, { iPersonId: 2, mane: "bbb" }, { iPersonId: 3, mane: "ccc" }, { iPersonId: 4, mane: "ddd" }];
+  fullList: any[] ;
   flag = false;
   checkboxValueSelectAll: boolean;
 
   @Input()
   id: string;
-  filterList: string[];
+  filterList: any[];
 
-  aaa() {
+  openOrClose() {
     if (this.flag == false) {
+       
+       this.filterList.splice(0,this.filterList.length);
       this.fullList.forEach(element => {
-        debugger;
         if (element['bChecked'] == true)
-        //לא נותן להוסיף לרשימה
-          this.filterList.push(element);
+         {
+           this.filterList.push(element);
+           }
       });
     }
+    
   }
 
 
@@ -41,16 +44,16 @@ export class VyMultySelectComponent implements OnInit {
       this.fullList.forEach(element => {
         element['bChecked'] = false;
       });
-      debugger;
   }
 
-  select(i:number) {debugger;
-    this.fullList[i].bChecked = !this.fullList[i].bChecked;
-  }
+  //select(i: number) {
+    // 
+    //this.fullList[i].bChecked = !this.fullList[i].bChecked;
+  //}
 
   ngOnInit() {
-     this.fullList.forEach(element => {
-    element['bChecked'] = false;
+    this.fullList.forEach(element => {
+      element['bChecked'] = false;
 
     });
   }
