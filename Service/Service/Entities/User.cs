@@ -61,7 +61,12 @@ namespace Service.Entities
         }
 
 
+<<<<<<< HEAD
         public static  void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvMobile, string nvEmail, string nvUserName, string nvPassword, int iPermissionType) { 
+=======
+        public static void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvMobile, string nvEmail, string nvUserName, string nvPassword, int iPermissionType)
+        {
+>>>>>>> d05fe88de41e0a879fe58978135df662d1ce12dd
             try
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();

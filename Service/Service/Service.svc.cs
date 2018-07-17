@@ -18,11 +18,38 @@ namespace Service
             return User.Login(nvUserName, nvPassword);
         }
 
-        public void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvMobile, string nvEmail, string nvUserName, string nvPassword, int iPermissionType)
+        public void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvPhone, string nvEmail, string nvUserName, string nvPassword, int iPermissionType)
         {
-            User.SetUser(iPersonId, iUserId, nvLastName, nvFirstName, nvMobile, nvEmail, nvUserName, nvPassword, iPermissionType);
+            User.SetUser(iPersonId, iUserId, nvLastName, nvFirstName, nvPhone, nvEmail, nvUserName, nvPassword, iPermissionType);
         }
 
+        #endregion
+
+        #region Student
+
+        public List<Student> GetStudentList(int iUserId)
+        {
+            return Student.GetStudentList(iUserId);
+        }
+
+
+
+        public bool AddStudent(Student student, int iUserId)
+        {
+            return Student.AddStudent(student, iUserId);
+        }
+
+
+        public bool UpdateStudent(Student student, int iUserId)
+        {
+            return Student.UpdateStudent(student, iUserId);
+        }
+
+
+        public bool UpdateStatusStudent(int iPersonId, int iStatusType)
+        {
+            return Student.UpdateStatusStudent(iPersonId, iStatusType);
+        }
         #endregion
 
         #region Avrech
@@ -120,10 +147,20 @@ namespace Service
     //    return Yeshivot.GetAllYeshivot(iYeshivaId);
     //}
 
+<<<<<<< HEAD
     //public bool AddYeshiva(Yeshivot yeshiva)
     //{
     //    return Yeshivot.AddYeshiva(yeshiva);
     //}
 
     #endregion
+=======
+        //public bool AddYeshiva(Yeshivot yeshiva)
+        //{
+        //    return Yeshivot.AddYeshiva();
+        //}
+      
+
+    }
+>>>>>>> d05fe88de41e0a879fe58978135df662d1ce12dd
 }
