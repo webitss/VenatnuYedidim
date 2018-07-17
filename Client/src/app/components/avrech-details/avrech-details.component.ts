@@ -29,7 +29,7 @@ export class AvrechDetailsComponent implements OnInit {
     },
       err=>("err")
     );
-
+    debugger;
   }
 
   save()

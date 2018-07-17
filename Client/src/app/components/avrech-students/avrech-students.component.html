@@ -2,5 +2,5 @@
   avrech-students works!
 </p>
 <ul>
-  <li *ngFor="let s of students">{{s.iPersonId}} {{s.nvFirstName}} {{s.nvLastName}} <button class="deleteStudent(s.iPersonId)">מחק</button></li>
+  <li *ngFor="let s of students">{{s.iPersonId}} {{s.nvFirstName}} {{s.nvLastName}} <button (click)="deleteStudent(s.iPersonId)">מחק</button></li>
 </ul>

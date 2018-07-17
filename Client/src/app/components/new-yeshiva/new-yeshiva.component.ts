@@ -13,7 +13,6 @@ export class NewYeshivaComponent implements OnInit {
 
   constructor(private appProx:AppProxy,private yeshiva:Yeshiva) { }
  
-  
 
   ngOnInit() {
   }
