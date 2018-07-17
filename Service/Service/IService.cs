@@ -9,7 +9,7 @@ namespace Service
     public interface IService
     {
         #region User
-      
+
         [OperationContract]
         [WebInvoke(
            Method = "POST",
@@ -31,6 +31,15 @@ namespace Service
 
         [OperationContract]
         [WebInvoke(
+           Method = "POST",
+           UriTemplate = "GetUserByPersonId",
+           BodyStyle = WebMessageBodyStyle.WrappedRequest,
+           ResponseFormat = WebMessageFormat.Json,
+           RequestFormat = WebMessageFormat.Json)]
+        User GetUserByPersonId(int iPersonId);
+
+        [OperationContract]
+        [WebInvoke(
           Method = "POST",
           UriTemplate = "SetUser",
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
@@ -48,7 +57,7 @@ namespace Service
          BodyStyle = WebMessageBodyStyle.WrappedRequest,
          ResponseFormat = WebMessageFormat.Json,
          RequestFormat = WebMessageFormat.Json)]
-         List<Student> GetStudentList(int iUserId);
+        List<Student> GetStudentList(int iUserId);
 
 
 
