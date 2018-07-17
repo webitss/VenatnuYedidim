@@ -43,11 +43,6 @@ namespace Service
         }
 
 
-        public List<Conversation> GetConversations(int iPersonId)
-        {
-            return Conversation.GetConversations(iPersonId);
-        }
-
         #endregion
 
 
@@ -66,22 +61,21 @@ namespace Service
             return SysTableRow.GetValues(iSysTableId);
         }
         #endregion
-<<<<<<< HEAD
+
         //#region SysTables
-=======
+
         #region SysTables
->>>>>>> 3c53cb33dd536c77e4e3aeb2b0bc4d6127062913
+
         //public List<SysTables> GetAllNames(int iSysTableId)
         //{
         //    return SysTables.GetAllNames();
         //}
-<<<<<<< HEAD
+
         //#endregion
-=======
+
         #endregion
->>>>>>> 3c53cb33dd536c77e4e3aeb2b0bc4d6127062913
         #region Conversation
-        public List<Conversation> GetConversations(int? iPersonId)
+        public List<Conversation> GetConversations(int iPersonId)
         {
             return Conversation.GetConversations(iPersonId);
         }
