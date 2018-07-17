@@ -88,6 +88,7 @@ namespace Service.Entities
                 return false;
             }
         }
+<<<<<<< HEAD
         public static bool UpdateConversation(Conversation conversation,int iUserId)
         {
 
@@ -111,6 +112,32 @@ namespace Service.Entities
                 return false;
             }
         }
+=======
+
+        //public static bool AddConversation(int iPersonId, Conversation conversation, int iUserId)
+        //{
+
+        //    try
+        //    {
+        //        List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
+        //        parameters.Add(new SqlParameter("iPersonId", iPersonId));
+        //        parameters.Add(new SqlParameter("iConversationType", conversation.iConversationType));
+        //        parameters.Add(new SqlParameter("iConversationType", conversation.dConversationDate));
+        //        parameters.Add(new SqlParameter("iConversationType", conversation.dtConversationTime));
+        //        parameters.Add(new SqlParameter("iConversationType", conversation.nvConversationSummary));
+        //        parameters.Add(new SqlParameter("iConversationType", conversation.dtNextConversationDate));
+        //        parameters.Add(new SqlParameter("iConversationType", conversation.iConversationType));
+
+        //        DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters).Tables[0].Rows[0];
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.LogError("AddConversation / TConversation_INS", "ex" + ex);
+        //        return false;
+        //    }
+        //}
+>>>>>>> 4ab549154798ef6d833c5ecec50222d1087e77eb
 
 
 
