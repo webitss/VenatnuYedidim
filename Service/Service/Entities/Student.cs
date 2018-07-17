@@ -76,7 +76,7 @@ namespace Service.Entities
         }
 
 
-        public bool UpdateStudent(Student student, int iUserId)
+        public static bool UpdateStudent(Student student, int iUserId)
         {
             try
             {
@@ -92,7 +92,7 @@ namespace Service.Entities
             }
         }
 
-        public bool UpdateStatusStudent(int iPersonId, int iStatusType)
+        public static bool UpdateStatusStudent(int iPersonId, int iStatusType)
         {
             try
             {
