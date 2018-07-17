@@ -78,9 +78,9 @@ namespace Service
             return Avrech.GetAvrechById(iPersonId);
         }
 
-        public bool UpdateAvrech(Avrech avrech)
+        public bool UpdateAvrech(Avrech avrech, int iUserId)
         {
-            return avrech.UpdateAvrech(avrech);
+            return Avrech.UpdateAvrech(avrech,  iUserId);
         }
 
         public List<Person> GetAvrechStudents(int iPersonId)
@@ -91,6 +91,7 @@ namespace Service
         #endregion
 
         #region Conversation
+
         public List<Conversation> GetConversations(int? iPersonId)
         {
             return Conversation.GetConversations(iPersonId);
@@ -125,12 +126,11 @@ namespace Service
 
         #endregion
 
-
         #region Conversation
-       
-        //public bool AddConversations( Conversation conversation, int iUserId)
+
+        //public bool AddConversations(Conversation conversation, int iUserId)
         //{
-        //    return Conversation.AddConversations(conversation,iUserId);
+        //    return Conversation.AddConversations(conversation, iUserId);
         //}
 
 

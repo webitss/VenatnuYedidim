@@ -113,7 +113,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool UpdateAvrech(Avrech avrech);
+        bool UpdateAvrech(Avrech avrech, int iUserId);
 
         #endregion
 
@@ -175,7 +175,7 @@ namespace Service
         //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
         //  ResponseFormat = WebMessageFormat.Json,
         //  RequestFormat = WebMessageFormat.Json)]
-        //  bool AddConversations(Conversation conversation,int iUserId);
+        //bool AddConversations(Conversation conversation,int iUserId);
 
         #endregion Conversation
 

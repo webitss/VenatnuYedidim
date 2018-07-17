@@ -69,13 +69,7 @@ namespace Service.Entities
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
-                parameters.Add(new SqlParameter("iPersonId",conversation.iPersonId));
-                parameters.Add(new SqlParameter("iConversationType",conversation.iConversationType));
-                parameters.Add(new SqlParameter("iConversationType", conversation.dConversationDate));
-                parameters.Add(new SqlParameter("iConversationType", conversation.dtConversationTime));
-                parameters.Add(new SqlParameter("iConversationType", conversation.nvConversationSummary));
-                parameters.Add(new SqlParameter("iConversationType", conversation.dtNextConversationDate));
-                parameters.Add(new SqlParameter("iConversationType", conversation.iConversationType));
+               
                 parameters.Add(new SqlParameter("iUserId", conversation.iConversationType));
 
 
@@ -88,20 +82,14 @@ namespace Service.Entities
                 return false;
             }
         }
+
         public static bool UpdateConversation(Conversation conversation,int iUserId)
         {
 
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
-                parameters.Add(new SqlParameter("iConversationType", conversation.iConversationType));
-                parameters.Add(new SqlParameter("iConversationType", conversation.dConversationDate));
-                parameters.Add(new SqlParameter("iConversationType", conversation.dtConversationTime));
-                parameters.Add(new SqlParameter("iConversationType", conversation.nvConversationSummary));
-                parameters.Add(new SqlParameter("iConversationType", conversation.dtNextConversationDate));
-                parameters.Add(new SqlParameter("iConversationType", conversation.iConversationType));
-                parameters.Add(new SqlParameter("iUserId", conversation.iConversationType));
-
+             
                 DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_UPD", parameters).Tables[0].Rows[0];
                 return true;
             }
@@ -111,5 +99,6 @@ namespace Service.Entities
                 return false;
             }
         }
+
     }
 }
