@@ -61,7 +61,6 @@ namespace Service.Entities
         }
 
 
-        public static void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvPhone, string nvEmail, string nvUserName, string nvPassword, int iPermissionType)
         {
             try
             {
@@ -70,7 +69,7 @@ namespace Service.Entities
                 parameters.Add(new SqlParameter("iUserId", iUserId));
                 parameters.Add(new SqlParameter("nvLastName", nvLastName));
                 parameters.Add(new SqlParameter("nvFirstName", nvFirstName));
-                parameters.Add(new SqlParameter("nvPhone", nvPhone));
+                parameters.Add(new SqlParameter("nvMobile", nvMobile));
                 parameters.Add(new SqlParameter("nvEmail", nvEmail));
                 parameters.Add(new SqlParameter("nvUserName", nvUserName));
                 parameters.Add(new SqlParameter("nvPassword", nvPassword));
@@ -80,7 +79,7 @@ namespace Service.Entities
             catch (Exception ex)
             {
                 Log.LogError("SetUser / TUser_INSRT", "iPersonId: " + iPersonId + ", iUserId: " + iUserId + ", nvLastName:" +
-                    nvLastName + ", nvFirstName:" + nvFirstName + ", nvPhone:" + nvPhone + ", nvEmail:" + nvEmail + ", nvUserName:" +
+                    nvLastName + ", nvFirstName:" + nvFirstName + ", nvPhone:" + nvMobile + ", nvEmail:" + nvEmail + ", nvUserName:" +
                     nvUserName + ", nvPassword:" + nvPassword + ", iPermissionType:" + iPermissionType + ",ex: " + ex);
             }
         }

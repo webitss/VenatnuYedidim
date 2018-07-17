@@ -18,9 +18,9 @@ namespace Service
             return User.Login(nvUserName, nvPassword);
         }
 
-        public void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvPhone, string nvEmail, string nvUserName, string nvPassword, int iPermissionType)
+        public void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvMobile, string nvEmail, string nvUserName, string nvPassword, int iPermissionType)
         {
-            User.SetUser(iPersonId, iUserId, nvLastName, nvFirstName, nvPhone, nvEmail, nvUserName, nvPassword, iPermissionType);
+            User.SetUser(iPersonId, iUserId, nvLastName, nvFirstName, nvMobile, nvEmail, nvUserName, nvPassword, iPermissionType);
         }
 
         #endregion
