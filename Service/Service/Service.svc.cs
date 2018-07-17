@@ -32,6 +32,11 @@ namespace Service
             return Avrech.GetAllAvrechim(iPersonId);
         }
 
+      public bool UpdateAvrech(Avrech avrech)
+    {
+        return avrech.UpdateAvrech(avrech);
+    }
+
 
         public bool AddEvent(Event oEvent)
         {
@@ -55,11 +60,6 @@ namespace Service
         }
 
 
-        public List<Conversation> GetConversations(int iPersonId)
-        {
-            return Conversation.GetConversations(iPersonId);
-        }
-
         #endregion
 
         #region files
@@ -78,6 +78,7 @@ namespace Service
         }
         #endregion
 
+
         #region SysTables
 
         //public List<SysTables> GetAllNames(int iSysTableId)
@@ -85,12 +86,10 @@ namespace Service
         //    return SysTables.GetAllNames();
         //}
 
-
-
         #endregion
 
         #region Conversation
-        public List<Conversation> GetConversations(int? iPersonId)
+        public List<Conversation> GetConversations(int iPersonId)
         {
             return Conversation.GetConversations(iPersonId);
         }

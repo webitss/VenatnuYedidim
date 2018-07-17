@@ -8,7 +8,7 @@ export class Person{
     nvEmail:String;
     nvAddress:String;
     nvCity:String;
-    iCreatedByUserId:	number;
+    iCreatedByUserId:number;
     dtCreatedate:Date;	
     iLastModifyUserId:number;
     dtLastModifyDate:Date;
