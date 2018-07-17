@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { user } from '../../classes/user';
+import { Person } from '../../classes/person';
+import { AppProxy } from '../../services/app.proxy';
 
 @Component({
   selector: 'app-user-details',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appProxy: AppProxy) { }
 
   ngOnInit() {
+    this.appProxy.post("GetUserByPersonId",{iPersonId: 1})
+    .then(data=>{
+      this.user = data;
+    })
   }
 
+  @Input()
+  @Output()
+  user: user;
+
+  @Input()
+  @Output()
+  person: Person;
 }
