@@ -20,6 +20,14 @@ export class NewYeshivaComponent implements OnInit {
 
   save(yeshiva1) {
    
-    this.appProx.post('AddYeshiva',{yeshiva:yeshiva1});
+    this.appProx.post('AddYeshiva',{yeshiva:yeshiva1})
+    .then(
+      data=>{
+        this.yeshiva1=data;
+        alert("good");
+      }).catch(err=>{
+      alert(err);
+      });
+
   }
 }

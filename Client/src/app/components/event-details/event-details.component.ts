@@ -1,6 +1,8 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
-import { Event } from '../../classes/event';
+import {  Event1 } from '../../classes/event';
+import { Subject } from 'rxjs/Subject';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-event-details',
@@ -9,18 +11,20 @@ import { Event } from '../../classes/event';
 })
 export class EventDetailsComponent implements OnInit {
 
+  e: Subject<Event1>=new BehaviorSubject<Event1>(new Event1());
  
-  event: Event;
+ //e: Event1;
+
 
 
  save() {
    debugger;
-    this.appProxy.post("AddEvent",{oEvent: this.event})
+    this.appProxy.post("AddEvent",{oEvent: this.e })
     .then(
       data=>{
-      alert(data);
+      alert("success"+data);
        }).catch(err=>{
-         alert(err);
+         alert("error:"+err);
        });
   }
 
@@ -29,7 +33,7 @@ export class EventDetailsComponent implements OnInit {
   constructor( private appProxy: AppProxy) { }
 
   ngOnInit() {
-    this.event = new Event();
+
   }
 
 }

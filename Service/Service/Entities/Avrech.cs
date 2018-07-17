@@ -60,7 +60,7 @@ namespace Service.Entities
             }
         }
 
-        public bool UpdateAvrech(Avrech avrech,int iUserId)
+        public static bool UpdateAvrech(Avrech avrech,int iUserId)
         {
             try
             {
