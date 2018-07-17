@@ -73,9 +73,9 @@ namespace Service
             return Avrech.GetAvrechById(iPersonId);
         }
 
-        public bool UpdateAvrech(Avrech avrech)
+        public bool UpdateAvrech(Avrech avrech, int iUserId)
         {
-            return avrech.UpdateAvrech(avrech);
+            return Avrech.UpdateAvrech(avrech, iUserId);
         }
 
         public List<Student> GetAvrechStudents(int iPersonId)

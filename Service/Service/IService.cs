@@ -113,7 +113,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool UpdateAvrech(Avrech avrech);
+        bool UpdateAvrech(Avrech avrech, int iUserId);
 
         #endregion
 
