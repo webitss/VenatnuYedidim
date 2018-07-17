@@ -126,15 +126,6 @@ namespace Service
         bool UpdateAvrech(Avrech avrech);
 
 
-        [OperationContract]
-        [WebInvoke(
-           Method = "POST",
-           UriTemplate = "GetConversations",
-           BodyStyle = WebMessageBodyStyle.WrappedRequest,
-           ResponseFormat = WebMessageFormat.Json,
-           RequestFormat = WebMessageFormat.Json)]
-        List<Conversation> GetConversations(int iPersonId);
-
 
         #endregion
 
@@ -147,12 +138,6 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Student> GetAvrechStudents(int iPersonId);
 
-
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> fa0334f5e1983a73343cfd7ea5b08ed2d0e73f53
 
 
         [OperationContract]
