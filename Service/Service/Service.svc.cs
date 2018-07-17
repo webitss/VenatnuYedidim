@@ -8,9 +8,9 @@ namespace Service
     {
         #region User
 
-        public List<User> GetUsersByPermittion(int personId)
+        public List<User> GetUsersByPermittion(int iPersonId)
         {
-            return User.GetUsers(personId);
+            return User.GetUsers(iPersonId);
         }
 
         public User Login(string nvUserName, string nvPassword)
