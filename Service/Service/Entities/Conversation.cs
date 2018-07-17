@@ -47,22 +47,22 @@ namespace Service.Entities
                 return null;
             }
         }
-        public static bool DeleteConversation(int iConversationId)
-        {
-            try
-            {
-                SqlParameter parameters=new SqlParameter();
-                parameters.Add(new SqlParameter("iConversationId", iConversationId));
-                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters).Tables[0].Rows[0];
+        //public static bool DeleteConversation(int iConversationId)
+        //{
+        //    try
+        //    {
+        //        SqlParameter parameters=new SqlParameter();
+        //        parameters.Add(new SqlParameter("iConversationId", iConversationId));
+        //        DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters).Tables[0].Rows[0];
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Log.LogError("DeleteConversation / TConversation_INS", "ex" + ex);
-                return false;
-            }
-        }
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.LogError("DeleteConversation / TConversation_INS", "ex" + ex);
+        //        return false;
+        //    }
+        //}
 
 
 

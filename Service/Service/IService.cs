@@ -79,7 +79,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool UpdateStudent(Student student, int iUserId)
+        bool UpdateStudent(Student student, int iUserId);
 
 
 
@@ -90,7 +90,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool UpdateStatusStudent(int iPersonId, int iStatusType)
+        bool UpdateStatusStudent(int iPersonId, int iStatusType);
 
         #endregion Student
 
@@ -196,7 +196,7 @@ namespace Service
         #region SysTableRow
         [OperationContract]
         [WebInvoke(
-        Method = "POST",
+        Method = "GET",
         UriTemplate = "GetValues",
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
@@ -212,7 +212,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<SysTableRow> GetAllNames();
+        List<SysTables> GetAllNames();
 
         #endregion
 

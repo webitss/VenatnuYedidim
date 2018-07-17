@@ -45,6 +45,7 @@ export class SysTableService {
     
      console.log(iSysTableId+"arived");
     for (let key in SysTableService.dataTables) {
+      console.log(key)
        if (SysTableService.dataTables[key].iSysTableId===iSysTableId ){
         this.Mykey=key;
        if (SysTableService.dataTables[key].SysTableRow.length > 0 )

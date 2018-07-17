@@ -24,5 +24,7 @@ this.sysTableService.getValues(id);
     console.log("jjjjjjjjjjjjjj");
     this.sysTableService.getValues(id);
   }
-  
+  ff(){
+    alert("select");
+  }
 }
