@@ -42,7 +42,6 @@ namespace Service.Entities
 
         #endregion
 
-       
         public static List<Student> GetStudentList(int iUserId)
         {
             try
@@ -59,14 +58,14 @@ namespace Service.Entities
         }
 
 
-        public static bool AddStudent(Student student,int iUserId)
+        public static bool AddStudent(Student student, int iUserId)
         {
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
                 DataRow dr = SqlDataAccess.ExecuteDatasetSP("TStudent_INS", parameters).Tables[0].Rows[0];
-              
+
                 return true;
             }
             catch (Exception ex)
@@ -75,9 +74,41 @@ namespace Service.Entities
                 return false;
             }
         }
-      
 
 
+        public bool UpdateStudent(Student student, int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TStudent_UPD", parameters).Tables[0].Rows[0];
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("UpdateStudent / TStudent_UPD", "ex" + ex);
+                return false;
+            }
+        }
 
+        public bool UpdateStatusStudent(int iPersonId, int iStatusType)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iPersonId", iPersonId));
+                parameters.Add(new SqlParameter("iStatusType", iStatusType));
+                SqlDataAccess.ExecuteDatasetSP("TStudentUpdateStatus_UPD", parameters);
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                Log.LogError("UpdateStatusStudent / TStudentUpdateStatus_UPD", "ex" + ex);
+                return false;
+            }
+        }
     }
+
 }

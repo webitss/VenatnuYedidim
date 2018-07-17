@@ -70,6 +70,7 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         Avrech GetAvrechById(int? iPersonId);
 
+
         [OperationContract]
         [WebInvoke(
         Method = "POST",
@@ -78,6 +79,19 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         bool UpdateAvrech(Avrech avrech);
+
+
+        //[OperationContract]
+        //[WebInvoke(
+        //   Method = "POST",
+        //   UriTemplate = "GetConversations",
+        //   BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //   ResponseFormat = WebMessageFormat.Json,
+        //   RequestFormat = WebMessageFormat.Json)]
+        //List<Conversation> GetConversations(int iPersonId);
+
+
+        #endregion
 
         [OperationContract]
         [WebInvoke(
@@ -97,7 +111,6 @@ namespace Service
         //   RequestFormat = WebMessageFormat.Json)]
         //List<Conversation> GetConversations(int iPersonId);
 
-        #endregion
 
         
 
