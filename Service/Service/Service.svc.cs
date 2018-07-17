@@ -126,7 +126,11 @@ namespace Service
         #endregion
 
         #region SysTableRow
-       
+        public List<SysTableRow> GetValues(int iSysTableId)
+        {
+
+            return SysTableRow.GetValues(iSysTableId);
+        }
         #endregion
 
         #region SysTables
@@ -138,11 +142,7 @@ namespace Service
 
 
 
-        public List<SysTableRow> GetValues(int iSysTableId)
-        {
-
-            return SysTableRow.GetValues(iSysTableId);
-        }
+      
 
         #endregion
 
