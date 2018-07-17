@@ -104,24 +104,24 @@ namespace Service
 
         #endregion
         #region SysTables
-        [OperationContract]
-        [WebInvoke(
-        Method = "GET",
-        UriTemplate = "GetAllNames",
-        BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        ResponseFormat = WebMessageFormat.Json,
-        RequestFormat = WebMessageFormat.Json)]
-        List<SysTableRow> GetAllNames();
+        //[OperationContract]
+        //[WebInvoke(
+        //Method = "GET",
+        //UriTemplate = "GetAllNames",
+        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //ResponseFormat = WebMessageFormat.Json,
+        //RequestFormat = WebMessageFormat.Json)]
+        //List<SysTableRow> GetAllNames();
 
         #endregion
 
-        [OperationContract]
-        [WebInvoke(
-        Method = "POST",
-        UriTemplate = "AddYeshiva",
-        BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        ResponseFormat = WebMessageFormat.Json,
-        RequestFormat = WebMessageFormat.Json)]
-        bool AddYeshiva(Yeshivot yeshiva);
+        //[OperationContract]
+        //[WebInvoke(
+        //Method = "POST",
+        //UriTemplate = "AddYeshiva",
+        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //ResponseFormat = WebMessageFormat.Json,
+        //RequestFormat = WebMessageFormat.Json)]
+        //bool AddYeshiva(Yeshivot yeshiva);
     }
 }

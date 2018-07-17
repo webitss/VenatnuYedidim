@@ -67,10 +67,10 @@ namespace Service
         }
         #endregion
         #region SysTables
-        public List<SysTables> GetAllNames(int iSysTableId)
-        {
-            return SysTables.GetAllNames();
-        }
+        //public List<SysTables> GetAllNames(int iSysTableId)
+        //{
+        //    return SysTables.GetAllNames();
+        //}
         #endregion
 
 
