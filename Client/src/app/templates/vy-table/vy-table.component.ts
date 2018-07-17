@@ -9,7 +9,7 @@ export class VyTableComponent implements OnInit {
 
   private lstColumns = [{
     title: 'עריכה',
-    filter: '',
+    filter: 'a',
     name: 'aa',
     titleStyle: {
       width: '25%',
@@ -23,55 +23,80 @@ export class VyTableComponent implements OnInit {
       background: 'red'
     }
   },
-  {    
+  {
     title: 'שם פרטי',
     filter: '',
     name: 'bb',
-    titleStyle: {
-      width: '25%',
-      color: 'red'
-    },
-    filterStyle: {
-      width: '25%'
-    },
-    cellStyle: {
-      width: '25%',
-      background: 'red'
-    }
+    // titleStyle: {
+    //   width: '25%',
+    //   color: 'red'
+    // },
+    // filterStyle: {
+    //   width: '25%'
+    // },
+    // cellStyle: {
+    //   width: '25%',
+    //   background: 'red'
+    // }
   },
   {
     title: 'שם משפחה',
     filter: '',
     name: 'cc',
-    titleStyle: {
-      width: '25%',
-      color: 'red'
-    },
-    filterStyle: {
-      width: '25%'
-    },
-    cellStyle: {
-      width: '25%',
-      background: 'red'
-    }
+    // titleStyle: {
+    //   width: '25%',
+    //   color: 'red'
+    // },
+    // filterStyle: {
+    //   width: '25%'
+    // },
+    // cellStyle: {
+    //   width: '25%',
+    //   background: 'red'
+    // }
   },
   {
     title: 'נייד',
     filter: '',
     name: 'dd',
-    titleStyle: {
-      width: '25%',
-      color: 'red'
-    },
-    filterStyle: {
-      width: '25%'
-    },
-    cellStyle: {
-      width: '25%',
-      background: 'red'
-    }
+    // titleStyle: {
+    //   width: '25%',
+    //   color: 'red'
+    // },
+    // filterStyle: {
+    //   width: '25%'
+    // },
+    // cellStyle: {
+    //   width: '25%',
+    //   background: 'red'
+    // }
   }]
+
   private lstDataRows = [{
+    aa: 'aaa',
+    bb: 'aaa',
+    cc: 'aaa',
+    dd: 'aaa',
+  },
+  {
+    aa: 'bbb',
+    bb: 'bbb',
+    cc: 'bbb',
+    dd: 'bbb',
+  },
+  {
+    aa: 'aaa',
+    bb: 'bbb',
+    cc: 'ccc',
+    dd: 'ddd',
+  },
+  {
+    aa: 'aaa',
+    bb: 'bbb',
+    cc: 'ccc',
+    dd: 'ddd',
+  },
+  {
     aa: 'aaa',
     bb: 'bbb',
     cc: 'ccc',

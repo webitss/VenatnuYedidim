@@ -7,6 +7,7 @@ import { RouterModule, Route } from '@angular/router';
 
 //--- templates ---
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
+import { VyTableFilterPipe } from './templates/vy-table/vy-table-filter.pipe';
 
 //--- services ---
 import { AppProxy } from './services/app.proxy';
@@ -53,6 +54,7 @@ import { StudentMeetingDetailsComponent } from './components/student-meeting-det
   declarations: [
     //templates
     VyTableComponent,
+    VyTableFilterPipe,
 
     //components
     AppComponent,
@@ -91,7 +93,7 @@ import { StudentMeetingDetailsComponent } from './components/student-meeting-det
     VyMultySelectComponent,
     StudentConversationComponent,
     StudentConversationDetailsComponent,
-    StudentMeetingDetailsComponent,    
+    StudentMeetingDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,16 +101,18 @@ import { StudentMeetingDetailsComponent } from './components/student-meeting-det
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot([
-     // { path: "", component: StudentsComponent },
+      // { path: "", component: StudentsComponent },
       { path: "students", component: StudentsComponent },
       {
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
           { path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
-          { path: "student-meetings", component: StudentMeetingsComponent ,children:[
-          {path:"student-meeting-details/:iMeetingId",component:StudentMeetingDetailsComponent}
-          ]},
+          {
+            path: "student-meetings", component: StudentMeetingsComponent, children: [
+              { path: "student-meeting-details/:iMeetingId", component: StudentMeetingDetailsComponent }
+            ]
+          },
           { path: "student-conversations", component: StudentConversationsComponent },
         ]
       },
@@ -148,15 +152,17 @@ import { StudentMeetingDetailsComponent } from './components/student-meeting-det
           { path: "", component: SettingsCodeTableComponent },
           { path: "settings-code-tables", component: SettingsCodeTableComponent },
           { path: "settings-reports", component: SettingsReportsComponent },
-          { path: "settings-yeshivot", component: SettingsYeshivotComponent,
-        children: [
-          { path:"new-yeshiva", component:NewYeshivaComponent}
-          ] },
+          {
+            path: "settings-yeshivot", component: SettingsYeshivotComponent,
+            children: [
+              { path: "new-yeshiva", component: NewYeshivaComponent }
+            ]
+          },
           { path: "settings-documents", component: SettingsDocumentsComponent },
           { path: "settings-frontend", component: SettingsFrontendComponent },
         ]
       },
-      {path:"vy-multy-select",component:VyMultySelectComponent}
+      { path: "vy-multy-select", component: VyMultySelectComponent }
 
     ], { useHash: true })
   ],
