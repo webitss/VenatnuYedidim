@@ -61,14 +61,15 @@ namespace Service.Entities
         }
 
 
-        public static bool SetUser(User user)
-        {
+        public static bool SetUser(User user)        {
             try
             {
+
                 SqlDataAccess.ExecuteDatasetSP("TUser_INSRT", ObjectGenerator<User>.GetSqlParametersFromObject(user));
                 return true;
                 
             }
+
             catch (Exception ex)
             {
                 Log.LogError("SetUser / TUser_INSRT", "ex: " + ex);
