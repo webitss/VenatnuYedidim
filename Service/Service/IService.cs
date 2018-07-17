@@ -213,6 +213,7 @@ namespace Service
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
         bool DeleteMeeting(int iMeetingId, int iUserId);
+
         #endregion Meeting
 
         #region files

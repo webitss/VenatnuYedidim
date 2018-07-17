@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class StudentComponent implements OnInit, OnDestroy {
   private sub: any;
   flag: number;
+  protected currentComponent:any;
   constructor(private route: ActivatedRoute) { }
   // subscription:Subscription;
   ngOnInit() {
@@ -17,6 +18,10 @@ export class StudentComponent implements OnInit, OnDestroy {
       this.flag = +params['iPersonId'];
     });
   }
+  onRouterOutletActivate(event) {
+    this.currentComponent = event;
+  }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

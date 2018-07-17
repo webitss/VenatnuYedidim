@@ -108,10 +108,12 @@ namespace Service
         {
             return Avrech.GetAvrechStudents(iPersonId);
         }
-        public bool DeleteAvrechStudent(int iAvrechId, int iStudentId)
+
+        public bool DeleteAvrechStudent(int iAvrechId,int iStudentId)
         {
             return Avrech.DeleteAvrechStudent(iAvrechId, iStudentId);
         }
+        
 
 
         #endregion
@@ -150,10 +152,7 @@ namespace Service
             return SysTables.GetAllNames();
         }
 
-
-
-
-
+        
         #endregion
 
         #region Conversation
@@ -170,7 +169,6 @@ namespace Service
         {
             return Yeshivot.GetAllYeshivot(iYeshivaId);
         }
-
 
         public bool AddYeshiva(Yeshivot yeshiva)
         {

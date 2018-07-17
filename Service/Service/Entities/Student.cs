@@ -34,7 +34,7 @@ namespace Service.Entities
         [DataMember]
         public string nvCauseOfDeathMother { get; set; }
         [DataMember]
-        public DateTime dtAddStudentDate { get; set; }
+        public DateTime? dtAddStudentDate { get; set; }
         [DataMember]
         public string nvComment { get; set; }
         [DataMember]
