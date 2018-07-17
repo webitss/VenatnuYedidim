@@ -34,7 +34,7 @@ namespace Service.Entities
         [DataMember]
         public string nvCauseOfDeathMother { get; set; }
         [DataMember]
-        public DateTime dtAddStudentDate { get; set; }
+        public DateTime? dtAddStudentDate { get; set; }
         [DataMember]
         public string nvComment { get; set; }
         [DataMember]
@@ -64,7 +64,7 @@ namespace Service.Entities
             {
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
-                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TStudent_INS", parameters).Tables[0].Rows[0];
+                SqlDataAccess.ExecuteDatasetSP("TStudent_INS", parameters);
 
                 return true;
             }
@@ -76,13 +76,13 @@ namespace Service.Entities
         }
 
 
-        public bool UpdateStudent(Student student, int iUserId)
+        public static bool UpdateStudent(Student student, int iUserId)
         {
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
-                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TStudent_UPD", parameters).Tables[0].Rows[0];
+                SqlDataAccess.ExecuteDatasetSP("TStudent_UPD", parameters);
                 return true;
             }
             catch (Exception ex)
@@ -92,7 +92,7 @@ namespace Service.Entities
             }
         }
 
-        public bool UpdateStatusStudent(int iPersonId, int iStatusType)
+        public static bool UpdateStatusStudent(int iPersonId, int iStatusType)
         {
             try
             {

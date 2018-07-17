@@ -62,7 +62,7 @@ namespace Service.Entities
                 parameters.Add(new SqlParameter("nvEmail", yeshiva.nvEmail));
                 parameters.Add(new SqlParameter("nvMobile", yeshiva.nvMobile));
 
-                SqlDataAccess.ExecuteDatasetSP("TYeshivot_INS");
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TYeshivot_INS",parameters).Tables[0].Rows[0];
                 return true;
             }
             catch (Exception ex)

@@ -1,4 +1,4 @@
-export class Event {
+export class Event1 {
     iEventId: number;
     nvName: string;
     dtEventDate: Date;
