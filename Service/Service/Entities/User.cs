@@ -71,7 +71,7 @@ namespace Service.Entities
             }
             catch (Exception ex)
             {
-                Log.LogError("SetUser / TUser_INSRT", "user: " + user + " ,ex: " + ex);
+                Log.LogError("SetUser / TUser_INSRT", "ex: " + ex);
                 return false;
             }
         }
