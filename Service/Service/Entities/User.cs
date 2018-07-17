@@ -45,6 +45,20 @@ namespace Service.Entities
         }
 
 
+        public static User GetUserByPersonId(int iPersonId)
+        {
+            try
+            {
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TUser_GetUserByIPersonId", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
+                User user = ObjectGenerator<User>.GeneratFromDataRow(dr);
+                return user;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("Login / TUser_ByUserNameAndPassword_SLCT", "iPersonId: " + iPersonId + ", ex " + ex);
+                return null;
+            }
+        }
         public static List<User> GetUsers(int iPersonId)
         {
             try

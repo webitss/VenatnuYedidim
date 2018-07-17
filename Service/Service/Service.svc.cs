@@ -13,6 +13,11 @@ namespace Service
             return User.GetUsers(iPersonId);
         }
 
+        public User GetUserByPersonId(int iPersonId)
+        {
+            return User.GetUserByPersonId(iPersonId);
+        }
+
         public User Login(string nvUserName, string nvPassword)
         {
             return User.Login(nvUserName, nvPassword);
