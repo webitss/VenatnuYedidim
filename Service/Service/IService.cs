@@ -20,17 +20,6 @@ namespace Service
         User Login(string nvUserName, string nvPassword);
 
         [OperationContract]
-
-        [WebInvoke(
-            Method = "POST",
-            UriTemplate = "GetEventsList",
-            BodyStyle = WebMessageBodyStyle.WrappedRequest,
-            ResponseFormat = WebMessageFormat.Json,
-            RequestFormat = WebMessageFormat.Json)]
-        List<Event> GetEventsList(int iUserId);
-
-        [OperationContract]
-
         [WebInvoke(
            Method = "POST",
            UriTemplate = "GetUsersByPermittion",
@@ -70,20 +59,18 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         Avrech GetAvrechById(int? iPersonId);
 
-<<<<<<< HEAD
-       
-=======
-        //[OperationContract]
-        //[WebInvoke(
-        //   Method = "POST",
-        //   UriTemplate = "GetConversations",
-        //   BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //   ResponseFormat = WebMessageFormat.Json,
-        //   RequestFormat = WebMessageFormat.Json)]
-        //List<Conversation> GetConversations(int iPersonId);
->>>>>>> 510478dabe485e544355be4c5d7fcfca0dfb3f1f
+        [OperationContract]
+        [WebInvoke(
+           Method = "POST",
+           UriTemplate = "GetConversations",
+           BodyStyle = WebMessageBodyStyle.WrappedRequest,
+           ResponseFormat = WebMessageFormat.Json,
+           RequestFormat = WebMessageFormat.Json)]
+        List<Conversation> GetConversations(int iPersonId);
 
         #endregion
+
+        #region student
 
         [OperationContract]
         [WebInvoke(
@@ -94,26 +81,18 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Student> GetAvrechStudents(int iPersonId);
 
+        #endregion
 
+        #region Conversation
         [OperationContract]
         [WebInvoke(
         Method = "POST",
-        UriTemplate = "AddEvent",
+        UriTemplate = "GetConversations",
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool AddEvent(Event oEvent);
+        List<Conversation> GetConversations(int? iPersonId);
 
-        #region Conversation
-
-        [OperationContract]
-        [WebInvoke(
-          Method = "POST",
-          UriTemplate = "GetConversations",
-          BodyStyle = WebMessageBodyStyle.WrappedRequest,
-          ResponseFormat = WebMessageFormat.Json,
-          RequestFormat = WebMessageFormat.Json)]
-        List<Conversation> GetConversations(int iPersonId);
         #endregion Conversation
 
         #region files
@@ -140,6 +119,7 @@ namespace Service
         List<SysTableRow> GetValues(int iSysTableId);
 
         #endregion
+
         #region SysTables
         //[OperationContract]
         //[WebInvoke(
@@ -152,22 +132,26 @@ namespace Service
 
         #endregion
 
-        [OperationContract]
-        [WebInvoke(
-        Method = "POST",
-        UriTemplate = "AddYeshiva",
-        BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        ResponseFormat = WebMessageFormat.Json,
-        RequestFormat = WebMessageFormat.Json)]
-        bool AddYeshiva(Yeshivot yeshiva);
+        #region yeshivot
 
-        [OperationContract]
-        [WebInvoke(
-        Method = "POST",
-        UriTemplate = "GetAllYeshivot",
-        BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        ResponseFormat = WebMessageFormat.Json,
-        RequestFormat = WebMessageFormat.Json)]
-        List<Yeshivot> GetAllYeshivot(Yeshivot yeshiva);
+        //[OperationContract]
+        //[WebInvoke(
+        //Method = "POST",
+        //UriTemplate = "AddYeshiva",
+        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //ResponseFormat = WebMessageFormat.Json,
+        //RequestFormat = WebMessageFormat.Json)]
+        //bool AddYeshiva(Yeshivot yeshiva);
+
+        //[OperationContract]
+        //[WebInvoke(
+        //Method = "POST",
+        //UriTemplate = "GetAllYeshivot",
+        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //ResponseFormat = WebMessageFormat.Json,
+        //RequestFormat = WebMessageFormat.Json)]
+        //List<Yeshivot> GetAllYeshivot(int iYeshivaId);
+
+        #endregion
     }
 }

@@ -32,18 +32,6 @@ namespace Service
             return Avrech.GetAllAvrechim(iPersonId);
         }
 
-
-        public bool AddEvent(Event oEvent)
-        {
-            return Event.AddEvent(oEvent);
-        }
-
-        public List<Event> GetEventsList(int iUserId)
-        {
-            return Event.GetEventsList(iUserId);
-        }
-
-
         public List<Student> GetAvrechStudents(int iPersonId)
         {
             return Avrech.GetAvrechStudents(iPersonId);
@@ -55,7 +43,13 @@ namespace Service
         }
 
 
+        public List<Conversation> GetConversations(int iPersonId)
+        {
+            return Conversation.GetConversations(iPersonId);
+        }
+
         #endregion
+
 
         #region files
 
@@ -73,54 +67,33 @@ namespace Service
         }
         #endregion
 
-<<<<<<< HEAD
-        //#region SysTables
-
-=======
->>>>>>> 510478dabe485e544355be4c5d7fcfca0dfb3f1f
-        #region SysTables
-
-        //public List<SysTables> GetAllNames(int iSysTableId)
-        //{
-        //    return SysTables.GetAllNames();
-        //}
-
-<<<<<<< HEAD
-        //#endregion
-
-        #endregion
-=======
+        public List<SysTables> GetAllNames(int iSysTableId)
+        {
+            return SysTables.GetAllNames();
+        }
 
 
-        #endregion
-
->>>>>>> 510478dabe485e544355be4c5d7fcfca0dfb3f1f
         #region Conversation
-        public List<Conversation> GetConversations(int iPersonId)
+        public List<Conversation> GetConversations(int? iPersonId)
         {
             return Conversation.GetConversations(iPersonId);
         }
 
         #endregion
 
-
-
-<<<<<<< HEAD
-    public bool AddYeshiva(Yeshivot yeshiva)
-    {
-        return Yeshivot.AddYeshiva(yeshiva.nvYeshivaName, yeshiva.nvAddress, 
-            yeshiva.nvCity, yeshiva.nvContact, yeshiva.nvRoleType, yeshiva.nvEmail, yeshiva.nvMobile);
     }
 
-    public List<Yeshivot> GetAllYeshivot(int iYeshivaId)
-    {
-        return Yeshivot.GetAllYeshivot(iYeshivaId);
-=======
+    #region yeshivot
 
-        //public bool AddYeshiva(Yeshivot yeshiva)
-        //{
-        //    return Yeshivot.AddYeshiva();
-        //}
->>>>>>> 801415ac721b923d46b0ef5190bce2dd6a62ba21
-    }
+    //public List<Yeshivot> GetAllYeshivot(int iYeshivaId)
+    //{
+    //    return Yeshivot.GetAllYeshivot(iYeshivaId);
+    //}
+
+    //public bool AddYeshiva(Yeshivot yeshiva)
+    //{
+    //    return Yeshivot.AddYeshiva(yeshiva);
+    //}
+
+    #endregion
 }
