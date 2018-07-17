@@ -46,9 +46,54 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvPhone, string nvEmail, string nvUserName, string nvPassword, int iPermissionType);
+        void SetUser(User user);
 
         #endregion
+
+        #region Student
+        [OperationContract]
+        [WebInvoke(
+         Method = "POST",
+         UriTemplate = "GetStudentList",
+         BodyStyle = WebMessageBodyStyle.WrappedRequest,
+         ResponseFormat = WebMessageFormat.Json,
+         RequestFormat = WebMessageFormat.Json)]
+         List<Student> GetStudentList(int iUserId);
+
+
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "AddStudent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool AddStudent(Student student, int iUserId);
+
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "UpdateStudent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool UpdateStudent(Student student, int iUserId);
+
+
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "UpdateStatusStudent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool UpdateStatusStudent(int iPersonId, int iStatusType);
+
+        #endregion Student
+
 
         #region Avrech
 
@@ -81,15 +126,6 @@ namespace Service
         bool UpdateAvrech(Avrech avrech);
 
 
-        //[OperationContract]
-        //[WebInvoke(
-        //   Method = "POST",
-        //   UriTemplate = "GetConversations",
-        //   BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //   ResponseFormat = WebMessageFormat.Json,
-        //   RequestFormat = WebMessageFormat.Json)]
-        //List<Conversation> GetConversations(int iPersonId);
-
 
         #endregion
 
@@ -103,16 +139,6 @@ namespace Service
         List<Student> GetAvrechStudents(int iPersonId);
 
 
-        //[WebInvoke(
-        //   Method = "POST",
-        //   UriTemplate = "GetConversations",
-        //   BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //   ResponseFormat = WebMessageFormat.Json,
-        //   RequestFormat = WebMessageFormat.Json)]
-        //List<Conversation> GetConversations(int iPersonId);
-
-
-        
 
         [OperationContract]
         [WebInvoke(
@@ -180,4 +206,5 @@ namespace Service
         //RequestFormat = WebMessageFormat.Json)]
         //bool AddYeshiva(Yeshivot yeshiva);
     }
+
 }
