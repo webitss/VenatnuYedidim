@@ -90,8 +90,15 @@ namespace Service
 
     }
 
-    //public bool AddYeshiva(Yeshivot yeshiva)
-    //{
-    //    return Yeshivot.AddYeshiva();
-    //}
+
+    public bool AddYeshiva(Yeshivot yeshiva)
+    {
+        return Yeshivot.AddYeshiva(yeshiva.nvYeshivaName, yeshiva.nvAddress, 
+            yeshiva.nvCity, yeshiva.nvContact, yeshiva.nvRoleType, yeshiva.nvEmail, yeshiva.nvMobile);
+    }
+
+    public List<Yeshivot> GetAllYeshivot(int iYeshivaId)
+    {
+        return Yeshivot.GetAllYeshivot(iYeshivaId);
+    }
 }

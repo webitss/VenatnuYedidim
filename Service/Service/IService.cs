@@ -127,13 +127,22 @@ namespace Service
 
         #endregion
 
-        //[OperationContract]
-        //[WebInvoke(
-        //Method = "POST",
-        //UriTemplate = "AddYeshiva",
-        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //ResponseFormat = WebMessageFormat.Json,
-        //RequestFormat = WebMessageFormat.Json)]
-        //bool AddYeshiva(Yeshivot yeshiva);
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "AddYeshiva",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool AddYeshiva(Yeshivot yeshiva);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetAllYeshivot",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Yeshivot> GetAllYeshivot(Yeshivot yeshiva);
     }
 }
