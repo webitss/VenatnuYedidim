@@ -13,7 +13,8 @@ export class SettingsCodeTableComponent implements OnInit {
   constructor(private sysTableService: SysTableService) { }
 
   ngOnInit() {
-    // this.sysTableService.getTableNames().then(data=>this.tableNames=data,error=>alert(error) );
+
+    this.sysTableService.getTableNames().then(data=>this.tableNames=data,error=>alert(error) );
   }
   getValues1(id:number){
    
@@ -23,4 +24,5 @@ this.sysTableService.getValues(id);
     console.log("jjjjjjjjjjjjjj");
     this.sysTableService.getValues(id);
   }
+  
 }

@@ -160,14 +160,14 @@ namespace Service
 
         #endregion
         #region SysTables
-        //[OperationContract]
-        //[WebInvoke(
-        //Method = "GET",
-        //UriTemplate = "GetAllNames",
-        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //ResponseFormat = WebMessageFormat.Json,
-        //RequestFormat = WebMessageFormat.Json)]
-        //List<SysTableRow> GetAllNames();
+        [OperationContract]
+        [WebInvoke(
+        Method = "GET",
+        UriTemplate = "GetAllNames",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<SysTableRow> GetAllNames();
 
         #endregion
 
