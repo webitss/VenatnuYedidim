@@ -29,9 +29,8 @@ export class AvrechStudentsComponent implements OnInit {
       {
         if(this.students[i].iPersonId==id)
         this.students.splice(i,1);
+        break;
       }
-      alert("success"+data);
-      
   }}
       ,err=>alert(err));
   }
