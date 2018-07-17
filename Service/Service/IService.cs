@@ -46,7 +46,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvPhone, string nvEmail, string nvUserName, string nvPassword, int iPermissionType);
+        void SetUser(User user);
 
         #endregion
 
@@ -79,7 +79,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool UpdateStudent(Student student, int iUserId)
+        bool UpdateStudent(Student student, int iUserId);
 
 
 
@@ -90,7 +90,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool UpdateStatusStudent(int iPersonId, int iStatusType)
+        bool UpdateStatusStudent(int iPersonId, int iStatusType);
 
         #endregion Student
 
@@ -126,15 +126,6 @@ namespace Service
         bool UpdateAvrech(Avrech avrech);
 
 
-        //[OperationContract]
-        //[WebInvoke(
-        //   Method = "POST",
-        //   UriTemplate = "GetConversations",
-        //   BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //   ResponseFormat = WebMessageFormat.Json,
-        //   RequestFormat = WebMessageFormat.Json)]
-        //List<Conversation> GetConversations(int iPersonId);
-
 
         #endregion
 
@@ -148,16 +139,6 @@ namespace Service
         List<Student> GetAvrechStudents(int iPersonId);
 
 
-        //[WebInvoke(
-        //   Method = "POST",
-        //   UriTemplate = "GetConversations",
-        //   BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //   ResponseFormat = WebMessageFormat.Json,
-        //   RequestFormat = WebMessageFormat.Json)]
-        //List<Conversation> GetConversations(int iPersonId);
-
-
-        
 
         [OperationContract]
         [WebInvoke(
