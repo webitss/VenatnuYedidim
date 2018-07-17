@@ -48,6 +48,7 @@ import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-sel
 import { StudentConversationComponent } from './components/student-conversation/student-conversation.component';
 import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
 import { StudentMeetingDetailsComponent } from './components/student-meeting-details/student-meeting-details.component';
+import { SysTableService } from './services/sys-table.service';
 
 @NgModule({
   declarations: [
@@ -160,7 +161,7 @@ import { StudentMeetingDetailsComponent } from './components/student-meeting-det
 
     ], { useHash: true })
   ],
-  providers: [AppProxy],
+  providers: [AppProxy,SysTableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
