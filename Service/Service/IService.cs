@@ -148,11 +148,7 @@ namespace Service
         List<Student> GetAvrechStudents(int iPersonId);
 
 
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> fa0334f5e1983a73343cfd7ea5b08ed2d0e73f53
 
 
         [OperationContract]
@@ -173,7 +169,17 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        List<Conversation> GetConversations(int iPersonId);
+        List<Conversation> GetConversations(int? iPersonId);
+
+        [OperationContract]
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "AddConversations",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+        bool AddConversations(Conversation conversation,int iUserId);
+
         #endregion Conversation
 
         #region files
