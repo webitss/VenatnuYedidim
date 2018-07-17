@@ -15,6 +15,7 @@ export class AvrechDetailsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute ,private appProxy:AppProxy) { }
 
   ngOnInit() {
+    debugger;
     this.activatedRoute.parent.params.subscribe(params => {
       this.id=params['iPersonId'];
     })   
@@ -23,7 +24,7 @@ export class AvrechDetailsComponent implements OnInit {
       data=>
       {
     this.avrech=data;
-    debugger;
+    
     },
       err=>("err")
     );

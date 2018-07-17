@@ -60,11 +60,6 @@ namespace Service
         }
 
 
-        public List<Conversation> GetConversations(int iPersonId)
-        {
-            return Conversation.GetConversations(iPersonId);
-        }
-
         #endregion
 
         #region files
@@ -83,6 +78,7 @@ namespace Service
         }
         #endregion
 
+
         #region SysTables
 
         //public List<SysTables> GetAllNames(int iSysTableId)
@@ -91,11 +87,10 @@ namespace Service
         //}
 
 
-
         #endregion
 
         #region Conversation
-        public List<Conversation> GetConversations(int? iPersonId)
+        public List<Conversation> GetConversations(int iPersonId)
         {
             return Conversation.GetConversations(iPersonId);
         }
