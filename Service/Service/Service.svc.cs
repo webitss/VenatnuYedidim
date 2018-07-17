@@ -25,6 +25,27 @@ namespace Service
 
         #endregion
 
+        #region Meeting
+
+        public List<Meeting> GetMeetingsByStudentId(int iPersonId)
+        {
+            return Meeting.GetMeetingsByStudentId(iPersonId);
+        }
+        public bool AddMeeting(Meeting meeting, int iUserId)
+        {
+            return Meeting.AddMeeting(meeting, iUserId);
+        }
+        public bool UpdateMeeting(Meeting meeting, int iUserId)
+        {
+            return Meeting.UpdateMeeting(meeting, iUserId);
+        }
+        public bool DeleteMeeting(int iMeetingId, int iUserId)
+        {
+            return Meeting.DeleteMeeting(iMeetingId, iUserId);
+        }
+
+        #endregion
+
         #region Avrech
 
         public List<Avrech> GetAllAvrechim(int? iPersonId)
@@ -32,10 +53,10 @@ namespace Service
             return Avrech.GetAllAvrechim(iPersonId);
         }
 
-      public bool UpdateAvrech(Avrech avrech)
-    {
-        return avrech.UpdateAvrech(avrech);
-    }
+        public bool UpdateAvrech(Avrech avrech)
+        {
+            return avrech.UpdateAvrech(avrech);
+        }
 
 
         public bool AddEvent(Event oEvent)
