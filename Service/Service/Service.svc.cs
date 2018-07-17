@@ -117,13 +117,7 @@ namespace Service
 
 
         #endregion
-
-        #region Conversation
-        public List<Conversation> GetConversations(int? iPersonId)
-        {
-            return Conversation.GetConversations(iPersonId);
-        }
-
+            
         #region files
 
         public string SaveFileByBase64(string base64File, string fileName)
@@ -133,10 +127,7 @@ namespace Service
 
 
         #endregion
-
-
-        #endregion
-
+        
         #region SysTableRow
         public List<SysTableRow> GetValues(int iSysTableId)
         {
@@ -152,15 +143,28 @@ namespace Service
             return SysTables.GetAllNames();
         }
 
-        
+
         #endregion
 
         #region Conversation
 
-        //public bool AddConversations( Conversation conversation, int iUserId)
-        //{
-        //    return Conversation.AddConversations(conversation,iUserId);
-        //}
+        public List<Conversation> GetConversations(int? iPersonId)
+        {
+            return Conversation.GetConversations(iPersonId);
+        }
+        public bool AddConversations(Conversation conversation, int iUserId)
+        {
+            return Conversation.AddConversation(conversation, iUserId);
+        }
+        public bool UpdateConversations(Conversation conversation, int iUserId)
+        {
+            return Conversation.UpdateConversation(conversation, iUserId);
+        }
+        public bool DeleteConversations(int iConversationId, int iUserId)
+        {
+            return Conversation.DeleteConversation(iConversationId, iUserId);
+        }
+
         #endregion
 
         #region yeshivot
@@ -174,6 +178,8 @@ namespace Service
         {
             return Yeshivot.AddYeshiva(yeshiva);
         }
+
+        #endregion
     }
-    #endregion
+
 }
