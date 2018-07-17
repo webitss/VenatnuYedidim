@@ -61,26 +61,25 @@ namespace Service.Entities
         }
 
 
-        public static void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvPhone, string nvEmail, string nvUserName, string nvPassword, int iPermissionType)
-        {
+        public static  void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvMobile, string nvEmail, string nvUserName, string nvPassword, int iPermissionType) { 
             try
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("iPersonId", iPersonId));
+        parameters.Add(new SqlParameter("iPersonId", iPersonId));
                 parameters.Add(new SqlParameter("iUserId", iUserId));
                 parameters.Add(new SqlParameter("nvLastName", nvLastName));
                 parameters.Add(new SqlParameter("nvFirstName", nvFirstName));
-                parameters.Add(new SqlParameter("nvPhone", nvPhone));
+                parameters.Add(new SqlParameter("nvMobile", nvMobile));
                 parameters.Add(new SqlParameter("nvEmail", nvEmail));
                 parameters.Add(new SqlParameter("nvUserName", nvUserName));
                 parameters.Add(new SqlParameter("nvPassword", nvPassword));
                 parameters.Add(new SqlParameter("iPermissionType", iPermissionType));
                 DataRow dr = SqlDataAccess.ExecuteDatasetSP("TUser_INSRT", parameters).Tables[0].Rows[0];
-            }
+    }
             catch (Exception ex)
             {
                 Log.LogError("SetUser / TUser_INSRT", "iPersonId: " + iPersonId + ", iUserId: " + iUserId + ", nvLastName:" +
-                    nvLastName + ", nvFirstName:" + nvFirstName + ", nvPhone:" + nvPhone + ", nvEmail:" + nvEmail + ", nvUserName:" +
+                    nvLastName + ", nvFirstName:" + nvFirstName + ", nvPhone:" + nvMobile + ", nvEmail:" + nvEmail + ", nvUserName:" +
                     nvUserName + ", nvPassword:" + nvPassword + ", iPermissionType:" + iPermissionType + ",ex: " + ex);
             }
         }

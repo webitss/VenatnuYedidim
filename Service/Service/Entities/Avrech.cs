@@ -59,5 +59,11 @@ namespace Service.Entities
                 return null;
             }
         }
+
+        public bool UpdateAvrech(Avrech avrech)
+        {
+            return true;
+        }
+
     }
 }

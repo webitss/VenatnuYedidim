@@ -16,7 +16,6 @@ export class UsersComponent implements OnInit {
   id:number=1;
 
   ngOnInit() {
-   this.appProxy.post("GetUsersByPermittion",{iPersonId: this.id})
     .then(
       data=>{
       this.users=data;
