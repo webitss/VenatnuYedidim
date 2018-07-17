@@ -19,6 +19,7 @@ export class StudentConversationsComponent implements OnInit {
   .then(
     data=>{
       this.conversations=data;
+      alert("good");
     }).catch(err=>{
     alert(err);
     });

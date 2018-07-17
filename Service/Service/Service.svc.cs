@@ -18,9 +18,9 @@ namespace Service
             return User.Login(nvUserName, nvPassword);
         }
 
-        public void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvPhone, string nvEmail, string nvUserName, string nvPassword, int iPermissionType)
+        public void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvMobile, string nvEmail, string nvUserName, string nvPassword, int iPermissionType)
         {
-            User.SetUser(iPersonId, iUserId, nvLastName, nvFirstName, nvPhone, nvEmail, nvUserName, nvPassword, iPermissionType);
+            User.SetUser(iPersonId, iUserId, nvLastName, nvFirstName, nvMobile, nvEmail, nvUserName, nvPassword, iPermissionType);
         }
 
         #endregion
@@ -31,6 +31,11 @@ namespace Service
         {
             return Avrech.GetAllAvrechim(iPersonId);
         }
+
+      public bool UpdateAvrech(Avrech avrech)
+    {
+        return avrech.UpdateAvrech(avrech);
+    }
 
 
         public bool AddEvent(Event oEvent)
@@ -55,11 +60,6 @@ namespace Service
         }
 
 
-        public List<Conversation> GetConversations(int iPersonId)
-        {
-            return Conversation.GetConversations(iPersonId);
-        }
-
         #endregion
 
         #region files
@@ -78,6 +78,7 @@ namespace Service
         }
         #endregion
 
+
         #region SysTables
 
         //public List<SysTables> GetAllNames(int iSysTableId)
@@ -85,12 +86,10 @@ namespace Service
         //    return SysTables.GetAllNames();
         //}
 
-
-
         #endregion
 
         #region Conversation
-        public List<Conversation> GetConversations(int? iPersonId)
+        public List<Conversation> GetConversations(int iPersonId)
         {
             return Conversation.GetConversations(iPersonId);
         }

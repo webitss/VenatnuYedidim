@@ -110,7 +110,10 @@ import { SysTableService } from './services/sys-table.service';
           { path: "student-meetings", component: StudentMeetingsComponent ,children:[
           {path:"student-meeting-details/:iMeetingId",component:StudentMeetingDetailsComponent}
           ]},
-          { path: "student-conversations", component: StudentConversationsComponent },
+          { path: "student-conversations", component: StudentConversationsComponent ,children:[
+            { path: "student-conversation", component: StudentConversationComponent },
+            { path: "student-conversation-details", component: StudentConversationDetailsComponent },
+          ]},
         ]
       },
       { path: "avrechim", component: AvrechimComponent },
