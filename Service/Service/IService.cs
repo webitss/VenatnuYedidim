@@ -46,7 +46,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvPhone, string nvEmail, string nvUserName, string nvPassword, int iPermissionType);
+        void SetUser(User user);
 
         #endregion
 
@@ -126,14 +126,14 @@ namespace Service
         bool UpdateAvrech(Avrech avrech);
 
 
-        //[OperationContract]
-        //[WebInvoke(
-        //   Method = "POST",
-        //   UriTemplate = "GetConversations",
-        //   BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //   ResponseFormat = WebMessageFormat.Json,
-        //   RequestFormat = WebMessageFormat.Json)]
-        //List<Conversation> GetConversations(int iPersonId);
+        [OperationContract]
+        [WebInvoke(
+           Method = "POST",
+           UriTemplate = "GetConversations",
+           BodyStyle = WebMessageBodyStyle.WrappedRequest,
+           ResponseFormat = WebMessageFormat.Json,
+           RequestFormat = WebMessageFormat.Json)]
+        List<Conversation> GetConversations(int iPersonId);
 
 
         #endregion
