@@ -1,11 +1,12 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'orderBy' })
-export class OrderByPipe implements PipeTransform {
-    transform(value: Array<any>, fields: Array<string>): Array<any> {
-        let dir: number, type: string, array: Array<any> = [].concat(value ? value : []);
-        const fieldSorter = (fields) => (a, b) => fields.map(o => {
+@Pipe({ name: 'vyTableOrderBy' })
+export class VyTableOrderByPipe implements PipeTransform {
+    transform(lstDataRows: Array<any>, lstFields: Array<string>): Array<any> {
+        let dir: number, type: string, array: Array<any> = [].concat(lstDataRows ? lstDataRows : []);
+        
+        const fieldSorter = (lstFields) => (a, b) => lstFields.map(o => {
             dir = 1;
             type = 'string';
 
@@ -20,6 +21,7 @@ export class OrderByPipe implements PipeTransform {
             else return a[o] > b[o] ? dir : a[o] < b[o] ? -(dir) : 0;
 
         }).reduce((p, n) => p ? p : n, 0);
-        return array.sort(fieldSorter(fields));
+
+        return array.sort(fieldSorter(lstFields));
     }
 }

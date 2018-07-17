@@ -8,6 +8,7 @@ import { RouterModule, Route } from '@angular/router';
 //--- templates ---
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
 import { VyTableFilterPipe } from './templates/vy-table/vy-table-filter.pipe';
+import { VyTableOrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
 
 //--- services ---
 import { AppProxy } from './services/app.proxy';
@@ -56,6 +57,7 @@ import { SysTableService } from './services/sys-table.service';
     //templates
     VyTableComponent,
     VyTableFilterPipe,
+    VyTableOrderByPipe,
 
     //components
     AppComponent,

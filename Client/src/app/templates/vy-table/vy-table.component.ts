@@ -9,7 +9,7 @@ export class VyTableComponent implements OnInit {
 
   private lstColumns = [{
     title: 'עריכה',
-    filter: 'a',
+    filter: '',
     name: 'aa',
     titleStyle: {
       width: '25%',
@@ -73,37 +73,43 @@ export class VyTableComponent implements OnInit {
   }]
 
   private lstDataRows = [{
-    aa: 'aaa',
-    bb: 'aaa',
-    cc: 'aaa',
-    dd: 'aaa',
+    aa: 1,
+    bb: 'aaa1',
+    cc: 'aaa1',
+    dd: 'aaa1',
   },
   {
-    aa: 'bbb',
-    bb: 'bbb',
-    cc: 'bbb',
-    dd: 'bbb',
+    aa: 1,
+    bb: 'bbb3',
+    cc: 'bbb2',
+    dd: 'bbb2',
   },
   {
-    aa: 'aaa',
-    bb: 'bbb',
-    cc: 'ccc',
-    dd: 'ddd',
+    aa: 1,
+    bb: 'ccc2',
+    cc: 'ccc4',
+    dd: 'ccc3',
   },
   {
-    aa: 'aaa',
-    bb: 'bbb',
-    cc: 'ccc',
-    dd: 'ddd',
+    aa: 1,
+    bb: 'ddd4',
+    cc: 'ddd4',
+    dd: 'ddd4',
   },
   {
-    aa: 'aaa',
-    bb: 'bbb',
-    cc: 'ccc',
-    dd: 'ddd',
+    aa: 5,
+    bb: 'eee5',
+    cc: 'eee5',
+    dd: 'eee5',
   }]
 
-  constructor() { }
+  private lstOrderByFields: Array<any>
+
+  constructor() {
+    this.lstOrderByFields = new Array<any>();   
+    this.lstOrderByFields.push({'aa': 'number'})
+    this.lstOrderByFields.push('-bb')
+  }
 
   ngOnInit() {
 
