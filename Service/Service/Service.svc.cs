@@ -8,9 +8,9 @@ namespace Service
     {
         #region User
 
-        public List<User> GetUsersByPermittion(int iPersonId)
+        public List<User> GetUsersByPermittion(int personId)
         {
-            return User.GetUsers(iPersonId);
+            return User.GetUsers(personId);
         }
 
         public User Login(string nvUserName, string nvPassword)
@@ -18,9 +18,9 @@ namespace Service
             return User.Login(nvUserName, nvPassword);
         }
 
-        public void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvMobile, string nvEmail, string nvUserName, string nvPassword, int iPermissionType)
+        public void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvPhone, string nvEmail, string nvUserName, string nvPassword, int iPermissionType)
         {
-            User.SetUser(iPersonId, iUserId, nvLastName, nvFirstName, nvMobile, nvEmail, nvUserName, nvPassword, iPermissionType);
+            User.SetUser(iPersonId, iUserId, nvLastName, nvFirstName, nvPhone, nvEmail, nvUserName, nvPassword, iPermissionType);
         }
 
         #endregion
@@ -103,5 +103,32 @@ namespace Service
         //{
         //    return Yeshivot.AddYeshiva();
         //}
+        #region Student
+
+        public List<Student> GetStudentList(int iUserId)
+        {
+            return Student.GetStudentList(iUserId);
+        }
+
+
+
+        public bool AddStudent(Student student,int iUserId)
+        {
+            return Student.AddStudent(student, iUserId);
+        }
+
+
+        public bool UpdateStudent(Student student, int iUserId)
+        {
+            return Student.UpdateStudent(student, iUserId);
+        }
+
+
+        public bool UpdateStatusStudent(int iPersonId, int iStatusType)
+        {
+            return Student.UpdateStatusStudent(iPersonId, iStatusType);
+        }
+        #endregion
+
     }
 }
