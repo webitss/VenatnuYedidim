@@ -79,7 +79,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool UpdateStudent(Student student, int iUserId)
+        bool UpdateStudent(Student student, int iUserId);
 
 
 
@@ -90,7 +90,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool UpdateStatusStudent(int iPersonId, int iStatusType)
+        bool UpdateStatusStudent(int iPersonId, int iStatusType);
 
         #endregion Student
 
