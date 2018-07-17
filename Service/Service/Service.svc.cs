@@ -29,10 +29,10 @@ namespace Service
 
         public List<Avrech> GetAllAvrechim(int? iPersonId)
         {
-            return Avrech.GetAvrechim(iPersonId);
+            return Avrech.GetAllAvrechim(iPersonId);
         }
 
-<<<<<<< HEAD
+
         public bool AddEvent(Event oEvent)
         {
             return Event.AddEvent(oEvent);
@@ -43,7 +43,7 @@ namespace Service
             return Event.GetEventsList(iUserId);
         }
 
-=======
+
         public List<Student> GetAvrechStudents(int iPersonId)
         {
             return Avrech.GetAvrechStudents(iPersonId);
@@ -54,9 +54,14 @@ namespace Service
             return Avrech.GetAvrechById(iPersonId);
         }
 
+
+        public List<Conversation> GetConversations(int iPersonId)
+        {
+            return Conversation.GetConversations(iPersonId);
+        }
+
         #endregion
 
->>>>>>> 41451d74e73ad3601800b86b7f547cfb53c20335
         #region files
 
         public string SaveFileByBase64(string base64File, string fileName)
@@ -64,8 +69,38 @@ namespace Service
             return Fileshandler.SaveFileByBase64(base64File, fileName);
         }
 
+
         #endregion
+        #region SysTableRow
+        public List<SysTableRow> GetValues(int iSysTableId)
+        {
+            return SysTableRow.GetValues(iSysTableId);
+        }
+        #endregion
+
+        #region SysTables
+
+        //public List<SysTables> GetAllNames(int iSysTableId)
+        //{
+        //    return SysTables.GetAllNames();
+        //}
+
+        #endregion
+
+        #region Conversation
+        public List<Conversation> GetConversations(int? iPersonId)
+        {
+            return Conversation.GetConversations(iPersonId);
+        }
+
+        #endregion
+
+
+
+
+        //public bool AddYeshiva(Yeshivot yeshiva)
+        //{
+        //    return Yeshivot.AddYeshiva();
+        //}
     }
-
-
 }

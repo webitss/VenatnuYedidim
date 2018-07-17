@@ -43,6 +43,7 @@ import { SettingsReportsComponent } from './components/settings-reports/settings
 import { SettingsYeshivotComponent } from './components/settings-yeshivot/settings-yeshivot.component';
 import { SettingsDocumentsComponent } from './components/settings-documents/settings-documents.component';
 import { SettingsFrontendComponent } from './components/settings-frontend/settings-frontend.component';
+import { NewYeshivaComponent } from './components/new-yeshiva/new-yeshiva.component';
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
 import { StudentConversationComponent } from './components/student-conversation/student-conversation.component';
 import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
@@ -87,6 +88,7 @@ import { StudentMeetingDetailsComponent } from './components/student-meeting-det
     SettingsYeshivotComponent,
     SettingsDocumentsComponent,
     SettingsFrontendComponent,
+    NewYeshivaComponent,
     VyMultySelectComponent,
     StudentConversationComponent,
     StudentConversationDetailsComponent,
@@ -98,6 +100,7 @@ import { StudentMeetingDetailsComponent } from './components/student-meeting-det
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot([
+     // { path: "", component: StudentsComponent },
       { path: "students", component: StudentsComponent },
       {
         path: "students/student/:iPersonId", component: StudentComponent,
@@ -146,7 +149,10 @@ import { StudentMeetingDetailsComponent } from './components/student-meeting-det
           { path: "", component: SettingsCodeTableComponent },
           { path: "settings-code-tables", component: SettingsCodeTableComponent },
           { path: "settings-reports", component: SettingsReportsComponent },
-          { path: "settings-yeshivot", component: SettingsYeshivotComponent },
+          { path: "settings-yeshivot", component: SettingsYeshivotComponent,
+        children: [
+          { path:"new-yeshiva", component:NewYeshivaComponent}
+          ] },
           { path: "settings-documents", component: SettingsDocumentsComponent },
           { path: "settings-frontend", component: SettingsFrontendComponent },
         ]

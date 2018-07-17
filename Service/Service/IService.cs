@@ -20,9 +20,9 @@ namespace Service
         User Login(string nvUserName, string nvPassword);
 
         [OperationContract]
-<<<<<<< HEAD
+
         [WebInvoke(
-            Method = "GET",
+            Method = "POST",
             UriTemplate = "GetEventsList",
             BodyStyle = WebMessageBodyStyle.WrappedRequest,
             ResponseFormat = WebMessageFormat.Json,
@@ -30,8 +30,7 @@ namespace Service
         List<Event> GetEventsList(int iUserId);
 
         [OperationContract]
-=======
->>>>>>> 41451d74e73ad3601800b86b7f547cfb53c20335
+
         [WebInvoke(
            Method = "POST",
            UriTemplate = "GetUsersByPermittion",
@@ -71,6 +70,15 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         Avrech GetAvrechById(int? iPersonId);
 
+        //[OperationContract]
+        //[WebInvoke(
+        //   Method = "POST",
+        //   UriTemplate = "GetConversations",
+        //   BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //   ResponseFormat = WebMessageFormat.Json,
+        //   RequestFormat = WebMessageFormat.Json)]
+        //List<Conversation> GetConversations(int iPersonId);
+
         #endregion
 
         [OperationContract]
@@ -82,6 +90,7 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Student> GetAvrechStudents(int iPersonId);
 
+
         [OperationContract]
         [WebInvoke(
         Method = "POST",
@@ -90,6 +99,18 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         bool AddEvent(Event oEvent);
+
+        #region Conversation
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetConversations",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Conversation> GetConversations(int? iPersonId);
+
+        #endregion Conversation
 
         #region files
 
@@ -103,5 +124,37 @@ namespace Service
         string SaveFileByBase64(string base64File, string fileName);
 
         #endregion
+
+        #region SysTableRow
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetValues",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<SysTableRow> GetValues(int iSysTableId);
+
+        #endregion
+        #region SysTables
+        //[OperationContract]
+        //[WebInvoke(
+        //Method = "GET",
+        //UriTemplate = "GetAllNames",
+        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //ResponseFormat = WebMessageFormat.Json,
+        //RequestFormat = WebMessageFormat.Json)]
+        //List<SysTableRow> GetAllNames();
+
+        #endregion
+
+        //[OperationContract]
+        //[WebInvoke(
+        //Method = "POST",
+        //UriTemplate = "AddYeshiva",
+        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //ResponseFormat = WebMessageFormat.Json,
+        //RequestFormat = WebMessageFormat.Json)]
+        //bool AddYeshiva(Yeshivot yeshiva);
     }
 }
