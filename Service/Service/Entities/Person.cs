@@ -36,5 +36,9 @@ namespace Service.Entities
         public Dictionary<string, string> lstObject { get; set; }
 
         #endregion
+
+        //Person() {
+        //    lstObject = new Dictionary<string, string>();
+        //}
     }
 }
