@@ -25,6 +25,33 @@ namespace Service
 
         #endregion
 
+        #region Student
+
+        public List<Student> GetStudentList(int iUserId)
+        {
+            return Student.GetStudentList(iUserId);
+        }
+
+
+
+        public bool AddStudent(Student student, int iUserId)
+        {
+            return Student.AddStudent(student, iUserId);
+        }
+
+
+        public bool UpdateStudent(Student student, int iUserId)
+        {
+            return Student.UpdateStudent(student, iUserId);
+        }
+
+
+        public bool UpdateStatusStudent(int iPersonId, int iStatusType)
+        {
+            return Student.UpdateStatusStudent(iPersonId, iStatusType);
+        }
+        #endregion
+
         #region Avrech
 
         public List<Avrech> GetAllAvrechim(int? iPersonId)
@@ -103,32 +130,7 @@ namespace Service
         //{
         //    return Yeshivot.AddYeshiva();
         //}
-        #region Student
-
-        public List<Student> GetStudentList(int iUserId)
-        {
-            return Student.GetStudentList(iUserId);
-        }
-
-
-
-        public bool AddStudent(Student student,int iUserId)
-        {
-            return Student.AddStudent(student, iUserId);
-        }
-
-
-        public bool UpdateStudent(Student student, int iUserId)
-        {
-            return Student.UpdateStudent(student, iUserId);
-        }
-
-
-        public bool UpdateStatusStudent(int iPersonId, int iStatusType)
-        {
-            return Student.UpdateStatusStudent(iPersonId, iStatusType);
-        }
-        #endregion
+      
 
     }
 }

@@ -50,6 +50,31 @@ namespace Service
 
         #endregion
 
+        #region Student
+        [OperationContract]
+        [WebInvoke(
+         Method = "POST",
+         UriTemplate = "GetStudentList",
+         BodyStyle = WebMessageBodyStyle.WrappedRequest,
+         ResponseFormat = WebMessageFormat.Json,
+         RequestFormat = WebMessageFormat.Json)]
+         List<Student> GetStudentList(int iUserId);
+
+
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "AddStudent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool AddStudent(Student student, int iUserId);
+
+
+        #endregion Student
+
+
         #region Avrech
 
         [OperationContract]
@@ -180,4 +205,5 @@ namespace Service
         //RequestFormat = WebMessageFormat.Json)]
         //bool AddYeshiva(Yeshivot yeshiva);
     }
+
 }
