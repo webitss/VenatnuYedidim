@@ -47,22 +47,68 @@ namespace Service.Entities
                 return null;
             }
         }
-        public static bool DeleteConversation(int iConversationId)
+        //public static bool DeleteConversation(int iConversationId)
+        //{
+        //    try
+        //    {
+        //        SqlParameter parameters=new SqlParameter();
+        //        parameters.Add(new SqlParameter("iConversationId", iConversationId));
+        //        DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters).Tables[0].Rows[0];
+
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.LogError("DeleteConversation / TConversation_DEL", "ex" + ex);
+        //        return false;
+        //    }
+        //}
+        public static bool AddConversation(int iPersonId,Conversation conversation,int iUserId)
         {
+            
             try
             {
-                SqlParameter parameters=new SqlParameter();
-                parameters.Add(new SqlParameter("iConversationId", iConversationId));
-                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters).Tables[0].Rows[0];
+                List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
+                parameters.Add(new SqlParameter("iPersonId",iPersonId));
+                parameters.Add(new SqlParameter("iConversationType",conversation.iConversationType));
+                parameters.Add(new SqlParameter("iConversationType", conversation.dConversationDate));
+                parameters.Add(new SqlParameter("iConversationType", conversation.dtConversationTime));
+                parameters.Add(new SqlParameter("iConversationType", conversation.nvConversationSummary));
+                parameters.Add(new SqlParameter("iConversationType", conversation.dtNextConversationDate));
+                parameters.Add(new SqlParameter("iConversationType", conversation.iConversationType));
 
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters).Tables[0].Rows[0];
                 return true;
             }
             catch (Exception ex)
             {
-                Log.LogError("DeleteConversation / TConversation_INS", "ex" + ex);
+                Log.LogError("AddConversation / TConversation_INS", "ex" + ex);
                 return false;
             }
         }
+        //public static bool AddConversation(int iPersonId, Conversation conversation, int iUserId)
+        //{
+
+        //    try
+        //    {
+        //        List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
+        //        parameters.Add(new SqlParameter("iPersonId", iPersonId));
+        //        parameters.Add(new SqlParameter("iConversationType", conversation.iConversationType));
+        //        parameters.Add(new SqlParameter("iConversationType", conversation.dConversationDate));
+        //        parameters.Add(new SqlParameter("iConversationType", conversation.dtConversationTime));
+        //        parameters.Add(new SqlParameter("iConversationType", conversation.nvConversationSummary));
+        //        parameters.Add(new SqlParameter("iConversationType", conversation.dtNextConversationDate));
+        //        parameters.Add(new SqlParameter("iConversationType", conversation.iConversationType));
+
+        //        DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters).Tables[0].Rows[0];
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.LogError("AddConversation / TConversation_INS", "ex" + ex);
+        //        return false;
+        //    }
+        //}
 
 
 

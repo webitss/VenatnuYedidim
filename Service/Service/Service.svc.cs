@@ -8,9 +8,9 @@ namespace Service
     {
         #region User
 
-        public List<User> GetUsersByPermittion(int personId)
+        public List<User> GetUsersByPermittion(int iPersonId)
         {
-            return User.GetUsers(personId);
+            return User.GetUsers(iPersonId);
         }
 
         public User Login(string nvUserName, string nvPassword)
@@ -18,9 +18,9 @@ namespace Service
             return User.Login(nvUserName, nvPassword);
         }
 
-        public void SetUser(int iPersonId, int iUserId, string nvLastName, string nvFirstName, string nvPhone, string nvEmail, string nvUserName, string nvPassword, int iPermissionType)
+        public void SetUser(User user)
         {
-            User.SetUser(iPersonId, iUserId, nvLastName, nvFirstName, nvPhone, nvEmail, nvUserName, nvPassword, iPermissionType);
+            User.SetUser(user);
         }
 
         #endregion
@@ -31,7 +31,6 @@ namespace Service
         {
             return Student.GetStudentList(iUserId);
         }
-
 
 
         public bool AddStudent(Student student, int iUserId)
@@ -54,33 +53,19 @@ namespace Service
 
         #region Avrech
 
+        //public bool AddEvent(Event oEvent)
+        //{
+        //    return Event.AddEvent(oEvent);
+        //}
+
+        //public List<Event> GetEventsList(int iUserId)
+        //{
+        //    return Event.GetEventsList(iUserId);
+        //}
+
         public List<Avrech> GetAllAvrechim(int? iPersonId)
         {
             return Avrech.GetAllAvrechim(iPersonId);
-        }
-
-
-
-      public bool UpdateAvrech(Avrech avrech)
-    {
-        return avrech.UpdateAvrech(avrech);
-    }
-
-
-        public bool AddEvent(Event oEvent)
-        {
-            return Event.AddEvent(oEvent);
-        }
-
-        public List<Event> GetEventsList(int iUserId)
-        {
-            return Event.GetEventsList(iUserId);
-        }
-
-
-        public List<Student> GetAvrechStudents(int iPersonId)
-        {
-            return Avrech.GetAvrechStudents(iPersonId);
         }
 
         public Avrech GetAvrechById(int? iPersonId)
@@ -88,14 +73,23 @@ namespace Service
             return Avrech.GetAvrechById(iPersonId);
         }
 
-
-        public List<Conversation> GetConversations(int iPersonId)
+        public bool UpdateAvrech(Avrech avrech)
         {
-            return Conversation.GetConversations(iPersonId);
+            return avrech.UpdateAvrech(avrech);
+        }
+
+        public List<Student> GetAvrechStudents(int iPersonId)
+        {
+            return Avrech.GetAvrechStudents(iPersonId);
         }
 
         #endregion
 
+        #region Conversation
+        public List<Conversation> GetConversations(int? iPersonId)
+        {
+            return Conversation.GetConversations(iPersonId);
+        }
 
         #region files
 
@@ -106,20 +100,16 @@ namespace Service
 
 
         #endregion
+
+
+        #endregion
+
         #region SysTableRow
         public List<SysTableRow> GetValues(int iSysTableId)
         {
             return SysTableRow.GetValues(iSysTableId);
         }
         #endregion
-
-
-        public List<SysTables> GetAllNames(int iSysTableId)
-        {
-            return SysTables.GetAllNames();
-        }
-
-
 
         #region SysTables
 
@@ -130,37 +120,21 @@ namespace Service
 
         #endregion
 
-        #region Conversation
-        public List<Conversation> GetConversations(int? iPersonId)
-        {
-            return Conversation.GetConversations(iPersonId);
-        }
 
-        #endregion
+        #region yeshivot
 
-    }
+        //public List<Yeshivot> GetAllYeshivot(int iYeshivaId)
+        //{
+        //    return Yeshivot.GetAllYeshivot(iYeshivaId);
+        //}
 
-    #region yeshivot
 
-    //public List<Yeshivot> GetAllYeshivot(int iYeshivaId)
-    //{
-    //    return Yeshivot.GetAllYeshivot(iYeshivaId);
-    //}
-
-<<<<<<< HEAD
-    //public bool AddYeshiva(Yeshivot yeshiva)
-    //{
-    //    return Yeshivot.AddYeshiva(yeshiva);
-    //}
-
-    #endregion
-=======
         //public bool AddYeshiva(Yeshivot yeshiva)
         //{
-        //    return Yeshivot.AddYeshiva();
+        //    return Yeshivot.AddYeshiva(yeshiva);
         //}
-      
 
+        #endregion
+        //}
     }
->>>>>>> d05fe88de41e0a879fe58978135df662d1ce12dd
 }
