@@ -32,6 +32,18 @@ namespace Service
             return Avrech.GetAllAvrechim(iPersonId);
         }
 
+
+        public bool AddEvent(Event oEvent)
+        {
+            return Event.AddEvent(oEvent);
+        }
+
+        public List<Event> GetEventsList(int iUserId)
+        {
+            return Event.GetEventsList(iUserId);
+        }
+
+
         public List<Student> GetAvrechStudents(int iPersonId)
         {
             return Avrech.GetAvrechStudents(iPersonId);
@@ -44,7 +56,6 @@ namespace Service
 
 
         #endregion
-
 
         #region files
 
@@ -62,8 +73,11 @@ namespace Service
         }
         #endregion
 
+<<<<<<< HEAD
         //#region SysTables
 
+=======
+>>>>>>> 510478dabe485e544355be4c5d7fcfca0dfb3f1f
         #region SysTables
 
         //public List<SysTables> GetAllNames(int iSysTableId)
@@ -71,9 +85,16 @@ namespace Service
         //    return SysTables.GetAllNames();
         //}
 
+<<<<<<< HEAD
         //#endregion
 
         #endregion
+=======
+
+
+        #endregion
+
+>>>>>>> 510478dabe485e544355be4c5d7fcfca0dfb3f1f
         #region Conversation
         public List<Conversation> GetConversations(int iPersonId)
         {
@@ -82,10 +103,12 @@ namespace Service
 
         #endregion
 
-    }
 
-    //public bool AddYeshiva(Yeshivot yeshiva)
-    //{
-    //    return Yeshivot.AddYeshiva();
-    //}
+
+
+        //public bool AddYeshiva(Yeshivot yeshiva)
+        //{
+        //    return Yeshivot.AddYeshiva();
+        //}
+    }
 }
