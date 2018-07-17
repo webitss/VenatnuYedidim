@@ -8,13 +8,22 @@ import {Conversation} from '../../classes/conversation';
   styleUrls: ['./student-conversations.component.css']
 })
 export class StudentConversationsComponent implements OnInit {
-
-  constructor(private appProxy:AppProxy) { }
   id:number=1;
   conversations:Conversation[];
 
+  constructor(private appProxy:AppProxy) { }
+  
+
   ngOnInit() {
-    this.appProxy.post("GetConversations",{iPersonId:this.id});
+  this.appProxy.post("GetConversations",{iPersonId:this.id})
+  .then(
+    data=>{
+      this.conversations=data;
+    }).catch(err=>{
+    alert(err);
+    });
   }
+  
+   
 
 }

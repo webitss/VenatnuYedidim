@@ -32,7 +32,7 @@ namespace Service.Entities
 
         #endregion
 
-        public static List<Conversation> GetConversations(int iPersonId)
+        public static List<Conversation> GetConversations(int? iPersonId)
         {
             try
             {
@@ -48,35 +48,6 @@ namespace Service.Entities
         }
       
       
-        //public static List<Student> GetStudentList()
-        //{
-        //    try
-        //    {
-        //        DataTable dt = SqlDataAccess.ExecuteDatasetSP("TStudent_SLCT").Tables[0];                
-        //        List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(dt.Rows);
-        //        return students;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.LogError("GetStudentList / TStudent_SLCT", "ex" + ex);
-        //        return null;
-        //    }
-        //}
-
-        //public static bool AddStudent(Student student)
-        //{
-        //    try
-        //    {
-        //        ///ObjectGenerator<Student>.GetSqlParametersFromObject(student)
-        //        SqlDataAccess.ExecuteDatasetSP("TStudent_INS");
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.LogError("AddStudent / TStudent_INS", "ex" + ex);
-        //        return false;
-        //    }
-        //}
       
     }
 }

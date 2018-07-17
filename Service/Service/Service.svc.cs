@@ -72,7 +72,13 @@ namespace Service
         //    return SysTables.GetAllNames();
         //}
         #endregion
+        #region Conversation
+        public List<Conversation> GetConversations(int? iPersonId)
+        {
+            return Conversation.GetConversations(iPersonId);
+        }
 
+        #endregion
 
     }
 
