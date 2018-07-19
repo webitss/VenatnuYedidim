@@ -24,8 +24,8 @@ namespace Service.Entities
         public string nvPlace { get; set; }
         [DataMember]
         public string nvComments { get; set; }
-        //[DataMember]
-        //public int iCreatedByUserId { get; set; }
+        [DataMember]
+        public int iCreatedByUserId { get; set; }
         //[DataMember]
         //public DateTime? dtCreatedate { get; set; }
         //[DataMember]
@@ -52,12 +52,13 @@ namespace Service.Entities
             }
         }
 
-        public static bool AddEvent(Event1 addEvent)
+        public static bool AddEvent(Event1 addEvent, int iUserId)
         {
             try
             {
                 //addEvent.dtEventDate = DateTime.Today;
                 List<SqlParameter> parameters = ObjectGenerator<Event1>.GetSqlParametersFromObject(addEvent);
+                parameters.Add(new SqlParameter("iCreatedByUserId", iUserId));
                 SqlDataAccess.ExecuteDatasetSP("TEvent_INS", parameters);
                 return true;
             }
