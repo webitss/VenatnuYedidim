@@ -11,13 +11,13 @@ import { StudentConversationDetailsComponent } from '../student-conversation-det
 })
 export class StudentConversationsComponent implements OnInit {
 
-  iPersonId: number = 7;
+  protected iPersonId: number = 7;
   protected conversationsList: Array<Conversation> = new Array<Conversation>();
-  conversation: Conversation;
+  protected conversationSelect: Conversation;
   constructor(private appProxy: AppProxy) { }
 
   newConversation() {
-    this.conversation = new Conversation();
+    this.conversationSelect = new Conversation();
   }
 
 

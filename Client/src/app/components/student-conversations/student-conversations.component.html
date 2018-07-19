@@ -7,13 +7,13 @@
 <span>{{conver.conversationSummary}}</span>
 
         </div>
-        <button name="UpdateConversation" (click)="conversation=conver">ערוך שיחה</button>
+        <button name="UpdateConversation" (click)="conversationSelect=conver">ערוך שיחה</button>
         <button name="delete" (click)="deleteConversation(1,1)" >מחק שיחה</button>
        
     </li>
  </ul>
 
 
-<div *ngIf="conversation!=null">
-<app-student-conversation-details [conversation]=conversatoin></app-student-conversation-details>
+<div *ngIf="conversationSelect!=null">
+<app-student-conversation-details [conversation]=conversationSelect></app-student-conversation-details>
 </div>
