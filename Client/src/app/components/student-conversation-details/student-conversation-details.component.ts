@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
@@ -10,18 +10,22 @@ import { Conversation } from '../../classes/conversation';
 })
 export class StudentConversationDetailsComponent implements OnInit {
   private sub: any;
-  conversationId:number;
+  @Input()
+  protected iConversationId:number;
+
+
+  //conversationId:number;
   conversations:Conversation[];
-  conversationType:number;
-    conversationDate:Date;
-    conversationDateTime:Date;
-    conversationSummary:string;
-    NextconversationDate:Date;
+  // conversationType:number;
+  //   conversationDate:Date;
+  //   conversationDateTime:Date;
+  //   conversationSummary:string;
+  //   NextconversationDate:Date;
   constructor(private route:ActivatedRoute,private appProxy:AppProxy) { }
 
   addConversation(iPersonId:number)
   {
-    this.appProxy.post("GetConversations",{iPersonId:iPersonId})
+    this.appProxy.post("GetConversations",{iPersonId:iPersonId,})
   .then(
     data=>{
       this.conversations=data;
@@ -34,7 +38,7 @@ export class StudentConversationDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.sub=this.route.params.subscribe(params=>{
-      this.conversationId=+params['iMeetingId'];
+      this.iConversationId=+params['conversationId'];
     });
    }
    ngOnDestroy() {

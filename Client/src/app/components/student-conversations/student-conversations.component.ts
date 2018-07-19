@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import {Conversation} from '../../classes/conversation';
+
+import {StudentConversationDetailsComponent} from '../student-conversation-details/student-conversation-details.component';
 
 @Component({
   selector: 'app-student-conversations',
@@ -8,9 +10,10 @@ import {Conversation} from '../../classes/conversation';
   styleUrls: ['./student-conversations.component.css']
 })
 export class StudentConversationsComponent implements OnInit {
+  
   id:number=1;
   conversations:Conversation[];
-
+  conversationId:number;
   constructor(private appProxy:AppProxy) { }
   deleteConversation(iConversationId:number,iUserId:number)
   {
