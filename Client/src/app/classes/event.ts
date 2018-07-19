@@ -9,4 +9,5 @@ export class Event1 {
     iLastModifyUserId:number;
     dtLastModifyDate:Date;
     bSysRowStatus:boolean;
+
 }
