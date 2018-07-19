@@ -36,4 +36,5 @@ export class Student implements Person {
     dtAddStudentDate:Date;
     nvComment:string;
     
+    constructor(){}
 }

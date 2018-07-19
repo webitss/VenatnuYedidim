@@ -56,6 +56,9 @@ namespace Service.Entities
                 List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
                 return students;
             }
+
+   
+
             catch (Exception ex)
             {
                 Log.LogError("GetStudentList / TStudentGetStudentByUser_SLCT", "ex" + ex);
