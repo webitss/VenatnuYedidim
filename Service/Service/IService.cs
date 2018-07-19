@@ -8,6 +8,19 @@ namespace Service
     [ServiceContract]
     public interface IService
     {
+        #region Person
+
+        [OperationContract]
+        [WebInvoke(
+           Method = "POST",
+           UriTemplate = "GetPersonById",
+           BodyStyle = WebMessageBodyStyle.WrappedRequest,
+           ResponseFormat = WebMessageFormat.Json,
+           RequestFormat = WebMessageFormat.Json)]
+        Person GetPersonById(int iPersonId);
+        #endregion
+
+
         #region User
 
         [OperationContract]
@@ -143,10 +156,11 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Person> GetAvrechStudents(int iPersonId);
+        List<Student> GetAvrechStudents(int iPersonId);
 
         #endregion
 
+        #region events
         [OperationContract]
         [WebInvoke(
         Method = "POST",
@@ -154,7 +168,8 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool AddEvent(Event oEvent);       
+        bool AddEvent(Event1 addEvent);
+        #endregion
 
         #region Meeting
 
@@ -283,11 +298,11 @@ namespace Service
 
         [OperationContract]
         [WebInvoke(
-      Method = "POST",
-      UriTemplate = "DeleteConversations",
-      BodyStyle = WebMessageBodyStyle.WrappedRequest,
-      ResponseFormat = WebMessageFormat.Json,
-      RequestFormat = WebMessageFormat.Json)]
+          Method = "POST",
+          UriTemplate = "DeleteConversations",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
         bool DeleteConversations(int iConversationId, int iUserId);
 
         #endregion Conversation

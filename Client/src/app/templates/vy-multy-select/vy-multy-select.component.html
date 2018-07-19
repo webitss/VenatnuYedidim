@@ -1,0 +1,16 @@
+<div style="height: 1px00; width: 300px;">
+  <div style="border: 1px solid black; width: 100px; height: 25px;" (click)="flag=!flag; openOrClose()"></div>
+  <div class="hebrew" *ngIf="flag==true">
+    <div>
+      <input type="checkbox" value="selectAll" class="hebrew" [(ngModel)]="checkboxValueSelectAll" checked (change)="selectAll()">בחר הכל</div>
+    <div>
+      <!-- name="selectAll" id="selectAll"-->
+      <input type="text" placeholder="חפש" [(ngModel)]="search" style="border: 1px solid black;"/>
+    </div>
+    <div *ngFor="let item of fullList|filter:search">
+      <input type="checkbox" class="hebrew" [(ngModel)]="item['bMultySelectChecked']">
+      <!--(change)="select(i)"-->
+      <span class="hebrew">{{item.nvFirstName}}  {{item.nvLastName}}  {{item.nvIdentityCard}}</span>
+    </div>
+  </div>
+</div>

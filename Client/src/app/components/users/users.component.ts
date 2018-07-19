@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { user } from '../../classes/user';
+import { User } from '../../classes/user';
 import { AppProxy } from '../../services/app.proxy';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -10,10 +11,7 @@ import { AppProxy } from '../../services/app.proxy';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy) { }
-
-  users: user[];
-  id:number;
+  constructor(private appProxy: AppProxy, private router: Router) { }
 
   ngOnInit() {
     this.id=1;
@@ -26,4 +24,10 @@ export class UsersComponent implements OnInit {
        });
   }
 
+  users: User[];
+  id:number;
+
+  editUser(u: User){
+    this.router.navigate(['users/user/',u.iPersonId]);
+  }
 }

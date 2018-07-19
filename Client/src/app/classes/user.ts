@@ -1,4 +1,4 @@
-export class user {
+export class User {
     iPersonId: number;
     nvUserName: string;
     nvPassword: string;

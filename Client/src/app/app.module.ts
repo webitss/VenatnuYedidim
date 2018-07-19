@@ -4,12 +4,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from "@angular/http";
 import { RouterModule, Route } from '@angular/router';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
+//import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 //--- templates ---
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
 import { VyTableFilterPipe } from './templates/vy-table/vy-table-filter.pipe';
 import { VyTableOrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
+
+//--- Pipes ---
+import { FilterPipe } from './pipes/filter.pipe';
 
 //--- services ---
 import { AppProxy } from './services/app.proxy';
@@ -59,6 +62,9 @@ import { SysTableService } from './services/sys-table.service';
     VyTableComponent,
     VyTableFilterPipe,
     VyTableOrderByPipe,
+
+    // pipes
+    FilterPipe,
 
     //components
     AppComponent,

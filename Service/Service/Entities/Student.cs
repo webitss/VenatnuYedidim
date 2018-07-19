@@ -20,7 +20,7 @@ namespace Service.Entities
         [DataMember]
         public string nvBirthdate { get; set; }
         [DataMember]
-        public DateTime dtBirthdate { get; set; }
+        public DateTime? dtBirthdate { get; set; }
         [DataMember]
         public string nvFatherDeathDate { get; set; }
         [DataMember]
