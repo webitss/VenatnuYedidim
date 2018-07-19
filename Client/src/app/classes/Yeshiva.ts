@@ -1,16 +1,16 @@
 export class Yeshiva{
-    iYeshivaId:number;
-    nvYeshivaName:string;
-    nvAddress:string;
-    nvCity:string;
-    nvContact:string;
-    nvRoleType:string;
-    nvEmail:string;
-    nvMobile:string;
-    iCreatedByUserId:number;
-    dtCreatedate:Date;	
-    iLastModifyUserId:number;
-    dtLastModifyDate:Date;
-    bSysRowStatus:boolean;
-    nvStatus:String;
+  private iYeshivaId:number;
+  private nvYeshivaName:string;
+  private nvAddress:string;
+  private nvCity:string;
+  private nvContact:string;
+  private nvRoleType:string;
+  private nvEmail:string;
+  private nvMobile:string;
+  private iCreatedByUserId:number;
+  private dtCreatedate:Date;	
+  private iLastModifyUserId:number;
+  private dtLastModifyDate:Date;
+  private bSysRowStatus:boolean;
+  private nvStatus:String;
 }

@@ -147,7 +147,7 @@ namespace Service
         bool DeleteAvrechStudent(int iAvrechId, int iStudentId);
         #endregion
 
-        #region student
+    
 
         [OperationContract]
         [WebInvoke(
@@ -156,9 +156,9 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Person> GetAvrechStudents(int iPersonId);
+        List<Student> GetAvrechStudents(int iPersonId);
 
-        #endregion
+
 
         #region events
         [OperationContract]

@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from "@angular/http";
 import { RouterModule, Route } from '@angular/router';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
+//import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 //--- templates ---
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
@@ -55,6 +56,10 @@ import { StudentConversationComponent } from './components/student-conversation/
 import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
 import { StudentMeetingDetailsComponent } from './components/student-meeting-details/student-meeting-details.component';
 import { SysTableService } from './services/sys-table.service';
+
+import { inject } from '@angular/core/testing';
+import { injectElementRef } from '@angular/core/src/render3';
+
 
 @NgModule({
   declarations: [
@@ -119,7 +124,7 @@ import { SysTableService } from './services/sys-table.service';
       {
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
-          { path: "", component: StudentDetailsComponent },
+         //{ path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
           {
             path: "student-meetings", component: StudentMeetingsComponent, children: [

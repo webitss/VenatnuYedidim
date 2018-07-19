@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppProxy } from '../../services/app.proxy';
 
 @Component({
   selector: 'app-settings-documents',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsDocumentsComponent implements OnInit {
 
-  constructor() { }
+  documents: any;
+  constructor(private appProxy:AppProxy) { }
 
   ngOnInit() {
+    this.appProxy.get('GetDocuments').then(data=>this.documents=data
+      ,err=>alert(err));
   }
 
 }

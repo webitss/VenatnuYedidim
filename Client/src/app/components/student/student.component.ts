@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
+import { AppProxy } from '../../services/app.proxy';
+import { Student } from '../../classes/student';
 
 @Component({
   selector: 'app-student',
@@ -11,12 +13,17 @@ export class StudentComponent implements OnInit, OnDestroy {
   private sub: any;
   flag: number;
   protected currentComponent:any;
-  constructor(private route: ActivatedRoute) { }
+
+
+  constructor(private route: ActivatedRoute,private appProxy:AppProxy) { }
   // subscription:Subscription;
   ngOnInit() {
+
+
     this.sub = this.route.params.subscribe(params => {
-      this.flag = +params['iPersonId'];
+    this.flag = +params['iPersonId'];
     });
+   
   }
   onRouterOutletActivate(event) {
     this.currentComponent = event;
@@ -25,6 +32,12 @@ export class StudentComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
+
+
+
+
+
+
 }
 
 

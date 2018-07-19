@@ -30,7 +30,7 @@ export class Student implements Person {
     nvCauseOfDeathFather:string;
     nvCauseOfDeathMother:string;
     nvImgStudent:string
-    nvYeshiva:string
+    nvYeshivaName:string
     nvYeshivaStreet:string
     nvYeshivaCity	:string
     dtAddStudentDate:Date;
