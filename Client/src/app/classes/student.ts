@@ -2,7 +2,7 @@ import { Person } from "./person";
 
 export class Student implements Person {
      iPersonId: number;
-   nvFirstName: String;
+    nvFirstName: String;
     nvLastName: String;
     nvIdentityCard: String;
     nvPhone: String;
@@ -13,7 +13,7 @@ export class Student implements Person {
     nvStatus: String;
     nvMobile: String;
     nvEmail: String;
-
+ 
 
     iStudentId	:number;
     nvBornDate:string;
