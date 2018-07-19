@@ -15,5 +15,6 @@ export class Person{
     bSysRowStatus:boolean;
     nvStatus:String;
 
+    constructor(){}
     
 }
