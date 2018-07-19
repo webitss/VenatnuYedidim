@@ -6,11 +6,22 @@ namespace Service
 {
     public class Service : IService
     {
+        #region Person
+        public Person GetPersonById(int iPersonId)
+        {
+            return Person.GetPersonById(iPersonId);
+        }
+        #endregion
         #region User
 
         public List<User> GetUsersByPermittion(int iPersonId)
         {
             return User.GetUsers(iPersonId);
+        }
+
+        public User GetUserByPersonId(int iPersonId)
+        {
+            return User.GetUserByPersonId(iPersonId);
         }
 
         public User Login(string nvUserName, string nvPassword)
@@ -45,7 +56,7 @@ namespace Service
         }
 
         #endregion
-                       
+
         #region Student
 
         public List<Student> GetStudentList(int iUserId)
@@ -77,17 +88,23 @@ namespace Service
         }
         #endregion
 
-        #region Avrech
+        #region Event1
 
-        public bool AddEvent(Event oEvent)
+        public bool AddEvent(Event1 addEvent)
         {
-            return Event.AddEvent(oEvent);
+            return Event1.AddEvent(addEvent);
         }
 
         //public List<Event> GetEventsList(int iUserId)
         //{
         //    return Event.GetEventsList(iUserId);
         //}
+
+        #endregion
+
+        #region Avrech
+
+
 
         public List<Avrech> GetAllAvrechim(int? iPersonId)
         {
@@ -98,19 +115,25 @@ namespace Service
         {
             return Avrech.GetAvrechById(iPersonId);
         }
+<<<<<<< HEAD
               
         public List<Student> GetAvrechStudents(int iPersonId)
+=======
+
+        public List<Person> GetAvrechStudents(int iPersonId)
+>>>>>>> 88fd167e153d4fd679ddd1203e6053ead0628530
         {
             return Avrech.GetAvrechStudents(iPersonId);
         }
 
-        #endregion
-
-        #region Conversation
-        public List<Conversation> GetConversations(int? iPersonId)
+        public bool DeleteAvrechStudent(int iAvrechId, int iStudentId)
         {
-            return Conversation.GetConversations(iPersonId);
+            return Avrech.DeleteAvrechStudent(iAvrechId, iStudentId);
         }
+
+
+
+        #endregion
 
         #region files
 
@@ -122,11 +145,12 @@ namespace Service
 
         #endregion
 
-
-        #endregion
-
         #region SysTableRow
-       
+        public List<SysTableRow> GetValues(int iSysTableId)
+        {
+
+            return SysTableRow.GetValues(iSysTableId);
+        }
         #endregion
 
         #region SysTables
@@ -137,21 +161,27 @@ namespace Service
         }
 
 
-
-        public List<SysTableRow> GetValues(int iSysTableId)
-        {
-
-            return SysTableRow.GetValues(iSysTableId);
-        }
-
         #endregion
 
         #region Conversation
-       
-        //public bool AddConversations( Conversation conversation, int iUserId)
-        //{
-        //    return Conversation.AddConversations(conversation,iUserId);
-        //}
+
+        public List<Conversation> GetConversations(int? iPersonId)
+        {
+            return Conversation.GetConversations(iPersonId);
+        }
+        public bool AddConversations(Conversation conversation, int iUserId)
+        {
+            return Conversation.AddConversation(conversation, iUserId);
+        }
+        public bool UpdateConversations(Conversation conversation, int iUserId)
+        {
+            return Conversation.UpdateConversation(conversation, iUserId);
+        }
+        public bool DeleteConversations(int iConversationId, int iUserId)
+        {
+            return Conversation.DeleteConversation(iConversationId, iUserId);
+        }
+
         #endregion
 
         #region yeshivot
@@ -161,11 +191,12 @@ namespace Service
             return Yeshivot.GetAllYeshivot(iYeshivaId);
         }
 
-
         public bool AddYeshiva(Yeshivot yeshiva)
         {
             return Yeshivot.AddYeshiva(yeshiva);
         }
+
+        #endregion
     }
-    #endregion
+
 }

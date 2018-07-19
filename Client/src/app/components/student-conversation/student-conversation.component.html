@@ -1,3 +1,7 @@
-<p>
-  student-conversation works!
-</p>
+<div>{{conv.id}}</div>
+
+<button name="UpdateConversation" (click)="conversationId=2">ערוך שיחה</button>
+<button name="delete" (click)="deleteConversation(1,1)" >מחק שיחה</button>
+<div *ngIf="conversationId==2">
+  <app-student-conversation-details  [iConversationId]=conversationId></app-student-conversation-details>
+  </div>
