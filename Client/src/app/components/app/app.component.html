@@ -1,22 +1,22 @@
 <nav class="navbar navbar-expand-sm nav">
   <a class="navbar-brand tital" href="#"><img src="./assets/images/Lighthouse.jpg"></a>
   <ul class="navbar-nav" *ngIf="currentComponent">
-    <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Student') != -1}" class="nav-item   li">
+    <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Student') != -1}" class="nav-item">
       <a class="closed link" routerLink='/students'>תלמידים</a>
     </li>
-    <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Avrechim') != -1}" class="nav-item   li">
+    <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Avrechim') != -1}" class="nav-item">
       <a class="closed link" routerLink='/avrechim'>אברכים</a>
     </li>
-    <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Events') != -1}" class="nav-item li ">
+    <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Events') != -1}" class="nav-item">
       <a class="closed link" routerLink='/events'>ארועים</a>
     </li>
-    <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Graduates') != -1}" class="nav-item  li">
+    <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Graduates') != -1}" class="nav-item">
       <a class="closed link" routerLink='/graduates'>בוגרים</a>
     </li>
-    <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Users') != -1}" class="nav-item   li">
+    <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Users') != -1}" class="nav-item">
       <a class="closed link" routerLink='/users'>משתמשים</a>
     </li>
-    <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Settings') != -1}" class="nav-item   li">
+    <li [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Settings') != -1}" class="nav-item">
       <a class="nav-item link" routerLink='/settings'>הגדרות</a>
     </li>
   </ul>
@@ -38,3 +38,4 @@
 </div> -->
 <!-- <input type="file" value="העלה תמונה" (change)="LoadImage($event,saveFile)"/> -->
 <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
+<app-vy-table></app-vy-table>
