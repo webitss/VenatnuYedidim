@@ -1,4 +1,14 @@
 
 <button class="btn consolidation">איחוד כרטיסים</button>
 <button class="btn newStudent" routerLink="student/0/student-details">תלמיד חדש</button>
-<button class="btn edit" routerLink="student/1/student-details">עריכה </button>
+
+ <button class="btn edit" routerLink="student/1/student-details">עריכה </button>
+
+
+ <div *ngFor="let student of studentList">
+        {{student.nvFirstName}}
+        {{student.nvBirthday}}
+        {{student.dtBirthday}}
+        {{student.nvAddress}}
+        {{student.nvCity}}
+    </div>

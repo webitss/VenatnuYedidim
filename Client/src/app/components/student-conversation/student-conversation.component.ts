@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppProxy } from '../../services/app.proxy';
+import { Conversation } from '../../classes/conversation';
 
 @Component({
   selector: 'app-student-conversation',
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./student-conversation.component.css']
 })
 export class StudentConversationComponent implements OnInit {
+conversation:Conversation;
+  constructor(private appProxy:AppProxy) { }
 
-  constructor() { }
+
+
 
   ngOnInit() {
   }

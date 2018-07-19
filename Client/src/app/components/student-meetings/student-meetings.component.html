@@ -1,9 +1,15 @@
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
 
-<button  routerLink="student-meeting-details/0">הוספת פגישה</button>
-<button routerLink="student-meeting-details/1">עריכה</button>
-<!-- <table>
-    <tr *ngFor=" let meeting of meetingListt.">
-        <th>{{meeting.}}</th>
-    </tr>
-</table> -->
+<button  (click)="meeting=null; flag=1">הוספת פגישה</button>
+
+ <ul>
+     <li *ngFor="let item of meetingList">
+        
+         {{item.nvSummary }} <button (click)="meeting=item; flag=1">עריכה</button>
+
+     </li>
+ </ul>
+
+ <div *ngIf="flag==1">
+    <app-student-meeting-details [meeting]=meeting></app-student-meeting-details> 
+ </div> 

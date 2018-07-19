@@ -1,22 +1,16 @@
-<p>
-  vy-multy-select works!
-</p>
-<<<<<<< HEAD
-<select>
- <!-- <option *ngFor=myList></option>-->
-</select>
-=======
-<div style="border: 1px solid black; width: 100px; height: 25px;" (click)="flag=!flag; aaa()" class="a"></div>
-  <div *ngIf="flag==true" dir="rtl">
+<div style="height: 1px00; width: 300px;">
+  <div style="border: 1px solid black; width: 100px; height: 25px;" (click)="flag=!flag; openOrClose()"></div>
+  <div class="hebrew" *ngIf="flag==true">
     <div>
-      <input type="checkbox" value="selectAll" [(ngModel)]="checkboxValueSelectAll" checked  (change)="selectAll()">בחר הכל</div>
+      <input type="checkbox" value="selectAll" class="hebrew" [(ngModel)]="checkboxValueSelectAll" checked (change)="selectAll()">בחר הכל</div>
     <div>
-       <!-- name="selectAll" id="selectAll"-->
-      <input type="text" placeholder="חפש" style="border: 1px solid black">
+      <!-- name="selectAll" id="selectAll"-->
+      <input type="text" placeholder="חפש" [(ngModel)]="search" style="border: 1px solid black;"/>
     </div>
-    <div *ngFor="let item of fullList; let i=index">
-      <input type="checkbox" [(ngModel)]="item['bChecked']" (change)="select(i)"> 
-      {{item.mane}}
+    <div *ngFor="let item of fullList|filter:search">
+      <input type="checkbox" class="hebrew" [(ngModel)]="item['bMultySelectChecked']">
+      <!--(change)="select(i)"-->
+      <span class="hebrew">{{item.nvFirstName}}  {{item.nvLastName}}  {{item.nvIdentityCard}}</span>
     </div>
+  </div>
 </div>
->>>>>>> 41451d74e73ad3601800b86b7f547cfb53c20335

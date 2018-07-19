@@ -1,24 +1,31 @@
 
+<div *ngIf="iConversationId==1">
+<h2>הוספה</h2>
+</div>
+<div *ngIf="iConversationId==2">
+  <h2>עריכה</h2>
+  </div>
 <div>
     <div>
       <label for="conversationType">סוג שיחה</label>
-      <input type="text" name="conversationType"/>
+      <input type="text" name="conversationType" [(ngModel)]="conversation.conversationType"/>
     </div>
+    
     <div>
       <label for="conversationDate">תאריך</label>
-      <input type="date" name="conversationDate"/>
+      <input type="date" name="conversationDate" [(ngModel)]="conversation.conversationDate"/>
     </div>
     <div>
       <label for="conversationDateTime">שעה</label>
-      <input type="datetime" name="conversationDateTime"/>
+      <input type="date" name="conversationDateTime"  [(ngModel)]="conversation.conversationDateTime"/>
     </div>
     <div>
       <label for="conversationSummary">סיכום</label>
-      <input type="text" name="conversationSummary"/>
+      <input type="text" name="conversationSummary" [(ngModel)]="conversation.conversationSummary"/>
     </div>
     <div>
        <label for="NextconversationDate">תאריך ליצירת קשר פעם הבאה</label>
-       <input type="datetime" name="NextconversationDate"/>
+       <input type="date" name="NextconversationDate" [(ngModel)]="conversation.NextconversationDate"/>
     </div>
-    <input type="button" name="save" value="=שמירה"/>
+    <input type="button" name="save" value="שמירה" (click)="addConversation()"/>
   </div>

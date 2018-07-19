@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Student } from '../../classes/student';
@@ -9,10 +9,31 @@ import { Student } from '../../classes/student';
   styleUrls: ['./avrech-students.component.css']
 })
 export class AvrechStudentsComponent implements OnInit {
-
+  @Output()
+  flag: boolean = false;
   id: number;
-  students:Student[];
-  constructor(private activatedRoute: ActivatedRoute,private appProxy:AppProxy) { }
+  students: Student[];
+  //מסוג סטודנט עם שליפה מהסרביס
+  allStudents: any[] = [{ iPersonId: 1,nvFirstName: "chaim",nvLastName: "choen",nvIdentityCard:"123456789"},
+  { iPersonId:2,nvFirstName: "yeoda",nvLastName: "levi",nvIdentityCard:"987654321"},
+  { iPersonId: 3,nvFirstName: "pinchas",nvLastName: "lev",nvIdentityCard:"147258369"},
+  { iPersonId: 4,nvFirstName: "rafi",nvLastName: "catz",nvIdentityCard:"963852741"},
+  { iPersonId: 5,nvFirstName: "asher",nvLastName: "green",nvIdentityCard:"741852963"}];
+  studentsToAdd: Array<any> = new Array<any>();
+  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy) {
+    
+   }
+
+  cancelAdd() {
+    this.flag = false;
+  }
+  saveAdd() {
+    debugger;
+    //לקבל את הרשימה המסוננת
+    let d = this.studentsToAdd;
+    this.flag=false;
+  }
+
 
   ngOnInit() {
     this.activatedRoute.parent.params.subscribe(params => {

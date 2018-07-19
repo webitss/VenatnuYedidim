@@ -1,13 +1,13 @@
 .control {
-width: 150px;
-height: 25px;
-list-style-type: none;
-float: right;
-margin-right: 5%;
-color: white;
-text-align: center;
-font-size: 15px;
-
+    width: 150px;
+    height: 25px;
+    list-style-type: none;
+    /* float: right; */
+    margin-right: 5%;
+    color: #808080;
+    text-align: center;
+    font-size: 15px;
+    /* display: inline-block; */
 }
 navbar-nav{
     float: right;
