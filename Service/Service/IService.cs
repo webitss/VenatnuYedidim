@@ -306,6 +306,21 @@ namespace Service
         bool DeleteConversations(int iConversationId, int iUserId);
 
         #endregion Conversation
+
+
+        #region Documents
+
+        [OperationContract]
+        [WebInvoke(
+         Method = "POST",
+         UriTemplate = "GetDocuments",
+         BodyStyle = WebMessageBodyStyle.WrappedRequest,
+         ResponseFormat = WebMessageFormat.Json,
+         RequestFormat = WebMessageFormat.Json)]
+         List<Document> GetDocuments();
+
+        #endregion
+        
     }
 
 }

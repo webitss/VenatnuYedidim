@@ -65,7 +65,7 @@ namespace Service
         }
 
 
-        
+
         public bool AddStudent(Student student, int iUserId)
         {
             return Student.AddStudent(student, iUserId);
@@ -115,7 +115,7 @@ namespace Service
         {
             return Avrech.GetAvrechById(iPersonId);
         }
-              
+
         public List<Student> GetAvrechStudents(int iPersonId)
         {
             return Avrech.GetAvrechStudents(iPersonId);
@@ -192,6 +192,17 @@ namespace Service
         }
 
         #endregion
+
+        #region Documents
+
+        #endregion
+
+
+        public List<Document> GetDocuments()
+        {
+            return Document.GetDocuments();
+        }
+
     }
 
 }
