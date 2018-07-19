@@ -48,7 +48,7 @@ namespace Service.Entities
         {
             try
             {
-                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TPerson_GetPersonById", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TPerson_GetPersonById_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
                 Person user = ObjectGenerator<User>.GeneratFromDataRow(dr);
 
                 return user;
