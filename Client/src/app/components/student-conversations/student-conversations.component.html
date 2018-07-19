@@ -3,7 +3,10 @@
 <!-- <router-outlet></router-outlet> -->
  <ul>
     <li *ngFor="let conver of conversationsList">
-        <div>{{conver.id}}</div>
+        <div>
+<span>{{conver.conversationSummary}}</span>
+
+        </div>
         <button name="UpdateConversation" (click)="conversation=conver">ערוך שיחה</button>
         <button name="delete" (click)="deleteConversation(1,1)" >מחק שיחה</button>
        
