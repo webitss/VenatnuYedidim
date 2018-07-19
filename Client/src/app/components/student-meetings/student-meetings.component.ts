@@ -17,7 +17,7 @@ export class StudentMeetingsComponent implements OnInit {
  
   // meetingList:Meeting[]=new Meeting[6];
   ngOnInit() {
-    this.appProxy.post("GetMeetingsByStudentId",{iPersonId:2}).then(
+    this.appProxy.post("GetMeetingsByStudentId",{iPersonId:1}).then(
       data=>
       {
         alert("good");
