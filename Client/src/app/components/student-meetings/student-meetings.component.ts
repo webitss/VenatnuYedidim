@@ -14,7 +14,11 @@ export class StudentMeetingsComponent implements OnInit {
   constructor(private appProxy:AppProxy) { }
   meetingList:Meeting[];
   id:number;
- 
+ meeting:Meeting;
+ flag:number;
+ //this.meeting.iMeetingType=4;;
+//  {iMeetingType:4,iPersonId:1,dtMeetingDate:7-9-2018,};
+
   // meetingList:Meeting[]=new Meeting[6];
   ngOnInit() {
     this.appProxy.post("GetMeetingsByStudentId",{iPersonId:1}).then(
