@@ -14,8 +14,8 @@ namespace Service.Entities
     {
         #region Data Members
 
-        [DataMember]
-        public int? iEventId { get; set; }
+        //[DataMember]
+        //public int iEventId { get; set; }
         [DataMember]
         public string nvName { get; set; }
         [DataMember]
@@ -24,16 +24,16 @@ namespace Service.Entities
         public string nvPlace { get; set; }
         [DataMember]
         public string nvComments { get; set; }
-        [DataMember]
-        public int? iCreatedByUserId { get; set; }
-        [DataMember]
-        public DateTime? dtCreatedate { get; set; }
-        [DataMember]
-        public int? iLastModifyUserId { get; set; }
-        [DataMember]
-        public DateTime? dtLastModifyDate { get; set; }
-        [DataMember]
-        public bool? bSysRowStatus { get; set; }
+        //[DataMember]
+        //public int iCreatedByUserId { get; set; }
+        //[DataMember]
+        //public DateTime? dtCreatedate { get; set; }
+        //[DataMember]
+        //public int iLastModifyUserId { get; set; }
+        //[DataMember]
+        //public DateTime? dtLastModifyDate { get; set; }
+        //[DataMember]
+        //public bool bSysRowStatus { get; set; }
 
         #endregion
          
@@ -56,7 +56,9 @@ namespace Service.Entities
         {
             try
             {
-                SqlDataAccess.ExecuteDatasetSP("TEvent_INS", ObjectGenerator<Event1>.GetSqlParametersFromObject(addEvent));
+                //addEvent.dtEventDate = DateTime.Today;
+                List<SqlParameter> parameters = ObjectGenerator<Event1>.GetSqlParametersFromObject(addEvent);
+                SqlDataAccess.ExecuteDatasetSP("TEvent_INS", parameters);
                 return true;
             }
             catch (Exception ex)
