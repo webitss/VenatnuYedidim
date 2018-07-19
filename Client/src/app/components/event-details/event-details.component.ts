@@ -3,6 +3,7 @@ import { AppProxy } from '../../services/app.proxy';
 import { Event1 } from '../../classes/event';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { EventComponent } from '../event/event.component';
 
 @Component({
   selector: 'app-event-details',
@@ -11,13 +12,12 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 })
 export class EventDetailsComponent implements OnInit {
 
-  //  e: Subject<Event1>=new BehaviorSubject<Event1>(new Event1());
-  e: Event1;
+  protected e: Event1;
 
 
 
   save() {
-    this.appProxy.post("AddEvent", { oEvent: this.e })
+    this.appProxy.post('AddEvent', { addEvent: this.e })
       .then(
         data => {
           alert("success" + data);
@@ -26,20 +26,7 @@ export class EventDetailsComponent implements OnInit {
         });
   }
 
-  ngOnChange() {
-    console.log('child on change', this.e);
-  }
 
-  ngAfterViewInit() {
-    console.log('child after view init', this.e);
-    this.appProxy.post("AddEvent", { oEvent: this.e })
-    .then(
-      data => {
-        alert("success" + data);
-      }).catch(err => {
-        alert("error:" + err);
-      });
-  }
 
 
 
@@ -47,8 +34,6 @@ export class EventDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.e = new Event1();
-    this.e.nvName = 'lea';
-    this.e.dtEventDate=new Date('01-01-2018');
   }
 
 }

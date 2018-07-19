@@ -8,54 +8,60 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class VyMultySelectComponent implements OnInit {
 
-  // constructor() { this.filterList = new Array<any>(); }
-  // @Input()
-  // @Output()
-  // fullList: any[] ;
-  // flag = false;
-  // checkboxValueSelectAll: boolean;
+  constructor() { }
+  @Input()
+  @Output()
+  fullList: Array<any>;
+  flag = false;
+  checkboxValueSelectAll: boolean;
 
-  // @Input()
-  // id: string;
-  // filterList: any[];
+  id: string;
 
-  // openOrClose() {
-  //   if (this.flag == false) {
+  @Input()
+  @Output()
+  selectedList: Array<any>;
+
+  openOrClose() {
+    if (this.flag == false) {
        
-  //      this.filterList.splice(0,this.filterList.length);
-  //     this.fullList.forEach(element => {
-  //       if (element['bChecked'] == true)
-  //        {
-  //          this.filterList.push(element);
-  //          }
-  //     });
-  //   }
+       this.selectedList.splice(0,this.selectedList.length);
+      this.fullList.forEach(element => {
+        if (element['bMultySelectChecked'] == true)
+         {
+           this.selectedList.push(element);
+           }
+      });
+    }
     
-  // }
+  }
 
 
 
-  // selectAll() {
-  //   if (this.checkboxValueSelectAll == true)
-  //     this.fullList.forEach(element => {
-  //       element['bChecked'] = true;
-  //     });
-  //   else
-  //     this.fullList.forEach(element => {
-  //       element['bChecked'] = false;
-  //     });
-  // }
+  selectAll() {
+    if (this.checkboxValueSelectAll == true)
+      this.fullList.forEach(element => {
+        element['bMultySelectChecked'] = true;
+      });
+    else
+      this.fullList.forEach(element => {
+        element['bMultySelectChecked'] = false;
+      });
+  }
 
-  // //select(i: number) {
-  //   // 
-  //   //this.fullList[i].bChecked = !this.fullList[i].bChecked;
-  // //}
+  //select(i: number) {
+    // 
+    //this.fullList[i].bMultySelectChecked = !this.fullList[i].bMultySelectChecked;
+  //}
 
   ngOnInit() {
-  //   this.fullList.forEach(element => {
-  //     element['bChecked'] = false;
+    this.fullList.forEach(element => {
+      element['bMultySelectChecked'] = false;
+      //שיהיה דינאמי
+        element['toString']=element['nvFirstName']+element['nvLastName']+element['nvIdentityCard'];
 
-  //   });
+    });
   }
 
 }
+
+    

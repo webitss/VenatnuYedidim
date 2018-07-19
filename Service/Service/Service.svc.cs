@@ -88,17 +88,23 @@ namespace Service
         }
         #endregion
 
-        #region Avrech
+        #region Event1
 
-        public bool AddEvent(Event oEvent)
+        public bool AddEvent(Event1 addEvent)
         {
-            return Event.AddEvent(oEvent);
+            return Event1.AddEvent(addEvent);
         }
 
         //public List<Event> GetEventsList(int iUserId)
         //{
         //    return Event.GetEventsList(iUserId);
         //}
+
+        #endregion
+
+        #region Avrech
+
+
 
         public List<Avrech> GetAllAvrechim(int? iPersonId)
         {
@@ -109,21 +115,26 @@ namespace Service
         {
             return Avrech.GetAvrechById(iPersonId);
         }
+<<<<<<< HEAD
+              
+        public List<Student> GetAvrechStudents(int iPersonId)
+=======
 
         public List<Person> GetAvrechStudents(int iPersonId)
+>>>>>>> 88fd167e153d4fd679ddd1203e6053ead0628530
         {
             return Avrech.GetAvrechStudents(iPersonId);
         }
 
-        public bool DeleteAvrechStudent(int iAvrechId,int iStudentId)
+        public bool DeleteAvrechStudent(int iAvrechId, int iStudentId)
         {
             return Avrech.DeleteAvrechStudent(iAvrechId, iStudentId);
         }
-        
+
 
 
         #endregion
-            
+
         #region files
 
         public string SaveFileByBase64(string base64File, string fileName)
@@ -133,7 +144,7 @@ namespace Service
 
 
         #endregion
-        
+
         #region SysTableRow
         public List<SysTableRow> GetValues(int iSysTableId)
         {

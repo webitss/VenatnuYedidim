@@ -10,29 +10,39 @@ using System.Web;
 namespace Service.Entities
 {
     [DataContract]
-    public class Event
+    public class Event1
     {
         #region Data Members
 
         [DataMember]
-        public int iEventId { get; set; }
+        public int? iEventId { get; set; }
         [DataMember]
         public string nvName { get; set; }
         [DataMember]
-        public DateTime dtEventDate { get; set; }
+        public DateTime? dtEventDate { get; set; }
         [DataMember]
         public string nvPlace { get; set; }
         [DataMember]
         public string nvComments { get; set; }
+        [DataMember]
+        public int? iCreatedByUserId { get; set; }
+        [DataMember]
+        public DateTime? dtCreatedate { get; set; }
+        [DataMember]
+        public int? iLastModifyUserId { get; set; }
+        [DataMember]
+        public DateTime? dtLastModifyDate { get; set; }
+        [DataMember]
+        public bool? bSysRowStatus { get; set; }
 
         #endregion
-
-        public static List<Event> GetEventsList(int iUserId)
+         
+        public static List<Event1> GetEventsList(int? iUserId)
         {
             try
             {
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_SLCT", new SqlParameter("iPersonId", iUserId)).Tables[0].Rows;
-                List<Event> events = ObjectGenerator<Event>.GeneratListFromDataRowCollection(drc);
+                List<Event1> events = ObjectGenerator<Event1>.GeneratListFromDataRowCollection(drc);
                 return events;
             }
             catch (Exception ex)
@@ -42,11 +52,11 @@ namespace Service.Entities
             }
         }
 
-        public static bool AddEvent(Event oEvent)
+        public static bool AddEvent(Event1 addEvent)
         {
             try
             {
-                SqlDataAccess.ExecuteDatasetSP("TEvent_INS", ObjectGenerator<Event>.GetSqlParametersFromObject(oEvent));
+                SqlDataAccess.ExecuteDatasetSP("TEvent_INS", ObjectGenerator<Event1>.GetSqlParametersFromObject(addEvent));
                 return true;
             }
             catch (Exception ex)

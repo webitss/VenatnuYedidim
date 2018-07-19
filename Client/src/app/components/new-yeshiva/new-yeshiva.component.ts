@@ -9,24 +9,24 @@ import { Yeshiva } from '../../classes/Yeshiva';
 })
 export class NewYeshivaComponent implements OnInit {
 
-  yeshiva1:Yeshiva=new Yeshiva(); 
+ protected yeshiva: Yeshiva = new Yeshiva();
 
-  constructor(private appProx:AppProxy,private yeshiva:Yeshiva) { }
- 
+  constructor(private appProx: AppProxy) { }
+
 
   ngOnInit() {
   }
 
-  save(yeshiva1) {
-   
-    this.appProx.post('AddYeshiva',{yeshiva:yeshiva1})
-    .then(
-      data=>{
-        this.yeshiva1=data;
-        alert("good");
-      }).catch(err=>{
-      alert(err);
-      });
-
+  save() {
+    this.appProx.post('AddYeshiva', { yeshiva: this.yeshiva })
+      .then(
+        data => {
+          if(this.yeshiva!=null){
+            this.yeshiva = data;
+          }
+          alert("good");
+        }).catch(err => {
+          alert("Error, there is null");
+        });
   }
 }
