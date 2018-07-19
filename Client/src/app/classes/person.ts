@@ -8,11 +8,6 @@ export class Person {
     public nvEmail: String;
     public nvAddress: String;
     public nvCity: String;
-    public iCreatedByUserId: number;
-    public dtCreatedate: Date;
-    public iLastModifyUserId: number;
-    public dtLastModifyDate: Date;
-    public bSysRowStatus: boolean;
     public nvStatus: String;
 
     constructor() {
