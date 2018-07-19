@@ -8,54 +8,54 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class VyMultySelectComponent implements OnInit {
 
-  constructor() { this.filterList = new Array<any>(); }
-  @Input()
-  @Output()
-  fullList: any[] ;
-  flag = false;
-  checkboxValueSelectAll: boolean;
+  // constructor() { this.filterList = new Array<any>(); }
+  // @Input()
+  // @Output()
+  // fullList: any[] ;
+  // flag = false;
+  // checkboxValueSelectAll: boolean;
 
-  @Input()
-  id: string;
-  filterList: any[];
+  // @Input()
+  // id: string;
+  // filterList: any[];
 
-  openOrClose() {
-    if (this.flag == false) {
+  // openOrClose() {
+  //   if (this.flag == false) {
        
-       this.filterList.splice(0,this.filterList.length);
-      this.fullList.forEach(element => {
-        if (element['bChecked'] == true)
-         {
-           this.filterList.push(element);
-           }
-      });
-    }
+  //      this.filterList.splice(0,this.filterList.length);
+  //     this.fullList.forEach(element => {
+  //       if (element['bChecked'] == true)
+  //        {
+  //          this.filterList.push(element);
+  //          }
+  //     });
+  //   }
     
-  }
+  // }
 
 
 
-  selectAll() {
-    if (this.checkboxValueSelectAll == true)
-      this.fullList.forEach(element => {
-        element['bChecked'] = true;
-      });
-    else
-      this.fullList.forEach(element => {
-        element['bChecked'] = false;
-      });
-  }
+  // selectAll() {
+  //   if (this.checkboxValueSelectAll == true)
+  //     this.fullList.forEach(element => {
+  //       element['bChecked'] = true;
+  //     });
+  //   else
+  //     this.fullList.forEach(element => {
+  //       element['bChecked'] = false;
+  //     });
+  // }
 
-  //select(i: number) {
-    // 
-    //this.fullList[i].bChecked = !this.fullList[i].bChecked;
-  //}
+  // //select(i: number) {
+  //   // 
+  //   //this.fullList[i].bChecked = !this.fullList[i].bChecked;
+  // //}
 
   ngOnInit() {
-    this.fullList.forEach(element => {
-      element['bChecked'] = false;
+  //   this.fullList.forEach(element => {
+  //     element['bChecked'] = false;
 
-    });
+  //   });
   }
 
 }
