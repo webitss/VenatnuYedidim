@@ -1,17 +1,17 @@
 <form class="form">
-  <div class="form-group">
+  <div class="form-group col-sm-4">
   <label for='event-name'>שם הארוע</label>
-  <input type="text" name='event-name' class="form-control" [(ngModel)]="event.nvName"/>
+  <input type="text" name='event-name' class="form-control" [(ngModel)]="e.nvName"/>
 </div>
 
   <label for='event-place'>מקום הארוע</label>
-  <input type="text" name='event-place'  [(ngModel)]="event.nvPlace"/>
+  <input type="text" name='event-place'  [(ngModel)]="e.nvPlace"/>
 
   <label for='event-date'>תאריך</label>
-  <input type="date" name='event-date'  [(ngModel)]="event.dtEventDate"/>
+  <input type="date" name='event-date'  [(ngModel)]="e.dtEventDate"/>
 
   <label for='event-comment'>הערות</label>
-  <input type="text" name='event-comment'  [(ngModel)]="event.nvComments"/>
+  <input type="text" name='event-comment'  [(ngModel)]="e.nvComments"/>
 
   <label for='event-for'>עבור</label>
   <select name="event-for">
@@ -20,4 +20,6 @@
     <option>בוגרים</option>
     <option>כולם</option>
   </select>
+
+  <button (click)="save()">save</button>
 </form>

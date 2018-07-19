@@ -1,6 +1,11 @@
 <p>
  בחר טבלה
 </p>
-<!-- <select>
-    <option *ngFor="let name of tableNames">{{name}}</option>
-</select> -->
+<select>
+    <option *ngFor="let name of tableNames" >{{name.nvSysTableName}}</option>
+</select>
+SysTableService
+<table *ngFor="let val of Values">
+<tr></tr>
+</table>
+<input type="button" value="ניסוי" (click)=ff()/>
