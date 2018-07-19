@@ -11,6 +11,9 @@ import { VyTableComponent } from './templates/vy-table/vy-table.component';
 import { VyTableFilterPipe } from './templates/vy-table/vy-table-filter.pipe';
 import { VyTableOrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
 
+//--- Pipes ---
+import { FilterPipe } from './pipes/filter.pipe';
+
 //--- services ---
 import { AppProxy } from './services/app.proxy';
 //--- components ---
@@ -59,6 +62,9 @@ import { SysTableService } from './services/sys-table.service';
     VyTableComponent,
     VyTableFilterPipe,
     VyTableOrderByPipe,
+
+    // pipes
+    FilterPipe,
 
     //components
     AppComponent,
