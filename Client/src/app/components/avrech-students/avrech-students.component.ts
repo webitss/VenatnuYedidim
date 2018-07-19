@@ -14,9 +14,15 @@ export class AvrechStudentsComponent implements OnInit {
   id: number;
   students: Student[];
   //מסוג סטודנט עם שליפה מהסרביס
-  allStudents: any[] = [{ iPersonId: 1, name: "aaa" }, { iPersonId: 2, name: "bbb" }, { iPersonId: 3, name: "ccc" }, { iPersonId: 4, name: "ddd" }, { iPersonId: 5, name: "abc" }];
-  studentsToAdd: any[];
-  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy) { }
+  allStudents: any[] = [{ iPersonId: 1,nvFirstName: "chaim",nvLastName: "choen",nvIdentityCard:"123456789"},
+  { iPersonId:2,nvFirstName: "yeoda",nvLastName: "levi",nvIdentityCard:"987654321"},
+  { iPersonId: 3,nvFirstName: "pinchas",nvLastName: "lev",nvIdentityCard:"147258369"},
+  { iPersonId: 4,nvFirstName: "rafi",nvLastName: "catz",nvIdentityCard:"963852741"},
+  { iPersonId: 5,nvFirstName: "asher",nvLastName: "green",nvIdentityCard:"741852963"}];
+  studentsToAdd: Array<any> = new Array<any>();
+  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy) {
+    
+   }
 
   cancelAdd() {
     this.flag = false;
@@ -24,7 +30,7 @@ export class AvrechStudentsComponent implements OnInit {
   saveAdd() {
     debugger;
     //לקבל את הרשימה המסוננת
-    //this.studentsToAdd = filterList;
+    let d = this.studentsToAdd;
     this.flag=false;
   }
 

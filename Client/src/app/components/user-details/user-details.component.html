@@ -2,36 +2,36 @@
 
   <div class="form-horizontal">
     <label for="user-name">שם משפחה:</label>
-    <input type="text" class="form-control" maxlength="15" [(ngModel)]="person.nvLastName"/>
+    <input type="text" class="form-control" maxlength="15" [(ngModel)]="person.nvLastName" [ngModelOptions]="{standalone: true}"/>
   </div>
 
   <div class="form-horizontal">
     <label for="user-name">שם פרטי:</label>
-    <input type="text" class="form-control" maxlength="15" [(ngModel)]="person.nvFirstName"/>
+    <input type="text" class="form-control" maxlength="15" [(ngModel)]="person.nvFirstName" [ngModelOptions]="{standalone: true}"/>
   </div>
 
   <div class="form-horizontal">
     <label for="user-name">נייד:</label>
-    <input type="tel" class="form-control" [(ngModel)]="person.nvMobile"/>
+    <input type="tel" class="form-control" [(ngModel)]="person.nvMobile" [ngModelOptions]="{standalone: true}"/>
   </div>
 
   <div class="form-horizontal">
     <label for="user-name">מייל:</label>
-    <input type="email" class="form-control" [(ngModel)]="person.nvEmail"/>
+    <input type="email" class="form-control" [(ngModel)]="person.nvEmail" [ngModelOptions]="{standalone: true}"/>
   </div>
 
   <div class="form-horizontal">
     <label for="user-name">שם משתמש:</label>
-    <input type="text" class="form-control" maxlength="15"  [(ngModel)]="user.nvUserName"/>
+    <input type="text" class="form-control" maxlength="15"  [(ngModel)]="user.nvUserName" [ngModelOptions]="{standalone: true}"/>
   </div>
 
   <div class="form-horizontal">
     <label for="user-name">סיסמה:</label>
-    <input type="password" class="form-control"  [(ngModel)]="user.nvPassword"/>
+    <input type="password" class="form-control"  [(ngModel)]="user.nvPassword" [ngModelOptions]="{standalone: true}"/>
   </div>
 
   <label for="permittion">הרשאה:</label>
-  <select name="permittion"  [(ngModel)]="user.iPermissionId">
+  <select name="permittion"  [(ngModel)]="user.iPermissionId" [ngModelOptions]="{standalone: true}" class="form-control">
     <option [ngValue]="1">new value</option>
     <option [ngValue]="2">new value</option>
     <option [ngValue]="3">new value</option>

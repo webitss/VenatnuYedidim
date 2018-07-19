@@ -8,6 +8,19 @@ namespace Service
     [ServiceContract]
     public interface IService
     {
+        #region Person
+
+        [OperationContract]
+        [WebInvoke(
+           Method = "POST",
+           UriTemplate = "GetPersonById",
+           BodyStyle = WebMessageBodyStyle.WrappedRequest,
+           ResponseFormat = WebMessageFormat.Json,
+           RequestFormat = WebMessageFormat.Json)]
+        Person GetPersonById(int iPersonId);
+        #endregion
+
+
         #region User
 
         [OperationContract]
@@ -285,11 +298,11 @@ namespace Service
 
         [OperationContract]
         [WebInvoke(
-      Method = "POST",
-      UriTemplate = "DeleteConversations",
-      BodyStyle = WebMessageBodyStyle.WrappedRequest,
-      ResponseFormat = WebMessageFormat.Json,
-      RequestFormat = WebMessageFormat.Json)]
+          Method = "POST",
+          UriTemplate = "DeleteConversations",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
         bool DeleteConversations(int iConversationId, int iUserId);
 
         #endregion Conversation
