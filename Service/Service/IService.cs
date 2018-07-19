@@ -13,11 +13,11 @@ namespace Service
         [OperationContract]
         [WebInvoke(
            Method = "POST",
-           UriTemplate = "GetPersonById",
+           UriTemplate = "GetPerson",
            BodyStyle = WebMessageBodyStyle.WrappedRequest,
            ResponseFormat = WebMessageFormat.Json,
            RequestFormat = WebMessageFormat.Json)]
-        Person GetPersonById(int iPersonId);
+        Person GetPerson(int iPersonId);
         #endregion
 
 
@@ -26,11 +26,11 @@ namespace Service
         [OperationContract]
         [WebInvoke(
            Method = "POST",
-           UriTemplate = "GetUsersByPermittion",
+           UriTemplate = "GetUsers",
            BodyStyle = WebMessageBodyStyle.WrappedRequest,
            ResponseFormat = WebMessageFormat.Json,
            RequestFormat = WebMessageFormat.Json)]
-        List<User> GetUsersByPermittion(int iPersonId);
+        List<User> GetUsers(int iPersonId);
 
         [OperationContract]
         [WebInvoke(
@@ -45,11 +45,11 @@ namespace Service
         [OperationContract]
         [WebInvoke(
            Method = "POST",
-           UriTemplate = "GetUserByPersonId",
+           UriTemplate = "GetUser",
            BodyStyle = WebMessageBodyStyle.WrappedRequest,
            ResponseFormat = WebMessageFormat.Json,
            RequestFormat = WebMessageFormat.Json)]
-        User GetUserByPersonId(int iPersonId);
+        User GetUser(int iPersonId);
 
         [OperationContract]
         [WebInvoke(

@@ -45,31 +45,32 @@ namespace Service.Entities
         }
 
 
-        public static User GetUserByPersonId(int iPersonId)
+        public static User GetUser(int iPersonId)
         {
             try
             {
-                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TUser_GetUserByIPersonId_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TUser_GetUser_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
                 User user = ObjectGenerator<User>.GeneratFromDataRow(dr);
                 return user;
             }
             catch (Exception ex)
             {
-                Log.LogError("GetUserByPersonId / TUser_ByUserNameAndPassword_SLCT", "iPersonId: " + iPersonId + ", ex " + ex);
+                Log.LogError("GetUser / TUser_GetUser_SLCT", "iPersonId: " + iPersonId + ", ex " + ex);
                 return null;
             }
         }
+
         public static List<User> GetUsers(int iPersonId)
         {
             try
             {
-                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TUser_GetUsersByPermission_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TUser_GetUsers_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
                 List<User> users = ObjectGenerator<User>.GeneratListFromDataRowCollection(drc);
                 return users;
             }
             catch (Exception ex)
             {
-                Log.LogError("GetUsers / TUser_GetUsersByPermission_SLCT", "iPersonId:" + iPersonId + ",ex " + ex);
+                Log.LogError("GetUsers / TUser_GetUsers_SLCT", "iPersonId:" + iPersonId + ",ex " + ex);
                 return null;
             }
         }
@@ -79,14 +80,14 @@ namespace Service.Entities
             try
             {
 
-                SqlDataAccess.ExecuteDatasetSP("TUser_INSRT", ObjectGenerator<User>.GetSqlParametersFromObject(user));
+                SqlDataAccess.ExecuteDatasetSP("TUser_INS/UPD", ObjectGenerator<User>.GetSqlParametersFromObject(user));
                 return true;
                 
             }
 
             catch (Exception ex)
             {
-                Log.LogError("SetUser / TUser_INSRT", "ex: " + ex);
+                Log.LogError("SetUser / TUser_INS/UPD", "ex: " + ex);
                 return false;
             }
         }
