@@ -1,0 +1,9 @@
+.addStudent{
+   position: absolute; 
+   margin-bottom:25%;  
+   margin-right: 35%;
+    border:1px solid black;
+     width: 35%;
+      height: 35%;
+      padding: 50px;
+}

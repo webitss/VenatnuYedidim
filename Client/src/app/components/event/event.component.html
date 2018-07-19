@@ -6,8 +6,8 @@
     <li (click)="eventParticipants()" class="col-sm-1">משתתפים</li>
   </ul>
   <div class="col-sm-5"></div>
-  <button *ngIf="isDetails==true" (click)="save()">שמירה</button>
+  <button *ngIf="isDetails==true" (click)="save()" class="btn">שמירה</button>
   <button>סגור</button>
 </div>
 
-<router-outlet></router-outlet>
+<router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>

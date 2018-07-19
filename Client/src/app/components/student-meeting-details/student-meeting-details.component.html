@@ -1,11 +1,9 @@
-<p>
-  student-meeting-details works!
-</p>
-<div *ngIf="meetingId==1">
+
+<div *ngIf="meeting && meeting.iMeetingId">
   <h1>עריכה </h1>
 </div>
 
-<div *ngIf="meetingId==0">
+<div *ngIf="meeting.iMeetingId==null">
   <h1>פגישה חדשה </h1>
 </div>
 
@@ -13,12 +11,18 @@
   
   <div class="form-group">
     <label for="meetingTyp">סוג פגישה</label>
-    <input type="email" class="form-control" id="email">
+    <input type="number" class="form-control" id="meetingType" [(ngModel)]="meeting.iMeetingType" [ngModelOptions]="{standalone: true}">
   </div>
   <div class="form-group">
     <label for="date">תאריך:</label>
-    <input type="date" class="form-control" id="date">
+    <!-- <input type="date" class="form-control" id="date"[(ngModel)]="meeting.dtMeetingDate" > -->
+  </div>
+  <div class="form-group">
+    <label for="nvSummary"> סיכום</label>
+    <input type="text" class="form-control" id="nvSummary" [(ngModel)]="meeting.nvSummary" [ngModelOptions]="{standalone: true}">
+    <p>xjzi</p>
+
   </div>
   
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" (click)="save()">Submit</button>
 </form>

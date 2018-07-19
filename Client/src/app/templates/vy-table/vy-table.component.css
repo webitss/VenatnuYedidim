@@ -1,0 +1,11 @@
+.cell{
+    /* height: 50px; */
+    /* border: 1px solid gray; */
+    padding: 10px;
+    text-align: right;
+}
+
+.cell-title{
+  background:  #484444;
+  color: white
+}
