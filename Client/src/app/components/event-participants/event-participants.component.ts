@@ -18,7 +18,7 @@ participant:Participants[];
     data=>{
       this.participant=data;
       alert("good");
-    }).catch(err=>{
+    },err=>{
     alert(err);
     });
   }

@@ -104,7 +104,7 @@ namespace Service
             return Avrech.GetAvrechById(iPersonId);
         }
               
-        public List<Person> GetAvrechStudents(int iPersonId)
+        public List<Student> GetAvrechStudents(int iPersonId)
         {
             return Avrech.GetAvrechStudents(iPersonId);
         }
