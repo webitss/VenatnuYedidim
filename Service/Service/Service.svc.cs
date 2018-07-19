@@ -65,11 +65,7 @@ namespace Service
         }
 
 
-        public bool UpdateAvrech(Avrech avrech, int iUserId)
-        {
-            return Avrech.UpdateAvrech(avrech, iUserId);
-        }
-
+        
         public bool AddStudent(Student student, int iUserId)
         {
             return Student.AddStudent(student, iUserId);
@@ -104,6 +100,10 @@ namespace Service
 
         #region Avrech
 
+        public bool UpdateAvrech(Avrech avrech, int iUserId)
+        {
+            return Avrech.UpdateAvrech(avrech, iUserId);
+        }
 
 
         public List<Avrech> GetAllAvrechim(int? iPersonId)
@@ -115,13 +115,8 @@ namespace Service
         {
             return Avrech.GetAvrechById(iPersonId);
         }
-<<<<<<< HEAD
               
         public List<Student> GetAvrechStudents(int iPersonId)
-=======
-
-        public List<Person> GetAvrechStudents(int iPersonId)
->>>>>>> 88fd167e153d4fd679ddd1203e6053ead0628530
         {
             return Avrech.GetAvrechStudents(iPersonId);
         }

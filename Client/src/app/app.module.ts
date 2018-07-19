@@ -124,7 +124,7 @@ import { injectElementRef } from '@angular/core/src/render3';
       {
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
-          { path: "", component: StudentDetailsComponent },
+         //{ path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
           {
             path: "student-meetings", component: StudentMeetingsComponent, children: [
