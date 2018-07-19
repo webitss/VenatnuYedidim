@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { forEach } from '@angular/router/src/utils/collection';
 //import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @Component({
@@ -21,18 +21,23 @@ export class VyMultySelectComponent implements OnInit {
   @Output()
   selectedList: Array<any>;
 
+  @Output()
+  onSave: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
+
+
   openOrClose() {
+    debugger;
     if (this.flag == false) {
-       
-       this.selectedList.splice(0,this.selectedList.length);
+     // if(this.selectedList!=null)
+      this.selectedList.splice(0, this.selectedList.length);
       this.fullList.forEach(element => {
-        if (element['bMultySelectChecked'] == true)
-         {
-           this.selectedList.push(element);
-           }
+        if (element['bMultySelectChecked'] == true) {
+          this.selectedList.push(element);
+        }
       });
+      this.onSave.emit(this.selectedList);
+      debugger;
     }
-    
   }
 
 
@@ -49,19 +54,19 @@ export class VyMultySelectComponent implements OnInit {
   }
 
   //select(i: number) {
-    // 
-    //this.fullList[i].bMultySelectChecked = !this.fullList[i].bMultySelectChecked;
+  // 
+  //this.fullList[i].bMultySelectChecked = !this.fullList[i].bMultySelectChecked;
   //}
 
   ngOnInit() {
+    this.selectedList=new Array<any>();
     this.fullList.forEach(element => {
       element['bMultySelectChecked'] = false;
       //שיהיה דינאמי
-        element['toString']=element['nvFirstName']+element['nvLastName']+element['nvIdentityCard'];
+      element['toString'] = element['nvFirstName'] + element['nvLastName'] + element['nvIdentityCard'];
 
     });
   }
 
 }
 
-    

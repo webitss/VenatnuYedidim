@@ -13,11 +13,11 @@ import { EventComponent } from '../event/event.component';
 export class EventDetailsComponent implements OnInit {
 
   protected e: Event1;
-
-
+  protected date: Date;
 
   save() {
-    this.appProxy.post('AddEvent', { addEvent: this.e })
+    this.e.dtEventDate = new Date(this.date);
+    this.appProxy.post('AddEvent', { addEvent: this.e,  iUserId: 1})
       .then(
         data => {
           alert("success" + data);
