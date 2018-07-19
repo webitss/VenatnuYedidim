@@ -13,10 +13,18 @@ export class UserDetailsComponent implements OnInit {
   constructor(private appProxy: AppProxy) { }
 
   ngOnInit() {
-    this.appProxy.post("GetUserByPersonId",{iPersonId: 1})
-    .then(data=>{
-      this.user = data;
-    })
+    this.appProxy.post("GetUserByPersonId", { iPersonId: 1 })
+      .then(data => {
+        this.user = data;
+      }).catch(err => {
+        alert("Error!");
+      });
+    this.appProxy.post("GetUserByPersonId", { iPersonId: 1 })
+      .then(data => {
+        this.person = data;
+      }).catch(err => {
+        alert("Error!");
+      });
   }
 
   @Input()

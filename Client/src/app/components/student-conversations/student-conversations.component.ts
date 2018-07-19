@@ -15,18 +15,7 @@ export class StudentConversationsComponent implements OnInit {
   conversations:Conversation[];
   conversationId:number;
   constructor(private appProxy:AppProxy) { }
-  deleteConversation(iConversationId:number,iUserId:number)
-  {
-    this.appProxy.post("DeleteConversations",{iConversationId:iConversationId,iUserId:iUserId})
-    .then(
-      data=>{
-        this.conversations=data;
-        alert("sucsses");
-      }).catch(err=>{
-      alert(err);
-      });
-  }  
-
+  
 
   ngOnInit() {
   this.appProxy.post("GetConversations",{iPersonId:this.id})
