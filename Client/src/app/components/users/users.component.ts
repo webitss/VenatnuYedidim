@@ -14,18 +14,16 @@ export class UsersComponent implements OnInit {
   constructor(private appProxy: AppProxy, private router: Router) { }
 
   ngOnInit() {
-    this.id=1;
-   this.appProxy.post("GetUsersByPermittion",{iPersonId: this.id})
+    this.iPersonId = 0;
+   this.appProxy.post("GetUsers",{iPersonId: this.iPersonId})
     .then(
       data=>{
       this.users=data;
-       }).catch(err=>{
-         alert(err);
        });
   }
 
-  users: User[];
-  id:number;
+  private users: Array<User>;
+  private iPersonId:number;
 
   editUser(u: User){
     this.router.navigate(['users/user/',u.iPersonId]);

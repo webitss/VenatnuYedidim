@@ -15,7 +15,7 @@ studentList:Student[];
 
   ngOnInit() {
     this.id=0;
-    this.appProxy.post(' GetStudentList',{iUserId:this.id}).then(data=>this.studentList=data,err=>alert(err));
+    this.appProxy.post('GetStudentList',{iUserId:this.id}).then(data=>this.studentList=data,err=>alert(err));
   }
 
 }

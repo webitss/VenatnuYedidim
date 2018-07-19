@@ -105,6 +105,7 @@
   <ItemGroup>
     <Compile Include="Entities\Conversation.cs" />
     <Compile Include="Entities\Event1.cs" />
+    <Compile Include="Entities\Document.cs" />
     <Compile Include="Entities\Meeting.cs" />
     <Compile Include="Entities\SysTableRow.cs" />
     <Compile Include="Entities\SysTables.cs" />

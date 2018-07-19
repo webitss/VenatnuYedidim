@@ -10,7 +10,7 @@ export class AppProxy {
 
   public post(url: string, data: any = {}): Promise<any> {
     return this.http
-      .post(`${AppProxy.baseUrl + 'Service.svc/'}${url}`, this.convertData(data, true))
+      .post(`${AppProxy.baseUrl + 'Service.svc/'}${url.trim()}`, this.convertData(data, true))
       .toPromise()
       .then(data => { return this.convertData(data, false) })
       .catch(error => {
@@ -21,7 +21,7 @@ export class AppProxy {
 
   public get(url: string): Promise<any> {
     return this.http
-      .get(`${AppProxy.baseUrl + 'Service.svc/'}${url}`)
+      .get(`${AppProxy.baseUrl + 'Service.svc/'}${url.trim()}`)
       .toPromise()
       .then(result => { return this.convertData(result, false) })
       .catch(error => {

@@ -1,7 +1,7 @@
 import { Person } from "./person";
 
 export class Student implements Person {
-    iPersonId: number;
+     iPersonId: number;
     nvFirstName: String;
     nvLastName: String;
     nvIdentityCard: String;
@@ -10,15 +10,10 @@ export class Student implements Person {
     dtBirthday:Date;
     nvAddress: String;
     nvCity: String;
-    iCreatedByUserId: number;
-    dtCreatedate: Date;
-    iLastModifyUserId: number;
-    dtLastModifyDate: Date;
-    bSysRowStatus: boolean;
     nvStatus: String;
     nvMobile: String;
     nvEmail: String;
-
+ 
 
     iStudentId	:number;
     nvBornDate:string;

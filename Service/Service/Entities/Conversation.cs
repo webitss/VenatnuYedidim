@@ -1,4 +1,5 @@
 ﻿
+using Newtonsoft.Json;
 using Service.Utilities;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace Service.Entities
         public string nvConversationSummary { get; set; }
         [DataMember]
         public DateTime dtNextConversationDate { get; set; }
-      
+
 
         #endregion
 
@@ -37,27 +38,26 @@ namespace Service.Entities
         {
             try
             {
-                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TConversation_SLCT").Tables[0];
-                List<Conversation> conversations = ObjectGenerator<Conversation>.GeneratListFromDataRowCollection(dt.Rows);
-                return conversations;
+                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TConversation_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0];
+                return ObjectGenerator<Conversation>.GeneratListFromDataRowCollection(dt.Rows);            
             }
             catch (Exception ex)
             {
-                Log.LogError("GetStudentConversation", "ex" + ex);
+                Log.LogError("GetStudentConversation / TConversation_SLCT", "ex" + ex + ", iPersonId: " + iPersonId);
                 return null;
             }
         }
 
-     
 
-        public static bool AddConversation(Conversation conversation,int iUserId)
+
+        public static bool AddConversation(Conversation conversation, int iPersonId)
         {
-            
+
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
-               
-                parameters.Add(new SqlParameter("iCreatedByUserId", conversation.iConversationType));
+
+                parameters.Add(new SqlParameter("iCreatedByUserId", iPersonId));
 
 
                 DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters).Tables[0].Rows[0];
@@ -65,12 +65,12 @@ namespace Service.Entities
             }
             catch (Exception ex)
             {
-                Log.LogError("AddConversation / TConversation_INS", "ex" + ex);
+                Log.LogError("AddConversation / TConversation_INS", "ex" + ex + ", conversation: " + JsonConvert.SerializeObject(conversation));
                 return false;
             }
         }
 
-        public static bool UpdateConversation(Conversation conversation,int iUserId)
+        public static bool UpdateConversation(Conversation conversation, int iUserId)
         {
 
             try
