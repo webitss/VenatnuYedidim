@@ -7,7 +7,7 @@
   </ul>
   <div class="col-sm-5"></div>
   <button *ngIf="isDetails==true" (click)="save()" class="btn">שמירה</button>
-  <button>סגור</button>
+  <button routerLink="/events">סגור</button>
 </div>
 
 <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
