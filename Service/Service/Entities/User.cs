@@ -49,7 +49,7 @@ namespace Service.Entities
         {
             try
             {
-                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TUser_GetUserByIPersonId", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TUser_GetUserByIPersonId_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
                 User user = ObjectGenerator<User>.GeneratFromDataRow(dr);
                 return user;
             }
