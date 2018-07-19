@@ -55,7 +55,7 @@ namespace Service.Entities
             }
             catch (Exception ex)
             {
-                Log.LogError("Login / TUser_ByUserNameAndPassword_SLCT", "iPersonId: " + iPersonId + ", ex " + ex);
+                Log.LogError("GetUserByPersonId / TUser_ByUserNameAndPassword_SLCT", "iPersonId: " + iPersonId + ", ex " + ex);
                 return null;
             }
         }

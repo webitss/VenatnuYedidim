@@ -6,6 +6,12 @@ namespace Service
 {
     public class Service : IService
     {
+        #region Person
+        public Person GetPersonById(int iPersonId)
+        {
+            return Person.GetPersonById(iPersonId);
+        }
+        #endregion
         #region User
 
         public List<User> GetUsersByPermittion(int iPersonId)
