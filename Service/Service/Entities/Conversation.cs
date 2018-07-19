@@ -48,25 +48,7 @@ namespace Service.Entities
             }
         }
 
-        //public static bool DeleteConversation(int iConversationId)
-        //{
-        //    try
-        //    {
-        //        SqlParameter parameters=new SqlParameter();
-        //        parameters.Add(new SqlParameter("iConversationId", iConversationId));
-        //        DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters).Tables[0].Rows[0];
-        //        SqlParameter parameters = new SqlParameter();
-        //        parameters.Add(new SqlParameter("iConversationId", iConversationId));
-        //        DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_DEL", parameters).Tables[0].Rows[0];
-
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.LogError("DeleteConversation / TConversation_DEL", "ex" + ex);
-        //        return false;
-        //    }
-        //}
+     
 
         public static bool AddConversation(Conversation conversation,int iUserId)
         {
