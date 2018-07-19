@@ -20,10 +20,13 @@ export class StudentMeetingsComponent implements OnInit {
     this.appProxy.post("GetMeetingsByStudentId",{iPersonId:2}).then(
       data=>
       {
+        alert("good");
     this.meetingList=data;
     debugger;
     },
-      err=>("err")
+      err=>{
+        alert("not good");
+        }
     );
   }
 
