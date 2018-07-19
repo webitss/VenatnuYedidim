@@ -23,16 +23,7 @@ namespace Service.Entities
         public DateTime dtMeetingDate { get; set; }
         [DataMember]
         public string nvSummary { get; set; }
-        [DataMember]
-        public int iCreatedByUserId { get; set; }
-        [DataMember]
-        public DateTime dtCreatedate { get; set; }
-        [DataMember]
-        public int iLastModifyUserId { get; set; }
-        [DataMember]
-        public DateTime dtLastModifyDate { get; set; }
-        [DataMember]
-        public bool bSysRowStatus { get; set; }
+        
         #endregion
 
         #region Methods
