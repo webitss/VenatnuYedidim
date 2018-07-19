@@ -113,7 +113,7 @@ import { SysTableService } from './services/sys-table.service';
       {
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
-          { path: "", component: StudentDetailsComponent },
+         //{ path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
           {
             path: "student-meetings", component: StudentMeetingsComponent, children: [
