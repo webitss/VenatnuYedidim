@@ -102,7 +102,7 @@ import { SysTableService } from './services/sys-table.service';
     StudentMeetingDetailsComponent,
   ],
   imports: [
-    Ng2SearchPipeModule,
+   // Ng2SearchPipeModule,
     BrowserModule,
     FormsModule,
     HttpModule,
