@@ -161,14 +161,14 @@ namespace Service
 
 
         #region events
-        [OperationContract]
-        [WebInvoke(
-        Method = "POST",
-        UriTemplate = "AddEvent",
-        BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        ResponseFormat = WebMessageFormat.Json,
-        RequestFormat = WebMessageFormat.Json)]
-        bool AddEvent(Event1 addEvent);
+        //[OperationContract]
+        //[WebInvoke(
+        //Method = "POST",
+        //UriTemplate = "AddEvent",
+        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //ResponseFormat = WebMessageFormat.Json,
+        //RequestFormat = WebMessageFormat.Json)]
+        //bool AddEvent(Event1 addEvent);
         #endregion
 
         #region Meeting
@@ -306,6 +306,20 @@ namespace Service
         bool DeleteConversations(int iConversationId, int iUserId);
 
         #endregion Conversation
+
+        #region participiant
+
+        //[OperationContract]
+        //[WebInvoke(
+        //  Method = "POST",
+        //  UriTemplate = "GetParticipantsList",
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //  ResponseFormat = WebMessageFormat.Json,
+        //  RequestFormat = WebMessageFormat.Json)]
+        //List<Participant> GetParticipantsList(int? iEventId);
+
+        #endregion
+
     }
 
 }
