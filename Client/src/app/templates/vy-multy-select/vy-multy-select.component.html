@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 
 <div  style="height: 1px00; width: 300px;">
 <div   style="border: 1px solid black; width: 100px; height: 25px;" (click)="flag=!flag; openOrClose()" ></div>
   <div  class="hebrew" *ngIf="flag==true" >
     <div  >
       <input type="checkbox" value="selectAll"  class="hebrew"[(ngModel)]="checkboxValueSelectAll" checked  (change)="selectAll()">בחר הכל</div>
+=======
+<p>
+  vy-multy-select works!
+</p>
+<div style="border: 1px solid black; width: 100px; height: 25px;" (click)="flag=!flag; aaa()" class="a"></div>
+  <div *ngIf="flag==true" dir="rtl">
+    <div>
+      <input type="checkbox" value="selectAll" [(ngModel)]="checkboxValueSelectAll" checked  (change)="selectAll()">בחר הכל</div>
+>>>>>>> 9c380dbd920d766f8d5aa4411f6e6d37f7adde91
     <div>
        <!-- name="selectAll" id="selectAll"-->
       <input    type="text" placeholder="חפש" [(ngModel)]="search" style="border: 1px solid black;">
@@ -14,4 +24,7 @@
       <span class="hebrew" >{{item.name}}</span>
     </div>
 </div>
+<<<<<<< HEAD
 </div>
+=======
+>>>>>>> 9c380dbd920d766f8d5aa4411f6e6d37f7adde91

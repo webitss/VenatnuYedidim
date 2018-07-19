@@ -8,6 +8,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 //--- templates ---
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
+import { VyTableFilterPipe } from './templates/vy-table/vy-table-filter.pipe';
+import { VyTableOrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
 
 //--- services ---
 import { AppProxy } from './services/app.proxy';
@@ -55,6 +57,8 @@ import { SysTableService } from './services/sys-table.service';
   declarations: [
     //templates
     VyTableComponent,
+    VyTableFilterPipe,
+    VyTableOrderByPipe,
 
     //components
     AppComponent,
@@ -95,7 +99,7 @@ import { SysTableService } from './services/sys-table.service';
     VyMultySelectComponent,
     StudentConversationComponent,
     StudentConversationDetailsComponent,
-    StudentMeetingDetailsComponent,    
+    StudentMeetingDetailsComponent,
   ],
   imports: [
     Ng2SearchPipeModule,
@@ -105,20 +109,23 @@ import { SysTableService } from './services/sys-table.service';
     HttpClientModule,
     RouterModule.forRoot([
      // { path: "", component: StudentsComponent },
-     {path:"vy-multy-select",component:VyMultySelectComponent},
       { path: "students", component: StudentsComponent },
       {
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
           { path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
-          { path: "student-meetings", component: StudentMeetingsComponent ,children:[
-          {path:"student-meeting-details/:iMeetingId",component:StudentMeetingDetailsComponent}
-          ]},
-          { path: "student-conversations", component: StudentConversationsComponent ,children:[
-            { path: "student-conversation", component: StudentConversationComponent },
-            { path: "student-conversation-details", component: StudentConversationDetailsComponent },
-          ]},
+          {
+            path: "student-meetings", component: StudentMeetingsComponent, children: [
+              { path: "student-meeting-details/:iMeetingId", component: StudentMeetingDetailsComponent }
+            ]
+          },
+          {
+            path: "student-conversations", component: StudentConversationsComponent, children: [
+              { path: "student-conversation", component: StudentConversationComponent },
+              { path: "student-conversation-details/:ConversationId", component: StudentConversationDetailsComponent },
+            ]
+          },
         ]
       },
       { path: "avrechim", component: AvrechimComponent },
@@ -157,18 +164,21 @@ import { SysTableService } from './services/sys-table.service';
           { path: "", component: SettingsCodeTableComponent },
           { path: "settings-code-tables", component: SettingsCodeTableComponent },
           { path: "settings-reports", component: SettingsReportsComponent },
-          { path: "settings-yeshivot", component: SettingsYeshivotComponent,
-        children: [
-          { path:"new-yeshiva", component:NewYeshivaComponent}
-          ] },
+          {
+            path: "settings-yeshivot", component: SettingsYeshivotComponent,
+            children: [
+              { path: "new-yeshiva", component: NewYeshivaComponent }
+            ]
+          },
           { path: "settings-documents", component: SettingsDocumentsComponent },
           { path: "settings-frontend", component: SettingsFrontendComponent },
         ]
-      }
+      },
+      // { path: "vy-multy-select", component: VyMultySelectComponent }
 
     ], { useHash: true })
   ],
-  providers: [AppProxy,SysTableService],
+  providers: [AppProxy, SysTableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
