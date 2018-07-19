@@ -1,7 +1,5 @@
 
 
-<router-outlet></router-outlet>
-
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
@@ -19,19 +17,19 @@
          <a class="navbar-brand" href="#">שם תלמיד </a>
         </li>
        -->
-        <li  [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('StudentDetails') != -1}" class="nav-item">
+        <li  [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('StudentDetails') != -1}" class="tab">
             <a class="nav-link" routerLink="student-details">  פרטים אישיים<span class="sr-only">(current)</span></a>
       </li>
-      <li  [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('StudentMeetings') != -1}" class="nav-item">
+      <li  [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('StudentMeetings') != -1}" class="tab">
           <a class="nav-link" routerLink="student-meetings">  פגישות</a>
       </li>
-      <li  [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('StudentConversations') != -1}" class="nav-item">
+      <li  [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('StudentConversations') != -1}" class="tab">
           <a class="nav-link" routerLink="/students/student/1/student-conversations">  שיחות</a>
       </li>
-      <li  [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('sr') != -1}" class="nav-item">
+      <li  [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('sr') != -1}" class="tab">
           <a class="nav-link" href="#"> ארועים שהשתתף</a>
       </li>
-      <li  [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('sr') != -1}" class="nav-item">
+      <li  [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('sr') != -1}" class="tab">
           <a class="nav-link" href="#">מסמכים</a>
       </li>
     </ul>
@@ -45,17 +43,18 @@
   </div>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <div class="right"></div>
-            <a class="nav-link" href="#">שמור</a>
-            <div class="left"></div>
+            <a class="save" href="#">שמור</a>
           </li>
           
           <li class="nav-item">
-              <div class="right"></div>
-              <a class="nav-link" href="#">סגור</a>
-              <div class="left"></div>
+              <a class="close1" href="#">סגור</a>
             </li>
     </ul>
-    <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
+  
   </div>
 </nav>
+
+    
+<router-outlet>    </router-outlet>
+
+
