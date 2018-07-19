@@ -4,12 +4,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from "@angular/http";
 import { RouterModule, Route } from '@angular/router';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
+//import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 //--- templates ---
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
 import { VyTableFilterPipe } from './templates/vy-table/vy-table-filter.pipe';
 import { VyTableOrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
+
+//--- Pipes ---
+import { FilterPipe } from './pipes/filter.pipe';
 
 //--- services ---
 import { AppProxy } from './services/app.proxy';
@@ -53,12 +57,19 @@ import { StudentConversationDetailsComponent } from './components/student-conver
 import { StudentMeetingDetailsComponent } from './components/student-meeting-details/student-meeting-details.component';
 import { SysTableService } from './services/sys-table.service';
 
+import { inject } from '@angular/core/testing';
+import { injectElementRef } from '@angular/core/src/render3';
+
+
 @NgModule({
   declarations: [
     //templates
     VyTableComponent,
     VyTableFilterPipe,
     VyTableOrderByPipe,
+
+    // pipes
+    FilterPipe,
 
     //components
     AppComponent,
@@ -113,7 +124,7 @@ import { SysTableService } from './services/sys-table.service';
       {
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
-          { path: "", component: StudentDetailsComponent },
+         //{ path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
           {
             path: "student-meetings", component: StudentMeetingsComponent, children: [

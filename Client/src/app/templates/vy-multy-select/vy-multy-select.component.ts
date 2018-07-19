@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { forEach } from '@angular/router/src/utils/collection';
 //import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @Component({
@@ -8,54 +8,65 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class VyMultySelectComponent implements OnInit {
 
-  // constructor() { this.filterList = new Array<any>(); }
-  // @Input()
-  // @Output()
-  // fullList: any[] ;
-  // flag = false;
-  // checkboxValueSelectAll: boolean;
+  constructor() { }
+  @Input()
+  @Output()
+  fullList: Array<any>;
+  flag = false;
+  checkboxValueSelectAll: boolean;
 
-  // @Input()
-  // id: string;
-  // filterList: any[];
+  id: string;
 
-  // openOrClose() {
-  //   if (this.flag == false) {
-       
-  //      this.filterList.splice(0,this.filterList.length);
-  //     this.fullList.forEach(element => {
-  //       if (element['bChecked'] == true)
-  //        {
-  //          this.filterList.push(element);
-  //          }
-  //     });
-  //   }
-    
-  // }
+  @Input()
+  @Output()
+  selectedList: Array<any>;
+
+  @Output()
+  onSave: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
 
 
+  openOrClose() {
+    debugger;
+    if (this.flag == false) {
+     // if(this.selectedList!=null)
+      this.selectedList.splice(0, this.selectedList.length);
+      this.fullList.forEach(element => {
+        if (element['bMultySelectChecked'] == true) {
+          this.selectedList.push(element);
+        }
+      });
+      this.onSave.emit(this.selectedList);
+      debugger;
+    }
+  }
 
-  // selectAll() {
-  //   if (this.checkboxValueSelectAll == true)
-  //     this.fullList.forEach(element => {
-  //       element['bChecked'] = true;
-  //     });
-  //   else
-  //     this.fullList.forEach(element => {
-  //       element['bChecked'] = false;
-  //     });
-  // }
 
-  // //select(i: number) {
-  //   // 
-  //   //this.fullList[i].bChecked = !this.fullList[i].bChecked;
-  // //}
+
+  selectAll() {
+    if (this.checkboxValueSelectAll == true)
+      this.fullList.forEach(element => {
+        element['bMultySelectChecked'] = true;
+      });
+    else
+      this.fullList.forEach(element => {
+        element['bMultySelectChecked'] = false;
+      });
+  }
+
+  //select(i: number) {
+  // 
+  //this.fullList[i].bMultySelectChecked = !this.fullList[i].bMultySelectChecked;
+  //}
 
   ngOnInit() {
-  //   this.fullList.forEach(element => {
-  //     element['bChecked'] = false;
+    this.selectedList=new Array<any>();
+    this.fullList.forEach(element => {
+      element['bMultySelectChecked'] = false;
+      //שיהיה דינאמי
+      element['toString'] = element['nvFirstName'] + element['nvLastName'] + element['nvIdentityCard'];
 
-  //   });
+    });
   }
 
 }
+

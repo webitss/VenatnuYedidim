@@ -13,7 +13,7 @@ namespace Service.Entities
     public class Person
     {
         #region Data Members
-
+        
         [DataMember]
         public int iPersonId { get; set; }
         [DataMember]
@@ -44,14 +44,14 @@ namespace Service.Entities
         //}
         #region Methods
 
-        public static Person GetPersonById(int iPersonId)
+        public static Person GetPerson(int iPersonId)
         {
             try
             {
                 DataRow dr = SqlDataAccess.ExecuteDatasetSP("TPerson_GetPersonById_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
-                Person user = ObjectGenerator<User>.GeneratFromDataRow(dr);
+                Person person = ObjectGenerator<User>.GeneratFromDataRow(dr);
 
-                return user;
+                return person;
             }
             catch (Exception ex)
             {

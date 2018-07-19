@@ -1,11 +1,18 @@
-<p> 
-  settings component
-</p>
-<ul>
-  <li><a class="control" routerLink="settings-code-tables">טבלאות קוד</a></li>
-  <li><a class="control" routerLink="settings-reports">דוחו"ת</a></li>
-  <li><a class="control" routerLink="settings-yeshivot">מוסדות</a></li>
-  <li><a class="control" routerLink="settings-documents">מסמכים</a></li>
-  <li><a class="control" routerLink="settings-frontend">תדמית</a></li>
+<ul class="navbar-nav mr-auto">
+  <li [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('SettingsCodeTable') != -1}" class="tab">
+    <a class="control" routerLink="settings-code-tables">טבלאות קוד</a>
+  </li>
+  <li [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('SettingsReports') != -1}" class="tab">
+    <a class="control" routerLink="settings-reports">דוחו"ת</a>
+  </li>
+  <li [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('SettingsYeshivot') != -1}" class="tab">
+    <a class="control" routerLink="settings-yeshivot">מוסדות</a>
+  </li>
+  <li [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('SettingsDocuments') != -1}" class="tab">
+    <a class="control" routerLink="settings-documents">מסמכים</a>
+  </li>
+  <li [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('StudentFrontend') != -1}" class="tab">
+    <a class="control" routerLink="settings-frontend">תדמית</a>
+  </li>
 </ul>
-<router-outlet></router-outlet>
+<router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>

@@ -23,7 +23,8 @@ this.sysTableService.getValues(id);
   }
   getValues(){
     
-    this.sysTableService.getValues(1).then(data=>this.Values=data,error=>alert(error) );;
+    this.sysTableService.getValues(1).then(data=>this.Values=data,error=>alert(error) );
+    
   }
   ff(){
     alert("select");

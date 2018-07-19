@@ -1,11 +1,19 @@
-<button name="addConversation" (click)="conversationId=1">הוסף שיחה</button>
+<button name="addConversation" (click)="newConversation()">הוסף שיחה</button>
 
 <!-- <router-outlet></router-outlet> -->
-<!-- <app-student-conversations *ngFor="let conver of conversations">
-    <app-student-conversation></app-student-conversation>
-</app-student-conversations> -->
+ <ul>
+    <li *ngFor="let conver of conversationsList">
+        <div>
+<span>{{conver.conversationSummary}}</span>
+
+        </div>
+        <button name="UpdateConversation" (click)="conversationSelect=conver">ערוך שיחה</button>
+        <button name="delete" (click)="deleteConversation(1,1)" >מחק שיחה</button>
+       
+    </li>
+ </ul>
 
 
-<div *ngIf="conversationId==1">
-<app-student-conversation-details [iConversationId]=conversationId></app-student-conversation-details>
+<div *ngIf="conversationSelect!=null">
+<app-student-conversation-details [conversation]=conversationSelect></app-student-conversation-details>
 </div>

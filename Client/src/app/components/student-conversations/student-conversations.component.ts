@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
-import {Conversation} from '../../classes/conversation';
+import { Conversation } from '../../classes/conversation';
 
-import {StudentConversationDetailsComponent} from '../student-conversation-details/student-conversation-details.component';
+import { StudentConversationDetailsComponent } from '../student-conversation-details/student-conversation-details.component';
 
 @Component({
   selector: 'app-student-conversations',
@@ -10,24 +10,41 @@ import {StudentConversationDetailsComponent} from '../student-conversation-detai
   styleUrls: ['./student-conversations.component.css']
 })
 export class StudentConversationsComponent implements OnInit {
-  
-  id:number=1;
-  conversations:Conversation[];
-  conversationId:number;
-  constructor(private appProxy:AppProxy) { }
-  
+
+  protected iPersonId: number = 7;
+  protected conversationsList: Array<Conversation> = new Array<Conversation>();
+  protected conversationSelect: Conversation;
+  constructor(private appProxy: AppProxy) { }
+
+  newConversation() {
+    this.conversationSelect = new Conversation();
+  }
+
+
+  deleteConversation(iConversationId: number, iUserId: number) {
+    this.appProxy.post("DeleteConversations", { iConversationId: iConversationId, iUserId: 1 })
+      .then(
+        data => {
+          this.conversationsList = data;
+          alert("sucsses");
+        }).catch(err => {
+          alert(err);
+        });
+  }
 
   ngOnInit() {
-  this.appProxy.post("GetConversations",{iPersonId:this.id})
-  .then(
-    data=>{
-      this.conversations=data;
-      alert("good");
-    }).catch(err=>{
-    alert(err);
-    });
+
+    // this.activatedRoute.parent.params.subscribe(params => {
+    //   this.id=params['iPersonId'];
+    // })  
+    this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
+      .then(
+        data => {
+          this.conversationsList = data as (Array<Conversation>);
+          alert(this.conversationsList[0].iPersonId );
+        });
   }
-  
-   
+
+
 
 }

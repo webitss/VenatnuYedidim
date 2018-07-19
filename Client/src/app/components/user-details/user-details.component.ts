@@ -16,26 +16,15 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit() {
     debugger;
     this.router.params.subscribe(params => {
-      if (params['iPersonId'] != 0)
-        this.appProxy.post("GetUserByPersonId", { iPersonId: 1 })
+      if (params['iPersonId'] != '0') {
+        this.appProxy.post("GetUser", { iPersonId: params['iPersonId'] })
           .then(data => {
-            if (data.iPersonId != 0){
-              this.user = data;
-              this.appProxy.post("GetPersonById", { iPersonId: 1 })
-              .then(data => {
-                this.person = data;
-              }).catch(err => {
-                alert("Error!");
-              });
-            }
-            else{
-              this.user = new User();
-              this.person = new Person();
-            } 
-          }).catch(err => {
-            alert("Error!");
+            this.user = data;
           });
-
+      }
+      else {
+        this.user = new User();
+      }
     });
   }
 
@@ -43,13 +32,10 @@ export class UserDetailsComponent implements OnInit {
 
   @Input()
   @Output()
-  user: User;
+  public user: User;
 
   @Input()
   @Output()
-  person: Person;
+  public person: Person;
 
-  // @Input()
-  // @Output()
-  // isNew: boolean = false;
 }

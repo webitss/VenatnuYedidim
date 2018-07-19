@@ -7,21 +7,23 @@ namespace Service
     public class Service : IService
     {
         #region Person
-        public Person GetPersonById(int iPersonId)
-        {
-            return Person.GetPersonById(iPersonId);
-        }
+
+        //public Person GetPerson(int iPersonId)
+        //{
+        //    return Person.GetPerson(iPersonId);
+        //}
         #endregion
+
         #region User
 
-        public List<User> GetUsersByPermittion(int iPersonId)
+        public List<User> GetUsers(int iPersonId)
         {
             return User.GetUsers(iPersonId);
         }
 
-        public User GetUserByPersonId(int iPersonId)
+        public User GetUser(int iPersonId)
         {
-            return User.GetUserByPersonId(iPersonId);
+            return User.GetUser(iPersonId);
         }
 
         public User Login(string nvUserName, string nvPassword)
@@ -90,10 +92,10 @@ namespace Service
 
         #region Avrech
 
-        public bool AddEvent(Event oEvent)
-        {
-            return Event.AddEvent(oEvent);
-        }
+        //public bool AddEvent(Event oEvent, int iUserId)
+        //{
+        //    return Event.AddEvent(oEvent);
+        //}
 
         //public List<Event> GetEventsList(int iUserId)
         //{
@@ -110,7 +112,7 @@ namespace Service
             return Avrech.GetAvrechById(iPersonId);
         }
 
-        public List<Person> GetAvrechStudents(int iPersonId)
+        public List<Student> GetAvrechStudents(int iPersonId)
         {
             return Avrech.GetAvrechStudents(iPersonId);
         }
@@ -185,7 +187,19 @@ namespace Service
             return Yeshivot.AddYeshiva(yeshiva);
         }
 
+
         #endregion
+
+        #region Documents
+
+        #endregion
+
+
+        public List<Document> GetDocuments()
+        {
+            return Document.GetDocuments();
+        }
+
     }
 
 }
