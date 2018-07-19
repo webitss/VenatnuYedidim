@@ -1,7 +1,3 @@
-<p>
-  new-yeshiva works!
-</p>
-
 <div>שם מוסד</div>
 <input type="text" maxlength="50" [(ngModel)]="yeshiva.nvYeshivaName"/>
 <div>כתובת</div> 
@@ -14,6 +10,7 @@
 <input type="text" maxlength="50" [(ngModel)]="yeshiva.nvMobile"/>
 <div>מייל</div>
 <input type="text" maxlength="50" [(ngModel)]="yeshiva.nvEmail"/>
+
 <div>תפקיד</div>
 <select>
   <option>תפקיד 1</option>
@@ -21,4 +18,6 @@
   <option>תפקיד 3</option>
 </select>
 
-<button (click)="save">שמור</button>
+<button (click)="save()">שמור</button>
+
+<!-- settings-yeshivot -->

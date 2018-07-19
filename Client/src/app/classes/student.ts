@@ -1,8 +1,8 @@
 import { Person } from "./person";
 
 export class Student implements Person {
-    iPersonId: number;
-    nvFirstName: String;
+     iPersonId: number;
+   nvFirstName: String;
     nvLastName: String;
     nvIdentityCard: String;
     nvPhone: String;
@@ -10,11 +10,6 @@ export class Student implements Person {
     dtBirthday:Date;
     nvAddress: String;
     nvCity: String;
-    iCreatedByUserId: number;
-    dtCreatedate: Date;
-    iLastModifyUserId: number;
-    dtLastModifyDate: Date;
-    bSysRowStatus: boolean;
     nvStatus: String;
     nvMobile: String;
     nvEmail: String;
@@ -30,10 +25,11 @@ export class Student implements Person {
     nvCauseOfDeathFather:string;
     nvCauseOfDeathMother:string;
     nvImgStudent:string
-    nvYeshiva:string
+    nvYeshivaName:string
     nvYeshivaStreet:string
     nvYeshivaCity	:string
     dtAddStudentDate:Date;
     nvComment:string;
     
+    constructor(){}
 }

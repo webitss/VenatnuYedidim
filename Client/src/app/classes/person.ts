@@ -1,19 +1,32 @@
-export class Person{
-    iPersonId:number;
-    nvFirstName:String;
-    nvLastName:String;
-    nvIdentityCard:String;
-    nvPhone:String;
-    nvMobile:String;
-    nvEmail:String;
-    nvAddress:String;
-    nvCity:String;
-    iCreatedByUserId:number;
-    dtCreatedate:Date;	
-    iLastModifyUserId:number;
-    dtLastModifyDate:Date;
-    bSysRowStatus:boolean;
-    nvStatus:String;
+export class Person {
+    public iPersonId: number;
+    public nvFirstName: String;
+    public nvLastName: String;
+    public nvIdentityCard: String;
+    public nvPhone: String;
+    public nvMobile: String;
+    public nvEmail: String;
+    public nvAddress: String;
+    public nvCity: String;
+    public iCreatedByUserId: number;
+    public dtCreatedate: Date;
+    public iLastModifyUserId: number;
+    public dtLastModifyDate: Date;
+    public bSysRowStatus: boolean;
+    public nvStatus: String;
 
-    
+    constructor() {
+        this.iPersonId = 0;
+        this.nvFirstName = '';
+        this.nvLastName = '';
+        this.nvIdentityCard = '';
+        this.nvPhone = '';
+        this.nvMobile = '';
+        this.nvEmail = '';
+        this.nvAddress = '';
+        this.nvCity = '';
+
+    }
+
+
 }

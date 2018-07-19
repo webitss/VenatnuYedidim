@@ -13,11 +13,11 @@ namespace Service
         [OperationContract]
         [WebInvoke(
            Method = "POST",
-           UriTemplate = "GetPersonById",
+           UriTemplate = "GetPerson",
            BodyStyle = WebMessageBodyStyle.WrappedRequest,
            ResponseFormat = WebMessageFormat.Json,
            RequestFormat = WebMessageFormat.Json)]
-        Person GetPersonById(int iPersonId);
+        Person GetPerson(int iPersonId);
         #endregion
 
 
@@ -26,11 +26,11 @@ namespace Service
         [OperationContract]
         [WebInvoke(
            Method = "POST",
-           UriTemplate = "GetUsersByPermittion",
+           UriTemplate = "GetUsers",
            BodyStyle = WebMessageBodyStyle.WrappedRequest,
            ResponseFormat = WebMessageFormat.Json,
            RequestFormat = WebMessageFormat.Json)]
-        List<User> GetUsersByPermittion(int iPersonId);
+        List<User> GetUsers(int iPersonId);
 
         [OperationContract]
         [WebInvoke(
@@ -45,11 +45,11 @@ namespace Service
         [OperationContract]
         [WebInvoke(
            Method = "POST",
-           UriTemplate = "GetUserByPersonId",
+           UriTemplate = "GetUser",
            BodyStyle = WebMessageBodyStyle.WrappedRequest,
            ResponseFormat = WebMessageFormat.Json,
            RequestFormat = WebMessageFormat.Json)]
-        User GetUserByPersonId(int iPersonId);
+        User GetUser(int iPersonId);
 
         [OperationContract]
         [WebInvoke(
@@ -147,7 +147,7 @@ namespace Service
         bool DeleteAvrechStudent(int iAvrechId, int iStudentId);
         #endregion
 
-        #region student
+    
 
         [OperationContract]
         [WebInvoke(
@@ -156,10 +156,11 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Person> GetAvrechStudents(int iPersonId);
+        List<Student> GetAvrechStudents(int iPersonId);
 
-        #endregion
 
+
+        #region events
         [OperationContract]
         [WebInvoke(
         Method = "POST",
@@ -167,7 +168,8 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool AddEvent(Event oEvent);       
+        bool AddEvent(Event1 addEvent);
+        #endregion
 
         #region Meeting
 

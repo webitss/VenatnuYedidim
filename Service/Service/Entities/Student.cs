@@ -15,20 +15,22 @@ namespace Service.Entities
     {
         #region Data Members
 
+       // [DataMember]
+        //public int iStudentId { get; set; }
         [DataMember]
         public string nvImgStudent { get; set; }
         [DataMember]
         public string nvBirthdate { get; set; }
         [DataMember]
-        public DateTime dtBirthdate { get; set; }
+        public DateTime? dtBirthdate { get; set; }
         [DataMember]
         public string nvFatherDeathDate { get; set; }
         [DataMember]
         public string nvMotherDeathDate { get; set; }
         [DataMember]
-        public bool bDeathFather { get; set; }
+        public bool? bDeathFather { get; set; }
         [DataMember]
-        public bool bDeathMother { get; set; }
+        public bool? bDeathMother { get; set; }
         [DataMember]
         public string nvCauseOfDeathFather { get; set; }
         [DataMember]
@@ -39,20 +41,29 @@ namespace Service.Entities
         public string nvComment { get; set; }
         [DataMember]
         public int iStatusType { get; set; }
-
+        [DataMember]
+        public string nvYeshivaName { get; set; }
+        [DataMember]
+        public string nvYeshivaStreet { get; set; }
+        [DataMember]
+        public string nvYeshivaCity { get; set; }
+        	
         #endregion
 
         public static List<Student> GetStudentList(int iUserId)
         {
             try
             {
-                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TStudent_SLCT", new SqlParameter("iPersonId", iUserId)).Tables[0].Rows;
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TStudentGetStudentByUser_SLCT", new SqlParameter("iUserId", iUserId)).Tables[0].Rows;
                 List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
                 return students;
             }
+
+   
+
             catch (Exception ex)
             {
-                Log.LogError("GetStudentList / TStudent_SLCT", "ex" + ex);
+                Log.LogError("GetStudentList / TStudentGetStudentByUser_SLCT", "ex" + ex);
                 return null;
             }
         }

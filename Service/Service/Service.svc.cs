@@ -7,21 +7,21 @@ namespace Service
     public class Service : IService
     {
         #region Person
-        public Person GetPersonById(int iPersonId)
+        public Person GetPerson(int iPersonId)
         {
-            return Person.GetPersonById(iPersonId);
+            return Person.GetPerson(iPersonId);
         }
         #endregion
         #region User
 
-        public List<User> GetUsersByPermittion(int iPersonId)
+        public List<User> GetUsers(int iPersonId)
         {
             return User.GetUsers(iPersonId);
         }
 
-        public User GetUserByPersonId(int iPersonId)
+        public User GetUser(int iPersonId)
         {
-            return User.GetUserByPersonId(iPersonId);
+            return User.GetUser(iPersonId);
         }
 
         public User Login(string nvUserName, string nvPassword)
@@ -65,11 +65,7 @@ namespace Service
         }
 
 
-        public bool UpdateAvrech(Avrech avrech, int iUserId)
-        {
-            return Avrech.UpdateAvrech(avrech, iUserId);
-        }
-
+        
         public bool AddStudent(Student student, int iUserId)
         {
             return Student.AddStudent(student, iUserId);
@@ -88,17 +84,27 @@ namespace Service
         }
         #endregion
 
-        #region Avrech
+        #region Event1
 
-        public bool AddEvent(Event oEvent)
+        public bool AddEvent(Event1 addEvent)
         {
-            return Event.AddEvent(oEvent);
+            return Event1.AddEvent(addEvent);
         }
 
         //public List<Event> GetEventsList(int iUserId)
         //{
         //    return Event.GetEventsList(iUserId);
         //}
+
+        #endregion
+
+        #region Avrech
+
+        public bool UpdateAvrech(Avrech avrech, int iUserId)
+        {
+            return Avrech.UpdateAvrech(avrech, iUserId);
+        }
+
 
         public List<Avrech> GetAllAvrechim(int? iPersonId)
         {
@@ -109,21 +115,21 @@ namespace Service
         {
             return Avrech.GetAvrechById(iPersonId);
         }
-
-        public List<Person> GetAvrechStudents(int iPersonId)
+              
+        public List<Student> GetAvrechStudents(int iPersonId)
         {
             return Avrech.GetAvrechStudents(iPersonId);
         }
 
-        public bool DeleteAvrechStudent(int iAvrechId,int iStudentId)
+        public bool DeleteAvrechStudent(int iAvrechId, int iStudentId)
         {
             return Avrech.DeleteAvrechStudent(iAvrechId, iStudentId);
         }
-        
+
 
 
         #endregion
-            
+
         #region files
 
         public string SaveFileByBase64(string base64File, string fileName)
@@ -133,7 +139,7 @@ namespace Service
 
 
         #endregion
-        
+
         #region SysTableRow
         public List<SysTableRow> GetValues(int iSysTableId)
         {
@@ -184,6 +190,7 @@ namespace Service
         {
             return Yeshivot.AddYeshiva(yeshiva);
         }
+
 
         #endregion
     }

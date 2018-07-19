@@ -11,41 +11,41 @@ import { Conversation } from '../../classes/conversation';
 export class StudentConversationDetailsComponent implements OnInit {
   private sub: any;
   @Input()
-  protected iConversationId:number;
+  protected conversation: Conversation;
 
-  iUserId:number;
+  iUserId: number;
   //conversationId:number;
-  conversation:Conversation;
+  //conversation:Conversation;
   // conversationType:number;
   //   conversationDate:Date;
   //   conversationDateTime:Date;
   //   conversationSummary:string;
   //   NextconversationDate:Date;
-  constructor(private route:ActivatedRoute,private appProxy:AppProxy) { }
+  constructor(private route: ActivatedRoute, private appProxy: AppProxy) { }
 
-  addConversation(iConversationId:number)
-  {
-    if(iConversationId==1){
-    this.appProxy.post("AddConversations",{conversation:this.conversation,iUserId:this.iUserId,})
-     .then(
-    data=>{
-      this.conversation=data;
-      alert("good");
-    }).catch(err=>{
-    alert(err);
-    });
-    }
-    
-    }   
-    
+  addConversation() {
+
+    this.appProxy.post("AddConversations", { conversation: this.conversation, iUserId: this.iUserId })
+      .then(
+        data => {
+          if (data)
+            alert("good");
+          else
+            alert("no good");
+        });
+  }
+
+
+
 
 
   ngOnInit() {
-    this.sub=this.route.params.subscribe(params=>{
-      this.iConversationId=+params['conversationId'];
-    });
-   }
-   ngOnDestroy() {
-     this.sub.unsubscribe();
-     }
+    // this.sub=this.route.params.subscribe(params=>{
+    //   this.iconversationId=+params['conversationId'];
+    // });
+  }
+  //  ngOnDestroy() {
+  //    this.sub.unsubscribe();
+  //    }
+
 }
