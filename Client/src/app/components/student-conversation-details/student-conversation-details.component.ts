@@ -11,9 +11,9 @@ import { Conversation } from '../../classes/conversation';
 export class StudentConversationDetailsComponent implements OnInit {
   private sub: any;
   @Input()
-  protected conversation:Conversation;
+  protected conversation: Conversation;
 
-  iUserId:number;
+  iUserId: number;
   //conversationId:number;
   //conversation:Conversation;
   // conversationType:number;
@@ -21,31 +21,31 @@ export class StudentConversationDetailsComponent implements OnInit {
   //   conversationDateTime:Date;
   //   conversationSummary:string;
   //   NextconversationDate:Date;
-  constructor(private route:ActivatedRoute,private appProxy:AppProxy) { }
+  constructor(private route: ActivatedRoute, private appProxy: AppProxy) { }
 
-  addConversation()
-  {
-  
-    this.appProxy.post("AddConversations",{conversation:this.conversation,iUserId:this.iUserId})
-     .then(
-    data=>{
-     if(data)
-      alert("good");
-      else
-      alert("no good");
-    });
+  addConversation() {
+
+    this.appProxy.post("AddConversations", { conversation: this.conversation, iUserId: this.iUserId })
+      .then(
+        data => {
+          if (data)
+            alert("good");
+          else
+            alert("no good");
+        });
   }
-    
-    
-    
+
+
+
 
 
   ngOnInit() {
     // this.sub=this.route.params.subscribe(params=>{
     //   this.iconversationId=+params['conversationId'];
     // });
-   }
+  }
   //  ngOnDestroy() {
   //    this.sub.unsubscribe();
   //    }
 
+}

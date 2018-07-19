@@ -1,0 +1,15 @@
+.btn{
+    width: 170px;
+    height: 45px;
+    border-radius: 30px;
+    color: white;
+    margin-top: 50px;
+}
+.consolidation{
+    background-color: orange;
+}
+.newStudent{
+    background-color:  rgb(207, 37, 94);
+    margin-right: 10px;
+    margin-left: 80px;
+}
