@@ -47,7 +47,7 @@ namespace Service.Entities
             }
             catch (Exception ex)
             {
-                Log.LogError("GetParticipantsList / TParticipant_SLCT", "ex" + ex);
+                Log.LogError("GetParticipantsList / TParticipant_SLCT", "ex" + ex +", iEventId : "+ iEventId);
                 return null;
             }
         }

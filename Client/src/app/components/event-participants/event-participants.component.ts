@@ -8,17 +8,17 @@ import { Participants } from '../../classes/participants';
   styleUrls: ['./event-participants.component.css']
 })
 export class EventParticipantsComponent implements OnInit {
-Id:number=1;
+  iEventId:number=1;
 participant:Participants[];
   constructor(private appProxy:AppProxy) { }
 
   ngOnInit() {
-    this.appProxy.post("GetParticipantsList",{iEventId:this.Id})
+    this.appProxy.post("GetParticipantsList",{iEventId:this.iEventId})
     .then(
     data=>{
       this.participant=data;
       alert("good");
-    }).catch(err=>{
+    },err=>{
     alert(err);
     });
   }
