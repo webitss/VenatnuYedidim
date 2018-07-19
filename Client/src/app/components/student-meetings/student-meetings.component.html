@@ -1,13 +1,15 @@
 <!-- <router-outlet></router-outlet> -->
 
-<button  (click)="iMeetingId=0">הוספת פגישה</button> 
- <button (click)="iMeetingId=1">עריכה</button>
- <div *ngIf="iMeetingId >-1">
-    <app-student-meeting-details [meetingId]=iMeetingId></app-student-meeting-details> 
- </div> 
-<!-- <h1>{{meetingList[0].nvSummary}}</h1>
+<button  (click)="meeting=null; flag=1">הוספת פגישה</button>
+
  <ul>
-     <li *ngFor="let meeting of meetingList">
-         {{meeting.nvSummary}}
+     <li *ngFor="let item of meetingList">
+        
+         {{item.nvSummary }} <button (click)="meeting=item; flag=1">עריכה</button>
+
      </li>
- </ul> -->
+ </ul>
+
+ <div *ngIf="flag==1">
+    <app-student-meeting-details [meeting]=meeting></app-student-meeting-details> 
+ </div> 

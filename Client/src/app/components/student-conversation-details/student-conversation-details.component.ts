@@ -13,9 +13,9 @@ export class StudentConversationDetailsComponent implements OnInit {
   @Input()
   protected iConversationId:number;
 
-
+  iUserId:number;
   //conversationId:number;
-  conversations:Conversation[];
+  conversation:Conversation;
   // conversationType:number;
   //   conversationDate:Date;
   //   conversationDateTime:Date;
@@ -23,17 +23,21 @@ export class StudentConversationDetailsComponent implements OnInit {
   //   NextconversationDate:Date;
   constructor(private route:ActivatedRoute,private appProxy:AppProxy) { }
 
-  addConversation(iPersonId:number)
+  addConversation(iConversationId:number)
   {
-    this.appProxy.post("GetConversations",{iPersonId:iPersonId,})
-  .then(
+    if(iConversationId==1){
+    this.appProxy.post("AddConversations",{conversation:this.conversation,iUserId:this.iUserId,})
+     .then(
     data=>{
-      this.conversations=data;
+      this.conversation=data;
       alert("good");
     }).catch(err=>{
     alert(err);
     });
-  }
+    }
+    
+    }   
+    
 
 
   ngOnInit() {

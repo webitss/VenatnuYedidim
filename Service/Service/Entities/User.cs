@@ -49,13 +49,13 @@ namespace Service.Entities
         {
             try
             {
-                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TUser_GetUserByIPersonId", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TUser_GetUserByIPersonId_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
                 User user = ObjectGenerator<User>.GeneratFromDataRow(dr);
                 return user;
             }
             catch (Exception ex)
             {
-                Log.LogError("Login / TUser_ByUserNameAndPassword_SLCT", "iPersonId: " + iPersonId + ", ex " + ex);
+                Log.LogError("GetUserByPersonId / TUser_ByUserNameAndPassword_SLCT", "iPersonId: " + iPersonId + ", ex " + ex);
                 return null;
             }
         }
