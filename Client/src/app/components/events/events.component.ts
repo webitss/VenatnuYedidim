@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
+import { Event1 } from '../../classes/event';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-events',
@@ -7,17 +9,80 @@ import { AppProxy } from '../../services/app.proxy';
   styleUrls: ['./events.component.css']
 })
 export class EventsComponent implements OnInit {
+  protected eventsList: Event1[];
+  // lstDataRows: any[];
 
-  constructor(private appProxy:AppProxy) { }
+
+  constructor(private appProxy: AppProxy, private router: Router) { }
+
+
+  public lstColumns = [{
+    title: 'עריכה',
+    name: 'aa',
+    titleStyle: {
+      width: '25%',
+    },
+    filterStyle: {
+      width: '25%'
+    },
+    cellStyle: {
+      width: '25%',
+    }
+  },
+  {
+    title: 'שם ארוע',
+    name: 'nvName',
+    filterStyle: {
+      width: '25%'
+    },
+    cellStyle: {
+      width: '25%'
+    }
+  },
+
+  {
+    title: 'תאריך',
+    name: 'dtEventDate',
+    titleStyle: {
+      width: '25%'
+    },
+    filterStyle: {
+      width: '25%'
+    },
+    cellStyle: {
+      width: '25%',
+    }
+  },
+  {
+    title: 'מקום',
+    name: 'nvPlace',
+
+    filterStyle: {
+      width: '25%'
+    },
+    cellStyle: {
+      width: '25%'
+    }
+  }
+  ]
+  public lstDataRows = [];
+
 
   ngOnInit() {
 
     this.appProxy.post('GetEventsList', { iUserId: 0 }).then(res => {
       res.forEach(e => {
-       // this.lstDataRows.
+        this.lstDataRows.push({
+          nvName: e.nvName,
+          dtEventDate: e.dtEventDate.toLocaleDateString(),
+          nvPlace: e.nvPlace
+        });
+
       });
-     // this.lstDataRows = res;
-    })
+    }
+    )
+
+
   }
 
 }

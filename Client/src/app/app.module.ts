@@ -53,15 +53,17 @@ import { SettingsDocumentsComponent } from './components/settings-documents/sett
 import { SettingsFrontendComponent } from './components/settings-frontend/settings-frontend.component';
 import { NewYeshivaComponent } from './components/new-yeshiva/new-yeshiva.component';
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
-import { StudentConversationComponent } from './components/student-conversation/student-conversation.component';
 import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
 import { StudentMeetingDetailsComponent } from './components/student-meeting-details/student-meeting-details.component';
 import { SysTableService } from './services/sys-table.service';
 
 import { inject } from '@angular/core/testing';
 import { injectElementRef } from '@angular/core/src/render3';
+<<<<<<< HEAD
 import { EditYeshivaComponent } from './components/edit-yeshiva/edit-yeshiva.component';
 import { UploadDocumentComponent } from './components/upload-document/upload-document.component';
+=======
+>>>>>>> c437cbcc7b8d0cf28c3023b26e8114e9d8261128
 
 
 @NgModule({
@@ -111,7 +113,6 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
     NewYeshivaComponent,
 
     VyMultySelectComponent,
-    StudentConversationComponent,
     StudentConversationDetailsComponent,
     StudentMeetingDetailsComponent,
     EditYeshivaComponent,
@@ -139,7 +140,6 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
           },
           {
             path: "student-conversations", component: StudentConversationsComponent, children: [
-              { path: "student-conversation", component: StudentConversationComponent },
               { path: "student-conversation-details/:ConversationId", component: StudentConversationDetailsComponent },
             ]
           },
@@ -166,7 +166,7 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
         children: [
           { path: "", component: EventDetailsComponent },
           { path: "event-details", component: EventDetailsComponent },
-          { path: "event-participants", component: EventParticipantsComponent }
+          { path: "event-participants/:iEventId", component: EventParticipantsComponent }
         ]
       },
       { path: "graduates", component: GraduatesComponent },
@@ -188,8 +188,7 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "new-yeshiva", component: NewYeshivaComponent },
-              { path: "edit-yeshiva", component:EditYeshivaComponent}
+              { path: "new-yeshiva", component: NewYeshivaComponent }
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },

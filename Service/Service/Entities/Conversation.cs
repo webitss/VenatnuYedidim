@@ -33,13 +33,21 @@ namespace Service.Entities
 
 
         #endregion
+        public Conversation()
+        {
+            dConversationDate = new DateTime();
+            dtConversationTime = new DateTime();
+            dtNextConversationDate = new DateTime();
+        }
+
 
         public static List<Conversation> GetConversations(int? iPersonId)
         {
             try
             {
-                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TConversation_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0];
-                return ObjectGenerator<Conversation>.GeneratListFromDataRowCollection(dt.Rows);            
+                DataRowCollection dt = SqlDataAccess.ExecuteDatasetSP("TConversation_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
+                List<Conversation> conversations=ObjectGenerator<Conversation>.GeneratListFromDataRowCollection(dt);
+               return conversations;
             }
             catch (Exception ex)
             {
@@ -56,12 +64,11 @@ namespace Service.Entities
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
-
                 parameters.Add(new SqlParameter("iCreatedByUserId", iPersonId));
-
-
-                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters).Tables[0].Rows[0];
+               SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters);
                 return true;
+
+               
             }
             catch (Exception ex)
             {
@@ -70,15 +77,16 @@ namespace Service.Entities
             }
         }
 
-        public static bool UpdateConversation(Conversation conversation, int iUserId)
+        public static bool UpdateConversation(Conversation conversation, int iPersonId)
         {
 
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
-                parameters.Add(new SqlParameter("iLastModifyUserId", conversation.iConversationType));
+                parameters.Add(new SqlParameter("iLastModifyUserId", iPersonId));
+                SqlDataAccess.ExecuteDatasetSP("TConversation_UPD", parameters);
+                
 
-                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_UPD", parameters).Tables[0].Rows[0];
                 return true;
             }
             catch (Exception ex)
@@ -87,14 +95,14 @@ namespace Service.Entities
                 return false;
             }
         }
-        public static bool DeleteConversation(int iConversationId, int iUserId)
+        public static bool DeleteConversation(int iConversationId, int iPersonId)
         {
             try
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();
                 parameters.Add(new SqlParameter("iConversationId", iConversationId));
-                parameters.Add(new SqlParameter("iLastModifyUserId", iUserId));
-                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TConversation_DEL", parameters).Tables[0].Rows[0];
+                parameters.Add(new SqlParameter("iLastModifyUserId", iPersonId));
+                SqlDataAccess.ExecuteDatasetSP("TConversation_DEL", parameters);
 
                 return true;
             }
