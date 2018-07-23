@@ -10,7 +10,6 @@ import { Conversation } from '../../classes/conversation';
 })
 export class StudentConversationDetailsComponent implements OnInit {
   private sub: any;
-  protected idConversationId:number;
   @Input()
   protected conversation: Conversation;
 
