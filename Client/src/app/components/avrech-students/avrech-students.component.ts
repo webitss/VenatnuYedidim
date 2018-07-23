@@ -14,11 +14,12 @@ export class AvrechStudentsComponent implements OnInit {
   id: number;
   students: Student[];
   //מסוג סטודנט עם שליפה מהסרביס
-  allStudents: any[] = [{ iPersonId: 1, nvFirstName: "chaim", nvLastName: "choen", nvIdentityCard: "123456789" },
-  { iPersonId: 2, nvFirstName: "yeoda", nvLastName: "levi", nvIdentityCard: "987654321" },
-  { iPersonId: 3, nvFirstName: "pinchas", nvLastName: "lev", nvIdentityCard: "147258369" },
-  { iPersonId: 4, nvFirstName: "rafi", nvLastName: "catz", nvIdentityCard: "963852741" },
-  { iPersonId: 5, nvFirstName: "asher", nvLastName: "green", nvIdentityCard: "741852963" }];
+  allStudents: Array<Student>;
+  //  [{ iPersonId: 1, nvFirstName: "chaim", nvLastName: "choen", nvIdentityCard: "123456789" },
+  // { iPersonId: 2, nvFirstName: "yeoda", nvLastName: "levi", nvIdentityCard: "987654321" },
+  // { iPersonId: 3, nvFirstName: "pinchas", nvLastName: "lev", nvIdentityCard: "147258369" },
+  // { iPersonId: 4, nvFirstName: "rafi", nvLastName: "catz", nvIdentityCard: "963852741" },
+  // { iPersonId: 5, nvFirstName: "asher", nvLastName: "green", nvIdentityCard: "741852963" }];
   studentsToAdd: Array<any> = new Array<any>();
   constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy) {
 
@@ -35,7 +36,7 @@ export class AvrechStudentsComponent implements OnInit {
   }
 
   saveAdd() {
-    //לשלוח ל DB
+    
     this.flag = false
   }
 
@@ -44,6 +45,9 @@ export class AvrechStudentsComponent implements OnInit {
       this.id = params['iPersonId'];
     })
     this.appProxy.post('GetAvrechStudents', { iPersonId: this.id }).then(data => this.students = data
+      , err => alert(err));
+
+    this.appProxy.post('GetStudentList', { iPersonId: 0 }).then(data =>this.allStudents = data
       , err => alert(err));
   }
 
