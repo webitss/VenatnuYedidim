@@ -1,4 +1,5 @@
-﻿using Service.Utilities;
+﻿using Newtonsoft.Json;
+using Service.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +15,7 @@ namespace Service.Entities
     {
         #region Data Members
 
+        [NoSendToSQL]
         [DataMember]
         public int iYeshivaId { get; set; }
         [DataMember]
@@ -32,6 +34,8 @@ namespace Service.Entities
         public string nvMobile { get; set; }
 
         #endregion
+
+        #region Methods
 
         public static List<Yeshivot> GetAllYeshivot(int iYeshivaId)
         {
@@ -53,23 +57,33 @@ namespace Service.Entities
         {
             try
             {
-                List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("nvYeshivaName", yeshiva.nvYeshivaName));
-                parameters.Add(new SqlParameter("nvAddress", yeshiva.nvAddress));
-                parameters.Add(new SqlParameter("nvCity", yeshiva.nvCity));
-                parameters.Add(new SqlParameter("nvContact", yeshiva.nvContact));
-                parameters.Add(new SqlParameter("iRoleType", yeshiva.nvRoleType));
-                parameters.Add(new SqlParameter("nvEmail", yeshiva.nvEmail));
-                parameters.Add(new SqlParameter("nvMobile", yeshiva.nvMobile));
-
+                List<SqlParameter> parameters = ObjectGenerator<Yeshivot>.GetSqlParametersFromObject(yeshiva);
                 DataRow dr = SqlDataAccess.ExecuteDatasetSP("TYeshivot_INS",parameters).Tables[0].Rows[0];
                 return true;
             }
             catch (Exception ex)
             {
-                Log.LogError("AddYeshiva / TYeshivot_INS", "ex" + ex);
+                Log.LogError("AddYeshiva / TYeshivot_INS", "ex" + ex + ", yeshiva: " + JsonConvert.SerializeObject(yeshiva));
                 return false;
             }
         }
+
+        public static bool EditYeshiva(Yeshivot yeshiva, int iYeshivaId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = ObjectGenerator<Yeshivot>.GetSqlParametersFromObject(yeshiva);
+                parameters.Add(new SqlParameter("iYeshivaId", iYeshivaId));
+                SqlDataAccess.ExecuteDatasetSP("TYeshivot_UPD", parameters);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Log.LogError("EditYeshiva / TYeshivot_UPD", "ex" + ex + ", yeshiva: " + JsonConvert.SerializeObject(yeshiva));
+                return false;
+            }
+        }
+
+        #endregion
     }
 }

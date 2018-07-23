@@ -1,16 +1,19 @@
-<div>
+<div style="margin: 0 80px">
   <div class="row">
-    <div *ngFor="let col of lstColumns" class="col">
-      <div [ngStyle]="col.titleStyle"> {{col.title}} </div>
-      <div [ngStyle]="col.filterStyle">{{col.filter}}
-        <input type="text" [(ngModel)]="col.filter">
-      </div>
+    <div *ngFor="let col of lstColumns" class="col cell cell-title" [ngStyle]="col.titleStyle">
+      {{col.title}}
     </div>
   </div>
 
-  <div *ngFor="let row of lstDataRows" class="row">
-    <div *ngFor="let col of lstColumns" [ngStyle]="col.cellStyle">
-      <div>{{row[col.name]}}</div>
+  <div class="row">
+    <div *ngFor="let col of lstColumns" class="col cell cell-filer" [ngStyle]="col.filterStyle">
+      <input type="text" [(ngModel)]="col.filter" class="form-control">
+    </div>
+  </div>
+
+  <div *ngFor="let row of lstDataRows | vyTableFilter : lstColumns | vyTableOrderBy : lstOrderByFields; let i = index" [ngClass]="{'even': i%2 == 0}"  class="row">
+    <div *ngFor="let col of lstColumns" class="col cell" [ngStyle]="col.cellStyle" >
+      {{row[col.name]}}
     </div>
   </div>
 

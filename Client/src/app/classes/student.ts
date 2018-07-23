@@ -10,11 +10,6 @@ export class Student implements Person {
     dtBirthday:Date;
     nvAddress: String;
     nvCity: String;
-    iCreatedByUserId: number;
-    dtCreatedate: Date;
-    iLastModifyUserId: number;
-    dtLastModifyDate: Date;
-    bSysRowStatus: boolean;
     nvStatus: String;
     nvMobile: String;
     nvEmail: String;
@@ -30,8 +25,8 @@ export class Student implements Person {
     nvCauseOfDeathFather:string;
     nvCauseOfDeathMother:string;
     nvImgStudent:string
-    nvYeshiva:string
-    nvYeshivaAddress:string
+    nvYeshivaName:string
+    nvYeshivaStreet:string
     nvYeshivaCity	:string
     dtAddStudentDate:Date;
     nvComment:string;

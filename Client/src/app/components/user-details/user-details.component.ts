@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { User } from '../../classes/user';
+import { Person } from '../../classes/person';
+import { AppProxy } from '../../services/app.proxy';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-details',
@@ -7,9 +11,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appProxy: AppProxy, private router: ActivatedRoute) { }
 
   ngOnInit() {
+    debugger;
+    this.router.params.subscribe(params => {
+      if (params['iPersonId'] != '0') {
+        this.appProxy.post("GetUser", { iPersonId: params['iPersonId'] })
+          .then(data => {
+            this.user = data;
+          });
+      }
+      else {
+        this.user = new User();
+      }
+    });
   }
+
+
+
+  @Input()
+  @Output()
+  public user: User;
+
+  @Input()
+  @Output()
+  public person: Person;
 
 }

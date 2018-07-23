@@ -1,24 +1,25 @@
-<p>
-  new-yeshiva works!
-</p>
+<form>
+  <div>שם מוסד</div>
+  <input type="text" maxlength="50" [(ngModel)]="yeshiva.nvYeshivaName" required/>
+  <div>כתובת</div>
+  <input type="text" maxlength="50" [(ngModel)]="yeshiva.nvAddress" required/>
+  <div>עיר</div>
+  <input type="text" maxlength="50" [(ngModel)]="yeshiva.nvCity" required/>
+  <div>שם איש קשר</div>
+  <input type="text" maxlength="50" [(ngModel)]="yeshiva.nvContact" required/>
+  <div>טלפון</div>
+  <input type="number" maxlength="50" [(ngModel)]="yeshiva.nvMobile" required/>
+  <div>מייל</div>
+  <input type="text" maxlength="50" [(ngModel)]="yeshiva.nvEmail" required/>
 
-<div>שם מוסד</div>
-<input type="text" maxlength="50" [(ngModel)]="yeshiva.nvYeshivaName"/>
-<div>כתובת</div> 
-<input type="text" maxlength="50" [(ngModel)]="yeshiva.nvAddress"/>
-<div>עיר</div>
-<input type="text" maxlength="50" [(ngModel)]="yeshiva.nvCity"/>
-<div>שם איש קשר</div>
-<input type="text" maxlength="50" [(ngModel)]="yeshiva.nvContact"/>
-<div>טלפון</div>
-<input type="text" maxlength="50" [(ngModel)]="yeshiva.nvMobile"/>
-<div>מייל</div>
-<input type="text" maxlength="50" [(ngModel)]="yeshiva.nvEmail"/>
-<div>תפקיד</div>
-<select>
-  <option>תפקיד 1</option>
-  <option>תפקיד 2</option>
-  <option>תפקיד 3</option>
-</select>
+  <div>תפקיד</div>
+  <select>
+    <option>תפקיד 1</option>
+    <option>תפקיד 2</option>
+    <option>תפקיד 3</option>
+  </select>
 
-<button (click)="save">שמור</button>
+</form>
+<button (click)="save()">שמור</button>
+
+<button (click)="close()">ביטול</button>

@@ -1,0 +1,17 @@
+.cell{
+    /* height: 50px; */
+    /* border: 1px solid gray; */
+    padding: 10px;
+    text-align: right;
+}
+
+.cell-title{
+  background:  rgb(77, 43, 43);
+  color: white;
+  border-bottom: 8px solid orange;
+ -moz-border-bottom-colors: orange  rgb(207, 37, 94);
+}
+.even{
+  background-color: #eaecee;  
+}
+

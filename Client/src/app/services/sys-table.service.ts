@@ -42,7 +42,7 @@ export class SysTableService {
   constructor(private appProxy: AppProxy) { }
  ////#region מקבל ID של טבלה מחזיר ערכים מאותה טבלה 
    getValues(iSysTableId: number) {
-    
+ 
      console.log(iSysTableId+"arived");
     for (let key in SysTableService.dataTables) {
       console.log(key)
@@ -55,7 +55,7 @@ export class SysTableService {
        }
       }
       }
-   
+     
    console.log(this.appProxy.post("GetValues", iSysTableId));
       this.appProxy.post("GetValues", iSysTableId).then(l=>SysTableService.dataTables[this.Mykey]=l);
   }

@@ -10,6 +10,7 @@ import { error } from 'util';
 export class SettingsCodeTableComponent implements OnInit {
 
   tableNames: string[];
+  Values:string[];
   constructor(private sysTableService: SysTableService) { }
 
   ngOnInit() {
@@ -20,11 +21,13 @@ export class SettingsCodeTableComponent implements OnInit {
    
 this.sysTableService.getValues(id);
   }
-  getValues(id:number){
-    console.log("jjjjjjjjjjjjjj");
-    this.sysTableService.getValues(id);
+  getValues(){
+    
+    this.sysTableService.getValues(1).then(data=>this.Values=data,error=>alert(error) );
+    
   }
   ff(){
     alert("select");
+    this.sysTableService.getValues(1).then(data=>this.Values=data,error=>alert(error) );;
   }
 }

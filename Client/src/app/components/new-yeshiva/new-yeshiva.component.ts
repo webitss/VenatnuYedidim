@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Yeshiva } from '../../classes/Yeshiva';
+import { forEach } from '@angular/router/src/utils/collection';
+import { element } from 'protractor';
+import { EMLINK } from 'constants';
+import { SettingsYeshivotComponent } from '../settings-yeshivot/settings-yeshivot.component';
 
 @Component({
   selector: 'app-new-yeshiva',
@@ -9,24 +13,37 @@ import { Yeshiva } from '../../classes/Yeshiva';
 })
 export class NewYeshivaComponent implements OnInit {
 
-  yeshiva1:Yeshiva=new Yeshiva(); 
+  protected nvYeshivaName:Yeshiva;
+  protected nvAddress:Yeshiva;
+  protected nvCity:Yeshiva;
+  protected nvContact:Yeshiva;
+  protected nvMobile:Yeshiva;
+  protected nvEmail:Yeshiva;
 
-  constructor(private appProx:AppProxy,private yeshiva:Yeshiva) { }
- 
+  protected yeshiva: Yeshiva = new Yeshiva();
+
+  constructor(private appProx: AppProxy) { }
+
 
   ngOnInit() {
   }
 
-  save(yeshiva1) {
-   
-    this.appProx.post('AddYeshiva',{yeshiva:yeshiva1})
-    .then(
-      data=>{
-        this.yeshiva1=data;
-        alert("good");
-      }).catch(err=>{
-      alert(err);
-      });
+  save() {
+    this.appProx.post('AddYeshiva', { yeshiva: this.yeshiva })
+      .then(
+        data => {
+          {
+            this.yeshiva = data;
+            path:"settings/:settings-yeshivot";
+          }
+        })
+  }
 
+  close() {
+    path:"settings/:settings-yeshivot";
+  }
+
+  edit() {
+    this.appProx.post('EditYeshiva',{yeshiva:this.yeshiva});
   }
 }
