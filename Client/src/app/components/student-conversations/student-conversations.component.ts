@@ -3,6 +3,7 @@ import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
 
 import { StudentConversationDetailsComponent } from '../student-conversation-details/student-conversation-details.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-student-conversations',
@@ -11,10 +12,35 @@ import { StudentConversationDetailsComponent } from '../student-conversation-det
 })
 export class StudentConversationsComponent implements OnInit {
 
-  protected iPersonId: number = 7;
-  
+  protected iPersonId: number = 9;
+
   protected conversationsList: Array<Conversation> = new Array<Conversation>();
   protected conversationSelect: Conversation;
+
+  @Input()
+  public lstColumns = [
+    {
+      title: 'סוג שיחה',
+      name: 'iConversationType'
+    },
+    {
+      title: 'תאריך שיחה',
+      name: 'dConversationDate'
+    },
+    {
+      title: 'סיכום שיחה',
+      name: 'nvConversationSummary'
+    },
+    {
+      title: 'תאריך שיחה הבאה',
+      name: 'dtNextConversationDate'
+    }
+
+
+
+  ];
+
+
   constructor(private appProxy: AppProxy) { }
 
   // newConversation() {
@@ -34,10 +60,10 @@ export class StudentConversationsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.appProxy.post("GetConversations", { iPersonId:this.iPersonId})
+    this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
       .then(
         data => {
-          this.conversationsList = data as (Array<Conversation>);
+          this.conversationsList = data;
           //alert(this.conversationsList[0].iPersonId );
         });
   }

@@ -164,17 +164,17 @@ namespace Service
         {
             return Conversation.GetConversations(iPersonId);
         }
-        public bool AddConversations(Conversation conversation, int iUserId)
+        public bool AddConversations(Conversation conversation, int iPersonId)
         {
-            return Conversation.AddConversation(conversation, iUserId);
+            return Conversation.AddConversation(conversation, iPersonId);
         }
-        public bool UpdateConversations(Conversation conversation, int iUserId)
+        public bool UpdateConversations(Conversation conversation, int iPersonId)
         {
-            return Conversation.UpdateConversation(conversation, iUserId);
+            return Conversation.UpdateConversation(conversation, iPersonId);
         }
-        public bool DeleteConversations(int iConversationId, int iUserId)
+        public bool DeleteConversations(int iConversationId, int iPersonId)
         {
-            return Conversation.DeleteConversation(iConversationId, iUserId);
+            return Conversation.DeleteConversation(iConversationId, iPersonId);
         }
 
         #endregion

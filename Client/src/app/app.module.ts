@@ -52,7 +52,6 @@ import { SettingsDocumentsComponent } from './components/settings-documents/sett
 import { SettingsFrontendComponent } from './components/settings-frontend/settings-frontend.component';
 import { NewYeshivaComponent } from './components/new-yeshiva/new-yeshiva.component';
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
-import { StudentConversationComponent } from './components/student-conversation/student-conversation.component';
 import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
 import { StudentMeetingDetailsComponent } from './components/student-meeting-details/student-meeting-details.component';
 import { SysTableService } from './services/sys-table.service';
@@ -108,7 +107,6 @@ import { injectElementRef } from '@angular/core/src/render3';
     NewYeshivaComponent,
 
     VyMultySelectComponent,
-    StudentConversationComponent,
     StudentConversationDetailsComponent,
     StudentMeetingDetailsComponent,
   ],
@@ -133,7 +131,6 @@ import { injectElementRef } from '@angular/core/src/render3';
           },
           {
             path: "student-conversations", component: StudentConversationsComponent, children: [
-              { path: "student-conversation", component: StudentConversationComponent },
               { path: "student-conversation-details/:ConversationId", component: StudentConversationDetailsComponent },
             ]
           },

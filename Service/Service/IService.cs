@@ -286,7 +286,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        bool AddConversations(Conversation conversation, int iUserId);
+        bool AddConversations(Conversation conversation, int iPersonId);
 
         [OperationContract]
         [WebInvoke(
@@ -295,7 +295,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        bool UpdateConversations(Conversation conversation, int iUserId);
+        bool UpdateConversations(Conversation conversation, int iPersonId);
 
         [OperationContract]
         [WebInvoke(
@@ -304,7 +304,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        bool DeleteConversations(int iConversationId, int iUserId);
+        bool DeleteConversations(int iConversationId, int iPersonId);
 
         #endregion Conversation
 

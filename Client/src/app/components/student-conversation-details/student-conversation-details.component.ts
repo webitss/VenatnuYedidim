@@ -10,23 +10,32 @@ import { Conversation } from '../../classes/conversation';
 })
 export class StudentConversationDetailsComponent implements OnInit {
   private sub: any;
-  protected idConversationId:number;
+  //protected idConversationId:number;
   @Input()
   protected conversation: Conversation;
 
-  iUserId: number;
-  //conversationId:number;
-  //conversation:Conversation;
-  // conversationType:number;
-  //   conversationDate:Date;
-  //   conversationDateTime:Date;
-  //   conversationSummary:string;
-  //   NextconversationDate:Date;
+   protected iPersonId: number=1;
+
   constructor(private route: ActivatedRoute, private appProxy: AppProxy) { }
-
-  addConversation() {
-
-    this.appProxy.post("AddConversations", { conversation: this.conversation, iUserId: this.iUserId })
+ 
+   
+saveConversation() {
+    this.conversation.dConversationDate = new Date(this.conversation.dConversationDate);
+    this.conversation.dtConversationTime = new Date(this.conversation.dtConversationTime);
+    this.conversation.dtNextConversationDate = new Date(this.conversation.dtNextConversationDate);
+    if (this.conversation.iConversationId == null) {
+      this.conversation.iPersonId = 7;
+      this.appProxy.post("AddConversations", { conversation: this.conversation, iPersonId:this.iPersonId })
+        .then(
+          data => {
+            if (data)
+              alert("good");
+            else
+              alert("no good");
+          });
+    }
+    else {
+      this.appProxy.post("UpdateConversations", { conversation: this.conversation, iPersonId:this.iPersonId })
       .then(
         data => {
           if (data)
@@ -34,6 +43,10 @@ export class StudentConversationDetailsComponent implements OnInit {
           else
             alert("no good");
         });
+
+
+    }
+
   }
 
 
@@ -41,6 +54,8 @@ export class StudentConversationDetailsComponent implements OnInit {
 
 
   ngOnInit() {
+    if (this.conversation == null)
+    this.conversation = new Conversation();
     // this.sub=this.route.params.subscribe(params=>{
     //   this.iconversationId=+params['conversationId'];
     // });
