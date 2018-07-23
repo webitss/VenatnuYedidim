@@ -128,6 +128,11 @@ namespace Service
             return Avrech.UpdateAvrech(avrech, iUserId);
         }
 
+        public bool UpdateUserNameAndPassword(int iPersonId, string nvUserName, string nvPassword, int iUserId)
+        {
+            return Avrech.UpdateUserNameAndPassword(iPersonId, nvUserName, nvPassword, iUserId);
+        }
+
         #endregion
             
         #region files

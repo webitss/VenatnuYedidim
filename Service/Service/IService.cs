@@ -137,6 +137,16 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         bool UpdateAvrech(Avrech avrech, int iUserId);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "UpdateUserNameAndPassword",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool UpdateUserNameAndPassword(int iPersonId,string nvUserName,string nvPassword, int iUserId);
+        
+
 
         [OperationContract]
         [WebInvoke(
