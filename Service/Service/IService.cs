@@ -251,6 +251,16 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<SysTableRow> GetValues(int iSysTableId);
 
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "UpdateValue",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+         bool UpdateValue(SysTableRow sysTableRow);
+
         #endregion
 
         #region SysTables
