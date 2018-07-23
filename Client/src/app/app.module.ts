@@ -59,7 +59,6 @@ import { SysTableService } from './services/sys-table.service';
 
 import { inject } from '@angular/core/testing';
 import { injectElementRef } from '@angular/core/src/render3';
-import { EditYeshivaComponent } from './components/edit-yeshiva/edit-yeshiva.component';
 
 
 @NgModule({
@@ -112,7 +111,6 @@ import { EditYeshivaComponent } from './components/edit-yeshiva/edit-yeshiva.com
     StudentConversationComponent,
     StudentConversationDetailsComponent,
     StudentMeetingDetailsComponent,
-    EditYeshivaComponent,
   ],
   imports: [
    // Ng2SearchPipeModule,
@@ -158,6 +156,10 @@ import { EditYeshivaComponent } from './components/edit-yeshiva/edit-yeshiva.com
         children: [
           { path: "", component: EventDetailsComponent },
           { path: "event-details", component: EventDetailsComponent },
+<<<<<<< HEAD
+          { path: "event-participants/:iEventId", component: EventParticipantsComponent }
+=======
+>>>>>>> 0aecbf66362627f71118a68c45b566153b65f11c
         ]
       },
       { path: "graduates", component: GraduatesComponent },
@@ -179,8 +181,7 @@ import { EditYeshivaComponent } from './components/edit-yeshiva/edit-yeshiva.com
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "new-yeshiva", component: NewYeshivaComponent },
-              { path: "edit-yeshiva", component:EditYeshivaComponent}
+              { path: "new-yeshiva", component: NewYeshivaComponent }
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },
