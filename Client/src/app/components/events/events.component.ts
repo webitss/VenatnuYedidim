@@ -13,7 +13,6 @@ export class EventsComponent implements OnInit {
   // lstDataRows: any[];
 
 
-
   constructor(private appProxy: AppProxy, private router: Router) { }
 
 
@@ -68,7 +67,9 @@ export class EventsComponent implements OnInit {
   ]
   public lstDataRows = [];
 
+
   ngOnInit() {
+
     this.appProxy.post('GetEventsList', { iUserId: 0 }).then(res => {
       res.forEach(e => {
         this.lstDataRows.push({
@@ -80,6 +81,8 @@ export class EventsComponent implements OnInit {
       });
     }
     )
+
+
   }
 
 }

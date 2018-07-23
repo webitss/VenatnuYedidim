@@ -46,8 +46,7 @@ namespace Service.Entities
                     {
                         documents.Add(ObjectGenerator<Document>.GeneratFromDataRow(dr));
                         documents.Last().lstObject = new Dictionary<string, string>();
-                        documents.Last().lstObject.Add("nvFirstName", dr["nvFirstName"].ToString());
-                        documents.Last().lstObject.Add("nvLastName", dr["nvLastName"].ToString());
+                        documents.Last().lstObject.Add("nvName", dr["nvName"].ToString());
                         documents.Last().lstObject.Add("nvIdentityCard", dr["nvIdentityCard"].ToString());
                         documents.Last().lstObject.Add("nvCategory", dr["nvCategory"].ToString());
                     }
