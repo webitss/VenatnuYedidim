@@ -58,7 +58,7 @@ namespace Service.Entities
             {
                 //addEvent.dtEventDate = DateTime.Today;
                 List<SqlParameter> parameters = ObjectGenerator<Event1>.GetSqlParametersFromObject(addEvent);
-                parameters.Add(new SqlParameter("iCreatedByUserId", iUserId));
+                parameters.Find(x => x.ParameterName == "iCreatedByUserId").Value = iUserId;
                 SqlDataAccess.ExecuteDatasetSP("TEvent_INS", parameters);
                 return true;
             }
