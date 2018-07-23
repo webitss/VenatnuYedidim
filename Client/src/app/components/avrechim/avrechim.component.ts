@@ -20,9 +20,7 @@ export class AvrechimComponent implements OnInit {
       data=>
       {
     this.avrechimList=data;
-
     },
-      err=>("err")
     );
     
   }
