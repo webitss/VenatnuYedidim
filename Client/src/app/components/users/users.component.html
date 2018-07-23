@@ -1,7 +1,4 @@
 <button class="btn" routerLink="/users/user/0">משתמש חדש</button>
 <router-outlet></router-outlet>
-<app-vy-table [lstColumns]="7" [lstDataRows]="users.length"></app-vy-table>
-<div *ngFor="let u of users">
-    {{u.nvUserName}}
-    <button class="btn" (click)="editUser(u)">ערוך</button>
-</div>
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table>
+<button (click)="editUser(u)"></button>
