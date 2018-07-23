@@ -59,7 +59,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        void SetUser(User user, int iUserId);
+        void SetUser(User user);
 
         #endregion
 
@@ -137,6 +137,16 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         bool UpdateAvrech(Avrech avrech, int iUserId);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "UpdateUserNameAndPassword",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool UpdateUserNameAndPassword(int iPersonId,string nvUserName,string nvPassword, int iUserId);
+        
+
 
         [OperationContract]
         [WebInvoke(
@@ -148,7 +158,7 @@ namespace Service
         bool DeleteAvrechStudent(int iAvrechId, int iStudentId);
         #endregion
 
-
+    
 
         [OperationContract]
         [WebInvoke(
@@ -169,15 +179,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool AddEvent(Event1 addEvent, int iUserId);
-
-        [WebInvoke(
-Method = "POST",
-UriTemplate = "GetEventsList",
-BodyStyle = WebMessageBodyStyle.WrappedRequest,
-ResponseFormat = WebMessageFormat.Json,
-RequestFormat = WebMessageFormat.Json)]
-        List<Event1> GetEventsList(int iUserId);
+        bool AddEvent(Event1 addEvent,int iUserId);
         #endregion
 
         #region Meeting
@@ -333,12 +335,12 @@ RequestFormat = WebMessageFormat.Json)]
 
         [OperationContract]
         [WebInvoke(
-         Method = "POST",
+         Method = "GET",
          UriTemplate = "GetDocuments",
          BodyStyle = WebMessageBodyStyle.WrappedRequest,
          ResponseFormat = WebMessageFormat.Json,
          RequestFormat = WebMessageFormat.Json)]
-        List<Document> GetDocuments();
+         List<Document> GetDocuments();
 
         #endregion
     }
