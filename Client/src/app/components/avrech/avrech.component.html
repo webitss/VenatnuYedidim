@@ -11,4 +11,4 @@
 <button (click)="save()">שמירה</button>
 <button (click)="close()">סגור</button>
 
-<router-outlet></router-outlet>
+<router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>

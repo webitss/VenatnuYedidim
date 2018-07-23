@@ -12,8 +12,8 @@ import{BehaviorSubject} from'rxjs/BehaviorSubject'
 })
 export class AvrechComponent implements OnInit {
 
-  @ViewChild(AvrechDetailsComponent)
-  private AvrechDetailsComp:AvrechDetailsComponent;
+  protected currentComponent: any;
+
 
   
 
@@ -21,14 +21,15 @@ export class AvrechComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.AvrechDetailsComp=new AvrechDetailsComponent(new ActivatedRoute(),this.appProxy);
   }
 
-  save()
-  {
-    if (this.route.snapshot.children[0].component == AvrechDetailsComponent) {
-      this.AvrechDetailsComp.save();
-    }
+  onRouterOutletActivate(event) {
+    this.currentComponent = event;
+  }
+
+  save() {
+
+    if (this.currentComponent.save) this.currentComponent.save();
   }
 
   close()

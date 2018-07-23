@@ -13,6 +13,33 @@ export class AvrechimComponent implements OnInit {
 
  avrech:Avrech
    avrechimList:Avrech[];
+   public lstColumns = [{
+      title: 'פתיחה',
+      name: 'open'
+    }
+  ,{
+    title: 'שם משפחה',
+    name: 'nvLastName'
+  },
+  {
+    title: 'שם פרטי',
+    name: 'nvFirstName'
+  },
+  {
+    title: 'טלפון',
+    name: 'nvPhone'
+  },
+  {
+    title: 'נייד',
+    name: 'nvMobile'
+  },
+  {
+    title: 'מייל',
+    name: 'nvEmail'
+  }];
+  public lstDataRows = [{
+    
+    }];
   constructor(private appProxy:AppProxy) { }
 
   ngOnInit() {
@@ -20,9 +47,16 @@ export class AvrechimComponent implements OnInit {
       data=>
       {
     this.avrechimList=data;
-
+    this.avrechimList.forEach(element => {
+      this.lstDataRows.push({
+        nvLastName: element.nvLastName,
+    nvFirstName: element.nvFirstName,
+    nvPhone: element.nvPhone,
+    nvMobile: element.nvMobile,
+    nvEmail:element.nvEmail
+      })
+    });
     },
-      err=>("err")
     );
     
   }
