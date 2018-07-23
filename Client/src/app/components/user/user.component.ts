@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppProxy } from '../../services/app.proxy';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appProxy: AppProxy, private router: Router) { }
 
   ngOnInit() {
   }
 
+  protected currentComponent: any;
+
+  onRouterOutletActivate(event) {
+    this.currentComponent = event;
+  }
+
+  saveUser() {
+    this.currentComponent.saveUser();
+    this.router.navigate(['users']);
+  }
 }

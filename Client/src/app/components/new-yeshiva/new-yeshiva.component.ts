@@ -13,13 +13,6 @@ import { SettingsYeshivotComponent } from '../settings-yeshivot/settings-yeshivo
 })
 export class NewYeshivaComponent implements OnInit {
 
-  protected nvYeshivaName:Yeshiva;
-  protected nvAddress:Yeshiva;
-  protected nvCity:Yeshiva;
-  protected nvContact:Yeshiva;
-  protected nvMobile:Yeshiva;
-  protected nvEmail:Yeshiva;
-
   protected yeshiva: Yeshiva = new Yeshiva();
 
   constructor(private appProx: AppProxy) { }
@@ -34,13 +27,9 @@ export class NewYeshivaComponent implements OnInit {
         data => {
           {
             this.yeshiva = data;
-            // path:"settings/:settings-yeshivot";
+
           }
         })
-  }
-
-  close() {
-    // path:"settings/:settings-yeshivot";
   }
 
   edit() {

@@ -14,7 +14,6 @@ export class UserDetailsComponent implements OnInit {
   constructor(private appProxy: AppProxy, private router: ActivatedRoute) { }
 
   ngOnInit() {
-    debugger;
     this.router.params.subscribe(params => {
       if (params['iPersonId'] != '0') {
         this.appProxy.post("GetUser", { iPersonId: params['iPersonId'] })
@@ -27,9 +26,6 @@ export class UserDetailsComponent implements OnInit {
       }
     });
   }
-
-
-
   @Input()
   @Output()
   public user: User;
@@ -37,5 +33,14 @@ export class UserDetailsComponent implements OnInit {
   @Input()
   @Output()
   public person: Person;
+
+  saveUser() {
+    this.appProxy.post("SetUser", { user: this.user, iUserId: 1 }).then(data => {
+      if (data == true)
+        alert("המשתמש נוסף בהצלחה!");
+      else
+        alert("error!");
+    })
+  }
 
 }

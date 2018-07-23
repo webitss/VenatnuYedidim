@@ -66,8 +66,10 @@ namespace Service
             return Student.GetStudentList(iUserId);
         }
 
-
-       
+        public  bool AddStudentsToAvrech(List<T2Int> studentAndAvrechArr, int iUserId)
+        {
+            return Student.AddStudentsToAvrech(studentAndAvrechArr, iUserId);
+        }
 
         public bool AddStudent(Student student, int iUserId)
         {
@@ -152,6 +154,10 @@ namespace Service
 
             return SysTableRow.GetValues(iSysTableId);
         }
+          public bool UpdateValue(SysTableRow sysTableRow)
+        {
+           return SysTableRow.UpdateValue(sysTableRow);
+        }
         #endregion
 
         #region SysTables
@@ -217,6 +223,8 @@ namespace Service
         {
             return Participant.GetParticipantsList(iEventId);
         }
+
+      
         #endregion
 
     }
