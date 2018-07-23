@@ -35,6 +35,8 @@ namespace Service.Entities
 
         #endregion
 
+        #region Methods
+
         public static List<Yeshivot> GetAllYeshivot(int iYeshivaId)
         {
             try
@@ -65,5 +67,23 @@ namespace Service.Entities
                 return false;
             }
         }
+
+        public static bool EditYeshiva(Yeshivot yeshiva, int iYeshivaId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = ObjectGenerator<Yeshivot>.GetSqlParametersFromObject(yeshiva);
+                parameters.Add(new SqlParameter("iYeshivaId", iYeshivaId));
+                SqlDataAccess.ExecuteDatasetSP("TYeshivot_UPD", parameters);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Log.LogError("EditYeshiva / TYeshivot_UPD", "ex" + ex + ", yeshiva: " + JsonConvert.SerializeObject(yeshiva));
+                return false;
+            }
+        }
+
+        #endregion
     }
 }
