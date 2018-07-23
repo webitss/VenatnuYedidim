@@ -25,6 +25,7 @@ import { StudentComponent } from './components/student/student.component';
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
 import { StudentMeetingsComponent } from './components/student-meetings/student-meetings.component';
 import { StudentConversationsComponent } from './components/student-conversations/student-conversations.component';
+import { StudentDocumentsComponent } from './components/student-documents/student-documents.component';
 
 import { AvrechimComponent } from './components/avrechim/avrechim.component';
 import { AvrechComponent } from './components/avrech/avrech.component';
@@ -60,6 +61,7 @@ import { SysTableService } from './services/sys-table.service';
 import { inject } from '@angular/core/testing';
 import { injectElementRef } from '@angular/core/src/render3';
 import { EditYeshivaComponent } from './components/edit-yeshiva/edit-yeshiva.component';
+import { UploadDocumentComponent } from './components/upload-document/upload-document.component';
 
 
 @NgModule({
@@ -113,6 +115,8 @@ import { EditYeshivaComponent } from './components/edit-yeshiva/edit-yeshiva.com
     StudentConversationDetailsComponent,
     StudentMeetingDetailsComponent,
     EditYeshivaComponent,
+    UploadDocumentComponent,
+    StudentDocumentsComponent,
   ],
   imports: [
    // Ng2SearchPipeModule,
@@ -139,6 +143,10 @@ import { EditYeshivaComponent } from './components/edit-yeshiva/edit-yeshiva.com
               { path: "student-conversation-details/:ConversationId", component: StudentConversationDetailsComponent },
             ]
           },
+          {
+            path:"student-documents",component:StudentDocumentsComponent
+          }
+
         ]
       },
       { path: "avrechim", component: AvrechimComponent },
