@@ -90,17 +90,21 @@ namespace Service
         }
         #endregion
 
+
+        #region Event
+        public bool AddEvent(Event1 oEvent, int iUserId)
+        {
+            return Event1.AddEvent(oEvent, iUserId);
+        }
+
+        public List<Event1> GetEventsList(int iUserId)
+        {
+            return Event1.GetEventsList(iUserId);
+        }
+
+        #endregion
         #region Avrech
 
-        //public bool AddEvent(Event oEvent, int iUserId)
-        //{
-        //    return Event.AddEvent(oEvent);
-        //}
-
-        //public List<Event> GetEventsList(int iUserId)
-        //{
-        //    return Event.GetEventsList(iUserId);
-        //}
 
         public List<Avrech> GetAllAvrechim(int? iPersonId)
         {

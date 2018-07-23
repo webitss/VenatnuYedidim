@@ -162,14 +162,14 @@ namespace Service
 
 
         #region events
-        //[OperationContract]
-        //[WebInvoke(
-        //Method = "POST",
-        //UriTemplate = "AddEvent",
-        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //ResponseFormat = WebMessageFormat.Json,
-        //RequestFormat = WebMessageFormat.Json)]
-        //bool AddEvent(Event1 addEvent);
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "AddEvent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool AddEvent(Event1 addEvent,int iUserId);
         #endregion
 
         #region Meeting
