@@ -1,19 +1,20 @@
-<button name="addConversation" (click)="newConversation()">הוסף שיחה</button>
+<button name="addConversation" (click)="conversationSelect=null; flag=1;">הוסף שיחה</button>
 
 <!-- <router-outlet></router-outlet> -->
  <ul>
     <li *ngFor="let conver of conversationsList">
         <div>
-<span>{{conver.conversationSummary}}</span>
-
+<span>{{conver.nvConversationSummary}}</span>
         </div>
-        <button name="UpdateConversation" (click)="conversationSelect=conver">ערוך שיחה</button>
-        <button name="delete" (click)="deleteConversation(1,1)" >מחק שיחה</button>
+        <button name="UpdateConversation" (click)="conversationSelect=conver; flag=1;">ערוך שיחה</button>
+        <button name="delete" (click)="deleteConversation(conver.iConversationId,1)" >מחק שיחה</button>
        
     </li>
  </ul>
 
 
-<div *ngIf="conversationSelect!=null">
+<div *ngIf="flag==1">
 <app-student-conversation-details [conversation]=conversationSelect></app-student-conversation-details>
 </div>
+
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table>

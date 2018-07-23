@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewYeshivaComponent } from './new-yeshiva.component';
+import { UploadDocumentComponent } from './upload-document.component';
 
-describe('NewYeshivaComponent', () => {
-  let component: NewYeshivaComponent;
-  let fixture: ComponentFixture<NewYeshivaComponent>;
+describe('UploadDocumentComponent', () => {
+  let component: UploadDocumentComponent;
+  let fixture: ComponentFixture<UploadDocumentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewYeshivaComponent ]
+      declarations: [ UploadDocumentComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewYeshivaComponent);
+    fixture = TestBed.createComponent(UploadDocumentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

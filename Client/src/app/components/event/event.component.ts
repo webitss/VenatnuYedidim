@@ -17,7 +17,7 @@ export class EventComponent implements OnInit {
 
   protected currentComponent: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private appProxy: AppProxy, private cd: ChangeDetectorRef) {
+  constructor(private router: Router, private route: ActivatedRoute, private appProxy: AppProxy) {
 
 
   }
@@ -34,7 +34,7 @@ export class EventComponent implements OnInit {
   }
   eventParticipants() {
     this.isDetails = false;
-    this.router.navigate(["/events/event/event-participants"]);
+    this.router.navigate(["/events/event/event-participants",1]);
   }
 
   save() {

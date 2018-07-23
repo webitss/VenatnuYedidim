@@ -1,4 +1,5 @@
 ﻿using Service.Entities;
+using Service.Utilities;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -71,8 +72,7 @@ namespace Service
          BodyStyle = WebMessageBodyStyle.WrappedRequest,
          ResponseFormat = WebMessageFormat.Json,
          RequestFormat = WebMessageFormat.Json)]
-        List<Student> GetStudentList(int iUserId);
-        
+        List<Student> GetStudentList(int iUserId);        
        
        [OperationContract]
         [WebInvoke(
@@ -83,6 +83,14 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         Student GetStudentById(int iPersonId);
 
+        [OperationContract]
+        [WebInvoke(
+         Method = "POST",
+         UriTemplate = "AddStudentsToAvrech",
+         BodyStyle = WebMessageBodyStyle.WrappedRequest,
+         ResponseFormat = WebMessageFormat.Json,
+         RequestFormat = WebMessageFormat.Json)]
+        bool AddStudentsToAvrech(List<T2Int> studentAndAvrechArr, int iUserId);
 
         [OperationContract]
         [WebInvoke(
@@ -146,6 +154,16 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         bool UpdateAvrech(Avrech avrech, int iUserId);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "UpdateUserNameAndPassword",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool UpdateUserNameAndPassword(int iPersonId,string nvUserName,string nvPassword, int iUserId);
+        
+
 
         [OperationContract]
         [WebInvoke(
@@ -171,14 +189,14 @@ namespace Service
 
 
         #region events
-        //[OperationContract]
-        //[WebInvoke(
-        //Method = "POST",
-        //UriTemplate = "AddEvent",
-        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //ResponseFormat = WebMessageFormat.Json,
-        //RequestFormat = WebMessageFormat.Json)]
-        //bool AddEvent(Event1 addEvent);
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "AddEvent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool AddEvent(Event1 addEvent,int iUserId);
         #endregion
 
         #region Meeting
@@ -218,6 +236,7 @@ namespace Service
 
         #endregion Meeting
 
+
         #region files
 
         [OperationContract]
@@ -240,6 +259,16 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         List<SysTableRow> GetValues(int iSysTableId);
+
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "UpdateValue",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+         bool UpdateValue(SysTableRow sysTableRow);
 
         #endregion
 
@@ -295,7 +324,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        bool AddConversations(Conversation conversation, int iUserId);
+        bool AddConversations(Conversation conversation, int iPersonId);
 
         [OperationContract]
         [WebInvoke(
@@ -304,7 +333,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        bool UpdateConversations(Conversation conversation, int iUserId);
+        bool UpdateConversations(Conversation conversation, int iPersonId);
 
         [OperationContract]
         [WebInvoke(
@@ -313,20 +342,20 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        bool DeleteConversations(int iConversationId, int iUserId);
+        bool DeleteConversations(int iConversationId, int iPersonId);
 
         #endregion Conversation
 
         #region participiant
 
-        //[OperationContract]
-        //[WebInvoke(
-        //  Method = "POST",
-        //  UriTemplate = "GetParticipantsList",
-        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //  ResponseFormat = WebMessageFormat.Json,
-        //  RequestFormat = WebMessageFormat.Json)]
-        //List<Participant> GetParticipantsList(int? iEventId);
+       [OperationContract]
+       [WebInvoke(
+         Method = "POST",
+         UriTemplate = "GetParticipantsList",
+         BodyStyle = WebMessageBodyStyle.WrappedRequest,
+         ResponseFormat = WebMessageFormat.Json,
+         RequestFormat = WebMessageFormat.Json)]
+       List<Person> GetParticipantsList(int iEventId);
 
         #endregion
 
@@ -334,7 +363,7 @@ namespace Service
 
         [OperationContract]
         [WebInvoke(
-         Method = "POST",
+         Method = "GET",
          UriTemplate = "GetDocuments",
          BodyStyle = WebMessageBodyStyle.WrappedRequest,
          ResponseFormat = WebMessageFormat.Json,

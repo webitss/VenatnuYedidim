@@ -6,6 +6,8 @@
 
 <div class="container">
  
+ <!-- <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table> -->
+
         <table class="table table-striped">
                 <thead>
                   <tr>
@@ -21,7 +23,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let student of studentList">
-                      <td ></td>
+                      <td ><img src="../../../assets/images/pencil.png" class="iconPen"></td>
                       <td>   {{student.nvFirstName}}</td>
                       <td> {{student.nvLastName}}</td>
                       <td> {{student.nvPhone}}</td>
