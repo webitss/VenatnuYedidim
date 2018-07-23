@@ -1,34 +1,39 @@
 import { Person } from "./person";
 
 export class Student implements Person {
-    iPersonId: number;
-    nvFirstName: String;
-    nvLastName: String;
-    nvIdentityCard: String;
-    nvPhone: String;
-    nvBirthday:String;
-    dtBirthday:Date;
-    nvAddress: String;
-    nvCity: String;
-    nvStatus: String;
-    nvMobile: String;
-    nvEmail: String;
 
 
-    iStudentId	:number;
-    nvBornDate:string;
-    dtBornDate:Date;
-    nvFatherDeathDate:string;
-    bDeathFather	:boolean;
-    nvMotherDeathDate:string;
-    bDeathMother	:Boolean;
-    nvCauseOfDeathFather:string;
-    nvCauseOfDeathMother:string;
-    nvImgStudent:string
-    nvYeshivaName:string
-    nvYeshivaStreet:string
-    nvYeshivaCity	:string
-    dtAddStudentDate:Date;
-    nvComment:string;
-    
+    public iPersonId: number;
+    public nvFirstName: String;
+    public nvLastName: String;
+    public nvIdentityCard: String;
+    public nvPhone: String;
+    public nvMobile: String;
+    public nvEmail: String;
+    public nvAddress: String;
+    public nvCity: String;
+    public nvStatus: String;
+    public nvBirthdate: String;
+    public dtBirthdate: Date;
+
+    public iStudentId: number;
+    public nvFatherDeathDate: string;
+    public bDeathFather: boolean;
+    public nvMotherDeathDate: string;
+    public bDeathMother: Boolean;
+    public nvCauseOfDeathFather: string;
+    public nvCauseOfDeathMother: string;
+    public nvImgStudent: string
+    public nvYeshivaName: string
+    public nvYeshivaStreet: string
+    public nvYeshivaCity: string
+    public dtAddStudentDate: Date;
+    public nvComment: string;
+
+    constructor() {
+
+        this.dtBirthdate = new Date();
+        this.dtAddStudentDate= new Date();
+    }
+
 }

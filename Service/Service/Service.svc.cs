@@ -65,7 +65,10 @@ namespace Service
         {
             return Student.GetStudentList(iUserId);
         }
-
+        public Student GetStudentById( int iUserId)
+        {
+            return Student.GetStudentById( iUserId);
+        }
 
         public bool UpdateAvrech(Avrech avrech, int iUserId)
         {
