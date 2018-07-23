@@ -10,7 +10,7 @@
     <div *ngFor="let item of fullList|filter:search">
       <input type="checkbox" class="hebrew" [(ngModel)]="item['bMultySelectChecked']">
       <!--(change)="select(i)"-->
-      <span class="hebrew">{{item.nvFirstName}}  {{item.nvLastName}}  {{item.nvIdentityCard}}</span>
+      <span class="hebrew"title="{{item.nvFirstName}}  {{item.nvLastName}}  {{item.nvIdentityCard}}" >{{item.nvFirstName}}  {{item.nvLastName}}  {{item.nvIdentityCard}}...</span>
     </div>
   </div>
 </div>
