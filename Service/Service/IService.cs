@@ -1,4 +1,5 @@
 ﻿using Service.Entities;
+using Service.Utilities;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -73,7 +74,14 @@ namespace Service
          RequestFormat = WebMessageFormat.Json)]
         List<Student> GetStudentList(int iUserId);
 
-
+        [OperationContract]
+        [WebInvoke(
+         Method = "POST",
+         UriTemplate = "AddStudentsToAvrech",
+         BodyStyle = WebMessageBodyStyle.WrappedRequest,
+         ResponseFormat = WebMessageFormat.Json,
+         RequestFormat = WebMessageFormat.Json)]
+        bool AddStudentsToAvrech(List<T2Int> studentAndAvrechArr, int iUserId);
 
         [OperationContract]
         [WebInvoke(
@@ -218,6 +226,7 @@ namespace Service
         bool DeleteMeeting(int iMeetingId, int iUserId);
 
         #endregion Meeting
+
 
         #region files
 

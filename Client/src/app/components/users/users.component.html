@@ -1,6 +1,11 @@
 <button class="btn" routerLink="/users/user/0">משתמש חדש</button>
 <router-outlet></router-outlet>
+<<<<<<< HEAD
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table>
+<button (click)="editUser(u)"></button>
+=======
 <div *ngFor="let u of users">
     {{u.nvUserName}}
     <button class="btn" (click)="editUser(u)"><span class="glyphicon glyphicon-edit"></span></button>
 </div>
+>>>>>>> 0aecbf66362627f71118a68c45b566153b65f11c
