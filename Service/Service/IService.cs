@@ -310,14 +310,14 @@ namespace Service
 
         #region participiant
 
-        //[OperationContract]
-        //[WebInvoke(
-        //  Method = "POST",
-        //  UriTemplate = "GetParticipantsList",
-        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //  ResponseFormat = WebMessageFormat.Json,
-        //  RequestFormat = WebMessageFormat.Json)]
-        //List<Participant> GetParticipantsList(int? iEventId);
+       [OperationContract]
+       [WebInvoke(
+         Method = "POST",
+         UriTemplate = "GetParticipantsList",
+         BodyStyle = WebMessageBodyStyle.WrappedRequest,
+         ResponseFormat = WebMessageFormat.Json,
+         RequestFormat = WebMessageFormat.Json)]
+       List<Person> GetParticipantsList(int iEventId);
 
         #endregion
 
