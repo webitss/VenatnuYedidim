@@ -1,10 +1,14 @@
+  <div class="navbar-collapse row">
+    <div (click)="eventDetails()" [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventDetails') != -1}" class="tab col-sm-1">
+        <a class="control" routerLink="event-details">פרטים</a>
+    </div>
+    <div (click)="eventParticipants()" [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventParticipants') != -1}" class="tab col-sm-1">
+        <a class="control" routerLink="event-participants">משתתפים</a>
+    </div>
+  </div>
 <div class="col-sm-12 event-menu">
   <div class="name col-sm-2">שם ארוע</div>
   <div class="col-sm-1"></div>
-  <ul>
-    <li (click)="eventDetails()" class="col-sm-1">פרטים</li>
-    <li (click)="eventParticipants()" class="col-sm-1">משתתפים</li>
-  </ul>
   <div class="col-sm-5"></div>
   <button *ngIf="isDetails==true" (click)="save()" class="btn">שמירה</button>
   <button routerLink="/events">סגור</button>
