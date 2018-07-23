@@ -15,7 +15,7 @@ namespace Service.Entities
         #region Data Members
         
         [DataMember]
-        public int iPersonId { get; set; }
+        public int    iPersonId { get; set; }
         [DataMember]
         public string nvFirstName { get; set; }
         [DataMember]

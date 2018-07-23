@@ -7,5 +7,11 @@ export class User extends Person {
     public iPermissionId: number
     public dtCreatedate: Date;
 
-    constructor() { super(); }
+    constructor() {
+         super();
+         this.nvUserName = '';
+         this.nvPassword = '';
+         this.iPermissionId = 0;
+         this.dtCreatedate = new Date();
+        }
 }

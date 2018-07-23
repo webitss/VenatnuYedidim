@@ -31,9 +31,9 @@ namespace Service
             return User.Login(nvUserName, nvPassword);
         }
 
-        public void SetUser(User user)
+        public void SetUser(User user, int iUserId)
         {
-            User.SetUser(user);
+            User.SetUser(user, iUserId);
         }
 
         #endregion
