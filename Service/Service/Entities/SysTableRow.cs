@@ -29,8 +29,10 @@ namespace Service.Entities
         {
             try
             {
-                SqlParameter parameter = new SqlParameter("iSysTableId", iSysTableId);
-                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TSysTableRow_ByTableId_SLCT", parameter).Tables[0];
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iSysTableId", iSysTableId));
+
+                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TSysTableRow_ByTableId_SLCT", parameters).Tables[0];
                 DataRowCollection drc = dt.Rows;
                 return ObjectGenerator<SysTableRow>.GeneratListFromDataRowCollection(drc);
             }
