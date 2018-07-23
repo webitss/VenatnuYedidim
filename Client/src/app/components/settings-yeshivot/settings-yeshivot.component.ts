@@ -11,16 +11,11 @@ import { AppProxy } from '../../services/app.proxy';
 })
 export class SettingsYeshivotComponent implements OnInit {
 
-  protected currentComponent:any;
   
   constructor(private appProxy:AppProxy) { }
   yeshivaList:Yeshiva;
 
   ngOnInit() {
     this.appProxy.post("GetAllYeshivot").then(data=>this.yeshivaList=data,err=>alert(err));
-  }
-
-  onRouterOutletActivate(event) {
-    this.currentComponent = event;
   }
 }
