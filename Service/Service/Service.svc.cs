@@ -209,6 +209,15 @@ namespace Service
             return Document.GetDocuments();
         }
 
+
+        #region participant
+
+        public List<Person> GetParticipantsList(int iEventId)
+        {
+            return Participant.GetParticipantsList(iEventId);
+        }
+        #endregion
+
     }
 
 }

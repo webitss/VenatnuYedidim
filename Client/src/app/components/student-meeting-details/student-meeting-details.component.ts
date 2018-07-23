@@ -10,6 +10,7 @@ import { Meeting } from '../../classes/meeting';
 })
 export class StudentMeetingDetailsComponent implements OnInit {
   private sub: any;
+  
   // @Input() 
   // protected meetingId:number;
   @Output()
