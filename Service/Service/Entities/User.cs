@@ -76,13 +76,11 @@ namespace Service.Entities
         }
 
 
-        public static bool SetUser(User user, int iUserId)        {
+        public static bool SetUser(User user)        {
             try
             {
-                List <SqlParameter> parameters = new List<SqlParameter>();
-                parameters= ObjectGenerator<User>.GetSqlParametersFromObject(user);
-                parameters.Add(new SqlParameter("iUserId", iUserId));
-                SqlDataAccess.ExecuteDatasetSP("TUser_INS/UPD", parameters);
+
+                SqlDataAccess.ExecuteDatasetSP("TUser_INS/UPD", ObjectGenerator<User>.GetSqlParametersFromObject(user));
                 return true;
                 
             }

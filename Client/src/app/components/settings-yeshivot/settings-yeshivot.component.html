@@ -1,7 +1,32 @@
-<p>
-  yeshivot works!
-</p>
-
 <button routerLink="new-yeshiva">מוסד חדש</button>
 
+<table class="table table-striped">
+  <thead>
+    <tr>
+        <td>פתיחה</td>
+        <td>שם מוסד</td>
+        <td>כתובת</td>
+        <td>עיר</td>
+        <td>שם איש קשר</td>
+        <td>תפקיד</td>
+        <td>מייל</td>
+        <td>נייד</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let yeshiva of yeshivaList">
+      <td><button routerLink="edit-yeshiva">עריכה</button></td>
+      <td>{{yeshiva.nvYeshivaName}}</td>
+      <td>{{yeshiva.nvAddress}}</td>
+      <td>{{yeshiva.nvCity}}</td>
+      <td>{{yeshiva.nvContact}}</td>
+      <td>{{yeshiva.nvRoleType}}</td>
+      <td>{{yeshiva.nvEmail}}</td>
+      <td>{{yeshiva.nvMobile}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
 <router-outlet></router-outlet>
+<!-- (activate)="onRouterOutletActivate($event)" -->

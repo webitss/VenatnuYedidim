@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SysTableService } from '../../services/sys-table.service';
 import { error } from 'util';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'
-import { SysTables } from '../../classes/SysTables';
 import { SysTableRow } from '../../classes/SysTableRow';
+import { SysTables } from '../../classes/SysTables';
 
 @Component({
   selector: 'app-settings-code-tables',
@@ -42,6 +41,4 @@ export class SettingsCodeTableComponent implements OnInit {
     });
     console.log(this.Values);
   }
-
-
 }

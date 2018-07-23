@@ -1,5 +1,5 @@
-export class SysTableRow {
-    public iSysTableRowId: number;
-    public iSysTableId: number;
-    public nvValue: string
-}
+export class SysTableRow{
+    public iSysTableId:Number;   
+    public iSysTableRowId:Number;   
+    public nvValue:string;       
+   }

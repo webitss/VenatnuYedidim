@@ -66,7 +66,7 @@ export class SysTableService {
           return SysTableService.dataTables[this.Mykey];
         }
         else
-          alert("err");
+          console.log("err");
       }
 
       );
@@ -74,7 +74,8 @@ export class SysTableService {
   }
   ////#endregion
   //#region  מחזיר את שמות כל הטבלאות
-  getTableNames(): Promise<SysTables[]> {
+  getTableNames(): Promise<Array<SysTables>> {
+   
     return this.appProxy.get("GetAllNames");
 
   }
