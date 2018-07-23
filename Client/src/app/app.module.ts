@@ -59,6 +59,7 @@ import { SysTableService } from './services/sys-table.service';
 
 import { inject } from '@angular/core/testing';
 import { injectElementRef } from '@angular/core/src/render3';
+import { EditYeshivaComponent } from './components/edit-yeshiva/edit-yeshiva.component';
 
 
 @NgModule({
@@ -111,6 +112,7 @@ import { injectElementRef } from '@angular/core/src/render3';
     StudentConversationComponent,
     StudentConversationDetailsComponent,
     StudentMeetingDetailsComponent,
+    EditYeshivaComponent,
   ],
   imports: [
    // Ng2SearchPipeModule,
@@ -178,7 +180,8 @@ import { injectElementRef } from '@angular/core/src/render3';
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "new-yeshiva", component: NewYeshivaComponent }
+              { path: "new-yeshiva", component: NewYeshivaComponent },
+              { path: "edit-yeshiva", component:EditYeshivaComponent}
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },

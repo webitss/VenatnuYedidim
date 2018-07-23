@@ -90,6 +90,24 @@ namespace Service.Entities
                 return false;
             }
         }
+        public static bool UpdateUserNameAndPassword(int iPersonId, string nvUserName, string nvPassword, int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iPersonId", iPersonId));
+                parameters.Add(new SqlParameter("nvUserName", nvUserName));
+                parameters.Add(new SqlParameter("nvPassword", nvPassword));
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TUser_userNameAndPassword_UPD", parameters);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("UpdateAvrech / TPerson_UPD", "ex" + ex);
+                return false;
+            }
+        }
 
     }
 }

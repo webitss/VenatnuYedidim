@@ -17,7 +17,7 @@ export class EventComponent implements OnInit {
 
   protected currentComponent: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private appProxy: AppProxy, private cd: ChangeDetectorRef) {
+  constructor(private router: Router, private route: ActivatedRoute, private appProxy: AppProxy) {
 
 
   }

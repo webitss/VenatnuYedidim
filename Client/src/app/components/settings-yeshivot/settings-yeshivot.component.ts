@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NewYeshivaComponent } from '../new-yeshiva/new-yeshiva.component';
 import { Yeshiva } from '../../classes/Yeshiva';
 import { RouterLink } from '@angular/router';
+import { AppProxy } from '../../services/app.proxy';
 
 @Component({
   selector: 'app-settings-yeshivot',
@@ -9,10 +10,17 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./settings-yeshivot.component.css']
 })
 export class SettingsYeshivotComponent implements OnInit {
+
+  protected currentComponent:any;
   
-  constructor() { }
+  constructor(private appProxy:AppProxy) { }
+  yeshivaList:Yeshiva;
 
   ngOnInit() {
+    this.appProxy.post("GetAllYeshivot").then(data=>this.yeshivaList=data,err=>alert(err));
   }
-  
+
+  onRouterOutletActivate(event) {
+    this.currentComponent = event;
+  }
 }

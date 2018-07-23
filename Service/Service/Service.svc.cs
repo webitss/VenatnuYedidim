@@ -67,10 +67,7 @@ namespace Service
         }
 
 
-        public bool UpdateAvrech(Avrech avrech, int iUserId)
-        {
-            return Avrech.UpdateAvrech(avrech, iUserId);
-        }
+       
 
         public bool AddStudent(Student student, int iUserId)
         {
@@ -127,6 +124,15 @@ namespace Service
         }
 
 
+        public bool UpdateAvrech(Avrech avrech, int iUserId)
+        {
+            return Avrech.UpdateAvrech(avrech, iUserId);
+        }
+
+        public bool UpdateUserNameAndPassword(int iPersonId, string nvUserName, string nvPassword, int iUserId)
+        {
+            return Avrech.UpdateUserNameAndPassword(iPersonId, nvUserName, nvPassword, iUserId);
+        }
 
         #endregion
 
@@ -203,6 +209,15 @@ namespace Service
 
 
 
+
+
+        #region participant
+
+        public List<Person> GetParticipantsList(int iEventId)
+        {
+            return Participant.GetParticipantsList(iEventId);
+        }
+        #endregion
 
     }
 
