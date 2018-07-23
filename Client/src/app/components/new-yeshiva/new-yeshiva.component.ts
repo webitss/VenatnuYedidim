@@ -27,6 +27,7 @@ export class NewYeshivaComponent implements OnInit {
         data => {
           {
             this.yeshiva = data;
+
           }
         })
   }
