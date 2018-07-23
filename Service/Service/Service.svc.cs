@@ -118,18 +118,24 @@ namespace Service
             return Avrech.GetAvrechStudents(iPersonId);
         }
 
-        public bool DeleteAvrechStudent(int iAvrechId,int iStudentId)
+        public bool DeleteAvrechStudent(int iAvrechId, int iStudentId)
         {
             return Avrech.DeleteAvrechStudent(iAvrechId, iStudentId);
         }
+
 
         public bool UpdateAvrech(Avrech avrech, int iUserId)
         {
             return Avrech.UpdateAvrech(avrech, iUserId);
         }
 
+        public bool UpdateUserNameAndPassword(int iPersonId, string nvUserName, string nvPassword, int iUserId)
+        {
+            return Avrech.UpdateUserNameAndPassword(iPersonId, nvUserName, nvPassword, iUserId);
+        }
+
         #endregion
-            
+
         #region files
 
         public string SaveFileByBase64(string base64File, string fileName)
@@ -139,7 +145,7 @@ namespace Service
 
 
         #endregion
-        
+
         #region SysTableRow
         public List<SysTableRow> GetValues(int iSysTableId)
         {
@@ -195,14 +201,14 @@ namespace Service
         #endregion
 
         #region Documents
-
-        #endregion
-
-
         public List<Document> GetDocuments()
         {
             return Document.GetDocuments();
         }
+        #endregion
+
+
+
 
 
         #region participant

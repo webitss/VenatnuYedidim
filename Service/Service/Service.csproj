@@ -96,8 +96,10 @@
     <Content Include="bin\NReco.PdfGenerator.dll" />
     <Content Include="bin\Service.dll" />
     <Content Include="bin\Service.pdb" />
+    <Content Include="Files\Chrysanthemum.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Service.svc" />
+    <Content Include="Files\TZ.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

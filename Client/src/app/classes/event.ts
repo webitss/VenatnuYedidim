@@ -1,5 +1,5 @@
 export class Event1 {
-    iEventId: number;
+    // iEventId: number;
     nvName: string;
     dtEventDate: Date;
     nvPlace: string;
