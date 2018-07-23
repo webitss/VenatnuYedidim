@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
 })
 export class EventsComponent implements OnInit {
   protected eventsList: Event1[];
-  lstDataRows: any;
- 
+  // lstDataRows: any[];
 
 
-  constructor(private appProxy: AppProxy, private router:Router) { }
+
+  constructor(private appProxy: AppProxy, private router: Router) { }
 
 
   public lstColumns = [{
@@ -66,14 +66,20 @@ export class EventsComponent implements OnInit {
     }
   }
   ]
+  public lstDataRows = [];
 
   ngOnInit() {
     this.appProxy.post('GetEventsList', { iUserId: 0 }).then(res => {
       res.forEach(e => {
-       // this.lstDataRows.
+        this.lstDataRows.push({
+          nvName: e.nvName,
+          dtEventDate: e.dtEventDate.toLocaleDateString(),
+          nvPlace: e.nvPlace
+        });
+
       });
-      this.lstDataRows = res;
-    })
+    }
+    )
   }
 
 }
