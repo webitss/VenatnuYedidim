@@ -2,13 +2,9 @@
  בחר טבלה
 </p>
 <!-- [(ngModel)]="Id" -->
-<select (change)="getValues()" [(ngModel)]="Id">
+<select (change)="getValues()" [(ngModel)]="id">
     <option *ngFor="let name of tableNames"  value={{name.iSysTableId}}>{{name.nvSysTableName}}</option>
 </select>
 <!-- SysTableService -->
-<table *ngFor="let val of Values">
-<tr>
-    <td>{{val.nvValue}}</td>
-</tr>
-</table>
-<input type="button" value="ניסוי" (click)="getValues(1)"/>
+
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="Values"></app-vy-table>

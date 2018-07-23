@@ -146,6 +146,10 @@ namespace Service
 
             return SysTableRow.GetValues(iSysTableId);
         }
+          public bool UpdateValue(SysTableRow sysTableRow)
+        {
+           return SysTableRow.UpdateValue(sysTableRow);
+        }
         #endregion
 
         #region SysTables
@@ -211,6 +215,8 @@ namespace Service
         {
             return Participant.GetParticipantsList(iEventId);
         }
+
+      
         #endregion
 
     }

@@ -14,12 +14,20 @@ export class SettingsCodeTableComponent implements OnInit {
 
   protected tableNames: Array<SysTables>;
   protected Values: Array<SysTableRow>;
-  protected Id: number;
+  protected id: number;
+  protected lstColumns = [{
+    title: 'עריכה',
+     
+  },
+  {
+    title: 'ערך',
+    name: 'nvValue'
+  }]
   constructor(private sysTableService: SysTableService) { }
 
   ngOnInit() {
 
-    let d = this.Id;
+    
 
     this.sysTableService.getTableNames().then(data => this.tableNames = data, error => alert(error));
 
@@ -27,8 +35,8 @@ export class SettingsCodeTableComponent implements OnInit {
   getValues() {
 
 
-let a = 0
-    this.sysTableService.getValues(this.Id).then(data => {
+
+    this.sysTableService.getValues(this.id).then(data => {
       if (data) this.Values = data as Array<SysTableRow>;
       else alert(error)
     });
