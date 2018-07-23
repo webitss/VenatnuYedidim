@@ -1,3 +1,6 @@
 <p>
   documents works!
 </p>
+<ul *ngFor="let d of documents">
+<li> {{d.nvDocumentName}}, {{d.lstObject['nvCategory']}}, {{d.lstObject['nvIdentityCard']}},{{d.lstObject['nvFirstName']}} {{d.lstObject['nvLastName']}}</li>
+</ul>

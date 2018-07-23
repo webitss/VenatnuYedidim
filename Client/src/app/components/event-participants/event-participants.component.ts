@@ -8,17 +8,27 @@ import { Participants } from '../../classes/participants';
   styleUrls: ['./event-participants.component.css']
 })
 export class EventParticipantsComponent implements OnInit {
-  iEventId:number=1;
-participant:Participants[];
-  constructor(private appProxy:AppProxy) { }
+  protected iEventId: number = 1;
+  protected participant: Array<any> = new Array<any>();
+  protected lstColumns = [{
+      title: 'שם פרטי',
+      name: 'nvFirstName'    
+    },{
+      title: 'שם משפחה',
+      name: 'nvLastName'    
+    }
+
+  ]
+
+  constructor(private appProxy: AppProxy) { }
 
   ngOnInit() {
-    this.appProxy.post("GetParticipantsList",{iEventId:this.iEventId})
-    .then(
-    data=>{
-      this.participant=data;
-      alert("good");
-    })
+    this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId })
+      .then(
+        data => {
+          this.participant = data;
+          alert("good");
+        })
   }
-  
-  }
+
+}
