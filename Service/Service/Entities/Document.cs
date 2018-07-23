@@ -46,14 +46,15 @@ namespace Service.Entities
                     {
                         documents.Add(ObjectGenerator<Document>.GeneratFromDataRow(dr));
                         documents.Last().lstObject = new Dictionary<string, string>();
-                        documents.Last().lstObject.Add("StudentName", dr["StudentName"].ToString());
-                        documents.Last().lstObject.Add("StudentId", dr["StudentId"].ToString());
+                        documents.Last().lstObject.Add("nvName", dr["nvName"].ToString());
+                        documents.Last().lstObject.Add("nvIdentityCard", dr["nvIdentityCard"].ToString());
+                        documents.Last().lstObject.Add("nvCategory", dr["nvCategory"].ToString());
                     }
                     return documents;
                 }
                 catch (Exception ex)
                 {
-                    Log.LogError("GetDocuments / TDocuments_SLCT", ", ex " + ex);
+                    Log.LogError("GetDocuments / TDocuments_OfStudents_SLCT", ", ex " + ex);
                     return null;
                 }
 
