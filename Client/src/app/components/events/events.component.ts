@@ -70,7 +70,7 @@ export class EventsComponent implements OnInit {
   ngOnInit() {
     this.appProxy.post('GetEventsList', { iUserId: 0 }).then(res => {
       res.forEach(e => {
-//this.lstDataRows
+       // this.lstDataRows.
       });
       this.lstDataRows = res;
     })
