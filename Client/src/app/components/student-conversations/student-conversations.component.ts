@@ -12,13 +12,14 @@ import { StudentConversationDetailsComponent } from '../student-conversation-det
 export class StudentConversationsComponent implements OnInit {
 
   protected iPersonId: number = 7;
+  
   protected conversationsList: Array<Conversation> = new Array<Conversation>();
   protected conversationSelect: Conversation;
   constructor(private appProxy: AppProxy) { }
 
-  newConversation() {
-    this.conversationSelect = new Conversation();
-  }
+  // newConversation() {
+  //   this.conversationSelect = new Conversation();
+  // }
 
 
   deleteConversation(iConversationId: number, iUserId: number) {
@@ -33,15 +34,11 @@ export class StudentConversationsComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    // this.activatedRoute.parent.params.subscribe(params => {
-    //   this.id=params['iPersonId'];
-    // })  
-    this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
+    this.appProxy.post("GetConversations", { iPersonId:this.iPersonId})
       .then(
         data => {
           this.conversationsList = data as (Array<Conversation>);
-          alert(this.conversationsList[0].iPersonId );
+          //alert(this.conversationsList[0].iPersonId );
         });
   }
 

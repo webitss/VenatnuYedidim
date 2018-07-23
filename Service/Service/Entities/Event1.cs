@@ -41,7 +41,7 @@ namespace Service.Entities
         {
             try
             {
-                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_SLCT", new SqlParameter("iPersonId", iUserId)).Tables[0].Rows;
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_SLCT", new SqlParameter("iUserId", iUserId)).Tables[0].Rows;
                 List<Event1> events = ObjectGenerator<Event1>.GeneratListFromDataRowCollection(drc);
                 return events;
             }
@@ -58,7 +58,7 @@ namespace Service.Entities
             {
                 //addEvent.dtEventDate = DateTime.Today;
                 List<SqlParameter> parameters = ObjectGenerator<Event1>.GetSqlParametersFromObject(addEvent);
-                parameters.Add(new SqlParameter("iCreatedByUserId", iUserId));
+                parameters.Find(x => x.ParameterName == "iCreatedByUserId").Value = iUserId;
                 SqlDataAccess.ExecuteDatasetSP("TEvent_INS", parameters);
                 return true;
             }

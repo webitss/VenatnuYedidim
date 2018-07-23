@@ -158,7 +158,7 @@ import { EditYeshivaComponent } from './components/edit-yeshiva/edit-yeshiva.com
         children: [
           { path: "", component: EventDetailsComponent },
           { path: "event-details", component: EventDetailsComponent },
-          { path: "event-participants", component: EventParticipantsComponent }
+          { path: "event-participants/:iEventId", component: EventParticipantsComponent }
         ]
       },
       { path: "graduates", component: GraduatesComponent },
