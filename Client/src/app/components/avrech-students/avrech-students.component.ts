@@ -2,6 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Student } from '../../classes/student';
+import { T2Int } from '../../classes/T2Int';
 
 @Component({
   selector: 'app-avrech-students',
@@ -34,9 +35,19 @@ export class AvrechStudentsComponent implements OnInit {
     //לקבל את הרשימה המסוננת
     this.studentsToAdd = list;
   }
+userId:number=22;
+studentAndAvrechArr:Array<T2Int>=new Array<T2Int>();
+t2int:T2Int=new T2Int();
 
   saveAdd() {
-    
+    this.studentsToAdd.forEach(element => {
+      this.t2int.iId1=this.userId;
+      this.t2int.iId2=element.iPersonId;
+      this.studentAndAvrechArr.push(this.t2int);
+    });
+    debugger;
+    this.appProxy.post('AddStudentsToAvrech', { studentAndAvrechArr: this.studentAndAvrechArr,iUserId:this.userId }).then(data =>{debugger; alert(data);}
+      , err => alert(err));
     this.flag = false
   }
 

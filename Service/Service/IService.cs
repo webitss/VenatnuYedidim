@@ -1,4 +1,5 @@
 ﻿using Service.Entities;
+using Service.Utilities;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -73,7 +74,14 @@ namespace Service
          RequestFormat = WebMessageFormat.Json)]
         List<Student> GetStudentList(int iUserId);
 
-
+        [OperationContract]
+        [WebInvoke(
+         Method = "POST",
+         UriTemplate = "AddStudentsToAvrech",
+         BodyStyle = WebMessageBodyStyle.WrappedRequest,
+         ResponseFormat = WebMessageFormat.Json,
+         RequestFormat = WebMessageFormat.Json)]
+        bool AddStudentsToAvrech(List<T2Int> studentAndAvrechArr, int iUserId);
 
         [OperationContract]
         [WebInvoke(
@@ -136,6 +144,16 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         bool UpdateAvrech(Avrech avrech, int iUserId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "UpdateUserNameAndPassword",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool UpdateUserNameAndPassword(int iPersonId,string nvUserName,string nvPassword, int iUserId);
+        
 
 
         [OperationContract]
@@ -209,6 +227,7 @@ namespace Service
 
         #endregion Meeting
 
+
         #region files
 
         [OperationContract]
@@ -231,6 +250,16 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         List<SysTableRow> GetValues(int iSysTableId);
+
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "UpdateValue",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+         bool UpdateValue(SysTableRow sysTableRow);
 
         #endregion
 
@@ -325,7 +354,7 @@ namespace Service
 
         [OperationContract]
         [WebInvoke(
-         Method = "POST",
+         Method = "GET",
          UriTemplate = "GetDocuments",
          BodyStyle = WebMessageBodyStyle.WrappedRequest,
          ResponseFormat = WebMessageFormat.Json,
