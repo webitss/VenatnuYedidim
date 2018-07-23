@@ -156,7 +156,10 @@ import { injectElementRef } from '@angular/core/src/render3';
         children: [
           { path: "", component: EventDetailsComponent },
           { path: "event-details", component: EventDetailsComponent },
-          { path: "event-participants", component: EventParticipantsComponent }
+<<<<<<< HEAD
+          { path: "event-participants/:iEventId", component: EventParticipantsComponent }
+=======
+>>>>>>> 0aecbf66362627f71118a68c45b566153b65f11c
         ]
       },
       { path: "graduates", component: GraduatesComponent },

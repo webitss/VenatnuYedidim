@@ -60,9 +60,11 @@ namespace Service.Entities
         {
             try
             {
-
-                DataRow drc = SqlDataAccess.ExecuteDatasetSP("TAvrech_GetAvrechById_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
-                Avrech avrech = ObjectGenerator<Avrech>.GeneratFromDataRow(drc);
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TAvrech_GetAvrechById_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
+                Avrech avrech = ObjectGenerator<Avrech>.GeneratFromDataRow(dr);
+                avrech.lstObject = new Dictionary<string, string>();
+                avrech.lstObject.Add("nvUserName", dr["nvUserName"].ToString());
+                avrech.lstObject.Add("nvPassword", dr["nvPassword"].ToString());
 
                 return avrech;
             }
@@ -80,6 +82,24 @@ namespace Service.Entities
                 List<SqlParameter> parameters = ObjectGenerator<Avrech>.GetSqlParametersFromObject(avrech);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
                 SqlDataAccess.ExecuteDatasetSP("TPerson_UPD", parameters);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("UpdateAvrech / TPerson_UPD", "ex" + ex);
+                return false;
+            }
+        }
+        public static bool UpdateUserNameAndPassword(int iPersonId, string nvUserName, string nvPassword, int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iPersonId", iPersonId));
+                parameters.Add(new SqlParameter("nvUserName", nvUserName));
+                parameters.Add(new SqlParameter("nvPassword", nvPassword));
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TUser_userNameAndPassword_UPD", parameters);
                 return true;
             }
             catch (Exception ex)
