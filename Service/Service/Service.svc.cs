@@ -121,15 +121,15 @@ namespace Service
             return Avrech.GetAvrechStudents(iPersonId);
         }
 
-        public bool DeleteAvrechStudent(int iAvrechId,int iStudentId)
+        public bool DeleteAvrechStudent(int iAvrechId, int iStudentId)
         {
             return Avrech.DeleteAvrechStudent(iAvrechId, iStudentId);
         }
-        
+
 
 
         #endregion
-            
+
         #region files
 
         public string SaveFileByBase64(string base64File, string fileName)
@@ -139,7 +139,7 @@ namespace Service
 
 
         #endregion
-        
+
         #region SysTableRow
         public List<SysTableRow> GetValues(int iSysTableId)
         {
@@ -195,14 +195,14 @@ namespace Service
         #endregion
 
         #region Documents
-
-        #endregion
-
-
         public List<Document> GetDocuments()
         {
             return Document.GetDocuments();
         }
+        #endregion
+
+
+
 
     }
 

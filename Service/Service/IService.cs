@@ -325,7 +325,7 @@ namespace Service
 
         [OperationContract]
         [WebInvoke(
-         Method = "POST",
+         Method = "GET",
          UriTemplate = "GetDocuments",
          BodyStyle = WebMessageBodyStyle.WrappedRequest,
          ResponseFormat = WebMessageFormat.Json,
