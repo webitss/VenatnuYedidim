@@ -38,4 +38,14 @@ export class UserDetailsComponent implements OnInit {
   @Output()
   public person: Person;
 
+  saveUser() {
+    this.appProxy.post("SetUser", { user: this.user, iUserId: 1 }).then(data => {
+      debugger
+      if (data == true)
+        alert("המשתמש נוסף בהצלחה!");
+      else
+        alert("error!");
+    })
+  }
+
 }
