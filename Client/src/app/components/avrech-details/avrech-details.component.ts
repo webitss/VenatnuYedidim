@@ -25,11 +25,9 @@ export class AvrechDetailsComponent implements OnInit {
       data=>
       {
     this.avrech=data;
-    
     },
       err=>("err")
     );
-    debugger;
   }
 
   save()
