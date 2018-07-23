@@ -1,14 +1,11 @@
 <p>
  בחר טבלה
 </p>
-<!-- [(ngModel)]="Id" -->
-<select (change)="getValues()" [(ngModel)]="Id">
-    <option *ngFor="let name of tableNames"  value={{name.iSysTableId}}>{{name.nvSysTableName}}</option>
+<select>
+    <option *ngFor="let name of tableNames" >{{name.nvSysTableName}}</option>
 </select>
-<!-- SysTableService -->
+SysTableService
 <table *ngFor="let val of Values">
-<tr>
-    <td>{{val.nvValue}}</td>
-</tr>
+<tr></tr>
 </table>
-<input type="button" value="ניסוי" (click)="getValues(1)"/>
+<input type="button" value="ניסוי" (click)=ff()/>

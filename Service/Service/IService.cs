@@ -59,7 +59,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        void SetUser(User user, int iUserId);
+        void SetUser(User user);
 
         #endregion
 

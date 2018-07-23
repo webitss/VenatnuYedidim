@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SysTableService } from '../../services/sys-table.service';
 import { error } from 'util';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'
-import { SysTables } from '../../classes/SysTables';
-import { SysTableRow } from '../../classes/SysTableRow';
 
 @Component({
   selector: 'app-settings-code-tables',
@@ -12,28 +9,25 @@ import { SysTableRow } from '../../classes/SysTableRow';
 })
 export class SettingsCodeTableComponent implements OnInit {
 
-  protected tableNames: Array<SysTables>;
-  protected Values: Array<SysTableRow>;
-  protected Id: number;
+  tableNames: string[];
+  Values:string[];
   constructor(private sysTableService: SysTableService) { }
 
   ngOnInit() {
 
-    let d = this.Id;
-
-    this.sysTableService.getTableNames().then(data => this.tableNames = data, error => alert(error));
-
+    this.sysTableService.getTableNames().then(data=>this.tableNames=data,error=>alert(error) );
   }
-  getValues() {
-
-
-let a = 0
-    this.sysTableService.getValues(this.Id).then(data => {
-      if (data) this.Values = data as Array<SysTableRow>;
-      else alert(error)
-    });
-    console.log(this.Values);
+  getValues1(id:number){
+   
+this.sysTableService.getValues(id);
   }
-
-
+  getValues(){
+    
+    this.sysTableService.getValues(1).then(data=>this.Values=data,error=>alert(error) );
+    
+  }
+  ff(){
+    alert("select");
+    this.sysTableService.getValues(1).then(data=>this.Values=data,error=>alert(error) );;
+  }
 }

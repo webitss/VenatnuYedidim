@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AppProxy } from './app.proxy';
-import { promise } from 'protractor';
-import { SysTables } from '../classes/SysTables';
-import { SysTableRow } from '../classes/SysTableRow';
 
 @Injectable()
 export class SysTableService {
-  Mykey: string;
+  Mykey:string;
   public static dataTables = {
     deathType: {
       iSysTableId: 1,
@@ -43,40 +40,29 @@ export class SysTableService {
   }
 
   constructor(private appProxy: AppProxy) { }
-  ////#region מקבל ID של טבלה מחזיר ערכים מאותה טבלה 
-  getValues(iSysTableId: number): Promise<Array<SysTableRow>> {
-
-    console.log(iSysTableId + "arived");
+ ////#region מקבל ID של טבלה מחזיר ערכים מאותה טבלה 
+   getValues(iSysTableId: number) {
+ 
+     console.log(iSysTableId+"arived");
     for (let key in SysTableService.dataTables) {
       console.log(key)
-      if (SysTableService.dataTables[key].iSysTableId === iSysTableId) {
-        this.Mykey = key;
-        if (SysTableService.dataTables[key].SysTableRow.length > 0) {
-          return SysTableService.dataTables[key].SysTableRow;
-
-        }
+       if (SysTableService.dataTables[key].iSysTableId===iSysTableId ){
+        this.Mykey=key;
+       if (SysTableService.dataTables[key].SysTableRow.length > 0 )
+       {
+         return SysTableService.dataTables[key].SysTableRow;
+        
+       }
       }
-    }
-
-    return this.appProxy.post("GetValues", { iSysTableId: iSysTableId })
-
-      .then(l => {
-        if (l) {
-          SysTableService.dataTables[this.Mykey] = l
-          return SysTableService.dataTables[this.Mykey];
-        }
-        else
-          alert("err");
       }
-
-      );
-
+     
+   console.log(this.appProxy.post("GetValues", iSysTableId));
+      this.appProxy.post("GetValues", iSysTableId).then(l=>SysTableService.dataTables[this.Mykey]=l);
   }
   ////#endregion
-  //#region  מחזיר את שמות כל הטבלאות
-  getTableNames(): Promise<SysTables[]> {
+ //#region  מחזיר את שמות כל הטבלאות
+  getTableNames(): Promise<string[]> {
     return this.appProxy.get("GetAllNames");
-
   }
 
   //#endregion
