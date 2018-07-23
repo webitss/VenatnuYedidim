@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SysTableService } from '../../services/sys-table.service';
 import { error } from 'util';
+import { SysTableRow } from '../../classes/SysTableRow';
+import { SysTables } from '../../classes/SysTables';
 
 @Component({
   selector: 'app-settings-code-tables',
@@ -9,25 +11,34 @@ import { error } from 'util';
 })
 export class SettingsCodeTableComponent implements OnInit {
 
-  tableNames: string[];
-  Values:string[];
+  protected tableNames: Array<SysTables>;
+  protected Values: Array<SysTableRow>;
+  protected id: number;
+  protected lstColumns = [{
+    title: 'עריכה',
+     
+  },
+  {
+    title: 'ערך',
+    name: 'nvValue'
+  }]
   constructor(private sysTableService: SysTableService) { }
 
   ngOnInit() {
 
-    this.sysTableService.getTableNames().then(data=>this.tableNames=data,error=>alert(error) );
-  }
-  getValues1(id:number){
-   
-this.sysTableService.getValues(id);
-  }
-  getValues(){
     
-    this.sysTableService.getValues(1).then(data=>this.Values=data,error=>alert(error) );
-    
+
+    this.sysTableService.getTableNames().then(data => this.tableNames = data, error => alert(error));
+
   }
-  ff(){
-    alert("select");
-    this.sysTableService.getValues(1).then(data=>this.Values=data,error=>alert(error) );;
+  getValues() {
+
+
+
+    this.sysTableService.getValues(this.id).then(data => {
+      if (data) this.Values = data as Array<SysTableRow>;
+      else alert(error)
+    });
+    console.log(this.Values);
   }
 }
