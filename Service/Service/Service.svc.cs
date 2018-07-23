@@ -67,10 +67,7 @@ namespace Service
         }
 
 
-        public bool UpdateAvrech(Avrech avrech, int iUserId)
-        {
-            return Avrech.UpdateAvrech(avrech, iUserId);
-        }
+       
 
         public bool AddStudent(Student student, int iUserId)
         {
@@ -125,8 +122,11 @@ namespace Service
         {
             return Avrech.DeleteAvrechStudent(iAvrechId, iStudentId);
         }
-        
 
+        public bool UpdateAvrech(Avrech avrech, int iUserId)
+        {
+            return Avrech.UpdateAvrech(avrech, iUserId);
+        }
 
         #endregion
             
