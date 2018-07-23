@@ -59,7 +59,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        void SetUser(User user);
+        void SetUser(User user, int iUserId);
 
         #endregion
 
@@ -148,7 +148,7 @@ namespace Service
         bool DeleteAvrechStudent(int iAvrechId, int iStudentId);
         #endregion
 
-    
+
 
         [OperationContract]
         [WebInvoke(
@@ -162,14 +162,22 @@ namespace Service
 
 
         #region events
-        //[OperationContract]
-        //[WebInvoke(
-        //Method = "POST",
-        //UriTemplate = "AddEvent",
-        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //ResponseFormat = WebMessageFormat.Json,
-        //RequestFormat = WebMessageFormat.Json)]
-        //bool AddEvent(Event1 addEvent);
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "AddEvent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool AddEvent(Event1 addEvent, int iUserId);
+
+        [WebInvoke(
+Method = "POST",
+UriTemplate = "GetEventsList",
+BodyStyle = WebMessageBodyStyle.WrappedRequest,
+ResponseFormat = WebMessageFormat.Json,
+RequestFormat = WebMessageFormat.Json)]
+        List<Event1> GetEventsList(int iUserId);
         #endregion
 
         #region Meeting
@@ -310,14 +318,14 @@ namespace Service
 
         #region participiant
 
-        //[OperationContract]
-        //[WebInvoke(
-        //  Method = "POST",
-        //  UriTemplate = "GetParticipantsList",
-        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //  ResponseFormat = WebMessageFormat.Json,
-        //  RequestFormat = WebMessageFormat.Json)]
-        //List<Participant> GetParticipantsList(int? iEventId);
+       [OperationContract]
+       [WebInvoke(
+         Method = "POST",
+         UriTemplate = "GetParticipantsList",
+         BodyStyle = WebMessageBodyStyle.WrappedRequest,
+         ResponseFormat = WebMessageFormat.Json,
+         RequestFormat = WebMessageFormat.Json)]
+       List<Person> GetParticipantsList(int iEventId);
 
         #endregion
 
@@ -330,7 +338,7 @@ namespace Service
          BodyStyle = WebMessageBodyStyle.WrappedRequest,
          ResponseFormat = WebMessageFormat.Json,
          RequestFormat = WebMessageFormat.Json)]
-         List<Document> GetDocuments();
+        List<Document> GetDocuments();
 
         #endregion
     }

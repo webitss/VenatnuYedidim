@@ -31,9 +31,9 @@ namespace Service
             return User.Login(nvUserName, nvPassword);
         }
 
-        public void SetUser(User user)
+        public void SetUser(User user, int iUserId)
         {
-            User.SetUser(user);
+            User.SetUser(user, iUserId);
         }
 
         #endregion
@@ -67,10 +67,7 @@ namespace Service
         }
 
 
-        public bool UpdateAvrech(Avrech avrech, int iUserId)
-        {
-            return Avrech.UpdateAvrech(avrech, iUserId);
-        }
+       
 
         public bool AddStudent(Student student, int iUserId)
         {
@@ -90,17 +87,21 @@ namespace Service
         }
         #endregion
 
+
+        #region Event
+        public bool AddEvent(Event1 oEvent, int iUserId)
+        {
+            return Event1.AddEvent(oEvent, iUserId);
+        }
+
+        public List<Event1> GetEventsList(int iUserId)
+        {
+            return Event1.GetEventsList(iUserId);
+        }
+
+        #endregion
         #region Avrech
 
-        //public bool AddEvent(Event oEvent, int iUserId)
-        //{
-        //    return Event.AddEvent(oEvent);
-        //}
-
-        //public List<Event> GetEventsList(int iUserId)
-        //{
-        //    return Event.GetEventsList(iUserId);
-        //}
 
         public List<Avrech> GetAllAvrechim(int? iPersonId)
         {
@@ -121,8 +122,11 @@ namespace Service
         {
             return Avrech.DeleteAvrechStudent(iAvrechId, iStudentId);
         }
-        
 
+        public bool UpdateAvrech(Avrech avrech, int iUserId)
+        {
+            return Avrech.UpdateAvrech(avrech, iUserId);
+        }
 
         #endregion
             
@@ -199,6 +203,15 @@ namespace Service
         {
             return Document.GetDocuments();
         }
+
+
+        #region participant
+
+        public List<Person> GetParticipantsList(int iEventId)
+        {
+            return Participant.GetParticipantsList(iEventId);
+        }
+        #endregion
 
     }
 
