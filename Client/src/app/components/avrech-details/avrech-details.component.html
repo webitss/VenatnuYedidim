@@ -19,7 +19,6 @@
 <label for="firstName">עיר</label>
 <input type="text" id="firstName" [(ngModel)]="avrech.nvCity"/>
 <label for="firstName">שם משתמש</label>
-<input type="text" id="firstName" [(ngModel)]="avrech.nvUserName"/>
+<input type="text" id="firstName" [(ngModel)]="avrech.lstObject['nvUserName']"/>
 <label for="firstName"> סיסמה</label>
-<input type="text" id="firstName" [(ngModel)]="avrech.nvLPassword"/>
-<button (click)="save()">שמירה</button>
+<input type="text" id="firstName" [(ngModel)]="avrech.lstObject['nvPassword']"/>

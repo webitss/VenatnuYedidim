@@ -9,4 +9,9 @@
     iLastModifyUserId:number;
     dtLastModifyDate:Date;
     bSysRowStatus:boolean;    
+
+
+    constructor(){
+        this.dtMeetingDate=new Date();
+    }
     }

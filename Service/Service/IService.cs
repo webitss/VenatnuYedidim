@@ -10,14 +10,15 @@ namespace Service
     {
         #region Person
 
-        [OperationContract]
-        [WebInvoke(
-           Method = "POST",
-           UriTemplate = "GetPerson",
-           BodyStyle = WebMessageBodyStyle.WrappedRequest,
-           ResponseFormat = WebMessageFormat.Json,
-           RequestFormat = WebMessageFormat.Json)]
-        Person GetPerson(int iPersonId);
+        //[OperationContract]
+        //[WebInvoke(
+        //   Method = "POST",
+        //   UriTemplate = "GetPerson",
+        //   BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //   ResponseFormat = WebMessageFormat.Json,
+        //   RequestFormat = WebMessageFormat.Json)]
+        //Person GetPerson(int iPersonId);
+
         #endregion
 
 
@@ -168,7 +169,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool AddEvent(Event1 addEvent);
+        bool AddEvent(Event1 addEvent,int iUserId);
         #endregion
 
         #region Meeting
@@ -307,6 +308,18 @@ namespace Service
 
         #endregion Conversation
 
+        #region participiant
+
+        //[OperationContract]
+        //[WebInvoke(
+        //  Method = "POST",
+        //  UriTemplate = "GetParticipantsList",
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //  ResponseFormat = WebMessageFormat.Json,
+        //  RequestFormat = WebMessageFormat.Json)]
+        //List<Participant> GetParticipantsList(int? iEventId);
+
+        #endregion
 
         #region Documents
 
@@ -320,7 +333,6 @@ namespace Service
          List<Document> GetDocuments();
 
         #endregion
-        
     }
 
 }

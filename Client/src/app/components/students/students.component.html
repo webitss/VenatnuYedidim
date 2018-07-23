@@ -4,11 +4,33 @@
 
  <button class="btn edit" routerLink="student/1/student-details">עריכה </button>
 
-
- <div *ngFor="let student of studentList">
-        {{student.nvFirstName}}
-        {{student.nvBirthday}}
-        {{student.dtBirthday}}
-        {{student.nvAddress}}
-        {{student.nvCity}}
-    </div>
+<div class="container">
+ 
+        <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>שם פרטי</th>
+                    <th>שם משפחה</th>
+                    <th>טלפון</th>
+                    <th>נייד</th>
+                    <th>דו"אל</th>
+                    <th>מוסד לימודים</th>
+                    <th>משויך לאברך</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let student of studentList">
+                      <td>   {{student.nvFirstName}}</td>
+                      <td> {{student.nvLastName}}</td>
+                      <td> {{student.nvPhone}}</td>
+                      <td>{{student.nvMobile}}</td>
+                      <td> {{student.nvEmail}}</td>
+                      <td> {{student.nvYeshivaName}}</td>
+                      <td> </td>
+                  </tr>
+                </tbody>
+              </table>
+       
+      
+  
+</div>

@@ -25,24 +25,15 @@ export class AvrechDetailsComponent implements OnInit {
       data=>
       {
     this.avrech=data;
-    
     },
       err=>("err")
     );
-    debugger;
   }
 
   save()
   {
     this.appProxy.post("UpdateAvrech",{avrech:this.avrech,iUserId:1}).then(
-      data=>
-      {
-        if(data==true)
-    alert("העדכון הצליח");
-    else
-    alert("העדכון נכשל")
-    },
-      err=>("err")
+    
     );
   }
 

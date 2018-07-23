@@ -23,10 +23,17 @@ namespace Service.Entities
         public DateTime dtMeetingDate { get; set; }
         [DataMember]
         public string nvSummary { get; set; }
-        
+
         #endregion
 
         #region Methods
+
+        public Meeting()
+        {
+            dtMeetingDate = new DateTime();
+        }
+
+
         public static List<Meeting> GetMeetingsByStudentId(int iPersonId)
         {
             try
@@ -47,15 +54,15 @@ namespace Service.Entities
         {
             try
             {
-
+                
                 List<SqlParameter> parameters = ObjectGenerator<Meeting>.GetSqlParametersFromObject(meeting);
                 parameters.Add(new SqlParameter("iCreatedByUserId", iUserId));
-                SqlDataAccess.ExecuteDatasetSP("TMeeting_INC", parameters);
+                SqlDataAccess.ExecuteDatasetSP("TMeeting_INS", parameters);
                 return true;
             }
             catch (Exception ex)
             {
-                Log.LogError("AddMeeting / TMeeting_INC", "ex" + ex);
+                Log.LogError("AddMeeting / TMeeting_INS", "ex" + ex);
                 return false;
             }
         }
@@ -66,7 +73,7 @@ namespace Service.Entities
             {
                 List<SqlParameter> parameters = ObjectGenerator<Meeting>.GetSqlParametersFromObject(meeting);
                 parameters.Add(new SqlParameter("iLastModifyUserId", iUserId));
-                SqlDataAccess.ExecuteDatasetSP("TStudent_INS", parameters);
+                SqlDataAccess.ExecuteDatasetSP("Tmeeting_UPD", parameters);
                 return true;
             }
             catch (Exception ex)

@@ -16,13 +16,14 @@ export class StudentMeetingDetailsComponent implements OnInit {
   @Input()
   protected meeting: Meeting;
   save() {
+    this.meeting.dtMeetingDate = new Date(this.meeting.dtMeetingDate);
     //פגישה חדשה
     if (this.meeting.iMeetingId == null) {
       this.meeting.iPersonId=1;
       this.appProxi.post("AddMeeting", { meeting: this.meeting, iUserId: 1 }).then(
         data => {
           alert("good");
-          debugger;
+          // debugger;
         },
         err => {
           alert("not good");

@@ -1,8 +1,8 @@
 import { Person } from "./person";
 
 export class Student implements Person {
-     iPersonId: number;
-   nvFirstName: String;
+    iPersonId: number;
+    nvFirstName: String;
     nvLastName: String;
     nvIdentityCard: String;
     nvPhone: String;
@@ -31,5 +31,4 @@ export class Student implements Person {
     dtAddStudentDate:Date;
     nvComment:string;
     
-    constructor(){}
 }

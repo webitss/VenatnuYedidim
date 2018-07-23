@@ -60,9 +60,11 @@ namespace Service.Entities
         {
             try
             {
-
-                DataRow drc = SqlDataAccess.ExecuteDatasetSP("TAvrech_GetAvrechById_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
-                Avrech avrech = ObjectGenerator<Avrech>.GeneratFromDataRow(drc);
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TAvrech_GetAvrechById_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
+                Avrech avrech = ObjectGenerator<Avrech>.GeneratFromDataRow(dr);
+                avrech.lstObject = new Dictionary<string, string>();
+                avrech.lstObject.Add("nvUserName", dr["nvUserName"].ToString());
+                avrech.lstObject.Add("nvPassword", dr["nvPassword"].ToString());
 
                 return avrech;
             }
