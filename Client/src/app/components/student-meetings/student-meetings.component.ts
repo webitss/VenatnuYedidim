@@ -24,7 +24,7 @@ export class StudentMeetingsComponent implements OnInit {
   public lstColumns = [{
     title: 'עריכה',
     name: 'edit',
-    clickCell:true,
+    bClickCell:true,
     type: 'html'
 
   },

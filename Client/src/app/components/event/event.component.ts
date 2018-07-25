@@ -27,6 +27,7 @@ export class EventComponent implements OnInit {
   }
 
   isDetails: boolean = true;
+  //header:string;
 
   eventDetails() {
     this.isDetails = true;
