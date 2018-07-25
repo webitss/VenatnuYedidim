@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Yeshiva } from '../../classes/Yeshiva';
 import { forEach } from '@angular/router/src/utils/collection';
@@ -11,13 +11,17 @@ import { SettingsYeshivotComponent } from '../settings-yeshivot/settings-yeshivo
   templateUrl: './new-yeshiva.component.html',
   styleUrls: ['./new-yeshiva.component.css']
 })
+
 export class NewYeshivaComponent implements OnInit {
+
+  @Output()
+  @Input()
 
   protected yeshiva: Yeshiva = new Yeshiva();
 
   constructor(private appProx: AppProxy) { }
 
-
+  
   ngOnInit() {
   }
 
