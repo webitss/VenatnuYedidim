@@ -101,4 +101,26 @@ export class AppComponent implements OnInit {
   //   }
 
   // }
+
+  public lstColumns = [{
+    title: 'עריכה',
+    type: 'html',
+    name: 'edit',
+    clickCell: true
+    
+  },
+  {
+    title: 'שם פרטי',
+    name: 'nvFirstName'
+  }]
+
+  public lstDataRows = [{
+    nvFirstName: 1,
+    edit: '<span>עריכה</span>'
+  }]
+
+  aaaa(){
+    alert('aaaa')
+  }
+ 
 }
