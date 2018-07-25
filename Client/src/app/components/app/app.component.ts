@@ -17,7 +17,9 @@ export class AppComponent implements OnInit {
 
   // public lstColumns = [{
   //   title: 'עריכה',
-  //   name: 'aa' 
+  //   name: 'aa',
+  // type: 'html',
+  // clickCell: true 
   // },
   // {
   //   title: 'שם פרטי',
