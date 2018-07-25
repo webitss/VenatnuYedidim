@@ -18,13 +18,21 @@ export class EventDetailsComponent implements OnInit {
   protected e: Event1;
 
   
+// header:string;
 
+// getHeader(){
+//   return this.header;
+// }
   protected date: Date;
 
   
-
+// getUser(){
+  
+// }
   save() {
-    this.e.dtEventDate = new Date(this.date);
+   this.date=new Date(this.e.dtEventDate);
+   this.e.dtEventDate = new Date(this.date);
+
     this.appProxy.post('SetEvent', { oEvent: this.e,  iUserId: 1})
       .then(
         data => {
@@ -46,13 +54,17 @@ export class EventDetailsComponent implements OnInit {
       if (params['iEventId'] != '0') {
         this.appProxy.post("GetEvent", { iEventId: params['iEventId'] })
           .then(data => {
-           // this.e=new Event1();
             this.e = data;
             this.date=this.e.dtEventDate;
+          //this.header=this.e.nvName;
+  
           });
+  
+  
       }
       else {
         this.e = new Event1();
+       // this.header="ארוע חדש";
       }
     });
   }

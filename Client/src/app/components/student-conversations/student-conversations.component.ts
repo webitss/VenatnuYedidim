@@ -13,6 +13,7 @@ import { Title } from '@angular/platform-browser';
 export class StudentConversationsComponent implements OnInit {
 
   protected iPersonId: number = 9;
+
   protected conversationsList: Array<Conversation> = new Array<Conversation>();
   protected conversationSelect: Conversation;
 

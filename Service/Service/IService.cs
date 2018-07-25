@@ -229,13 +229,13 @@ RequestFormat = WebMessageFormat.Json)]
           RequestFormat = WebMessageFormat.Json)]
         List<Meeting> GetMeetingsByStudentId(int iPersonId);
 
-        [WebInvoke(
-          Method = "POST",
-          UriTemplate = "AddMeeting",
-          BodyStyle = WebMessageBodyStyle.WrappedRequest,
-          ResponseFormat = WebMessageFormat.Json,
-          RequestFormat = WebMessageFormat.Json)]
-        bool AddMeeting(Meeting meeting, int iUserId);
+        //[WebInvoke(
+        //  Method = "POST",
+        //  UriTemplate = "AddMeeting",
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //  ResponseFormat = WebMessageFormat.Json,
+        //  RequestFormat = WebMessageFormat.Json)]
+        //bool AddMeeting(Meeting meeting, int iUserId);
 
         [WebInvoke(
           Method = "POST",
@@ -245,13 +245,13 @@ RequestFormat = WebMessageFormat.Json)]
           RequestFormat = WebMessageFormat.Json)]
         bool SetMeeting(Meeting meeting, int iUserId);
 
-        [WebInvoke(
-          Method = "POST",
-          UriTemplate = "UpdateMeeting",
-          BodyStyle = WebMessageBodyStyle.WrappedRequest,
-          ResponseFormat = WebMessageFormat.Json,
-          RequestFormat = WebMessageFormat.Json)]
-        bool UpdateMeeting(Meeting meeting, int iUserId);
+        //[WebInvoke(
+        //  Method = "POST",
+        //  UriTemplate = "UpdateMeeting",
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //  ResponseFormat = WebMessageFormat.Json,
+        //  RequestFormat = WebMessageFormat.Json)]
+        //bool UpdateMeeting(Meeting meeting, int iUserId);
 
         [WebInvoke(
           Method = "POST",
@@ -297,6 +297,14 @@ RequestFormat = WebMessageFormat.Json)]
         RequestFormat = WebMessageFormat.Json)]
          bool UpdateValue(SysTableRow sysTableRow);
 
+        [OperationContract]
+        [WebInvoke(
+       Method = "POST",
+       UriTemplate = "AddValue",
+       BodyStyle = WebMessageBodyStyle.WrappedRequest,
+       ResponseFormat = WebMessageFormat.Json,
+       RequestFormat = WebMessageFormat.Json)]
+        bool AddValue(SysTableRow sysTableRow);
         #endregion
 
         #region SysTables

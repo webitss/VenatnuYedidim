@@ -6,7 +6,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
-
 namespace Service.Entities
 {
     [DataContract]

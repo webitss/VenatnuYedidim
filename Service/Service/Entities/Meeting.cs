@@ -67,38 +67,38 @@ namespace Service.Entities
             }
         }
 
-        public static bool AddMeeting(Meeting meeting, int iUserId)
-        {
-            try
-            {
+        //public static bool AddMeeting(Meeting meeting, int iUserId)
+        //{
+        //    try
+        //    {
                 
-                List<SqlParameter> parameters = ObjectGenerator<Meeting>.GetSqlParametersFromObject(meeting);
-                parameters.Add(new SqlParameter("iCreatedByUserId", iUserId));
-                SqlDataAccess.ExecuteDatasetSP("TMeeting_INS", parameters);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Log.LogError("AddMeeting / TMeeting_INS", "ex" + ex);
-                return false;
-            }
-        }
+        //        List<SqlParameter> parameters = ObjectGenerator<Meeting>.GetSqlParametersFromObject(meeting);
+        //        parameters.Add(new SqlParameter("iCreatedByUserId", iUserId));
+        //        SqlDataAccess.ExecuteDatasetSP("TMeeting_INS", parameters);
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.LogError("AddMeeting / TMeeting_INS", "ex" + ex);
+        //        return false;
+        //    }
+        //}
 
-        public static bool UpdateMeeting(Meeting meeting, int iUserId)
-        {
-            try
-            {
-                List<SqlParameter> parameters = ObjectGenerator<Meeting>.GetSqlParametersFromObject(meeting);
-                parameters.Add(new SqlParameter("iLastModifyUserId", iUserId));
-                SqlDataAccess.ExecuteDatasetSP("Tmeeting_UPD", parameters);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Log.LogError("UpdateMeeting/Tmeeting_UPD", "ex" + ex);
-                return false;
-            }
-        }
+        //public static bool UpdateMeeting(Meeting meeting, int iUserId)
+        //{
+        //    try
+        //    {
+        //        List<SqlParameter> parameters = ObjectGenerator<Meeting>.GetSqlParametersFromObject(meeting);
+        //        parameters.Add(new SqlParameter("iLastModifyUserId", iUserId));
+        //        SqlDataAccess.ExecuteDatasetSP("Tmeeting_UPD", parameters);
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.LogError("UpdateMeeting/Tmeeting_UPD", "ex" + ex);
+        //        return false;
+        //    }
+        //}
 
         public static bool DeleteMeeting(int iMeetingId, int iUserId)
         {

@@ -42,6 +42,7 @@ export class UserDetailsComponent implements OnInit {
 
   saveUser() {
     this.appProxy.post("SetUser", { user: this.user, iUserId: 1 }).then(data => {
+      debugger
       if (data == true) {
         alert("המשתמש נוסף בהצלחה!");
         this.router.navigate(['users']);

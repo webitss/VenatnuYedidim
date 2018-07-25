@@ -52,6 +52,7 @@ export class StudentMeetingsComponent implements OnInit {
 
   addMeeting(){
     this.meeting = new Meeting();
+    this.meeting.dtMeetingDate = new Date(); 
   }
   close(){
     this.meeting = null;
