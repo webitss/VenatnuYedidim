@@ -10,9 +10,7 @@ import { Meeting } from '../../classes/meeting';
 })
 export class StudentMeetingDetailsComponent implements OnInit {
   private sub: any;
-  @Output() Meeting = new EventEmitter();  
-  // @Input() 
-  // protected meetingId:number;
+  @Output() Meeting = new EventEmitter(); 
 
   @Output()
   @Input()
@@ -27,7 +25,8 @@ export class StudentMeetingDetailsComponent implements OnInit {
     //פגישה חדשה
     if (this.meeting.iMeetingId == null) {
       this.meeting.iPersonId=1;
-      this.appProxi.post("AddMeeting", { meeting: this.meeting, iUserId: 1 }).then(
+      }
+      this.appProxi.post("SetMeeting", { meeting: this.meeting, iUserId: 1 }).then(
         data => {
           alert("good");
           this.Meeting.emit(null);
@@ -37,34 +36,13 @@ export class StudentMeetingDetailsComponent implements OnInit {
           alert("not good");
         }
       );
-    }
-    else
-    this.appProxi.post("UpdateMeeting", { meeting: this.meeting, iUserId: 1 }).then(
-      data => {
-        alert("good");
-        debugger;
-      },
-      err => {
-        alert("not good");
+    
       }
-    );
-  }
 
   constructor(private route: ActivatedRoute, private appProxi: AppProxy) { }
-  // subscription:Subscription;
   ngOnInit() {
-    if (this.meeting == null)
-      this.meeting = new Meeting();
-    //  this.sub=this.route.params.subscribe(params=>{
-    //    this.meetingId=+params['iMeetingId'];
-    //  });
-    debugger;
-
+   
   }
-  // ngOnDestroy() {
-  //   this.sub.unsubscribe();
-  //   }
-
-
+  
 
 }
