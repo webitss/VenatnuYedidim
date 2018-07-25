@@ -60,7 +60,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        void SetUser(User user);
+        bool SetUser(User user, int iUserId);
 
         #endregion
 
@@ -236,6 +236,14 @@ RequestFormat = WebMessageFormat.Json)]
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
         bool AddMeeting(Meeting meeting, int iUserId);
+
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "SetMeeting",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+        bool SetMeeting(Meeting meeting, int iUserId);
 
         [WebInvoke(
           Method = "POST",
