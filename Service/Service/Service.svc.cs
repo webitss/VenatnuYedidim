@@ -163,6 +163,11 @@ namespace Service
         {
            return SysTableRow.UpdateValue(sysTableRow);
         }
+        public bool AddValue(SysTableRow sysTableRow)
+        {
+            return SysTableRow.AddValue(sysTableRow);
+        }
+
         #endregion
 
         #region SysTables
@@ -230,6 +235,7 @@ namespace Service
         }
 
       
+
         #endregion
 
     }

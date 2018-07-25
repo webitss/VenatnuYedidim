@@ -7,4 +7,15 @@
 </select>
 <!-- SysTableService -->
 
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="Values"></app-vy-table>
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="Values" (clickCell)="cell($event)"></app-vy-table>
+<div>
+    <form class="form" *ngIf="toEdit">
+<input type="text" [(ngModel)]="row.nvValue" value={{row.nvValue}} class="input" [ngModelOptions]="{standalone: true}"/>
+<input type="submit" value="שמור" (click)="save()"/>
+    </form>
+    <input type="button" value="הוספת ערך" (click)="divNewValue=true"/>
+    <div *ngIf="divNewValue">
+    <input type="text" [(ngModel)]="roeToadd.nvValue" [ngModelOptions]="{standalone: true}"/>
+    <button (click)="saveNeeValue()">שמור</button>
+    <button (click)="divNewValue=false">סגור</button>
+</div>
