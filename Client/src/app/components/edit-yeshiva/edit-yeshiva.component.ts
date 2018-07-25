@@ -1,4 +1,7 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
+import { Yeshiva } from '../../classes/Yeshiva';
+import { EventEmitter } from 'events';
+import { AppProxy } from '../../services/app.proxy';
 
 @Component({
   selector: 'app-edit-yeshiva',
@@ -7,12 +10,24 @@ import { Component, OnInit, Output, Input } from '@angular/core';
 })
 export class EditYeshivaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appProxy:AppProxy) { }
+
+  @Output() Yeshiva=new EventEmitter();
 
   @Output()
   @Input()
+  protected yeshiva:Yeshiva;
+
+
+  close(){
+    this.Yeshiva.emit(null);
+  }
   
-  ngOnInit() {
+  edit() {
+    this.appProxy.post('EditYeshiva',{yeshiva:this.yeshiva});
+    this.Yeshiva.emit(null);
   }
 
+  ngOnInit() {
+  }
 }

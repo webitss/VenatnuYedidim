@@ -9,6 +9,8 @@ import { AppProxy } from '../../services/app.proxy';
   templateUrl: './settings-yeshivot.component.html',
   styleUrls: ['./settings-yeshivot.component.css']
 })
+
+
 export class SettingsYeshivotComponent implements OnInit {
 
   

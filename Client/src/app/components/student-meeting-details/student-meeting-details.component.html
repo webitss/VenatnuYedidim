@@ -1,28 +1,26 @@
+<form class="meetingform">
 
-<div *ngIf="meeting && meeting.iMeetingId">
-  <h1>עריכה </h1>
-</div>
-
-<div *ngIf="meeting.iMeetingId==null">
-  <h1>פגישה חדשה </h1>
-</div>
-
-<form action="/action_page.php meetingform">
-  
-  <div class="form-group">
+  <button  (click)="save()">שמור</button>
+  <button (click)="close()">ביטול</button>
+  <div *ngIf="meeting.iMeetingId">
+    <h1>עריכה </h1>
+  </div>
+  <div *ngIf="meeting.iMeetingId==null">
+    <h1>פגישה חדשה </h1>
+  </div>
+  <div class="row">
+  <div class="form-group col-sm-4">
     <label for="meetingTyp">סוג פגישה</label>
     <input type="number" class="form-control" id="meetingType" [(ngModel)]="meeting.iMeetingType" [ngModelOptions]="{standalone: true}">
   </div>
-  <div class="form-group">
+  <div class="form-group col-sm-4">
     <label for="date">תאריך:</label>
-    <!-- <input type="date" class="form-control" id="date"[(ngModel)]="meeting.dtMeetingDate" > -->
+    <input type="date" class="form-control" id="date"[(ngModel)]="meeting.dtMeetingDate" >
   </div>
-  <div class="form-group">
+  <div class="form-group col-sm-4">
     <label for="nvSummary"> סיכום</label>
     <input type="text" class="form-control" id="nvSummary" [(ngModel)]="meeting.nvSummary" [ngModelOptions]="{standalone: true}">
-    <p>xjzi</p>
-
   </div>
-  
-  <button type="submit" class="btn btn-primary" (click)="save()">Submit</button>
+</div>
+
 </form>

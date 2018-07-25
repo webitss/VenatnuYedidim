@@ -15,44 +15,6 @@ export class AppComponent implements OnInit {
   protected name: string;
   constructor(private appProxy: AppProxy, private router: Router) { }
 
-  // public lstColumns = [{
-  //   title: 'עריכה',
-  //   name: 'aa',
-  // type: 'html',
-  // clickCell: true 
-  // },
-  // {
-  //   title: 'שם פרטי',
-  //   name: 'nvFirtName'    
-  // },
-  // {
-  //   title: 'שם משפחה',
-  //   name: 'nvLastName',
-  // },
-  // {
-  //   title: 'נייד',
-  //   name: 'dd',
-  // }]
-
-  // public lstDataRows = [{
-  //   aa: 1,
-  //   nvFirtName: 'aaa1',
-  //   nvLastName: 'aaa1',
-  //   dd: 'aaa1',
-  // },
-  // {
-  //   aa: 1,
-  //   nvFirtName: 'bbb3',
-  //   nvLastName: 'bbb2',
-  //   dd: 'bbb2',
-  // },
-  // {
-  //   aa: 1,
-  //   nvFirtName: 'ccc2',
-  //   nvLastName: 'ccc4',
-  //   dd: 'ccc3',
-  // }];
-
   ngOnInit() {
     this.router.navigate(['students']);
 
@@ -66,7 +28,6 @@ export class AppComponent implements OnInit {
   onRouterOutletActivate(event) {
     this.currentComponent = event;
   }
-
 
   saveFile() {
     this.appProxy.post('SaveFileByBase64', this.nvBase64File)
@@ -105,25 +66,6 @@ export class AppComponent implements OnInit {
 
   // }
 
-  public lstColumns = [{
-    title: 'עריכה',
-    type: 'html',
-    name: 'edit',
-    clickCell: true
-    
-  },
-  {
-    title: 'שם פרטי',
-    name: 'nvFirstName'
-  }]
-
-  public lstDataRows = [{
-    nvFirstName: 1,
-    edit: '<span>עריכה</span>'
-  }]
-
-  aaaa(){
-    alert('aaaa')
-  }
+ 
  
 }

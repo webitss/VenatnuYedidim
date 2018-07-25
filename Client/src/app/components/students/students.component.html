@@ -8,33 +8,8 @@
  
  <!-- <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table> -->
 
-        <table class="table table-striped">
-                <thead>
-                  <tr>
-                
-                    <th>שם פרטי</th>
-                    <th>שם משפחה</th>
-                    <th>טלפון</th>
-                    <th>נייד</th>
-                    <th>דו"אל</th>
-                    <th>מוסד לימודים</th>
-                    <th>משויך לאברך</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let student of studentList">
-                      <td ><img src="../../../assets/images/pencil.png" class="iconPen" routerLink="student/{{student.iPersonId}}/student-details"></td>
-                      <td>   {{student.nvFirstName}}</td>
-                      <td> {{student.nvLastName}}</td>
-                      <td> {{student.nvPhone}}</td>
-                      <td>{{student.nvMobile}}</td>
-                      <td> {{student.nvEmail}}</td>
-                      <td> {{student.nvYeshivaName}}</td>
-                      <td> </td>
-                  </tr>
-                </tbody>
-              </table>
-       
-      
+ <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editStudent($event)"  ></app-vy-table> 
+
+
   
 </div>

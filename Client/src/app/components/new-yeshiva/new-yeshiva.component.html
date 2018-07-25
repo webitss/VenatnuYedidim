@@ -1,6 +1,6 @@
 <form class=newYeshiva>
   
-  <button>ביטול</button>
+  <button (click)="close()">ביטול</button>
 
   <button (click)="save()">שמור</button>
 
@@ -15,7 +15,7 @@
   <div>טלפון</div>
   <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvMobile" />
   <div>מייל</div>
-  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvEmail" />
+  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvEmail" /> 
 
   <div>תפקיד</div>
   <select>
