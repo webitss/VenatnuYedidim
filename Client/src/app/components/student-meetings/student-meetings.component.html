@@ -2,18 +2,9 @@
 
 <button  (click)="meeting=null; flag=1" >הוספת פגישה</button>
 
- <!-- <ul>
-     <li *ngFor="let item of meetingList">
-        
-         {{item.nvSummary }} <button (click)="meeting=item; flag=1">עריכה</button>
-         {{item.dtMeetingDate}}
-
-     </li>
- </ul> -->
 
 
-
-        <div *ngIf="flag==1">
+        <div *ngIf="flag==1" class="meetingDetails">
                 <app-student-meeting-details [meeting]=meeting></app-student-meeting-details> 
              </div> 
 
