@@ -55,14 +55,14 @@ namespace Service.Entities
             {
                 
                 List<SqlParameter> sqlParameters = new List<SqlParameter>();
-                sqlParameters.Add(new SqlParameter("studentAndAvrechArr" , ObjectGenerator<T2Int>.GetDataTable(studentAndAvrechArr)));
-                sqlParameters.Add(new SqlParameter("iUserId", iUserId));
+                 sqlParameters.Add(new SqlParameter("iUserId", iUserId));
+                sqlParameters.Add(new SqlParameter("studentAndAvrechArr", ObjectGenerator<T2Int>.GetDataTable(studentAndAvrechArr)));
 
-                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_INS/UPD", sqlParameters).Tables[0].Rows;
+                SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_INS/UPD", sqlParameters);
                 //List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 return false;

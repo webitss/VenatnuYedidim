@@ -61,6 +61,7 @@ import { inject } from '@angular/core/testing';
 import { injectElementRef } from '@angular/core/src/render3';
 import { EditYeshivaComponent } from './components/edit-yeshiva/edit-yeshiva.component';
 import { UploadDocumentComponent } from './components/upload-document/upload-document.component';
+import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-checked.pipe';
 
 
 @NgModule({
@@ -115,6 +116,7 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
     EditYeshivaComponent,
     UploadDocumentComponent,
     StudentDocumentsComponent,
+    FilterBMultySelectCheckedPipe,
   ],
   imports: [
    // Ng2SearchPipeModule,

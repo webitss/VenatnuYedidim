@@ -16,7 +16,9 @@ namespace Service.Utilities
 
     [DataContract]
     public class T2Int {
+        [DataMember]
         public int iId1 { get; set; }
+        [DataMember]
         public int iId2 { get; set; }
 
         //public T2Int(int _iId1 , int _iId2 ) {

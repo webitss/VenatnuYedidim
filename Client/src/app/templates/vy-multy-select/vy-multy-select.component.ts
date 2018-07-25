@@ -15,20 +15,21 @@ export class VyMultySelectComponent implements OnInit {
   flag = false;
   checkboxValueSelectAll: boolean;
 
+
   id: string;
 
   @Input()
   @Output()
   selectedList: Array<any>;
-
+  onOverFlag:boolean=false;
+  
   @Output()
   onSave: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
 
 
   openOrClose() {
-    debugger;
     if (this.flag == false) {
-     // if(this.selectedList!=null)
+      // if(this.selectedList!=null)
       this.selectedList.splice(0, this.selectedList.length);
       this.fullList.forEach(element => {
         if (element['bMultySelectChecked'] == true) {
@@ -36,7 +37,6 @@ export class VyMultySelectComponent implements OnInit {
         }
       });
       this.onSave.emit(this.selectedList);
-      debugger;
     }
   }
 
@@ -59,12 +59,11 @@ export class VyMultySelectComponent implements OnInit {
   //}
 
   ngOnInit() {
-    this.selectedList=new Array<any>();
+    this.selectedList = new Array<any>();
     this.fullList.forEach(element => {
-      element['bMultySelectChecked'] = false;
+      //element['bMultySelectChecked'] = false;
       //שיהיה דינאמי
       element['toString'] = element['nvFirstName'] + element['nvLastName'] + element['nvIdentityCard'];
-
     });
   }
 
