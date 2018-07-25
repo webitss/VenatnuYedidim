@@ -13,6 +13,7 @@ export class StudentComponent implements OnInit, OnDestroy {
   private sub: any;
   flag: number;
   protected currentComponent:any;
+  
 
 
   constructor(private route: ActivatedRoute,private appProxy:AppProxy) { }
@@ -29,16 +30,21 @@ export class StudentComponent implements OnInit, OnDestroy {
     this.currentComponent = event;
   }
 
+  saveStudent() {
+    this.currentComponent.saveStudent();
+   
+  }
+
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
 
-
-
-
-
 }
+
+
+
 
 
 
