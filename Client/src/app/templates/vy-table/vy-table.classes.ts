@@ -9,8 +9,8 @@ export class VyTableColumn {
   public filterStyle: any;
   public cellStyle: any;
 
-  constructor(_title: string, _filter: string, _name: string, _type: string, _clickCell: boolean = false,
-    _titleStyle: any = {}, _filterStyle: any = {}, _cellStyle: any = {}) {
+  constructor(_title: string, _name: string, _type?: string, _clickCell: boolean = false,
+    _filter: string = '', _titleStyle: any = {}, _filterStyle: any = {}, _cellStyle: any = {}) {
     this.title = _title;
     this.filter = _filter;
     this.name = _name;
