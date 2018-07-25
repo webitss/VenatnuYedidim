@@ -2,7 +2,7 @@
 <button class="btn consolidation">איחוד כרטיסים</button>
 <button class="btn newStudent" routerLink="student/0/student-details">תלמיד חדש</button>
 
- <button class="btn edit" routerLink="student/1/student-details">עריכה </button>
+ <!-- <button class="btn edit">עריכה </button> -->
 
 <div class="container">
  
@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let student of studentList">
-                      <td ><img src="../../../assets/images/pencil.png" class="iconPen"></td>
+                      <td ><img src="../../../assets/images/pencil.png" class="iconPen" routerLink="student/{{student.iPersonId}}/student-details"></td>
                       <td>   {{student.nvFirstName}}</td>
                       <td> {{student.nvLastName}}</td>
                       <td> {{student.nvPhone}}</td>
