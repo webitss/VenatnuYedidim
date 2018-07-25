@@ -1,16 +1,21 @@
+<form class=newYeshiva>
+  
+  <button>ביטול</button>
+
+  <button (click)="save()">שמור</button>
 
   <div>שם מוסד</div>
-  <input type="text" maxlength="50" [(ngModel)]="yeshiva.nvYeshivaName" />
+  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvYeshivaName" />
   <div>כתובת</div>
-  <input type="text" maxlength="50" [(ngModel)]="yeshiva.nvAddress" />
+  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvAddress" />
   <div>עיר</div>
-  <input type="text" maxlength="50" [(ngModel)]="yeshiva.nvCity" />
+  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvCity" />
   <div>שם איש קשר</div>
-  <input type="text" maxlength="50" [(ngModel)]="yeshiva.nvContact" />
+  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvContact" />
   <div>טלפון</div>
-  <input type="text" maxlength="50" [(ngModel)]="yeshiva.nvMobile"/>
+  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvMobile" />
   <div>מייל</div>
-  <input type="text" maxlength="50" [(ngModel)]="yeshiva.nvEmail" />
+  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvEmail" /> 
 
   <div>תפקיד</div>
   <select>
@@ -18,7 +23,5 @@
     <option>תפקיד 2</option>
     <option>תפקיד 3</option>
   </select>
-  
-<button (click)="save()">שמור</button>
-
-<button routerLink="settings/settings-yeshivot">ביטול</button>
+   
+</form>

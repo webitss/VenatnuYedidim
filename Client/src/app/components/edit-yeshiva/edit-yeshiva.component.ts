@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
+import { Yeshiva } from '../../classes/Yeshiva';
 
 @Component({
   selector: 'app-edit-yeshiva',
@@ -7,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditYeshivaComponent implements OnInit {
 
+  // protected yeshiva:Yeshiva;
+
   constructor() { }
 
+  // @Output()
+  // @Input()
+  
   ngOnInit() {
   }
 
