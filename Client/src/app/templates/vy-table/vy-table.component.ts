@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { VyTableColumn } from './vy-table.classes';
 
 @Component({
   selector: 'app-vy-table',
@@ -8,49 +9,9 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 export class VyTableComponent implements OnInit {
 
   @Input()
-  public lstColumns = [];
-  // public lstColumns = [{
-  //   title: 'עריכה',
-  //   filter: '',
-  //   name: 'aa',
-  //   // titleStyle: {
-  //   //   width: '25%',
-  //   //   color: 'red'
-  //   // },
-  //   // filterStyle: {
-  //   //   width: '25%'
-  //   // },
-  //   // cellStyle: {
-  //   //   width: '25%',
-  //   //   background: 'red'
-  //   // }
-  // },
-  // {
-  //   title: 'שם פרטי',
-  //   filter: '',
-  //   name: 'bb',
-  //   // titleStyle: {
-  //   //   width: '25%',
-  //   //   color: 'red'
-  //   // },
-  //   // filterStyle: {
-  //   //   width: '25%'
-  //   // },
-  //   // cellStyle: {
-  //   //   width: '25%',
-  //   //   background: 'red'
-  //   // }
-  // }]
-
+  public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   @Input()
-  public lstDataRows = [];
-  // public lstDataRows = [{
-  //   aa: 1,
-  //   bb: 'aaa1',
-  //   cc: 'aaa1',
-  //   dd: 'aaa1',
-  // }]
-
+  public lstDataRows: Array<any> = new Array<any>();
   @Output()
   public clickCell: EventEmitter<any> = new EventEmitter<any>();
 
