@@ -27,7 +27,6 @@ export class VyTableComponent implements OnInit {
     this.clickCell.emit(item);
   }
 
-
   ngOnInit() {
 
   }

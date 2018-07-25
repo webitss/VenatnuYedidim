@@ -192,11 +192,30 @@ namespace Service
         [OperationContract]
         [WebInvoke(
         Method = "POST",
-        UriTemplate = "AddEvent",
+        UriTemplate = "SetEvent",
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool AddEvent(Event1 addEvent,int iUserId);
+        bool SetEvent(Event1 oEvent, int iUserId);
+
+        [OperationContract]
+        [WebInvoke(
+Method = "POST",
+UriTemplate = "GetEventsList",
+BodyStyle = WebMessageBodyStyle.WrappedRequest,
+ResponseFormat = WebMessageFormat.Json,
+RequestFormat = WebMessageFormat.Json)]
+        List<Event1> GetEventsList(int iUserId);
+
+
+        [OperationContract]
+        [WebInvoke(
+Method = "POST",
+UriTemplate = "GetEvent",
+BodyStyle = WebMessageBodyStyle.WrappedRequest,
+ResponseFormat = WebMessageFormat.Json,
+RequestFormat = WebMessageFormat.Json)]
+        Event1 GetEvent(int? iEventId);
         #endregion
 
         #region Meeting
@@ -217,6 +236,14 @@ namespace Service
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
         bool AddMeeting(Meeting meeting, int iUserId);
+
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "SetMeeting",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+        bool SetMeeting(Meeting meeting, int iUserId);
 
         [WebInvoke(
           Method = "POST",

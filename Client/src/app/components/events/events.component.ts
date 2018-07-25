@@ -10,15 +10,18 @@ import { Router } from '@angular/router';
 })
 export class EventsComponent implements OnInit {
   protected eventsList: Event1[];
-  // lstDataRows: any[];
 
 
   constructor(private appProxy: AppProxy, private router: Router) { }
 
+edit(e){
+  this.router.navigate(['events/event/', e.iEventId]);
 
+}
   public lstColumns = [{
     title: 'עריכה',
-    name: 'aa',
+    type: 'html',
+  clickCell: true ,
     titleStyle: {
       width: '25%',
     },
@@ -73,9 +76,12 @@ export class EventsComponent implements OnInit {
     this.appProxy.post('GetEventsList', { iUserId: 0 }).then(res => {
       res.forEach(e => {
         this.lstDataRows.push({
+          iEventId: e.iEventId,
           nvName: e.nvName,
           dtEventDate: e.dtEventDate.toLocaleDateString(),
-          nvPlace: e.nvPlace
+          nvPlace: e.nvPlace,
+          edit: '<span>עריכה</span>'
+
         });
 
       });

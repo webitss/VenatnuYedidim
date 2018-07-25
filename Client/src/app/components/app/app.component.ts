@@ -65,6 +65,9 @@ export class AppComponent implements OnInit {
 
   // }
 
+<<<<<<< HEAD
  
  
+=======
+>>>>>>> e1f51f808f4b849eec94663169fb9db2fd69d16f
 }

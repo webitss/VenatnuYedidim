@@ -14,8 +14,8 @@ namespace Service.Entities
     {
         #region Data Members
 
-        //[DataMember]
-        //public int iEventId { get; set; }
+        [DataMember]
+        public int iEventId { get; set; }
         [DataMember]
         public string nvName { get; set; }
         [DataMember]
@@ -41,7 +41,7 @@ namespace Service.Entities
         {
             try
             {
-                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_SLCT", new SqlParameter("iPersonId", iUserId)).Tables[0].Rows;
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_SLCT", new SqlParameter("iUserId", iUserId)).Tables[0].Rows;
                 List<Event1> events = ObjectGenerator<Event1>.GeneratListFromDataRowCollection(drc);
                 return events;
             }
@@ -52,22 +52,44 @@ namespace Service.Entities
             }
         }
 
-        public static bool AddEvent(Event1 addEvent, int iUserId)
+        public static bool SetEvent(Event1 oEvent, int iUserId)
         {
             try
             {
-                //addEvent.dtEventDate = DateTime.Today;
-                List<SqlParameter> parameters = ObjectGenerator<Event1>.GetSqlParametersFromObject(addEvent);
-                parameters.Find(x => x.ParameterName == "iCreatedByUserId").Value = iUserId;
-                SqlDataAccess.ExecuteDatasetSP("TEvent_INS", parameters);
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iEventId", oEvent.iEventId));
+                parameters.Add(new SqlParameter("nvName", oEvent.nvName));
+                parameters.Add(new SqlParameter("dtEventDate", oEvent.dtEventDate));
+                parameters.Add(new SqlParameter("nvPlace", oEvent.nvPlace));
+                parameters.Add(new SqlParameter("nvComments", oEvent.nvComments));
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+
+                //parameters.Find(x => x.ParameterName == "iCreatedByUserId").Value = iUserId;
+                SqlDataAccess.ExecuteDatasetSP("TEvent_INS/UPD", parameters);
                 return true;
             }
             catch (Exception ex)
             {
-                Log.LogError("Add / TEvent_INS", "ex" + ex);
+                Log.LogError("set event / TEvent_INS/UPD", "ex" + ex);
                 return false;
             }
         }
+
+        public static Event1 GetEvent(int? iEventId)
+        {
+            try
+            {
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TEvent_GetEvent_SLCT", new SqlParameter("iEventId", iEventId)).Tables[0].Rows[0];
+                Event1 e = ObjectGenerator<Event1>.GeneratFromDataRow(dr);
+                return e;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetEvent / TEvent_GetEvent_SLCT", "ex" + ex);
+                return null;
+            }
+        }
+        
 
     }
 }

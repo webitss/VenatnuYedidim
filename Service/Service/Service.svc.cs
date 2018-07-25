@@ -46,8 +46,15 @@ namespace Service
         }
         public bool AddMeeting(Meeting meeting, int iUserId)
         {
-            return Meeting.AddMeeting(meeting, iUserId);
+            return Meeting.SetMeeting(meeting, iUserId);
         }
+
+        public bool SetMeeting(Meeting meeting, int iUserId)
+        {
+            return Meeting.SetMeeting(meeting, iUserId);
+        }
+
+
         public bool UpdateMeeting(Meeting meeting, int iUserId)
         {
             return Meeting.UpdateMeeting(meeting, iUserId);
@@ -96,14 +103,19 @@ namespace Service
 
 
         #region Event
-        public bool AddEvent(Event1 oEvent, int iUserId)
+        public bool SetEvent(Event1 oEvent, int iUserId)
         {
-            return Event1.AddEvent(oEvent, iUserId);
+            return Event1.SetEvent(oEvent, iUserId);
         }
 
         public List<Event1> GetEventsList(int iUserId)
         {
             return Event1.GetEventsList(iUserId);
+        }
+
+        public Event1 GetEvent(int? iEventId)
+        {
+            return Event1.GetEvent(iEventId);
         }
 
         #endregion
@@ -229,7 +241,8 @@ namespace Service
             return Participant.GetParticipantsList(iEventId);
         }
 
-      
+
+
         #endregion
 
     }
