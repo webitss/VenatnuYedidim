@@ -2,7 +2,9 @@
   <a class="navbar-brand tital" href="#"><img src="./assets/images/Lighthouse.jpg"></a>
   <ul class="navbar-nav" *ngIf="currentComponent">
     <li [ngClass]="{'appSelect': currentComponent.constructor.name.indexOf('Student') != -1}" class="nav-item">
+      <div class="fullTab">
          <a class="closed link" routerLink='/students'>תלמידים</a>    
+      </div>
     </li>
     <li [ngClass]="{'appSelect': currentComponent.constructor.name.indexOf('Avrechim') != -1}" class="nav-item">
       <a class="closed link" routerLink='/avrechim'>אברכים</a>
@@ -39,4 +41,4 @@
 <!-- <input type="file" value="העלה תמונה" (change)="LoadImage($event,saveFile)"/> -->
 <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
 
-<!-- <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table> -->
+<!-- <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="aaaa($event)"></app-vy-table> -->

@@ -72,7 +72,16 @@ namespace Service
          BodyStyle = WebMessageBodyStyle.WrappedRequest,
          ResponseFormat = WebMessageFormat.Json,
          RequestFormat = WebMessageFormat.Json)]
-        List<Student> GetStudentList(int iUserId);
+        List<Student> GetStudentList(int iUserId);        
+       
+       [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetStudentById",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        Student GetStudentById(int iPersonId);
 
         [OperationContract]
         [WebInvoke(

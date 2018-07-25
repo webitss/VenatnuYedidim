@@ -1,0 +1,21 @@
+/* .imageStudent{
+
+} */
+*{
+    text-align: right;
+}
+.imageStudent{
+    height: 600px;
+    background-color: #e6e4e4;
+}
+.file{
+    visibility: hidden;
+}
+.chooseFile{
+    background-color:  rgb(207, 37, 94);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-top: 500px;
+    margin-right: 40%;
+}

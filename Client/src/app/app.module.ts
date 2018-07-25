@@ -163,7 +163,7 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
         children: [
           { path: "", component: EventDetailsComponent },
           { path: "event-details", component: EventDetailsComponent },
-          { path: "event-participants/:iEventId", component: EventParticipantsComponent }
+          { path: "event-participants", component: EventParticipantsComponent }
         ]
       },
       { path: "graduates", component: GraduatesComponent },
@@ -185,7 +185,8 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "new-yeshiva", component: NewYeshivaComponent }
+              { path: "new-yeshiva", component: NewYeshivaComponent },
+              { path: "edit-yeshiva", component:EditYeshivaComponent}
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },

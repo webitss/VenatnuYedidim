@@ -66,6 +66,11 @@ namespace Service
             return Student.GetStudentList(iUserId);
         }
 
+        public Student GetStudentById( int iUserId)
+        {
+            return Student.GetStudentById( iUserId);
+        }
+        
         public  bool AddStudentsToAvrech(List<T2Int> studentAndAvrechArr, int iUserId)
         {
             return Student.AddStudentsToAvrech(studentAndAvrechArr, iUserId);

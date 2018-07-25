@@ -9,6 +9,8 @@ export class Person {
     public nvAddress: String;
     public nvCity: String;
     public nvStatus: String;
+    public nvBirthdate	:String
+    public dtBirthdate:Date
 
     constructor() {
         this.iPersonId = 0;
@@ -20,6 +22,8 @@ export class Person {
         this.nvEmail = '';
         this.nvAddress = '';
         this.nvCity = '';
+        this.nvBirthdate='';
+        this.dtBirthdate=new Date();
 
     }
 
