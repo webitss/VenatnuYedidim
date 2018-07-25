@@ -1,14 +1,15 @@
-<div *ngIf="flag==1" class="newYeshiva">
-  <app-new-yeshiva [yeshiva]=yeshiva></app-new-yeshiva>
+
+
+<button (click)="iYeshivaId = 0">מוסד חדש</button>
+
+
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="editYeshiva($event)"></app-vy-table>
+
+<div *ngIf="iYeshivaId != null">  
+<app-setting-yeshiva  [iYeshivaId]="iYeshivaId"></app-setting-yeshiva>
 </div>
 
-<div *ngIf="flag==1" class="newYeshiva">
-    <app-edit-yeshiva [yeshiva]=yeshiva></app-edit-yeshiva>
-</div>
-
-<button (click)="yeshiva=null; flag=1">מוסד חדש</button>
-
-<table class="table table-striped">
+<!-- <table class="table table-striped">
   <thead>
     <tr>
       <td>פתיחה</td>
@@ -35,4 +36,4 @@
       <td>{{yeshiva.nvMobile}}</td>
     </tr>
   </tbody>
-</table>
+</table>  -->

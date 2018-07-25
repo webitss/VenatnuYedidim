@@ -7,18 +7,19 @@ import { EMLINK } from 'constants';
 import { SettingsYeshivotComponent } from '../settings-yeshivot/settings-yeshivot.component';
 
 @Component({
-  selector: 'app-new-yeshiva',
-  templateUrl: './new-yeshiva.component.html',
-  styleUrls: ['./new-yeshiva.component.css']
+  selector: 'app-setting-yeshiva',
+  templateUrl: './setting-yeshiva.component.html',
+  styleUrls: ['./setting-yeshiva.component.css']
 })
 
-export class NewYeshivaComponent implements OnInit {
+export class SettingYeshivaComponent implements OnInit {
 
   @Output() Yeshiva=new EventEmitter();
 
   
-  @Output()
   @Input()
+  public iYeshivaId: number;
+  
   protected yeshiva: Yeshiva = new Yeshiva();
 
   constructor(private appProxy: AppProxy) { }
@@ -32,6 +33,15 @@ export class NewYeshivaComponent implements OnInit {
             this.Yeshiva.emit(null);
           }
         })
+  }
+
+  edit() {
+    this.appProxy.post('EditYeshiva',{yeshiva:this.yeshiva});
+    this.Yeshiva.emit(null);
+  }
+
+  close(){
+
   }
 
   ngOnInit() {

@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NewYeshivaComponent } from '../new-yeshiva/new-yeshiva.component';
+import { Component, OnInit } from '@angular/core';
+import { SettingYeshivaComponent } from '../setting-yeshiva/setting-yeshiva.component';
 import { Yeshiva } from '../../classes/Yeshiva';
-import { RouterLink } from '@angular/router';
+// import { RouterLink } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
+import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 
 @Component({
   selector: 'app-settings-yeshivot',
@@ -13,15 +14,34 @@ import { AppProxy } from '../../services/app.proxy';
 
 export class SettingsYeshivotComponent implements OnInit {
 
-  
-  constructor(private appProxy:AppProxy) { }
-  protected yeshivaList:Yeshiva;
-  protected yeshiva:Yeshiva;  
+  protected yeshivaList: Array<Yeshiva> = new Array<Yeshiva>();
+  protected iYeshivaId: number;
+  protected lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
+
+  constructor(private appProxy: AppProxy) { }
+
 
   ngOnInit() {
-    this.appProxy.post("GetAllYeshivot").then(data=>this.yeshivaList=data,err=>alert(err));
 
-    if(this.yeshiva==null)
-      this.yeshiva=new Yeshiva();
+    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true))
+    this.lstColumns.push(new VyTableColumn('שם מוסד', 'nvYeshivaName'))
+    this.lstColumns.push(new VyTableColumn('כתובת ', 'nvAddress'))
+    this.lstColumns.push(new VyTableColumn('עיר', 'nvCity'))
+    this.lstColumns.push(new VyTableColumn('שם איש קשר', 'nvContact'))
+    this.lstColumns.push(new VyTableColumn('תפקיד', 'nvRoleType'))
+    this.lstColumns.push(new VyTableColumn('מייל', 'nvEmail'))
+    this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'))
+
+    this.appProxy.post("GetAllYeshivot").then(data => {
+      this.yeshivaList = data
+      this.yeshivaList.forEach(y=> y['edit'] = '<span>עריכה</span>')
+    });
+
+  }
+
+
+  public editYeshiva(yeshiva) {
+    this.iYeshivaId = yeshiva.iYeshivaId;
+    
   }
 }
