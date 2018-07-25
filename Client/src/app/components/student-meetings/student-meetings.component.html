@@ -1,6 +1,6 @@
 <!-- <router-outlet></router-outlet> -->
 
-<button  (click)="meeting=null; flag=1">הוספת פגישה</button>
+<button  (click)="meeting=null; flag=1" >הוספת פגישה</button>
 
  <!-- <ul>
      <li *ngFor="let item of meetingList">
@@ -11,8 +11,12 @@
      </li>
  </ul> -->
 
- <div *ngIf="flag==1">
-    <app-student-meeting-details [meeting]=meeting></app-student-meeting-details> 
- </div> 
 
- <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="meetingList"></app-vy-table>
+
+        <div *ngIf="flag==1">
+                <app-student-meeting-details [meeting]=meeting></app-student-meeting-details> 
+             </div> 
+
+ 
+
+ <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="meetingList" (clickCell)="editMeeting($event)"></app-vy-table>

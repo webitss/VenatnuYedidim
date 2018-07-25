@@ -3,6 +3,8 @@ import { Meeting } from '../../classes/meeting';
 import { AppProxy } from '../../services/app.proxy';
 import { StudentMeetingDetailsComponent } from '../student-meeting-details/student-meeting-details.component';
 
+
+
 @Component({
   selector: 'app-student-meetings',
   templateUrl: './student-meetings.component.html',
@@ -21,7 +23,10 @@ export class StudentMeetingsComponent implements OnInit {
 
   public lstColumns = [{
     title: 'עריכה',
-    name: 'edit'
+    name: 'edit',
+    clickCell:true,
+    type: 'html'
+
   },
   {
     title: 'סוג פגישה',
@@ -40,6 +45,10 @@ export class StudentMeetingsComponent implements OnInit {
     name: 'nvSummary',
   }]
 
+  editMeeting(meeting:Meeting){
+      this.meeting = meeting;
+      this.flag = 1;
+  }
 
 
   ngOnInit() {
@@ -50,7 +59,7 @@ export class StudentMeetingsComponent implements OnInit {
         this.meetingList.forEach(m => {
           m['nvDate'] = m.dtMeetingDate.getDate().toString();
           m['nvHour'] = m.dtMeetingDate.getHours().toString();
-          m['edit'] = 'ערוך';
+          m['edit'] = '<p>ערוך</p>';
         });
         debugger;
       },
