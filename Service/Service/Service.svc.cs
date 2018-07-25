@@ -66,8 +66,15 @@ namespace Service
             return Student.GetStudentList(iUserId);
         }
 
-
-       
+        public Student GetStudentById( int iUserId)
+        {
+            return Student.GetStudentById( iUserId);
+        }
+        
+        public  bool AddStudentsToAvrech(List<T2Int> studentAndAvrechArr, int iUserId)
+        {
+            return Student.AddStudentsToAvrech(studentAndAvrechArr, iUserId);
+        }
 
         public bool AddStudent(Student student, int iUserId)
         {
@@ -152,6 +159,10 @@ namespace Service
 
             return SysTableRow.GetValues(iSysTableId);
         }
+          public bool UpdateValue(SysTableRow sysTableRow)
+        {
+           return SysTableRow.UpdateValue(sysTableRow);
+        }
         #endregion
 
         #region SysTables
@@ -170,17 +181,17 @@ namespace Service
         {
             return Conversation.GetConversations(iPersonId);
         }
-        public bool AddConversations(Conversation conversation, int iUserId)
+        public bool AddConversations(Conversation conversation, int iPersonId)
         {
-            return Conversation.AddConversation(conversation, iUserId);
+            return Conversation.AddConversation(conversation, iPersonId);
         }
-        public bool UpdateConversations(Conversation conversation, int iUserId)
+        public bool UpdateConversations(Conversation conversation, int iPersonId)
         {
-            return Conversation.UpdateConversation(conversation, iUserId);
+            return Conversation.UpdateConversation(conversation, iPersonId);
         }
-        public bool DeleteConversations(int iConversationId, int iUserId)
+        public bool DeleteConversations(int iConversationId, int iPersonId)
         {
-            return Conversation.DeleteConversation(iConversationId, iUserId);
+            return Conversation.DeleteConversation(iConversationId, iPersonId);
         }
 
         #endregion
@@ -217,6 +228,8 @@ namespace Service
         {
             return Participant.GetParticipantsList(iEventId);
         }
+
+      
         #endregion
 
     }

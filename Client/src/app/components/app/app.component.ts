@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,54 @@ export class AppComponent implements OnInit {
   protected nvBase64File: string;
   protected name: string;
   constructor(private appProxy: AppProxy, private router: Router) { }
+
+  public lstColumns = [{
+    title: 'עריכה',
+    name: 'aa' 
+  },
+  {
+    title: 'שם פרטי',
+    name: 'bb'    
+  },
+  {
+    title: 'שם משפחה',
+    name: 'cc',
+  },
+  {
+    title: 'נייד',
+    name: 'dd',
+  }]
+
+  public lstDataRows = [{
+    aa: 1,
+    bb: 'aaa1',
+    cc: 'aaa1',
+    dd: 'aaa1',
+  },
+  {
+    aa: 1,
+    bb: 'bbb3',
+    cc: 'bbb2',
+    dd: 'bbb2',
+  },
+  {
+    aa: 1,
+    bb: 'ccc2',
+    cc: 'ccc4',
+    dd: 'ccc3',
+  },
+  {
+    aa: 1,
+    bb: 'ddd4',
+    cc: 'ddd4',
+    dd: 'ddd4',
+  },
+  {
+    aa: 5,
+    bb: 'eee5',
+    cc: 'eee5',
+    dd: 'eee5',
+  }]
 
   ngOnInit() {
     this.router.navigate(['students']);

@@ -1,13 +1,15 @@
 <div style="margin: 0 80px">
   <div class="row">
     <div *ngFor="let col of lstColumns" class="col cell cell-title" [ngStyle]="col.titleStyle">
-      {{col.title}}
+      <div class="small-title">
+        {{col.title}}
+      </div>     
     </div>
   </div>
 
   <div class="row">
-    <div *ngFor="let col of lstColumns" class="col cell cell-filer" [ngStyle]="col.filterStyle">
-      <input type="text" [(ngModel)]="col.filter" class="form-control">
+    <div *ngFor="let col of lstColumns" class="col cell cell-filter" [ngStyle]="col.filterStyle">
+      <input type="text" [(ngModel)]="col.filter" class="form-control" id="search">
     </div>
   </div>
 
@@ -18,5 +20,4 @@
       <div *ngIf="col.type != 'html'"> {{row[col.name]}} </div>
     </div>
   </div>
-
 </div>

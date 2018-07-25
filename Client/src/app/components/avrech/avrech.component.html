@@ -1,14 +1,22 @@
-<p>
-  avrech works!
-</p>
-<ul>
-  <li><a routerLink="avrech-details">פרטים אישיים</a></li>
-  <li><a routerLink="avrech-students">תלמידים</a></li>
-  <li><a routerLink="avrech-diary">יומן</a></li>
-  <li><a routerLink="avrech-presence">נוכחות</a></li>
-</ul>
+<div class="navbar-collapse row">
+  <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDetails') != -1}" class="tab col-sm-1">
+    <a class="control" routerLink="avrech-details">פרטים אישיים</a>
+  </div>
+  <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechStudents') != -1}" class="tab col-sm-1">
+    <a class="control" routerLink="avrech-students">תלמידים</a>
+  </div>
+  <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDiary') != -1}" class="tab col-sm-1">
+    <a class="control" routerLink="avrech-diary">יומן</a>
+  </div>
+  <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechPresence') != -1}" class="tab col-sm-1">
+    <a class="control" routerLink="avrech-presence">נוכחות</a>
+  </div>
+  <!-- <div class="col-sm-4"></div> -->
+</div>
 
 <button (click)="save()">שמירה</button>
 <button (click)="close()">סגור</button>
 
 <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
+
+

@@ -5,13 +5,25 @@
     text-align: right;
 }
 
-.cell-title{
-  background:  rgb(77, 43, 43);
-  color: white;
-  border-bottom: 8px solid orange;
+.cell-title,small-title{
+  background:  rgb(59, 45, 45);
+  opacity: 0.9;
+  color: #ccc;
+  border-bottom: 3px solid orange;
  -moz-border-bottom-colors: orange  rgb(207, 37, 94);
 }
 .even{
   background-color: #eaecee;  
 }
+.small-title{
+  height: 90%;
+  border-left: 1px solid #808080;
 
+}
+.cell-filter{
+  opacity: 0.5;
+}
+#search {
+  background: white url("./../../../assets/icons/search.png") left no-repeat;
+  /* padding-right: 97px; */
+}

@@ -28,17 +28,8 @@ export class NewYeshivaComponent implements OnInit {
           {
             this.yeshiva = data;
 
-
-            // path:"settings/:settings-yeshivot";
-
           }
         })
-  }
-
-  close() {
-
-    // path:"settings/:settings-yeshivot";
-
   }
 
   edit() {
