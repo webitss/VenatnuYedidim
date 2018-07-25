@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppProxy } from '../../services/app.proxy';
 
 @Component({
   selector: 'app-student-documents',
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentDocumentsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appProxy:AppProxy) { }
 
   ngOnInit() {
   }
-
+  
 }

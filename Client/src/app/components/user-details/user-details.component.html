@@ -32,9 +32,6 @@
 
   <label for="permittion">הרשאה:</label>
   <select name="permittion"  [(ngModel)]="user.iPermissionId" [ngModelOptions]="{standalone: true}" class="form-control">
-    <option [ngValue]="1">new value</option>
-    <option [ngValue]="2">new value</option>
-    <option [ngValue]="3">new value</option>
-    <option [ngValue]="4">new value</option>
+    <option [ngValue]="1" *ngFor="let item of lst"></option>
   </select>
 </form>

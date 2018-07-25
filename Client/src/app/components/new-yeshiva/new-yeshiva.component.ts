@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Yeshiva } from '../../classes/Yeshiva';
 import { forEach } from '@angular/router/src/utils/collection';
@@ -11,28 +11,29 @@ import { SettingsYeshivotComponent } from '../settings-yeshivot/settings-yeshivo
   templateUrl: './new-yeshiva.component.html',
   styleUrls: ['./new-yeshiva.component.css']
 })
+
 export class NewYeshivaComponent implements OnInit {
 
+  @Output() Yeshiva=new EventEmitter();
+
+  
+  @Output()
+  @Input()
   protected yeshiva: Yeshiva = new Yeshiva();
 
-  constructor(private appProx: AppProxy) { }
-
-
-  ngOnInit() {
-  }
+  constructor(private appProxy: AppProxy) { }
 
   save() {
-    this.appProx.post('AddYeshiva', { yeshiva: this.yeshiva })
+    this.appProxy.post('AddYeshiva', { yeshiva: this.yeshiva })
       .then(
         data => {
           {
             this.yeshiva = data;
-
+            this.Yeshiva.emit(null);
           }
         })
   }
 
-  edit() {
-    this.appProx.post('EditYeshiva',{yeshiva:this.yeshiva});
+  ngOnInit() {
   }
 }

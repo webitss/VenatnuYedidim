@@ -1,21 +1,31 @@
-<button routerLink="new-yeshiva">מוסד חדש</button>
+<div *ngIf="flag==1" class="newYeshiva">
+  <app-new-yeshiva [yeshiva]=yeshiva></app-new-yeshiva>
+</div>
+
+<div *ngIf="flag==1" class="newYeshiva">
+    <app-edit-yeshiva [yeshiva]=yeshiva></app-edit-yeshiva>
+</div>
+
+<button (click)="yeshiva=null; flag=1">מוסד חדש</button>
 
 <table class="table table-striped">
   <thead>
     <tr>
-        <td>פתיחה</td>
-        <td>שם מוסד</td>
-        <td>כתובת</td>
-        <td>עיר</td>
-        <td>שם איש קשר</td>
-        <td>תפקיד</td>
-        <td>מייל</td>
-        <td>נייד</td>
+      <td>פתיחה</td>
+      <td>שם מוסד</td>
+      <td>כתובת</td>
+      <td>עיר</td>
+      <td>שם איש קשר</td>
+      <td>תפקיד</td>
+      <td>מייל</td>
+      <td>נייד</td>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let yeshiva of yeshivaList">
-      <td><button routerLink="edit-yeshiva">עריכה</button></td>
+      <td>
+          <button (click)="yeshiva=null; flag=1">עריכה</button>
+      </td>
       <td>{{yeshiva.nvYeshivaName}}</td>
       <td>{{yeshiva.nvAddress}}</td>
       <td>{{yeshiva.nvCity}}</td>
@@ -26,7 +36,3 @@
     </tr>
   </tbody>
 </table>
-
-
-<router-outlet></router-outlet>
-<!-- (activate)="onRouterOutletActivate($event)" -->

@@ -10,53 +10,30 @@ import { AppProxy } from '../../services/app.proxy';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  constructor(private appProxy:AppProxy) { }
+  constructor(private appProxy: AppProxy) { }
 
-@Input() student:Student
+  @Input() student: Student
 
 
   fatherDead: boolean;
-  motherDead:boolean;
+  motherDead: boolean;
 
   ngOnInit() {
- this.student=new Student();
- this.appProxy.post("GetStudentById",{iPersonId:7}).then(data=>{this.student=data ;alert("successfuly")},err=>alert(err));
+    this.student = new Student();
+    this.appProxy.post("GetStudentById", { iPersonId: 7 }).then(data => { this.student = data }, err => alert(err));
+
+
+  }
+
+
+  saveStudent() {
+    if (this.student.iPersonId == 0) {
+      this.appProxy.post("AddStudent", { Student: this.student, iUserId: 3 }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
+    }
+    else {
+      this.appProxy.post("UpdateStudent", { Student: this.student, iUserId: 3 }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
+    }
+  }
 
 
 }
-}
-// if (this.meeting.iMeetingId == null) {
-//   this.meeting.iPersonId=1;
-//   this.appProxi.post("AddMeeting", { meeting: this.meeting, iUserId: 1 }).then(
-//     data => {
-//       alert("good");
-//       // debugger;
-//     },
-//     err => {
-//       alert("not good");
-//     }
-//   );
-// }
-// else
-// this.appProxi.post("UpdateMeeting", { meeting: this.meeting, iUserId: 1 }).then(
-//   data => {
-//     alert("good");
-//     debugger;
-//   },
-//   err => {
-//     alert("not good");
-//   }
-// );
-// }
-
-// constructor(private route: ActivatedRoute, private appProxi: AppProxy) { }
-// // subscription:Subscription;
-// ngOnInit() {
-// if (this.meeting == null)
-//   this.meeting = new Meeting();
-// //  this.sub=this.route.params.subscribe(params=>{
-// //    this.meetingId=+params['iMeetingId'];
-// //  });
-// debugger;
-
-// }

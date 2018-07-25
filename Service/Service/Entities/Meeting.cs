@@ -50,6 +50,23 @@ namespace Service.Entities
 
         }
 
+        internal static bool SetMeeting(Meeting meeting, int iUserId)
+        {
+            try
+            {
+
+                List<SqlParameter> parameters = ObjectGenerator<Meeting>.GetSqlParametersFromObject(meeting);
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TMeeting_UPD/INS", parameters);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("SetMeeting / TMeeting_UPD/INS", "ex" + ex);
+                return false;
+            }
+        }
+
         public static bool AddMeeting(Meeting meeting, int iUserId)
         {
             try
