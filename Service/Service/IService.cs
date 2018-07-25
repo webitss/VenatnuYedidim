@@ -220,6 +220,14 @@ namespace Service
 
         [WebInvoke(
           Method = "POST",
+          UriTemplate = "SetMeeting",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+        bool SetMeeting(Meeting meeting, int iUserId);
+
+        [WebInvoke(
+          Method = "POST",
           UriTemplate = "UpdateMeeting",
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,

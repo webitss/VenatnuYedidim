@@ -46,8 +46,15 @@ namespace Service
         }
         public bool AddMeeting(Meeting meeting, int iUserId)
         {
-            return Meeting.AddMeeting(meeting, iUserId);
+            return Meeting.SetMeeting(meeting, iUserId);
         }
+
+        public bool SetMeeting(Meeting meeting, int iUserId)
+        {
+            return Meeting.SetMeeting(meeting, iUserId);
+        }
+
+
         public bool UpdateMeeting(Meeting meeting, int iUserId)
         {
             return Meeting.UpdateMeeting(meeting, iUserId);
