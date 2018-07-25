@@ -58,11 +58,6 @@
                     <label>
                         <input type="checkbox" name="fatherDied" (change)="fatherDead=true"> יתום מאב</label>
                 </div>
-<<<<<<< HEAD
-                <div class="form-group col-sm-3">
-                    <label for="couseOfdead"> נפטר מ:</label>
-                    <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathFather" [ngModelOptions]="{standalone: true}">
-=======
                 <div *ngIf="fatherDead">
                     <div class="form-group col-sm-4">
                         <label for="dtBornDate"> תאריך פטירה עברי:</label>
@@ -72,7 +67,6 @@
                         <label for="couseOfdead"> נפטר מ:</label>
                         <input type="date" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathFather" [ngModelOptions]="{standalone: true}">
                     </div>
->>>>>>> 10631fd97bcd877ec420d213bfdddce53ae9d72c
                 </div>
             </div>
             <div class="form-group col-sm-4">
@@ -80,11 +74,6 @@
                     <label>
                         <input type="checkbox" name="motherDead" (change)="motherDead=true"> יתום מאם</label>
                 </div>
-<<<<<<< HEAD
-                <div class="form-group col-sm-3">
-                    <label for="couseOfdead"> נפטרה מ:</label>
-                    <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathMother" [ngModelOptions]="{standalone: true}">
-=======
                 <div *ngIf="motherDead">
                     <div class="form-group col-sm-4">
                         <label for="dtBornDate"> תאריך פטירה עברי:</label>
@@ -94,7 +83,6 @@
                         <label for="couseOfdead"> נפטר מ:</label>
                         <input type="date" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathMother" [ngModelOptions]="{standalone: true}">
                     </div>
->>>>>>> 10631fd97bcd877ec420d213bfdddce53ae9d72c
                 </div>
             </div>
             <div class="col-sm-1"></div>
