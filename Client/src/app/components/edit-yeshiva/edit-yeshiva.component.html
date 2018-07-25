@@ -1,4 +1,8 @@
 <form class=editYesiva>
+  <button (click)="close()">ביטול</button>
+
+  <button (click)="save()">שמור</button>
+  
   <div>שם מוסד</div>
   <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvYeshivaName" />
   <div>כתובת</div>
@@ -19,7 +23,5 @@
     <option>תפקיד 3</option>
   </select>
 
-  <button (click)="save()">שמור</button>
 
-  <button>ביטול</button>
 </form>

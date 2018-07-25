@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   constructor(private appProxy: AppProxy, private router: Router) { }
 
   ngOnInit() {
-    // this.router.navigate(['students']);
+    this.router.navigate(['students']);
 
     // this.appProxy.post('Login', { nvUserName: 'מערכת', nvPassword: '1234' })
     //   .then(user => {
@@ -65,9 +65,6 @@ export class AppComponent implements OnInit {
 
   // }
 
-<<<<<<< HEAD
  
  
-=======
->>>>>>> e1f51f808f4b849eec94663169fb9db2fd69d16f
 }
