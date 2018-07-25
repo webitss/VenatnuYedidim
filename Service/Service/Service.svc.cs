@@ -31,9 +31,9 @@ namespace Service
             return User.Login(nvUserName, nvPassword);
         }
 
-        public void SetUser(User user)
+        public bool SetUser(User user, int iUserId)
         {
-            User.SetUser(user);
+            return User.SetUser(user, iUserId);
         }
 
         #endregion
@@ -175,6 +175,11 @@ namespace Service
         {
            return SysTableRow.UpdateValue(sysTableRow);
         }
+        public bool AddValue(SysTableRow sysTableRow)
+        {
+            return SysTableRow.AddValue(sysTableRow);
+        }
+
         #endregion
 
         #region SysTables
@@ -240,9 +245,7 @@ namespace Service
         {
             return Participant.GetParticipantsList(iEventId);
         }
-
-
-
+        
         #endregion
 
     }

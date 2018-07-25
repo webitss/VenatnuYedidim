@@ -60,7 +60,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        void SetUser(User user);
+        bool SetUser(User user, int iUserId);
 
         #endregion
 
@@ -297,6 +297,14 @@ RequestFormat = WebMessageFormat.Json)]
         RequestFormat = WebMessageFormat.Json)]
          bool UpdateValue(SysTableRow sysTableRow);
 
+        [OperationContract]
+        [WebInvoke(
+       Method = "POST",
+       UriTemplate = "AddValue",
+       BodyStyle = WebMessageBodyStyle.WrappedRequest,
+       ResponseFormat = WebMessageFormat.Json,
+       RequestFormat = WebMessageFormat.Json)]
+        bool AddValue(SysTableRow sysTableRow);
         #endregion
 
         #region SysTables

@@ -14,17 +14,25 @@ namespace Service.Entities
     {
         #region Data Members
 
-        [DataMember]
-        public int iSysTableRowId { get; set; }
+       
         [DataMember]
         public int iSysTableId { get; set; }
         [DataMember]
         public string nvValue { get; set; }
-        
+        [DataMember]
+        public int iSysRowStatus { get; set; }
+        [DataMember]
+        public DateTime dtLastModifyDate { get; set; }
+        [DataMember]
+        public  int iLastModifyUserId { get; set; }
+        [DataMember]
+        public DateTime dtCreateDate { get; set; }
+        [DataMember]
+        public int iCreateUserId { get; set; }
         #endregion
 
         #region Methods
-     
+
         public static List<SysTableRow> GetValues(int iSysTableId)
         {
             try
@@ -43,19 +51,24 @@ namespace Service.Entities
         }
 
         //להפוך לאובייקט
-        public bool AddValue(int iSysTableId, string nvValue)
+        public static bool AddValue(SysTableRow sysTableRow)
+
         {
+           
             try
             {
-                List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("iSysTableId", iSysTableId));
-                parameters.Add(new SqlParameter("nvValue", nvValue));
+                List<SqlParameter> parameters = ObjectGenerator<SysTableRow>.GetSqlParametersFromObject(sysTableRow);
+
+
+
                 SqlDataAccess.ExecuteDatasetSP("TSysTableRow_INS", parameters);
+               
+                
                 return true;
             }
             catch (Exception ex)
             {
-                Log.LogError("AddValue / TSysTableRow_INS", "iSysTableId: " + iSysTableId + "nvValue" + nvValue + ex + " , ex");
+                Log.LogError("AddValue / TSysTableRow_INS", "iSysTableId: " + sysTableRow.iSysTableId + "nvValue" + sysTableRow.nvValue + ex + " , ex");
                 return false;
             }
 
@@ -65,18 +78,20 @@ namespace Service.Entities
         //ב iSysTableRowId
         public static bool UpdateValue(SysTableRow sysTableRow)
         {
+
+
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<SysTableRow>.GetSqlParametersFromObject(sysTableRow);
-               
-                
-               
+
+
+
                 SqlDataAccess.ExecuteDatasetSP("TSysTableRow_UPD", parameters);
                 return true;
             }
             catch (Exception ex)
             {
-                Log.LogError("AddValue / TSysTableRow_UPD", "iSysTableId: " + sysTableRow.iSysTableId + "nvValue" + sysTableRow.nvValue+ ex + " , ex");
+                Log.LogError("AddValue / TSysTableRow_UPD", "iSysTableId: " + sysTableRow.iSysTableId + "nvValue" + sysTableRow.nvValue + ex + " , ex");
                 return false;
             }
         }

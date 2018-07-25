@@ -22,6 +22,5 @@ export class UserComponent implements OnInit {
 
   saveUser() {
     this.currentComponent.saveUser();
-    this.router.navigate(['users']);
   }
 }
