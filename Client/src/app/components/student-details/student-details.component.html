@@ -28,7 +28,7 @@
             <div class="col-sm-3"></div>
             <div class="form-group col-sm-2">
                 <label for="nvBornDate"> תאריך לידה עברי:</label>
-                <input type="date" class="form-control" id="nvBornDate" [(ngModel)]="student.nvBirthdate" [ngModelOptions]="{standalone: true}">
+                <input type="text" class="form-control" id="nvBornDate" [(ngModel)]="student.nvBirthdate" [ngModelOptions]="{standalone: true}">
                 <!-- <input type="text" class="form col-sm-1" id="nvBornDate">
                       <input type="text" class="form col-sm-1" id="nvBornDate">
                       <input type="text" class="form col-sm-1" id="nvBornDate"> -->
@@ -61,11 +61,11 @@
                 <div *ngIf="fatherDead">
                     <div class="form-group col-sm-4">
                         <label for="dtBornDate"> תאריך פטירה עברי:</label>
-                        <input type="date" class="form-control" id="dtBornDate" [(ngModel)]="student.nvFatherDeathDate" [ngModelOptions]="{standalone: true}">
+                        <input type="text" class="form-control" id="dtBornDate" [(ngModel)]="student.nvFatherDeathDate" [ngModelOptions]="{standalone: true}">
                     </div>
                     <div class="form-group col-sm-3">
                         <label for="couseOfdead"> נפטר מ:</label>
-                        <input type="date" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathFather" [ngModelOptions]="{standalone: true}">
+                        <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathFather" [ngModelOptions]="{standalone: true}">
                     </div>
                 </div>
             </div>
@@ -77,11 +77,11 @@
                 <div *ngIf="motherDead">
                     <div class="form-group col-sm-4">
                         <label for="dtBornDate"> תאריך פטירה עברי:</label>
-                        <input type="date" class="form-control" id="dtBornDate" [(ngModel)]="student.nvMotherDeathDate" [ngModelOptions]="{standalone: true}">
+                        <input type="text" class="form-control" id="dtBornDate" [(ngModel)]="student.nvMotherDeathDate" [ngModelOptions]="{standalone: true}">
                     </div>
                     <div class="form-group col-sm-3">
                         <label for="couseOfdead"> נפטר מ:</label>
-                        <input type="date" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathMother" [ngModelOptions]="{standalone: true}">
+                        <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathMother" [ngModelOptions]="{standalone: true}">
                     </div>
                 </div>
             </div>
