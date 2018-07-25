@@ -1,4 +1,5 @@
 ﻿using Service.Entities;
+using Service.Utilities;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -71,9 +72,25 @@ namespace Service
          BodyStyle = WebMessageBodyStyle.WrappedRequest,
          ResponseFormat = WebMessageFormat.Json,
          RequestFormat = WebMessageFormat.Json)]
-        List<Student> GetStudentList(int iUserId);
+        List<Student> GetStudentList(int iUserId);        
+       
+       [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetStudentById",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        Student GetStudentById(int iPersonId);
 
-
+        [OperationContract]
+        [WebInvoke(
+         Method = "POST",
+         UriTemplate = "AddStudentsToAvrech",
+         BodyStyle = WebMessageBodyStyle.WrappedRequest,
+         ResponseFormat = WebMessageFormat.Json,
+         RequestFormat = WebMessageFormat.Json)]
+        bool AddStudentsToAvrech(List<T2Int> studentAndAvrechArr, int iUserId);
 
         [OperationContract]
         [WebInvoke(
@@ -219,6 +236,7 @@ namespace Service
 
         #endregion Meeting
 
+
         #region files
 
         [OperationContract]
@@ -241,6 +259,16 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         List<SysTableRow> GetValues(int iSysTableId);
+
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "UpdateValue",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+         bool UpdateValue(SysTableRow sysTableRow);
 
         #endregion
 
@@ -296,7 +324,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        bool AddConversations(Conversation conversation, int iUserId);
+        bool AddConversations(Conversation conversation, int iPersonId);
 
         [OperationContract]
         [WebInvoke(
@@ -305,7 +333,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        bool UpdateConversations(Conversation conversation, int iUserId);
+        bool UpdateConversations(Conversation conversation, int iPersonId);
 
         [OperationContract]
         [WebInvoke(
@@ -314,7 +342,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        bool DeleteConversations(int iConversationId, int iUserId);
+        bool DeleteConversations(int iConversationId, int iPersonId);
 
         #endregion Conversation
 

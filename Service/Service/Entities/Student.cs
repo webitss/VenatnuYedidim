@@ -47,13 +47,36 @@ namespace Service.Entities
         public string nvYeshivaStreet { get; set; }
         [DataMember]
         public string nvYeshivaCity { get; set; }
-        	
+
         #endregion
+
+        public static bool AddStudentsToAvrech(List<T2Int> studentAndAvrechArr, int iUserId) {
+            try
+            {
+                
+                List<SqlParameter> sqlParameters = new List<SqlParameter>();
+                sqlParameters.Add(new SqlParameter("studentAndAvrechArr" , ObjectGenerator<T2Int>.GetDataTable(studentAndAvrechArr)));
+                sqlParameters.Add(new SqlParameter("iUserId", iUserId));
+
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_INS/UPD", sqlParameters).Tables[0].Rows;
+                //List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+
+            }
+
+        }
 
         public static List<Student> GetStudentList(int iUserId)
         {
             try
             {
+                
+
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TStudentGetStudentByUser_SLCT", new SqlParameter("iUserId", iUserId)).Tables[0].Rows;
                 List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
                 return students;
@@ -67,6 +90,28 @@ namespace Service.Entities
                 return null;
             }
         }
+
+        public static Student GetStudentById(int iPersonId)
+        {
+            try
+            {
+                DataRow drc = SqlDataAccess.ExecuteDatasetSP("TStudentGetStudentbyId_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
+                Student student = ObjectGenerator<Student>.GeneratFromDataRow(drc);
+
+                return student;
+            }
+            
+
+            catch (Exception ex)
+            {
+                Log.LogError("GetStudentList / TStudentGetStudentbyId_SLCT", "ex" + ex);
+                return null;
+            }
+        }
+
+
+
+       
 
 
         public static bool AddStudent(Student student, int iUserId)

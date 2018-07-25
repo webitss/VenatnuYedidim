@@ -3,6 +3,8 @@ import { Meeting } from '../../classes/meeting';
 import { AppProxy } from '../../services/app.proxy';
 import { StudentMeetingDetailsComponent } from '../student-meeting-details/student-meeting-details.component';
 
+
+
 @Component({
   selector: 'app-student-meetings',
   templateUrl: './student-meetings.component.html',
@@ -15,18 +17,50 @@ export class StudentMeetingsComponent implements OnInit {
   id: number;
   meeting: Meeting;
   flag: number;
-  //this.meeting.iMeetingType=4;;
-  //  {iMeetingType:4,iPersonId:1,dtMeetingDate:7-9-2018,};
-
-  // meetingList:Meeting[]=new Meeting[6];
 
   constructor(private appProxy: AppProxy) { }
+
+
+  public lstColumns = [{
+    title: 'עריכה',
+    name: 'edit',
+    clickCell:true,
+    type: 'html'
+
+  },
+  {
+    title: 'סוג פגישה',
+    name: 'iMeetingType'
+  },
+  {
+    title: 'תאריך',
+    name: 'nvDate',
+  },
+  {
+    title  : 'שעה',
+    name: 'nvHour'
+  },
+  {
+    title: 'סיכום',
+    name: 'nvSummary',
+  }]
+
+  editMeeting(meeting:Meeting){
+      this.meeting = meeting;
+      this.flag = 1;
+  }
+
 
   ngOnInit() {
     this.appProxy.post("GetMeetingsByStudentId", { iPersonId: 1 }).then(
       data => {
-        alert("good");
+        //alert("good");
         this.meetingList = data;
+        this.meetingList.forEach(m => {
+          m['nvDate'] = m.dtMeetingDate.getDate().toString();
+          m['nvHour'] = m.dtMeetingDate.getHours().toString();
+          m['edit'] = '<p>ערוך</p>';
+        });
         debugger;
       },
       err => {

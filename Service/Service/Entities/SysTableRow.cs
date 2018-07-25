@@ -63,19 +63,20 @@ namespace Service.Entities
 
         //להחליף את iSysTableId
         //ב iSysTableRowId
-        public bool UpdateValue(int iSysTableRowId, string nvValue)
+        public static bool UpdateValue(SysTableRow sysTableRow)
         {
             try
             {
-                List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("iSysTableId", iSysTableRowId));
-                parameters.Add(new SqlParameter("nvValue", nvValue));
+                List<SqlParameter> parameters = ObjectGenerator<SysTableRow>.GetSqlParametersFromObject(sysTableRow);
+               
+                
+               
                 SqlDataAccess.ExecuteDatasetSP("TSysTableRow_UPD", parameters);
                 return true;
             }
             catch (Exception ex)
             {
-                Log.LogError("AddValue / TSysTableRow_UPD", "iSysTableId: " + iSysTableRowId + "nvValue" + nvValue + ex + " , ex");
+                Log.LogError("AddValue / TSysTableRow_UPD", "iSysTableId: " + sysTableRow.iSysTableId + "nvValue" + sysTableRow.nvValue+ ex + " , ex");
                 return false;
             }
         }

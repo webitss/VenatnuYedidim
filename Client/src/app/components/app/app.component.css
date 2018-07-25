@@ -1,8 +1,11 @@
-li:hover
+/* li:hover
 {
     background-color:rgba(169, 169, 169, 0.37) ;
-}
+} */
 
+.nav-item:hover{
+    background-color:rgba(169, 169, 169, 0.37) ;
+}
 .link{
    color: black;
   
@@ -11,9 +14,7 @@ li:hover
   
   text-decoration: none;
 }
-.kk1{
-    /* background-color:rgb(102, 56, 151); */
-    
+.appSelect{
     color:  rgb(207, 37, 94);
     font-weight:bold; 
 }
@@ -24,19 +25,15 @@ li:hover
 .nav{
     /* background-color:rgba(220, 220, 220, 0.945); */
     box-shadow: #eae6e6 15px 5px 15px;
-    height: 70px;
+    height: 65px;   
 }
 .n{
     /* padding-right: 175px;  */
     font-size: 15px;
 }
 li{
-    height: 30px;
     border: rgba(31, 0, 0, 0.185);
-    padding: 0px 0px 0px 90px;
-    margin: 10px 50px;
-    border-top: 0;
-    border-right: 0;
+    padding: 12px 90px 10px 90px;
     border-left: 1px solid #d8d8d8;
     text-align: center;
 }

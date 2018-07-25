@@ -16,7 +16,22 @@ export class EventParticipantsComponent implements OnInit {
     },{
       title: 'שם משפחה',
       name: 'nvLastName'    
-    }
+    },{
+      title: 'טלפון',
+      name: 'nvLastName'    
+    },{
+      title: 'נייד',
+      name: 'nvLastName'    
+    },{
+      title: 'מייל',
+      name: 'nvLastName'    
+    },{
+      title: 'סוג משתתף',
+      name: 'nvLastName'    
+    },{
+      title: 'סטטוס',
+      name: 'nvLastName'    
+    },
 
   ]
 
