@@ -185,7 +185,8 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "new-yeshiva", component: NewYeshivaComponent }
+              { path: "new-yeshiva", component: NewYeshivaComponent },
+              { path: "edit-yeshiva", component:EditYeshivaComponent}
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },
