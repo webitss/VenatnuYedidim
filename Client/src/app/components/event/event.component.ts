@@ -24,9 +24,11 @@ export class EventComponent implements OnInit {
 
   onRouterOutletActivate(event) {
     this.currentComponent = event;
+    //if(event.getHeader) event.getUser();this.header=event.getHeader();
   }
 
   isDetails: boolean = true;
+  //header:string;
 
   eventDetails() {
     this.isDetails = true;

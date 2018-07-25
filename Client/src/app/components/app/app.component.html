@@ -2,7 +2,9 @@
   <a class="navbar-brand tital" href="#"><img src="./assets/images/Lighthouse.jpg"></a>
   <ul class="navbar-nav" *ngIf="currentComponent">
     <li [ngClass]="{'appSelect': currentComponent.constructor.name.indexOf('Student') != -1}" class="nav-item">
+      <div class="fullTab">
          <a class="closed link" routerLink='/students'>תלמידים</a>    
+      </div>
     </li>
     <li [ngClass]="{'appSelect': currentComponent.constructor.name.indexOf('Avrechim') != -1}" class="nav-item">
       <a class="closed link" routerLink='/avrechim'>אברכים</a>
@@ -32,6 +34,7 @@
     </div>
   </div>
 </nav>
+
 
 <!-- <div id="s-Image_1" class="pie image firer ie-background commentable" alt="image" style="left: 1088px; top: 231px;">
     <img src="PicUrl">

@@ -1,4 +1,4 @@
-<form class="form-horizontal row">
+<form class="form-horizontal row" *ngIf="user != null">
 
   <div class="form-horizontal">
     <label for="user-name">שם משפחה:</label>
@@ -31,10 +31,7 @@
   </div>
 
   <label for="permittion">הרשאה:</label>
-  <select name="permittion"  [(ngModel)]="user.iPermissionId" [ngModelOptions]="{standalone: true}" class="form-control">
-    <option [ngValue]="1">new value</option>
-    <option [ngValue]="2">new value</option>
-    <option [ngValue]="3">new value</option>
-    <option [ngValue]="4">new value</option>
+  <select name="permittion" class="col-sm-1"  [(ngModel)]="user.iPermissionId" [ngModelOptions]="{standalone: true}" class="form-control">
+    <option [value]="item.iSysTableRowId" *ngFor="let item of lst">{{item.nvValue}}</option>
   </select>
 </form>

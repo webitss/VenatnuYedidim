@@ -8,6 +8,7 @@ import { RouterModule, Route } from '@angular/router';
 
 
 //--- templates ---
+import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
 import { VyTableFilterPipe } from './templates/vy-table/vy-table-filter.pipe';
 import { VyTableOrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
@@ -17,6 +18,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 
 //--- services ---
 import { AppProxy } from './services/app.proxy';
+import { SysTableService } from './services/sys-table.service';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
 
@@ -26,6 +28,8 @@ import { StudentDetailsComponent } from './components/student-details/student-de
 import { StudentMeetingsComponent } from './components/student-meetings/student-meetings.component';
 import { StudentConversationsComponent } from './components/student-conversations/student-conversations.component';
 import { StudentDocumentsComponent } from './components/student-documents/student-documents.component';
+import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
+import { StudentMeetingDetailsComponent } from './components/student-meeting-details/student-meeting-details.component';
 
 import { AvrechimComponent } from './components/avrechim/avrechim.component';
 import { AvrechComponent } from './components/avrech/avrech.component';
@@ -51,15 +55,11 @@ import { SettingsReportsComponent } from './components/settings-reports/settings
 import { SettingsYeshivotComponent } from './components/settings-yeshivot/settings-yeshivot.component';
 import { SettingsDocumentsComponent } from './components/settings-documents/settings-documents.component';
 import { SettingsFrontendComponent } from './components/settings-frontend/settings-frontend.component';
-import { NewYeshivaComponent } from './components/new-yeshiva/new-yeshiva.component';
-import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
-import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
-import { StudentMeetingDetailsComponent } from './components/student-meeting-details/student-meeting-details.component';
-import { SysTableService } from './services/sys-table.service';
 
-import { inject } from '@angular/core/testing';
-import { injectElementRef } from '@angular/core/src/render3';
-import { EditYeshivaComponent } from './components/edit-yeshiva/edit-yeshiva.component';
+import { SettingYeshivaComponent } from './components/setting-yeshiva/setting-yeshiva.component';
+
+// import { inject } from '@angular/core/testing';
+// import { injectElementRef } from '@angular/core/src/render3';
 import { UploadDocumentComponent } from './components/upload-document/upload-document.component';
 import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-checked.pipe';
 
@@ -67,6 +67,7 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
 @NgModule({
   declarations: [
     //templates
+    VyMultySelectComponent,
     VyTableComponent,
     VyTableFilterPipe,
     VyTableOrderByPipe,
@@ -82,6 +83,9 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
     StudentDetailsComponent,
     StudentMeetingsComponent,
     StudentConversationsComponent,
+    StudentConversationDetailsComponent,
+    StudentMeetingDetailsComponent,
+    StudentDocumentsComponent,
 
     AvrechimComponent,
     AvrechComponent,
@@ -108,15 +112,14 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
     SettingsDocumentsComponent,
     SettingsFrontendComponent,
 
-    NewYeshivaComponent,
+    SettingYeshivaComponent,
 
-    VyMultySelectComponent,
-    StudentConversationDetailsComponent,
-    StudentMeetingDetailsComponent,
-    EditYeshivaComponent,
     UploadDocumentComponent,
+<<<<<<< HEAD
     StudentDocumentsComponent,
     FilterBMultySelectCheckedPipe,
+=======
+>>>>>>> a0f7bcc047b4c558b229846f8e3a3248fbbdedf7
   ],
   imports: [
    // Ng2SearchPipeModule,
@@ -133,10 +136,11 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
          //{ path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
           {
-            path: "student-meetings", component: StudentMeetingsComponent, children: [
-              { path: "student-meeting-details/:iMeetingId", component: StudentMeetingDetailsComponent }
-            ]
-          },
+            path: "student-meetings", component: StudentMeetingsComponent},
+            // children: [
+            //   { path: "student-meeting-details/:iMeetingId", component: StudentMeetingDetailsComponent }
+            // ]
+          
           {
             path: "student-conversations", component: StudentConversationsComponent, children: [
               { path: "student-conversation-details/:ConversationId", component: StudentConversationDetailsComponent },
@@ -187,8 +191,7 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "new-yeshiva", component: NewYeshivaComponent },
-              { path: "edit-yeshiva", component:EditYeshivaComponent}
+              { path: "setting-yeshiva", component: SettingYeshivaComponent }
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },

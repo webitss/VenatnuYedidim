@@ -19,10 +19,7 @@ namespace Service.Entities
         //public int iStudentId { get; set; }
         [DataMember]
         public string nvImgStudent { get; set; }
-        [DataMember]
-        public string nvBirthdate { get; set; }
-        [DataMember]
-        public DateTime? dtBirthdate { get; set; }
+  
         [DataMember]
         public string nvFatherDeathDate { get; set; }
         [DataMember]

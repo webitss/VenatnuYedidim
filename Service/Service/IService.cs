@@ -60,7 +60,7 @@ namespace Service
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        void SetUser(User user);
+        bool SetUser(User user, int iUserId);
 
         #endregion
 
@@ -192,11 +192,30 @@ namespace Service
         [OperationContract]
         [WebInvoke(
         Method = "POST",
-        UriTemplate = "AddEvent",
+        UriTemplate = "SetEvent",
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool AddEvent(Event1 addEvent,int iUserId);
+        bool SetEvent(Event1 oEvent, int iUserId);
+
+        [OperationContract]
+        [WebInvoke(
+Method = "POST",
+UriTemplate = "GetEventsList",
+BodyStyle = WebMessageBodyStyle.WrappedRequest,
+ResponseFormat = WebMessageFormat.Json,
+RequestFormat = WebMessageFormat.Json)]
+        List<Event1> GetEventsList(int iUserId);
+
+
+        [OperationContract]
+        [WebInvoke(
+Method = "POST",
+UriTemplate = "GetEvent",
+BodyStyle = WebMessageBodyStyle.WrappedRequest,
+ResponseFormat = WebMessageFormat.Json,
+RequestFormat = WebMessageFormat.Json)]
+        Event1 GetEvent(int? iEventId);
         #endregion
 
         #region Meeting
@@ -210,21 +229,29 @@ namespace Service
           RequestFormat = WebMessageFormat.Json)]
         List<Meeting> GetMeetingsByStudentId(int iPersonId);
 
-        [WebInvoke(
-          Method = "POST",
-          UriTemplate = "AddMeeting",
-          BodyStyle = WebMessageBodyStyle.WrappedRequest,
-          ResponseFormat = WebMessageFormat.Json,
-          RequestFormat = WebMessageFormat.Json)]
-        bool AddMeeting(Meeting meeting, int iUserId);
+        //[WebInvoke(
+        //  Method = "POST",
+        //  UriTemplate = "AddMeeting",
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //  ResponseFormat = WebMessageFormat.Json,
+        //  RequestFormat = WebMessageFormat.Json)]
+        //bool AddMeeting(Meeting meeting, int iUserId);
 
         [WebInvoke(
           Method = "POST",
-          UriTemplate = "UpdateMeeting",
+          UriTemplate = "SetMeeting",
           BodyStyle = WebMessageBodyStyle.WrappedRequest,
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
-        bool UpdateMeeting(Meeting meeting, int iUserId);
+        bool SetMeeting(Meeting meeting, int iUserId);
+
+        //[WebInvoke(
+        //  Method = "POST",
+        //  UriTemplate = "UpdateMeeting",
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //  ResponseFormat = WebMessageFormat.Json,
+        //  RequestFormat = WebMessageFormat.Json)]
+        //bool UpdateMeeting(Meeting meeting, int iUserId);
 
         [WebInvoke(
           Method = "POST",
@@ -270,6 +297,14 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
          bool UpdateValue(SysTableRow sysTableRow);
 
+        [OperationContract]
+        [WebInvoke(
+       Method = "POST",
+       UriTemplate = "AddValue",
+       BodyStyle = WebMessageBodyStyle.WrappedRequest,
+       ResponseFormat = WebMessageFormat.Json,
+       RequestFormat = WebMessageFormat.Json)]
+        bool AddValue(SysTableRow sysTableRow);
         #endregion
 
         #region SysTables

@@ -96,6 +96,8 @@
     <Content Include="bin\NReco.PdfGenerator.dll" />
     <Content Include="bin\Service.dll" />
     <Content Include="bin\Service.pdb" />
+    <Content Include="Files\bg.jpg" />
+    <Content Include="Files\חמווווד.png" />
     <Content Include="Files\תמונה סרוקה.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Service.svc" />
@@ -139,6 +141,8 @@
   <ItemGroup>
     <Content Include="bin\NLog.config" />
     <Content Include="bin\Service.dll.config" />
+    <Content Include="Files\forms.pdf" />
+    <Content Include="Files\אודי קורות חיים.pdf" />
     <None Include="Properties\PublishProfiles\aaa.pubxml" />
     <None Include="Properties\PublishProfiles\bbb.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
