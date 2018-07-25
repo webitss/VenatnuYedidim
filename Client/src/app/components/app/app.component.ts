@@ -21,11 +21,11 @@ export class AppComponent implements OnInit {
   },
   {
     title: 'שם פרטי',
-    name: 'bb'    
+    name: 'nvFirtName'    
   },
   {
     title: 'שם משפחה',
-    name: 'cc',
+    name: 'nvLastName',
   },
   {
     title: 'נייד',
@@ -34,33 +34,21 @@ export class AppComponent implements OnInit {
 
   public lstDataRows = [{
     aa: 1,
-    bb: 'aaa1',
-    cc: 'aaa1',
+    nvFirtName: 'aaa1',
+    nvLastName: 'aaa1',
     dd: 'aaa1',
   },
   {
     aa: 1,
-    bb: 'bbb3',
-    cc: 'bbb2',
+    nvFirtName: 'bbb3',
+    nvLastName: 'bbb2',
     dd: 'bbb2',
   },
   {
     aa: 1,
-    bb: 'ccc2',
-    cc: 'ccc4',
+    nvFirtName: 'ccc2',
+    nvLastName: 'ccc4',
     dd: 'ccc3',
-  },
-  {
-    aa: 1,
-    bb: 'ddd4',
-    cc: 'ddd4',
-    dd: 'ddd4',
-  },
-  {
-    aa: 5,
-    bb: 'eee5',
-    cc: 'eee5',
-    dd: 'eee5',
   }]
 
   ngOnInit() {

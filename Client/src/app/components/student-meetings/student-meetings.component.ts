@@ -15,18 +15,43 @@ export class StudentMeetingsComponent implements OnInit {
   id: number;
   meeting: Meeting;
   flag: number;
-  //this.meeting.iMeetingType=4;;
-  //  {iMeetingType:4,iPersonId:1,dtMeetingDate:7-9-2018,};
-
-  // meetingList:Meeting[]=new Meeting[6];
 
   constructor(private appProxy: AppProxy) { }
+
+
+  public lstColumns = [{
+    title: 'עריכה',
+    name: 'edit'
+  },
+  {
+    title: 'סוג פגישה',
+    name: 'iMeetingType'
+  },
+  {
+    title: 'תאריך',
+    name: 'nvDate',
+  },
+  {
+    title  : 'שעה',
+    name: 'nvHour'
+  },
+  {
+    title: 'סיכום',
+    name: 'nvSummary',
+  }]
+
+
 
   ngOnInit() {
     this.appProxy.post("GetMeetingsByStudentId", { iPersonId: 1 }).then(
       data => {
-        alert("good");
+        //alert("good");
         this.meetingList = data;
+        this.meetingList.forEach(m => {
+          m['nvDate'] = m.dtMeetingDate.getDate().toString();
+          m['nvHour'] = m.dtMeetingDate.getHours().toString();
+          m['edit'] = 'ערוך';
+        });
         debugger;
       },
       err => {

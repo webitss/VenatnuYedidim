@@ -2,14 +2,17 @@
 
 <button  (click)="meeting=null; flag=1">הוספת פגישה</button>
 
- <ul>
+ <!-- <ul>
      <li *ngFor="let item of meetingList">
         
          {{item.nvSummary }} <button (click)="meeting=item; flag=1">עריכה</button>
+         {{item.dtMeetingDate}}
 
      </li>
- </ul>
+ </ul> -->
 
  <div *ngIf="flag==1">
     <app-student-meeting-details [meeting]=meeting></app-student-meeting-details> 
  </div> 
+
+ <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="meetingList"></app-vy-table>
