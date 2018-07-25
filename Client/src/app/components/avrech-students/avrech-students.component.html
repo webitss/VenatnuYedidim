@@ -1,9 +1,9 @@
 
 <button (click)="flag=true">הוסף תלמיד</button>
 <div *ngIf="flag==true"  class="addStudent">
-  <span>שיוך תלמידים</span>
-  <button (click)="cancelAdd()">ביטול</button>
-  <button (click)="saveAdd()">שמירה</button>
+  <span class="Student-affiliation">שיוך תלמידים</span>
+  <button (click)="cancelAdd()" class="btn-org">ביטול</button>
+  <button (click)="saveAdd()" class="btn-pink">שמירה</button>
   <app-vy-multy-select [fullList]="allStudents" (onSave)="getFromChild($event)"></app-vy-multy-select>
 </div>
 <p>

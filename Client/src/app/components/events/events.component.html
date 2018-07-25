@@ -1,5 +1,6 @@
-<button routerLink="/events/event/0">ארוע חדש</button>
-
+<div class="row">
+<button routerLink="/events/event/0" class="btn-pink btn">ארוע חדש</button>
+</div>
 <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="edit($event)"></app-vy-table>
 
 <router-outlet></router-outlet>

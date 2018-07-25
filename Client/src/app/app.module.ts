@@ -56,12 +56,12 @@ import { SettingsYeshivotComponent } from './components/settings-yeshivot/settin
 import { SettingsDocumentsComponent } from './components/settings-documents/settings-documents.component';
 import { SettingsFrontendComponent } from './components/settings-frontend/settings-frontend.component';
 
-import { NewYeshivaComponent } from './components/new-yeshiva/new-yeshiva.component';
-import { EditYeshivaComponent } from './components/edit-yeshiva/edit-yeshiva.component';
+import { SettingYeshivaComponent } from './components/setting-yeshiva/setting-yeshiva.component';
 
 // import { inject } from '@angular/core/testing';
 // import { injectElementRef } from '@angular/core/src/render3';
 import { UploadDocumentComponent } from './components/upload-document/upload-document.component';
+import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-checked.pipe';
 
 
 @NgModule({
@@ -108,14 +108,18 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
     SettingsComponent,
     SettingsCodeTableComponent,
     SettingsReportsComponent,
-    // SettingsYeshivotComponent,
+    SettingsYeshivotComponent,
     SettingsDocumentsComponent,
     SettingsFrontendComponent,
 
-    NewYeshivaComponent,
-    EditYeshivaComponent,
+    SettingYeshivaComponent,
 
     UploadDocumentComponent,
+<<<<<<< HEAD
+    StudentDocumentsComponent,
+    FilterBMultySelectCheckedPipe,
+=======
+>>>>>>> a0f7bcc047b4c558b229846f8e3a3248fbbdedf7
   ],
   imports: [
    // Ng2SearchPipeModule,
@@ -185,13 +189,12 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
           { path: "", component: SettingsCodeTableComponent },
           { path: "settings-code-tables", component: SettingsCodeTableComponent },
           { path: "settings-reports", component: SettingsReportsComponent },
-          // {
-          //   path: "settings-yeshivot", component: SettingsYeshivotComponent,
-          //   children: [
-          //     { path: "new-yeshiva", component: NewYeshivaComponent },
-          //     { path: "edit-yeshiva", component:EditYeshivaComponent}
-          //   ]
-          // },
+          {
+            path: "settings-yeshivot", component: SettingsYeshivotComponent,
+            children: [
+              { path: "setting-yeshiva", component: SettingYeshivaComponent }
+            ]
+          },
           { path: "settings-documents", component: SettingsDocumentsComponent },
           { path: "settings-frontend", component: SettingsFrontendComponent },
         ]

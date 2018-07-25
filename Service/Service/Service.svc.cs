@@ -31,9 +31,9 @@ namespace Service
             return User.Login(nvUserName, nvPassword);
         }
 
-        public void SetUser(User user)
+        public bool SetUser(User user, int iUserId)
         {
-            User.SetUser(user);
+            return User.SetUser(user, iUserId);
         }
 
         #endregion
@@ -44,14 +44,21 @@ namespace Service
         {
             return Meeting.GetMeetingsByStudentId(iPersonId);
         }
-        public bool AddMeeting(Meeting meeting, int iUserId)
+        //public bool AddMeeting(Meeting meeting, int iUserId)
+        //{
+        //    return Meeting.SetMeeting(meeting, iUserId);
+        //}
+
+        public bool SetMeeting(Meeting meeting, int iUserId)
         {
-            return Meeting.AddMeeting(meeting, iUserId);
+            return Meeting.SetMeeting(meeting, iUserId);
         }
-        public bool UpdateMeeting(Meeting meeting, int iUserId)
-        {
-            return Meeting.UpdateMeeting(meeting, iUserId);
-        }
+
+
+        //public bool UpdateMeeting(Meeting meeting, int iUserId)
+        //{
+        //    return Meeting.UpdateMeeting(meeting, iUserId);
+        //}
         public bool DeleteMeeting(int iMeetingId, int iUserId)
         {
             return Meeting.DeleteMeeting(iMeetingId, iUserId);
@@ -168,6 +175,11 @@ namespace Service
         {
            return SysTableRow.UpdateValue(sysTableRow);
         }
+        public bool AddValue(SysTableRow sysTableRow)
+        {
+            return SysTableRow.AddValue(sysTableRow);
+        }
+
         #endregion
 
         #region SysTables
@@ -233,9 +245,7 @@ namespace Service
         {
             return Participant.GetParticipantsList(iEventId);
         }
-
-
-
+        
         #endregion
 
     }

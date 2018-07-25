@@ -2,6 +2,8 @@
     direction: rtl;
 }
 .settingYeshiva{
+    direction: rtl;
+    float: right;
     position: fixed;
     z-index: 100;
     top: 30%;

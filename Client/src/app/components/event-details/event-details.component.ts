@@ -13,18 +13,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EventDetailsComponent implements OnInit {
 
-  @Input()
-  @Output()
   protected e: Event1;
 
   
+// header:string;
 
-  protected date: Date;
+// getHeader(){
+//   return this.header;
+// }
 
   
-
+// getUser(){
+  
+// }
   save() {
-    this.e.dtEventDate = new Date(this.date);
+ //  this.date=new Date(this.e.dtEventDate);
+   this.e.dtEventDate = new Date(this.e.dtEventDate);
+
     this.appProxy.post('SetEvent', { oEvent: this.e,  iUserId: 1})
       .then(
         data => {
@@ -41,18 +46,20 @@ export class EventDetailsComponent implements OnInit {
   constructor(private appProxy: AppProxy, private router: ActivatedRoute) { }
 
   ngOnInit() {
-    this.date=new Date();
     this.router.params.subscribe(params => {
       if (params['iEventId'] != '0') {
         this.appProxy.post("GetEvent", { iEventId: params['iEventId'] })
           .then(data => {
-           // this.e=new Event1();
             this.e = data;
-            this.date=this.e.dtEventDate;
+          //this.header=this.e.nvName;
+  
           });
+  
+  
       }
       else {
         this.e = new Event1();
+       // this.header="ארוע חדש";
       }
     });
   }

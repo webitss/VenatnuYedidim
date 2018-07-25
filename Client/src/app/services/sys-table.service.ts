@@ -79,6 +79,25 @@ export class SysTableService {
     return this.appProxy.get("GetAllNames");
 
   }
+   //#endregion
+  editValue(row:SysTableRow):any{
+  
+     this.appProxy.post("UpdateValue", { sysTableRow: row }).
+     then(l=>{ if(l==="true"){
+      return true;
+    }
+    return false;
+       });
+       
+ 
+  }
 
-  //#endregion
+ addValue(row:SysTableRow){
+  this.appProxy.post("AddValue", { sysTableRow: row }).
+  then(l=>{ if(l==="true"){
+   return true;
+ }
+ return false;
+    });
+ }
 }

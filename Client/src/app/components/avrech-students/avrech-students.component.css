@@ -1,9 +1,31 @@
+*{
+      float: right;
+}
 .addStudent{
    position: absolute; 
    margin-bottom:25%;  
    margin-right: 35%;
     border:1px solid black;
      width: 35%;
-      height: 35%;
+      height: 25%;
       padding: 50px;
+}
+.Student-affiliation{
+font-weight: bold;
+}
+button{
+      float: left;
+      border-radius:30px;
+      width:75px;
+      margin-left:10px;
+      color: white;
+      border: none;
+}
+.btn-pink{
+      background-color: rgb(207, 37, 94);
+ 
+}
+.btn-org{
+      background-color: orange;
+
 }
