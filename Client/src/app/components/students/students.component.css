@@ -5,9 +5,7 @@
     color: white;
     margin-top: 50px;
 }
-.consolidation{
-    background-color: orange;
-}
+
 .newStudent{
     background-color:  rgb(207, 37, 94);
     margin-right: 10px;
@@ -17,4 +15,8 @@
     width: 5%;
     height: 5%;
     cursor: pointer;
+}
+
+.consolidation{
+    background-color: orange;
 }
