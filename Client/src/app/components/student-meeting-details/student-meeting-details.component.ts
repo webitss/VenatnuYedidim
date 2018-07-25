@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Meeting } from '../../classes/meeting';
@@ -10,11 +10,18 @@ import { Meeting } from '../../classes/meeting';
 })
 export class StudentMeetingDetailsComponent implements OnInit {
   private sub: any;
+  @Output() Meeting = new EventEmitter();  
   // @Input() 
   // protected meetingId:number;
+
   @Output()
   @Input()
   protected meeting: Meeting;
+
+  close(){
+     this.Meeting.emit(null);
+  }
+
   save() {
     this.meeting.dtMeetingDate = new Date(this.meeting.dtMeetingDate);
     //פגישה חדשה
@@ -23,6 +30,7 @@ export class StudentMeetingDetailsComponent implements OnInit {
       this.appProxi.post("AddMeeting", { meeting: this.meeting, iUserId: 1 }).then(
         data => {
           alert("good");
+          this.Meeting.emit(null);
           // debugger;
         },
         err => {

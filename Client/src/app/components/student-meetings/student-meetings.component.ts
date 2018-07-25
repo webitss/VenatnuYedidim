@@ -50,7 +50,12 @@ export class StudentMeetingsComponent implements OnInit {
       this.flag = 1;
   }
 
-
+  addMeeting(){
+    this.meeting = new Meeting();
+  }
+  close(){
+    this.meeting = null;
+  }
   ngOnInit() {
     this.appProxy.post("GetMeetingsByStudentId", { iPersonId: 1 }).then(
       data => {
@@ -60,6 +65,7 @@ export class StudentMeetingsComponent implements OnInit {
           m['nvDate'] = m.dtMeetingDate.getDate().toString();
           m['nvHour'] = m.dtMeetingDate.getHours().toString();
           m['edit'] = '<p>ערוך</p>';
+          // '<img src="../../../assets/images/pencil.png"/>'
         });
         debugger;
       },

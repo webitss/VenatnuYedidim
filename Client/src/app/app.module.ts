@@ -132,10 +132,11 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
          //{ path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
           {
-            path: "student-meetings", component: StudentMeetingsComponent, children: [
-              { path: "student-meeting-details/:iMeetingId", component: StudentMeetingDetailsComponent }
-            ]
-          },
+            path: "student-meetings", component: StudentMeetingsComponent},
+            // children: [
+            //   { path: "student-meeting-details/:iMeetingId", component: StudentMeetingDetailsComponent }
+            // ]
+          
           {
             path: "student-conversations", component: StudentConversationsComponent, children: [
               { path: "student-conversation-details/:ConversationId", component: StudentConversationDetailsComponent },
@@ -164,7 +165,7 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
         children: [
           { path: "", component: EventDetailsComponent },
           { path: "event-details", component: EventDetailsComponent },
-          { path: "event-participants", component: EventParticipantsComponent }
+          { path: "event-participants/:iEventId", component: EventParticipantsComponent }
         ]
       },
       { path: "graduates", component: GraduatesComponent },

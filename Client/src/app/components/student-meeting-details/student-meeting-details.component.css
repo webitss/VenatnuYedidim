@@ -1,3 +1,14 @@
 .meetingform{
-    border: 1px;
+
+    border: solid;
+    direction: rtl;
+}
+
+h1{
+    text-align: center;
+}
+
+button{
+    margin-top:  2%;
+    margin-left: 2%;
 }
