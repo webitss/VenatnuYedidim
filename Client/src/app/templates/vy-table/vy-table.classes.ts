@@ -4,7 +4,7 @@ export class VyTableColumn {
   public filter: string;
   public name: string;
   public type: string;
-  public clickCell: boolean;
+  public bClickCell: boolean;
   public titleStyle: any;
   public filterStyle: any;
   public cellStyle: any;
@@ -15,7 +15,7 @@ export class VyTableColumn {
     this.filter = _filter;
     this.name = _name;
     this.type = _type;
-    this.clickCell = _clickCell;
+    this.bClickCell = _clickCell;
     this.titleStyle = _titleStyle;
     this.filterStyle = _filterStyle;
     this.cellStyle = _cellStyle;
