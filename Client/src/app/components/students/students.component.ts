@@ -17,8 +17,6 @@ export class StudentsComponent implements OnInit {
 
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   ngOnInit() {
-    this.id=0;
-    this.appProxy.post('GetStudentList',{iUserId:this.id}).then(data=>this.studentList=data,err=>alert(err));
     this.id = 0;
     this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => this.studentList = data, err => alert(err));
 
