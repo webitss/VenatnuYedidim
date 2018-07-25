@@ -1,0 +1,9 @@
+.meetingDetails{
+    position: fixed;
+    z-index: 100;
+    top: 40%;
+    right: 100px;
+    left: 100px;
+    background:lightgray;
+    border: 2px;
+}

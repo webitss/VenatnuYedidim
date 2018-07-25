@@ -13,9 +13,13 @@ export class SettingsYeshivotComponent implements OnInit {
 
   
   constructor(private appProxy:AppProxy) { }
-  yeshivaList:Yeshiva;
+  protected yeshivaList:Yeshiva;
+  protected yeshiva:Yeshiva;  
 
   ngOnInit() {
     this.appProxy.post("GetAllYeshivot").then(data=>this.yeshivaList=data,err=>alert(err));
+
+    if(this.yeshiva==null)
+      this.yeshiva=new Yeshiva();
   }
 }
