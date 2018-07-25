@@ -20,11 +20,32 @@ export class StudentDetailsComponent implements OnInit {
 
   ngOnInit() {
  this.student=new Student();
- this.appProxy.post("GetStudentById",{iPersonId:7}).then(data=>{this.student=data ;alert("successfuly")},err=>alert(err));
+ //this.appProxy.post("GetStudentById",{iPersonId:7}).then(data=>{this.student=data ;alert("successfuly")},err=>alert(err));
 
 
 }
+
+
+saveStudent(){
+
+
+if(this.student.iPersonId==0){
+  this.appProxy.post("AddStudent",{ Student: this.student, iUserId: 1 }).then(
+    data => {
+      alert("good");
+      // debugger;
+    },
+    err => {
+      alert("exeption");
+    }
+  );
 }
+}
+
+
+}
+
+
 // if (this.meeting.iMeetingId == null) {
 //   this.meeting.iPersonId=1;
 //   this.appProxi.post("AddMeeting", { meeting: this.meeting, iUserId: 1 }).then(
