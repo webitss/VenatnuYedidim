@@ -129,6 +129,7 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
       {
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
+          { path: "", component: StudentDetailsComponent },
          //{ path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
           {

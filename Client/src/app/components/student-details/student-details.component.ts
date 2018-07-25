@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Student } from '../../classes/student';
 import { AppProxy } from '../../services/app.proxy';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -10,24 +11,36 @@ import { AppProxy } from '../../services/app.proxy';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy) { }
+  constructor(private appProxy: AppProxy, private route: ActivatedRoute,private router:Router) { }
 
   @Input() student: Student
 
-
+  paramRout:any;
   fatherDead: boolean;
   motherDead: boolean;
 
   ngOnInit() {
-    this.student = new Student();
-    this.appProxy.post("GetStudentById", { iPersonId: 7 }).then(data => { this.student = data }, err => alert(err));
+  
+    this.route.params.subscribe(params => {
+      
+      if (params['iPersonId'] != '0') {
+        this.appProxy.post("GetStudentById", { iPersonId: params['iPersonId']}).then(data => { this.student = data }, err => alert(err));
 
+      }
+      else {
+        this.student = new Student();
+      }
+    });
 
+    
+    this.route.params.subscribe(params => {this.paramRout=params['iPersonId']});
   }
 
 
+
+
   saveStudent() {
-    if (this.student.iPersonId == 0) {
+    if (this.paramRout!= '0') {
       this.appProxy.post("AddStudent", { Student: this.student, iUserId: 3 }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
     }
     else {
