@@ -87,30 +87,27 @@ export class AppComponent implements OnInit {
   }
 
 
-  // LoadImage(event, callback) {
-  //   let name, type, nvBase64File;
+  LoadImage(event, callback) {
+    let name, type, nvBase64File;
 
-  //   let fileList: FileList = event.target.files;
-  //   if (fileList.length > 0) {
-  //     let file: File = fileList[0];
+    let fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      let file: File = fileList[0];
 
-  //     // this.PicUrl = fail;
-  //     var fileType = file.name.substring(file.name.indexOf(".") + 1, file.name.length);
+      if ((window as any).FileReader) {
+        var fileReader = new FileReader();
 
-  //     if ((window as any).FileReader) {
-  //       var fileReader = new FileReader();
+        name = file.name;
+        type = file.type;
 
-  //       name = file.name;
-  //       type = file.type;
+        fileReader.onload = function (e) {
+          nvBase64File = (e.target as any).result;
+          if (callback) callback();
+        }
+        fileReader.readAsDataURL(file);
 
-  //       fileReader.onload = function (e) {
-  //         nvBase64File = (e.target as any).result;
-  //         if (callback) callback();
-  //       }
-  //       fileReader.readAsDataURL(file);
+      }
+    }
 
-  //     }
-  //   }
-
-  // }
+  }
 }

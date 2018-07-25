@@ -59,11 +59,8 @@ import { SysTableService } from './services/sys-table.service';
 
 import { inject } from '@angular/core/testing';
 import { injectElementRef } from '@angular/core/src/render3';
-<<<<<<< HEAD
 import { EditYeshivaComponent } from './components/edit-yeshiva/edit-yeshiva.component';
 import { UploadDocumentComponent } from './components/upload-document/upload-document.component';
-=======
->>>>>>> c437cbcc7b8d0cf28c3023b26e8114e9d8261128
 
 
 @NgModule({
