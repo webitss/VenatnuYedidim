@@ -1,6 +1,10 @@
 <div *ngIf="flag==1" class="newYeshiva">
   <app-new-yeshiva [yeshiva]=yeshiva></app-new-yeshiva>
 </div>
+
+<div *ngIf="flag==1" class="newYeshiva">
+    <app-edit-yeshivaa [yeshiva]=yeshiva></app-edit-yeshiva>
+  </div>
 <button (click)="yeshiva=null; flag=1">מוסד חדש</button>
 
 <table class="table table-striped">
@@ -19,7 +23,7 @@
   <tbody>
     <tr *ngFor="let yeshiva of yeshivaList">
       <td>
-        <button routerLink="edit-yeshiva">עריכה</button>
+          <button (click)="yeshiva=null; flag=1">עריכה</button>
       </td>
       <td>{{yeshiva.nvYeshivaName}}</td>
       <td>{{yeshiva.nvAddress}}</td>
