@@ -7,11 +7,11 @@
     </div>
   </div>
 <div class="col-sm-12 event-menu">
-  <div class="name col-sm-2">אירוע חדש</div>
+  <div class="name col-sm-4">{{header}}</div>
   <div class="col-sm-1"></div>
   <div class="col-sm-5"></div>
   <button *ngIf="isDetails==true" (click)="save()" class="btn">שמירה</button>
   <button routerLink="/events" class="btn">סגור</button>
 </div>
 
-<router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
+<router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>.

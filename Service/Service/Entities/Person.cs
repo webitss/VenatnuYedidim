@@ -23,6 +23,10 @@ namespace Service.Entities
         [DataMember]
         public string nvIdentityCard { get; set; }
         [DataMember]
+        public string nvBirthdate { get; set; }
+        [DataMember]
+        public DateTime? dtBirthdate { get; set; }
+        [DataMember]
         public string nvPhone { get; set; }
         [DataMember]
         public string nvMobile { get; set; }
@@ -32,6 +36,7 @@ namespace Service.Entities
         public string nvAddress { get; set; }
         [DataMember]
         public string nvCity { get; set; }
+
 
         [NoSQL]
         [DataMember]

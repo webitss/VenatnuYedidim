@@ -1,60 +1,61 @@
-
-
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div *ngIf="flag==1">
-          <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">תלמידים</li>
-                <li class="breadcrumb-item active" aria-current="page">שם התלמיד</li>
-              </ol>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div *ngIf="flag==1">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">תלמידים</li>
+                    <li class="breadcrumb-item active" aria-current="page">שם התלמיד</li>
+                </ol>
             </nav>
-            
-    <ul class="navbar-nav mr-auto" *ngIf="currentComponent">
-      <!-- <li  [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Student') != -1}" class="nav-item">
+
+            <ul class="navbar-nav mr-auto" *ngIf="currentComponent">
+                <!-- <li  [ngClass]="{'kk1': currentComponent.constructor.name.indexOf('Student') != -1}" class="nav-item">
          <a class="navbar-brand" href="#">שם תלמיד </a>
         </li>
        -->
-        <li  [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('StudentDetails') != -1}" class="tab">
-            <a class="nav-link" routerLink="student-details">  פרטים אישיים<span class="sr-only">(current)</span></a>
-      </li>
-      <li  [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('StudentMeetings') != -1}" class="tab">
-          <a class="nav-link" routerLink="student-meetings">  פגישות</a>
-      </li>
-      <li  [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('StudentConversations') != -1}" class="tab">
-          <a class="nav-link" routerLink="/students/student/1/student-conversations">  שיחות</a>
-      </li>
-      <li  [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('sr') != -1}" class="tab">
-          <a class="nav-link" href="#"> ארועים שהשתתף</a>
-      </li>
-      <li  [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('sr') != -1}" class="tab">
-          <a class="nav-link" href="#">מסמכים</a>
-      </li>
-    </ul>
-  </div>
-  <div *ngIf="flag==0">
-      <ul class="navbar-nav mr-auto">
-      <li>   <a class="navbar-brand" href="#">תלמיד חדש</a></li>
-      <li>פרטים אישיים   <span class="sr-only">(current)</span></li>
-      </ul>
-    
-  </div>
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="save" href="#">שמור</a>
-          </li>
-          
-          <li class="nav-item">
-              <a class="close1" href="#">סגור</a>
+                <li [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('StudentDetails') != -1}" class="tab">
+                    <a class="nav-link" routerLink="student-details"> פרטים אישיים
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('StudentMeetings') != -1}" class="tab">
+                    <a class="nav-link" routerLink="student-meetings"> פגישות</a>
+                </li>
+                <li [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('StudentConversations') != -1}" class="tab">
+                    <a class="nav-link" routerLink="/students/student/1/student-conversations"> שיחות</a>
+                </li>
+                <li [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('sr') != -1}" class="tab">
+                    <a class="nav-link" href="#"> ארועים שהשתתף</a>
+                </li>
+                <li [ngClass]="{'kk2': currentComponent.constructor.name.indexOf('sr') != -1}" class="tab">
+                    <a class="nav-link" routerLink="student-documents">מסמכים</a>
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="flag==0">
+            <ul class="navbar-nav mr-auto">
+                <li>
+                    <a class="navbar-brand" href="#">תלמיד חדש</a>
+                </li>
+                <li>פרטים אישיים
+                    <span class="sr-only">(current)</span>
+                </li>
+            </ul>
+
+        </div>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="save" (click)="saveStudent()">שמור</a>
             </li>
-    </ul>
-  
-  </div>
+
+            <li class="nav-item">
+                <a class="close1" >סגור</a>
+            </li>
+        </ul>
+
+    </div>
 </nav>
 
-    
-<router-outlet (activate)="onRouterOutletActivate($event)">    </router-outlet>
 
-
+<router-outlet (activate)="onRouterOutletActivate($event)"> </router-outlet>

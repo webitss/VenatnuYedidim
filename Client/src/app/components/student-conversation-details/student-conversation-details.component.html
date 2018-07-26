@@ -30,5 +30,5 @@
        <label for="NextconversationDate">תאריך ליצירת קשר פעם הבאה</label>
        <input type="date" name="NextconversationDate" class="form-control" [(ngModel)]="conversation.dtNextConversationDate" [ngModelOptions]="{standalone: true}"/>
     </div>
-    <input type="button" name="save" value="שמירה" (click)="addConversation(conversation,1)"/>
+    <input type="button" name="save"  value="שמירה" (click)="saveConversation()"/>
   </div>

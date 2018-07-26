@@ -1,0 +1,16 @@
+.meetingDetails{
+    position: fixed;
+    z-index: 100;
+    top: 40%;
+    right: 100px;
+    left: 100px;
+    background:lightgray;
+    border: 2px;
+}
+
+img{
+ /* background-image: url('../../../assets/images/pencil.png') */
+ width: 2px;
+ height: 2px;
+ 
+}

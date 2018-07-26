@@ -13,9 +13,11 @@
     </div>
   </div>
 
-  <div *ngFor="let row of lstDataRows | vyTableFilter : lstColumns | vyTableOrderBy : lstOrderByFields; let i = index" [ngClass]="{'even': i%2 == 0}"  class="row">
-    <div *ngFor="let col of lstColumns" class="col cell" [ngStyle]="col.cellStyle" >
-      {{row[col.name]}}
+  <div *ngFor="let row of lstDataRows | vyTableFilter : lstColumns | vyTableOrderBy : lstOrderByFields; let i = index" [ngClass]="{'even': i%2 == 0}"
+    class="row" >
+    <div *ngFor="let col of lstColumns" class="col cell" [ngStyle]="col.cellStyle" (click)="col.bClickCell ? clickCellFunc(row): ''">
+      <div *ngIf="col.type == 'html'" [innerHtml]="row[col.name]"></div>
+      <div *ngIf="col.type != 'html'"> {{row[col.name]}} </div>
     </div>
   </div>
 </div>

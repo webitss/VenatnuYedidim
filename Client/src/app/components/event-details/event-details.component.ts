@@ -4,6 +4,7 @@ import { Event1 } from '../../classes/event';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { EventComponent } from '../event/event.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-event-details',
@@ -13,11 +14,23 @@ import { EventComponent } from '../event/event.component';
 export class EventDetailsComponent implements OnInit {
 
   protected e: Event1;
-  protected date: Date;
 
+  
+// header:string;
+
+// getHeader(){
+//   return this.header;
+// }
+
+  
+// getUser(){
+  
+// }
   save() {
-    this.e.dtEventDate = new Date(this.date);
-    this.appProxy.post('AddEvent', { addEvent: this.e,  iUserId: 1})
+ //  this.date=new Date(this.e.dtEventDate);
+   this.e.dtEventDate = new Date(this.e.dtEventDate);
+
+    this.appProxy.post('SetEvent', { oEvent: this.e,  iUserId: 1})
       .then(
         data => {
           alert("success" + data);
@@ -30,10 +43,26 @@ export class EventDetailsComponent implements OnInit {
 
 
 
-  constructor(private appProxy: AppProxy) { }
+  constructor(private appProxy: AppProxy, private router: ActivatedRoute) { }
 
   ngOnInit() {
-    this.e = new Event1();
+    this.router.params.subscribe(params => {
+      if (params['iEventId'] != '0') {
+        this.appProxy.post("GetEvent", { iEventId: params['iEventId'] })
+          .then(data => {
+            this.e = data;
+          //this.header=this.e.nvName;
+  
+          });
+  
+  
+      }
+      else {
+        this.e = new Event1();
+       // this.header="ארוע חדש";
+      }
+    });
+  }
   }
 
-}
+

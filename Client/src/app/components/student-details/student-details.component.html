@@ -1,26 +1,124 @@
-
-
-    <div class=" col-sm-2">
-        <input type="file">
-    </div>
-
-    <div class="form-group">
-        <label for="lastName">שם שפחה:</label>
-        <input type="text" class="form-control" id="lastName">
-    </div>
-
-    <div class="form-group">
-            <label for="firstName">שם פרטי:</label>
-            <input type="text" class="form-control" id="firstName">
+<form>
+    <div class="row">
+        <!-- <div class="col-sm-1"></div> -->
+        <div class="imageStudent col-sm-2">
+            <div class="chooseFile"></div>
+            <input type="file" class="file">
         </div>
+        <div class="col-sm-10">
+            <div class="form-group col-sm-2">
+                <label for="lastName">שם משפחה:</label>
+                <input type="text" class="form-control" id="lastName" [(ngModel)]="student.nvLastName" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="firstName">שם פרטי:</label>
+                <input type="text" class="form-control" id="firstName" [(ngModel)]="student.nvFirstName" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="identity">תעודת זהות :</label>
+                <input type="text" class="form-control" id="identity" [(ngModel)]="student.nvIdentityCard" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="phone"> טלפון :</label>
+                <input type="text" class="form-control" id="phone" [(ngModel)]="student.nvPhone" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-3"></div>
+            <div class="form-group col-sm-2">
+                <label for="nvBornDate"> תאריך לידה עברי:</label>
+                <input type="text" class="form-control" id="nvBornDate" [(ngModel)]="student.nvBirthdate" [ngModelOptions]="{standalone: true}">
+                <!-- <input type="text" class="form col-sm-1" id="nvBornDate">
+                      <input type="text" class="form col-sm-1" id="nvBornDate">
+                      <input type="text" class="form col-sm-1" id="nvBornDate"> -->
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="dtBornDate"> תאריך לידה לועזי:</label>
+                <input type="date" class="form-control" id="dtBornDate" [(ngModel)]="student.dtBirthdate" [ngModelOptions]="{standalone: true}">
+            </div>
 
-    <div class="form-group">
-        <label for="identity">תעודת זהות :</label>
-        <input type="text" class="form-control" id="identity">
+
+
+            <div class="form-group col-sm-2">
+                <label for="street"> כתובת :</label>
+                <input type="text" class="form-control" id="street" [(ngModel)]="student.nvAddress" [ngModelOptions]="{standalone: true}">
+            </div>
+
+            <div class="form-group col-sm-2">
+                <label for="city"> עיר :</label>
+                <input type="text" class="form-control" id="city" [(ngModel)]="student.nvCity" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-3"></div>
+            <div class="form-group col-sm-4">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="fatherDied" (change)="fatherDead=true"> יתום מאב</label>
+                </div>
+                <div *ngIf="fatherDead">
+                    <div class="form-group col-sm-4">
+                        <label for="dtBornDate"> תאריך פטירה עברי:</label>
+                        <input type="text" class="form-control" id="dtBornDate" [(ngModel)]="student.nvFatherDeathDate" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label for="couseOfdead"> נפטר מ:</label>
+                        <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathFather" [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="motherDead" (change)="motherDead=true"> יתום מאם</label>
+                </div>
+                <div *ngIf="motherDead">
+                    <div class="form-group col-sm-4">
+                        <label for="dtBornDate"> תאריך פטירה עברי:</label>
+                        <input type="text" class="form-control" id="dtBornDate" [(ngModel)]="student.nvMotherDeathDate" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label for="couseOfdead"> נפטר מ:</label>
+                        <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathMother" [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-3"></div>
+
+            <div class="form-group col-sm-2">
+                <label for="yeshivaName">מוסד לימודים :</label>
+                <input type="text" class="form-control" id="yeshivaName" [(ngModel)]="student.nvYeshivaName" [ngModelOptions]="{standalone: true}">
+            </div>
+
+            <div class="form-group col-sm-2">
+                <label for="yesivaStreet">כתובת מוסד :</label>
+                <input type="text" class="form-control" id="yesivaStreet" [(ngModel)]="student.nvYeshivaStreet" [ngModelOptions]="{standalone: true}">
+            </div>
+
+            <div class="form-group col-sm-2">
+                <label for="yeshivaCity">עיר מוסד :</label>
+                <input type="text" class="form-control" id="yeshivaCity" [(ngModel)]="student.nvYeshivaCity" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-3"></div>
+            <div class="form-group col-sm-2">
+                <label for="dateAdd"> תאריך הצטרפות :</label>
+                <input type="date" class="form-control" id="dateAdd" [(ngModel)]="student.dtAddStudentDate" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-3"></div>
+            <div class="form-group col-sm-8">
+                <label for='comment'>הערות</label>
+                <textarea name='comment' class="form-control" [(ngModel)]="student.nvComment" [ngModelOptions]="{standalone: true}"></textarea>
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-            <label for="phone"> טלפון :</label>
-            <input type="text" class="form-control" id="phone">
-     </div>
-
+</form>

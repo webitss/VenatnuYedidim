@@ -1,5 +1,12 @@
+import { Data } from "@angular/router";
+
 export class SysTableRow{
-    public iSysTableId:Number;   
-    public iSysTableRowId:Number;   
-    public nvValue:string;       
+    public iSysTableId:number;   
+     
+    public nvValue:string; 
+  public  iSysRowStatus:number;
+public dtLastModifyDate:Date;
+public iLastModifyUserId:number
+public dtCreateDate:Date;
+public iCreateUserId:number;    
    }

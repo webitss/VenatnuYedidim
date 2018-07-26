@@ -1,0 +1,14 @@
+*{
+    direction: rtl;
+}
+.settingYeshiva{
+    direction: rtl;
+    float: right;
+    position: fixed;
+    z-index: 100;
+    top: 30%;
+    right: 100px;
+    left: 100px;
+    background:lightgray;
+    border: 2px;
+}
