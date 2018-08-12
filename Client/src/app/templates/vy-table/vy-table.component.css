@@ -9,8 +9,8 @@
   background:  rgb(59, 45, 45);
   opacity: 0.9;
   color: #ccc;
-  border-bottom: 3px solid orange;
- -moz-border-bottom-colors: orange  rgb(207, 37, 94);
+  border-bottom: 3px solid #cf255e;
+ -moz-border-bottom-colors: #cf255e  rgb(207, 37, 94);
 }
 .even{
   background-color: #eaecee;  

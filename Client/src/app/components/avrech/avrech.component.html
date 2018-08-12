@@ -1,22 +1,38 @@
-<div class="navbar-collapse row">
-  <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDetails') != -1}" class="tab col-sm-1">
-    <a class="control" routerLink="avrech-details">פרטים אישיים</a>
-  </div>
-  <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechStudents') != -1}" class="tab col-sm-1">
-    <a class="control" routerLink="avrech-students">תלמידים</a>
-  </div>
-  <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDiary') != -1}" class="tab col-sm-1">
-    <a class="control" routerLink="avrech-diary">יומן</a>
-  </div>
-  <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechPresence') != -1}" class="tab col-sm-1">
-    <a class="control" routerLink="avrech-presence">נוכחות</a>
-  </div>
-  <!-- <div class="col-sm-4"></div> -->
-</div>
+<div class="name-area">שם האברך</div>
+<div class="content-area">
+<div class="header row">
+<nav class="navbar navbar-expand-sm nav header-navbar">
+    <ul class="navbar-nav navbar-list" *ngIf="currentComponent">
+        <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDetails') != -1}" class="nav-item">
+          <div class="fullTab" routerLink="avrech-details">
+             פרטים אישיים   
+          </div>
+        </li>
+        <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechStudents') != -1}" class="nav-item">
+            <div class="fullTab" routerLink="avrech-students">תלמידים
+              
+            </div>
+          </li><li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDiary') != -1}" class="nav-item">
+              <div class="fullTab" routerLink="avrech-diary">
+                יומן
+              </div>
+            </li><li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechPresence') != -1}" class="nav-item">
+                <div class="fullTab" routerLink="avrech-presence">
+                  נוכחות
+                </div>
+              </li>
+        </ul>
 
-<button (click)="save()">שמירה</button>
-<button (click)="close()">סגור</button>
+ 
+
+</nav>
+<button class="btn-circle btn-save" (click)="save()">שמור v </button>
+<button class="btn-circle btn-close" (click)="close()">סגור x </button>
+
+</div>
+ 
 
 <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
 
 
+</div>

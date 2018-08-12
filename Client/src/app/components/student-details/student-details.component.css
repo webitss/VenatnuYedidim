@@ -7,6 +7,7 @@
 .imageStudent{
     height: 600px;
     background-color: #e6e4e4;
+    float: right;
 }
 .file{
     visibility: hidden;
