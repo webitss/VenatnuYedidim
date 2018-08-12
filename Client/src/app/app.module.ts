@@ -115,11 +115,8 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
     SettingYeshivaComponent,
 
     UploadDocumentComponent,
-<<<<<<< HEAD
-    StudentDocumentsComponent,
+    
     FilterBMultySelectCheckedPipe,
-=======
->>>>>>> a0f7bcc047b4c558b229846f8e3a3248fbbdedf7
   ],
   imports: [
    // Ng2SearchPipeModule,
