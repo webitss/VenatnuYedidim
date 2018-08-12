@@ -14,7 +14,8 @@ namespace Service.Entities
     {
         #region Data Members
 
-       
+        [DataMember]
+        public int iSysTableRowId { get; set; }
         [DataMember]
         public int iSysTableId { get; set; }
         [DataMember]

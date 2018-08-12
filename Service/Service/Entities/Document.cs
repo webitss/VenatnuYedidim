@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
@@ -60,6 +61,29 @@ namespace Service.Entities
 
             }
             #endregion
+        }
+
+        public static bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment)
+        {
+            try
+            {
+                List<SqlParameter> sqlParameters = new List<SqlParameter>();
+                sqlParameters.Add(new SqlParameter("iItemId", iItemId));
+                sqlParameters.Add(new SqlParameter("iBelongingType", iBelongingType));
+                sqlParameters.Add(new SqlParameter("nvDocumentName", nvFileName));
+                sqlParameters.Add(new SqlParameter("iCategoryType", iCategoryType));
+                sqlParameters.Add(new SqlParameter("nvComment", nvComment));
+
+                SqlDataAccess.ExecuteDatasetSP("TDocuments_INS", sqlParameters);
+
+                Fileshandler.SaveFileByBase64(nvBase64File, nvFileName);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("AddFile /TDocuments_INS", "ex: " + ex);
+                return false;
+            }
         }
     }
 }

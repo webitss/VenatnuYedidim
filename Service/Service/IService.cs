@@ -405,6 +405,15 @@ RequestFormat = WebMessageFormat.Json)]
          RequestFormat = WebMessageFormat.Json)]
          List<Document> GetDocuments();
 
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "AddFile",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment);
         #endregion
     }
 

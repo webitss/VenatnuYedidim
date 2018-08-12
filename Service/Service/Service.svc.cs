@@ -162,6 +162,11 @@ namespace Service
             return Fileshandler.SaveFileByBase64(base64File, fileName);
         }
 
+        public bool AddFile(int iItemId,int iBelongingType,int iCategoryType, string nvBase64File, string nvFileName,string nvComment)
+        {
+            return Document.AddFile(iItemId, iBelongingType, iCategoryType, nvBase64File, nvFileName, nvComment);
+        }
+
 
         #endregion
 
