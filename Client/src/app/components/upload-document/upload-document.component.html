@@ -1,4 +1,10 @@
 <div class="upload-document"></div>
 
+קטגוריה
+<select [(ngModel)]="category">
+    <option *ngFor="let s of sheetTypes" value={{s.iSysTableRowId}}>{{s.nvValue}}</option>
+</select>
+<!-- <input type="text" [(ngModel)]="category">קטגוריה -->
+<input type="text" [(ngModel)]="comment">תיאור
 <input type="file" value="העלה מסמך" (change)="loadDocument($event,save)" name="LoadDocument"/>
-<button value="save" (click)="saveFile()">save</button>
+<button value="save" (click)="saveFile()">שמירה</button>
