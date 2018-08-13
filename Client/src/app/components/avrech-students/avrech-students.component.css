@@ -1,14 +1,15 @@
 *{
       float: right;
 }
-.addStudent{
+.add-student{
    position: absolute; 
    margin-bottom:25%;  
-   margin-right: 35%;
-    border:1px solid black;
+   margin-right: 15%;
+    border:1px solid rgb(175, 175, 175);
      width: 35%;
       height: 25%;
       padding: 50px;
+      background-color: white;
 }
 .Student-affiliation{
 font-weight: bold;
