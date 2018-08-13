@@ -55,7 +55,13 @@ namespace Service.Entities
         public static bool AddValue(SysTableRow sysTableRow)
 
         {
-           
+//            @iSysRowStatus   int,
+// @dtLastModifyDate   datetime,	
+//@iLastModifyUserId  int ,
+//@dtCreateDate   datetime,	
+//@iCreateUserId  int ,
+//@nvValue    nvarchar(50)    ,
+//@iSysTableId    int
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<SysTableRow>.GetSqlParametersFromObject(sysTableRow);

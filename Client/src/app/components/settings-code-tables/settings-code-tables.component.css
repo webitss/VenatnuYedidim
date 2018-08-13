@@ -1,0 +1,15 @@
+.ChoosTable{
+    float: right;
+
+}
+.divAddvalue{
+    float: right;
+}
+.btnAddValue{
+    border-radius:30%;
+    border-color: hotpink;
+   
+}
+myTable{
+    float: left;
+}
