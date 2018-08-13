@@ -62,6 +62,7 @@ import { SettingYeshivaComponent } from './components/setting-yeshiva/setting-ye
 // import { injectElementRef } from '@angular/core/src/render3';
 import { UploadDocumentComponent } from './components/upload-document/upload-document.component';
 import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-checked.pipe';
+import { EventMediaComponent } from './event-media/event-media.component';
 
 
 @NgModule({
@@ -117,6 +118,8 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
     UploadDocumentComponent,
     
     FilterBMultySelectCheckedPipe,
+    
+    EventMediaComponent,
   ],
   imports: [
    // Ng2SearchPipeModule,
@@ -168,6 +171,8 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
           { path: "", component: EventDetailsComponent },
           { path: "event-details", component: EventDetailsComponent },
           { path: "event-participants", component: EventParticipantsComponent }
+          { path: "event-media", component: EventMediaComponent },
+
         ]
       },
       { path: "graduates", component: GraduatesComponent },

@@ -48,6 +48,7 @@ export class EventDetailsComponent implements OnInit {
   ngOnInit() {
     this.router.params.subscribe(params => {
       if (params['iEventId'] != '0') {
+        
         this.appProxy.post("GetEvent", { iEventId: params['iEventId'] })
           .then(data => {
             this.e = data;
