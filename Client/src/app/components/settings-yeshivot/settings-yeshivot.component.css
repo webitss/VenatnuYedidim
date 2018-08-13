@@ -4,9 +4,9 @@
 .settingYeshiva{
     position: fixed;
     z-index: 100;
-    top: 30%;
-    right: 100px;
-    left: 100px;
+    top: 28%;
+    right: 120px;
+    left: 120px;
     background:lightgray;
     border: 2px;
 }

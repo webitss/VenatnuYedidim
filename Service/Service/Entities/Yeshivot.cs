@@ -84,6 +84,21 @@ namespace Service.Entities
             }
         }
 
+        public static Yeshivot getYeshivaById(int iYeshivaId)
+        {
+            try
+            {
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TYeshivot_getById_SLCT", new SqlParameter("iYeshivaId", iYeshivaId)).Tables[0].Rows[0];
+                Yeshivot yeshiva= ObjectGenerator<Yeshivot>.GeneratFromDataRow(dr);
+                return yeshiva;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("getYeshivaById / TYeshivot_getById_SLCT", "ex: " + ex);
+                return null;
+            }
+        }
+
         #endregion
     }
 }

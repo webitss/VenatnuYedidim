@@ -115,7 +115,7 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
     SettingYeshivaComponent,
 
     UploadDocumentComponent,
-    
+
     FilterBMultySelectCheckedPipe,
   ],
   imports: [
@@ -138,7 +138,7 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
             // children: [
             //   { path: "student-meeting-details/:iMeetingId", component: StudentMeetingDetailsComponent }
             // ]
-          
+
           {
             path: "student-conversations", component: StudentConversationsComponent, children: [
               { path: "student-conversation-details/:ConversationId", component: StudentConversationDetailsComponent },
@@ -189,7 +189,7 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "setting-yeshiva", component: SettingYeshivaComponent }
+              { path: "setting-yeshiva/:iYeshivaId", component: SettingYeshivaComponent }
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },
