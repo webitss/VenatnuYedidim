@@ -5,35 +5,7 @@
 
 <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="editYeshiva($event)"></app-vy-table>
 
-<div *ngIf="iYeshivaId != null">  
+<div *ngIf="iYeshivaId != null">
 <app-setting-yeshiva  [iYeshivaId]="iYeshivaId"></app-setting-yeshiva>
 </div>
 
-<!-- <table class="table table-striped">
-  <thead>
-    <tr>
-      <td>פתיחה</td>
-      <td>שם מוסד</td>
-      <td>כתובת</td>
-      <td>עיר</td>
-      <td>שם איש קשר</td>
-      <td>תפקיד</td>
-      <td>מייל</td>
-      <td>נייד</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let yeshiva of yeshivaList">
-      <td>
-          <button (click)="yeshiva=null; flag=1">עריכה</button>
-      </td>
-      <td>{{yeshiva.nvYeshivaName}}</td>
-      <td>{{yeshiva.nvAddress}}</td>
-      <td>{{yeshiva.nvCity}}</td>
-      <td>{{yeshiva.nvContact}}</td>
-      <td>{{yeshiva.nvRoleType}}</td>
-      <td>{{yeshiva.nvEmail}}</td>
-      <td>{{yeshiva.nvMobile}}</td>
-    </tr>
-  </tbody>
-</table>  -->

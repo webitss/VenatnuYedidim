@@ -116,7 +116,11 @@ import { EventMediaComponent } from './components/event-media/event-media.compon
     SettingYeshivaComponent,
 
     UploadDocumentComponent,
+<<<<<<< HEAD
+
+=======
     StudentDocumentsComponent,
+>>>>>>> 34ba9381e1a1c4dc412b458032b247cece6119d2
     FilterBMultySelectCheckedPipe,
     
     EventMediaComponent,
@@ -140,7 +144,7 @@ import { EventMediaComponent } from './components/event-media/event-media.compon
             // children: [
             //   { path: "student-meeting-details/:iMeetingId", component: StudentMeetingDetailsComponent }
             // ]
-          
+
           {
             path: "student-conversations", component: StudentConversationsComponent, children: [
               { path: "student-conversation-details/:ConversationId", component: StudentConversationDetailsComponent },
@@ -193,7 +197,7 @@ import { EventMediaComponent } from './components/event-media/event-media.compon
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "setting-yeshiva", component: SettingYeshivaComponent }
+              { path: "setting-yeshiva/:iYeshivaId", component: SettingYeshivaComponent }
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },
