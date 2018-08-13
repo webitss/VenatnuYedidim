@@ -5,12 +5,12 @@
     <ul class="navbar-nav navbar-list" *ngIf="currentComponent">
         <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDetails') != -1}" class="nav-item">
           <div class="fullTab" routerLink="avrech-details">
-             פרטים אישיים   
+             פרטים אישיים
           </div>
         </li>
         <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechStudents') != -1}" class="nav-item">
             <div class="fullTab" routerLink="avrech-students">תלמידים
-              
+
             </div>
           </li><li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDiary') != -1}" class="nav-item">
               <div class="fullTab" routerLink="avrech-diary">
@@ -23,14 +23,15 @@
               </li>
         </ul>
 
- 
+
 
 </nav>
+<div class="btn-area">
 <button class="btn-circle btn-save" (click)="save()">שמור v </button>
 <button class="btn-circle btn-close" (click)="close()">סגור x </button>
-
 </div>
- 
+</div>
+
 
 <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
 

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UploadDocumentComponent } from './upload-document.component';
+import { EventMediaComponent } from './event-media.component';
 
-describe('UploadDocumentComponent', () => {
-  let component: UploadDocumentComponent;
-  let fixture: ComponentFixture<UploadDocumentComponent>;
+describe('EventMediaComponent', () => {
+  let component: EventMediaComponent;
+  let fixture: ComponentFixture<EventMediaComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UploadDocumentComponent ]
+      declarations: [ EventMediaComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UploadDocumentComponent);
+    fixture = TestBed.createComponent(EventMediaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

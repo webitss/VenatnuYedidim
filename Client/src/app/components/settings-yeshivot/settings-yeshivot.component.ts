@@ -32,16 +32,14 @@ export class SettingsYeshivotComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('מייל', 'nvEmail'))
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'))
 
-    this.appProxy.post("GetAllYeshivot").then(data => {
-      this.yeshivaList = data
+    this.appProxy.post('GetAllYeshivot').then(data => {
+      this.yeshivaList = data;
       this.yeshivaList.forEach(y=> y['edit'] = '<span>עריכה</span>')
     });
 
   }
 
-
   public editYeshiva(yeshiva) {
     this.iYeshivaId = yeshiva.iYeshivaId;
-    
   }
 }

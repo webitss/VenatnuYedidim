@@ -24,27 +24,33 @@ export class EventComponent implements OnInit {
 
   onRouterOutletActivate(event) {
     this.currentComponent = event;
-    //if(event.getHeader) event.getUser();this.header=event.getHeader();
   }
 
   isDetails: boolean = true;
-  //header:string;
 
-  eventDetails() {
-    this.isDetails = true;
-    this.router.navigate(["/events/event/event-details"]);
-  }
-  eventParticipants() {
-    this.isDetails = false;
-    this.router.navigate(["/events/event/event-participants",1]);
-  }
+ 
 
   save() {
-
     if (this.currentComponent.save) this.currentComponent.save();
   }
-
+e:Event1;
+header:string;
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      if (params['iEventId'] != '0') {
+       this.isDetails=true;
+       this.appProxy.post("GetEvent", { iEventId: params['iEventId'] })
+          .then(data => {
+            this.e = data;
+            this.header=this.e.nvName;
+  
+          });
+      }
+      else {
+       this.isDetails=false;
+        this.header='אירוע חדש';
+      }
+    });
 
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Participants } from '../../classes/participants';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-event-participants',
@@ -12,38 +13,63 @@ export class EventParticipantsComponent implements OnInit {
   protected participant: Array<any> = new Array<any>();
   protected lstColumns = [{
       title: 'שם פרטי',
-      name: 'nvFirstName'    
+      name: 'nvFirstName'
     },{
       title: 'שם משפחה',
-      name: 'nvLastName'    
+      name: 'nvLastName'
     },{
       title: 'טלפון',
-      name: 'nvLastName'    
+      name: 'nvLastName'
     },{
       title: 'נייד',
-      name: 'nvLastName'    
+      name: 'nvLastName'
     },{
       title: 'מייל',
-      name: 'nvLastName'    
+      name: 'nvLastName'
     },{
       title: 'סוג משתתף',
-      name: 'nvLastName'    
+      name: 'nvLastName'
     },{
       title: 'סטטוס',
-      name: 'nvLastName'    
+      name: 'nvLastName'
     },
 
   ]
 
-  constructor(private appProxy: AppProxy) { }
+
+
+  constructor(private appProxy: AppProxy, private router: ActivatedRoute) { }
 
   ngOnInit() {
-    this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId })
-      .then(
-        data => {
-          this.participant = data;
-          alert("good");
-        })
-  }
+    // this.router.params.subscribe(params => {
+    //   this.appProxy.post("GetParticipantsList", { iEventId: params['iEventId'] })
+    //     .then(data => {
+    //       this.participant = data;
+    //       //this.header=this.e.nvName;
+
+    //     });
+
+
+    // }
+
+    this.router.params.subscribe(params=>{
+this.appProxy.post("GetParticipantsList", {iEventId:params['iEventId']}).then(data=>{
+  this.participant=data;
+  alert("שגיאה בגישה לשרת");
+})
+    });
+
+
+    // this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId })
+    //   .then(
+    //     data => {
+    //       this.participant = data;
+    //       alert("good");
+    //     })
+
+
+}
+
+
 
 }
