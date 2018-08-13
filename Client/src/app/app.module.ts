@@ -62,6 +62,7 @@ import { SettingYeshivaComponent } from './components/setting-yeshiva/setting-ye
 // import { injectElementRef } from '@angular/core/src/render3';
 import { UploadDocumentComponent } from './components/upload-document/upload-document.component';
 import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-checked.pipe';
+import { EventMediaComponent } from './components/event-media/event-media.component';
 
 
 @NgModule({
@@ -115,8 +116,14 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
     SettingYeshivaComponent,
 
     UploadDocumentComponent,
+<<<<<<< HEAD
 
+=======
+    StudentDocumentsComponent,
+>>>>>>> 34ba9381e1a1c4dc412b458032b247cece6119d2
     FilterBMultySelectCheckedPipe,
+    
+    EventMediaComponent,
   ],
   imports: [
    // Ng2SearchPipeModule,
@@ -130,7 +137,6 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
       {
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
-          { path: "", component: StudentDetailsComponent },
          //{ path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
           {
@@ -167,7 +173,9 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
         children: [
           { path: "", component: EventDetailsComponent },
           { path: "event-details", component: EventDetailsComponent },
-          { path: "event-participants/:iEventId", component: EventParticipantsComponent }
+          { path: "event-participants", component: EventParticipantsComponent },
+          { path: "event-media", component: EventMediaComponent },
+
         ]
       },
       { path: "graduates", component: GraduatesComponent },
