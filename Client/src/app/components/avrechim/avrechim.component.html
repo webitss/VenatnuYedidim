@@ -1,10 +1,38 @@
 
-<div class=" row component-name-header">
-    <div class="col-sm-4 component-name">אברכים</div>
-    <div class="actions col-sm-8">
-    <button class="btn btn-small excel"></button>
+<div class=" row avrechim-header">
+    <div class="avrechim">אברכים</div>
+    <button class="btn btn-small excel" (click)="tableToExcel('testTable', 'avrechimList')" value="Export to Excel"></button>
     <button class="btn btn-small">s</button>
     <button class="btn btn-circle1 btn-orange"> שליחת מייל</button>
     <button class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">אברך חדש</button>
-</div></div>
+</div>
 <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="avrechimList" (clickCell)="editAvrech($event)"></app-vy-table>
+
+
+
+<!-- <table id="testTable">
+<tr>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>4</td>
+    <td>6</td>
+    <td>8</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>6</td>
+    <td>9</td>
+    <td>12</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>8</td>
+    <td>12</td>
+    <td>16</td>
+</tr>
+</table> --></table> -->

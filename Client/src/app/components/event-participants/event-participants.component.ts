@@ -12,27 +12,27 @@ export class EventParticipantsComponent implements OnInit {
   protected iEventId: number = 1;
   protected participant: Array<any> = new Array<any>();
   protected lstColumns = [{
-    title: 'שם פרטי',
-    name: 'nvFirstName'
-  }, {
-    title: 'שם משפחה',
-    name: 'nvLastName'
-  }, {
-    title: 'טלפון',
-    name: 'nvLastName'
-  }, {
-    title: 'נייד',
-    name: 'nvLastName'
-  }, {
-    title: 'מייל',
-    name: 'nvLastName'
-  }, {
-    title: 'סוג משתתף',
-    name: 'nvLastName'
-  }, {
-    title: 'סטטוס',
-    name: 'nvLastName'
-  },
+      title: 'שם פרטי',
+      name: 'nvFirstName'
+    },{
+      title: 'שם משפחה',
+      name: 'nvLastName'
+    },{
+      title: 'טלפון',
+      name: 'nvLastName'
+    },{
+      title: 'נייד',
+      name: 'nvLastName'
+    },{
+      title: 'מייל',
+      name: 'nvLastName'
+    },{
+      title: 'סוג משתתף',
+      name: 'nvLastName'
+    },{
+      title: 'סטטוס',
+      name: 'nvLastName'
+    },
 
   ]
 
@@ -66,7 +66,7 @@ this.appProxy.post("GetParticipantsList", {iEventId:params['iEventId']}).then(da
     //       this.participant = data;
     //       alert("good");
     //     })
-  
+
 
 }
 

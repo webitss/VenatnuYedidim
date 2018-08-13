@@ -155,20 +155,7 @@ namespace Service
 
         #endregion
 
-        #region files
-
-        public string SaveFileByBase64(string base64File, string fileName)
-        {
-            return Fileshandler.SaveFileByBase64(base64File, fileName);
-        }
-
-        public bool AddFile(int iItemId,int iBelongingType,int iCategoryType, string nvBase64File, string nvFileName,string nvComment)
-        {
-            return Document.AddFile(iItemId, iBelongingType, iCategoryType, nvBase64File, nvFileName, nvComment);
-        }
-
-
-        #endregion
+      
 
         #region SysTableRow
         public List<SysTableRow> GetValues(int iSysTableId)
@@ -238,6 +225,20 @@ namespace Service
         {
             return Document.GetDocuments();
         }
+        public string SaveFileByBase64(string base64File, string fileName)
+        {
+            return Fileshandler.SaveFileByBase64(base64File, fileName);
+        }
+
+        public bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment)
+        {
+            return Document.AddFile(iItemId, iBelongingType, iCategoryType, nvBase64File, nvFileName, nvComment);
+        }
+        public List<Document> GetDocumentsByItemId(int iItemId)
+        {
+            return Document.GetDocumentsByItemId(iItemId);
+        }
+
         #endregion
 
 

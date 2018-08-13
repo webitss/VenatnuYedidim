@@ -19,7 +19,7 @@ namespace Service.Entities
         [DataMember]
         public string nvPassword { get; set; }
         [DataMember]
-        public int iPermissionType { get; set; }
+        public int iPermissionId { get; set; }
 
         #endregion
 
