@@ -60,7 +60,7 @@ namespace Service.Entities
                 }
 
             }
-            #endregion
+            
         }
 
         public static bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment)
@@ -85,5 +85,29 @@ namespace Service.Entities
                 return false;
             }
         }
+
+        public static List<Document> GetDocumentsByItemId(int iItemId)
+        {
+            try
+            {
+                List<Document> documents = new List<Document>();
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TDocuments_ByItemId_SLCT", new SqlParameter("iItemId", iItemId)).Tables[0].Rows;
+                foreach (DataRow dr in drc)
+                {
+                    documents.Add(ObjectGenerator<Document>.GeneratFromDataRow(dr));
+                    documents.Last().lstObject = new Dictionary<string, string>();
+                    documents.Last().lstObject.Add("nvCategory", dr["nvCategory"].ToString());
+                }
+                return documents;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetDocumentsByItemId / TDocuments_ByItemId_SLCT", ", ex " + ex);
+                return null;
+            }
+
+        }
+
+        #endregion
     }
 }

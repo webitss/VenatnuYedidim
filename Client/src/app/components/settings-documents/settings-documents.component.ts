@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
+import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 
 @Component({
   selector: 'app-settings-documents',
@@ -9,10 +10,22 @@ import { AppProxy } from '../../services/app.proxy';
 export class SettingsDocumentsComponent implements OnInit {
   public lstDataRows = new Array();
   documents: any;
-  // public static baseUrl = 'http://localhost:14777/';
+  public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
+
+
+
+
+
+
   constructor(private appProxy: AppProxy) { }
 
   ngOnInit() {
+    this.lstColumns.push(new VyTableColumn('צפיה', 'open', 'html'));
+    this.lstColumns.push(new VyTableColumn('שם תלמיד', 'nvName'));
+    this.lstColumns.push(new VyTableColumn('מ.ז', 'nvIdentityCard'));
+    this.lstColumns.push(new VyTableColumn('קטגוריה למסמך', 'nvCategory'));
+    this.lstColumns.push(new VyTableColumn('שם מסמך', 'nvDocumentName'));
+
     this.appProxy.get('GetDocuments').then(data => {
     this.documents = data;
       this.documents.forEach(element => {
@@ -20,93 +33,18 @@ export class SettingsDocumentsComponent implements OnInit {
           nvName: element.lstObject['nvName'],
           nvIdentityCard: element.lstObject['nvIdentityCard'],
           nvCategory: element.lstObject['nvCategory'],
-          nvDocumentName: element.nvDocumentName
-        })
+          nvDocumentName: element.nvDocumentName,
+          open: '<a href=' + AppProxy.baseUrl + 'Files/' + element.nvDocumentName + ' target="_blank"> פתח מסמך</a>'
+        });
       });
     }
       , err => alert(err));
 
   }
 
-  get staticBaseUrl() {
-    return AppProxy.baseUrl;
-  }
+  // get staticBaseUrl() {
+  //   return AppProxy.baseUrl;
+  // }
 
-  public lstColumns = [//{
-    // title: 'צפייה',
-    //filter: '',
-    // name: 'show',
-    // filterStyle: {
-    //   width: '25%'
-    // },
-    // cellStyle: {
-    //   width: '25%',
-    //   background: 'red'
-    // }
-    //},
-    {
-      title: 'שם תלמיד',
-      //filter: '',
-      name: 'nvName',
-      // titleStyle: {
-      //   width: '25%',
-      //   color: 'red'
-      // },
-      // filterStyle: {
-      //   width: '25%'
-      // },
-      // cellStyle: {
-      //   width: '25%',
-      //   background: 'red'
-      // }
-    },
-    {
-      title: 'מ.ז',
-      // filter: '',
-      name: 'nvIdentityCard',
-      // titleStyle: {
-      //   width: '25%',
-      //   color: 'red'
-      // },
-      // filterStyle: {
-      //   width: '25%'
-      // },
-      // cellStyle: {
-      //   width: '25%',
-      //   background: 'red'
-      // }
-    },
-    {
-      title: 'קטגוריה למסמך',
-      //filter: '',
-      name: 'nvCategory',
-      // titleStyle: {
-      //   width: '25%',
-      //   color: 'red'
-      // },
-      // filterStyle: {
-      //   width: '25%'
-      // },
-      // cellStyle: {
-      //   width: '25%',
-      //   background: 'red'
-      // }
-    },
-    {
-      title: 'שם מסמך',
-      //filter: '',
-      name: 'nvDocumentName',
-      // titleStyle: {
-      //   width: '25%',
-      //   color: 'red'
-      // },
-      // filterStyle: {
-      //   width: '25%'
-      // },
-      // cellStyle: {
-      //   width: '25%',
-      //   background: 'red'
-      // }
-    }]
 
 }

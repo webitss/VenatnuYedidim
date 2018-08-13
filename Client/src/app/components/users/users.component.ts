@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../classes/user';
 import { AppProxy } from '../../services/app.proxy';
 import { Router } from '@angular/router';
+import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 
 @Component({
   selector: 'app-users',
@@ -17,50 +18,30 @@ export class UsersComponent implements OnInit {
     this.iPersonId = 0;
     this.appProxy.post("GetUsers", { iPersonId: this.iPersonId }).then(data => {
       this.lstDataRows = data;
+
+      this.lstDataRows.forEach(u => {
+
+        u["edit"] = "<p>ערוך</p>";
+      });
     });
   }
 
   private users: Array<User>;
+
   private iPersonId: number;
-  protected lstDataRows: any;
 
-  public lstColumns = [{
-    title: 'עריכה',
-    name: 'aa',
-  },
-  {
-    title: 'שם משפחה',
-    name: 'nvLastName',
-  },
 
-  {
-    title: 'שם פרטי',
-    name: 'nvFirstName',
-  },
-  {
-    title: 'נייד',
-    name: 'nvMobile',
-  },
-  {
-    title: 'מייל',
-    name: 'nvEmail',
-  },
-  {
-    title: 'שם משתמש',
-    name: 'nvUserName',
+  public lstColumns = [
+    new VyTableColumn('עריכה', 'edit', 'html', true),
+    new VyTableColumn('שם משפחה', 'nvLastName'),
+    new VyTableColumn('שם פרטי', 'nvFirstName'),
+    new VyTableColumn('נייד', 'nvMobile'),
+    new VyTableColumn('שם משתמש', 'nvUserName'),
+    new VyTableColumn('הרשאה', 'iPermissionId'),
+  ];
+  public lstDataRows = [];
 
-    filterStyle: {
-      width: '25%'
-    },
-    cellStyle: {
-      width: '25%'
-    }
-  },
-  {
-    title: 'הרשאה',
-    name: 'iPermissionType',
-  }
-  ]
+
 
   editUser(u: User) {
     this.router.navigate(['users/user/', u.iPersonId]);

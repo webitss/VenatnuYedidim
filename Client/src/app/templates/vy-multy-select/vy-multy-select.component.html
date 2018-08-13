@@ -1,21 +1,40 @@
-<div  class="vy-multy-select">
-  <span class="choose-students"> בחר תלמידים</span>
-  <div  class="multy-select"(click)="flag=!flag; openOrClose()"></div>
-  <div class="open-list"(mouseover)="onOverFlag=true" (mouseleave)="onOverFlag=false" *ngIf="flag==true">
-    <div>
-      <input type="checkbox" value="selectAll"  [(ngModel)]="checkboxValueSelectAll" checked (change)="selectAll()">בחר הכל</div>
-    <div>
-      <!-- name="selectAll" id="selectAll"-->
-      <input type="text" placeholder="חפש" class="search"[(ngModel)]="search" style="border: 1px solid black;" />
+<div class="vy-multy-select">
+  <div class="row">
+    <div class="col-sm-5">
+      <span class="choose-students">
+        בחר תלמידים
+      </span>
     </div>
-    <div >
-      <div *ngFor="let item of fullList|filter:search">
-        <input type="checkbox"  [(ngModel)]="item['bMultySelectChecked']">
-        <span  >{{item.nvFirstName}} {{item.nvLastName}} {{item.nvIdentityCard}}</span>
+    <div class="multy-select col-sm-7" (click)="flag=!flag; openOrClose()" (mouseover)="onOverFlag=true" (mouseleave)="onOverFlag=false"><span style="color: gainsboro">{{titleStr}}</span>
+      <!-- <div *ngIf="flag==true">-->
+      <!-- <div *ngFor="let s of fullList|filterBMultySelectChecked" style="font-size: 13px">
+        {{s.nvFirstName}} {{s.nvLastName}} {{s.nvIdentityCard}} ,
+      </div>... -->
+      <!-- </div> -->
+    </div>
+
+      <div *ngIf="onOverFlag==true" class="mouseover" style="z-index: 999999999;">
+        <!-- && flag==true -->
+        <div *ngFor="let s of fullList|filterBMultySelectChecked">{{s.nvFirstName}} {{s.nvLastName}} {{s.nvIdentityCard}}
+          <br/>
+        </div>
       </div>
-    </div>
-    <div *ngIf="onOverFlag==true" class="mouseover">
-      <div *ngFor="let s of fullList|filterBMultySelectChecked">{{s.nvFirstName}} {{s.nvLastName}} {{s.nvIdentityCard}}<br/></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-5"></div>
+    <div class="open-list col-sm-7" *ngIf="flag==true">
+      <div>
+        <input type="checkbox" value="selectAll" [(ngModel)]="checkboxValueSelectAll" checked (change)="selectAll()">בחר הכל</div>
+      <div>
+        <!-- name="selectAll" id="selectAll"-->
+        <input type="text" placeholder="חפש" class="search item" [(ngModel)]="search" style="border: 1px solid rgb(175, 175, 175);" />
+      </div>
+      <div>
+        <div *ngFor="let item of fullList|filter:search" class="item">
+          <input type="checkbox" [(ngModel)]="item['bMultySelectChecked']">
+          <span>{{item.nvFirstName}} {{item.nvLastName}} {{item.nvIdentityCard}}</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

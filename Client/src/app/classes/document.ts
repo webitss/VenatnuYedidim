@@ -5,8 +5,9 @@ export class Document {
     iCategoryType: number;
     nvComment: string;
     iCreatedByUserId:number;
-    dtCreatedate:Date;	
+    dtCreatedate:Date;
     iLastModifyUserId:number;
     dtLastModifyDate:Date;
     bSysRowStatus:boolean;
+
 }

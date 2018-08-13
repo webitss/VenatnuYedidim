@@ -22,13 +22,15 @@ export class VyMultySelectComponent implements OnInit {
   @Output()
   selectedList: Array<any>;
   onOverFlag:boolean=false;
+  @Input()
+  titleStr:string;
   
   @Output()
   onSave: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
 
 
   openOrClose() {
-    if (this.flag == false) {
+  if (this.flag == false) {
       // if(this.selectedList!=null)
       this.selectedList.splice(0, this.selectedList.length);
       this.fullList.forEach(element => {

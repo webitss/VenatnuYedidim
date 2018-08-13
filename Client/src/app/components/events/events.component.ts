@@ -38,7 +38,7 @@ new VyTableColumn('מקום','nvPlace') ];
           nvName: e.nvName,
           dtEventDate: e.dtEventDate.toLocaleDateString(),
           nvPlace: e.nvPlace,
-          edit: '<div class="glyphicon glyphicon-pencil">ערוך</div>'
+          edit: '<div class="edit"></div>'
 
         });
 
