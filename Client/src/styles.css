@@ -92,7 +92,6 @@ body{
 
 .header>.navbar-expand-sm>.navbar-nav>.nav-item{
     border: rgba(31, 0, 0, 0.185);
-    /* padding: 10px 40px; */
     border-left: 1px solid #d8d8d8;
     text-align: center;
     width:15%;
@@ -117,7 +116,6 @@ body{
 .header>.navbar-expand-sm>.navbar-nav>.nav-item>.fullTab{
     width: 100%;
     height: 100%;
-    /* color: black; */
     cursor: pointer;
 }
 
@@ -153,9 +151,7 @@ body{
     background-repeat: no-repeat;
     width: 30px;
     height: 30px;
-     /* background-image: url("../../src/assets/images/pencil.png");  */
      background-image: url("../src/assets/images/pencil.png");
-    /* src: "../../src/assets/images/pencil.png"; */
     cursor: pointer;
 }
 .avrechim{
@@ -170,7 +166,6 @@ height: 80px;
 margin: 10px;
 margin-top: 30px;
 padding-right: 20px;
-/* text-align: right; */
 }
 .component-name{
     text-align: right;
