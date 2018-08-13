@@ -1,7 +1,11 @@
 <!-- <router-outlet></router-outlet> -->
 
-<button (click)="addMeeting()">הוספת פגישה</button>
-
+<!-- <button (click)="addMeeting()">הוספת פגישה</button> -->
+<div class="row first-row">
+                <div class="add-area">
+            <button class="btn-circle btn-add" (click)="addMeeting()"> הוספת פגישה +</button>
+            </div>
+            </div>
 
 
         <div *ngIf="meeting != null" class="meetingDetails">

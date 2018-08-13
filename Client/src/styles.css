@@ -1,3 +1,7 @@
+*{
+    background-repeat: no-repeat;
+    background-size: contain;
+}
 body{
     direction: rtl;
 }
@@ -68,7 +72,7 @@ body{
     color:white;
     margin-left: 1%;
 }
-.btn-close{
+.btn-close,.btn-add{
     background-color:white ;
     color:rgb(207, 37, 94);
 }
@@ -169,4 +173,10 @@ padding-right: 20px;
 
 .first-row{
     height: 50px;
+}
+.add-area{
+    width: 40%;
+    margin-left: 5%;
+    margin-right: 60%;
+    
 }
