@@ -167,7 +167,7 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
         children: [
           { path: "", component: EventDetailsComponent },
           { path: "event-details", component: EventDetailsComponent },
-          { path: "event-participants/:iEventId", component: EventParticipantsComponent }
+          { path: "event-participants", component: EventParticipantsComponent }
         ]
       },
       { path: "graduates", component: GraduatesComponent },
