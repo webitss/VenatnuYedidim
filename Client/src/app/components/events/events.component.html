@@ -1,5 +1,10 @@
-<div class="row">
-<button routerLink="/events/event/0" class="btn-pink btn">ארוע חדש</button>
+
+
+<div class=" row component-name-header">
+        <div class="col-sm-4 component-name">אירועים</div>
+        <div class="actions col-sm-8">
+    <button class="btn btn-circle1 btn-pink" routerLink="/events/event/0">אירוע חדש</button>
+</div>
 </div>
 <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="edit($event)"></app-vy-table>
 
