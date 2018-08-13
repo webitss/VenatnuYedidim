@@ -1,7 +1,17 @@
+<<<<<<< HEAD
 <button name="addConversation" (click)="addConversation()">הוסף שיחה</button>
 
 <!-- <router-outlet></router-outlet> -->
  <!-- <ul>
+=======
+<!-- <button name="addConversation" (click)="conversationSelect=null; flag=1;">הוסף שיחה</button> -->
+<div class="row first-row">
+        <div class="add-area">
+    <button class="btn-circle btn-add" (click)="conversationSelect=null; flag=1;"> הוסף שיחה +</button>
+    </div>
+    </div>
+ <ul>
+>>>>>>> 4d00eaa9dc23d01688dd11ed8df439102e52e28d
     <li *ngFor="let conver of conversationsList">
         <div>
 <span>{{conver.nvConversationSummary}}</span>
@@ -17,4 +27,10 @@
 <app-student-conversation-details [conversation]="conversationSelect" (Conversation)="close()"></app-student-conversation-details>
 </div>
 
+<<<<<<< HEAD
 <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editConversation($event)"></app-vy-table>
+=======
+<!-- <div class="row"> -->
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table>
+<!-- </div> -->
+>>>>>>> 4d00eaa9dc23d01688dd11ed8df439102e52e28d
