@@ -1,6 +1,9 @@
-<button name="addConversation" (click)="conversationSelect=null; flag=1;">הוסף שיחה</button>
-
-<!-- <router-outlet></router-outlet> -->
+<!-- <button name="addConversation" (click)="conversationSelect=null; flag=1;">הוסף שיחה</button> -->
+<div class="row first-row">
+        <div class="add-area">
+    <button class="btn-circle btn-add" (click)="conversationSelect=null; flag=1;"> הוסף שיחה +</button>
+    </div>
+    </div>
  <ul>
     <li *ngFor="let conver of conversationsList">
         <div>
@@ -17,4 +20,6 @@
 <app-student-conversation-details [conversation]=conversationSelect></app-student-conversation-details>
 </div>
 
+<!-- <div class="row"> -->
 <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table>
+<!-- </div> -->
