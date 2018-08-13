@@ -28,7 +28,7 @@ export class StudentsComponent implements OnInit {
 
       this.studentList.forEach(
         st => {
-           st['edit'] = '<p>ערוך</p>'; 
+           st['edit'] = '<div class="edit"></div>'; 
           })
     }, err => { alert(err); });
 
