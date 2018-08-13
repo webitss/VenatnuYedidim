@@ -53,8 +53,8 @@ body{
     background-color: orange;
 }
 .btn-circle{
-    height: 40px;
-    width: 100px;
+    height: 80%;
+    width: 40%;
     /* float: left; */
     border: 1px solid rgb(207, 37, 94);
     border-radius: 20px;
@@ -127,6 +127,10 @@ body{
     width: 100%;
     text-align: right;
 }
+.btn-area{
+    width: 20%;
+
+}
 .form-group{
     width: 20%;
     float: right;
@@ -140,6 +144,13 @@ body{
 }
 .edit
 {
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+     /* background-image: url("../../src/assets/images/pencil.png");  */
+     background-image: url("../src/assets/images/pencil.png");
+    /* src: "../../src/assets/images/pencil.png"; */
     cursor: pointer;
 }
 .avrechim{
@@ -154,4 +165,8 @@ height: 80px;
 margin: 10px;
 margin-top: 30px;
 padding-right: 20px;
+}
+
+.first-row{
+    height: 50px;
 }
