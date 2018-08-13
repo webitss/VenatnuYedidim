@@ -170,9 +170,9 @@ import { EventMediaComponent } from './components/event-media/event-media.compon
         children: [
           { path: "", component: EventDetailsComponent },
           { path: "event-details", component: EventDetailsComponent },
+          { path: "event-participants", component: EventParticipantsComponent },
           { path: "event-media", component: EventMediaComponent },
 
-          { path: "event-participants/:iEventId", component: EventParticipantsComponent }
         ]
       },
       { path: "graduates", component: GraduatesComponent },
