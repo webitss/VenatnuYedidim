@@ -26,7 +26,10 @@ export class StudentsComponent implements OnInit {
     this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
       this.studentList = data;
 
-      this.studentList.forEach(st => { st['edit'] = '<p>ערוך</p>'; })
+      this.studentList.forEach(
+        st => {
+           st['edit'] = '<p>ערוך</p>'; 
+          })
     }, err => { alert(err); });
 
 
