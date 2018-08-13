@@ -13,27 +13,27 @@ export class UploadDocumentComponent implements OnInit {
 
   sheetTypes: SysTableRow[];
   id: any;
-  comment: string="";
+  comment = '';
   category: number;
-  constructor(private activatedRoute: ActivatedRoute ,private appProxy:AppProxy,private sysTableService:SysTableService) { }
+  constructor(private activatedRoute: ActivatedRoute , private appProxy:AppProxy,private sysTableService:SysTableService) { }
 
   ngOnInit() {
     this.activatedRoute.parent.params.subscribe(params => {
-      this.id=params['iPersonId'];
-    })
+      this.id = params['iPersonId'];
+    });
 
     this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data=>this.sheetTypes=data
-      ,err=>alert("error"));
+      , err => alert('error'));
   }
-  protected save = {document:'',name:''}
+  protected save = {document: '', name: ''};
 
 
   loadDocument(event, callback) {
     let name, type, nvBase64File;
 
-    let fileList: FileList = event.target.files;
+    const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
-      let file: File = fileList[0];
+      const file: File = fileList[0];
 
       if ((window as any).FileReader) {
         var fileReader = new FileReader();

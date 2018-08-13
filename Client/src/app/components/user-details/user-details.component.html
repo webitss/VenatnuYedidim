@@ -1,37 +1,45 @@
-<form class="form-horizontal row" *ngIf="user != null">
+<form *ngIf="user != null">
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+      <div class="form-group">
+        <label for="user-name">שם משפחה:</label>
+        <input type="text" class="form-control" maxlength="15" [(ngModel)]="user.nvLastName" [ngModelOptions]="{standalone: true}"
+        />
+      </div>
+      <div class="col-sm-1"></div>
+      <div class="form-group">
+        <label for="user-name">שם פרטי:</label>
+        <input type="text" class="form-control" maxlength="15" [(ngModel)]="user.nvFirstName" [ngModelOptions]="{standalone: true}"
+        />
+      </div>
 
-  <div class="form-horizontal">
-    <label for="user-name">שם משפחה:</label>
-    <input type="text" class="form-control" maxlength="15" [(ngModel)]="user.nvLastName" [ngModelOptions]="{standalone: true}"/>
+      <div class="form-group col-sm-2">
+        <label for="user-name">נייד:</label>
+        <input type="tel" class="form-control" [(ngModel)]="user.nvMobile" [ngModelOptions]="{standalone: true}" />
+      </div>
+
+      <div class="form-group col-sm-2">
+        <label for="user-name">מייל:</label>
+        <input type="email" class="form-control" [(ngModel)]="user.nvEmail" [ngModelOptions]="{standalone: true}" />
+      </div>
+
+      <div class="form-group col-sm-2">
+        <label for="user-name">שם משתמש:</label>
+        <input type="text" class="form-control" maxlength="15" [(ngModel)]="user.nvUserName" [ngModelOptions]="{standalone: true}"
+        />
+      </div>
+
+      <div class="form-group col-sm-2">
+        <label for="user-name">סיסמה:</label>
+        <input type="password" class="form-control" [(ngModel)]="user.nvPassword" [ngModelOptions]="{standalone: true}" />
+      </div>
+      <div class="form-group col-sm-2">
+        <label for="permittion">הרשאה:</label>
+        <select [(ngModel)]="user.iPermissionId" class="form-control" name="iPermissionId">
+          <option [value]="item.iSysTableRowId" *ngFor="let item of lst" [selected]="item.iSysTableRowId==user.iPermissionId">{{item.nvValue}}</option>
+        </select>
+      </div>
+    </div>
   </div>
-
-  <div class="form-horizontal">
-    <label for="user-name">שם פרטי:</label>
-    <input type="text" class="form-control" maxlength="15" [(ngModel)]="user.nvFirstName" [ngModelOptions]="{standalone: true}"/>
-  </div>
-
-  <div class="form-horizontal">
-    <label for="user-name">נייד:</label>
-    <input type="tel" class="form-control" [(ngModel)]="user.nvMobile" [ngModelOptions]="{standalone: true}"/>
-  </div>
-
-  <div class="form-horizontal">
-    <label for="user-name">מייל:</label>
-    <input type="email" class="form-control" [(ngModel)]="user.nvEmail" [ngModelOptions]="{standalone: true}"/>
-  </div>
-
-  <div class="form-horizontal">
-    <label for="user-name">שם משתמש:</label>
-    <input type="text" class="form-control" maxlength="15"  [(ngModel)]="user.nvUserName" [ngModelOptions]="{standalone: true}"/>
-  </div>
-
-  <div class="form-horizontal">
-    <label for="user-name">סיסמה:</label>
-    <input type="password" class="form-control"  [(ngModel)]="user.nvPassword" [ngModelOptions]="{standalone: true}"/>
-  </div>
-
-  <label for="permittion">הרשאה:</label>
-  <select name="permittion" class="col-sm-1"  [(ngModel)]="user.iPermissionId" [ngModelOptions]="{standalone: true}" class="form-control">
-    <option [value]="item.iSysTableRowId" *ngFor="let item of lst">{{item.nvValue}}</option>
-  </select>
 </form>

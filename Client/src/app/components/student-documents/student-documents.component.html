@@ -1,5 +1,6 @@
-<p>
-  student-documents works!
-</p>
 
-<app-upload-document></app-upload-document>
+<button (click)="upload=true">העלאת מסמך</button>
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editDocument($event)"></app-vy-table>
+
+
+<app-upload-document *ngIf="upload==true"></app-upload-document>
