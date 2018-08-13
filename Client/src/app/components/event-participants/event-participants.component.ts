@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Participants } from '../../classes/participants';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-event-participants',
@@ -35,15 +36,40 @@ export class EventParticipantsComponent implements OnInit {
 
   ]
 
-  constructor(private appProxy: AppProxy) { }
+
+
+  constructor(private appProxy: AppProxy, private router: ActivatedRoute) { }
 
   ngOnInit() {
-    this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId })
-      .then(
-        data => {
-          this.participant = data;
-          alert("good");
-        })
-  }
+    // this.router.params.subscribe(params => {
+    //   this.appProxy.post("GetParticipantsList", { iEventId: params['iEventId'] })
+    //     .then(data => {
+    //       this.participant = data;
+    //       //this.header=this.e.nvName;
+
+    //     });
+
+
+    // }
+
+    this.router.params.subscribe(params=>{
+this.appProxy.post("GetParticipantsList", {iEventId:params['iEventId']}).then(data=>{
+  this.participant=data;
+  alert("שגיאה בגישה לשרת");
+})
+    });
+
+
+    // this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId })
+    //   .then(
+    //     data => {
+    //       this.participant = data;
+    //       alert("good");
+    //     })
+
+
+}
+
+
 
 }
