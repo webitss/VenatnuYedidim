@@ -1,6 +1,7 @@
 *{
     background-repeat: no-repeat;
     background-size: contain;
+    
 }
 body{
     direction: rtl;
@@ -29,14 +30,14 @@ body{
     cursor: pointer;
 }
 .btn-small{
-    width: 2%;
+    width: 4%;
     height: 60%;
     background-color: rgba(169, 169, 169, 0.37);
     margin-left: 1%;
     
 }
 .btn-circle1{
-    width: 10%;
+    width: 15%;
     height: 60%;
     border-radius: 30px;
     color: white;
@@ -164,11 +165,15 @@ body{
     vertical-align: middle;
     text-align: right;
 }
-.avrechim-header{
+.component-name-header{
 height: 80px;
 margin: 10px;
 margin-top: 30px;
 padding-right: 20px;
+/* text-align: right; */
+}
+.component-name{
+    text-align: right;
 }
 
 .first-row{
