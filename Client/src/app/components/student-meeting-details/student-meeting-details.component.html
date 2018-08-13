@@ -1,42 +1,45 @@
-<!-- <form class="meetingform"> -->
 <div class="form ">
-
-  <button  (click)="save()">שמור</button>
-  <button (click)="close()">ביטול</button>
-
-  <div *ngIf="meeting.iMeetingId">
-    <h1>עריכה </h1>
-  </div>
-  <div *ngIf="meeting.iMeetingId==null">
-    <h1>פגישה חדשה </h1>
-  </div>
-
   <div class="row ">
-
-      <div class="form-group  " >
-          <label for="meetingTyp">סוג פגישה</label>
-        <input type="number" id="meetingType" [(ngModel)]="meeting.iMeetingType" class="form-control"/>
-        </div>
-
-
-
-
-  
-  <div class="form-group ">
-    <label for="date">תאריך:</label>
-    <input type="date" class="form-control" id="date" [(ngModel)]="meeting.dtMeetingDate"  [ngModelOptions]="{standalone: true}">
-  </div>
-  <div class="form-group ">
-      <label for="time">שעה:</label>
-      <input type="time" class="form-control" id="time" [(ngModel)]="meeting.dtMeetingDate"  [ngModelOptions]="{standalone: true}">
+    <div class="col-sm-8"></div>
+    <div class="col-sm-4">
+      <button class="btn-circle btn-save" (click)="save()">שמור v </button>
+      <button class="btn-circle btn-close" (click)="close()">סגור x </button>
     </div>
-  
-</div>
-<div class=" row ">
-<div class="form-group ">
-    <label for="nvSummary"> סיכום</label>
-    <input type="text" class="form-control" id="nvSummary" [(ngModel)]="meeting.nvSummary" [ngModelOptions]="{standalone: true}" style="height: 100px;">
   </div>
-</div>
+  <div class="content">
+    <div class="row ">
+      <div *ngIf="meeting.iMeetingId">
+        <h3>עריכה </h3>
+      </div>
+      <div *ngIf="meeting.iMeetingId==null">
+        <h3>פגישה חדשה </h3>
+      </div>
+    </div>
+    <div class="row ">
 
+      <div class="form-group  ">
+        <label for="meetingTyp">סוג פגישה</label>
+        <input type="number" id="meetingType" [(ngModel)]="meeting.iMeetingType" class="form-control" />
+      </div>
+
+      <div class="form-group ">
+        <label for="date">תאריך:</label>
+        <input type="date" class="form-control" id="date" [(ngModel)]="meeting.dtMeetingDate" [ngModelOptions]="{standalone: true}">
+      </div>
+
+      <div class="form-group ">
+        <label for="time">שעה:</label>
+        <input type="time" class="form-control" id="time" [(ngModel)]="meeting.dtMeetingDate" [ngModelOptions]="{standalone: true}">
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-12">
+        <label for="nvSummary"> סיכום</label>
+        <input type="text" class="form-control" id="nvSummary" [(ngModel)]="meeting.nvSummary" [ngModelOptions]="{standalone: true}">
+      </div>
+
+    </div>
+  </div>
 </div>
