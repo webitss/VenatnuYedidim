@@ -20,7 +20,7 @@ edit(e){
 
 }
   public lstColumns = [
-new VyTableColumn('עריכה','','html', true),
+new VyTableColumn('עריכה','edit','html', true),
 new VyTableColumn('שם ארוע','nvName'),
 new VyTableColumn('תאריך','dtEventDate'),
 new VyTableColumn('מקום','nvPlace') ];
@@ -29,6 +29,8 @@ new VyTableColumn('מקום','nvPlace') ];
 
   ngOnInit() {
 
+
+
     this.appProxy.post('GetEventsList', { iUserId: 0 }).then(res => {
       res.forEach(e => {
         this.lstDataRows.push({
@@ -36,7 +38,7 @@ new VyTableColumn('מקום','nvPlace') ];
           nvName: e.nvName,
           dtEventDate: e.dtEventDate.toLocaleDateString(),
           nvPlace: e.nvPlace,
-          edit: '<span>עריכה</span>'
+          edit: '<div class="glyphicon glyphicon-pencil">ערוך</div>'
 
         });
 
