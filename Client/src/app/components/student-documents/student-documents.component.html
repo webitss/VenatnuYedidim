@@ -1,6 +1,6 @@
 
-<button (click)="upload=true">העלאת מסמך</button>
+<button (click)="addDocument()">העלאת מסמך</button>
 <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editDocument($event)"></app-vy-table>
 
 
-<app-upload-document *ngIf="upload==true"></app-upload-document>
+<app-upload-document *ngIf="document!=null"></app-upload-document>

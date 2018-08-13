@@ -10,6 +10,7 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
   styleUrls: ['./student-documents.component.css']
 })
 export class StudentDocumentsComponent implements OnInit {
+  document: Document;
   id: number;
   public lstDataRows = new Array();
   documents: any;
@@ -49,9 +50,11 @@ export class StudentDocumentsComponent implements OnInit {
   get staticBaseUrl() {
     return AppProxy.baseUrl;
   }
+addDocument() {
+  this.document = new Document();
+}
   editDocument(e) {
-    // this.router.navigate(['students/student/',e.iPersonId])
     alert(e.iDocumentId);
+    this.document = new Document();
   }
-
 }
