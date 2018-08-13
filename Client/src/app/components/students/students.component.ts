@@ -28,7 +28,7 @@ export class StudentsComponent implements OnInit {
 
       this.studentList.forEach(
         st => {
-           st['edit'] = '<p>ערוך</p>'; 
+           st['edit'] = '<div class="edit"></div>'; 
           })
     }, err => { alert(err); });
 
@@ -46,7 +46,7 @@ export class StudentsComponent implements OnInit {
 
 
   editStudent(e) {
-    this.router.navigate(['students/student/',e.iPersonId])
+    this.router.navigate(['students/student/'+e.iPersonId+'/'+'student-details']);
   }
 
 

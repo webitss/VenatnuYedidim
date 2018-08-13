@@ -1,31 +1,32 @@
-*{
+/* *{
       float: right;
 }
-.addStudent{
+.add-student{
    position: absolute; 
    margin-bottom:25%;  
-   margin-right: 35%;
-    border:1px solid black;
+   margin-right: 15%;
+    border:1px solid rgb(175, 175, 175);
      width: 35%;
       height: 25%;
       padding: 50px;
+      background-color: white;
 }
 .Student-affiliation{
 font-weight: bold;
-}
-button{
+} */
+/* button{
       float: left;
       border-radius:30px;
       width:75px;
       margin-left:10px;
       color: white;
       border: none;
-}
-.btn-pink{
+} */
+/* .btn-pink{
       background-color: rgb(207, 37, 94);
  
 }
 .btn-org{
       background-color: orange;
 
-}
+} */

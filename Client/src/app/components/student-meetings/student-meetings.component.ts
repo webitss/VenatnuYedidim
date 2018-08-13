@@ -65,7 +65,7 @@ export class StudentMeetingsComponent implements OnInit {
         this.meetingList.forEach(m => {
           m['nvDate'] = m.dtMeetingDate.getDate().toString();
           m['nvHour'] = m.dtMeetingDate.getHours().toString();
-          m['edit'] = '<p>ערוך</p>';
+          m['edit'] = '<div class="edit"></div>';
           // '<img src="../../../assets/images/pencil.png"/>'
         });
         debugger;

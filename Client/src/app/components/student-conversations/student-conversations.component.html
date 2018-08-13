@@ -1,8 +1,5 @@
-<button name="addConversation" (click)="conversationSelect=null; flag=1;">הוסף שיחה</button>
 
-<!-- <router-outlet></router-outlet> -->
- <ul>
-    <li *ngFor="let conver of conversationsList">
+    <!-- <li *ngFor="let conver of conversationsList">
         <div>
 <span>{{conver.nvConversationSummary}}</span>
         </div>
@@ -10,11 +7,13 @@
         <button name="delete" (click)="deleteConversation(conver.iConversationId,1)" >מחק שיחה</button>
        
     </li>
- </ul>
+ </ul> --> -->
 
 
-<div *ngIf="flag==1">
-<app-student-conversation-details [conversation]=conversationSelect></app-student-conversation-details>
+<div *ngIf="conversationSelect!=null">
+<app-student-conversation-details [conversation]="conversationSelect" (Conversation)="close()"></app-student-conversation-details>
 </div>
 
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table>
+
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editConversation($event)"></app-vy-table>
+

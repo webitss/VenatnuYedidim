@@ -1,11 +1,15 @@
 *{
+    font-size: 13px;
    float: right;
+
 }
 
 .mouseover{
-    border: 1px solid black;
+    border: 1px solid rgb(175, 175, 175);
     background-color: gainsboro;
     position: absolute; 
+    padding-right: 10px;
+    margin-right: 50%;
 
 }
 .vy-multy-select{
@@ -13,27 +17,33 @@
      width: 300px;
      padding: 2%;
      background-color: white;
-}
-.multy-select{
-    border: 1px solid black; 
-    width: 230px;
-     height: 25px;
-     margin-right:150px;
-     margin-top: 0;
-}
-.choose-students{
-    width: 40%;
 
 }
+.multy-select{
+    border: 1px solid rgb(175, 175, 175); 
+    width: 230px;
+     height: 25px;
+     margin-top: 0;
+     padding: 0;
+}
+/*.choose-students{
+    width: 40%;
+}*/
 .open-list{
-    margin-right: 150px;
+    padding: 10px;
+   /* margin-right: 150px;*/
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid rgb(175, 175, 175);
     border-top: 0;
-    width:230px;
+   /* width:230px;*/
 }
 .search{
-    width: 230px;
+    width: 100%;
     border-left: 0px;
     border-right: 0px;
+}
+
+
+.item{
+    padding-bottom: 7px;
 }
