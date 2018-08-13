@@ -1,35 +1,46 @@
-<div *ngIf="conversation && conversation.iConversationId!=null">
-    <h2>עריכה</h2>
+<div class="form ">
+  <div class="row ">
+    <div class="col-sm-8"></div>
+    <div class="col-sm-4">
+      <button class="btn-circle btn-save" (click)="saveConversation()">שמור v </button>
+      <button class="btn-circle btn-close" (click)="cancel()">סגור x </button>
     </div>
-<div *ngIf="conversation.iConversationId==null">
-<h2>הוספה</h2>
-</div>
-
-<div>
-
- 
-
-    <div>
-      <label for="conversationType">סוג שיחה</label>
-      <input type="text" name="conversationType" class="form-control" [(ngModel)]="conversation.iConversationType" [ngModelOptions]="{standalone: true}"/>
-    </div>
-    
-    <div>
-      <label for="conversationDate">תאריך</label>
-      <input type="date" name="conversationDate" class="form-control" [ngModel]="conversation.dConversationDate | date:'yyyy-MM-dd'" (ngModelChange)="e.dtEventDate = $event" [ngModelOptions]="{standalone: true}"/>
-    </div>
-    <div>
-      <label for="conversationDateTime">שעה</label>
-      <input type="time" name="conversationDateTime" class="form-control" [ngModel]="conversation.dtConversationTime| date:'shortTime'" (ngModelChange)="e.dtEventTime = $event" [ngModelOptions]="{standalone: true}"/>
-    </div>
-    <div>
-      <label for="conversationSummary">סיכום</label>
-      <input type="text" name="conversationSummary" class="form-control" [(ngModel)]="conversation.nvConversationSummary" [ngModelOptions]="{standalone: true}"/>
-    </div>
-    <div>
-       <label for="NextconversationDate">תאריך ליצירת קשר פעם הבאה</label>
-       <input type="date" name="NextconversationDate" class="form-control" [ngModel]="conversation.dtNextConversationDate| date:'yyyy-MM-dd'" (ngModelChange)="e.dtEventDate = $event" [ngModelOptions]="{standalone: true}"/>
-    </div>
-    <input type="button" name="save"  value="שמירה" (click)="saveConversation()"/>
-    <input type="button" name="cancel"  value="ביטול" (click)="cancel()"/>
   </div>
+  <div class="content">
+    <div class="row ">
+      <div *ngIf="conversation && conversation.iConversationId!=null">
+        <h2>עריכה</h2>
+      </div>
+      <div *ngIf="conversation.iConversationId==null">
+        <h2>הוספה</h2>
+    </div>
+    <div class="row ">
+
+      <div class="form-group  ">
+          <label for="conversationType">סוג שיחה</label>
+          <input type="text" name="conversationType" class="form-control" [(ngModel)]="conversation.iConversationType" [ngModelOptions]="{standalone: true}"/>
+        </div>
+
+      <div class="form-group ">
+        <label for="conversationDate">תאריך</label>
+        <input type="date" name="conversationDate" class="form-control" [ngModel]="conversation.dConversationDate | date:'yyyy-MM-dd'"
+          (ngModelChange)="e.dtEventDate = $event" [ngModelOptions]="{standalone: true}" />
+      </div>
+      <div class="form-group ">
+        <label for="conversationDateTime">שעה</label>
+        <input type="time" name="conversationDateTime" class="form-control" [ngModel]="conversation.dtConversationTime| date:'shortTime'"
+          (ngModelChange)="e.dtEventTime = $event" [ngModelOptions]="{standalone: true}" />
+      </div>
+     
+
+    </div>
+
+   
+ <div class="row">
+      <div class="form-group col-sm-12">
+        <label for="conversationSummary">סיכום</label>
+        <input type="text" name="conversationSummary" class="form-control" [(ngModel)]="conversation.nvConversationSummary" [ngModelOptions]="{standalone: true}"/>
+      </div>
+    </div>
+  </div>
+</div>
