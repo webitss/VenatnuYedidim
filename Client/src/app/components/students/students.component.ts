@@ -46,7 +46,7 @@ export class StudentsComponent implements OnInit {
 
 
   editStudent(e) {
-    this.router.navigate(['students/student/',e.iPersonId])
+    this.router.navigate(['students/student/'+e.iPersonId+'/'+'student-details']);
   }
 
 
