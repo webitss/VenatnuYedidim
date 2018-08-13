@@ -115,7 +115,7 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
     SettingYeshivaComponent,
 
     UploadDocumentComponent,
-    
+    StudentDocumentsComponent,
     FilterBMultySelectCheckedPipe,
   ],
   imports: [
@@ -130,7 +130,6 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
       {
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
-          { path: "", component: StudentDetailsComponent },
          //{ path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
           {
