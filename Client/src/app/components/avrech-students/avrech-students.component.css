@@ -1,4 +1,4 @@
-*{
+/* *{
       float: right;
 }
 .add-student{
@@ -13,20 +13,20 @@
 }
 .Student-affiliation{
 font-weight: bold;
-}
-button{
+} */
+/* button{
       float: left;
       border-radius:30px;
       width:75px;
       margin-left:10px;
       color: white;
       border: none;
-}
-.btn-pink{
+} */
+/* .btn-pink{
       background-color: rgb(207, 37, 94);
  
 }
 .btn-org{
       background-color: orange;
 
-}
+} */

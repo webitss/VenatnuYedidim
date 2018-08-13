@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
@@ -10,6 +10,8 @@ import { Conversation } from '../../classes/conversation';
 })
 export class StudentConversationDetailsComponent implements OnInit {
   private sub: any;
+  @Output() 
+  Conversation = new EventEmitter(); 
   @Input()
   protected conversation: Conversation;
 
@@ -17,11 +19,16 @@ export class StudentConversationDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private appProxy: AppProxy) { }
  
+  cancel()
+  {
+    this.Conversation.emit(null);
+  }
+
    
-saveConversation() {
-    this.conversation.dConversationDate = new Date(this.conversation.dConversationDate);
-    this.conversation.dtConversationTime = new Date(this.conversation.dtConversationTime);
-    this.conversation.dtNextConversationDate = new Date(this.conversation.dtNextConversationDate);
+ saveConversation() {
+//     this.conversation.dConversationDate = new Date(this.conversation.dConversationDate);
+//     this.conversation.dtConversationTime = new Date(this.conversation.dtConversationTime);
+//     this.conversation.dtNextConversationDate = new Date(this.conversation.dtNextConversationDate);
     if (this.conversation.iConversationId == null) {
       this.conversation.iPersonId = 7;
       this.appProxy.post("AddConversations", { conversation: this.conversation, iPersonId:this.iPersonId })

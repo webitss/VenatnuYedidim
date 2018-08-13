@@ -58,7 +58,7 @@ export class AvrechimComponent implements OnInit {
       
       a => {
         debugger;
-         a['open'] = '<p class="edit">ערוך</p>'; 
+         a['open'] = '<div class="edit"></div>'; 
         });
  
 

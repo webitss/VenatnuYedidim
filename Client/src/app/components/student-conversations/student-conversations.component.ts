@@ -12,13 +12,19 @@ import { Title } from '@angular/platform-browser';
 })
 export class StudentConversationsComponent implements OnInit {
 
-  protected iPersonId: number = 9;
-
+  protected iPersonId: number = 7;
+  protected flag: number;
   protected conversationsList: Array<Conversation> = new Array<Conversation>();
   protected conversationSelect: Conversation;
 
   @Input()
   public lstColumns = [
+    {
+      title: 'עריכה',
+      name: 'edit',
+      bClickCell: true,
+      type: 'html'
+    },
     {
       title: 'סוג שיחה',
       name: 'iConversationType'
@@ -28,6 +34,10 @@ export class StudentConversationsComponent implements OnInit {
       name: 'dConversationDate'
     },
     {
+      title: 'שעת שיחה',
+      name: 'dtConversationTime'
+    },
+    {
       title: 'סיכום שיחה',
       name: 'nvConversationSummary'
     },
@@ -35,17 +45,31 @@ export class StudentConversationsComponent implements OnInit {
       title: 'תאריך שיחה הבאה',
       name: 'dtNextConversationDate'
     }
-
-
-
   ];
-
+  public lstDataRows=[];
 
   constructor(private appProxy: AppProxy) { }
 
   // newConversation() {
   //   this.conversationSelect = new Conversation();
   // }
+
+  close() {
+    this.conversationSelect = null;
+  }
+  editConversation(conver: Conversation) {
+    this.conversationSelect = conver;
+    this.flag=1;
+  }
+
+  addConversation()
+  {
+    this.conversationSelect=new Conversation();
+  this.conversationSelect.dConversationDate=new Date();
+  this.conversationSelect.dtConversationTime=new Date();
+  this.conversationSelect.dtNextConversationDate=new Date();
+ 
+  }
 
 
   deleteConversation(iConversationId: number, iUserId: number) {
@@ -63,8 +87,22 @@ export class StudentConversationsComponent implements OnInit {
     this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
       .then(
         data => {
-          this.conversationsList = data;
+          data.forEach(c => {
+            this.lstDataRows.push(
+              {
+                iConversationId: c.iConversationId,
+                iPersonId: c.iPersonId,
+                iConversationType:c.iConversationType,
+                dConversationDate: c.dConversationDate.toLocaleDateString(),
+                dtConversationTime: c.dtConversationTime.toLocaleTimeString(), 
+                dtNextConversationDate: c.dtNextConversationDate.toLocaleDateString(),
+                nvConversationSummary: c.nvConversationSummary,
+                edit: '<span>עריכה</span>'
+              });
+          });
+    
           //alert(this.conversationsList[0].iPersonId );
+         
         });
   }
 

@@ -16,11 +16,11 @@
     
     <div>
       <label for="conversationDate">תאריך</label>
-      <input type="date" name="conversationDate" class="form-control" [(ngModel)]="conversation.dConversationDate" [ngModelOptions]="{standalone: true}"/>
+      <input type="date" name="conversationDate" class="form-control" [ngModel]="conversation.dConversationDate | date:'yyyy-MM-dd'" (ngModelChange)="e.dtEventDate = $event" [ngModelOptions]="{standalone: true}"/>
     </div>
     <div>
       <label for="conversationDateTime">שעה</label>
-      <input type="date" name="conversationDateTime" class="form-control" [(ngModel)]="conversation.dtConversationTime" [ngModelOptions]="{standalone: true}"/>
+      <input type="time" name="conversationDateTime" class="form-control" [ngModel]="conversation.dtConversationTime| date:'shortTime'" (ngModelChange)="e.dtEventTime = $event" [ngModelOptions]="{standalone: true}"/>
     </div>
     <div>
       <label for="conversationSummary">סיכום</label>
@@ -28,7 +28,8 @@
     </div>
     <div>
        <label for="NextconversationDate">תאריך ליצירת קשר פעם הבאה</label>
-       <input type="date" name="NextconversationDate" class="form-control" [(ngModel)]="conversation.dtNextConversationDate" [ngModelOptions]="{standalone: true}"/>
+       <input type="date" name="NextconversationDate" class="form-control" [ngModel]="conversation.dtNextConversationDate| date:'yyyy-MM-dd'" (ngModelChange)="e.dtEventDate = $event" [ngModelOptions]="{standalone: true}"/>
     </div>
     <input type="button" name="save"  value="שמירה" (click)="saveConversation()"/>
+    <input type="button" name="cancel"  value="ביטול" (click)="cancel()"/>
   </div>
