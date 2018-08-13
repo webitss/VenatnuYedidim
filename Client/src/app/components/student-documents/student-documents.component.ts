@@ -36,7 +36,7 @@ export class StudentDocumentsComponent implements OnInit {
             nvCategory: element.lstObject['nvCategory'],
             dtCreatedate: element.dtCreatedate,
             nvDocumentName: element.nvDocumentName,
-            edit: '<p>ערוך</p>',
+            edit: '<div class="edit"></div>',
             open: '<a href=' + AppProxy.baseUrl + 'Files/' + element.nvDocumentName + ' target="_blank"> פתח מסמך</a>',
             iDocumentId: element.iDocumentId
           });
