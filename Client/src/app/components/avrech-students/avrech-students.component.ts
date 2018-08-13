@@ -19,6 +19,7 @@ export class AvrechStudentsComponent implements OnInit {
   fields: Array<string>;
   studentsToAdd: Array<any> = new Array<any>();
   student: Student;
+  title:string="רשימת תלמידים"
 
   //studentList: Student[];
 
