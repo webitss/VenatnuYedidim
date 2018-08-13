@@ -63,8 +63,8 @@ export class StudentMeetingsComponent implements OnInit {
         //alert("good");
         this.meetingList = data;
         this.meetingList.forEach(m => {
-          m['nvDate'] = m.dtMeetingDate.getDate().toString();
-          m['nvHour'] = m.dtMeetingDate.getHours().toString();
+          m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
+          m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
           m['edit'] = '<div class="edit"></div>';
           // '<img src="../../../assets/images/pencil.png"/>'
         });
@@ -77,3 +77,4 @@ export class StudentMeetingsComponent implements OnInit {
   }
 
 }
+
