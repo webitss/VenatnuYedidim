@@ -1,7 +1,7 @@
 
-<div class="row">
+
     
-<div class="ChoosTable col-sm-3" style="float: right">
+<div class="ChoosTable col-sm-3 " style="float: right " [ngClass]="{'bottom': showOverlap}" >
 <p>
  בחר טבלה
 </p>
@@ -14,27 +14,39 @@
 
 
 
-<input type="button" value="הוספת ערך+" (click)="divNewValue=true" class="btn-circle btn-add"/>
-<div *ngIf="divNewValue">
-<input type="text" [(ngModel)]="roeToadd.nvValue" [ngModelOptions]="{standalone: true}"/>
-<button (click)="saveNeeValue()">שמור</button>
-<button (click)="divNewValue=false">סגור</button>
+<input type="button" value="הוספת ערך+" (click)="addNewValue()" class="btn-circle btn-add"/>
 
-  
 
 </div>
-</div>
-
+<div class="row" >
 <div class="col-sm-8 myTable" style="float:left;">
 
 <!-- SysTableService -->
 
 <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="Values" (clickCell)="editSysTableRow($event)"></app-vy-table>
 <div>
-    <form class="form" *ngIf="toEdit">
-<input type="text" [(ngModel)]="row.nvValue" value={{row.nvValue}} class="input" [ngModelOptions]="{standalone: true}"/>
-<input type="submit" value="שמור" (click)="saveEditValue()"/>
+   
+</div>
+</div>
+</div>
+<div class="edit"  *ngIf="divNewValue">
+        <input type="text" [(ngModel)]="roeToadd.nvValue" [ngModelOptions]="{standalone: true}" class="form-control inp"/>
+        <button (click)="saveNeeValue()" class="btn-circle btn-save btn">שמור</button>
+        <button (click)="close()" class="btn-circle btn-close btn" >סגור</button> 
+        
+ </div>
+        <div class="form edit" *ngIf="toEdit">
+        <form>
+     <input type="text" [(ngModel)]="row.nvValue" value={{row.nvValue}} class="form-control inp" [ngModelOptions]="{standalone: true}"/>
+       <input type="submit" value="שמור" (click)="saveEditValue()" class="btn-circle btn-save btn"/>
     </form>
-</div>
-</div>
-</div>
+ </div>
+
+
+
+<div class="div" *ngIf="showOverlap"></div>
+
+
+
+       
+        

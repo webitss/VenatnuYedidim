@@ -1,5 +1,6 @@
 ﻿using Service.Entities;
 using Service.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -196,7 +197,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool SetEvent(Event1 oEvent, int iUserId);
+        bool SetEvent(Event1 oEvent, int iUserId, List<Object> to);
 
         [OperationContract]
         [WebInvoke(
@@ -339,6 +340,24 @@ RequestFormat = WebMessageFormat.Json)]
         RequestFormat = WebMessageFormat.Json)]
         List<Yeshivot> GetAllYeshivot(int iYeshivaId);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "EditYeshiva",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool EditYeshiva(Yeshivot yeshiva, int iYeshivaId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "getYeshivaById",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        Yeshivot getYeshivaById(int iYeshivaId);
+
         #endregion
 
         #region Conversation
@@ -423,6 +442,17 @@ RequestFormat = WebMessageFormat.Json)]
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         List<Document> GetDocumentsByItemId(int iItemId);
+        #endregion
+
+        #region graduates
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetGraduatesList",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Student> GetGraduatesList(int iUserId);
         #endregion
     }
 

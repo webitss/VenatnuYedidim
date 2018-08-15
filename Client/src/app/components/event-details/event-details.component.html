@@ -26,7 +26,10 @@
     </div>
   </div>
 
-<div class="row col-sm-12" *ngIf="!isDetails">
+
+  <!-- (onSave)="getFromChild($event)" -->
+  <app-vy-multy-select [fullList]="list" [titleStr]="title" [inputTitle]="inputTitle" (onSave)="getFromChild($event)" ></app-vy-multy-select>
+<!-- <div class="row col-sm-12" *ngIf="!isDetails">
   <div class="form-group col-sm-4">
 
   <label for='event-for'>עבור</label>
@@ -37,5 +40,5 @@
     <option>כולם</option>
   </select>
 </div>
-</div>
+</div> -->
 </form>

@@ -52,7 +52,7 @@ namespace Service.Entities
             }
         }
 
-        public static bool SetEvent(Event1 oEvent, int iUserId)
+        public static bool SetEvent(Event1 oEvent, int iUserId, List<Object> to)
         {
             try
             {

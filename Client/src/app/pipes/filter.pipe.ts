@@ -10,7 +10,7 @@ export class FilterPipe implements PipeTransform {
         if (!lstItems || !filterText || filterText == '' )
             return lstItems;
         else
-            return lstItems.filter(item =>item['toString'].indexOf(filterText)!=-1);
+            return lstItems.filter(item =>item['value'].indexOf(filterText)!=-1);
            
     }
 }
