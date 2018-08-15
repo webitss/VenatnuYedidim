@@ -38,7 +38,7 @@ namespace Service.Entities
                     p.nvPhone = dt.Rows[i]["nvPhone"].ToString();
                     p.nvMobile = dt.Rows[i]["nvMobile"].ToString();
                     p.nvEmail = dt.Rows[i]["nvEmail"].ToString();
-                    p.lstObject.Add("sysTableRow.nvValue", dt.Rows[i]["iArrivalStatusType"].ToString());
+                   // p.lstObject.Add("iArrivalStatusType", dt.Rows[i]["iArrivalStatusType"].ToString());
                     participants.Add(p);
                 }
 
