@@ -21,6 +21,7 @@ export class SettingsCodeTableComponent implements OnInit {
   protected toEdit:boolean;
   protected row:SysTableRow;
   protected roeToadd:SysTableRow=new SysTableRow();
+  protected roeToadd1:SysTableRow=new SysTableRow();
   protected Mykey:string;
   protected lstColumns = [{
     title: 'עריכה',
@@ -31,6 +32,8 @@ export class SettingsCodeTableComponent implements OnInit {
     title: 'ערך',
     name: 'nvValue'
   }]
+  private readonly newProperty = this;
+
   constructor(private sysTableService: SysTableService,private appProxy:AppProxy) { }
 
   ngOnInit() {
@@ -83,7 +86,7 @@ this.Mykey=key;
       );
     
   }
-  saveNeeValue(){
+   saveNeeValue(){
 
  
 this.roeToadd.dtLastModifyDate=new Date();
@@ -92,14 +95,18 @@ this.roeToadd.dtLastModifyDate=new Date();
     this.roeToadd.iSysTableId=this.idSysTableRow;
 
 Object.keys(SysTableService.dataTables).forEach(key => {
-  
+  debugger;
   if(SysTableService.dataTables[key].iSysTableId == this.idSysTableRow){
    
   SysTableService.dataTables[key].SysTableRow.push(this.roeToadd);
-  
+      
 
 }
 })
-    return this.sysTableService.addValue(this.roeToadd); 
+this.roeToadd1=this.roeToadd;
+this.roeToadd=new SysTableRow();
+    return this.sysTableService.addValue(this.roeToadd1); 
+   
   }
+  
 }

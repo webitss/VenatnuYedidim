@@ -13,3 +13,38 @@
 myTable{
     float: left;
 }
+.edit{
+    position: fixed;
+    z-index: 100;
+    top: 40%;
+    right: 25%;
+    background:white;
+    border: 2px;
+    width: 40%;
+    border: solid rgb(207, 37, 94);
+    height: 100px;
+}
+.btn{
+
+   height:50px;
+   width: 100px; 
+}
+.inp{
+    width: 300px; 
+}
+.container {
+    position: relative;
+}
+
+.bottomleft {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    font-size: 18px;
+}
+
+img { 
+    width: 100%;
+    height: auto;
+    opacity: 0.3;
+}
