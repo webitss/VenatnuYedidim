@@ -7,6 +7,12 @@ import { VyTableColumn } from './vy-table.classes';
   styleUrls: ['./vy-table.component.css']
 })
 export class VyTableComponent implements OnInit {
+  
+  protected iCountRows = 2;
+  protected countPagesDisplayed = 5;
+  protected iStartNumRow = 0;
+  protected iEndNumRow = 0;  
+  protected lstPagesNum: Array<number> = new Array<number>();
 
   @Input()
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
@@ -47,6 +53,48 @@ export class VyTableComponent implements OnInit {
     // return document.getElementById('tId').innerHTML
   }
 
+  ngOnInit() {
+
+  }
+
+  moveToPage(pageNum: number) {
+    this.lstCurrentDataRows = this.lstDataRows.slice((pageNum-1) * this.iCountRows, (pageNum * this.iCountRows) + this.iCountRows);
+    this.iStartNumRow = pageNum * this.iCountRows;
+    this.iEndNumRow = this.iStartNumRow + this.lstCurrentDataRows.length;
+    this.updateLstPagesNum();
+  }
+
+  moveToNextPage() {
+    this.lstCurrentDataRows = this.lstDataRows.slice(this.iEndNumRow, this.iEndNumRow + this.iCountRows);
+    this.iStartNumRow = this.iEndNumRow;
+    this.iEndNumRow = this.iEndNumRow + this.lstCurrentDataRows.length;
+    this.updateLstPagesNum();
+  }
+
+  moveToPrevPage() {
+    this.lstCurrentDataRows = this.lstDataRows.slice((this.iStartNumRow - this.iCountRows) < 0 ? 0 : (this.iStartNumRow - this.iCountRows), this.iStartNumRow);
+    this.iStartNumRow = (this.iStartNumRow - this.iCountRows) < 0 ? 0 : (this.iStartNumRow - this.iCountRows);
+    this.iEndNumRow = this.iStartNumRow + this.lstCurrentDataRows.length;
+    this.updateLstPagesNum();
+  }
+
+  updateLstPagesNum() {
+    let currentPage = (this.iStartNumRow / this.iCountRows) + 1;
+    this.lstPagesNum = [currentPage];
+    for (let i = 1; i < (this.countPagesDisplayed / 2); i++) {
+      if ((currentPage + i) < (this.lstDataRows.length / this.iCountRows))//next
+        this.lstPagesNum.push(currentPage + i);
+        if ((currentPage - i) > 0)//prev
+        this.lstPagesNum.push(currentPage - i);
+    }
+    // this.lstPagesNum //order by
+  }
+
+
+
+
+
+
   public tableToExcel() {
     debugger;
     let uri = 'data:application/vnd.ms-excel;base64,'
@@ -84,8 +132,5 @@ export class VyTableComponent implements OnInit {
     window.location.href = uri + base64(format(template, ctx))
   }
 
-  ngOnInit() {
-
-  }
 
 }

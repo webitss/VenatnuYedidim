@@ -22,3 +22,21 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- 
+<div>
+    <span>עמוד {{(iStartNumRow/iCountRows) + 1}}</span>
+   
+    <span (click)="iStartNumRow != 0 ? moveToPage(1) : ''" [ngStyle]="{'color': (iStartNumRow == 0 ? 'gray' : 'black')}">להתחלה</span>
+    <span (click)="iStartNumRow != 0 ? moveToPrevPage() : ''" [ngStyle]="{'color': (iStartNumRow == 0 ? 'gray' : 'black')}">הקודם</span>
+    
+  
+    <div *ngFor="let i of lstPagesNum">{{((iStartNumRow/iCountRows) + 1)}}
+      <span (click)="i != ((iStartNumRow/iCountRows) + 1) ? moveToPage(i) : ''" [ngStyle]="{'color': (i == ((iStartNumRow/iCountRows) + 1) ? 'gray' : 'black')}">{{i}}</span>
+    </div>
+  
+    <span (click)="iEndNumRow != lstDataRows.length ? moveToNextPage() : ''" [ngStyle]="{'color': (iEndNumRow == lstDataRows.length ? 'gray' : 'black')}">הבא</span>
+    <span (click)="iEndNumRow != lstDataRows.length ? moveToPage(lstDataRows.length / iCountRows) : ''" [ngStyle]="{'color': (iEndNumRow == lstDataRows.length ? 'gray' : 'black')}">לסוף</span>
+  </div> -->
