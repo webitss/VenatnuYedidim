@@ -1,5 +1,6 @@
 ﻿using Service.Entities;
 using Service.Utilities;
+using System;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -196,7 +197,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool SetEvent(Event1 oEvent, int iUserId);
+        bool SetEvent(Event1 oEvent, int iUserId, List<Object> to);
 
         [OperationContract]
         [WebInvoke(

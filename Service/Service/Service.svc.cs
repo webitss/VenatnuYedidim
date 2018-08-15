@@ -1,5 +1,6 @@
 ﻿using Service.Entities;
 using Service.Utilities;
+using System;
 using System.Collections.Generic;
 
 namespace Service
@@ -103,9 +104,9 @@ namespace Service
 
 
         #region Event
-        public bool SetEvent(Event1 oEvent, int iUserId)
+        public bool SetEvent(Event1 oEvent, int iUserId, List<Object> to)
         {
-            return Event1.SetEvent(oEvent, iUserId);
+            return Event1.SetEvent(oEvent, iUserId,to);
         }
 
         public List<Event1> GetEventsList(int iUserId)
@@ -256,7 +257,16 @@ namespace Service
         {
             return Participant.GetParticipantsList(iEventId);
         }
+<<<<<<< HEAD
+
+        public List<Student> GetGraduatesList(int iUserId)
+        {
+            throw new NotImplementedException();
+        }
+
+=======
         
+>>>>>>> b5158d748169c42fd80ecea7657c38452f01f43c
         #endregion
 
     }
