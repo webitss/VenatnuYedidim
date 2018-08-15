@@ -19,9 +19,6 @@ export class AvrechimComponent implements OnInit {
    avrechimList:Avrech[];
    public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
 
-<<<<<<< HEAD
-  constructor(private router: Router,private appProxy:AppProxy) { }
-=======
   
   //  public lstColumns = [{
   //     title: 'פתיחה',
@@ -51,7 +48,6 @@ export class AvrechimComponent implements OnInit {
     
   //   }];
   constructor(private router: Router,private appProxy:AppProxy,private renderer:Renderer2) { }
->>>>>>> e81931acb9a384cc915c8615242fd2138875d137
 
   ngOnInit() {
 
