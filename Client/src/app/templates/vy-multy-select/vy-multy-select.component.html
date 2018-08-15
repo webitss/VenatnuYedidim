@@ -5,7 +5,7 @@
        {{inputTitle}}
       </span>
     </div>
-    
+
     <div class="multy-select col-sm-7" (click)="flag=!flag; openOrClose()" (mouseover)="onOverFlag=true" (mouseleave)="onOverFlag=false"><span style="color: gainsboro">{{titleStr}}</span>
       <!-- <div *ngIf="flag==true">-->
       <!-- <div *ngFor="let s of fullList|filterBMultySelectChecked" style="font-size: 13px">
@@ -16,10 +16,21 @@
 
       <div *ngIf="onOverFlag==true" class="mouseover" style="z-index: 999999999;">
         <!-- && flag==true -->
-        <div *ngFor="let s of fullList|filterBMultySelectChecked">{{s.nvFirstName}} {{s.nvLastName}} {{s.nvIdentityCard}}
+        <div *ngFor="let s of fullList|filterBMultySelectChecked">{{s}}
           <br/>
         </div>
       </div>
+
+
+
+      <!-- <div *ngIf="onOverFlag==true" class="mouseover" style="z-index: 999999999;">
+          <div *ngFor="let s of fullList|filterBMultySelectChecked">{{s.nvFirstName}} {{s.nvLastName}} {{s.nvIdentityCard}}
+            <br/>
+          </div>
+        </div> -->
+
+
+
   </div>
   <div class="row">
     <div class="col-sm-5"></div>
@@ -31,10 +42,20 @@
         <input type="text" placeholder="חפש" class="search item" [(ngModel)]="search" style="border: 1px solid rgb(175, 175, 175);" />
       </div>
       <div>
+
+
+
         <div *ngFor="let item of fullList|filter:search" class="item">
           <input type="checkbox" [(ngModel)]="item['bMultySelectChecked']">
-          <span>{{item.nvFirstName}} {{item.nvLastName}} {{item.nvIdentityCard}}</span>
+          <span>{{item}}</span>
         </div>
+
+
+
+        <!-- <div *ngFor="let item of fullList|filter:search" class="item">
+          <input type="checkbox" [(ngModel)]="item['bMultySelectChecked']">
+          <span>{{item.nvFirstName}} {{item.nvLastName}} {{item.nvIdentityCard}}</span>
+        </div> -->
       </div>
     </div>
   </div>
