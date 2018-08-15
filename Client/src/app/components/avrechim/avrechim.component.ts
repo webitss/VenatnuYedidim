@@ -1,12 +1,10 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { AvrechComponent } from '../avrech/avrech.component';
 
 import {Avrech} from '../../classes/avrech';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { Router } from '@angular/router';
-import { create } from 'domain';
-import { createInjectable } from '../../../../node_modules/@angular/compiler/src/core';
 
 @Component({
   selector: 'app-avrechim',
@@ -19,39 +17,7 @@ export class AvrechimComponent implements OnInit {
    avrechimList:Avrech[];
    public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
 
-<<<<<<< HEAD
   constructor(private router: Router,private appProxy:AppProxy) { }
-=======
-  
-  //  public lstColumns = [{
-  //     title: 'פתיחה',
-  //     name: 'open'
-  //   }
-  // ,{
-  //   title: 'שם משפחה',
-  //   name: 'nvLastName'
-  // },
-  // {
-  //   title: 'שם פרטי',
-  //   name: 'nvFirstName'
-  // },
-  // {
-  //   title: 'טלפון',
-  //   name: 'nvPhone'
-  // },
-  // {
-  //   title: 'נייד',
-  //   name: 'nvMobile'
-  // },
-  // {
-  //   title: 'מייל',
-  //   name: 'nvEmail'
-  // }];
-  // public lstDataRows = [{
-    
-  //   }];
-  constructor(private router: Router,private appProxy:AppProxy,private renderer:Renderer2) { }
->>>>>>> e81931acb9a384cc915c8615242fd2138875d137
 
   ngOnInit() {
 
@@ -82,18 +48,4 @@ export class AvrechimComponent implements OnInit {
   editAvrech(e) {
         this.router.navigate(['avrechim/avrech/',e.iPersonId])
   }
-//   tableToExcel(AvrechimList){
-//     debugger;
-//     let uri = 'data:application/vnd.ms-excel;base64,'
-//         , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>createTable()</table></body></html>'
-//         , base64 = function(s) { return window.btoa(decodeURIComponent(encodeURIComponent(s))) }
-//         , format = function(s,c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
-           
-//             var ctx = {worksheet: name || 'Worksheet', table: this.createTable(a)}
-//             window.location.href = uri + base64(format(template, ctx))
-//                 }
-//     } 
-
-// createTable(){
-// this.renderer.createTable();
 }
