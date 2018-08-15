@@ -19,7 +19,9 @@ export class AvrechStudentsComponent implements OnInit {
   fields: Array<string>;
   studentsToAdd: Array<any> = new Array<any>();
   student: Student;
-  title:string="רשימת תלמידים"
+  title:string="רשימת תלמידים";
+  inputTitle:string="בחר תלמידים";
+
 
   //studentList: Student[];
 
