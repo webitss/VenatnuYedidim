@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./event-details.component.css']
 })
 export class EventDetailsComponent implements OnInit {
-  list: Array<string> = new Array<string>("אברכים", "תלמידים", "בוגרים");
+  list: Array<any> = new Array<any>({value:"אברכים"}, {value:"תלמידים"},{value: "בוגרים"});
   title:string="רשימת תלמידים";
   inputTitle:string="עבור";
 

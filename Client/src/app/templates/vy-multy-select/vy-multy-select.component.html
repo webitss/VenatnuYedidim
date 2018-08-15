@@ -16,7 +16,7 @@
 
       <div *ngIf="onOverFlag==true" class="mouseover" style="z-index: 999999999;">
         <!-- && flag==true -->
-        <div *ngFor="let s of fullList|filterBMultySelectChecked">{{s}}
+        <div *ngFor="let s of fullList|filterBMultySelectChecked">{{s.value}}
           <br/>
         </div>
       </div>
@@ -47,7 +47,7 @@
 
         <div *ngFor="let item of fullList|filter:search" class="item">
           <input type="checkbox" [(ngModel)]="item['bMultySelectChecked']">
-          <span>{{item}}</span>
+          <span>{{item.value}}</span>
         </div>
 
 

@@ -11,7 +11,7 @@ export class VyMultySelectComponent implements OnInit {
   constructor() { }
   @Input()
   @Output()
-  fullList: Array<string>;
+  fullList: Array<any>;
   flag = false;
   checkboxValueSelectAll: boolean;
 

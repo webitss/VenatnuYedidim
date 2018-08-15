@@ -22,7 +22,7 @@ export class AvrechStudentsComponent implements OnInit {
   title:string="רשימת תלמידים";
   inputTitle:string="בחר תלמידים";
 
-listToSelect:Array<string>;
+listToSelect:Array<any>;
 
   //studentList: Student[];
 
@@ -53,9 +53,9 @@ listToSelect:Array<string>;
       , err => alert(err));
     this.flag = false
   }
-
+  item:string;
   ngOnInit() {
-    this.listToSelect=new Array<string>();
+    this.listToSelect=new Array<any>();
     this.activatedRoute.parent.params.subscribe(params => {
       this.id = params['iPersonId'];
     })
@@ -73,7 +73,7 @@ listToSelect:Array<string>;
 
           this.allStudents.forEach(
             student=>{
-              this.listToSelect.push(student.nvFirstName+' '+student.nvLastName+" "+student.nvIdentityCard);
+              this.listToSelect.push({value:student.nvFirstName+' '+student.nvLastName+" "+student.nvIdentityCard});
             }
           );
     }
