@@ -7,11 +7,11 @@ import { VyTableColumn } from './vy-table.classes';
   styleUrls: ['./vy-table.component.css']
 })
 export class VyTableComponent implements OnInit {
-  
-  protected iCountRows = 2; 
+
+  protected iCountRows = 2;
   protected countPagesDisplayed = 5;
   protected iStartNumRow = 0;
-  protected iEndNumRow = 0;  
+  protected iEndNumRow = 0;
   protected lstPagesNum: Array<number> = new Array<number>();
 
   @Input()
@@ -58,7 +58,7 @@ export class VyTableComponent implements OnInit {
   }
 
   moveToPage(pageNum: number) {
-    this.lstCurrentDataRows = this.lstDataRows.slice((pageNum-1) * this.iCountRows, (pageNum * this.iCountRows) + this.iCountRows);
+    this.lstCurrentDataRows = this.lstDataRows.slice((pageNum - 1) * this.iCountRows, (pageNum * this.iCountRows) + this.iCountRows);
     this.iStartNumRow = pageNum * this.iCountRows;
     this.iEndNumRow = this.iStartNumRow + this.lstCurrentDataRows.length;
     this.updateLstPagesNum();
@@ -84,7 +84,7 @@ export class VyTableComponent implements OnInit {
     for (let i = 1; i < (this.countPagesDisplayed / 2); i++) {
       if ((currentPage + i) < (this.lstDataRows.length / this.iCountRows))//next
         this.lstPagesNum.push(currentPage + i);
-        if ((currentPage - i) > 0)//prev
+      if ((currentPage - i) > 0)//prev
         this.lstPagesNum.push(currentPage - i);
     }
     // this.lstPagesNum //order by
@@ -125,7 +125,7 @@ export class VyTableComponent implements OnInit {
         return window.btoa(decodeURIComponent(encodeURIComponent(s)))
       }
       , format = function (s, c) {
-        return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; })       
+        return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; })
       }
 
     var ctx = { worksheet: name || 'Worksheet', table: this.createTableFromData() }
