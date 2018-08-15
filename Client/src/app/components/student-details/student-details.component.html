@@ -1,113 +1,134 @@
 
-        <div class="imageStudent">
-            <div class="chooseFile"></div>
-            <input type="file" class="file">
-        </div>
-        <div class="form">
-            <div class="row">
-            <div class="form-group ">
-                <label for="lastName">שם משפחה:</label>
-                <input type="text" class="form-control" id="lastName" [(ngModel)]="student.nvLastName" [ngModelOptions]="{standalone: true}">
-            </div>
-            <div class="form-group ">
-                <label for="firstName">שם פרטי:</label>
-                <input type="text" class="form-control" id="firstName" [(ngModel)]="student.nvFirstName" [ngModelOptions]="{standalone: true}">
-            </div>
-            <div class="form-group ">
-                <label for="identity">תעודת זהות :</label>
-                <input type="text" class="form-control" id="identity" [(ngModel)]="student.nvIdentityCard" [ngModelOptions]="{standalone: true}">
-            </div>
-            <div class="form-group ">
-                <label for="phone"> טלפון :</label>
-                <input type="text" class="form-control" id="phone" [(ngModel)]="student.nvPhone" [ngModelOptions]="{standalone: true}">
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group ">
-                <label for="nvBornDate"> תאריך לידה עברי:</label>
-                <input type="text" class="form-control" id="nvBornDate" [(ngModel)]="student.nvBirthdate" [ngModelOptions]="{standalone: true}">
-            </div>
-            <div class="form-group ">
-                <label for="dtBornDate"> תאריך לידה לועזי:</label>
-                <input type="date" class="form-control" id="dtBornDate" [(ngModel)]="student.dtBirthdate" [ngModelOptions]="{standalone: true}">
-            </div>
-      
-            
-
-            <div class="form-group ">
-                <label for="street"> כתובת :</label>
-                <input type="text" class="form-control" id="street" [(ngModel)]="student.nvAddress" [ngModelOptions]="{standalone: true}">
-            </div>
-
-            <div class="form-group ">
-                <label for="city"> עיר :</label>
-                <input type="text" class="form-control" id="city" [(ngModel)]="student.nvCity" [ngModelOptions]="{standalone: true}">
-            </div>   
-        </div>
-      
-        <div class="row">
-            
-
-            <div class="form-group">
-                <label for="yeshivaName">מוסד לימודים :</label>
-                <input type="text" class="form-control" id="yeshivaName" [(ngModel)]="student.nvYeshivaName" [ngModelOptions]="{standalone: true}">
-            </div>
-
-            <div class="form-group ">
-                <label for="yesivaStreet">כתובת מוסד :</label>
-                <input type="text" class="form-control" id="yesivaStreet" [(ngModel)]="student.nvYeshivaStreet" [ngModelOptions]="{standalone: true}">
-            </div>
-
-            <div class="form-group ">
-                <label for="yeshivaCity">עיר מוסד :</label>
-                <input type="text" class="form-control" id="yeshivaCity" [(ngModel)]="student.nvYeshivaCity" [ngModelOptions]="{standalone: true}">
-            </div>
-           
-       
-        
-         
-            <div class="form-group ">
-                <label for="dateAdd"> תאריך הצטרפות :</label>
-                <input type="date" class="form-control" id="dateAdd" [(ngModel)]="student.dtAddStudentDate" [ngModelOptions]="{standalone: true}">
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-sm-4">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="fatherDead" (click)="changeStatusParent(1)" [checked]="isCheckedFather"> יתום מאב</label>
-                </div>
-                <div *ngIf="(fatherDead||fatherDeadDetails)">
-                    <div class="form-group col-sm-4">
-                        <label for="dtBornDate"> תאריך פטירה עברי:</label>
-                        <input type="text" class="form-control" id="dtBornDate" [(ngModel)]="student.nvFatherDeathDate" [ngModelOptions]="{standalone: true}">
-                    </div>
-                    <div class="form-group col-sm-3">
-                        <label for="couseOfdead"> נפטר מ:</label>
-                        <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathFather" [ngModelOptions]="{standalone: true}">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group col-sm-4">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="motherDead" (change)="changeStatusParent(2)" [checked]="isCheckedMother"> יתום מאם</label>
-                </div>
-                <div *ngIf="(motherDead||motherDeadDetails)">
-                    <div class="form-group col-sm-4">
-                        <label for="dtBornDate"> תאריך פטירה עברי:</label>
-                        <input type="text" class="form-control" id="dtBornDate" [(ngModel)]="student.nvMotherDeathDate" [ngModelOptions]="{standalone: true}">
-                    </div>
-                    <div class="form-group col-sm-3">
-                        <label for="couseOfdead"> נפטר מ:</label>
-                        <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathMother" [ngModelOptions]="{standalone: true}">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group ">
-                <label for='comment'>הערות</label>
-                <textarea name='comment' class="form-control" [(ngModel)]="student.nvComment" [ngModelOptions]="{standalone: true}"></textarea>
-            </div>
-        </div>
-   
+{{bornDateHebrewStudent.Day}}
+{{bornDateHebrewStudent.Month}}
+<div class="imageStudent">
+    <div class="chooseFile"></div>
+    <input type="file" class="file">
 </div>
+<div class="form">
+    <div class="row">
+        <div class="form-group ">
+            <label for="lastName">שם משפחה:</label>
+            <input type="text" class="form-control" id="lastName" [(ngModel)]="student.nvLastName" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group ">
+            <label for="firstName">שם פרטי:</label>
+            <input type="text" class="form-control" id="firstName" [(ngModel)]="student.nvFirstName" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group ">
+            <label for="identity">תעודת זהות :</label>
+            <input type="text" class="form-control" id="identity" [(ngModel)]="student.nvIdentityCard" [ngModelOptions]="{standalone: true}">
+        </div>
+        
+        <div class="form-group ">
+            <label for="phone"> טלפון :</label>
+            <input type="text" class="form-control" id="phone" [(ngModel)]="student.nvPhone" [ngModelOptions]="{standalone: true}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group ">
+            <label for="nvBornDateDay"> תאריך לידה עברי:</label>
+            <input type="text" class="form-control" id="nvBornDateDay" [(ngModel)]="bornDateHebrewStudent.Day" [ngModelOptions]="{standalone: true}"
+                placeholder="יום">
+            <input type="text" class="form-control" id="nvBornDateMonth" [(ngModel)]="bornDateHebrewStudent.Month" [ngModelOptions]="{standalone: true}"
+                placeholder="חודש">
+            <input type="text" class="form-control" id="nvBornDateYear" [(ngModel)]="bornDateHebrewStudent.Year" [ngModelOptions]="{standalone: true}"
+                placeholder="שנה">
+        </div>
+
+        <div class="form-group ">
+            <label for="dtBornDate"> תאריך לידה לועזי:</label>
+            <input type="date" class="form-control" id="dtBornDate" [(ngModel)]="student.dtBirthdate " (ngModelChange)="student.dtBirthdate= $event" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <!-- | date:'yyyy-MM-dd' -->
+
+        <div class="form-group ">
+            <label for="street"> כתובת :</label>
+            <input type="text" class="form-control" id="street" [(ngModel)]="student.nvAddress" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="form-group ">
+            <label for="city"> עיר :</label>
+            <input type="text" class="form-control" id="city" [(ngModel)]="student.nvCity" [ngModelOptions]="{standalone: true}">
+        </div>
+    </div>
+
+    <div class="row">
+
+
+        <div class="form-group">
+            <label for="yeshivaName">מוסד לימודים :</label>
+            <input type="text" class="form-control" id="yeshivaName" [(ngModel)]="student.nvYeshivaName" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="form-group ">
+            <label for="yesivaStreet">כתובת מוסד :</label>
+            <input type="text" class="form-control" id="yesivaStreet" [(ngModel)]="student.nvYeshivaStreet" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="form-group ">
+            <label for="yeshivaCity">עיר מוסד :</label>
+            <input type="text" class="form-control" id="yeshivaCity" [(ngModel)]="student.nvYeshivaCity" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="form-group ">
+            <label for="dateAdd"> תאריך הצטרפות :</label>
+            <input type="date" class="form-control" id="dateAdd" [(ngModel)]="student.dtAddStudentDate" [ngModelOptions]="{standalone: true}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="fatherDead" (click)="changeStatusParent(1)" [checked]="isCheckedFather"> יתום מאב</label>
+            </div>
+            <div *ngIf="(fatherDead||fatherDeadDetails)">
+                <div class="form-group col-sm-4">
+                    <label for="dtBornDateDay"> תאריך פטירה עברי:</label>
+                    <input type="text" class="form-control" id="dtBornDateDay" [(ngModel)]="diedDateHebrewFather.Day" [ngModelOptions]="{standalone: true}"
+                        placeholder="יום">
+                    <input type="text" class="form-control" id="dtBornDateMonth" [(ngModel)]="diedDateHebrewFather.Month" [ngModelOptions]="{standalone: true}"
+                        placeholder="חודש">
+                    <input type="text" class="form-control" id="dtBornDateYear" [(ngModel)]="diedDateHebrewFather.Year" [ngModelOptions]="{standalone: true}"
+                        placeholder="שנה">
+                </div>
+
+                <div class="form-group col-sm-3">
+                    <label for="couseOfdead"> נפטר מ:</label>
+                    <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathFather" [ngModelOptions]="{standalone: true}">
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-sm-4">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="motherDead" (change)="changeStatusParent(2)" [checked]="isCheckedMother"> יתום מאם</label>
+        </div>
+        <div *ngIf="(motherDead||motherDeadDetails)">
+            <div class="form-group col-sm-4">
+                <label for="dtBornDateDay"> תאריך פטירה עברי:</label>
+               
+                <input type="text" class="form-control" id="dtBornDateDay" [(ngModel)]="diedDateHebrewMother.Day" [ngModelOptions]="{standalone: true}"
+                placeholder="יום">
+            <input type="text" class="form-control" id="dtBornDateMonth" [(ngModel)]="diedDateHebrewMother.Month" [ngModelOptions]="{standalone: true}"
+                placeholder="חודש">
+            <input type="text" class="form-control" id="dtBornDateYear" [(ngModel)]="diedDateHebrewMother.Year" [ngModelOptions]="{standalone: true}"
+                placeholder="שנה">
+            </div>
+
+            <div class="form-group col-sm-3">
+                <label for="couseOfdead"> נפטר מ:</label>
+                <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathMother" [ngModelOptions]="{standalone: true}">
+            </div>
+        </div>
+    </div>
+    <div class="form-group ">
+        <label for='comment'>הערות</label>
+        <textarea name='comment' class="form-control" [(ngModel)]="student.nvComment" [ngModelOptions]="{standalone: true}"></textarea>
+    </div>
+</div>
+
+<!-- </div> -->

@@ -442,6 +442,17 @@ RequestFormat = WebMessageFormat.Json)]
         RequestFormat = WebMessageFormat.Json)]
         List<Document> GetDocumentsByItemId(int iItemId);
         #endregion
+
+        #region graduates
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetGraduatesList",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Student> GetGraduatesList(int iUserId);
+        #endregion
     }
 
 }

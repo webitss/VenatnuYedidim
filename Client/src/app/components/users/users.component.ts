@@ -4,6 +4,8 @@ import { User } from '../../classes/user';
 import { AppProxy } from '../../services/app.proxy';
 import { Router } from '@angular/router';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
+import { SysTableRow } from '../../classes/SysTableRow';
+import { SysTableService } from '../../services/sys-table.service';
 
 @Component({
   selector: 'app-users',
@@ -12,7 +14,7 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private router: Router) { }
+  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService) { }
 
   ngOnInit() {
     this.iPersonId = 0;
@@ -21,14 +23,19 @@ export class UsersComponent implements OnInit {
 
       this.lstDataRows.forEach(u => {
 
-        u["edit"] = "<p>ערוך</p>";
+        u["edit"] = "<div class='edit'></div>";
       });
     });
+    // this.sysTableService.getValues(4).then(data={
+    //   data.forEach(user => {
+    //     user["permittionValue"] = 
+    //   });
+    // })
   }
 
-  private users: Array<User>;
 
   private iPersonId: number;
+  private permittionValue: string;
 
 
   public lstColumns = [

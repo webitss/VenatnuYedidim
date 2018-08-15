@@ -260,6 +260,16 @@ namespace Service
         {
             return Participant.GetParticipantsList(iEventId);
         }
+
+        #endregion
+
+        #region graduates
+        
+       public List<Student> GetGraduatesList(int iUserId)
+        {
+          
+                return Student.GetGraduatesList(iUserId);
+        }
         
         #endregion
 

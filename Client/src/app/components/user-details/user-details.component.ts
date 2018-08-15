@@ -15,12 +15,11 @@ export class UserDetailsComponent implements OnInit {
   constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute, private sysTableService: SysTableService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.route.parent.params.subscribe(params => {
       if (params['iPersonId'] != '0') {
         this.appProxy.post("GetUser", { iPersonId: params['iPersonId'] })
           .then(data => {
             this.user = data;
-            debugger;
           });
       }
       else {
@@ -28,7 +27,6 @@ export class UserDetailsComponent implements OnInit {
       }
     });
     this.sysTableService.getValues(4).then(data => {
-      debugger
       this.lst = data;
     });
   }
@@ -40,11 +38,11 @@ export class UserDetailsComponent implements OnInit {
   @Output()
   public person: Person;
 
+
   public lst: Array<any>;
 
   saveUser() {
     this.appProxy.post("SetUser", { user: this.user, iUserId: 1 }).then(data => {
-      debugger
       if (data == true) {
         alert("המשתמש נוסף בהצלחה!");
         this.router.navigate(['users']);
