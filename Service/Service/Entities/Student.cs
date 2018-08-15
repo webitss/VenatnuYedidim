@@ -88,6 +88,25 @@ namespace Service.Entities
             }
         }
 
+        public static List<Student> GetGraduatesList(int iUserId)
+        {
+            try
+            {
+
+
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TStudentGetGraduateByUser_SLCT", new SqlParameter("iUserId", iUserId)).Tables[0].Rows;
+                List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
+                return students;
+            }
+
+
+
+            catch (Exception ex)
+            {
+                Log.LogError("GetGraduatesList / TStudentGetGraduateByUser_SLCT", "ex" + ex);
+                return null;
+            }
+        }
         public static Student GetStudentById(int iPersonId)
         {
             try
