@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
+import { SysTableRow } from '../../classes/SysTableRow';
 
 @Component({
   selector: 'app-student-conversation-details',
@@ -14,6 +15,9 @@ export class StudentConversationDetailsComponent implements OnInit {
   Conversation = new EventEmitter(); 
   @Input()
   protected conversation: Conversation;
+  @Input()
+  protected sysTableList:SysTableRow[];
+
 
    protected iPersonId: number=1;
 
