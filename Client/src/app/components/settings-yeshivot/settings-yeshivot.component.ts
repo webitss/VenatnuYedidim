@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { SettingYeshivaComponent } from '../setting-yeshiva/setting-yeshiva.component';
 import { Yeshiva } from '../../classes/Yeshiva';
-// import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-settings-yeshivot',
@@ -17,10 +18,11 @@ export class SettingsYeshivotComponent implements OnInit {
   protected yeshivaList: Array<Yeshiva> = new Array<Yeshiva>();
   protected iYeshivaId: number;
   protected lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
+  protected yeshiva:Yeshiva;
 
-  constructor(private appProxy: AppProxy) { }
-
-
+  
+  constructor(private appProxy: AppProxy,private router:Router) { }
+ 
   ngOnInit() {
 
     this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true))
@@ -31,15 +33,18 @@ export class SettingsYeshivotComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('תפקיד', 'nvRoleType'))
     this.lstColumns.push(new VyTableColumn('מייל', 'nvEmail'))
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'))
-
+    //להוסיף עמודה של תפקיד
     this.appProxy.post('GetAllYeshivot').then(data => {
       this.yeshivaList = data;
-      this.yeshivaList.forEach(y=> y['edit'] = '<span>עריכה</span>')
+      this.yeshivaList.forEach(y=> y['edit'] = '<div class="edit"></div>')
     });
-
   }
 
   public editYeshiva(yeshiva) {
     this.iYeshivaId = yeshiva.iYeshivaId;
+  }
+
+  cancel() {
+    this.yeshiva = null;
   }
 }

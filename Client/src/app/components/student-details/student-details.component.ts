@@ -2,6 +2,9 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { Student } from '../../classes/student';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HebrewDate } from '../../classes/hebrewDate';
+import { SysTableService } from '../../services/sys-table.service';
+import { SysTableRow } from '../../classes/SysTableRow';
 
 
 @Component({
@@ -11,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private route: ActivatedRoute, private router: Router) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router) { }
 
   @Input() student: Student
 
@@ -22,18 +25,48 @@ export class StudentDetailsComponent implements OnInit {
   motherDeadDetails: boolean;
   isCheckedFather: boolean;
   isCheckedMother: boolean;
-  @Output() bornDateHebrewStudent = { month: '', year: "", day: '' };
-  @Output() bornDateHebrewFather = { month: '', year: "", day: '' };
-  @Output() bornDateHebrewMother = { month: '', year: "", day: '' };
+  bornDateHebrewStudent: HebrewDate;
+  diedDateHebrewFather: HebrewDate;
+  diedDateHebrewMother: HebrewDate;
+  bornDateStudentArr = new Array<string>();
+  diedDateFatherArr = new Array<string>();
+  diedDateMotherArr = new Array<string>();
+  sysTableRowList: SysTableRow[];
 
   ngOnInit() {
+    this.bornDateHebrewStudent = new HebrewDate();
+    this.diedDateHebrewFather = new HebrewDate();
+    this.diedDateHebrewMother = new HebrewDate();
 
     this.route.parent.params.subscribe(params => {
       this.paramRout = params['iPersonId'];
       if (params['iPersonId'] != '0') {
 
+
         this.appProxy.post("GetStudentById", { iPersonId: params['iPersonId'] }).then(data => {
           this.student = data;
+
+          // this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(data => {
+          //   this.sysTableRowList =  data;
+          this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data; });
+
+          this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
+          this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];
+          this.bornDateHebrewStudent.Month = this.bornDateStudentArr[1];
+          this.bornDateHebrewStudent.Year = this.bornDateStudentArr[2];
+
+          this.diedDateFatherArr = this.student.nvFatherDeathDate.split(" ");
+          this.diedDateHebrewFather.Day = this.diedDateFatherArr[0];
+          this.diedDateHebrewFather.Month = this.diedDateFatherArr[1];
+          this.diedDateHebrewFather.Year = this.diedDateFatherArr[2];
+
+          this.diedDateMotherArr = this.student.nvMotherDeathDate.split(" ");
+          this.diedDateHebrewMother.Day = this.diedDateMotherArr[0];
+          this.diedDateHebrewMother.Month = this.diedDateMotherArr[1];
+          this.diedDateHebrewMother.Year = this.diedDateMotherArr[2];
+
+
+
           if (this.student.bDeathFather == true) {
             this.fatherDeadDetails = true;
             this.isCheckedFather = true;
@@ -88,8 +121,7 @@ export class StudentDetailsComponent implements OnInit {
 
   saveStudent() {
     alert("success")
-    this.student.nvBirthdate = this.bornDateHebrewStudent.day+" "+this.bornDateHebrewStudent.month+" "+this.bornDateHebrewStudent.year;
-    
+    this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;
     if (this.paramRout != '0') {
       this.appProxy.post("UpdateStudent", { Student: this.student, iUserId: 3 }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
     }

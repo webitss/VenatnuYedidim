@@ -197,7 +197,7 @@ import { TaskComponent } from './components/task/task.component';
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "setting-yeshiva", component: SettingYeshivaComponent }
+              { path: "setting-yeshiva/:EditNewYeshiva", component: SettingYeshivaComponent }
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },

@@ -4,6 +4,8 @@ import { User } from '../../classes/user';
 import { AppProxy } from '../../services/app.proxy';
 import { Router } from '@angular/router';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
+import { SysTableRow } from '../../classes/SysTableRow';
+import { SysTableService } from '../../services/sys-table.service';
 
 @Component({
   selector: 'app-users',
@@ -12,7 +14,7 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private router: Router) { }
+  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService) { }
 
   ngOnInit() {
     this.iPersonId = 0;
@@ -21,14 +23,22 @@ export class UsersComponent implements OnInit {
 
       this.lstDataRows.forEach(u => {
 
-        u["edit"] = "<p>ערוך</p>";
+        u["edit"] = "<div class='edit'></div>";
+      });
+
+      this.sysTableService.getValues(SysTableService.dataTables.permissionType.iSysTableId).then(data => {
+        this.lstDataRows.forEach(user => {
+          this.lstValues = data;
+          user["nvPermittion"] = data.filter(s => s.iSysTableRowId == user["iPermissionId"])[0].nvValue;
+        });
       });
     });
+
   }
 
-  private users: Array<User>;
 
   private iPersonId: number;
+  private lstValues: any;
 
 
   public lstColumns = [
@@ -37,7 +47,7 @@ export class UsersComponent implements OnInit {
     new VyTableColumn('שם פרטי', 'nvFirstName'),
     new VyTableColumn('נייד', 'nvMobile'),
     new VyTableColumn('שם משתמש', 'nvUserName'),
-    new VyTableColumn('הרשאה', 'iPermissionId'),
+    new VyTableColumn('הרשאה', 'nvPermittion'),
   ];
   public lstDataRows = [];
 

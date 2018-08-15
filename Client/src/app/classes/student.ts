@@ -5,15 +5,15 @@ export class Student implements Person {
 
     public iPersonId: number;
     public nvFirstName: String;
-    public nvLastName: String;
-    public nvIdentityCard: String;
-    public nvPhone: String;
-    public nvMobile: String;
-    public nvEmail: String;
-    public nvAddress: String;
-    public nvCity: String;
-    public nvStatus: String;
-    public nvBirthdate: String;
+    public nvLastName: string;
+    public nvIdentityCard: string;
+    public nvPhone: string;
+    public nvMobile: string;
+    public nvEmail: string;
+    public nvAddress: string;
+    public nvCity: string;
+    public nvStatus: string;
+    public nvBirthdate: string;
     public dtBirthdate: Date;
 
     public iStudentId: number;

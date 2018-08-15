@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Yeshiva } from '../../classes/Yeshiva';
-import {ActivatedRoute,Router} from '@angular/router'
+import {ActivatedRoute,Router, ROUTER_CONFIGURATION} from '@angular/router'
 // import { forEach } from '@angular/router/src/utils/collection';
 // import { element } from 'protractor';
 // import { EMLINK } from 'constants';
@@ -15,55 +15,55 @@ import { SettingsYeshivotComponent } from '../settings-yeshivot/settings-yeshivo
 
 export class SettingYeshivaComponent implements OnInit {
 
-  @Output() Yeshiva=new EventEmitter();
+  @Output() 
+  yeshivaEmit=new EventEmitter();
 
+  protected yeshiva:Yeshiva=new Yeshiva;
 
   @Input()
   public iYeshivaId: number;
 
-  protected yeshiva: Yeshiva = new Yeshiva();
 
   constructor(private appProxy: AppProxy,private ActivatedRoute:ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
-    this.ActivatedRoute.parent.params.subscribe(params=>{
-      this.iYeshivaId=params['iYeshivaId'];
-      alert(this.iYeshivaId);
-    })
-    this.appProxy.post('getYeshivaById',{iYeshivaId:this.yeshiva})
-     .then(
-       data=>{
-         this.yeshiva=data;
-       }
-     ),
-     err=>("err");
+      if(this.iYeshivaId == 0)
+      this.yeshiva = new Yeshiva();
+      else
+      this.appProxy.post('getYeshivaById',{iYeshivaId:this.iYeshivaId})
+      .then(
+        data=>{
+          this.yeshiva=data;
+        }
+      );
   }
 
-
   save() {
-    if(this.iYeshivaId==0){
+    if(this.yeshiva.iYeshivaId==0){
        this.appProxy.post('AddYeshiva', { yeshiva: this.yeshiva })
       .then(
         data => {
           {
             this.yeshiva = data;
-            this.Yeshiva.emit(null);
+            this.yeshivaEmit.emit(null);
             alert("נשמר בהצלחה");
+            this.router.navigate(["settings-yeshivot"]);
           }
         })
     }
     else{
-      this.appProxy.post('EditYeshiva',{yeshiva:this.yeshiva,iYeshivaId:this.yeshiva})
+      this.appProxy.post('EditYeshiva',{yeshiva:this.yeshiva,iYeshivaId:this.yeshiva.iYeshivaId})
       .then(
         data=>{
-        this.Yeshiva.emit(null);
+        this.yeshivaEmit.emit(null);
         alert("נשמר בהצלחה");
-        }
+        this.router.navigate(["settings-yeshivot"]);
+        } 
       )
     }
   }
 
   close(){
-  this.router.navigate(["settings-yeshivot"]);
+   this.yeshivaEmit.emit(null);
   }
 }
