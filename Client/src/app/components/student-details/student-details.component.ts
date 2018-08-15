@@ -30,7 +30,7 @@ export class StudentDetailsComponent implements OnInit {
   diedDateFatherArr = new Array<string>();
   diedDateMotherArr = new Array<string>();
 
-  
+
   ngOnInit() {
     this.bornDateHebrewStudent = new HebrewDate();
     this.diedDateHebrewFather = new HebrewDate();
@@ -43,12 +43,22 @@ export class StudentDetailsComponent implements OnInit {
 
         this.appProxy.post("GetStudentById", { iPersonId: params['iPersonId'] }).then(data => {
           this.student = data;
-          debugger;
-          this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
 
+          this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
           this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];
           this.bornDateHebrewStudent.Month = this.bornDateStudentArr[1];
           this.bornDateHebrewStudent.Year = this.bornDateStudentArr[2];
+
+          this.diedDateFatherArr = this.student.nvFatherDeathDate.split(" ");
+          this.diedDateHebrewFather.Day = this.diedDateFatherArr[0];
+          this.diedDateHebrewFather.Month = this.diedDateFatherArr[1];
+          this.diedDateHebrewFather.Year = this.diedDateFatherArr[2];
+
+          this.diedDateMotherArr = this.student.nvMotherDeathDate.split(" ");
+          this.diedDateHebrewMother.Day = this.diedDateMotherArr[0];
+          this.diedDateHebrewMother.Month = this.diedDateMotherArr[1];
+          this.diedDateHebrewMother.Year = this.diedDateMotherArr[2];
+
 
 
           if (this.student.bDeathFather == true) {

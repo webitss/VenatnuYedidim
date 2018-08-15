@@ -1,6 +1,3 @@
-
-{{bornDateHebrewStudent.Day}}
-{{bornDateHebrewStudent.Month}}
 <div class="imageStudent">
     <div class="chooseFile"></div>
     <input type="file" class="file">
@@ -17,12 +14,24 @@
         </div>
         <div class="form-group ">
             <label for="identity">תעודת זהות :</label>
-            <input type="text" class="form-control" id="identity" [(ngModel)]="student.nvIdentityCard" [ngModelOptions]="{standalone: true}">
+            <input type="text" class="form-control" id="identity" name="identity" [(ngModel)]="student.nvIdentityCard" [ngModelOptions]="{standalone: true}"
+                minlength="9" maxlength="9" #identity="ngModel">
+            <div *ngIf="identity.invalid && (identity.dirty || identity.touched)" class="alert alert-danger">
+                <div *ngIf="(identity.errors.minlength || identity.errors.maxlength)" >
+                   <p>תעודת זהות חייבת להכיל 9 ספרות </p>
+                </div>
+            </div>
         </div>
-        
+
         <div class="form-group ">
             <label for="phone"> טלפון :</label>
-            <input type="text" class="form-control" id="phone" [(ngModel)]="student.nvPhone" [ngModelOptions]="{standalone: true}">
+            <input type="text" class="form-control" id="phone" [(ngModel)]="student.nvPhone" [ngModelOptions]="{standalone: true}"
+            minlength="9" maxlength="9" #phone="ngModel">
+            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger">
+                <div *ngIf="(phone.errors.minlength||phone.errors.maxlength)" >
+                   <p>מספר טלפון אינו תקין </p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -38,7 +47,8 @@
 
         <div class="form-group ">
             <label for="dtBornDate"> תאריך לידה לועזי:</label>
-            <input type="date" class="form-control" id="dtBornDate" [(ngModel)]="student.dtBirthdate " (ngModelChange)="student.dtBirthdate= $event" [ngModelOptions]="{standalone: true}">
+            <input type="date" class="form-control" id="dtBornDate" [(ngModel)]="student.dtBirthdate " (ngModelChange)="student.dtBirthdate= $event"
+                [ngModelOptions]="{standalone: true}">
         </div>
 
         <!-- | date:'yyyy-MM-dd' -->
@@ -78,13 +88,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group col-sm-4">
+        <div class="form-group ">
             <div class="checkbox">
                 <label>
                     <input type="checkbox" name="fatherDead" (click)="changeStatusParent(1)" [checked]="isCheckedFather"> יתום מאב</label>
             </div>
             <div *ngIf="(fatherDead||fatherDeadDetails)">
-                <div class="form-group col-sm-4">
+                <div class="form-group ">
                     <label for="dtBornDateDay"> תאריך פטירה עברי:</label>
                     <input type="text" class="form-control" id="dtBornDateDay" [(ngModel)]="diedDateHebrewFather.Day" [ngModelOptions]="{standalone: true}"
                         placeholder="יום">
@@ -102,25 +112,25 @@
             </div>
         </div>
     </div>
-    <div class="form-group col-sm-4">
+    <div class="form-group ">
         <div class="checkbox">
             <label>
                 <input type="checkbox" name="motherDead" (change)="changeStatusParent(2)" [checked]="isCheckedMother"> יתום מאם</label>
         </div>
         <div *ngIf="(motherDead||motherDeadDetails)">
-            <div class="form-group col-sm-4">
+            <div class="form-group ">
                 <label for="dtBornDateDay"> תאריך פטירה עברי:</label>
-               
+
                 <input type="text" class="form-control" id="dtBornDateDay" [(ngModel)]="diedDateHebrewMother.Day" [ngModelOptions]="{standalone: true}"
-                placeholder="יום">
-            <input type="text" class="form-control" id="dtBornDateMonth" [(ngModel)]="diedDateHebrewMother.Month" [ngModelOptions]="{standalone: true}"
-                placeholder="חודש">
-            <input type="text" class="form-control" id="dtBornDateYear" [(ngModel)]="diedDateHebrewMother.Year" [ngModelOptions]="{standalone: true}"
-                placeholder="שנה">
+                    placeholder="יום">
+                <input type="text" class="form-control" id="dtBornDateMonth" [(ngModel)]="diedDateHebrewMother.Month" [ngModelOptions]="{standalone: true}"
+                    placeholder="חודש">
+                <input type="text" class="form-control" id="dtBornDateYear" [(ngModel)]="diedDateHebrewMother.Year" [ngModelOptions]="{standalone: true}"
+                    placeholder="שנה">
             </div>
 
             <div class="form-group col-sm-3">
-                <label for="couseOfdead"> נפטר מ:</label>
+                <label for="couseOfdead"> נפטרה מ:</label>
                 <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathMother" [ngModelOptions]="{standalone: true}">
             </div>
         </div>
