@@ -250,25 +250,11 @@ namespace Service
 
         #endregion
 
-
-
-
-
         #region participant
 
         public List<Person> GetParticipantsList(int iEventId)
         {
             return Participant.GetParticipantsList(iEventId);
-        }
-
-        #endregion
-
-        #region graduates
-        
-       public List<Student> GetGraduatesList(int iUserId)
-        {
-          
-                return Student.GetGraduatesList(iUserId);
         }
         
         #endregion
