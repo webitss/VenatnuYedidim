@@ -35,7 +35,7 @@ export class StudentDocumentsComponent implements OnInit {
         this.documents.forEach(element => {
           this.lstDataRows.push({
             nvCategory: element.lstObject['nvCategory'],
-            dtCreatedate: element.dtCreatedate,
+            dtCreatedate: element.dtCreatedate.toLocaleDateString(),
             nvDocumentName: element.nvDocumentName,
             edit: '<div class="edit"></div>',
             open: '<a href=' + AppProxy.baseUrl + 'Files/' + element.nvDocumentName + ' target="_blank"> פתח מסמך</a>',
