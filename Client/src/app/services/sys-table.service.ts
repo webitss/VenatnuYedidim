@@ -52,7 +52,7 @@ export class SysTableService {
       iSysTableId: 11,
       SysTableRow: []
     }
-  }
+  } 
 
   constructor(private appProxy: AppProxy) { }
   ////#region מקבל ID של טבלה מחזיר ערכים מאותה טבלה 
