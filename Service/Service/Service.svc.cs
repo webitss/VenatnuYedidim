@@ -257,16 +257,16 @@ namespace Service
         {
             return Participant.GetParticipantsList(iEventId);
         }
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
         public List<Student> GetGraduatesList(int iUserId)
         {
             throw new NotImplementedException();
         }
 
-=======
+//=======
         
->>>>>>> b5158d748169c42fd80ecea7657c38452f01f43c
+//>>>>>>> b5158d748169c42fd80ecea7657c38452f01f43c
         #endregion
 
     }
