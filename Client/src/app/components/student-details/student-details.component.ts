@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { Student } from '../../classes/student';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,12 +22,16 @@ export class StudentDetailsComponent implements OnInit {
   motherDeadDetails: boolean;
   isCheckedFather: boolean;
   isCheckedMother: boolean;
+  @Output() bornDateHebrewStudent = { month: '', year: "", day: '' };
+  @Output() bornDateHebrewFather = { month: '', year: "", day: '' };
+  @Output() bornDateHebrewMother = { month: '', year: "", day: '' };
 
   ngOnInit() {
 
     this.route.parent.params.subscribe(params => {
-
+      this.paramRout = params['iPersonId'];
       if (params['iPersonId'] != '0') {
+
         this.appProxy.post("GetStudentById", { iPersonId: params['iPersonId'] }).then(data => {
           this.student = data;
           if (this.student.bDeathFather == true) {
@@ -45,7 +49,7 @@ export class StudentDetailsComponent implements OnInit {
       }
     });
 
-    this.route.params.subscribe(params => { this.paramRout = params['iPersonId'] });
+    // this.route.parent.params.subscribe(params => { this.paramRout = params['iPersonId'] });
 
 
 
@@ -79,21 +83,23 @@ export class StudentDetailsComponent implements OnInit {
         }
         else this.motherDead = !this.motherDead; break;
     }
-
-
-
   }
-
 
 
   saveStudent() {
+    alert("success")
+    this.student.nvBirthdate = this.bornDateHebrewStudent.day+" "+this.bornDateHebrewStudent.month+" "+this.bornDateHebrewStudent.year;
+    
     if (this.paramRout != '0') {
-      this.appProxy.post("AddStudent", { Student: this.student, iUserId: 3 }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
-    }
-    else {
       this.appProxy.post("UpdateStudent", { Student: this.student, iUserId: 3 }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
     }
+    else {
+      this.appProxy.post("AddStudent", { Student: this.student, iUserId: 3 }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
+
+    }
   }
+
+
 
 
 }
