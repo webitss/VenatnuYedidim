@@ -13,11 +13,12 @@
       </div>
       <div *ngIf="conversation.iConversationId==null">
         <h2>הוספה</h2>
-    </div>
-    <div class="row ">
+      </div>
+      <div class="row ">
 
-      <div class="form-group  ">
+        <div class="form-group  ">
           <label for="conversationType">סוג שיחה</label>
+<<<<<<< HEAD
           <!-- <input type="text" name="conversationType" class="form-control"  [(ngModel)]="conversation.nvConversationType" [ngModelOptions]="{standalone: true}"/>-->
           <select [(ngModel)]="conversation.nvConversationType"> 
             <option *ngFor='let t of sysTableList' [value]="t.nvValue">{{t.nvValue}}</option>
@@ -31,13 +32,34 @@
       <div class="form-group ">
         <label for="conversationDateTime">שעה</label>
         <input type="text" name="conversationDateTime" class="form-control" [ngModel]="conversation.dtConversationTime | date:'yyyy-MM-dd'" (ngModelChange)="conversation.nvConversationTime = $event" [ngModelOptions]="{standalone: true}" />
+=======
+          <input type="text" name="conversationType" class="form-control" [(ngModel)]="conversation.iConversationType" [ngModelOptions]="{standalone: true}"
+          />
+        </div>
+
+        <div class="form-group ">
+          <label for="conversationDate">תאריך</label>
+          <input type="date" name="conversationDate" class="form-control" [ngModel]="conversation.dConversationDate | date:'d/M/yy'"
+            (ngModelChange)="conversation.dConversationDate = $event" />
+        </div>
+        <div class="form-group ">
+          <label for="conversationDateTime">שעה</label>
+          <input type="time" name="conversationDateTime" class="form-control" [ngModel]="conversation.dtConversationTime| date:'shortTime'"
+            (ngModelChange)="conversation.dtConversationTime = $event" [ngModelOptions]="{standalone: true}" />
+        </div>
+>>>>>>> 2cb1f8fed6c820dd05e57d5a241e70852f7b5ca6
+      </div>
+
+
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <label for="conversationSummary">סיכום</label>
+          <input type="text" name="conversationSummary" class="form-control" [(ngModel)]="conversation.nvConversationSummary" [ngModelOptions]="{standalone: true}"
+          />
+        </div>
       </div>
     </div>
-
-   
- <div class="row">
-      <div class="form-group col-sm-12">
-        <label for="conversationSummary">סיכום</label>
-        <input type="text" name="conversationSummary" class="form-control" [(ngModel)]="conversation.nvConversationSummary" [ngModelOptions]="{standalone: true}"/>
-      </div>
+      <app-task></app-task>
+  </div>
 </div>
+<!-- [type]="typeTask" -->

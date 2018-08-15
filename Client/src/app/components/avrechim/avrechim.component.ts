@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { AvrechComponent } from '../avrech/avrech.component';
 
 import {Avrech} from '../../classes/avrech';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { Router } from '@angular/router';
+import { viewClassName } from '../../../../node_modules/@angular/compiler';
+
+
 
 @Component({
   selector: 'app-avrechim',
@@ -15,6 +18,7 @@ export class AvrechimComponent implements OnInit {
 
  avrech:Avrech
    avrechimList:Avrech[];
+   @ViewChild('avrechim') avrechim:any;
    public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
 
   constructor(private router: Router,private appProxy:AppProxy) { }
@@ -36,7 +40,7 @@ export class AvrechimComponent implements OnInit {
     },
     );
 
-    this.lstColumns.push(new VyTableColumn('פתיחה', 'open', 'html', true));
+    this.lstColumns.push(new VyTableColumn('פתיחה', 'open', 'html', true,false));
     this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
     this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
     this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
@@ -47,5 +51,8 @@ export class AvrechimComponent implements OnInit {
   }
   editAvrech(e) {
         this.router.navigate(['avrechim/avrech/',e.iPersonId])
+  }
+  tableToExcel(t){
+    this.avrechim.tableToExcel(t);
   }
 }

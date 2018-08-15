@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute } from '@angular/router';
 import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
+// import { EventEmitter } from 'events';
+import { Document } from '../../classes/document';
+
 
 @Component({
   selector: 'app-upload-document',
@@ -10,20 +13,23 @@ import { SysTableRow } from '../../classes/SysTableRow';
   styleUrls: ['./upload-document.component.css']
 })
 export class UploadDocumentComponent implements OnInit {
+  @Output()
+  closeMe = new EventEmitter(); 
+
+  @Output()
+  @Input()
+  protected document: Document;
 
   sheetTypes: SysTableRow[];
   id: any;
-  comment = '';
-  category: number;
+  // comment = '';
+  // category: number;
   constructor(private activatedRoute: ActivatedRoute , private appProxy:AppProxy,private sysTableService:SysTableService) { }
 
   ngOnInit() {
-    this.activatedRoute.parent.params.subscribe(params => {
-      this.id = params['iPersonId'];
-    });
-
     this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data=>this.sheetTypes=data
       , err => alert('error'));
+      this.save.name=this.document.nvDocumentName;
   }
   protected save = {document: '', name: ''};
 
@@ -59,8 +65,17 @@ export class UploadDocumentComponent implements OnInit {
   //   this.appProxy.post('SaveFileByBase64', {base64File:this.save.document, fileName:this.save.name}).then(data => alert("success")
   //     , err => alert(err));
   // }
+  // if(this.save.document!=''){
+  // this.appProxy.post('AddFile', {iItemId:this.id,iBelongingType:4,iCategoryType:this.category,nvBase64File:this.save.document, nvFileName:this.save.name,nvComment:this.comment}).then(data => alert("success")
+  //     , err => alert(err));
+  // }
 
-  this.appProxy.post('AddFile', {iItemId:this.id,iBelongingType:4,iCategoryType:this.category,nvBase64File:this.save.document, nvFileName:this.save.name,nvComment:this.comment}).then(data => alert("success")
-      , err => alert(err));
-  }
+  if(this.save.name!=undefined){
+    this.appProxy.post('SetDocument', {document:this.document, iBelongingType:4,nvBase64File:this.save.document, nvFileName:this.save.name}).then(data => alert("success")
+        , err => alert(err));
+    }
+}
+closeDialog(){  
+  this.closeMe.emit(null);
+}
 }

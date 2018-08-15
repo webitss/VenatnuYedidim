@@ -25,17 +25,20 @@ export class UsersComponent implements OnInit {
 
         u["edit"] = "<div class='edit'></div>";
       });
+
+      this.sysTableService.getValues(SysTableService.dataTables.permissionType.iSysTableId).then(data => {
+        this.lstDataRows.forEach(user => {
+          this.lstValues = data;
+          user["nvPermittion"] = data.filter(s => s.iSysTableRowId == user["iPermissionId"])[0].nvValue;
+        });
+      });
     });
-    // this.sysTableService.getValues(4).then(data={
-    //   data.forEach(user => {
-    //     user["permittionValue"] = 
-    //   });
-    // })
+
   }
 
 
   private iPersonId: number;
-  private permittionValue: string;
+  private lstValues: any;
 
 
   public lstColumns = [
@@ -44,7 +47,7 @@ export class UsersComponent implements OnInit {
     new VyTableColumn('שם פרטי', 'nvFirstName'),
     new VyTableColumn('נייד', 'nvMobile'),
     new VyTableColumn('שם משתמש', 'nvUserName'),
-    new VyTableColumn('הרשאה', 'iPermissionId'),
+    new VyTableColumn('הרשאה', 'nvPermittion'),
   ];
   public lstDataRows = [];
 

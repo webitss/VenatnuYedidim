@@ -1,10 +1,63 @@
-<div class="upload-document"></div>
+<!-- <div class="upload-document">
 
-קטגוריה
-<select [(ngModel)]="category">
-    <option *ngFor="let s of sheetTypes" value={{s.iSysTableRowId}}>{{s.nvValue}}</option>
-</select>
-<!-- <input type="text" [(ngModel)]="category">קטגוריה -->
-<input type="text" [(ngModel)]="comment">תיאור
-<input type="file" value="העלה מסמך" (change)="loadDocument($event,save)" name="LoadDocument"/>
-<button value="save" (click)="saveFile()">שמירה</button>
+    <div>קטגוריה</div>
+    <select [(ngModel)]="document.iCategoryType">
+        <option *ngFor="let s of sheetTypes" value={{s.iSysTableRowId}}>{{s.nvValue}}</option>
+    </select>
+    <div>תיאור</div>
+    <input type="text" [(ngModel)]="document.nvComment">
+    <label for="LoadDocument">browse</label>
+    <input type="file" (change)="loadDocument($event,save)" name="LoadDocument" id="LoadDocument" />
+    <div class="documentName">{{save.name}}</div>
+
+    <button value="שמירה" (click)="saveFile()"></button>
+    <button value="ביטול" (click)="noSaveFile()"></button>
+
+</div> -->
+
+
+<div class="form ">
+    <div class="row ">
+        <div class="col-sm-8">
+            <div *ngIf="document.iDocumentId">
+                <h3>עריכה </h3>
+            </div>
+            <div *ngIf="document.iDocumentId==null">
+                <h3>העלאת מסמך</h3>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <button class="btn-circle btn-save" (click)="saveFile()">שמור v </button>
+            <button class="btn-circle btn-close" (click)="closeDialog()">סגור x </button>
+        </div>
+    </div>
+    <div class="content">
+        <div class="row ">
+
+            <div class="form-group">
+                <label for="category">קטגורית מסמך</label>
+                <select [(ngModel)]="document.iCategoryType" id="category" class="form-control">
+                    <option *ngFor="let s of sheetTypes" value={{s.iSysTableRowId}}>{{s.nvValue}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="comment">תיאור</label>
+                <input type="text" [(ngModel)]="document.nvComment" id="comment" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="LoadDocument" class="browse">browse</label>
+                <input type="file" (change)="loadDocument($event,save)" name="LoadDocument" id="LoadDocument" />
+                <!-- <div class="documentName">{{save.name}}</div>                 -->
+            </div>
+
+            <div class="form-group">
+                <label for="documentName">שם הקובץ</label>
+                <div class="form-control" id="documentName">{{save.name}}</div>
+            </div>
+        </div>
+    </div>
+</div>

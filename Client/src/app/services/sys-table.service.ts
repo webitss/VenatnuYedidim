@@ -44,11 +44,15 @@ export class SysTableService {
       iSysTableId: 9,
       SysTableRow: []
     },
-    conversationType:{
+    conversationType: {
       iSysTableId: 10,
       SysTableRow: []
     },
-  }
+    Task: {
+      iSysTableId: 11,
+      SysTableRow: []
+    }
+  } 
 
   constructor(private appProxy: AppProxy) { }
   ////#region מקבל ID של טבלה מחזיר ערכים מאותה טבלה 
@@ -105,10 +109,11 @@ export class SysTableService {
 
   }
 
-  addValue(row: SysTableRow) {
-    this.appProxy.post("AddValue", { sysTableRow: row }).
+  addValue(row: SysTableRow) : Promise<boolean>{
+  return  this.appProxy.post("AddValue", { sysTableRow: row }).
       then(l => {
-        if (l === "true") {
+        if (l) {
+         
           return true;
         }
         return false;

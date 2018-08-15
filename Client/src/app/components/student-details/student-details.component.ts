@@ -3,6 +3,8 @@ import { Student } from '../../classes/student';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HebrewDate } from '../../classes/hebrewDate';
+import { SysTableService } from '../../services/sys-table.service';
+import { SysTableRow } from '../../classes/SysTableRow';
 
 
 @Component({
@@ -12,7 +14,7 @@ import { HebrewDate } from '../../classes/hebrewDate';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private route: ActivatedRoute, private router: Router) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router) { }
 
   @Input() student: Student
 
@@ -29,7 +31,7 @@ export class StudentDetailsComponent implements OnInit {
   bornDateStudentArr = new Array<string>();
   diedDateFatherArr = new Array<string>();
   diedDateMotherArr = new Array<string>();
-
+  sysTableRowList: SysTableRow[];
 
   ngOnInit() {
     this.bornDateHebrewStudent = new HebrewDate();
@@ -43,6 +45,10 @@ export class StudentDetailsComponent implements OnInit {
 
         this.appProxy.post("GetStudentById", { iPersonId: params['iPersonId'] }).then(data => {
           this.student = data;
+
+          // this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(data => {
+          //   this.sysTableRowList =  data;
+          this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data; });
 
           this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
           this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];
