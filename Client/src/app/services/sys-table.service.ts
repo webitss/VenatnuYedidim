@@ -40,8 +40,13 @@ export class SysTableService {
       iSysTableId: 8,
       SysTableRow: []
     },
+<<<<<<< HEAD
     conversationType: {
       iSysTableId: 10,
+=======
+    meetingType: {
+      iSysTableId: 9,
+>>>>>>> c6ea57b2389eb074c81aa7316196f7c2c50bee4e
       SysTableRow: []
     }
   }
