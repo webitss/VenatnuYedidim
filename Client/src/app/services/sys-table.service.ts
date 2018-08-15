@@ -44,10 +44,14 @@ export class SysTableService {
       iSysTableId: 9,
       SysTableRow: []
     },
-    conversationType:{
+    conversationType: {
       iSysTableId: 10,
       SysTableRow: []
     },
+    Task: {
+      iSysTableId: 11,
+      SysTableRow: []
+    }
   }
 
   constructor(private appProxy: AppProxy) { }
