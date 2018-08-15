@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angu
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Meeting } from '../../classes/meeting';
+import { SysTableRow } from '../../classes/SysTableRow';
 
 @Component({
   selector: 'app-student-meeting-details',
@@ -16,12 +17,17 @@ export class StudentMeetingDetailsComponent implements OnInit {
   @Input()
   protected meeting: Meeting;
 
+  @Output()
+  @Input()
+  protected sysTableRowList:SysTableRow[];
+
   close(){
      this.Meeting.emit(null);
   }
 
   save() {
     this.meeting.dtMeetingDate = new Date(this.meeting.dtMeetingDate);
+    // this.meeting.nvMeetingType
     //פגישה חדשה
     if (this.meeting.iMeetingId == null) {
       this.meeting.iPersonId=1;
@@ -32,9 +38,6 @@ export class StudentMeetingDetailsComponent implements OnInit {
           this.Meeting.emit(null);
           // debugger;
         },
-        err => {
-          alert("not good");
-        }
       );
     
       }
