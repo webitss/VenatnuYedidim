@@ -1,7 +1,7 @@
 
 
     
-<div class="ChoosTable col-sm-3" style="float: right">
+<div class="ChoosTable col-sm-3 " style="float: right " [ngClass]="{'bottom': showOverlap}" >
 <p>
  בחר טבלה
 </p>
@@ -14,11 +14,11 @@
 
 
 
-<input type="button" value="הוספת ערך+" (click)="divNewValue=true" class="btn-circle btn-add"/>
+<input type="button" value="הוספת ערך+" (click)="addNewValue()" class="btn-circle btn-add"/>
 
 
 </div>
-<div class="row">
+<div class="row" >
 <div class="col-sm-8 myTable" style="float:left;">
 
 <!-- SysTableService -->
@@ -32,7 +32,7 @@
 <div class="edit"  *ngIf="divNewValue">
         <input type="text" [(ngModel)]="roeToadd.nvValue" [ngModelOptions]="{standalone: true}" class="form-control inp"/>
         <button (click)="saveNeeValue()" class="btn-circle btn-save btn">שמור</button>
-        <button (click)="divNewValue=false" class="btn-circle btn-close btn" >סגור</button> 
+        <button (click)="close()" class="btn-circle btn-close btn" >סגור</button> 
         
  </div>
         <div class="form edit" *ngIf="toEdit">
@@ -41,22 +41,12 @@
        <input type="submit" value="שמור" (click)="saveEditValue()" class="btn-circle btn-save btn"/>
     </form>
  </div>
- <html>
-        <head>
-        <style>
-        
-        </style>
-        </head>
-        <body>
-        
-        <h2>Image Text</h2>
-        <p>Add some text to an image in the bottom left corner:</p>
-        
-        <div class="container">
-          <img src="img_5terre_wide.jpg" alt="Cinque Terre" width="1000" height="300">
-          <div class="bottomleft">Bottom Left</div>
-        </div>
-        
-        </body>
-        </html>
+
+
+
+<div class="div" *ngIf="showOverlap"></div>
+
+
+
+       
         
