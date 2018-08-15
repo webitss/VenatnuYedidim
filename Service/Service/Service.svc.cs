@@ -217,6 +217,15 @@ namespace Service
             return Yeshivot.AddYeshiva(yeshiva);
         }
 
+        public bool EditYeshiva(Yeshivot yeshiva, int iYeshivaId)
+        {
+            return Yeshivot.EditYeshiva(yeshiva,iYeshivaId);
+        }
+
+        public Yeshivot getYeshivaById(int iYeshivaId)
+        {
+            return Yeshivot.getYeshivaById(iYeshivaId);
+        }
 
         #endregion
 
