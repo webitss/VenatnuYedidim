@@ -19,7 +19,10 @@ export class AvrechStudentsComponent implements OnInit {
   fields: Array<string>;
   studentsToAdd: Array<any> = new Array<any>();
   student: Student;
-  title:string="רשימת תלמידים"
+  title:string="רשימת תלמידים";
+  inputTitle:string="בחר תלמידים";
+
+listToSelect:Array<string>;
 
   //studentList: Student[];
 
@@ -52,6 +55,7 @@ export class AvrechStudentsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.listToSelect=new Array<string>();
     this.activatedRoute.parent.params.subscribe(params => {
       this.id = params['iPersonId'];
     })
@@ -65,7 +69,13 @@ export class AvrechStudentsComponent implements OnInit {
        this.allStudents.forEach(
         st => {
            st['delete'] = '<button class="btn delete" >מחק</button>'; 
-          })
+          });
+
+          this.allStudents.forEach(
+            student=>{
+              this.listToSelect.push(student.nvFirstName+' '+student.nvLastName+" "+student.nvIdentityCard);
+            }
+          );
     }
       , err => alert(err));
 
@@ -80,6 +90,8 @@ export class AvrechStudentsComponent implements OnInit {
     // this.fields.push("nvLastName");
     // this.fields.push("nvLastName");
     // this.fields.push("nvIdentityCad");
+
+   
   }
 
   deleteStudent(e) {
