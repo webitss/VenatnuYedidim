@@ -40,31 +40,30 @@ export class SysTableService {
       iSysTableId: 8,
       SysTableRow: []
     },
-<<<<<<< HEAD
-    conversationType: {
-      iSysTableId: 10,
-=======
     meetingType: {
       iSysTableId: 9,
->>>>>>> c6ea57b2389eb074c81aa7316196f7c2c50bee4e
       SysTableRow: []
-    }
+    },
+    conversationType:{
+      iSysTableId: 10,
+      SysTableRow: []
+    },
   }
 
   constructor(private appProxy: AppProxy) { }
   ////#region מקבל ID של טבלה מחזיר ערכים מאותה טבלה 
   getValues(iSysTableId: number): Promise<Array<SysTableRow>> {
-  
+
     console.log(iSysTableId + "arived");
     for (let key in SysTableService.dataTables) {
-   
+
       console.log(key)
-      console.log("log"+ SysTableService.dataTables[key].iSysTableId)
-      
+      console.log("log" + SysTableService.dataTables[key].iSysTableId)
+
       if (SysTableService.dataTables[key].iSysTableId == iSysTableId) {
         this.Mykey = key;
         if (SysTableService.dataTables[key].SysTableRow.length > 0) {
-      
+
           return Promise.resolve(SysTableService.dataTables[key].SysTableRow);
 
         }
@@ -88,29 +87,31 @@ export class SysTableService {
   ////#endregion
   //#region  מחזיר את שמות כל הטבלאות
   getTableNames(): Promise<Array<SysTables>> {
-   
+
     return this.appProxy.get("GetAllNames");
 
   }
-   //#endregion
-  editValue(row:SysTableRow):any{
-  
-     this.appProxy.post("UpdateValue", { sysTableRow: row }).
-     then(l=>{ if(l==="true"){
-      return true;
-    }
-    return false;
-       });
-       
- 
+  //#endregion
+  editValue(row: SysTableRow): any {
+
+    this.appProxy.post("UpdateValue", { sysTableRow: row }).
+      then(l => {
+        if (l === "true") {
+          return true;
+        }
+        return false;
+      });
+
+
   }
 
- addValue(row:SysTableRow){
-  this.appProxy.post("AddValue", { sysTableRow: row }).
-  then(l=>{ if(l==="true"){
-   return true;
- }
- return false;
-    });
- }
+  addValue(row: SysTableRow) {
+    this.appProxy.post("AddValue", { sysTableRow: row }).
+      then(l => {
+        if (l === "true") {
+          return true;
+        }
+        return false;
+      });
+  }
 }
