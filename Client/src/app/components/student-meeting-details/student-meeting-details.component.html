@@ -17,10 +17,15 @@
     </div>
     <div class="row ">
 
-      <div class="form-group  ">
-        <label for="meetingTyp">סוג פגישה</label>
-        <input type="number" id="meetingType" [(ngModel)]="meeting.iMeetingType" class="form-control" />
+      <div class="form-group">
+        <label for="nvMeetingType">סוג פגישה</label>
+        <input type="text" id="nvMeetingType" [(ngModel)]="meeting.nvMeetingType" class="form-control" />
       </div>
+      <!-- <select>
+        <option *ngFor="let s of sysTableRowList">
+          {{s.nvValue}}
+        </option>
+      </select> -->
 
       <div class="form-group ">
         <label for="date">תאריך:</label>

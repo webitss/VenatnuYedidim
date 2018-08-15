@@ -9,7 +9,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./event-participants.component.css']
 })
 export class EventParticipantsComponent implements OnInit {
-  protected iEventId: number = 1;
+  protected iEventId: number;
+  private sub:any;
   protected participant: Array<any> = new Array<any>();
   protected lstColumns = [{
     title: 'שם פרטי',
@@ -41,33 +42,22 @@ export class EventParticipantsComponent implements OnInit {
   constructor(private appProxy: AppProxy, private router: ActivatedRoute) { }
 
   ngOnInit() {
-    // this.router.params.subscribe(params => {
-    //   this.appProxy.post("GetParticipantsList", { iEventId: params['iEventId'] })
-    //     .then(data => {
-    //       this.participant = data;
-    //       //this.header=this.e.nvName;
 
-    //     });
-
-
-    // }
-
-    this.router.params.subscribe(params=>{
-this.appProxy.post("GetParticipantsList", {iEventId:params['iEventId']}).then(data=>{
+   this.sub= this.router.parent.params.subscribe(params=>{
+     this.iEventId=+params['iEventId'];
+this.appProxy.post("GetParticipantsList", {iEventId:this.iEventId}).then(data=>{
   this.participant=data;
   alert("שגיאה בגישה לשרת");
 })
     });
 
-
-    // this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId })
-    //   .then(
-    //     data => {
-    //       this.participant = data;
-    //       alert("good");
-    //     })
   
 
+}
+
+
+ngOnDestroy() {
+  this.sub.unsubscribe();
 }
 
 

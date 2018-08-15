@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Meeting } from '../../classes/meeting';
 import { AppProxy } from '../../services/app.proxy';
 import { StudentMeetingDetailsComponent } from '../student-meeting-details/student-meeting-details.component';
+import { SysTableService } from '../../services/sys-table.service';
+import { SysTableRow } from '../../classes/SysTableRow';
 
 
 
@@ -17,8 +19,9 @@ export class StudentMeetingsComponent implements OnInit {
   id: number;
   meeting: Meeting;
   flag: number;
+  sysTableRowList:SysTableRow[];
 
-  constructor(private appProxy: AppProxy) { }
+  constructor(private appProxy: AppProxy ,private sysTableService: SysTableService ) { }
 
 
   public lstColumns = [{
@@ -30,7 +33,9 @@ export class StudentMeetingsComponent implements OnInit {
   },
   {
     title: 'סוג פגישה',
-    name: 'iMeetingType'
+    name: 'nvMeetingType',
+   
+    
   },
   {
     title: 'תאריך',
@@ -46,7 +51,9 @@ export class StudentMeetingsComponent implements OnInit {
   }]
 
   editMeeting(meeting:Meeting){
+    
       this.meeting = meeting;
+    
       this.flag = 1;
   }
 
@@ -62,16 +69,18 @@ export class StudentMeetingsComponent implements OnInit {
       data => {
         //alert("good");
         this.meetingList = data;
-        this.meetingList.forEach(m => {
-          m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
-          m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
-          m['edit'] = '<div class="edit"></div>';
-          // '<img src="../../../assets/images/pencil.png"/>'
+        this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(data => {
+          this.sysTableRowList =  data;
+          this.meetingList.forEach(m => {
+            m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
+            m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
+            m['edit'] = '<div class="edit"></div>';
+            m['nvMeetingType'] = this.sysTableRowList.filter(s=> s.iSysTableRowId == m.iMeetingType)[0].nvValue;
+        });
+      
+          
         });
         debugger;
-      },
-      err => {
-        alert("not good");
       }
     );
   }
