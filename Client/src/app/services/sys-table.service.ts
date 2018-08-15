@@ -39,6 +39,10 @@ export class SysTableService {
     roleType: {
       iSysTableId: 8,
       SysTableRow: []
+    },
+    conversationType: {
+      iSysTableId: 10,
+      SysTableRow: []
     }
   }
 
