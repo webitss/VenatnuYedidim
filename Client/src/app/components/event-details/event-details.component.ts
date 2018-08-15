@@ -12,25 +12,16 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./event-details.component.css']
 })
 export class EventDetailsComponent implements OnInit {
+  list: Array<any> = new Array<any>({value:"אברכים"}, {value:"תלמידים"},{value: "בוגרים"});
+  title:string="רשימת תלמידים";
+  inputTitle:string="עבור";
 
   protected e: Event1;
 
-  
-// header:string;
 
-// getHeader(){
-//   return this.header;
-// }
-
-  
-// getUser(){
-  
-// }
   save() {
- //  this.date=new Date(this.e.dtEventDate);
-   this.e.dtEventDate = new Date(this.e.dtEventDate);
-
-    this.appProxy.post('SetEvent', { oEvent: this.e,  iUserId: 1})
+    this.e.dtEventDate = new Date(this.e.dtEventDate);
+    this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: 1 })
       .then(
         data => {
           alert("success" + data);
@@ -41,12 +32,8 @@ export class EventDetailsComponent implements OnInit {
 
 
   private sub: any;
-    private iEventId: number;
-
-    isDetails: boolean;
-
-
-
+  private iEventId: number;
+  isDetails: boolean;
 
   constructor(private appProxy: AppProxy, private router: ActivatedRoute) { }
 
@@ -54,26 +41,26 @@ export class EventDetailsComponent implements OnInit {
 
     this.sub = this.router.parent.params.subscribe(params => {
       this.iEventId = +params["iEventId"];
-      if(this.iEventId!=0){
-        this.isDetails=true;
-        this.appProxy.post('GetEvent', {iEventId:this.iEventId}).then(data=>{
-          this.e=data;
+      if (this.iEventId != 0) {
+        this.isDetails = true;
+        this.appProxy.post('GetEvent', { iEventId: this.iEventId }).then(data => {
+          this.e = data;
         })
       }
-      else{
-        this.e=new Event1();
-        this.isDetails=false;
+      else {
+        this.e = new Event1();
+        this.isDetails = false;
 
       }
-  });
+    });
 
-  
-   
+
+
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
-}
   }
+}
 
 
