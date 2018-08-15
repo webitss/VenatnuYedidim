@@ -3,23 +3,24 @@
 <div class="header row">
 <nav class="navbar navbar-expand-sm nav header-navbar">
     <ul class="navbar-nav navbar-list" *ngIf="currentComponent">
-        <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDetails') != -1}" class="nav-item">
-          <div class="fullTab" routerLink="avrech-details">
+        <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDetails') != -1}" class="nav-item" routerLink="avrech-details">
+          <span class="fullTab">
              פרטים אישיים
-          </div>
+          </span>
         </li>
-        <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechStudents') != -1}" class="nav-item">
-            <div class="fullTab" routerLink="avrech-students">תלמידים
+        <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechStudents') != -1}" class="nav-item" routerLink="avrech-students">
+            <span class="fullTab">תלמידים
 
-            </div>
-          </li><li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDiary') != -1}" class="nav-item">
-              <div class="fullTab" routerLink="avrech-diary">
+            </span>
+          </li>
+          <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDiary') != -1}" class="nav-item" routerLink="avrech-diary">
+              <span class="fullTab">
                 יומן
-              </div>
-            </li><li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechPresence') != -1}" class="nav-item">
-                <div class="fullTab" routerLink="avrech-presence">
+              </span>
+            </li><li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechPresence') != -1}" class="nav-item" routerLink="avrech-presence">
+                <span class="fullTab">
                   נוכחות
-                </div>
+                </span>
               </li>
         </ul>
 

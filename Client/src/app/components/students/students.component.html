@@ -10,11 +10,6 @@
     <button class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">תלמיד חדש</button>
 </div>
 </div>
- <!-- <button class="btn edit">עריכה </button> -->
-
-<!-- <div class="container"> -->
- 
- <!-- <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table> -->
 
  <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editStudent($event)"  ></app-vy-table> 
 
