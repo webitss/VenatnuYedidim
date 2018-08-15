@@ -20,13 +20,14 @@ export class StudentComponent implements OnInit, OnDestroy {
   // subscription:Subscription;
   ngOnInit() {
 
-
     this.sub = this.route.params.subscribe(params => {
     this.flag = +params['iPersonId'];
+
     });
    
   }
   onRouterOutletActivate(event) {
+    debugger;
     this.currentComponent = event;
   }
 

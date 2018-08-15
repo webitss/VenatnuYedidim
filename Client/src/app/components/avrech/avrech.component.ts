@@ -24,7 +24,9 @@ export class AvrechComponent implements OnInit {
   }
 
   onRouterOutletActivate(event) {
+
     this.currentComponent = event;
+    debugger;
   }
 
   save() {

@@ -97,6 +97,10 @@ body{
     width:15%;
     height: 100%;
 }
+.header>.navbar-expand-sm>.navbar-nav>.nav-item:hover{
+  
+    background-color:rgba(169, 169, 169, 0.37) ;
+}
 .header{
     height: 50px;
     margin-top: 50px;

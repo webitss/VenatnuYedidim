@@ -17,34 +17,6 @@ export class AvrechimComponent implements OnInit {
    avrechimList:Avrech[];
    public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
 
-  
-  //  public lstColumns = [{
-  //     title: 'פתיחה',
-  //     name: 'open'
-  //   }
-  // ,{
-  //   title: 'שם משפחה',
-  //   name: 'nvLastName'
-  // },
-  // {
-  //   title: 'שם פרטי',
-  //   name: 'nvFirstName'
-  // },
-  // {
-  //   title: 'טלפון',
-  //   name: 'nvPhone'
-  // },
-  // {
-  //   title: 'נייד',
-  //   name: 'nvMobile'
-  // },
-  // {
-  //   title: 'מייל',
-  //   name: 'nvEmail'
-  // }];
-  // public lstDataRows = [{
-    
-  //   }];
   constructor(private router: Router,private appProxy:AppProxy) { }
 
   ngOnInit() {
@@ -57,7 +29,6 @@ export class AvrechimComponent implements OnInit {
     this.avrechimList.forEach(
       
       a => {
-        debugger;
          a['open'] = '<div class="edit"></div>'; 
         });
  
