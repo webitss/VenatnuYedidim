@@ -1,23 +1,23 @@
 <form class=settingYeshiva>
-
+<!-- לבדוק למה כפתור הביטול /סגור לא עובד -->
   <button (click)="close()">ביטול</button>
 
   <button (click)="save()">שמור</button>
 
   <div>שם מוסד</div>
-  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvYeshivaName" />
+  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvYeshivaName" [ngModelOptions]="{standalone: true}"/>
   <div>כתובת</div>
-  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvAddress" />
+  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvAddress" [ngModelOptions]="{standalone: true}"/>
   <div>עיר</div>
-  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvCity" />
+  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvCity" [ngModelOptions]="{standalone: true}"/>
   <div>שם איש קשר</div>
-  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvContact" />
+  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvContact" [ngModelOptions]="{standalone: true}"/>
   <div>טלפון</div>
-  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvMobile" />
+  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvMobile" [ngModelOptions]="{standalone: true}"/>
   <div>מייל</div>
-  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvEmail" />
+  <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvEmail" [ngModelOptions]="{standalone: true}"/>
 
-  <div>תפקיד</div>
+  <div>תפקיד</div> 
   <select>
     <option>תפקיד 1</option>
     <option>תפקיד 2</option>
