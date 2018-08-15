@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
+import {SysTableService} from '../../services/sys-table.service';
 
 import { StudentConversationDetailsComponent } from '../student-conversation-details/student-conversation-details.component';
 import { Title } from '@angular/platform-browser';
@@ -48,7 +49,7 @@ export class StudentConversationsComponent implements OnInit {
   ];
   public lstDataRows=[];
 
-  constructor(private appProxy: AppProxy) { }
+  constructor(private appProxy: AppProxy,private sysTableService:SysTableService) { }
 
   // newConversation() {
   //   this.conversationSelect = new Conversation();
@@ -66,7 +67,7 @@ export class StudentConversationsComponent implements OnInit {
   {
     this.conversationSelect=new Conversation();
   this.conversationSelect.dConversationDate=new Date();
-  this.conversationSelect.dtConversationTime=new Date();
+  //this.conversationSelect.dtConversationTime=new Date();
   this.conversationSelect.dtNextConversationDate=new Date();
  
   }
@@ -87,6 +88,7 @@ export class StudentConversationsComponent implements OnInit {
     this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
       .then(
         data => {
+          //this.sysTableService.getValues()
           data.forEach(c => {
             this.lstDataRows.push(
               {
