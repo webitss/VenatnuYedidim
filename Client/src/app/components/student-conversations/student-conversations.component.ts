@@ -1,10 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
 import {SysTableService} from '../../services/sys-table.service';
+import { SysTableRow } from '../../classes/SysTableRow';
 
 import { StudentConversationDetailsComponent } from '../student-conversation-details/student-conversation-details.component';
 import { Title } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-student-conversations',
@@ -17,6 +19,8 @@ export class StudentConversationsComponent implements OnInit {
   protected flag: number;
   protected conversationsList: Array<Conversation> = new Array<Conversation>();
   protected conversationSelect: Conversation;
+ @Output()
+  protected sysTableList:SysTableRow[];
 
   @Input()
   public lstColumns = [
@@ -28,15 +32,15 @@ export class StudentConversationsComponent implements OnInit {
     },
     {
       title: 'סוג שיחה',
-      name: 'iConversationType'
+      name: 'nvConversationType'
     },
     {
       title: 'תאריך שיחה',
-      name: 'dConversationDate'
+      name: 'nvConversationDate'
     },
     {
       title: 'שעת שיחה',
-      name: 'dtConversationTime'
+      name: 'nvConversationTime'
     },
     {
       title: 'סיכום שיחה',
@@ -88,27 +92,22 @@ export class StudentConversationsComponent implements OnInit {
     this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
       .then(
         data => {
-          //this.sysTableService.getValues()
-          data.forEach(c => {
-            this.lstDataRows.push(
-              {
-                iConversationId: c.iConversationId,
-                iPersonId: c.iPersonId,
-                iConversationType:c.iConversationType,
-                dConversationDate: c.dConversationDate.toLocaleDateString(),
-                dtConversationTime: c.dtConversationTime.toLocaleTimeString(), 
-                dtNextConversationDate: c.dtNextConversationDate.toLocaleDateString(),
-                nvConversationSummary: c.nvConversationSummary,
-                edit: '<div class="edit"></div>'
-               
+          this.conversationsList=data;
+          this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val=>{
+            this.sysTableList=val;
+         
+          this.conversationsList.forEach(c => {
+                c['nvConversationType']=this.sysTableList.filter(s=>s.iSysTableRowId==c.iConversationType)[0].nvValue;
+                c['nvConversationDate']= c.dConversationDate.toLocaleDateString();
+                c['nvConversationTime']= c.dtConversationTime.toLocaleTimeString(); 
+                c['nvNextConversationDate']= c.dtNextConversationDate.toLocaleDateString();
+                c['edit']= '<div class="edit"></div>';
+                });
               });
           });
     
           //alert(this.conversationsList[0].iPersonId );
-         
-        });
-  }
-
-
+        }
 
 }
+

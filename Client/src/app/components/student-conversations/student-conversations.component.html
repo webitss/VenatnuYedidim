@@ -3,9 +3,9 @@
 
 
 <div *ngIf="conversationSelect!=null">
-<app-student-conversation-details [conversation]="conversationSelect" class="conversationDetails" (Conversation)="close()"></app-student-conversation-details>
+<app-student-conversation-details [conversation]="conversationSelect" [sysTableList]="sysTableList" class="conversationDetails" (Conversation)="close()"></app-student-conversation-details>
 </div>
 
 
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editConversation($event)"></app-vy-table>
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="conversationsList" (clickCell)="editConversation($event)"></app-vy-table>
 

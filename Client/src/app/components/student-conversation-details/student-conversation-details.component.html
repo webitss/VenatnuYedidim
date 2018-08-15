@@ -18,6 +18,21 @@
 
         <div class="form-group  ">
           <label for="conversationType">סוג שיחה</label>
+<<<<<<< HEAD
+          <!-- <input type="text" name="conversationType" class="form-control"  [(ngModel)]="conversation.nvConversationType" [ngModelOptions]="{standalone: true}"/>-->
+          <select [(ngModel)]="conversation.nvConversationType"> 
+            <option *ngFor='let t of sysTableList' [value]="t.nvValue">{{t.nvValue}}</option>
+            </select>
+        </div>
+<br/>
+      <div class="form-group ">
+        <label for="conversationDate">תאריך</label>
+        <input type="text" name="conversationDate" class="form-control" [ngModel]="conversation.nvConversationDate" (ngModelChange)="conversation.nvConversationDate = $event" [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <div class="form-group ">
+        <label for="conversationDateTime">שעה</label>
+        <input type="text" name="conversationDateTime" class="form-control" [ngModel]="conversation.dtConversationTime | date:'yyyy-MM-dd'" (ngModelChange)="conversation.nvConversationTime = $event" [ngModelOptions]="{standalone: true}" />
+=======
           <input type="text" name="conversationType" class="form-control" [(ngModel)]="conversation.iConversationType" [ngModelOptions]="{standalone: true}"
           />
         </div>
@@ -32,6 +47,7 @@
           <input type="time" name="conversationDateTime" class="form-control" [ngModel]="conversation.dtConversationTime| date:'shortTime'"
             (ngModelChange)="conversation.dtConversationTime = $event" [ngModelOptions]="{standalone: true}" />
         </div>
+>>>>>>> 2cb1f8fed6c820dd05e57d5a241e70852f7b5ca6
       </div>
 
 

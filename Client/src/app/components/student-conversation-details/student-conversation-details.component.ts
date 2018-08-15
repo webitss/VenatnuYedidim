@@ -2,7 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
+<<<<<<< HEAD
+import { SysTableRow } from '../../classes/SysTableRow';
+=======
 import { Task } from '../../classes/task';
+>>>>>>> 2cb1f8fed6c820dd05e57d5a241e70852f7b5ca6
 
 @Component({
   selector: 'app-student-conversation-details',
@@ -16,6 +20,9 @@ export class StudentConversationDetailsComponent implements OnInit {
   typeTask:Task;
   @Input()
   protected conversation: Conversation;
+  @Input()
+  protected sysTableList:SysTableRow[];
+
 
    protected iPersonId: number=1;
 
