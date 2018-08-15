@@ -23,17 +23,19 @@
     <li [ngClass]="{'appSelect': router.url.indexOf('avrechim') != -1}" class="nav-item" routerLink='/avrechim'>
      
       <span>אברכים</span>      
-     </li><li [ngClass]="{'appSelect': router.url.indexOf('Events') != -1}" class="nav-item" routerLink='/events'>
+     </li><li [ngClass]="{'appSelect': router.url.indexOf('events') != -1}" class="nav-item" routerLink='/events'>
      
       <span>ארועים</span>      
-     </li><li [ngClass]="{'appSelect': router.url.indexOf('Graduates') != -1}" class="nav-item" routerLink='/graduates'>
+     </li>
+     <li [ngClass]="{'appSelect': router.url.indexOf('graduates') != -1}" class="nav-item" routerLink='/graduates'>
      
       <span>בוגרים</span>      
-     </li><li [ngClass]="{'appSelect': router.url.indexOf('Users') != -1}" class="nav-item" routerLink='/users'>
+     </li>
+     <li [ngClass]="{'appSelect': router.url.indexOf('users') != -1}" class="nav-item" routerLink='/users'>
      
       <span>משתמשים</span>      
      </li>
-   <li [ngClass]="{'appSelect': router.url.indexOf('Settings') != -1}" class="nav-item" routerLink='/settings'>
+   <li [ngClass]="{'appSelect': router.url.indexOf('settings') != -1}" class="nav-item" routerLink='/settings'>
      
       <span>הגדרות</span>      
      </li>
