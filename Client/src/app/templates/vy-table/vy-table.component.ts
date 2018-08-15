@@ -8,7 +8,7 @@ import { VyTableColumn } from './vy-table.classes';
 })
 export class VyTableComponent implements OnInit {
   
-  protected iCountRows = 2;
+  protected iCountRows = 2; 
   protected countPagesDisplayed = 5;
   protected iStartNumRow = 0;
   protected iEndNumRow = 0;  
