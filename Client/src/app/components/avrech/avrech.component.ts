@@ -38,4 +38,6 @@ export class AvrechComponent implements OnInit {
   {
     this.router.navigate(["avrechim"]);
   }
-}
+  
+} 
+    
