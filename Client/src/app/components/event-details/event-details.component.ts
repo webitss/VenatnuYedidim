@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { EventComponent } from '../event/event.component';
 import { ActivatedRoute } from '@angular/router';
+import { FormArrayName } from '@angular/forms';
 
 @Component({
   selector: 'app-event-details',
@@ -13,15 +14,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EventDetailsComponent implements OnInit {
   list: Array<any> = new Array<any>({value:"אברכים"}, {value:"תלמידים"},{value: "בוגרים"});
-  title:string="רשימת תלמידים";
+  title:string="";
   inputTitle:string="עבור";
 
   protected e: Event1;
-
+to:Array<any>;
 
   save() {
     this.e.dtEventDate = new Date(this.e.dtEventDate);
-    this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: 1 })
+    this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: 1 , to:this.to})
       .then(
         data => {
           alert("success" + data);
@@ -30,7 +31,9 @@ export class EventDetailsComponent implements OnInit {
         });
   }
 
-
+  getFromChild(list: Array<any>) {
+    this.to = list;
+  }
   private sub: any;
   private iEventId: number;
   isDetails: boolean;
