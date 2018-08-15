@@ -27,13 +27,13 @@ export class StudentComponent implements OnInit, OnDestroy {
    
   }
   onRouterOutletActivate(event) {
-    debugger;
+   
     this.currentComponent = event;
   }
 
-  saveStudent() {
-    this.currentComponent.saveStudent();
-   
+  save() {
+
+    if (this.currentComponent.saveStudent) this.currentComponent.saveStudent();
   }
 
 

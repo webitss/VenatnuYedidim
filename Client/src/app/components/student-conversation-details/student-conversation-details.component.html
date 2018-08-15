@@ -23,16 +23,12 @@
 
       <div class="form-group ">
         <label for="conversationDate">תאריך</label>
-        <input type="date" name="conversationDate" class="form-control" [ngModel]="conversation.dConversationDate | date:'yyyy-MM-dd'"
-          (ngModelChange)="e.dtEventDate = $event" [ngModelOptions]="{standalone: true}" />
+        <input type="date" name="conversationDate" class="form-control" [ngModel]="conversation.dConversationDate | date:'d/M/yy'" (ngModelChange)="conversation.dConversationDate = $event" />
       </div>
       <div class="form-group ">
         <label for="conversationDateTime">שעה</label>
-        <input type="time" name="conversationDateTime" class="form-control" [ngModel]="conversation.dtConversationTime| date:'shortTime'"
-          (ngModelChange)="e.dtEventTime = $event" [ngModelOptions]="{standalone: true}" />
+        <input type="time" name="conversationDateTime" class="form-control" [ngModel]="conversation.dtConversationTime| date:'shortTime'" (ngModelChange)="conversation.dtConversationTime = $event" [ngModelOptions]="{standalone: true}" />
       </div>
-     
-
     </div>
 
    
@@ -41,6 +37,4 @@
         <label for="conversationSummary">סיכום</label>
         <input type="text" name="conversationSummary" class="form-control" [(ngModel)]="conversation.nvConversationSummary" [ngModelOptions]="{standalone: true}"/>
       </div>
-    </div>
-  </div>
 </div>
