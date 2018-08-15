@@ -3,7 +3,7 @@
     <div *ngFor="let col of lstColumns" class="col cell cell-title" [ngStyle]="col.titleStyle">
       <div class="small-title">
         {{col.title}}
-      </div>     
+      </div>
     </div>
   </div>
 
@@ -13,11 +13,30 @@
     </div>
   </div>
 
+  <!-- <div *ngFor="let row of lstCurrentDataRows | vyTableFilter : lstColumns | vyTableOrderBy : lstOrderByFields; let i = index" [ngClass]="{'even': i%2 == 0}" class="row"> -->
   <div *ngFor="let row of lstDataRows | vyTableFilter : lstColumns | vyTableOrderBy : lstOrderByFields; let i = index" [ngClass]="{'even': i%2 == 0}"
-    class="row" >
+    class="row">
     <div *ngFor="let col of lstColumns" class="col cell" [ngStyle]="col.cellStyle" (click)="col.bClickCell ? clickCellFunc(row): ''">
       <div *ngIf="col.type == 'html'" [innerHtml]="row[col.name]"></div>
       <div *ngIf="col.type != 'html'"> {{row[col.name]}} </div>
     </div>
   </div>
 </div>
+
+
+
+<!-- 
+<div>
+    <span>עמוד {{(iStartNumRow/iCountRows) + 1}}</span>
+   
+    <span (click)="iStartNumRow != 0 ? moveToPage(1) : ''" [ngStyle]="{'color': (iStartNumRow == 0 ? 'gray' : 'black')}">להתחלה</span>
+    <span (click)="iStartNumRow != 0 ? moveToPrevPage() : ''" [ngStyle]="{'color': (iStartNumRow == 0 ? 'gray' : 'black')}">הקודם</span>
+    
+  
+    <div *ngFor="let i of lstPagesNum">{{((iStartNumRow/iCountRows) + 1)}}
+      <span (click)="i != ((iStartNumRow/iCountRows) + 1) ? moveToPage(i) : ''" [ngStyle]="{'color': (i == ((iStartNumRow/iCountRows) + 1) ? 'gray' : 'black')}">{{i}}</span>
+    </div>
+  
+    <span (click)="iEndNumRow != lstDataRows.length ? moveToNextPage() : ''" [ngStyle]="{'color': (iEndNumRow == lstDataRows.length ? 'gray' : 'black')}">הבא</span>
+    <span (click)="iEndNumRow != lstDataRows.length ? moveToPage(lstDataRows.length / iCountRows) : ''" [ngStyle]="{'color': (iEndNumRow == lstDataRows.length ? 'gray' : 'black')}">לסוף</span>
+  </div> -->

@@ -63,29 +63,52 @@ namespace Service.Entities
             
         }
 
-        public static bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment)
-        {
-            try
-            {
-                List<SqlParameter> sqlParameters = new List<SqlParameter>();
-                sqlParameters.Add(new SqlParameter("iItemId", iItemId));
-                sqlParameters.Add(new SqlParameter("iBelongingType", iBelongingType));
-                sqlParameters.Add(new SqlParameter("nvDocumentName", nvFileName));
-                sqlParameters.Add(new SqlParameter("iCategoryType", iCategoryType));
-                sqlParameters.Add(new SqlParameter("nvComment", nvComment));
+        //public static bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment)
+        //{
+        //    try
+        //    {
+        //        List<SqlParameter> sqlParameters = new List<SqlParameter>();
+        //        sqlParameters.Add(new SqlParameter("iItemId", iItemId));
+        //        sqlParameters.Add(new SqlParameter("iBelongingType", iBelongingType));
+        //        sqlParameters.Add(new SqlParameter("nvDocumentName", nvFileName));
+        //        sqlParameters.Add(new SqlParameter("iCategoryType", iCategoryType));
+        //        sqlParameters.Add(new SqlParameter("nvComment", nvComment));
 
-                SqlDataAccess.ExecuteDatasetSP("TDocuments_INS", sqlParameters);
+        //        SqlDataAccess.ExecuteDatasetSP("TDocuments_INS", sqlParameters);
 
-                Fileshandler.SaveFileByBase64(nvBase64File, nvFileName);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Log.LogError("AddFile /TDocuments_INS", "ex: " + ex);
-                return false;
-            }
-        }
+        //        Fileshandler.SaveFileByBase64(nvBase64File, nvFileName);
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.LogError("AddFile /TDocuments_INS", "ex: " + ex);
+        //        return false;
+        //    }
+        //}
 
+            //finish this component
+        //public static bool SetDocument(Document document, int iBelongingType, string nvBase64File, string nvFileName)
+        //{
+        //    try
+        //    {
+        //        List<SqlParameter> sqlParameters = new List<SqlParameter>();
+        //        sqlParameters.Add(new SqlParameter("iItemId", iItemId));
+        //        sqlParameters.Add(new SqlParameter("iBelongingType", iBelongingType));
+        //        sqlParameters.Add(new SqlParameter("nvDocumentName", nvFileName));
+        //        sqlParameters.Add(new SqlParameter("iCategoryType", iCategoryType));
+        //        sqlParameters.Add(new SqlParameter("nvComment", nvComment));
+
+        //        SqlDataAccess.ExecuteDatasetSP("TDocuments_INS", sqlParameters);
+
+        //        Fileshandler.SaveFileByBase64(nvBase64File, nvFileName);
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.LogError("AddFile /TDocuments_INS", "ex: " + ex);
+        //        return false;
+        //    }
+        //}
         public static List<Document> GetDocumentsByItemId(int iItemId)
         {
             try
