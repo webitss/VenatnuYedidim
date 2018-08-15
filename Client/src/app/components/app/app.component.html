@@ -1,6 +1,21 @@
+<!-- <div class="header row">
+    <nav class="navbar navbar-expand-sm nav header-navbar">
+        <ul class="navbar-nav navbar-list" *ngIf="currentComponent">
+            <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentDetails') != -1}" class="nav-item" routerLink="student-details">
+              <span class="fullTab">
+                 פרטים אישיים   
+              </span>
+            </li>
+            </ul>
+            </nav>
+            </div> -->
+
 <nav class="navbar navbar-expand-sm nav">
-  <a class="navbar-brand tital" href="#"><img src="./assets/images/Lighthouse.jpg"></a>
-  <ul class="navbar-nav" *ngIf="currentComponent">
+  <div class="col-sm-1">
+  <a class="navbar-brand title" href="#"><img src="./assets/images/Lighthouse.jpg"></a>
+</div>
+<!-- <div class="c"> -->
+  <ul class="navbar-nav col-sm-8" *ngIf="currentComponent">
     <li [ngClass]="{'appSelect': currentComponent.constructor.name.indexOf('Student') != -1}" class="nav-item" routerLink='/students'>
      
      <span>תלמידים</span>      
@@ -24,7 +39,8 @@
      </li>
 
   </ul>
-
+<!-- </div> -->
+<div class="col-sm-3">
   <div id="t-Text_2" class="n pie label singleline autofit firer click ie-background commentable" style="float: left">
     <div class="backgroundLayer"></div>
     <div class="paddingLayer">
@@ -34,7 +50,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div></div>
 </nav>
 
 
