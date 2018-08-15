@@ -10,21 +10,21 @@
                      פרטים אישיים   
                   </div>
                 </li>
-                <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentMeetings') != -1}" class="nav-item">
+                <li *ngIf="flag!=0"  [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentMeetings') != -1}" class="nav-item">
                     <div class="fullTab" routerLink="student-meetings">פגישות
                       
                     </div>
-                  </li><li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentConversations') != -1}" class="nav-item">
+                  </li><li  *ngIf="flag!=0"  [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentConversations') != -1}" class="nav-item">
                       <div class="fullTab" routerLink="/students/student/1/student-conversations">
                             שיחות
                       </div>
                     </li>
-                    <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('sr') != -1}" class="nav-item">
+                    <li *ngIf="flag!=0"   [ngClass]="{'select': currentComponent.constructor.name.indexOf('sr') != -1}" class="nav-item">
                             <div class="fullTab" href="#">
                               ארועים שהשתתף
                                                    </div>
                           </li>
-                    <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('sr') != -1}" class="nav-item">
+                    <li  *ngIf="flag!=0"  [ngClass]="{'select': currentComponent.constructor.name.indexOf('sr') != -1}" class="nav-item">
                         <div class="fullTab" routerLink="student-documents">
                           מסמכים
                                                </div>

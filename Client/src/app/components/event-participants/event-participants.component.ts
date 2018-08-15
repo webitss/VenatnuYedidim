@@ -19,19 +19,19 @@ export class EventParticipantsComponent implements OnInit {
     name: 'nvLastName'
   }, {
     title: 'טלפון',
-    name: 'nvLastName'
+    name: 'nvPhone'
   }, {
     title: 'נייד',
-    name: 'nvLastName'
+    name: 'nvMobile'
   }, {
     title: 'מייל',
-    name: 'nvLastName'
+    name: 'nvEmail'
   }, {
     title: 'סוג משתתף',
-    name: 'nvLastName'
+    name: 'nvValue'
   }, {
     title: 'סטטוס',
-    name: 'nvLastName'
+    name: 'nvValue'
   },
 
   ]

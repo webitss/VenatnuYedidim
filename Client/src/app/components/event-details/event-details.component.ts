@@ -43,6 +43,7 @@ export class EventDetailsComponent implements OnInit {
   private sub: any;
     private iEventId: number;
 
+    isDetails: boolean;
 
 
 
@@ -54,12 +55,15 @@ export class EventDetailsComponent implements OnInit {
     this.sub = this.router.parent.params.subscribe(params => {
       this.iEventId = +params["iEventId"];
       if(this.iEventId!=0){
+        this.isDetails=true;
         this.appProxy.post('GetEvent', {iEventId:this.iEventId}).then(data=>{
           this.e=data;
         })
       }
       else{
         this.e=new Event1();
+        this.isDetails=false;
+
       }
   });
 

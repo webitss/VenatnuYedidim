@@ -116,7 +116,7 @@ import { EventMediaComponent } from './components/event-media/event-media.compon
     SettingYeshivaComponent,
 
     UploadDocumentComponent,
-    StudentDocumentsComponent,
+    
     FilterBMultySelectCheckedPipe,
     
     EventMediaComponent,
@@ -133,6 +133,7 @@ import { EventMediaComponent } from './components/event-media/event-media.compon
       {
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
+          { path: "", component: StudentDetailsComponent },
          //{ path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
           {

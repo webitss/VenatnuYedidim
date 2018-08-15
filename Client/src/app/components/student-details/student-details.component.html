@@ -72,38 +72,38 @@
             </div>
         </div>
         <div class="row">
-                <div class="form-group ">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="fatherDied" (change)="fatherDead=true"> יתום מאב</label>
-                        </div>
-                        <div *ngIf="fatherDead">
-                            <div class="form-group">
-                                <label for="dtBornDate"> תאריך פטירה עברי:</label>
-                                <input type="text" class="form-control" id="dtBornDate" [(ngModel)]="student.nvFatherDeathDate" [ngModelOptions]="{standalone: true}">
-                            </div>
-                            <div class="form-group">
-                                <label for="couseOfdead"> נפטר מ:</label>
-                                <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathFather" [ngModelOptions]="{standalone: true}">
-                            </div>
-                        </div>
+            <div class="form-group col-sm-4">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="fatherDead" (click)="changeStatusParent(1)" [checked]="isCheckedFather"> יתום מאב</label>
+                </div>
+                <div *ngIf="(fatherDead||fatherDeadDetails)">
+                    <div class="form-group col-sm-4">
+                        <label for="dtBornDate"> תאריך פטירה עברי:</label>
+                        <input type="text" class="form-control" id="dtBornDate" [(ngModel)]="student.nvFatherDeathDate" [ngModelOptions]="{standalone: true}">
                     </div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="motherDead" (change)="motherDead=true"> יתום מאם</label>
-                        </div>
-                        <div *ngIf="motherDead">
-                            <div class="form-group">
-                                <label for="dtBornDate"> תאריך פטירה עברי:</label>
-                                <input type="text" class="form-control" id="dtBornDate" [(ngModel)]="student.nvMotherDeathDate" [ngModelOptions]="{standalone: true}">
-                            </div>
-                            <div class="form-group">
-                                <label for="couseOfdead"> נפטר מ:</label>
-                                <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathMother" [ngModelOptions]="{standalone: true}">
-                            </div>
-                        </div>
+                    <div class="form-group col-sm-3">
+                        <label for="couseOfdead"> נפטר מ:</label>
+                        <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathFather" [ngModelOptions]="{standalone: true}">
                     </div>
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="motherDead" (change)="changeStatusParent(2)" [checked]="isCheckedMother"> יתום מאם</label>
+                </div>
+                <div *ngIf="(motherDead||motherDeadDetails)">
+                    <div class="form-group col-sm-4">
+                        <label for="dtBornDate"> תאריך פטירה עברי:</label>
+                        <input type="text" class="form-control" id="dtBornDate" [(ngModel)]="student.nvMotherDeathDate" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label for="couseOfdead"> נפטר מ:</label>
+                        <input type="text" class="form-control" id="couseOfdead" [(ngModel)]="student.nvCauseOfDeathMother" [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+            </div>
             <div class="form-group ">
                 <label for='comment'>הערות</label>
                 <textarea name='comment' class="form-control" [(ngModel)]="student.nvComment" [ngModelOptions]="{standalone: true}"></textarea>

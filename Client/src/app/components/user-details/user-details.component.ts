@@ -20,6 +20,7 @@ export class UserDetailsComponent implements OnInit {
         this.appProxy.post("GetUser", { iPersonId: params['iPersonId'] })
           .then(data => {
             this.user = data;
+            debugger;
           });
       }
       else {
@@ -27,6 +28,7 @@ export class UserDetailsComponent implements OnInit {
       }
     });
     this.sysTableService.getValues(4).then(data => {
+      debugger
       this.lst = data;
     });
   }

@@ -45,14 +45,18 @@ export class SysTableService {
   constructor(private appProxy: AppProxy) { }
   ////#region מקבל ID של טבלה מחזיר ערכים מאותה טבלה 
   getValues(iSysTableId: number): Promise<Array<SysTableRow>> {
-
+  
     console.log(iSysTableId + "arived");
     for (let key in SysTableService.dataTables) {
+   
       console.log(key)
-      if (SysTableService.dataTables[key].iSysTableId === iSysTableId) {
+      console.log("log"+ SysTableService.dataTables[key].iSysTableId)
+      
+      if (SysTableService.dataTables[key].iSysTableId == iSysTableId) {
         this.Mykey = key;
         if (SysTableService.dataTables[key].SysTableRow.length > 0) {
-          return SysTableService.dataTables[key].SysTableRow;
+      
+          return Promise.resolve(SysTableService.dataTables[key].SysTableRow);
 
         }
       }
@@ -62,8 +66,8 @@ export class SysTableService {
 
       .then(l => {
         if (l) {
-          SysTableService.dataTables[this.Mykey] = l
-          return SysTableService.dataTables[this.Mykey];
+          SysTableService.dataTables[this.Mykey].SysTableRow = l
+          return SysTableService.dataTables[this.Mykey].SysTableRow;
         }
         else
           console.log("err");
