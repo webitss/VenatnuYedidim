@@ -1,5 +1,44 @@
 .upload-document{
-    width: 200px;
-    height: 100px;
+    width: 50%;
+    height: 300px;
     border: 1px solid #ccc;
+    margin: auto;
+}
+#LoadDocument{
+    display: none;
+}
+/* .documentName{
+    width: 80px;
+    height: 40px;
+    border: 1px solid black;
+} */
+
+.content{
+    padding: 3%;
+    padding-right: 15%;
+
+}
+
+
+button{
+    margin-top:  4%;
+    margin-left: 4%;
+}
+.browse{
+    border: 1px solid #d8d8d8;
+    color: black;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: #d8d8d8;
+    margin-right: 35%;
+    cursor: pointer;
+}
+#documentName{
+    height: 60px;
+    padding-top: 27px;
+}
+h3{
+    text-align: right;
+    padding-right: 15%;
 }

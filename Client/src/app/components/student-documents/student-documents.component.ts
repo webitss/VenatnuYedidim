@@ -3,6 +3,7 @@ import { AppProxy } from '../../services/app.proxy';
 import { Document } from '../../classes/document';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-student-documents',
@@ -30,31 +31,40 @@ export class StudentDocumentsComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('שם מסמך', 'nvDocumentName'));
     this.lstColumns.push(new VyTableColumn('פתיחה', 'open', 'html'));
 
-    this.appProxy.post('GetDocumentsByItemId', {iItemId: this.id}).then(data => {
+    this.appProxy.post('GetDocumentsByItemId', { iItemId: this.id }).then(data => {
       this.documents = data;
-        this.documents.forEach(element => {
-          this.lstDataRows.push({
-            nvCategory: element.lstObject['nvCategory'],
-            dtCreatedate: element.dtCreatedate.toLocaleDateString(),
-            nvDocumentName: element.nvDocumentName,
-            edit: '<div class="edit"></div>',
-            open: '<a href=' + AppProxy.baseUrl + 'Files/' + element.nvDocumentName + ' target="_blank"> פתח מסמך</a>',
-            iDocumentId: element.iDocumentId
-          });
+      this.documents.forEach(element => {
+        this.lstDataRows.push({
+          nvCategory: element.lstObject['nvCategory'],
+          dtCreatedate: element.dtCreatedate.toLocaleDateString(),
+          nvDocumentName: element.nvDocumentName,
+          edit: '<div class="edit"></div>',
+          open: '<a href=' + AppProxy.baseUrl + 'Files/' + element.nvDocumentName + ' target="_blank"> פתח מסמך</a>',
+          iDocumentId: element.iDocumentId
         });
-      }
-        , err => alert(err));
+      });
+    }
+      , err => alert(err));
 
   }
 
   get staticBaseUrl() {
     return AppProxy.baseUrl;
   }
-addDocument() {
-  this.document = new Document();
-}
-  editDocument(e) {
-    alert(e.iDocumentId);
+  addDocument() {
     this.document = new Document();
+    this.document.iItemId=this.id;
+  }
+  editDocument(e) {
+    //alert(e.iDocumentId);
+    //console.log(e);
+    this.documents.forEach(element => {
+      if (element.iDocumentId == e.iDocumentId)
+        this.document = element;
+    });
+
+  }
+  closeDocumentDialog() {
+    this.document = null;
   }
 }
