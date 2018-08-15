@@ -1,7 +1,22 @@
-<div class="strip nav-bar nav">
-  <h3>משתמש חדש</h3>
-  <button class="btn-circle" (click)="saveUser()">שמור</button>
-  <button class="btn-pink" routerLink="/users">סגור</button>
-</div>
+<div class="name-area">{{title}}</div>
 
-<router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
+<div class="content-area">
+  <div class="header row">
+    <nav class="navbar navbar-expand-sm nav header-navbar">
+      <ul class="navbar-nav navbar-list" *ngIf="currentComponent">
+        <li [ngClass]="{'select': currentComponent.constructor.name.indexOf('UserDetails') != -1}" class="nav-item">
+          <div class="fullTab" routerLink="user-details">
+            פרטים אישיים
+          </div>
+        </li>
+
+      </ul>
+    </nav>
+
+    <div class="btn-area">
+      <button class="btn-circle btn-save" (click)="saveUser()">שמור V</button>
+      <button class="btn-circle btn-close" routerLink="/users">סגור X</button>
+    </div>
+  </div>
+  <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
+</div>
