@@ -63,6 +63,7 @@ import { SettingYeshivaComponent } from './components/setting-yeshiva/setting-ye
 import { UploadDocumentComponent } from './components/upload-document/upload-document.component';
 import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-checked.pipe';
 import { EventMediaComponent } from './components/event-media/event-media.component';
+import { TaskComponent } from './components/task/task.component';
 
 
 @NgModule({
@@ -120,6 +121,8 @@ import { EventMediaComponent } from './components/event-media/event-media.compon
     FilterBMultySelectCheckedPipe,
     
     EventMediaComponent,
+    
+    TaskComponent,
   ],
   imports: [
    // Ng2SearchPipeModule,
@@ -194,7 +197,7 @@ import { EventMediaComponent } from './components/event-media/event-media.compon
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "setting-yeshiva", component: SettingYeshivaComponent }
+              { path: "setting-yeshiva/:EditNewYeshiva", component: SettingYeshivaComponent }
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },
@@ -202,6 +205,7 @@ import { EventMediaComponent } from './components/event-media/event-media.compon
         ]
       },
       // { path: "vy-multy-select", component: VyMultySelectComponent }
+     { path: "task", component: TaskComponent }
 
     ], { useHash: true })
   ],

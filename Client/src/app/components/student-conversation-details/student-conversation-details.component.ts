@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
+import { Task } from '../../classes/task';
 
 @Component({
   selector: 'app-student-conversation-details',
@@ -12,6 +13,7 @@ export class StudentConversationDetailsComponent implements OnInit {
   private sub: any;
   @Output() 
   Conversation = new EventEmitter(); 
+  typeTask:Task;
   @Input()
   protected conversation: Conversation;
 
@@ -65,6 +67,7 @@ export class StudentConversationDetailsComponent implements OnInit {
     // this.sub=this.route.params.subscribe(params=>{
     //   this.iconversationId=+params['conversationId'];
     // });
+
   }
   //  ngOnDestroy() {
   //    this.sub.unsubscribe();

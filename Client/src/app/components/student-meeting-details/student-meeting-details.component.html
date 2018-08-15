@@ -19,22 +19,23 @@
 
       <div class="form-group">
         <label for="nvMeetingType">סוג פגישה</label>
-        <input type="text" id="nvMeetingType" [(ngModel)]="meeting.nvMeetingType" class="form-control" />
+        <select [(ngModel)]="meeting.iMeetingType" >
+          <option *ngFor='let s of sysTableRowList' [value]="s.iSysTableRowId" >
+            {{s.nvValue}}
+          </option>
+        </select>
       </div>
-      <!-- <select>
-        <option *ngFor="let s of sysTableRowList">
-          {{s.nvValue}}
-        </option>
-      </select> -->
-
+     
       <div class="form-group ">
         <label for="date">תאריך:</label>
-        <input type="date" class="form-control" name="date" id="date" [ngModel]="meeting.dtMeetingDate | date: 'yyy-mm-dd'" (ngModelChange)="e.dtEventDate = $event" [ngModelOptions]="{standalone: true}">
+        <input type="date" class="form-control" name="date" id="date" [ngModel]="meeting.dtMeetingDate | date:'yyyy-MM-dd'" (ngModelChange)="meeting.dtMeetingDate = $event"
+          [ngModelOptions]="{standalone: true}">
       </div>
 
       <div class="form-group ">
         <label for="time">שעה:</label>
-        <input type="time" class="form-control" id="time" [ngModel]="meeting.dtMeetingDate | date:'shortTime'" (ngModelChange)="e.dtEventDate = $event"   [ngModelOptions]="{standalone: true}">
+        <input type="mediumTime" class="form-control" id="time" [ngModel]="meeting.dtMeetingDate | date:'h:mm:ss a'" (ngModelChange)="e.dtEventDate = $event"
+          [ngModelOptions]="{standalone: true}">
       </div>
 
     </div>
@@ -44,8 +45,8 @@
         <label for="nvSummary"> סיכום</label>
         <input type="text" class="form-control" id="nvSummary" [(ngModel)]="meeting.nvSummary" [ngModelOptions]="{standalone: true}">
       </div>
+      <app-task></app-task>
 
     </div>
   </div>
 </div>
-

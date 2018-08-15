@@ -218,6 +218,15 @@ namespace Service
             return Yeshivot.AddYeshiva(yeshiva);
         }
 
+        public bool EditYeshiva(Yeshivot yeshiva, int iYeshivaId)
+        {
+            return Yeshivot.EditYeshiva(yeshiva,iYeshivaId);
+        }
+
+        public Yeshivot getYeshivaById(int iYeshivaId)
+        {
+            return Yeshivot.getYeshivaById(iYeshivaId);
+        }
 
         #endregion
 
@@ -242,24 +251,23 @@ namespace Service
 
         #endregion
 
-
-
-
-
         #region participant
 
         public List<Person> GetParticipantsList(int iEventId)
         {
             return Participant.GetParticipantsList(iEventId);
         }
+<<<<<<< HEAD
 
         public List<Student> GetGraduatesList(int iUserId)
         {
             throw new NotImplementedException();
         }
 
+=======
+        
+>>>>>>> b5158d748169c42fd80ecea7657c38452f01f43c
         #endregion
 
     }
-
 }
