@@ -25,7 +25,7 @@
           </option>
         </select>
       </div>
-      {{meeting.dtMeetingDate | date:'short' }}
+     
       <div class="form-group ">
         <label for="date">תאריך:</label>
         <input type="date" class="form-control" name="date" id="date" [ngModel]="meeting.dtMeetingDate | date:'yyyy-MM-dd'" (ngModelChange)="meeting.dtMeetingDate = $event"
@@ -34,7 +34,7 @@
 
       <div class="form-group ">
         <label for="time">שעה:</label>
-        <input type="short" class="form-control" id="time" [ngModel]="meeting.dtMeetingDate | date:'short'" (ngModelChange)="e.dtEventDate = $event"
+        <input type="mediumTime" class="form-control" id="time" [ngModel]="meeting.dtMeetingDate | date:'h:mm:ss a'" (ngModelChange)="e.dtEventDate = $event"
           [ngModelOptions]="{standalone: true}">
       </div>
 
