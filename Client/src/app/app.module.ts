@@ -194,7 +194,7 @@ import { EventMediaComponent } from './components/event-media/event-media.compon
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "setting-yeshiva", component: SettingYeshivaComponent }
+              { path: "setting-yeshiva/:EditNewYeshiva", component: SettingYeshivaComponent }
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },
