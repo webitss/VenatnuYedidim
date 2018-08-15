@@ -97,7 +97,7 @@ export class StudentConversationsComponent implements OnInit {
                 dtConversationTime: c.dtConversationTime.toLocaleTimeString(), 
                 dtNextConversationDate: c.dtNextConversationDate.toLocaleDateString(),
                 nvConversationSummary: c.nvConversationSummary,
-                edit: ' <img src="../../../assets/images/pencil.png" class="img"/>'
+                edit: '<div class="edit"></div>'
                
               });
           });

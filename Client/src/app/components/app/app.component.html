@@ -1,6 +1,21 @@
+<!-- <div class="header row">
+    <nav class="navbar navbar-expand-sm nav header-navbar">
+        <ul class="navbar-nav navbar-list" *ngIf="currentComponent">
+            <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentDetails') != -1}" class="nav-item" routerLink="student-details">
+              <span class="fullTab">
+                 פרטים אישיים   
+              </span>
+            </li>
+            </ul>
+            </nav>
+            </div> -->
+
 <nav class="navbar navbar-expand-sm nav">
-  <a class="navbar-brand tital" href="#"><img src="./assets/images/Lighthouse.jpg"></a>
-  <ul class="navbar-nav" *ngIf="currentComponent">
+  <div class="col-sm-1">
+  <a class="navbar-brand title" href="#"><img src="./assets/images/Lighthouse.jpg"></a>
+</div>
+<!-- <div class="c"> -->
+  <ul class="navbar-nav col-sm-8" *ngIf="currentComponent">
     <li [ngClass]="{'appSelect': currentComponent.constructor.name.indexOf('Student') != -1}" class="nav-item" routerLink='/students'>
      
      <span>תלמידים</span>      
@@ -8,23 +23,26 @@
     <li [ngClass]="{'appSelect': router.url.indexOf('avrechim') != -1}" class="nav-item" routerLink='/avrechim'>
      
       <span>אברכים</span>      
-     </li><li [ngClass]="{'appSelect': router.url.indexOf('Events') != -1}" class="nav-item" routerLink='/events'>
+     </li><li [ngClass]="{'appSelect': router.url.indexOf('events') != -1}" class="nav-item" routerLink='/events'>
      
       <span>ארועים</span>      
-     </li><li [ngClass]="{'appSelect': router.url.indexOf('Graduates') != -1}" class="nav-item" routerLink='/graduates'>
+     </li>
+     <li [ngClass]="{'appSelect': router.url.indexOf('graduates') != -1}" class="nav-item" routerLink='/graduates'>
      
       <span>בוגרים</span>      
-     </li><li [ngClass]="{'appSelect': router.url.indexOf('Users') != -1}" class="nav-item" routerLink='/users'>
+     </li>
+     <li [ngClass]="{'appSelect': router.url.indexOf('users') != -1}" class="nav-item" routerLink='/users'>
      
       <span>משתמשים</span>      
      </li>
-   <li [ngClass]="{'appSelect': router.url.indexOf('Settings') != -1}" class="nav-item" routerLink='/settings'>
-     
+   <li [ngClass]="{'appSelect': router.url.indexOf('settings') != -1}" class="nav-item" routerLink='/settings'>
+  
       <span>הגדרות</span>      
      </li>
 
   </ul>
-
+<!-- </div> -->
+<div class="col-sm-3">
   <div id="t-Text_2" class="n pie label singleline autofit firer click ie-background commentable" style="float: left">
     <div class="backgroundLayer"></div>
     <div class="paddingLayer">
@@ -34,7 +52,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div></div>
 </nav>
 
 
