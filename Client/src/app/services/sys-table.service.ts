@@ -39,6 +39,10 @@ export class SysTableService {
     roleType: {
       iSysTableId: 8,
       SysTableRow: []
+    },
+    meetingType: {
+      iSysTableId: 9,
+      SysTableRow: []
     }
   }
 
