@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit, Output, Input, ViewChild } from '@angular/core';
 import { SettingYeshivaComponent } from '../setting-yeshiva/setting-yeshiva.component';
 import { Yeshiva } from '../../classes/Yeshiva';
 import { Router } from '@angular/router';
@@ -21,6 +21,8 @@ export class SettingsYeshivotComponent implements OnInit {
   protected iYeshivaId: number;
   protected lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   protected yeshiva:Yeshiva;
+  @ViewChild('yeshivot') yeshivot:any;
+
  
   @Output()
   protected sysTableList:SysTableRow[];
@@ -29,7 +31,7 @@ export class SettingsYeshivotComponent implements OnInit {
  
   ngOnInit() {
 
-    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true))
+    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true,false))
     this.lstColumns.push(new VyTableColumn('שם מוסד', 'nvYeshivaName'))
     this.lstColumns.push(new VyTableColumn('כתובת ', 'nvAddress'))
     this.lstColumns.push(new VyTableColumn('עיר', 'nvCity'))
@@ -57,5 +59,8 @@ export class SettingsYeshivotComponent implements OnInit {
 
   close() {
     this.yeshiva = null;
+  }
+  tableToExcel(){
+    this.yeshivot.tableToExcel();
   }
 }

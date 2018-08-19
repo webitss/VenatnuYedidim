@@ -41,14 +41,13 @@ new VyTableColumn('מקום','nvPlace') ];
           edit: '<div class="edit"></div>'
 
         });
-
       });
     }
     )
 
 
   }
-  tableToExcel(t){
-    this.events.tableToExcel(t);
+  tableToExcel(){
+    this.events.tableToExcel();
   }
 }

@@ -66,7 +66,8 @@ export class StudentsComponent implements OnInit {
   // type: 'html'
 
 
-  tableToExcel(t){
-    this.students.tableToExcel(t);
+  tableToExcel(){
+    debugger;
+    this.students.tableToExcel();
   }
 }
