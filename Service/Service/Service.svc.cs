@@ -260,7 +260,8 @@ namespace Service
 
         public List<Student> GetGraduatesList(int iUserId)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return Student.GetGraduatesList(iUserId);
         }
 
         #endregion

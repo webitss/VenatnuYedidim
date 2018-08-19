@@ -3,6 +3,8 @@ import { AppProxy } from '../../services/app.proxy';
 import { Student } from '../../classes/student';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { Router, ActivatedRoute } from '@angular/router';
+// import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CardsUnionComponent } from '../cards-union/cards-union.component';
 
 @Component({
   selector: 'app-students',
@@ -11,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class StudentsComponent implements OnInit {
 
+  // 
   constructor(private appProxy: AppProxy, private router: Router,private route: ActivatedRoute ) { }
   param:any;
   id: number;
@@ -49,7 +52,16 @@ export class StudentsComponent implements OnInit {
     this.router.navigate(['students/student/'+e.iPersonId+'/'+'student-details']);
   }
 
-
+  cardsUnion()
+  {
+    // const modalRef = this.modalService.open(CardsUnionComponent);
+  
+    // modalRef.result.then((result) => {
+    //   console.log(result);
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
+  }
   // clickCell:true,
   // type: 'html'
 
