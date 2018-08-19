@@ -66,7 +66,7 @@ import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-che
 import { EventMediaComponent } from './components/event-media/event-media.component';
 import { TaskComponent } from './components/task/task.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
-
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
