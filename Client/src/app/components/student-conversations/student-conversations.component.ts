@@ -48,7 +48,7 @@ export class StudentConversationsComponent implements OnInit {
     },
     {
       title: 'תאריך שיחה הבאה',
-      name: 'dtNextConversationDate'
+      name: 'nvNextConversationDate'
     }
   ];
   public lstDataRows=[];
