@@ -240,10 +240,10 @@ namespace Service
             return Fileshandler.SaveFileByBase64(base64File, fileName);
         }
 
-        public bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment)
-        {
-            return Document.AddFile(iItemId, iBelongingType, iCategoryType, nvBase64File, nvFileName, nvComment);
-        }
+        //public bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment)
+        //{
+        //    return Document.AddFile(iItemId, iBelongingType, iCategoryType, nvBase64File, nvFileName, nvComment);
+        //}
         public List<Document> GetDocumentsByItemId(int iItemId)
         {
             return Document.GetDocumentsByItemId(iItemId);
@@ -257,16 +257,12 @@ namespace Service
         {
             return Participant.GetParticipantsList(iEventId);
         }
-//<<<<<<< HEAD
 
         public List<Student> GetGraduatesList(int iUserId)
         {
             throw new NotImplementedException();
         }
 
-//=======
-        
-//>>>>>>> b5158d748169c42fd80ecea7657c38452f01f43c
         #endregion
 
     }
