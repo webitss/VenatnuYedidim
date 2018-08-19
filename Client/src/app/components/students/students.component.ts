@@ -3,7 +3,7 @@ import { AppProxy } from '../../services/app.proxy';
 import { Student } from '../../classes/student';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { Router, ActivatedRoute } from '@angular/router';
-// import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+// import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CardsUnionComponent } from '../cards-union/cards-union.component';
 
 @Component({
@@ -13,8 +13,8 @@ import { CardsUnionComponent } from '../cards-union/cards-union.component';
 })
 export class StudentsComponent implements OnInit {
 
-  // ,private modalService: NgbModal
-  constructor(private appProxy: AppProxy, private router: Router,private route: ActivatedRoute  ) { }
+  // 
+  constructor(private appProxy: AppProxy, private router: Router,private route: ActivatedRoute ) { }
   param:any;
   id: number;
   studentList: Student[];
