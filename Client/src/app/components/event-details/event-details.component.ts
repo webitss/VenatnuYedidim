@@ -28,7 +28,7 @@ participantsToSend:Array<Tint>=new Array<Tint>();
   save() {
     this.e.dtEventDate = new Date(this.e.dtEventDate);
     this.to.forEach(t=>{
-      this.participantsToSend.push(new Tint(t.iSysTableRowId);
+      this.participantsToSend.push(new Tint(t.iSysTableRowId));
     })
     this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: 1 , to:this.participantsToSend})
       .then(
