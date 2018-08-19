@@ -52,7 +52,7 @@ namespace Service.Entities
             }
         }
 
-        public static bool SetEvent(Event1 oEvent, int iUserId, List<Object> to)
+        public static bool SetEvent(Event1 oEvent, int iUserId, List<TInt> to)
         {
             try
             {
@@ -66,6 +66,15 @@ namespace Service.Entities
 
                 //parameters.Find(x => x.ParameterName == "iCreatedByUserId").Value = iUserId;
                 SqlDataAccess.ExecuteDatasetSP("TEvent_INS/UPD", parameters);
+
+                List<SqlParameter> sqlParameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iEventId", oEvent.iEventId));
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+
+
+                SqlDataAccess.ExecuteDatasetSP("TParticipantsInsertStudents_INS", parameters);
+
+                
                 return true;
             }
             catch (Exception ex)

@@ -1,7 +1,8 @@
-import { Component, OnInit, Input,Output } from '@angular/core';
+import { Component, OnInit, Input,Output, EventEmitter } from '@angular/core';
 import{Task} from "../../classes/task"
 import { SysTableService } from '../../services/sys-table.service';
 import { AppProxy } from '../../services/app.proxy';
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -12,7 +13,9 @@ export class TaskComponent implements OnInit {
 @Input()
 @Output()
 taskTypeList:Array<any>;
-task:Task
+@Output()
+@Input()
+task:Task;
 selectType:string;
 type:Task;
 
@@ -38,9 +41,22 @@ type:Task;
       
           
         });
-        debugger;
+     this.task=new Task();
       }
     // );
+
+    // saveTask() {
+    //   debugger;
+    //   alert(this.task);
+    //   // this.appProxy.post("SetTask", { user: this.task, iUserId: 1 }).then(data => {
+    //   //   if (data == true) {
+    //   //     alert("המשימה נוספה בהצלחה!");
+    //   //   }
+    //   //   else
+    //   //     alert("error!");
+    //   // })
+    // }
+
   }
 
 

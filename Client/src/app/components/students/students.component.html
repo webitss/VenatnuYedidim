@@ -4,14 +4,14 @@
 <div class=" row component-name-header">
         <div class="col-sm-4 component-name">תלמידים</div>
         <div class="actions col-sm-8">
-    <button class="btn btn-small">s</button>
+    <button class="btn btn-small excel" (click)="tableToExcel(tId)" value="Export to Excel"></button>
     <button class="btn btn-small">s</button>
     <button class="btn btn-circle1 btn-orange" (click)="cardsUnion"> איחוד כרטיסים</button>
     <button class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">תלמיד חדש</button>
 </div>
 </div>
 
- <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editStudent($event)"  ></app-vy-table> 
+ <app-vy-table #students [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editStudent($event)"  ></app-vy-table> 
 
 
   

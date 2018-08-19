@@ -104,7 +104,7 @@ namespace Service
 
 
         #region Event
-        public bool SetEvent(Event1 oEvent, int iUserId, List<Object> to)
+        public bool SetEvent(Event1 oEvent, int iUserId, List<TInt> to)
         {
             return Event1.SetEvent(oEvent, iUserId,to);
         }
@@ -248,6 +248,12 @@ namespace Service
         //{
         //    return Document.AddFile(iItemId, iBelongingType, iCategoryType, nvBase64File, nvFileName, nvComment);
         //}
+        public bool SetDocument(Document document, string nvBase64File)
+        {
+            return Document.SetDocument(document, nvBase64File);
+        }
+       
+        
         public List<Document> GetDocumentsByItemId(int iItemId)
         {
             return Document.GetDocumentsByItemId(iItemId);

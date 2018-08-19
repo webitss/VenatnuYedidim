@@ -197,7 +197,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool SetEvent(Event1 oEvent, int iUserId, List<Object> to);
+        bool SetEvent(Event1 oEvent, int iUserId, List<TInt> to);
 
         [OperationContract]
         [WebInvoke(
@@ -441,6 +441,17 @@ RequestFormat = WebMessageFormat.Json)]
         //ResponseFormat = WebMessageFormat.Json,
         //RequestFormat = WebMessageFormat.Json)]
         //bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "SetDocument",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool SetDocument(Document document, string nvBase64File);
+
+       
 
         [OperationContract]
         [WebInvoke(
