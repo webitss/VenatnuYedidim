@@ -204,7 +204,6 @@ import { TaskComponent } from './components/task/task.component';
           { path: "settings-frontend", component: SettingsFrontendComponent },
         ]
       },
-      // { path: "vy-multy-select", component: VyMultySelectComponent }
      { path: "task", component: TaskComponent }
 
     ], { useHash: true })
