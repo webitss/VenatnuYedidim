@@ -27,11 +27,11 @@ namespace Service.Entities
         [DataMember]
         public string nvContact { get; set; }
         [DataMember]
-        public string nvRoleType { get; set; }
-        [DataMember]
         public string nvEmail { get; set; }
         [DataMember]
         public string nvMobile { get; set; }
+        [DataMember]
+        public int iRoleType { get; set; }
 
         #endregion
 

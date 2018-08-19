@@ -23,21 +23,15 @@ button{
       color: white;
       border: none;
 }
- .btn-pink1{
+.btn-close{
       background-color: white;
       border: 1px rgb(207, 37, 94) solid;
       color: rgb(207, 37, 94);
- 
 }
-.btn-pink2{
-      background-color: rgb(207, 37, 94);
-color: white;
-}
+
 .btn-add
 {
-/* height: 80%;*/
 width: 10%; 
-/* float: left; */
 border: 1px solid rgb(207, 37, 94);
 border-radius: 20px;
 text-align: center;

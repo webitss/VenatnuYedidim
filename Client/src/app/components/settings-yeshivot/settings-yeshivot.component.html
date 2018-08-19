@@ -2,8 +2,10 @@
 
 <button (click)="iYeshivaId = 0">מוסד חדש</button>
 
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="editYeshiva($event)"></app-vy-table>
-
 <div *ngIf="iYeshivaId != null">
-<app-setting-yeshiva  [iYeshivaId]="iYeshivaId" (Yeshiva)="cancel()"></app-setting-yeshiva>
+
+<app-setting-yeshiva [yeshiva1]="yeshiva" [sysTableList]="sysTableList" [iYeshivaId]="iYeshivaId" (Yeshiva)="close()"></app-setting-yeshiva>
+
 </div>
+
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="editYeshiva($event)"></app-vy-table>

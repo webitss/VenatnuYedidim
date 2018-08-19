@@ -28,17 +28,6 @@
 
 
   <!-- (onSave)="getFromChild($event)" -->
-  <app-vy-multy-select [fullList]="list" [titleStr]="title" [inputTitle]="inputTitle" (onSave)="getFromChild($event)" ></app-vy-multy-select>
-<!-- <div class="row col-sm-12" *ngIf="!isDetails">
-  <div class="form-group col-sm-4">
+  <app-vy-multy-select *ngIf="!isDetails" [fullList]="sysTableRowList" [titleStr]="title" [inputTitle]="inputTitle" (onSave)="getFromChild($event)" ></app-vy-multy-select>
 
-  <label for='event-for'>עבור</label>
-  <select name="event-for" class="form-control">
-    <option>תלמידים</option>
-    <option>אברכים</option>
-    <option>בוגרים</option>
-    <option>כולם</option>
-  </select>
-</div>
-</div> -->
 </form>
