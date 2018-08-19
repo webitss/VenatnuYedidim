@@ -104,7 +104,7 @@ namespace Service
 
 
         #region Event
-        public bool SetEvent(Event1 oEvent, int iUserId, List<Object> to)
+        public bool SetEvent(Event1 oEvent, int iUserId, List<TInt> to)
         {
             return Event1.SetEvent(oEvent, iUserId,to);
         }
