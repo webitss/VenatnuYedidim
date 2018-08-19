@@ -52,7 +52,7 @@ export class AvrechimComponent implements OnInit {
   editAvrech(e) {
         this.router.navigate(['avrechim/avrech/',e.iPersonId])
   }
-  tableToExcel(t){
-    this.avrechim.tableToExcel(t);
+  tableToExcel(){
+    this.avrechim.tableToExcel();
   }
 }

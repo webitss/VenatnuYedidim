@@ -1,8 +1,10 @@
 <div class=" row component-name-header">
     <div class="col-sm-4 component-name">משתמשים</div>
     <div class="actions col-sm-8">
+            <button class="btn btn-small excel" (click)="tableToExcel()" value="Export to Excel"></button>
+    <button class="btn btn-small">s</button>
         <button class="btn btn-circle1 btn-pink" routerLink="/users/user/0">משתמש חדש</button>
     </div>
 </div>
 <router-outlet></router-outlet>
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editUser($event)"></app-vy-table>
+<app-vy-table #users [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editUser($event)"></app-vy-table>
