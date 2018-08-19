@@ -1,7 +1,7 @@
 export class Document {
     iDocumentId: number;
     iItemId:number;
-    iBelonging: number;
+    iBelongingType: number;
     nvDocumentName: string;
     iCategoryType: number;
     nvComment: string;

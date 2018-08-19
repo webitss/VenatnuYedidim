@@ -51,7 +51,7 @@ namespace Service.Utilities
             }
         }
 
-        public static bool DeleteFile(string fileName, string folderPath)
+        public static bool DeleteFile(string fileName, string folderPath = "")
         {
             try
             {
