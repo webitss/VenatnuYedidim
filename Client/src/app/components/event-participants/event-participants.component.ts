@@ -34,7 +34,7 @@ export class EventParticipantsComponent implements OnInit {
     title: 'סוג משתתף',
     name: 'participantType'
   }, {
-    title: 'סטטוס',
+    title: 'סטטוס הגעה',
     name: 'arriveStatus'
   },
 
@@ -54,8 +54,8 @@ this.appProxy.post("GetParticipantsList", {iEventId:this.iEventId}).then(data=>{
     this.sysTableRowList =  data;
     this.participant.forEach(p => {
      
-     p['participantType'] = this.sysTableRowList.filter(s=> s.iSysTableRowId == p.iMeetingType)[0].nvValue;
-     p['arriveStatus'] = this.sysTableRowList.filter(s=> s.iSysTableRowId == p.iMeetingType)[0].nvValue;
+     p['participantType'] = this.sysTableRowList.filter(s=> s.iSysTableRowId == p. iArrivalStatus)[0].nvValue;
+     p['arriveStatus'] = this.sysTableRowList.filter(s=> s.iSysTableRowId == p.lstObject.iSatusType);
   });
 
     

@@ -1,0 +1,48 @@
+<!-- <p>
+  cards-union works!
+</p>
+<select>
+  <option *ngFor="let student of student1List">{{}}</option>
+</select> -->
+
+<!-- 
+<div class="add-student">
+  <h4 class="Student-affiliation">איחוד כרטיסים</h4>
+  
+</div>
+<div class="modal-body">
+    <select>
+        <option *ngFor="let student of student1List">{{}}</option>
+      </select>
+      <select>
+          <option *ngFor="let student of student1List">{{}}</option>
+        </select>
+    
+</div>
+<div class="modal-footer">
+    <button class="btn-pink1">
+        אחד
+      </button>
+</div>  -->
+
+
+ <div  class="add-student">
+  <span class="Student-affiliation">איחוד כרטיסים</span>
+  <select (change)="student1Change($event)">
+      <option *ngFor="let student of studentList" value="{{student.iPersonId}}">{{student.nvFirstName}}  {{student.nvLastName}}</option>
+    </select>
+    <select (change)="student2Change($event)">
+        <option *ngFor="let student of studentList" value="{{student.iPersonId}}">{{student.nvFirstName}}  {{student.nvLastName}}</option>
+      </select>
+  <button class="btn-pink1" (click)="students=true">אחד</button>
+  
+  <div>
+    <div>
+<span>{{student1.nvFirstName}}</span>
+<span>{{student1.nvLastName}}</span>
+  </div>
+  <div >
+      <span>{{student2.nvFirstName}}</span>
+      <span>{{student2.nvLastName}}</span>
+        </div>
+</div></div>

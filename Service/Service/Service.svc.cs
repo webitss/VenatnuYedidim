@@ -104,7 +104,7 @@ namespace Service
 
 
         #region Event
-        public bool SetEvent(Event1 oEvent, int iUserId, List<Object> to)
+        public bool SetEvent(Event1 oEvent, int iUserId, List<TInt> to)
         {
             return Event1.SetEvent(oEvent, iUserId,to);
         }
@@ -191,14 +191,18 @@ namespace Service
         {
             return Conversation.GetConversations(iPersonId);
         }
-        public bool AddConversations(Conversation conversation, int iPersonId)
+        public bool SetConversations(Conversation conversation, int iPersonId)
         {
-            return Conversation.AddConversation(conversation, iPersonId);
+            return Conversation.SetConversation(conversation, iPersonId);
         }
-        public bool UpdateConversations(Conversation conversation, int iPersonId)
-        {
-            return Conversation.UpdateConversation(conversation, iPersonId);
-        }
+        //public bool AddConversations(Conversation conversation, int iPersonId)
+        //{
+        //    return Conversation.AddConversation(conversation, iPersonId);
+        //}
+        //public bool UpdateConversations(Conversation conversation, int iPersonId)
+        //{
+        //    return Conversation.UpdateConversation(conversation, iPersonId);
+        //}
         public bool DeleteConversations(int iConversationId, int iPersonId)
         {
             return Conversation.DeleteConversation(iConversationId, iPersonId);
@@ -244,6 +248,12 @@ namespace Service
         //{
         //    return Document.AddFile(iItemId, iBelongingType, iCategoryType, nvBase64File, nvFileName, nvComment);
         //}
+        public bool SetDocument(Document document, string nvBase64File)
+        {
+            return Document.SetDocument(document, nvBase64File);
+        }
+       
+        
         public List<Document> GetDocumentsByItemId(int iItemId)
         {
             return Document.GetDocumentsByItemId(iItemId);
@@ -260,7 +270,8 @@ namespace Service
 
         public List<Student> GetGraduatesList(int iUserId)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return Student.GetGraduatesList(iUserId);
         }
 
         #endregion

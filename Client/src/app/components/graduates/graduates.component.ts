@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { AppProxy } from '../../services/app.proxy';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ export class GraduatesComponent implements OnInit {
   param:any;
   id: number;
   studentList: Student[];
-
+  @ViewChild('graduates') graduates:any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   ngOnInit() {
 
@@ -34,7 +34,7 @@ export class GraduatesComponent implements OnInit {
     }, err => { alert(err); });
 
 
-    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true));
+    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true,false));
     this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
     this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
     this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
@@ -42,5 +42,9 @@ export class GraduatesComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
     this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
 
+}
+tableToExcel(){
+  debugger;
+  this.graduates.tableToExcel();
 }
 }

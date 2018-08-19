@@ -1,19 +1,21 @@
 <div class="row col-sm-12">
   <div class="form-group ">
     <label for="taskType">סוג משימה</label>
-    <select name="taskType" class="form-control">
-      <option *ngFor="let type of taskTypeList">{{type['nvValue']}}</option>
+    <select name="taskType" class="form-control" name="taskType" [(ngModel)]="task.iTaskType">
+      <option *ngFor="let type of taskTypeList" [value]="type['iSysTableRowId']">{{type['nvValue']}}</option>
     </select>
   </div>
-
+  <!-- <select [(ngModel)]="user.iPermissionId" class="form-control" name="iPermissionId">
+    <option [value]="item.iSysTableRowId" *ngFor="let item of lst" [selected]="item.iSysTableRowId==user.iPermissionId">{{item.nvValue}}</option>
+  </select> -->
   <div class="form-group">
     <label for="taskDate">תאריך</label>
-    <input type="date" name="taskDate" class="form-control" />
-    <!-- [ngModel]="conversation.dConversationDate | date:'d/M/yy' -->
+    <input type="date" name="taskDate" class="form-control" [(ngModel)]="task.dtTaskdate" />
+    <!-- [ngModel]="conversation.dConversationDate| date:'d/M/yy'  -->
   </div>
   <div class="form-group">
     <label for="taskTime">שעה</label>
-    <input type="time" name="taskTime" class="form-control" />
+    <input type="time" name="taskTime" class="form-control" [(ngModel)]="task.tTaskTime" />
     <!-- [ngModel]="conversation.dtConversationTime| date:'shortTime'" -->
   </div>
 </div>

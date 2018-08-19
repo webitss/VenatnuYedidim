@@ -21,6 +21,7 @@ import { AppProxy } from './services/app.proxy';
 import { SysTableService } from './services/sys-table.service';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
+import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 
 import { StudentsComponent } from './components/students/students.component';
 import { StudentComponent } from './components/student/student.component';
@@ -64,8 +65,14 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
 import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-checked.pipe';
 import { EventMediaComponent } from './components/event-media/event-media.component';
 import { TaskComponent } from './components/task/task.component';
+<<<<<<< HEAD
 import { LogInComponent } from './log-in/log-in.component';
+=======
+import { CardsUnionComponent } from './components/cards-union/cards-union.component';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+>>>>>>> 00b34bffedb424ea0c4d2e81613a2564a453bafb
 
+// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -124,15 +131,25 @@ import { LogInComponent } from './log-in/log-in.component';
     EventMediaComponent,
 
     TaskComponent,
+<<<<<<< HEAD
 
     LogInComponent,
   ],
   imports: [
     // Ng2SearchPipeModule,
+=======
+    
+    CardsUnionComponent,
+  ],
+  imports: [
+    // NgbModule.forRoot(),
+   // Ng2SearchPipeModule,
+>>>>>>> 00b34bffedb424ea0c4d2e81613a2564a453bafb
     BrowserModule,
     FormsModule,
     HttpModule,
     HttpClientModule,
+    NguiDatetimePickerModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
       { path: "", component: LogInComponent },
@@ -214,6 +231,9 @@ import { LogInComponent } from './log-in/log-in.component';
     ], { useHash: true })
   ],
   providers: [AppProxy, SysTableService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  // entryComponents:[
+  //   CardsUnionComponent
+  // ]
 })
 export class AppModule { }

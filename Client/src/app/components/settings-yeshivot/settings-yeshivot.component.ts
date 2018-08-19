@@ -1,10 +1,12 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit, Output, Input, ViewChild } from '@angular/core';
 import { SettingYeshivaComponent } from '../setting-yeshiva/setting-yeshiva.component';
 import { Yeshiva } from '../../classes/Yeshiva';
 import { Router } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { EventEmitter } from 'events';
+import { SysTableService } from '../../services/sys-table.service';
+import { SysTableRow } from '../../classes/SysTableRow';
 
 @Component({
   selector: 'app-settings-yeshivot',
@@ -19,24 +21,35 @@ export class SettingsYeshivotComponent implements OnInit {
   protected iYeshivaId: number;
   protected lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   protected yeshiva:Yeshiva;
+  @ViewChild('yeshivot') yeshivot:any;
 
+ 
+  @Output()
+  protected sysTableList:SysTableRow[];
   
-  constructor(private appProxy: AppProxy,private router:Router) { }
+  constructor(private appProxy: AppProxy,private router:Router,private sysTableService:SysTableService) { }
  
   ngOnInit() {
 
-    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true))
+    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true,false))
     this.lstColumns.push(new VyTableColumn('שם מוסד', 'nvYeshivaName'))
     this.lstColumns.push(new VyTableColumn('כתובת ', 'nvAddress'))
     this.lstColumns.push(new VyTableColumn('עיר', 'nvCity'))
     this.lstColumns.push(new VyTableColumn('שם איש קשר', 'nvContact'))
-    this.lstColumns.push(new VyTableColumn('תפקיד', 'nvRoleType'))
     this.lstColumns.push(new VyTableColumn('מייל', 'nvEmail'))
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'))
-    //להוסיף עמודה של תפקיד
+    this.lstColumns.push(new VyTableColumn('תפקיד', 'nvRoleType'))
+
     this.appProxy.post('GetAllYeshivot').then(data => {
       this.yeshivaList = data;
-      this.yeshivaList.forEach(y=> y['edit'] = '<div class="edit"></div>')
+      this.sysTableService.getValues(SysTableService.dataTables.roleType.iSysTableId).then(val=>{
+        this.sysTableList=val;
+
+        this.yeshivaList.forEach(y=> {
+          y['edit'] = '<div class="edit"></div>';
+          y['nvRoleType']=this.sysTableList.filter(x=>x.iSysTableRowId==y.iRoleType)[0].nvValue;
+        });
+      });
     });
   }
 
@@ -44,7 +57,10 @@ export class SettingsYeshivotComponent implements OnInit {
     this.iYeshivaId = yeshiva.iYeshivaId;
   }
 
-  cancel() {
+  close() {
     this.yeshiva = null;
+  }
+  tableToExcel(){
+    this.yeshivot.tableToExcel();
   }
 }

@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
-import {SysTableService} from '../../services/sys-table.service';
+import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 
 import { StudentConversationDetailsComponent } from '../student-conversation-details/student-conversation-details.component';
 import { Title } from '@angular/platform-browser';
+import { SelectorListContext } from '@angular/compiler';
 
 
 @Component({
@@ -19,8 +20,8 @@ export class StudentConversationsComponent implements OnInit {
   protected flag: number;
   protected conversationsList: Array<Conversation> = new Array<Conversation>();
   protected conversationSelect: Conversation;
- @Output()
-  protected sysTableList:SysTableRow[];
+  @Output()
+  protected sysTableList: SysTableRow[];
 
   @Input()
   public lstColumns = [
@@ -48,12 +49,14 @@ export class StudentConversationsComponent implements OnInit {
     },
     {
       title: 'תאריך שיחה הבאה',
-      name: 'dtNextConversationDate'
-    }
-  ];
-  public lstDataRows=[];
+      name: 'nvNextConversationDate'
+    },
+    
 
-  constructor(private appProxy: AppProxy,private sysTableService:SysTableService) { }
+  ];
+  public lstDataRows = [];
+
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService) { }
 
   // newConversation() {
   //   this.conversationSelect = new Conversation();
@@ -64,16 +67,15 @@ export class StudentConversationsComponent implements OnInit {
   }
   editConversation(conver: Conversation) {
     this.conversationSelect = conver;
-    this.flag=1;
+    this.flag = 1;
   }
 
-  addConversation()
-  {
-    this.conversationSelect=new Conversation();
-  this.conversationSelect.dConversationDate=new Date();
-  //this.conversationSelect.dtConversationTime=new Date();
-  this.conversationSelect.dtNextConversationDate=new Date();
- 
+  addConversation() {
+    this.conversationSelect = new Conversation();
+    this.conversationSelect.dConversationDate = new Date();
+    this.conversationSelect.dtConversationTime = new Date();
+    this.conversationSelect.dtNextConversationDate = new Date();
+
   }
 
 
@@ -88,26 +90,56 @@ export class StudentConversationsComponent implements OnInit {
         });
   }
 
+  //   ngOnInit() {
+  //     this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
+  //       .then(data => {
+  //          this.conversationsList = data;
+  //         data.forEach(conv => {
+  //           this.lstDataRows.push({
+  //             iConversationType: this.sysTableList.filter(s => s.iSysTableRowId == conv.iConversationType)[0],
+  //             dConversationDate: conv.dConversationDate,
+  //             dtConversationTime: conv.dtConversationTime,
+  //             dtNextConversationDate: conv.dtNextConversationDate
+
+  //           });
+
+  //         });
+  //        this.selectList();
+  //       });
+  //     }
+
+  // selectList()
+  // {
+
+  //   this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
+  //     this.sysTableList = val;
+  //     this.conversationsList.forEach(c => {
+  //       c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
+  //       c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
+  //       c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
+  //       c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleDateString();
+  //       c['edit'] = '<div class="edit"></div>';
+  //       c['delete'] = '<div class="delete"></div>';
+  //     });
+  //   });
+  // }}
   ngOnInit() {
     this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
-      .then(
-        data => {
-          this.conversationsList=data;
-          this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val=>{
-            this.sysTableList=val;
-         
+      .then(data => {
+        this.conversationsList = data;
+        this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
+          this.sysTableList = val;
           this.conversationsList.forEach(c => {
-                c['nvConversationType']=this.sysTableList.filter(s=>s.iSysTableRowId==c.iConversationType)[0].nvValue;
-                c['nvConversationDate']= c.dConversationDate.toLocaleDateString();
-                c['nvConversationTime']= c.dtConversationTime.toLocaleTimeString(); 
-                c['nvNextConversationDate']= c.dtNextConversationDate.toLocaleDateString();
-                c['edit']= '<div class="edit"></div>';
-                });
-              });
+          
+            c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
+            c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
+            c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleDateString();
+            c['edit'] = '<div class="edit"></div>';
+            c['delete'] = '<div class="delete"></div>';
+            c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
           });
-    
-          //alert(this.conversationsList[0].iPersonId );
-        }
+        });
 
+      });
+  }
 }
-
