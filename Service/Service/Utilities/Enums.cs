@@ -26,4 +26,18 @@ namespace Service.Utilities
         //    iId2 = _iId2;
         //}
     }
+
+
+    [DataContract]
+    public class TInt
+    {
+        [DataMember]
+        public int iId { get; set; }
+      
+
+        //public T2Int(int _iId1 , int _iId2 ) {
+        //    iId1 = _iId1;
+        //    iId2 = _iId2;
+        //}
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Event1 } from '../../classes/event';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 })
 export class EventsComponent implements OnInit {
   protected eventsList: Event1[];
-
+  @ViewChild('events') events:any;
 
   constructor(private appProxy: AppProxy, private router: Router) { }
 
@@ -20,7 +20,7 @@ edit(e){
 
 }
   public lstColumns = [
-new VyTableColumn('עריכה','edit','html', true),
+new VyTableColumn('עריכה','edit','html', true,false),
 new VyTableColumn('שם ארוע','nvName'),
 new VyTableColumn('תאריך','dtEventDate'),
 new VyTableColumn('מקום','nvPlace') ];
@@ -48,5 +48,7 @@ new VyTableColumn('מקום','nvPlace') ];
 
 
   }
-
+  tableToExcel(t){
+    this.events.tableToExcel(t);
+  }
 }
