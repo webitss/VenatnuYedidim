@@ -1,10 +1,12 @@
 <div class=" row component-name-header">
     <div class="col-sm-4 component-name">אירועים</div>
     <div class="actions col-sm-8">
+            <button class="btn btn-small excel" (click)="tableToExcel(tId)" value="Export to Excel"></button>
+            <button class="btn btn-small">s</button>
         <button class="btn btn-circle1 btn-pink" routerLink="/events/event/0">אירוע חדש</button>
     </div>
 </div>
 
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="edit($event)"></app-vy-table>
+<app-vy-table #events [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="edit($event)"></app-vy-table>
 
 <router-outlet></router-outlet>

@@ -21,8 +21,8 @@ export class Student implements Person {
     public bDeathFather: boolean;
     public nvMotherDeathDate: string;
     public bDeathMother: Boolean;
-    public nvCauseOfDeathFather: string;
-    public nvCauseOfDeathMother: string;
+    public iCauseOfDeathFather:number;
+    public iCauseOfDeathMother:number;
     public nvImgStudent: string
     public nvYeshivaName: string
     public nvYeshivaStreet: string

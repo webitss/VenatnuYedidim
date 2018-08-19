@@ -104,7 +104,7 @@ namespace Service
 
 
         #region Event
-        public bool SetEvent(Event1 oEvent, int iUserId, List<Object> to)
+        public bool SetEvent(Event1 oEvent, int iUserId, List<TInt> to)
         {
             return Event1.SetEvent(oEvent, iUserId,to);
         }
@@ -260,7 +260,8 @@ namespace Service
 
         public List<Student> GetGraduatesList(int iUserId)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return Student.GetGraduatesList(iUserId);
         }
 
         #endregion

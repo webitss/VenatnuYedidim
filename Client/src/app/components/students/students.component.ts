@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Student } from '../../classes/student';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { Router, ActivatedRoute } from '@angular/router';
+// import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CardsUnionComponent } from '../cards-union/cards-union.component';
 
 @Component({
   selector: 'app-students',
@@ -11,11 +13,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class StudentsComponent implements OnInit {
 
+  // 
   constructor(private appProxy: AppProxy, private router: Router,private route: ActivatedRoute ) { }
   param:any;
   id: number;
   studentList: Student[];
-
+  @ViewChild('students') students:any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   ngOnInit() {
 
@@ -33,7 +36,7 @@ export class StudentsComponent implements OnInit {
     }, err => { alert(err); });
 
 
-    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true));
+    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true,false));
     this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
     this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
     this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
@@ -49,17 +52,21 @@ export class StudentsComponent implements OnInit {
     this.router.navigate(['students/student/'+e.iPersonId+'/'+'student-details']);
   }
 
-
+  cardsUnion()
+  {
+    // const modalRef = this.modalService.open(CardsUnionComponent);
+  
+    // modalRef.result.then((result) => {
+    //   console.log(result);
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
+  }
   // clickCell:true,
   // type: 'html'
 
 
-
-
-
-
-
-
-
-
+  tableToExcel(t){
+    this.students.tableToExcel(t);
+  }
 }

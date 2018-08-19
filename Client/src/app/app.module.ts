@@ -21,6 +21,7 @@ import { AppProxy } from './services/app.proxy';
 import { SysTableService } from './services/sys-table.service';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
+import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 
 import { StudentsComponent } from './components/students/students.component';
 import { StudentComponent } from './components/student/student.component';
@@ -64,7 +65,10 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
 import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-checked.pipe';
 import { EventMediaComponent } from './components/event-media/event-media.component';
 import { TaskComponent } from './components/task/task.component';
+import { CardsUnionComponent } from './components/cards-union/cards-union.component';
 
+
+// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -123,13 +127,17 @@ import { TaskComponent } from './components/task/task.component';
     EventMediaComponent,
     
     TaskComponent,
+    
+    CardsUnionComponent,
   ],
   imports: [
+    // NgbModule.forRoot(),
    // Ng2SearchPipeModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     HttpClientModule,
+    NguiDatetimePickerModule,
     RouterModule.forRoot([
      // { path: "", component: StudentsComponent },
       { path: "students", component: StudentsComponent },
@@ -209,6 +217,9 @@ import { TaskComponent } from './components/task/task.component';
     ], { useHash: true })
   ],
   providers: [AppProxy, SysTableService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  // entryComponents:[
+  //   CardsUnionComponent
+  // ]
 })
 export class AppModule { }

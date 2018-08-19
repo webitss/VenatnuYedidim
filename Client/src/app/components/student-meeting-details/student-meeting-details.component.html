@@ -19,23 +19,32 @@
 
       <div class="form-group">
         <label for="nvMeetingType">סוג פגישה</label>
-        <select [(ngModel)]="meeting.iMeetingType" >
-          <option *ngFor='let s of sysTableRowList' [value]="s.iSysTableRowId" >
+        <select [(ngModel)]="meeting.iMeetingType">
+          <option *ngFor='let s of sysTableRowList' [value]="s.iSysTableRowId">
             {{s.nvValue}}
           </option>
         </select>
       </div>
-     
+{{meeting.dtDate }}date:
+{{meeting.dtHour}}hour:
+      <!-- <div class="form-group ">
+        <label for="date">תאריך:</label>
+        <input type="date" class="form-control" name="date" id="date" [(ngModel)]="meeting.dtDate" (ngModelChange)="meeting.dtDate = $event"  >
+      </div> -->
       <div class="form-group ">
         <label for="date">תאריך:</label>
-        <input type="date" class="form-control" name="date" id="date" [ngModel]="meeting.dtMeetingDate | date:'yyyy-MM-dd'" (ngModelChange)="meeting.dtMeetingDate = $event"
-          [ngModelOptions]="{standalone: true}">
+        <input type="date" class="form-control" name="date" id="date" [(ngModel)]="meeting.dtDate" (ngModelChange)="meeting.dtDate = $event" >
       </div>
+<div class="form-control">
+      <input  [(ngModel)]="meeting.dtDate"  ngui-datetime-picker date-only="true" close-on-select="false"  name="dtDate">
+    </div>
+    
+
+
 
       <div class="form-group ">
         <label for="time">שעה:</label>
-        <input type="mediumTime" class="form-control" id="time" [ngModel]="meeting.dtMeetingDate | date:'h:mm:ss a'" (ngModelChange)="e.dtEventDate = $event"
-          [ngModelOptions]="{standalone: true}">
+        <input type="time" class="form-control" id="time" name="time" [(ngModel)]="meeting.dtHour " (ngModelChange)="meeting.dtHour = $event"  >
       </div>
 
     </div>
@@ -50,3 +59,16 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- 
+import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
+
+
+<input [(ngModel)]="game.dtDate" ngui-datetime-picker date-only=true close-on-select="false" formControlName="dtDate" name="dtDate"
+  class="form-control" (valueChanged)="saveDate('dtDate',$event)">
+
+
+<input class="form-control" [(ngModel)]="game.tmpTime" type="time" (change)="saveDate('dtDate',$event)" formControlName="tmpTime"
+  name="tmpTime"> -->
