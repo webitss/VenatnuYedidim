@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class StudentsComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private router: Router,private route: ActivatedRoute ) { }
+  constructor(private appProxy: AppProxy, private router: Router,private route: ActivatedRoute  ) { }
   param:any;
   id: number;
   studentList: Student[];
@@ -49,7 +49,10 @@ export class StudentsComponent implements OnInit {
     this.router.navigate(['students/student/'+e.iPersonId+'/'+'student-details']);
   }
 
+  cardsUnion()
+  {
 
+  }
   // clickCell:true,
   // type: 'html'
 
