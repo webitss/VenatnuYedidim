@@ -370,24 +370,32 @@ RequestFormat = WebMessageFormat.Json)]
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
         List<Conversation> GetConversations(int? iPersonId);
-
         [OperationContract]
         [WebInvoke(
-          Method = "POST",
-          UriTemplate = "AddConversations",
-          BodyStyle = WebMessageBodyStyle.WrappedRequest,
-          ResponseFormat = WebMessageFormat.Json,
-          RequestFormat = WebMessageFormat.Json)]
-        bool AddConversations(Conversation conversation, int iPersonId);
+        Method = "POST",
+        UriTemplate = "SetConversations",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool SetConversations(Conversation conversation, int iPersonId);
 
-        [OperationContract]
-        [WebInvoke(
-          Method = "POST",
-          UriTemplate = "UpdateConversations",
-          BodyStyle = WebMessageBodyStyle.WrappedRequest,
-          ResponseFormat = WebMessageFormat.Json,
-          RequestFormat = WebMessageFormat.Json)]
-        bool UpdateConversations(Conversation conversation, int iPersonId);
+        //[OperationContract]
+        //[WebInvoke(
+        //  Method = "POST",
+        //  UriTemplate = "AddConversations",
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //  ResponseFormat = WebMessageFormat.Json,
+        //  RequestFormat = WebMessageFormat.Json)]
+        //bool AddConversations(Conversation conversation, int iPersonId);
+
+        //[OperationContract]
+        //[WebInvoke(
+        //  Method = "POST",
+        //  UriTemplate = "UpdateConversations",
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //  ResponseFormat = WebMessageFormat.Json,
+        //  RequestFormat = WebMessageFormat.Json)]
+        //bool UpdateConversations(Conversation conversation, int iPersonId);
 
         [OperationContract]
         [WebInvoke(

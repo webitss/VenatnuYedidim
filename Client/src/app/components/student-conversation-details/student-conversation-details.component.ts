@@ -12,69 +12,54 @@ import { Task } from '../../classes/task';
 })
 export class StudentConversationDetailsComponent implements OnInit {
   private sub: any;
-  @Output() 
-  Conversation = new EventEmitter(); 
-  typeTask:Task;
+  @Output()
+  Conversation = new EventEmitter();
+  typeTask: Task;
   @Input()
   protected conversation: Conversation;
   @Input()
-  protected sysTableList:SysTableRow[];
+  protected sysTableList: SysTableRow[];
 
 
-   protected iPersonId: number=1;
+  protected iPersonId: number = 1;
 
   constructor(private route: ActivatedRoute, private appProxy: AppProxy) { }
- 
-  cancel()
-  {
+
+  cancel() {
     this.Conversation.emit(null);
   }
 
-   
- saveConversation() {
-//     this.conversation.dConversationDate = new Date(this.conversation.dConversationDate);
-//     this.conversation.dtConversationTime = new Date(this.conversation.dtConversationTime);
-//     this.conversation.dtNextConversationDate = new Date(this.conversation.dtNextConversationDate);
+
+  saveConversation() {
+    this.conversation.dConversationDate = new Date(this.conversation.dConversationDate);
+    this.conversation.dtConversationTime = new Date(this.conversation.dtConversationTime);
+    this.conversation.dtNextConversationDate = new Date(this.conversation.dtNextConversationDate);
     if (this.conversation.iConversationId == null) {
       this.conversation.iPersonId = 7;
-      this.appProxy.post("AddConversations", { conversation: this.conversation, iPersonId:this.iPersonId })
-        .then(
-          data => {
-            if (data)
-              alert("good");
-            else
-              alert("no good");
-          });
     }
-    else {
-      this.appProxy.post("UpdateConversations", { conversation: this.conversation, iPersonId:this.iPersonId })
+    this.appProxy.post("SetConversations", { conversation: this.conversation, iPersonId: this.iPersonId })
       .then(
         data => {
-          if (data)
+          if (data) {
             alert("good");
+            this.Conversation.emit(null);
+          }
           else
             alert("no good");
         });
-
-
-    }
-   
-      this.Conversation.emit(null);
- 
-  }
+}
 
 
 
 
-
-  ngOnInit() {
-    if (this.conversation == null)
+ngOnInit() {
+  if (this.conversation == null)
     this.conversation = new Conversation();
-    // this.sub=this.route.params.subscribe(params=>{
-    //   this.iconversationId=+params['conversationId'];
-    // });
+  // this.sub=this.route.params.subscribe(params=>{
+  //   this.iconversationId=+params['conversationId'];
+  // });
 
-  }
+}
   //  ngOnDestroy() {
   //    this.sub.unsubscribe();
   //    }

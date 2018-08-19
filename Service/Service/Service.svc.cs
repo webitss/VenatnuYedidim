@@ -191,14 +191,18 @@ namespace Service
         {
             return Conversation.GetConversations(iPersonId);
         }
-        public bool AddConversations(Conversation conversation, int iPersonId)
+        public bool SetConversations(Conversation conversation, int iPersonId)
         {
-            return Conversation.AddConversation(conversation, iPersonId);
+            return Conversation.SetConversation(conversation, iPersonId);
         }
-        public bool UpdateConversations(Conversation conversation, int iPersonId)
-        {
-            return Conversation.UpdateConversation(conversation, iPersonId);
-        }
+        //public bool AddConversations(Conversation conversation, int iPersonId)
+        //{
+        //    return Conversation.AddConversation(conversation, iPersonId);
+        //}
+        //public bool UpdateConversations(Conversation conversation, int iPersonId)
+        //{
+        //    return Conversation.UpdateConversation(conversation, iPersonId);
+        //}
         public bool DeleteConversations(int iConversationId, int iPersonId)
         {
             return Conversation.DeleteConversation(iConversationId, iPersonId);
