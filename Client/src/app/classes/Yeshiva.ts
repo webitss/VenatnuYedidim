@@ -4,7 +4,6 @@ export class Yeshiva{
   public nvAddress:string;
   public nvCity:string;
   public nvContact:string;
-  public nvRoleType:string;
   public nvEmail:string;
   public nvMobile:string;
   public iCreatedByUserId:number;
@@ -13,7 +12,8 @@ export class Yeshiva{
   public dtLastModifyDate:Date;
   public bSysRowStatus:boolean;
   public nvStatus:String;
-
+  public iRoleType:number;
+  
   constructor(){
     this.iYeshivaId=0;
   }

@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Meeting } from '../../classes/meeting';
 import { SysTableRow } from '../../classes/SysTableRow';
+import { timeout } from 'q';
+import { TIMEOUT } from 'dns';
+import { Timeouts } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-student-meeting-details',
@@ -44,7 +47,16 @@ export class StudentMeetingDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private appProxi: AppProxy) { }
   ngOnInit() {
-   
+  
+   this.meeting['dtDate'] = new Date((this.meeting.dtMeetingDate).getTime());
+  
+   this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ' '+new Date((this.meeting.dtMeetingDate).getMinutes());
+
+
+    //  this.meeting['dtHour'] =new Date(this.meeting.dtMeetingDate).getHours()+new Date(this.meeting.dtMeetingDate).getMinutes();
+
+  
+        
   }
   
 

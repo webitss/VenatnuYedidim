@@ -6,6 +6,10 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { EventComponent } from '../event/event.component';
 import { ActivatedRoute } from '@angular/router';
 import { FormArrayName } from '@angular/forms';
+import { PARAMETERS } from '@angular/core/src/util/decorators';
+import { Tint } from '../../classes/tint';
+import { SysTableService } from '../../services/sys-table.service';
+import { SysTableRow } from '../../classes/SysTableRow';
 
 @Component({
   selector: 'app-event-details',
@@ -13,16 +17,20 @@ import { FormArrayName } from '@angular/forms';
   styleUrls: ['./event-details.component.css']
 })
 export class EventDetailsComponent implements OnInit {
-  list: Array<any> = new Array<any>({value:"אברכים"}, {value:"תלמידים"},{value: "בוגרים"});
+  list: Array<any> = new Array<any>();
   title:string="";
   inputTitle:string="עבור";
 
   protected e: Event1;
 to:Array<any>;
+participantsToSend:Array<Tint>=new Array<Tint>();
 
   save() {
     this.e.dtEventDate = new Date(this.e.dtEventDate);
-    this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: 1 , to:this.to})
+    this.to.forEach(t=>{
+      this.participantsToSend.push(new Tint(t.iSysTableRowId));
+    })
+    this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: 1 , to:this.participantsToSend})
       .then(
         data => {
           alert("success" + data);
@@ -37,8 +45,9 @@ to:Array<any>;
   private sub: any;
   private iEventId: number;
   isDetails: boolean;
+  sysTableRowList:SysTableRow[];
 
-  constructor(private appProxy: AppProxy, private router: ActivatedRoute) { }
+  constructor(private appProxy: AppProxy, private router: ActivatedRoute,private sysTableService: SysTableService) { }
 
   ngOnInit() {
 
@@ -58,6 +67,18 @@ to:Array<any>;
     });
 
 
+  this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data=>{
+    this.sysTableRowList=data;
+    this.sysTableRowList.forEach(s=>{
+     // s.iSysTableRowId
+      s['value']= s.nvValue;
+    })
+    //alert("success"+this.sysTableRowList[0].nvValue);
+  },err=>{
+   // alert("error")
+  })
+
+//this.participantsToSend=new Array<string>();
 
   }
 

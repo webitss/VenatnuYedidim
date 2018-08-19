@@ -1,20 +1,3 @@
-<!-- <div class="upload-document">
-
-    <div>קטגוריה</div>
-    <select [(ngModel)]="document.iCategoryType">
-        <option *ngFor="let s of sheetTypes" value={{s.iSysTableRowId}}>{{s.nvValue}}</option>
-    </select>
-    <div>תיאור</div>
-    <input type="text" [(ngModel)]="document.nvComment">
-    <label for="LoadDocument">browse</label>
-    <input type="file" (change)="loadDocument($event,save)" name="LoadDocument" id="LoadDocument" />
-    <div class="documentName">{{save.name}}</div>
-
-    <button value="שמירה" (click)="saveFile()"></button>
-    <button value="ביטול" (click)="noSaveFile()"></button>
-
-</div> -->
-
 
 <div class="form ">
     <div class="row ">
@@ -28,7 +11,7 @@
         </div>
         <div class="col-sm-4">
             <button class="btn-circle btn-save" (click)="saveFile()">שמור v </button>
-            <button class="btn-circle btn-close" (click)="closeDialog()">סגור x </button>
+            <button class="btn-circle btn-close" (click)="closeDialog(false)">סגור x </button>
         </div>
     </div>
     <div class="content">
@@ -51,7 +34,6 @@
             <div class="form-group">
                 <label for="LoadDocument" class="browse">browse</label>
                 <input type="file" (change)="loadDocument($event,save)" name="LoadDocument" id="LoadDocument" />
-                <!-- <div class="documentName">{{save.name}}</div>                 -->
             </div>
 
             <div class="form-group">

@@ -46,8 +46,8 @@ namespace Service.Entities
             try
             {
                 DataRowCollection dt = SqlDataAccess.ExecuteDatasetSP("TConversation_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
-                List<Conversation> conversations=ObjectGenerator<Conversation>.GeneratListFromDataRowCollection(dt);
-               return conversations;
+                List<Conversation> conversations = ObjectGenerator<Conversation>.GeneratListFromDataRowCollection(dt);
+                return conversations;
             }
             catch (Exception ex)
             {
@@ -57,44 +57,61 @@ namespace Service.Entities
         }
 
 
-
-        public static bool AddConversation(Conversation conversation, int iPersonId)
+        public static bool SetConversation(Conversation conversation, int iPersonId)
         {
 
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
                 parameters.Add(new SqlParameter("iCreatedByUserId", iPersonId));
-               SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters);
+                SqlDataAccess.ExecuteDatasetSP("TConversation_INS/UPD", parameters);
                 return true;
 
-               
+
             }
             catch (Exception ex)
             {
-                Log.LogError("AddConversation / TConversation_INS", "ex" + ex + ", conversation: " + JsonConvert.SerializeObject(conversation));
+                Log.LogError("SetConversation / TConversation_INS/UPD", "ex" + ex + ", conversation: " + JsonConvert.SerializeObject(conversation));
                 return false;
             }
         }
+        //public static bool AddConversation(Conversation conversation, int iPersonId)
+        //{
 
-        public static bool UpdateConversation(Conversation conversation, int iPersonId)
-        {
+        //    try
+        //    {
+        //        List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
+        //        parameters.Add(new SqlParameter("iCreatedByUserId", iPersonId));
+        //        SqlDataAccess.ExecuteDatasetSP("TConversation_INS", parameters);
+        //        return true;
 
-            try
-            {
-                List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
-                parameters.Add(new SqlParameter("iLastModifyUserId", iPersonId));
-                SqlDataAccess.ExecuteDatasetSP("TConversation_UPD", parameters);
-                
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Log.LogError("UpdateConversation / TConversation_UPD", "ex" + ex);
-                return false;
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.LogError("AddConversation / TConversation_INS", "ex" + ex + ", conversation: " + JsonConvert.SerializeObject(conversation));
+        //        return false;
+        //    }
+        //}
+
+        //public static bool UpdateConversation(Conversation conversation, int iPersonId)
+        //{
+
+        //    try
+        //    {
+        //        List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
+        //        parameters.Add(new SqlParameter("iLastModifyUserId", iPersonId));
+        //        SqlDataAccess.ExecuteDatasetSP("TConversation_UPD", parameters);
+
+
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.LogError("UpdateConversation / TConversation_UPD", "ex" + ex);
+        //        return false;
+        //    }
+        //}
         public static bool DeleteConversation(int iConversationId, int iPersonId)
         {
             try
