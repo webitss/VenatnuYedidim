@@ -58,7 +58,9 @@ export class StudentConversationDetailsComponent implements OnInit {
 
 
     }
-
+   
+      this.Conversation.emit(null);
+ 
   }
 
 

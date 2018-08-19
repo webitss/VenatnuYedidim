@@ -42,14 +42,12 @@ export class StudentDetailsComponent implements OnInit {
       this.paramRout = params['iPersonId'];
       if (params['iPersonId'] != '0') {
 
-
         this.appProxy.post("GetStudentById", { iPersonId: params['iPersonId'] }).then(data => {
+          debugger;
           this.student = data;
 
-          // this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(data => {
-          //   this.sysTableRowList =  data;
-          this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data; });
-
+         
+         
           this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
           this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];
           this.bornDateHebrewStudent.Month = this.bornDateStudentArr[1];
@@ -65,8 +63,6 @@ export class StudentDetailsComponent implements OnInit {
           this.diedDateHebrewMother.Month = this.diedDateMotherArr[1];
           this.diedDateHebrewMother.Year = this.diedDateMotherArr[2];
 
-
-
           if (this.student.bDeathFather == true) {
             this.fatherDeadDetails = true;
             this.isCheckedFather = true;
@@ -79,14 +75,15 @@ export class StudentDetailsComponent implements OnInit {
       }
       else {
         this.student = new Student();
+  
       }
+      debugger;
+      this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data;  });
+    //  this.sysTableRowList.filter(s=> s.iSysTableRowId == m.iMeetingType)[0].nvValue;
     });
-
     // this.route.parent.params.subscribe(params => { this.paramRout = params['iPersonId'] });
-
-
-
   }
+
   changeStatusParent(parentType) {
     switch (parentType) {
       case 1:
@@ -101,7 +98,6 @@ export class StudentDetailsComponent implements OnInit {
           this.isCheckedFather = false
         }
         else this.fatherDead = !this.fatherDead; break;
-
       case 2:
         if (this.student.bDeathMother == true) {
           if (this.isCheckedMother == false) {
@@ -127,7 +123,6 @@ export class StudentDetailsComponent implements OnInit {
     }
     else {
       this.appProxy.post("AddStudent", { Student: this.student, iUserId: 3 }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
-
     }
   }
 

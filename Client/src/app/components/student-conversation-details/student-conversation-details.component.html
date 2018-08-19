@@ -27,11 +27,12 @@
 <br/>
       <div class="form-group ">
         <label for="conversationDate">תאריך</label>
-        <input type="text" name="conversationDate" class="form-control" [ngModel]="conversation.nvConversationDate" (ngModelChange)="conversation.nvConversationDate = $event" [ngModelOptions]="{standalone: true}"/>
+        <input type="date" name="conversationDate" class="form-control" [ngModel]="conversation.dConversationDate|date:'yyyy-MM-dd'" (ngModelChange)="conversation.dConversationDate = $event" [ngModelOptions]="{standalone: true}"/>
       </div>
+  
       <div class="form-group ">
         <label for="conversationDateTime">שעה</label>
-        <input type="text" name="conversationDateTime" class="form-control" [ngModel]="conversation.dtConversationTime | date:'yyyy-MM-dd'" (ngModelChange)="conversation.nvConversationTime = $event" [ngModelOptions]="{standalone: true}" />
+        <input type="time" name="conversationDateTime" class="form-control" [ngModel]="conversation.dtConversationTime | date:'hh:mm'" (ngModelChange)="conversation.dtConversationTime = $event" [ngModelOptions]="{standalone: true}" />
 
       </div>
 
@@ -42,6 +43,11 @@
           <input type="text" name="conversationSummary" class="form-control" [(ngModel)]="conversation.nvConversationSummary" [ngModelOptions]="{standalone: true}"
           />
         </div>
+      </div>
+      <div class="form-group ">
+        <label for="nextConversationDate">תאריך שיחה הבאה</label>
+        <input type="datetime" name="nextConversationDate" class="form-control" [ngModel]="conversation.dtNextConversationDate | date:'d/M/yy, h:mm a'" (ngModelChange)="conversation.dtNextConversationDate = $event" [ngModelOptions]="{standalone: true}" />
+
       </div>
     </div>
       <app-task></app-task>

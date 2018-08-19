@@ -150,9 +150,7 @@ body{
      margin-left: 2%;
     
 }
-.form{
-    /* margin: auto; */
-}
+
 .edit
 {
     background-size: contain;
@@ -189,4 +187,9 @@ padding-right: 20px;
     margin-left: 5%;
     margin-right: 60%;
     
+}
+.excel{
+    background-image: url("./../src/assets/icons/list.png");
+    background-repeat: no repeat;
+    background-size: contain;
 }
