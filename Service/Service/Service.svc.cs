@@ -244,6 +244,12 @@ namespace Service
         //{
         //    return Document.AddFile(iItemId, iBelongingType, iCategoryType, nvBase64File, nvFileName, nvComment);
         //}
+        public bool SetDocument(Document document, string nvBase64File)
+        {
+            return Document.SetDocument(document, nvBase64File);
+        }
+       
+        
         public List<Document> GetDocumentsByItemId(int iItemId)
         {
             return Document.GetDocumentsByItemId(iItemId);

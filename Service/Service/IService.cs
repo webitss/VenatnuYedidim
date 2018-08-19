@@ -437,6 +437,17 @@ RequestFormat = WebMessageFormat.Json)]
         [OperationContract]
         [WebInvoke(
         Method = "POST",
+        UriTemplate = "SetDocument",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool SetDocument(Document document, string nvBase64File);
+
+       
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
         UriTemplate = "GetDocumentsByItemId",
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,

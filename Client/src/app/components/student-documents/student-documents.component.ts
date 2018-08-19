@@ -31,6 +31,11 @@ export class StudentDocumentsComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('שם מסמך', 'nvDocumentName'));
     this.lstColumns.push(new VyTableColumn('פתיחה', 'open', 'html'));
 
+    this.loadDocuments();
+
+  }
+
+  loadDocuments() {
     this.appProxy.post('GetDocumentsByItemId', { iItemId: this.id }).then(data => {
       this.documents = data;
       this.documents.forEach(element => {
@@ -47,24 +52,33 @@ export class StudentDocumentsComponent implements OnInit {
       , err => alert(err));
 
   }
-
   get staticBaseUrl() {
     return AppProxy.baseUrl;
   }
   addDocument() {
     this.document = new Document();
-    this.document.iItemId=this.id;
+    this.document.iItemId = this.id;
+    this.document.iBelongingType = 4;
   }
   editDocument(e) {
     //alert(e.iDocumentId);
     //console.log(e);
     this.documents.forEach(element => {
-      if (element.iDocumentId == e.iDocumentId)
-        this.document = element;
+      if (element.iDocumentId == e.iDocumentId) {
+        this.document = new Document();
+        this.document.iBelongingType = 4;
+        this.document.iCategoryType = element.iCategoryType;
+        this.document.iDocumentId = element.iDocumentId;
+        this.document.iItemId = element.iItemId;
+        this.document.nvComment = element.nvComment;
+        this.document.nvDocumentName = element.nvDocumentName;
+      }
     });
 
   }
   closeDocumentDialog() {
     this.document = null;
+    this.lstDataRows=new Array();
+    this.loadDocuments();
   }
 }
