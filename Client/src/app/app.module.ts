@@ -67,6 +67,8 @@ import { TaskComponent } from './components/task/task.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
 
 
+// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     //templates
@@ -128,6 +130,7 @@ import { CardsUnionComponent } from './components/cards-union/cards-union.compon
     CardsUnionComponent,
   ],
   imports: [
+    // NgbModule.forRoot(),
    // Ng2SearchPipeModule,
     BrowserModule,
     FormsModule,
