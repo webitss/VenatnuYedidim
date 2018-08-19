@@ -370,24 +370,32 @@ RequestFormat = WebMessageFormat.Json)]
           ResponseFormat = WebMessageFormat.Json,
           RequestFormat = WebMessageFormat.Json)]
         List<Conversation> GetConversations(int? iPersonId);
-
         [OperationContract]
         [WebInvoke(
-          Method = "POST",
-          UriTemplate = "AddConversations",
-          BodyStyle = WebMessageBodyStyle.WrappedRequest,
-          ResponseFormat = WebMessageFormat.Json,
-          RequestFormat = WebMessageFormat.Json)]
-        bool AddConversations(Conversation conversation, int iPersonId);
+        Method = "POST",
+        UriTemplate = "SetConversations",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool SetConversations(Conversation conversation, int iPersonId);
 
-        [OperationContract]
-        [WebInvoke(
-          Method = "POST",
-          UriTemplate = "UpdateConversations",
-          BodyStyle = WebMessageBodyStyle.WrappedRequest,
-          ResponseFormat = WebMessageFormat.Json,
-          RequestFormat = WebMessageFormat.Json)]
-        bool UpdateConversations(Conversation conversation, int iPersonId);
+        //[OperationContract]
+        //[WebInvoke(
+        //  Method = "POST",
+        //  UriTemplate = "AddConversations",
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //  ResponseFormat = WebMessageFormat.Json,
+        //  RequestFormat = WebMessageFormat.Json)]
+        //bool AddConversations(Conversation conversation, int iPersonId);
+
+        //[OperationContract]
+        //[WebInvoke(
+        //  Method = "POST",
+        //  UriTemplate = "UpdateConversations",
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //  ResponseFormat = WebMessageFormat.Json,
+        //  RequestFormat = WebMessageFormat.Json)]
+        //bool UpdateConversations(Conversation conversation, int iPersonId);
 
         [OperationContract]
         [WebInvoke(
@@ -433,6 +441,17 @@ RequestFormat = WebMessageFormat.Json)]
         //ResponseFormat = WebMessageFormat.Json,
         //RequestFormat = WebMessageFormat.Json)]
         //bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "SetDocument",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool SetDocument(Document document, string nvBase64File);
+
+       
 
         [OperationContract]
         [WebInvoke(
