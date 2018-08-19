@@ -21,6 +21,7 @@ import { AppProxy } from './services/app.proxy';
 import { SysTableService } from './services/sys-table.service';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
+import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 
 import { StudentsComponent } from './components/students/students.component';
 import { StudentComponent } from './components/student/student.component';
@@ -130,6 +131,7 @@ import { TaskComponent } from './components/task/task.component';
     FormsModule,
     HttpModule,
     HttpClientModule,
+    NguiDatetimePickerModule,
     RouterModule.forRoot([
      // { path: "", component: StudentsComponent },
       { path: "students", component: StudentsComponent },
