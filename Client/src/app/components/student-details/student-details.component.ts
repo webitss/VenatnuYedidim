@@ -43,7 +43,10 @@ export class StudentDetailsComponent implements OnInit {
       if (params['iPersonId'] != '0') {
 
         this.appProxy.post("GetStudentById", { iPersonId: params['iPersonId'] }).then(data => {
+          debugger;
           this.student = data;
+
+         
          
           this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
           this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];

@@ -81,6 +81,8 @@
             <label for="yeshivaCity">עיר מוסד :</label>
             <input type="text" class="form-control" id="yeshivaCity" name="yeshivaCity" [(ngModel)]="student.nvYeshivaCity" [ngModelOptions]="{standalone: true}">
         </div>
+        <!-- <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/> -->
+
 
         <div class="form-group ">
             <label for="dateAdd"> תאריך הצטרפות :</label>
@@ -133,9 +135,7 @@
                         [ngModelOptions]="{standalone: true}" placeholder="שנה">
                 </div>
 
-
                 <div class="form-group ">
-                    {{student.iCauseOfDeathMother}}
                     <label for="couseOfdead"> נפטרה מ:</label>
                     <select class="form-control" id="couseOfdead" name="couseOfdead" [(ngModel)]="student.iCauseOfDeathMother">
                         <option *ngFor="let s of sysTableRowList" [value]="s.iSysTableRowId">

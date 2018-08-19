@@ -1,6 +1,6 @@
 <form class=settingYeshiva>
-<!-- לבדוק למה כפתור הביטול /סגור לא עובד -->
-  <button (click)="close()">ביטול</button>
+
+  <button (click)="cancel()">סגור</button>
 
   <button (click)="save()">שמור</button>
 
@@ -18,10 +18,8 @@
   <input class=inputYeshiva type="text" maxlength="50" [(ngModel)]="yeshiva.nvEmail" [ngModelOptions]="{standalone: true}"/>
 
   <div>תפקיד</div> 
-  <select>
-    <option>תפקיד 1</option>
-    <option>תפקיד 2</option>
-    <option>תפקיד 3</option>
-  </select>
 
+  <select [(ngModel)]="yeshiva.iRoleType">
+    <option *ngFor='let y of sysTableList' [value]="y.iSysTableRowId">{{y.nvValue}}</option>
+  </select>
 </form>

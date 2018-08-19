@@ -6,6 +6,7 @@ import {ActivatedRoute,Router, ROUTER_CONFIGURATION} from '@angular/router'
 // import { element } from 'protractor';
 // import { EMLINK } from 'constants';
 import { SettingsYeshivotComponent } from '../settings-yeshivot/settings-yeshivot.component';
+import { SysTableRow } from '../../classes/SysTableRow';
 
 @Component({
   selector: 'app-setting-yeshiva',
@@ -14,15 +15,20 @@ import { SettingsYeshivotComponent } from '../settings-yeshivot/settings-yeshivo
 })
 
 export class SettingYeshivaComponent implements OnInit {
-
+  
+  
+  
+  protected yeshiva:Yeshiva=new Yeshiva;
+  
   @Output() 
   yeshivaEmit=new EventEmitter();
 
-  protected yeshiva:Yeshiva=new Yeshiva;
-
   @Input()
   public iYeshivaId: number;
-
+  @Input()
+  protected sysTableList:SysTableRow[];
+  @Input()
+  yeshiva1:Yeshiva;
 
   constructor(private appProxy: AppProxy,private ActivatedRoute:ActivatedRoute,private router:Router) { }
 
@@ -63,7 +69,7 @@ export class SettingYeshivaComponent implements OnInit {
     }
   }
 
-  close(){
-   this.yeshivaEmit.emit(null);
+  cancel() {
+    this.yeshivaEmit.emit(null);
   }
 }

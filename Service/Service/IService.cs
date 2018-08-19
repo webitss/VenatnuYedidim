@@ -197,7 +197,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool SetEvent(Event1 oEvent, int iUserId, List<Object> to);
+        bool SetEvent(Event1 oEvent, int iUserId, List<TInt> to);
 
         [OperationContract]
         [WebInvoke(
