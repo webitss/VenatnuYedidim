@@ -64,6 +64,7 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
 import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-checked.pipe';
 import { EventMediaComponent } from './components/event-media/event-media.component';
 import { TaskComponent } from './components/task/task.component';
+import { LogInComponent } from './log-in/log-in.component';
 
 
 @NgModule({
@@ -117,41 +118,45 @@ import { TaskComponent } from './components/task/task.component';
     SettingYeshivaComponent,
 
     UploadDocumentComponent,
-    
+
     FilterBMultySelectCheckedPipe,
-    
+
     EventMediaComponent,
-    
+
     TaskComponent,
+
+    LogInComponent,
   ],
   imports: [
-   // Ng2SearchPipeModule,
+    // Ng2SearchPipeModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot([
-     // { path: "", component: StudentsComponent },
+      // { path: "", component: StudentsComponent },
+      { path: "", component: LogInComponent },
       { path: "students", component: StudentsComponent },
       {
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
           { path: "", component: StudentDetailsComponent },
-         //{ path: "", component: StudentDetailsComponent },
+          //{ path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
           {
-            path: "student-meetings", component: StudentMeetingsComponent},
-            // children: [
-            //   { path: "student-meeting-details/:iMeetingId", component: StudentMeetingDetailsComponent }
-            // ]
-          
+            path: "student-meetings", component: StudentMeetingsComponent
+          },
+          // children: [
+          //   { path: "student-meeting-details/:iMeetingId", component: StudentMeetingDetailsComponent }
+          // ]
+
           {
             path: "student-conversations", component: StudentConversationsComponent, children: [
               { path: "student-conversation-details/:ConversationId", component: StudentConversationDetailsComponent },
             ]
           },
           {
-            path:"student-documents",component:StudentDocumentsComponent
+            path: "student-documents", component: StudentDocumentsComponent
           }
 
         ]
@@ -204,7 +209,7 @@ import { TaskComponent } from './components/task/task.component';
           { path: "settings-frontend", component: SettingsFrontendComponent },
         ]
       },
-     { path: "task", component: TaskComponent }
+      { path: "task", component: TaskComponent }
 
     ], { useHash: true })
   ],
