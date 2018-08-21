@@ -65,12 +65,9 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
 import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-checked.pipe';
 import { EventMediaComponent } from './components/event-media/event-media.component';
 import { TaskComponent } from './components/task/task.component';
-<<<<<<< HEAD
 import { LogInComponent } from './log-in/log-in.component';
-=======
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
-import { GooglePlaceModule } from "ngx-google-places-autocomplete";
->>>>>>> 00b34bffedb424ea0c4d2e81613a2564a453bafb
+//import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
@@ -131,20 +128,17 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
     EventMediaComponent,
 
     TaskComponent,
-<<<<<<< HEAD
 
     LogInComponent,
   ],
-  imports: [
+ //imports: [ 
     // Ng2SearchPipeModule,
-=======
     
-    CardsUnionComponent,
-  ],
+   // CardsUnionComponent,
+  //],
   imports: [
     // NgbModule.forRoot(),
    // Ng2SearchPipeModule,
->>>>>>> 00b34bffedb424ea0c4d2e81613a2564a453bafb
     BrowserModule,
     FormsModule,
     HttpModule,
