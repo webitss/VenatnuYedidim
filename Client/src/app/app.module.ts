@@ -12,7 +12,7 @@ import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
 import { VyTableFilterPipe } from './templates/vy-table/vy-table-filter.pipe';
-import { VyTableOrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
+import { VyTableOrderByPipe, OrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
 
 //--- Pipes ---
 import { FilterPipe } from './pipes/filter.pipe';
@@ -77,6 +77,7 @@ import { ShowImageComponent } from './components/show-image/show-image.component
     VyTableComponent,
     VyTableFilterPipe,
     VyTableOrderByPipe,
+    OrderByPipe,
 
     // pipes
     FilterPipe,
