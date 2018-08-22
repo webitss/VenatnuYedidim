@@ -56,6 +56,14 @@ type:Task;
     //   //     alert("error!");
     //   // })
     // }
+    save(){
+      alert("id:"+ this.task.iTaskId);
+      alert("dtTaskdate:" +this.task.dtTaskdate);
+      alert("iTaskType:" +this.task.iTaskType);
+      alert("tTaskTime:" +this.task.tTaskTime);
+
+      debugger;
+    }
 
   }
 
