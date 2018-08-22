@@ -32,10 +32,10 @@ export class EventParticipantsComponent implements OnInit {
     name: 'nvEmail'
   }, {
     title: 'סוג משתתף',
-    name: 'participantType'
+    name: 'iParticipantType'
   }, {
     title: 'סטטוס הגעה',
-    name: 'arriveStatus'
+    name: 'iArriveStatusType'
   },
 
   ]
@@ -50,12 +50,12 @@ export class EventParticipantsComponent implements OnInit {
       this.iEventId = +params['iEventId'];
       this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(data => {
         this.participant = data;
-        this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
+        this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
           this.sysTableRowList = data;
           this.participant.forEach(p => {
 
-            p['arriveStatus'] = this.sysTableRowList.filter(s => s.iSysTableRowId == p.iArrivalStatus)[0].nvValue;
-            // p['arriveStatus'] = this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iSatusType);
+            p['iArriveStatusType'] = this.sysTableRowList.filter(s => s.iSysTableRowId ==parseInt (p.lstObject.iArrivalStatusType))[0].nvValue;
+            p['iParticipantType'] = this.sysTableRowList.filter(s => s.iSysTableRowId ==parseInt (p.lstObject.iArrivalStatusType))[0].nvValue;
           });
 
 

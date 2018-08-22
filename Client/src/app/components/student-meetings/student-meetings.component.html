@@ -7,7 +7,7 @@
 
 
         <div *ngIf="meeting != null" class="meetingDetails">
-                <app-student-meeting-details [sysTableRowList]="sysTableRowList" [meeting]="meeting" (NewMeeting)="addNewMeeting()" (Meeting)="close()"></app-student-meeting-details> 
+                <app-student-meeting-details [sysTableRowList]="sysTableRowList" [meeting]="meeting" (NewMeeting)="newMeeting()" (Meeting)="close()"></app-student-meeting-details> 
              </div> 
 
  

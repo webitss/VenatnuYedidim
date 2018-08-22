@@ -17,7 +17,7 @@ import { NguiDatetime } from '@ngui/datetime-picker';
 export class StudentMeetingDetailsComponent implements OnInit {
   private sub: any;
   @Output() Meeting = new EventEmitter();
-  @Output() NewMeeting = new EventEmitter<Meeting>();
+  @Output() NewMeeting = new EventEmitter();
 
   @Output()
   @Input()
@@ -42,46 +42,59 @@ export class StudentMeetingDetailsComponent implements OnInit {
     //פגישה חדשה
    
     this.meeting.dtMeetingDate = new Date(this.meeting['dtDate']+' '+this.meeting['dtHour']);
+    if(this.currentMeeting.iMeetingId == null)
+    this.meeting.iPersonId = 1;
 
-    this.appProxi.post("SetMeeting", { meeting: this.meeting, iUserId: 1 }).then(
+
+    
+
+    this.appProxi.post("SetMeeting", { meeting: this.currentMeeting, iUserId: 1 }).then(
       data => {
-        if (this.meeting.iMeetingId == null) {
-          this.meeting = data;
-          this.NewMeeting.emit(this.meeting);
-        }
-        else{
-          this.meeting['nvDate'] = this.meeting.dtMeetingDate.toLocaleDateString();
-          this.meeting['nvHour'] = this.meeting.dtMeetingDate.toLocaleTimeString();
-          this.meeting['edit'] = '<div class="edit"></div>';
-          this.meeting['nvMeetingType'] = this.sysTableRowList.filter(s=> s.iSysTableRowId == this.meeting.iMeetingType)[0].nvValue;    
-            }
+        if(this.currentMeeting.iMeetingId != null)
+        this.meeting =  Object.assign({},this.currentMeeting);
+        else
+        this.NewMeeting.emit(null);
+
+        // if (this.meeting.iMeetingId == null) {          
+        //   this.meeting = data;          
+        //   this.NewMeeting.emit(this.meeting);
+        // }
+        // else{
+        //   this.meeting['nvDate'] = this.meeting.dtMeetingDate.toLocaleDateString();
+        //   this.meeting['nvHour'] = this.meeting.dtMeetingDate.toLocaleTimeString();
+        //   this.meeting['edit'] = '<div class="edit"></div>';
+        //   this.meeting['nvMeetingType'] = this.sysTableRowList.filter(s=> s.iSysTableRowId == this.meeting.iMeetingType)[0].nvValue;    
+        //     }
         alert("good");
         this.Meeting.emit(null);
 
-        this.TaskComponent.saveTask();
+        // this.TaskComponent.saveTask();
+
         // debugger;
       },
     );
   }
-
+currentMeeting:Meeting;
   constructor(private route: ActivatedRoute, private appProxi: AppProxy) { }
   ngOnInit() {
-
-    this.meeting['dtDate'] = new Date((this.meeting.dtMeetingDate).getTime());
+    this.currentMeeting = new Meeting();
+   this.currentMeeting = Object.assign({},this.meeting);
+   
+    this.currentMeeting['dtDate'] = new Date((this.currentMeeting.dtMeetingDate).getTime());
 
     // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
     if ((this.meeting.dtMeetingDate).getMinutes() < 10)
-      this.minutes = '0' + (this.meeting.dtMeetingDate).getMinutes().toString();
+      this.minutes = '0' + (this.currentMeeting.dtMeetingDate).getMinutes().toString();
     else
-      this.minutes = (this.meeting.dtMeetingDate).getMinutes().toString();
+      this.minutes = (this.currentMeeting.dtMeetingDate).getMinutes().toString();
 
-    if ((this.meeting.dtMeetingDate).getHours() < 10)
-      this.hours = '0' + (this.meeting.dtMeetingDate).getHours().toString();
+    if ((this.currentMeeting.dtMeetingDate).getHours() < 10)
+      this.hours = '0' + (this.currentMeeting.dtMeetingDate).getHours().toString();
     else
-      this.hours = (this.meeting.dtMeetingDate).getHours().toString();
+      this.hours = (this.currentMeeting.dtMeetingDate).getHours().toString();
 
 
-    this.meeting['dtHour'] = this.hours + ':' + this.minutes;
+    this.currentMeeting['dtHour'] = this.hours + ':' + this.minutes;
 
   }
 

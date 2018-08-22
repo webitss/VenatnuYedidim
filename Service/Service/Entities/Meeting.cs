@@ -58,6 +58,7 @@ namespace Service.Entities
                 List<SqlParameter> parameters = ObjectGenerator<Meeting>.GetSqlParametersFromObject(meeting);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
                 SqlDataAccess.ExecuteDatasetSP("TMeeting_UPD/INS", parameters);
+
                 return true;
             }
             catch (Exception ex)

@@ -1,48 +1,126 @@
-<!-- <p>
-  cards-union works!
-</p>
-<select>
-  <option *ngFor="let student of student1List">{{}}</option>
-</select> -->
-
-<!-- 
-<div class="add-student">
-  <h4 class="Student-affiliation">איחוד כרטיסים</h4>
-  
-</div>
-<div class="modal-body">
-    <select>
-        <option *ngFor="let student of student1List">{{}}</option>
-      </select>
-      <select>
-          <option *ngFor="let student of student1List">{{}}</option>
-        </select>
-    
-</div>
-<div class="modal-footer">
-    <button class="btn-pink1">
-        אחד
-      </button>
-</div>  -->
 
 
  <div  class="add-student">
   <span class="Student-affiliation">איחוד כרטיסים</span>
-  <select (change)="student1Change($event)">
+  <div class="form-group">
+  <select class="form-control" (change)="student1Change($event)">
       <option *ngFor="let student of studentList" value="{{student.iPersonId}}">{{student.nvFirstName}}  {{student.nvLastName}}</option>
     </select>
-    <select (change)="student2Change($event)">
+  </div>
+  <div class="form-group">
+    <select class="form-control" (change)="student2Change($event)">
         <option *ngFor="let student of studentList" value="{{student.iPersonId}}">{{student.nvFirstName}}  {{student.nvLastName}}</option>
       </select>
+      </div>
   <button class="btn-pink1" (click)="students=true">אחד</button>
   
-  <div>
-    <div>
-<span>{{student1.nvFirstName}}</span>
-<span>{{student1.nvLastName}}</span>
-  </div>
-  <div >
-      <span>{{student2.nvFirstName}}</span>
-      <span>{{student2.nvLastName}}</span>
-        </div>
-</div></div>
+  <div *ngIf="student1&&student2&&students" class="students">
+    
+      <div class="st-details col-sm-6">
+          <span class="col-sm-3">שם פרטי:</span>
+              <input type="radio" class="col-sm-1" id="st1FirstName" name="stFirstName" value="{{student1.nvFirstName}}" [(ngModel)]="student.nvFirstName"  checked>
+              <label class="col-sm-3" for="st1FirstName">{{student1.nvFirstName}}</label>
+              <input type="radio" class="col-sm-1" id="st2FirstName" name="stFirstName" value="{{student2.nvFirstName}}" [(ngModel)]="student.nvFirstName">
+              <label class="col-sm-3" for="st2FirstName">{{student2.nvFirstName}}</label>
+</div>
+<div class="st-details col-sm-6">
+    <span class="col-sm-3">שם משפחה:</span>
+        <input type="radio" class="col-sm-1" id="st1LastName" name="stLastName" value="{{student1.nvLastName}}" [(ngModel)]="student.nvLastName" checked>
+        <label class="col-sm-3" for="st1LastName">{{student1.nvLastName}}</label>
+        <input type="radio" class="col-sm-1" id="st2LastName" name="stLastName" value="{{student2.nvLastName}}" [(ngModel)]="student.nvLastName" >
+        <label class="col-sm-3" for="st2LastName">{{student2.nvLastName}}</label>
+</div>
+<div class="st-details col-sm-6">
+    <span class="col-sm-3">ת.ז:</span>
+        <input type="radio" class="col-sm-1" id="st1IdentityCard" name="stIdentityCard" value="{{student1.nvIdentityCard}}" [(ngModel)]="student.nvIdentityCard" checked>
+        <label class="col-sm-3" for="st1IdentityCard">{{student1.nvIdentityCard}}</label>
+        <input type="radio" class="col-sm-1" id="st2IdentityCard" name="stIdentityCard" value="{{student2.nvIdentityCard}}" [(ngModel)]="student.nvIdentityCard" >
+        <label class="col-sm-3" for="st2IdentityCard">{{student2.nvIdentityCard}}</label>
+</div>
+
+<div class="st-details col-sm-6">
+    <span class="col-sm-3"> טלפון:</span>
+        <input type="radio" class="col-sm-1" id="st1FirstName" name="stPhone" value="{{student1.nvPhone}}" [(ngModel)]="student.nvPhone"  checked>
+        <label class="col-sm-3" for="st1FirstName">{{student1.nvPhone}}</label>
+        <input type="radio" class="col-sm-1" id="st2FirstName" name="stPhone" value="{{student2.nvPhone}}" [(ngModel)]="student.nvPhone">
+        <label class="col-sm-3" for="st2FirstName">{{student2.nvPhone}}</label>
+</div>
+<div class="st-details col-sm-6">
+<span class="col-sm-3"> נייד:</span>
+  <input type="radio" class="col-sm-1" id="st1LastName" name="stMobile" value="{{student1.nvMobile}}" [(ngModel)]="student.nvMobile" checked>
+  <label class="col-sm-3" for="st1LastName">{{student1.nvMobile}}</label>
+  <input type="radio" class="col-sm-1" id="st2LastName" name="stMobile" value="{{student2.nvMobile}}" [(ngModel)]="student.nvMobile" >
+  <label class="col-sm-3" for="st2LastName">{{student2.nvMobile}}</label>
+</div>
+<div class="st-details col-sm-6">
+<span class="col-sm-3">אימייל:</span>
+  <input type="radio" class="col-sm-1" id="st1IdentityCard" name="stEmail" value="{{student1.nvEmail}}" [(ngModel)]="student.nvEmail" checked>
+  <label class="col-sm-3" for="st1IdentityCard">{{student1.nvEmail}}</label>
+  <input type="radio" class="col-sm-1" id="st2IdentityCard" name="stEmail" value="{{student2.nvEmail}}" [(ngModel)]="student.nvEmail" >
+  <label class="col-sm-3" for="st2IdentityCard">{{student2.nvEmail}}</label>
+</div>
+
+<div class="st-details col-sm-6">
+    <span class="col-sm-3"> כתובת:</span>
+        <input type="radio" class="col-sm-1" id="st1Address" name="stAddress" value="{{student1.nvAddress}}" [(ngModel)]="student.nvAddress"  checked>
+        <label class="col-sm-3" for="st1Address">{{student1.nvAddress}}</label>
+        <input type="radio" class="col-sm-1" id="st2Address" name="stAddress" value="{{student2.nvAddress}}" [(ngModel)]="student.nvAddress">
+        <label class="col-sm-3" for="st2Address">{{student2.nvAddress}}</label>
+</div>
+<div class="st-details col-sm-6">
+<span class="col-sm-3"> עיר:</span>
+  <input type="radio" class="col-sm-1" id="st1City" name="stCity" value="{{student1.nvCity}}" [(ngModel)]="student.nvCity" checked>
+  <label class="col-sm-3" for="st1City">{{student1.nvCity}}</label>
+  <input type="radio" class="col-sm-1" id="st2City" name="stCity" value="{{student2.nvCity}}" [(ngModel)]="student.nvCity" >
+  <label class="col-sm-3" for="st2City">{{student2.nvCity}}</label>
+</div>
+<div class="st-details col-sm-6">
+<span class="col-sm-3">תאריך לידה:</span>
+  <input type="radio" class="col-sm-1" id="st1Birthdate" name="stBirthdate" value="{{student1.nvBirthdate}}" [(ngModel)]="student.nvBirthdate" checked>
+  <label class="col-sm-3" for="st1Birthdate">{{student1.nvBirthdate}}</label>
+  <input type="radio" class="col-sm-1" id="st2Birthdate" name="stBirthdate" value="{{student2.nvBirthdate}}" [(ngModel)]="student.nvBirthdate" >
+  <label class="col-sm-3" for="st2Birthdate">{{student2.nvBirthdate}}</label>
+</div>
+
+<div class="st-details col-sm-6">
+<span class="col-sm-3">שם ישיבה:</span>
+  <input type="radio" class="col-sm-1" id="st1YeshivaName" name="stYeshivaName" value="{{student1.nvYeshivaName}}" [(ngModel)]="student.nvYeshivaName" checked>
+  <label class="col-sm-3" for="st1YeshivaName">{{student1.nvYeshivaName}}</label>
+  <input type="radio" class="col-sm-1" id="st2YeshivaName" name="stYeshivaName" value="{{student2.nvYeshivaName}}" [(ngModel)]="student.nvYeshivaName" >
+  <label class="col-sm-3" for="st2YeshivaName">{{student2.nvYeshivaName}}</label>
+</div>
+
+<div class="st-details col-sm-6">
+    <span class="col-sm-3">רחוב הישיבה:</span>
+        <input type="radio" class="col-sm-1" id="st1YeshivaStreet" name="stYeshivaStreet" value="{{student1.nvYeshivaStreet}}" [(ngModel)]="student.nvYeshivaStreet"  checked>
+        <label class="col-sm-3" for="st1YeshivaStreet">{{student1.nvYeshivaStreet}}</label>
+        <input type="radio" class="col-sm-1" id="st2YeshivaStreet" name="stYeshivaStreet" value="{{student2.nvYeshivaStreet}}" [(ngModel)]="student.nvYeshivaStreet">
+        <label class="col-sm-3" for="st2YeshivaStreet">{{student2.nvYeshivaStreet}}</label>
+</div>
+<div class="st-details col-sm-6">
+<span class="col-sm-3">עיר הישיבה:</span>
+  <input type="radio" class="col-sm-1" id="st1YeshivaCity" name="stYeshivaCity" value="{{student1.nvYeshivaCity}}" [(ngModel)]="student.nvYeshivaCity" checked>
+  <label class="col-sm-3" for="st1YeshivaCity">{{student1.nvYeshivaCity}}</label>
+  <input type="radio" class="col-sm-1" id="st2YeshivaCity" name="stYeshivaCity" value="{{student2.nvYeshivaCity}}" [(ngModel)]="student.nvYeshivaCity" >
+  <label class="col-sm-3" for="st2YeshivaCity">{{student2.nvYeshivaCity}}</label>
+</div>
+<!-- <div class="st-details col-sm-6">
+<span class="col-sm-3">תאריך הצטרפות:</span>
+  <input type="radio" class="col-sm-1" id="st1AddStudentDate" name="stAddStudentDate" value="{{student1.dtAddStudentDate}}" [(ngModel)]="student.dtAddStudentDate" checked>
+  <label class="col-sm-3" for="st1AddStudentDate">{{student1.dtAddStudentDate}}</label>
+  <input type="radio" class="col-sm-1" id="st2AddStudentDate" name="stAddStudentDate" value="{{student2.dtAddStudentDate}}" [(ngModel)]="student.dtAddStudentDate" >
+  <label class="col-sm-3" for="st2AddStudentDate">{{student2.dtAddStudentDate.Day}}-{{student2.dtAddStudentDate.Month}}-{{student2.dtAddStudentDate.Year}}</label>
+</div> -->
+
+<div class="st-details col-sm-6">
+    <span class="col-sm-3"> הערות:</span>
+      <input type="radio" class="col-sm-1" id="st1AddStudentDate" name="stAddStudentDate" value="{{student1.nvComment}}" [(ngModel)]="student.nvComment" checked>
+      <label class="col-sm-3" for="st1AddStudentDate">{{student1.nvComment}}</label>
+      <input type="radio" class="col-sm-1" id="st2AddStudentDate" name="stAddStudentDate" value="{{student2.nvComment}}" [(ngModel)]="student.nvComment" >
+      <label class="col-sm-3" for="st2AddStudentDate">{{student2.nvComment}}</label>
+    </div>
+<button class="btn-pink1" (click)="unionOk()">אישור</button>
+
+</div>
+
+ 
