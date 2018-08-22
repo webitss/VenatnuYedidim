@@ -276,6 +276,15 @@ RequestFormat = WebMessageFormat.Json)]
                 RequestFormat = WebMessageFormat.Json)]
         string SaveFileByBase64(string base64File, string fileName);
 
+        [OperationContract]
+        [WebInvoke(
+              Method = "POST",
+              UriTemplate = "GeneratPdf",
+              BodyStyle = WebMessageBodyStyle.WrappedRequest,
+              ResponseFormat = WebMessageFormat.Json,
+              RequestFormat = WebMessageFormat.Json)]
+        string GeneratPdf(string headerHtml, string bodyHtml, string footerHtml);
+
         #endregion
 
         #region SysTableRow
