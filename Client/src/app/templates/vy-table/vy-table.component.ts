@@ -35,25 +35,28 @@ export class VyTableComponent implements OnInit {
   }
   createTableFromData() {
     //  let table = "<table><thead><tr><th>מוטי</th></tr></thead><tbody><tr><td>ראובני</td></tr></tbody></table>";
-    let table = "<table><thead><tr>";
+    
+  }
+createTableForPdf(componentName){
+  let sheet="<div><h1>ונתנו ידידים</h1><br/><br/><h2>טבלת "+componentName+"</h2></div>"
+  sheet+= "<table id='avrechim' style='width: 100%; background-color:#f9e4b1; height: 500px;><thead><tr style='text-align: initial'>";
     this.lstColumns.forEach(column => {
       if (column.bExcel)
-        table += "<th>" + column.title + "</th>";
+        sheet += "<th>" + column.title + "</th>";
     });
-    table += "</tr></thead><tbody>";
+    sheet += "</tr></thead><tbody>";
     this.lstDataRows.forEach(dataRow => {
-      table += "<tr>";
+      sheet += "<tr style='text-align: initial'>";
       this.lstColumns.forEach(col => {
         if (col.bExcel)
-          table += "<td>" + dataRow[col.name] + "</td>";
+          sheet += "<td>" + dataRow[col.name] + "</td>";
       });
-      table += "</tr>";
+      sheet += "</tr>";
     });
-    table += "</tbody></table>";
+    sheet += "</tbody></table><div style='font-weight: bold; background-color: #f7c853 '>סה\"\כ שורות: "+this.lstDataRows.length;
     // debugger;
-    return table;
-  }
-
+    return sheet;
+}
   ngOnInit() {
 
   }
@@ -90,7 +93,41 @@ export class VyTableComponent implements OnInit {
     }
     // this.lstPagesNum //order by
   }
+  // downloadFile() {
+  //   let url = AppProxy.baseUrl + 'Files/excelfilesForExample/' + EXCEL_FILES_NAME[this.game.nvLanguage].clickerGroups + '.xlsx';
+  //   let name = "קליקרים לקבוצות";
+  //   let type = "xlsx";
+  //   this.servGlobal.downloadFile(url, name, type);
+  // }
+  // downloadFile(url: string, name: string, type: string) {
+  //       console.log(url);
+  //       this.toDataUrl(url, function (base64) {
+  //           let data = base64.split(',')[1];
+  //           let binaryString = window.atob(data);
+  //           let binaryLen = binaryString.length;
+  //           let bytes = new Uint8Array(binaryLen);
+  //           for (let i = 0; i < binaryLen; i++) {
+
+  //               let ascii = binaryString.charCodeAt(i);
+  //               bytes[i] = ascii;
+  //           }
+  //           data = bytes;
   
+  //           let file = type ? new Blob([data], { type: type }) : new Blob([data]);
+  //           let link = document.createElement('a');
+  //           link.setAttribute('id', 'linkDownload');
+  //           link.href = window.URL.createObjectURL(file);
+  //           link.download = name + (type ? '.' + type : '');
+  //           link.click();
+  //           try {
+  //               document.getElementById('linkDownload').remove();
+  //           } catch (e) {
+  //               //Global_service.showMessage("הורדת הקובץ נכשלה", "fail");
+  //               console.log(e);
+  //           }
+  
+  //       });
+  //   }
 
   public tableToExcel() {
     let uri = 'data:application/vnd.ms-excel;base64,'
@@ -104,15 +141,5 @@ export class VyTableComponent implements OnInit {
     window.location.href = uri + base64(format(template, ctx))
   }
 }
-// public tableToExcel(t) {
-//   let uri = 'data:application/vnd.ms-excel;base64,'
-//   , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
-//   , base64 = function(s) { return window.btoa(eval('unescape(encodeURIComponent(s))')) }
-//     , format = function (s, c) {
-//       return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; })
-//     }
-//     if (!t.nodeType) t = document.getElementById(t)
-//     var ctx = {worksheet: name || 'Worksheet', table: t.innerHTML}
-//   debugger;
-//   window.location.href = uri + base64(format(template, ctx))
-//  }
+
+
