@@ -45,7 +45,13 @@ export class VyMultySelectComponent implements OnInit {
     }
   }
 
-
+save(){
+  this.fullList.forEach(element => {
+    if (element['bMultySelectChecked'] == true) {
+      element['bMultySelectChecked']=false;
+    }
+  });
+}
 
   selectAll() {
     if (this.checkboxValueSelectAll == true)

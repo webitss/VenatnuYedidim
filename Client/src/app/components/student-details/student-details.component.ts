@@ -43,11 +43,13 @@ export class StudentDetailsComponent implements OnInit {
       if (params['iPersonId'] != '0') {
 
         this.appProxy.post("GetStudentById", { iPersonId: params['iPersonId'] }).then(data => {
-          debugger;
-          this.student = data;
 
-         
-         
+          this.student = data;
+          debugger;
+          // this.student.dtBirthdate.getTime();
+          // this.student.dtAddStudentDate.getTime();
+
+
           this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
           this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];
           this.bornDateHebrewStudent.Month = this.bornDateStudentArr[1];
@@ -75,11 +77,12 @@ export class StudentDetailsComponent implements OnInit {
       }
       else {
         this.student = new Student();
-  
+        this.student.bDeathFather = false;
+        this.student.bDeathMother = false;
+
       }
-      debugger;
-      this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data;  });
-    //  this.sysTableRowList.filter(s=> s.iSysTableRowId == m.iMeetingType)[0].nvValue;
+      this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data; });
+
     });
     // this.route.parent.params.subscribe(params => { this.paramRout = params['iPersonId'] });
   }
@@ -116,13 +119,22 @@ export class StudentDetailsComponent implements OnInit {
 
 
   saveStudent() {
-    alert("success")
+
     this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;
     if (this.paramRout != '0') {
-      this.appProxy.post("UpdateStudent", { Student: this.student, iUserId: 3 }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
+
+
+      this.appProxy.post("UpdateStudent", { student: this.student, iUserId: 1 }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
     }
     else {
-      this.appProxy.post("AddStudent", { Student: this.student, iUserId: 3 }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
+      debugger;
+      if (this.isCheckedFather = true) {
+        this.student.bDeathFather = true;
+      }
+      if (this.isCheckedMother = true) {
+        this.student.bDeathMother = true;
+      }
+      this.appProxy.post("AddStudent", { student: this.student, iUserId: 3 }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
     }
   }
 

@@ -14,12 +14,15 @@ export class AppComponent implements OnInit {
   protected PicUrl: any;
   protected nvBase64File: string;
   protected name: string;
-  // protected userName: string = JSON.parse(localStorage.getItem("user"))? JSON.parse(localStorage.getItem("user")).nvUserName : "משתמש";
+
+  public instance: AppComponent;
+  public userName: string = JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")).nvUserName : "משתמש";
   constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.instance = this;
     if (JSON.parse(localStorage.getItem("user")) == null)
-     
+
       //alert(this.route.routeConfig.component.name);
       this.router.navigate(['']);
 
@@ -64,6 +67,11 @@ export class AppComponent implements OnInit {
       }
     }
 
+  }
+  private id: number;
+  goToUserDetails() {
+     this.id = JSON.parse(localStorage.getItem("user")).iPersonId;
+     this.router.navigate(['users/user/',this.id]);
   }
   //     }
   //   }
