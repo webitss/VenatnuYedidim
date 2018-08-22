@@ -3,7 +3,7 @@ import { AppProxy } from '../../services/app.proxy';
 import { Participants } from '../../classes/participants';
 import { ActivatedRoute } from '@angular/router';
 import { SysTableRow } from '../../classes/SysTableRow';
-import {  SysTableService } from '../../services/sys-table.service';
+import { SysTableService } from '../../services/sys-table.service';
 
 @Component({
   selector: 'app-event-participants',
@@ -12,9 +12,9 @@ import {  SysTableService } from '../../services/sys-table.service';
 })
 export class EventParticipantsComponent implements OnInit {
   protected iEventId: number;
-  private sub:any;
+  private sub: any;
   protected participant: Array<any> = new Array<any>();
-  sysTableRowList:SysTableRow[];
+  sysTableRowList: SysTableRow[];
   protected lstColumns = [{
     title: 'שם פרטי',
     name: 'nvFirstName'
@@ -42,36 +42,36 @@ export class EventParticipantsComponent implements OnInit {
 
 
 
-  constructor(private appProxy: AppProxy, private router: ActivatedRoute,private sysTableService: SysTableService) { }
+  constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
 
   ngOnInit() {
 
-   this.sub= this.router.parent.params.subscribe(params=>{
-     this.iEventId=+params['iEventId'];
-this.appProxy.post("GetParticipantsList", {iEventId:this.iEventId}).then(data=>{
-  this.participant=data;
-  this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
-    this.sysTableRowList =  data;
-    this.participant.forEach(p => {
-     
-     p['participantType'] = this.sysTableRowList.filter(s=> s.iSysTableRowId == p. iArrivalStatus)[0].nvValue;
-     p['arriveStatus'] = this.sysTableRowList.filter(s=> s.iSysTableRowId == p.lstObject.iSatusType);
-  });
+    this.sub = this.router.parent.params.subscribe(params => {
+      this.iEventId = +params['iEventId'];
+      this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(data => {
+        this.participant = data;
+        this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
+          this.sysTableRowList = data;
+          this.participant.forEach(p => {
 
-    
-  });
-  alert("שגיאה בגישה לשרת");
-})
+            p['arriveStatus'] = this.sysTableRowList.filter(s => s.iSysTableRowId == p.iArrivalStatus)[0].nvValue;
+            // p['arriveStatus'] = this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iSatusType);
+          });
+
+
+        });
+        alert("שגיאה בגישה לשרת");
+      })
     });
 
-  
-
-}
 
 
-ngOnDestroy() {
-  this.sub.unsubscribe();
-}
+  }
+
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 
 
 

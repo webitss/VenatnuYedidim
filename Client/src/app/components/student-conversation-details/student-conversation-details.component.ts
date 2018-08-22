@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { Task } from '../../classes/task';
+import { TaskComponent } from '../task/task.component';
 
 @Component({
   selector: 'app-student-conversation-details',
@@ -19,10 +20,16 @@ export class StudentConversationDetailsComponent implements OnInit {
   protected conversation: Conversation;
   @Input()
   protected sysTableList: SysTableRow[];
+<<<<<<< HEAD
   @Output()
   protected newConver= new EventEmitter();
   // @Input()
   // protected newConver :Conversation;
+=======
+
+  @ViewChild('task') TaskComponent:TaskComponent;
+
+>>>>>>> 7b464cdbe7f5af617d57c30414e811fc0f3b48ff
 
   protected iPersonId: number = 1;
 
@@ -69,7 +76,15 @@ export class StudentConversationDetailsComponent implements OnInit {
           else
             alert("no good");
         });
+<<<<<<< HEAD
   }
+=======
+        this.TaskComponent.saveTask();
+}
+
+
+
+>>>>>>> 7b464cdbe7f5af617d57c30414e811fc0f3b48ff
 
   ngOnInit() {
     if (this.conversation == null)
