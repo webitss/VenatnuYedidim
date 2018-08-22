@@ -100,6 +100,7 @@ import { MediaComponent } from './components/media/media.component';
     StudentConversationDetailsComponent,
     StudentMeetingDetailsComponent,
     StudentDocumentsComponent,
+    CardsUnionComponent,
 
     AvrechimComponent,
     AvrechComponent,
@@ -147,10 +148,10 @@ import { MediaComponent } from './components/media/media.component';
 
    
   ],
-  //imports: [ 
-  // Ng2SearchPipeModule,
-
-  // CardsUnionComponent,
+ //imports: [ 
+    // Ng2SearchPipeModule,
+    
+   
   //],
   imports: [
     // NgbModule.forRoot(),

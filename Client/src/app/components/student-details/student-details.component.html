@@ -47,10 +47,10 @@
 
         <div class="form-group ">
             <label for="dtBornDate"> תאריך לידה לועזי:</label>
-            <input type="date" class="form-control" id="dtBornDate" name="dtBornDate" [(ngModel)]="student.dtBirthdate " (ngModelChange)="student.dtBirthdate= $event"
+            <input type="date" class="form-control" id="dtBornDate" name="dtBornDate" [ngModel]="student.dtBirthdate  | date:'yyyy-MM-dd' " (ngModelChange)="e.dtBirthdate = $event"
                 [ngModelOptions]="{standalone: true}">
         </div>
-
+        <!-- ngui-datetime-picker date-only="true" close-on-select="false" -->
         <!-- | date:'yyyy-MM-dd' -->
 
         <div class="form-group ">
@@ -86,7 +86,7 @@
 
         <div class="form-group ">
             <label for="dateAdd"> תאריך הצטרפות :</label>
-            <input type="date" class="form-control" id="dateAdd" name="dateAdd" [(ngModel)]="student.dtAddStudentDate" [ngModelOptions]="{standalone: true}">
+            <input type="date" class="form-control" id="dateAdd" name="dateAdd" [ngModel]="student.dtAddStudentDate | date:'yyyy-MM-dd' " (ngModelChange)="e.dtAddStudentDate = $event" [ngModelOptions]="{standalone: true}">
         </div>
     </div>
     <div class="row">
@@ -98,7 +98,7 @@
             </div>
             <div *ngIf="(fatherDead||fatherDeadDetails)">
 
-                <div class="form-group">
+                <div class="form-group" style="width: 100%">
                     <label for="dtBornDateDay"> תאריך פטירה עברי:</label>
                     <input type="text" class="form-control " id="dtBornDateDay" name="dtBornDateDay" [(ngModel)]="diedDateHebrewFather.Day" [ngModelOptions]="{standalone: true} "
                         placeholder="יום">
@@ -108,7 +108,7 @@
                         [ngModelOptions]="{standalone: true}" placeholder="שנה">
                 </div>
 
-                <div class="form-group ">
+                <div class="form-group " style="width: 100%">
                     <label for="couseOfdead"> נפטר מ:</label>
                     <input type="text" class="form-control date" id="couseOfdead" name="couseOfdead" [(ngModel)]="student.iCauseOfDeathFather"
                         [ngModelOptions]="{standalone: true}" style="width: 0%">
@@ -125,7 +125,7 @@
 
             <div *ngIf="(motherDead||motherDeadDetails)">
 
-                <div class="form-group ">
+                <div class="form-group " style="width: 100%">
                     <label for="dtBornDateDayM"> תאריך פטירה עברי:</label>
                     <input type="text" class="form-control" id="dtBornDateDayM" name="dtBornDateDayM" [(ngModel)]="diedDateHebrewMother.Day"
                         [ngModelOptions]="{standalone: true}" placeholder="יום">
@@ -135,7 +135,7 @@
                         [ngModelOptions]="{standalone: true}" placeholder="שנה">
                 </div>
 
-                <div class="form-group ">
+                <div class="form-group " style="width: 100%">
                     <label for="couseOfdead"> נפטרה מ:</label>
                     <select class="form-control" id="couseOfdead" name="couseOfdead" [(ngModel)]="student.iCauseOfDeathMother">
                         <option *ngFor="let s of sysTableRowList" [value]="s.iSysTableRowId">
