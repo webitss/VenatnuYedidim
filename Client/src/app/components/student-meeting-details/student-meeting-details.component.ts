@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Meeting } from '../../classes/meeting';
@@ -6,6 +6,7 @@ import { SysTableRow } from '../../classes/SysTableRow';
 import { timeout } from 'q';
 import { TIMEOUT } from 'dns';
 import { Timeouts } from 'selenium-webdriver';
+import { TaskComponent } from '../task/task.component';
 import { NguiDatetime } from '@ngui/datetime-picker';
 
 @Component({
@@ -25,6 +26,9 @@ export class StudentMeetingDetailsComponent implements OnInit {
   @Input()
   protected sysTableRowList:SysTableRow[];
 
+  @ViewChild('task') TaskComponent:TaskComponent;
+
+
   close(){
      this.Meeting.emit(null);
   }
@@ -43,6 +47,7 @@ export class StudentMeetingDetailsComponent implements OnInit {
           // debugger;
         },
       );
+      this.TaskComponent.saveTask();
     
       }
 
@@ -52,8 +57,8 @@ export class StudentMeetingDetailsComponent implements OnInit {
    this.meeting['dtDate'] = new Date((this.meeting.dtMeetingDate).getTime());
 
     // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
-
-    this.meeting['dtHour'] = (this.meeting.dtMeetingDate).getHours() + ':'+(this.meeting.dtMeetingDate).getMinutes();
+if((this.meeting.dtMeetingDate).getMinutes() <10)
+    this.meeting['dtHour'] = (this.meeting.dtMeetingDate).getHours() + ':'+'0'+(this.meeting.dtMeetingDate).getMinutes();
 
 
 

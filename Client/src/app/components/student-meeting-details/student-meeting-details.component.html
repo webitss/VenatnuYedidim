@@ -42,7 +42,7 @@
     
       <div class="form-group ">
         <label for="time">שעה:</label>
-        <input type="time" class="form-control" id="time" name="time" value="{{meeting.dtHour}} " (ngModelChange)="meeting.dtHour = $event"  >
+        <input type="time" class="form-control" id="time" name="time" [(ngModel)]="meeting.dtHour " (ngModelChange)="meeting.dtHour = $event"  >
       </div>
 
     </div>
@@ -52,7 +52,7 @@
         <label for="nvSummary"> סיכום</label>
         <input type="text" class="form-control" id="nvSummary" [(ngModel)]="meeting.nvSummary" [ngModelOptions]="{standalone: true}">
       </div>
-      <app-task></app-task>
+      <app-task  #task></app-task>
 
     </div>
   </div>
