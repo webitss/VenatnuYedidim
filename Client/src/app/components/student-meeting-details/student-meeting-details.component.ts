@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Meeting } from '../../classes/meeting';
@@ -6,6 +6,7 @@ import { SysTableRow } from '../../classes/SysTableRow';
 import { timeout } from 'q';
 import { TIMEOUT } from 'dns';
 import { Timeouts } from 'selenium-webdriver';
+import { TaskComponent } from '../task/task.component';
 import { NguiDatetime } from '@ngui/datetime-picker';
 
 @Component({
@@ -29,8 +30,10 @@ export class StudentMeetingDetailsComponent implements OnInit {
   minutes: string;
   hours: string;
 
-  close() {
-    this.Meeting.emit(null);
+  @ViewChild('task') TaskComponent:TaskComponent;
+
+  close(){
+     this.Meeting.emit(null);
   }
 
   save() {
@@ -54,6 +57,8 @@ export class StudentMeetingDetailsComponent implements OnInit {
             }
         alert("good");
         this.Meeting.emit(null);
+
+        this.TaskComponent.saveTask();
         // debugger;
       },
     );
