@@ -10,17 +10,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CardsUnionComponent implements OnInit {
 
-  student1:number;
-student2:number;
+  student1:Student;
+student2:Student;
+student:Student=new Student();
+model:number;
+
   studentList:Student[];
   students:boolean=false;
 
-  student2List:string[]=['aaa','aalll','dd'];
   id:number;
-//   title:string="רשימת תלמידים";
-//   inputTitle:string="בחר תלמידים";
-
-// listToSelect=[];
 
   constructor(private activatedRoute: ActivatedRoute, private appProxy:AppProxy) { }
 
@@ -38,11 +36,22 @@ student2:number;
       , err => alert(err));
   }
   student1Change(event:any){
-   this.student1=event.currentTarget.value;
-    alert(this.student1);
+    this.studentList.forEach(e=>{
+      if(e.iPersonId==event.currentTarget.value)
+      this.student1=e;
+      debugger;
+    });
   }
   student2Change(event:any){
-    this.student2=event.currentTarget.value;
-     alert(this.student2);
+    this.studentList.forEach(e=>{
+    if(e.iPersonId==event.currentTarget.value)
+      this.student2=e;
+    });
+
+   }
+
+   unionOk()
+   {
+     debugger;
    }
 }

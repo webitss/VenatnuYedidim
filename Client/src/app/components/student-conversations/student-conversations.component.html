@@ -5,8 +5,8 @@
 </div>
 <div *ngIf="conversationSelect!=null">
     <app-student-conversation-details [conversation]="conversationSelect" [sysTableList]="sysTableList"  class="conversationDetails"
-    (Conversation)="newConver"  (Conversation)="close()"></app-student-conversation-details>
+     (Conversation)="close()" (newConver)="saveNewConver()"></app-student-conversation-details>
 </div>
 
 
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="conversationsList"(clickCell)="editConversation($event)"></app-vy-table>
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="conversationsList" (clickCell)="editConversation($event)" ></app-vy-table>
