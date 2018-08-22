@@ -67,6 +67,7 @@ import { TaskComponent } from './components/task/task.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
 import { ShowImageComponent } from './components/show-image/show-image.component';
+import { MediaComponent } from './components/media/media.component';
 //import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
@@ -131,6 +132,9 @@ import { ShowImageComponent } from './components/show-image/show-image.component
 
 
     ShowImageComponent,
+
+
+    MediaComponent,
 
 
    
