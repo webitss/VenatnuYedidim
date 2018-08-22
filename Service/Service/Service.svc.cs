@@ -67,6 +67,15 @@ namespace Service
 
         #endregion
 
+        #region Task
+
+        public bool SetTask(Task task, int iUserId)
+        {
+            return Task.SetTask(task, iUserId);
+        }
+
+        #endregion
+
         #region Student
 
         public List<Student> GetStudentList(int iUserId)
@@ -272,6 +281,16 @@ namespace Service
         {
             //throw new NotImplementedException();
             return Student.GetGraduatesList(iUserId);
+        }
+
+        #endregion
+
+
+        #region Fileshandler
+        
+        public string GeneratPdf(string headerHtml, string bodyHtml, string footerHtml)
+        {
+            return Fileshandler.GeneratPdf(headerHtml, bodyHtml, footerHtml);
         }
 
         #endregion

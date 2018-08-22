@@ -42,6 +42,8 @@ type:Task;
           
         });
      this.task=new Task();
+     this.task.nvComment=" עם התלמיד: "
+         
       }
     // );
 
@@ -52,8 +54,9 @@ type:Task;
       // alert("tTaskTime:" +this.task.tTaskTime);
       debugger;
       alert(this.task);
-      this.appProxy.post("SetTask", { task:this.task,userId:JSON.parse(localStorage.getItem("user")).iPersonId }).then(data => {
-        if (data == true) {
+      // JSON.parse(localStorage.getItem("user")).iPersonId
+      this.appProxy.post('SetTask', { task:this.task,iUserId:1 }).then(data => {
+        if (data) {
           alert("המשימה נוספה בהצלחה!");
         }
         else

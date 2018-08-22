@@ -19,10 +19,16 @@ export class StudentConversationDetailsComponent implements OnInit {
   protected conversation: Conversation;
   @Input()
   protected sysTableList: SysTableRow[];
+<<<<<<< HEAD
   @Output()
   protected newConver= new EventEmitter();
   // @Input()
   // protected newConver :Conversation;
+=======
+
+  @ViewChild('task') TaskComponent:TaskComponent;
+
+>>>>>>> 42028593fd1e71d823ad0c8dbe7f3ccc47af2ed8
 
   protected iPersonId: number = 1;
 
@@ -69,7 +75,15 @@ export class StudentConversationDetailsComponent implements OnInit {
           else
             alert("no good");
         });
+<<<<<<< HEAD
   }
+=======
+        this.TaskComponent.saveTask();
+}
+
+
+
+>>>>>>> 42028593fd1e71d823ad0c8dbe7f3ccc47af2ed8
 
   ngOnInit() {
     if (this.conversation == null)
