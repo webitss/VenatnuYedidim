@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 
 namespace Service.Utilities
@@ -159,7 +160,7 @@ namespace Service.Utilities
                 Log.LogError("DeleteFolder", " subSrcFolderPath: " + subSrcFolderPath + ", ex: " + ex.Message);
                 return false;
             }
-        }     
+        }
 
         public static bool CopyFolder(string subSrcFolderPath, string subTargetFolderPath)
         {
@@ -229,5 +230,22 @@ namespace Service.Utilities
                 return false;
             }
         }
+
+        public static string GeneratPdf(string headerHtml, string bodyHtml, string footerHtml)
+        {
+
+            NReco.PdfGenerator.HtmlToPdfConverter pdf = new NReco.PdfGenerator.HtmlToPdfConverter();
+            pdf.Margins = new NReco.PdfGenerator.PageMargins();
+            //pdf.Margins.Top = 25;
+            //pdf.Margins.Bottom = 20;
+            //pdf.Margins.Right = 5;
+            //pdf.Margins.Left = 5;
+            pdf.PageHeaderHtml = headerHtml != "" ? headerHtml : "<div>" + DateTime.Now.ToString("dd/MM/yyyy") + "</div>";
+            pdf.PageFooterHtml = footerHtml != "" ? footerHtml : "<div></div>";
+            pdf.CustomWkHtmlArgs = " --load-media-error-handling ignore ";
+            byte[] pdfBytes = pdf.GeneratePdf(bodyHtml);
+            return Convert.ToBase64String(pdfBytes);
+        }
+
     }
 }
