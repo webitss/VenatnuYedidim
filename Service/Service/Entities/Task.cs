@@ -21,6 +21,9 @@ namespace Service.Entities
         public DateTime dtTaskdate { get; set; }
         [DataMember]
         public TimeSpan tTaskTime { get; set; }
+        [DataMember]
+        public string nvComment { get; set; }
+
 
         #endregion
 

@@ -54,7 +54,8 @@ type:Task;
       // alert("tTaskTime:" +this.task.tTaskTime);
       debugger;
       alert(this.task);
-      this.appProxy.post('SetTask', { task:this.task,iUserId:JSON.parse(localStorage.getItem("user")).iPersonId }).then(data => {
+      // JSON.parse(localStorage.getItem("user")).iPersonId
+      this.appProxy.post('SetTask', { task:this.task,iUserId:1 }).then(data => {
         if (data) {
           alert("המשימה נוספה בהצלחה!");
         }
