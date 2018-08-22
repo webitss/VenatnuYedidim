@@ -148,7 +148,7 @@ import { ShowImageComponent } from './components/show-image/show-image.component
     FormsModule,
     HttpModule,
     HttpClientModule,
-    NguiDatetimePickerModule,
+    NguiDatetimePickerModule, 
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
       // { path: "", component: ShowImageComponent },
