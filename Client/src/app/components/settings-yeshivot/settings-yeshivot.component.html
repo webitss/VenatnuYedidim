@@ -10,6 +10,8 @@
 
 <div *ngIf="iYeshivaId != null">
 
+    <app-setting-yeshiva #yeshivot [yeshiva1]="yeshiva" [sysTableList]="sysTableList" [iYeshivaId]="iYeshivaId" (Yeshiva)="close()"></app-setting-yeshiva>
+    
 </div>
-<app-setting-yeshiva #yeshivot [yeshiva1]="yeshiva" [sysTableList]="sysTableList" [iYeshivaId]="iYeshivaId" (Yeshiva)="close()"></app-setting-yeshiva>
+
 <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="editYeshiva($event)"></app-vy-table>
