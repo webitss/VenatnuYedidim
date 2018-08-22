@@ -19,7 +19,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.iPersonId = 0;
-    this.appProxy.post("GetUsers", { iPersonId: this.iPersonId }).then(data => {
+    this.appProxy.post("GetUsers", { iPersonId: JSON.parse(localStorage.getItem("user")).iPersonId }).then(data => {
       this.lstDataRows = data;
 
       this.lstDataRows.forEach(u => {

@@ -34,22 +34,22 @@ export class VyTableComponent implements OnInit {
     this.clickCell.emit(item);
   }
   createTableFromData() {
-     let table = "<table><thead><tr><th>מוטי</th></tr></thead><tbody><tr><td>ראובני</td></tr></tbody></table>";
-    // let table = "<table><thead><tr>";
-    // this.lstColumns.forEach(column => {
-    //   if (column.bExcel)
-    //     table += "<th>" + column.title + "</th>";
-    // });
-    // table += "</tr></thead><tbody>";
-    // this.lstDataRows.forEach(dataRow => {
-    //   table += "<tr>";
-    //   this.lstColumns.forEach(col => {
-    //     if (col.bExcel)
-    //       table += "<td>" + dataRow[col.name] + "</td>";
-    //   });
-    //   table += "</tr>";
-    // });
-    // table += "</tbody></table>";
+    //  let table = "<table><thead><tr><th>מוטי</th></tr></thead><tbody><tr><td>ראובני</td></tr></tbody></table>";
+    let table = "<table><thead><tr>";
+    this.lstColumns.forEach(column => {
+      if (column.bExcel)
+        table += "<th>" + column.title + "</th>";
+    });
+    table += "</tr></thead><tbody>";
+    this.lstDataRows.forEach(dataRow => {
+      table += "<tr>";
+      this.lstColumns.forEach(col => {
+        if (col.bExcel)
+          table += "<td>" + dataRow[col.name] + "</td>";
+      });
+      table += "</tr>";
+    });
+    table += "</tbody></table>";
     // debugger;
     return table;
   }
@@ -104,3 +104,15 @@ export class VyTableComponent implements OnInit {
     window.location.href = uri + base64(format(template, ctx))
   }
 }
+// public tableToExcel(t) {
+//   let uri = 'data:application/vnd.ms-excel;base64,'
+//   , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+//   , base64 = function(s) { return window.btoa(eval('unescape(encodeURIComponent(s))')) }
+//     , format = function (s, c) {
+//       return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; })
+//     }
+//     if (!t.nodeType) t = document.getElementById(t)
+//     var ctx = {worksheet: name || 'Worksheet', table: t.innerHTML}
+//   debugger;
+//   window.location.href = uri + base64(format(template, ctx))
+//  }

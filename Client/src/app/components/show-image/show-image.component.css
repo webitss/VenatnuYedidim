@@ -1,0 +1,24 @@
+.nav{
+    box-shadow: #a38888 15px 5px 15px;
+    height: 65px;   
+    width: 100%;
+    padding: 0%;
+    background-color:lightgray;
+}
+.header{
+    font-family: tahoma;
+    font-size: 40px;
+    text-align:left;
+    color: deeppink
+
+}
+.text{
+width: 100%;
+height:40% ;
+background-color: darksalmon;
+}
+.image{
+    width: 100%;
+    height:40% ;
+    background-color:lightgray;  
+}

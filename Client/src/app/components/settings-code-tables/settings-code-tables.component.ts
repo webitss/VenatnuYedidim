@@ -41,7 +41,10 @@ export class SettingsCodeTableComponent implements OnInit {
 
   ngOnInit() {
 
-    this.sysTableService.getTableNames().then(data => this.tableNames = data, error => alert(error));
+    this.sysTableService.getTableNames().then(data => 
+    
+      this.tableNames = data,
+    error => alert(error));
 
   }
   public getValues() {
