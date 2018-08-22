@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Student } from '../../classes/student';
 import { T2Int } from '../../classes/T2Int';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
+import { VyMultySelectComponent } from '../../templates/vy-multy-select/vy-multy-select.component';
 
 @Component({
   selector: 'app-avrech-students',
@@ -21,6 +22,9 @@ export class AvrechStudentsComponent implements OnInit {
   student: Student;
   title:string="רשימת תלמידים";
   inputTitle:string="בחר תלמידים";
+
+@ViewChild('child')VyMultySelect:VyMultySelectComponent;
+
 
 listToSelect:Array<any>;
 
@@ -49,6 +53,8 @@ listToSelect:Array<any>;
     this.studentsToAdd.forEach(element => {
       this.studentAndAvrechArr.push(new T2Int(this.id, element.iPersonId));
     });
+    this.VyMultySelect.save();
+
     this.appProxy.post('AddStudentsToAvrech', { studentAndAvrechArr: this.studentAndAvrechArr, iUserId: this.userId }).then(data => { alert(data); }
       , err => alert(err));
     this.flag = false
