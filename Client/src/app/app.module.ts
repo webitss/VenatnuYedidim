@@ -127,7 +127,6 @@ import { ShowImageComponent } from './components/show-image/show-image.component
 
     TaskComponent,
 
-
     LogInComponent,
 
 
@@ -136,13 +135,6 @@ import { ShowImageComponent } from './components/show-image/show-image.component
 
    
   ],
-
- 
-  // imports: [
-    // NgbModule.forRoot(),
-   // Ng2SearchPipeModule,
-
-
  //imports: [ 
     // Ng2SearchPipeModule,
     
@@ -151,7 +143,6 @@ import { ShowImageComponent } from './components/show-image/show-image.component
   imports: [
     // NgbModule.forRoot(),
    // Ng2SearchPipeModule,
-
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -159,7 +150,7 @@ import { ShowImageComponent } from './components/show-image/show-image.component
    // NguiDatetimePickerModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
-      { path: "", component: ShowImageComponent },
+      // { path: "", component: ShowImageComponent },
       { path: "", component: LogInComponent },
       { path: "students", component: StudentsComponent },
       {
