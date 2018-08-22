@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EventMediaComponent implements OnInit {
   id: number;
   document: Document;
-  documents: any;
+  documents: any[]=new Array();
 
   constructor(private appProxy: AppProxy, private activatedRoute: ActivatedRoute, private router: Router) { }
 

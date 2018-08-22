@@ -16,3 +16,9 @@ button{
 .row{
     margin-bottom: 1%;
 }
+ul{
+    float: right;
+}
+li{
+    float: right;
+}
