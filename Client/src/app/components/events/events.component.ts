@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+﻿import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Event1 } from '../../classes/event';
 import { Router } from '@angular/router';
@@ -19,6 +19,7 @@ edit(e){
   this.router.navigate(['events/event/', e.iEventId]);
 
 }
+
   public lstColumns = [
 new VyTableColumn('עריכה','edit','html', true,false),
 new VyTableColumn('שם ארוע','nvName'),

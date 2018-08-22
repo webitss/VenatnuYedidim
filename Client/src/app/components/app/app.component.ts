@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { User } from '../../classes/user';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,14 @@ export class AppComponent implements OnInit {
   protected PicUrl: any;
   protected nvBase64File: string;
   protected name: string;
-  constructor(private appProxy: AppProxy, private router: Router) { }
+  // protected userName: string = JSON.parse(localStorage.getItem("user"))? JSON.parse(localStorage.getItem("user")).nvUserName : "משתמש";
+  constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.router.navigate(['students']);
+    if (JSON.parse(localStorage.getItem("user")) == null)
+     
+      //alert(this.route.routeConfig.component.name);
+      this.router.navigate(['']);
 
     // this.appProxy.post('Login', { nvUserName: 'מערכת', nvPassword: '1234' })
     //   .then(user => {

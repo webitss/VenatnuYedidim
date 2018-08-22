@@ -12,8 +12,8 @@ import { CardsUnionComponent } from '../cards-union/cards-union.component';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
+  flag:boolean;
 
-  // 
   constructor(private appProxy: AppProxy, private router: Router,private route: ActivatedRoute ) { }
   param:any;
   id: number;
@@ -51,9 +51,9 @@ export class StudentsComponent implements OnInit {
   editStudent(e) {
     this.router.navigate(['students/student/'+e.iPersonId+'/'+'student-details']);
   }
-
   cardsUnion()
   {
+    this.flag==true
     // const modalRef = this.modalService.open(CardsUnionComponent);
   
     // modalRef.result.then((result) => {

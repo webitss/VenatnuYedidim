@@ -2,7 +2,7 @@
     <div class="col-sm-4 component-name">אברכים</div>
     <div class="actions col-sm-8">
 
-        <button class="btn btn-small excel" (click)="tableToExcel()" value="Export to Excel"></button>
+        <button class="btn btn-small excel" (click)="tableToExcel('avrechim')" value="Export to Excel"></button>
         <button class="btn btn-small">s</button>
         <button class="btn btn-circle1 btn-orange"> שליחת מייל</button>
         <button class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">אברך חדש</button>
@@ -11,5 +11,22 @@
 
 <app-vy-table #avrechim [lstColumns]="lstColumns" [lstDataRows]="avrechimList" (clickCell)="editAvrech($event)"></app-vy-table>
 
-
-
+<!-- <table id="avrechim">
+<thead>
+    <tr>
+        <th>חעלכל</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>ףעגכלעלגךלצעלך</td>
+    </tr>
+    <tr>
+        <td>ףעגכלעלגךלצעלך</td>
+    </tr>
+    <tr>
+        <td>ףעגכלעלגךלצעלך</td>
+    </tr>
+</tbody>
+</table>
+ -->
