@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { Document } from '../../classes/document';
+import { AppProxy } from '../../services/app.proxy';
 
 @Component({
   selector: 'app-media',
@@ -17,4 +18,7 @@ export class MediaComponent implements OnInit {
   ngOnInit() {
   }
 
+  get baseFileUrl(){
+    return AppProxy.baseUrl+'Files/';
+  }
 }

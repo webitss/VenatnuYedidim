@@ -23,6 +23,8 @@ namespace Service.Entities
         [DataMember]
         public string nvDocumentName { get; set; }
         [DataMember]
+        public string nvDocumentType { get; set; }
+        [DataMember]
         public int iCategoryType { get; set; }
         [DataMember]
         public string nvComment { get; set; }
