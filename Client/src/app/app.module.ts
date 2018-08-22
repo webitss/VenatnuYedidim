@@ -92,6 +92,7 @@ import { ShowImageComponent } from './components/show-image/show-image.component
     StudentConversationDetailsComponent,
     StudentMeetingDetailsComponent,
     StudentDocumentsComponent,
+    CardsUnionComponent,
 
     AvrechimComponent,
     AvrechComponent,
@@ -139,7 +140,7 @@ import { ShowImageComponent } from './components/show-image/show-image.component
  //imports: [ 
     // Ng2SearchPipeModule,
     
-   // CardsUnionComponent,
+   
   //],
   imports: [
     // NgbModule.forRoot(),
