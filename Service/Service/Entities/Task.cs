@@ -10,113 +10,50 @@ using System.Web;
 namespace Service.Entities
 {
     [DataContract]
-    public class Meeting
+    public class Task
     {
         #region Data Members
         [DataMember]
-        public int iMeetingId { get; set; }
+        public int iTaskId { get; set; }
         [DataMember]
-        public int iPersonId { get; set; }
+        public int iTaskType { get; set; }
         [DataMember]
-        public int iMeetingType { get; set; }
+        public DateTime dtTaskdate { get; set; }
         [DataMember]
-        public DateTime dtMeetingDate { get; set; }
-        [DataMember]
-        public string nvSummary { get; set; }
+        public TimeSpan tTaskTime { get; set; }
 
         #endregion
 
         #region Methods
 
-        public Meeting()
+        public Task()
         {
-            dtMeetingDate = new DateTime();
+            dtTaskdate = new DateTime();
         }
 
 
-        public static List<Meeting> GetMeetingsByStudentId(int iPersonId)
-        {
-            try
-            {
-                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TMeeting_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
-                List<Meeting> meetings = ObjectGenerator<Meeting>.GeneratListFromDataRowCollection(drc);
-                return meetings;
-            }
-            catch (Exception ex)
-            {
-                Log.LogError("GetMeetings / TMeeting_SLCT", ", ex " + ex);
-                return null;
-            }
+      
 
-        }
-
-        internal static bool SetMeeting(Meeting meeting, int iUserId)
+        public static bool SetTask(Task task, int iUserId)
         {
             try
             {
 
-                List<SqlParameter> parameters = ObjectGenerator<Meeting>.GetSqlParametersFromObject(meeting);
+                List<SqlParameter> parameters = ObjectGenerator<Task>.GetSqlParametersFromObject(task);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
-                SqlDataAccess.ExecuteDatasetSP("TMeeting_UPD/INS", parameters);
+                SqlDataAccess.ExecuteDatasetSP("TTask_UPD/INS", parameters);
                 return true;
             }
             catch (Exception ex)
             {
-                Log.LogError("SetMeeting / TMeeting_UPD/INS", "ex" + ex);
+                Log.LogError("SetTask / TTask_UPD/INS", "ex" + ex);
                 return false;
             }
         }
 
-        //public static bool AddMeeting(Meeting meeting, int iUserId)
-        //{
-        //    try
-        //    {
-                
-        //        List<SqlParameter> parameters = ObjectGenerator<Meeting>.GetSqlParametersFromObject(meeting);
-        //        parameters.Add(new SqlParameter("iCreatedByUserId", iUserId));
-        //        SqlDataAccess.ExecuteDatasetSP("TMeeting_INS", parameters);
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.LogError("AddMeeting / TMeeting_INS", "ex" + ex);
-        //        return false;
-        //    }
-        //}
-
-        //public static bool UpdateMeeting(Meeting meeting, int iUserId)
-        //{
-        //    try
-        //    {
-        //        List<SqlParameter> parameters = ObjectGenerator<Meeting>.GetSqlParametersFromObject(meeting);
-        //        parameters.Add(new SqlParameter("iLastModifyUserId", iUserId));
-        //        SqlDataAccess.ExecuteDatasetSP("Tmeeting_UPD", parameters);
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.LogError("UpdateMeeting/Tmeeting_UPD", "ex" + ex);
-        //        return false;
-        //    }
-        //}
-
-        public static bool DeleteMeeting(int iMeetingId, int iUserId)
-        {
-            try
-            {
-                List<SqlParameter> parameters=new List<SqlParameter>();
-                parameters.Add(new SqlParameter("iMeetingId", iMeetingId));
-                parameters.Add(new SqlParameter("iLastModifyUserId", iUserId));
-                SqlDataAccess.ExecuteDatasetSP("TMeeting_DEL", parameters);
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Log.LogError("DeleteMeeting/Tmeeting_DEL", "ex" + ex);
-                return false;
-            }
-        }
+     
+    
+     
 
 
 
