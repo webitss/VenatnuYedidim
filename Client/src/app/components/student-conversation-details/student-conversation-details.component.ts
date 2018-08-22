@@ -43,6 +43,25 @@ export class StudentConversationDetailsComponent implements OnInit {
     this.appProxy.post("SetConversations", { conversation: this.conversation, iPersonId: this.iPersonId })
       .then(
         data => {
+          if (this.conversation.iConversationId == null) {
+            this.Conversation.emit(data);
+            // this.newConver.push({
+            //   iConversationId: data.iConversationId,
+            //   iPersonId: data.iPersonId,
+            //   iConversationType: this.sysTableList.filter(s => s.iSysTableRowId == data.iConversationType)[0],
+            //   dConversationDate: data.dConversationDate,
+            //   dtConversationTime: data.dtConversationTime,
+            //   nvConversationSummary: data.nvConversationSummary,
+            //   dtNextConversationDate: data.dtNextConversationDate
+            // });
+            //this.conversation=this.newConver;
+          }
+          else {
+            this.conversation['nvConversationDate'] = this.conversation.dConversationDate.toLocaleDateString();
+            this.conversation['nvConversationTime'] = this.conversation.dtConversationTime.toLocaleTimeString();
+            this.conversation['nvNextConversationDate'] = this.conversation.dtNextConversationDate.toLocaleDateString();
+            this.conversation['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == this.conversation.iConversationType)[0].nvValue;
+          }
           if (data) {
             alert("good");
             this.Conversation.emit(null);
@@ -56,14 +75,14 @@ export class StudentConversationDetailsComponent implements OnInit {
 
 
 
-ngOnInit() {
-  if (this.conversation == null)
-    this.conversation = new Conversation();
-  // this.sub=this.route.params.subscribe(params=>{
-  //   this.iconversationId=+params['conversationId'];
-  // });
+  ngOnInit() {
+    if (this.conversation == null)
+      this.conversation = new Conversation();
+    // this.sub=this.route.params.subscribe(params=>{
+    //   this.iconversationId=+params['conversationId'];
+    // });
 
-}
+  }
   //  ngOnDestroy() {
   //    this.sub.unsubscribe();
   //    }

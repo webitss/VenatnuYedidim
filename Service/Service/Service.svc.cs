@@ -285,5 +285,15 @@ namespace Service
 
         #endregion
 
+
+        #region Fileshandler
+        
+        public string GeneratPdf(string headerHtml, string bodyHtml, string footerHtml)
+        {
+            return Fileshandler.GeneratPdf(headerHtml, bodyHtml, footerHtml);
+        }
+
+        #endregion
+
     }
 }

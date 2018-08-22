@@ -16,12 +16,10 @@ import { SysTableRow } from '../../classes/SysTableRow';
 
 export class SettingYeshivaComponent implements OnInit {
   
-  
-  
   protected yeshiva:Yeshiva=new Yeshiva;
   
   @Output() 
-  yeshivaEmit=new EventEmitter();
+  Yeshiva=new EventEmitter();
 
   @Input()
   public iYeshivaId: number;
@@ -33,9 +31,9 @@ export class SettingYeshivaComponent implements OnInit {
   constructor(private appProxy: AppProxy,private ActivatedRoute:ActivatedRoute,private router:Router) { }
 
   ngOnInit() {
-      if(this.iYeshivaId == 0)
+    if(this.iYeshivaId == 0)
       this.yeshiva = new Yeshiva();
-      else
+    else
       this.appProxy.post('getYeshivaById',{iYeshivaId:this.iYeshivaId})
       .then(
         data=>{
@@ -44,32 +42,29 @@ export class SettingYeshivaComponent implements OnInit {
       );
   }
 
+  cancel() {
+    this.Yeshiva.emit(null);
+  }
+
   save() {
     if(this.yeshiva.iYeshivaId==0){
        this.appProxy.post('AddYeshiva', { yeshiva: this.yeshiva })
       .then(
         data => {
-          {
             this.yeshiva = data;
-            this.yeshivaEmit.emit(null);
             alert("נשמר בהצלחה");
-            this.router.navigate(["settings-yeshivot"]);
-          }
+            this.Yeshiva.emit(null);
         })
     }
     else{
       this.appProxy.post('EditYeshiva',{yeshiva:this.yeshiva,iYeshivaId:this.yeshiva.iYeshivaId})
       .then(
-        data=>{
-        this.yeshivaEmit.emit(null);
-        alert("נשמר בהצלחה");
-        this.router.navigate(["settings-yeshivot"]);
+        data=> {
+          this.yeshiva=data;
+          alert("נשמר בהצלחה");
+          this.Yeshiva.emit(null);
         } 
       )
     }
-  }
-
-  cancel() {
-    this.yeshivaEmit.emit(null);
   }
 }

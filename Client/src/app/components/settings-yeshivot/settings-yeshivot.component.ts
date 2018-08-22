@@ -20,7 +20,8 @@ export class SettingsYeshivotComponent implements OnInit {
   protected yeshivaList: Array<Yeshiva> = new Array<Yeshiva>();
   protected iYeshivaId: number;
   protected lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
-  protected yeshiva:Yeshiva;
+  protected yeshiva1:Yeshiva;
+
   @ViewChild('yeshivot') yeshivot:any;
 
  
@@ -42,9 +43,8 @@ export class SettingsYeshivotComponent implements OnInit {
 
     this.appProxy.post('GetAllYeshivot').then(data => {
       this.yeshivaList = data;
-      this.sysTableService.getValues(SysTableService.dataTables.roleType.iSysTableId).then(val=>{
+      this.sysTableService.getValues(SysTableService.dataTables.roleType.iSysTableId).then(val=> {
         this.sysTableList=val;
-
         this.yeshivaList.forEach(y=> {
           y['edit'] = '<div class="edit"></div>';
           y['nvRoleType']=this.sysTableList.filter(x=>x.iSysTableRowId==y.iRoleType)[0].nvValue;
@@ -58,8 +58,9 @@ export class SettingsYeshivotComponent implements OnInit {
   }
 
   close() {
-    this.yeshiva = null;
+    this.yeshiva1 = null;
   }
+
   tableToExcel(){
     this.yeshivot.tableToExcel();
   }
