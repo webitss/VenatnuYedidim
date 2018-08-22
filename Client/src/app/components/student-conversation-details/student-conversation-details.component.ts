@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { Task } from '../../classes/task';
+import { TaskComponent } from '../task/task.component';
 
 @Component({
   selector: 'app-student-conversation-details',
@@ -19,16 +20,16 @@ export class StudentConversationDetailsComponent implements OnInit {
   protected conversation: Conversation;
   @Input()
   protected sysTableList: SysTableRow[];
-<<<<<<< HEAD
+
   @Output()
-  protected newConver= new EventEmitter();
+  protected newConver = new EventEmitter();
   // @Input()
   // protected newConver :Conversation;
-=======
+  hours: string;
+  minutes: string;
 
-  @ViewChild('task') TaskComponent:TaskComponent;
+  @ViewChild('task') TaskComponent: TaskComponent;
 
->>>>>>> 42028593fd1e71d823ad0c8dbe7f3ccc47af2ed8
 
   protected iPersonId: number = 1;
 
@@ -49,18 +50,18 @@ export class StudentConversationDetailsComponent implements OnInit {
     this.appProxy.post("SetConversations", { conversation: this.conversation, iPersonId: this.iPersonId })
       .then(
         data => {
-         
-            this.newConver.emit(null);
-            // this.newConver.push({
-            //   iConversationId: this.conversation.iConversationId,
-            //   iPersonId: this.conversation.iPersonId,
-            //   iConversationType: this.sysTableList.filter(s => s.iSysTableRowId ==  this.conversation.iConversationType)[0],
-            //   dConversationDate:  this.conversation.dConversationDate,
-            //   dtConversationTime:  this.conversation.dtConversationTime,
-            //   nvConversationSummary:  this.conversation.nvConversationSummary,
-            //   dtNextConversationDate: this.conversation.dtNextConversationDate
-            // });
-            // this.conversation=this.newConver;
+
+          this.newConver.emit(null);
+          // this.newConver.push({
+          //   iConversationId: this.conversation.iConversationId,
+          //   iPersonId: this.conversation.iPersonId,
+          //   iConversationType: this.sysTableList.filter(s => s.iSysTableRowId ==  this.conversation.iConversationType)[0],
+          //   dConversationDate:  this.conversation.dConversationDate,
+          //   dtConversationTime:  this.conversation.dtConversationTime,
+          //   nvConversationSummary:  this.conversation.nvConversationSummary,
+          //   dtNextConversationDate: this.conversation.dtNextConversationDate
+          // });
+          // this.conversation=this.newConver;
           // }
           // else {
           //   this.conversation['nvConversationDate'] = this.conversation.dConversationDate.toLocaleDateString();
@@ -75,15 +76,13 @@ export class StudentConversationDetailsComponent implements OnInit {
           else
             alert("no good");
         });
-<<<<<<< HEAD
+
+    this.TaskComponent.saveTask();
   }
-=======
-        this.TaskComponent.saveTask();
-}
 
 
 
->>>>>>> 42028593fd1e71d823ad0c8dbe7f3ccc47af2ed8
+
 
   ngOnInit() {
     if (this.conversation == null)
@@ -91,15 +90,24 @@ export class StudentConversationDetailsComponent implements OnInit {
     // this.sub=this.route.params.subscribe(params=>{
     //   this.iconversationId=+params['conversationId'];
     // });
-    this.conversation['nvConversationDate'] = new Date((this.conversation.dConversationDate).getTime());
-
+    this.conversation['conversationDate'] = new Date((this.conversation.dConversationDate).getTime());
+    //this.conversation['dtNextConversationDate'] = new Date((this.conversation.dtNextConversationDate).getTime());
     // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
-if((this.conversation.dtConversationTime).getMinutes() <10)
-    this.conversation['nvConversationTime'] = (this.conversation.dtConversationTime).getHours() + ':'+'0'+(this.conversation.dtConversationTime).getMinutes();
+    if ((this.conversation.dtConversationTime).getMinutes() < 10)
+      this.minutes = '0' + (this.conversation.dtConversationTime).getMinutes().toString();
+    else
+      this.minutes = (this.conversation.dtConversationTime).getMinutes().toString();
+
+    if ((this.conversation.dtConversationTime).getHours() < 10)
+      this.hours = '0' + (this.conversation.dtConversationTime).getHours().toString();
+    else
+      this.hours = (this.conversation.dtConversationTime).getHours().toString();
+
+
+    this.conversation['conversationTime'] = this.hours + ':' + this.minutes;
+    //  ngOnDestroy() {
+    //    this.sub.unsubscribe();
+    //    }
 
   }
-  //  ngOnDestroy() {
-  //    this.sub.unsubscribe();
-  //    }
-
 }
