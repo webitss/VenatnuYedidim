@@ -22,14 +22,23 @@ export class UploadDocumentComponent implements OnInit {
 
   sheetTypes: SysTableRow[];
   id: any;
-  // comment = '';
-  // category: number;
+  component: string;
   constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService) { }
 
   ngOnInit() {
-    this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => this.sheetTypes = data
-      , err => alert('error'));
-    this.save.name = this.document.nvDocumentName;
+    // this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => this.sheetTypes = data
+    //   , err => alert('error'));
+    // this.save.name = this.document.nvDocumentName;
+
+    this.activatedRoute.url.subscribe(url => {
+    this.component = url.toString();
+      if (this.component == "student-documents") {
+        this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => this.sheetTypes = data
+          , err => alert('error'));
+        this.save.name = this.document.nvDocumentName;
+      }
+    });
+
   }
   protected save = { document: '', name: '' };
 
@@ -61,29 +70,13 @@ export class UploadDocumentComponent implements OnInit {
 
 
   saveFile() {
-    //alert(this.save.name);
-    //   this.appProxy.post('SaveFileByBase64', {base64File:this.save.document, fileName:this.save.name}).then(data => alert("success")
-    //     , err => alert(err));
-    // }
-    // if(this.save.document!=''){
-    // this.appProxy.post('AddFile', {iItemId:this.id,iBelongingType:4,iCategoryType:this.category,nvBase64File:this.save.document, nvFileName:this.save.name,nvComment:this.comment}).then(data => alert("success")
-    //     , err => alert(err));
-    // }
+    this.document.nvDocumentName = this.save.name;
 
-    // if (this.save.document != '') {
-      this.document.nvDocumentName = this.save.name;
-     
-      this.appProxy.post('SetDocument', { document: this.document, nvBase64File: this.save.document }).then(data => this.closeDialog()
-        , err => alert(err));
-    // }
-    // else {
-    //   if (this.document.iDocumentId != null) {
-    //     this.appProxy.post('SetDocumentDetails', { document: this.document}).then(data => alert("success")
-    //       , err => alert(err));
-    //     this.closeDialog();
-    //   }
-    // }
+    this.appProxy.post('SetDocument', { document: this.document, nvBase64File: this.save.document }).then(data => this.closeDialog()
+      , err => alert(err));
   }
+
+
   closeDialog() {
     this.closeMe.emit(null);
   }

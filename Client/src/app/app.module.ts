@@ -70,6 +70,7 @@ import { CardsUnionComponent } from './components/cards-union/cards-union.compon
 import { ShowImageComponent } from './components/show-image/show-image.component';
 import { SafeUrl } from './directives/safe-url';
 import { FitElement } from './directives/fit-element';
+import { MediaComponent } from './components/media/media.component';
 //import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
@@ -141,7 +142,10 @@ import { FitElement } from './directives/fit-element';
     ShowImageComponent,
 
 
+    MediaComponent,
 
+
+   
   ],
   //imports: [ 
   // Ng2SearchPipeModule,
