@@ -68,6 +68,8 @@ import { TaskComponent } from './components/task/task.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
 import { ShowImageComponent } from './components/show-image/show-image.component';
+import { SafeUrl } from './directives/safe-url';
+import { FitElement } from './directives/fit-element';
 //import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
@@ -81,6 +83,10 @@ import { ShowImageComponent } from './components/show-image/show-image.component
 
     // pipes
     FilterPipe,
+
+    //directives
+    SafeUrl,    
+    FitElement,
 
     //components
     AppComponent,
@@ -135,28 +141,28 @@ import { ShowImageComponent } from './components/show-image/show-image.component
     ShowImageComponent,
 
 
-   
+
   ],
- //imports: [ 
-    // Ng2SearchPipeModule,
-    
-   // CardsUnionComponent,
+  //imports: [ 
+  // Ng2SearchPipeModule,
+
+  // CardsUnionComponent,
   //],
   imports: [
     // NgbModule.forRoot(),
-   // Ng2SearchPipeModule,
+    // Ng2SearchPipeModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     HttpClientModule,
-    NguiDatetimePickerModule, 
+    NguiDatetimePickerModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
       // { path: "", component: ShowImageComponent },
       { path: "", component: LogInComponent },
       { path: "students", component: StudentsComponent },
       {
-        
+
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
           { path: "", component: StudentDetailsComponent },
