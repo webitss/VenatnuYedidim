@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { User } from '../classes/user';
-import { AppProxy } from '../services/app.proxy';
+import { User } from '../../classes/user';
+import { AppProxy } from '../../services/app.proxy';
 import { Router } from '@angular/router';
 
 @Component({

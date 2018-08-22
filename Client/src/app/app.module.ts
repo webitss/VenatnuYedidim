@@ -64,7 +64,7 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
 import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-checked.pipe';
 import { EventMediaComponent } from './components/event-media/event-media.component';
 import { TaskComponent } from './components/task/task.component';
-import { LogInComponent } from './log-in/log-in.component';
+import { LogInComponent } from './components/log-in/log-in.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
 import { ShowImageComponent } from './components/show-image/show-image.component';
 
