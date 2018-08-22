@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit, Output, Input, ViewChild } from '@angular/core';
 import { Task } from '../../classes/task';
+import {TaskComponent}from '../../components/task/task.component'
 
 @Component({
   selector: 'app-avrech-diary',
@@ -9,15 +10,18 @@ import { Task } from '../../classes/task';
 export class AvrechDiaryComponent implements OnInit {
 
   constructor() { }
+
+  @ViewChild('task') TaskComponent:TaskComponent;
+
   @Output()
   flag: boolean = false;
 
   @Output()
   @Input()
-  ttask: Task;
+  task: Task;
 
   ngOnInit() { 
-    this.ttask=new Task();
+    this.task=new Task();
   }
 
   // protected currentComponent: any;
@@ -28,19 +32,21 @@ export class AvrechDiaryComponent implements OnInit {
   // }
   addTask() {
     this.flag=true;
-   // this.ttask = new Task()
+   // this.task = new Task()
   }
   saveTask() {
     debugger;
-    alert("type: "+this.ttask.iTaskType);
-    alert("dtTaskdate: "+this.ttask.dtTaskdate);
-    alert("tTaskTime: "+this.ttask.tTaskTime);
+    this.TaskComponent.saveTask();
+
+    // alert("type: "+this.task.iTaskType);
+    // alert("dtTaskdate: "+this.task.dtTaskdate);
+    // alert("tTaskTime: "+this.task.tTaskTime);
     //שמירה
-    this.ttask = null;
+    //this.task = null;
     //this.currentComponent.saveTask();
   }
   close(){
-   // this.ttask = null;
+   // this.task = null;
     this.flag=false
   }
 }

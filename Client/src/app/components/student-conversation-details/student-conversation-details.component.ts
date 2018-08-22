@@ -19,7 +19,16 @@ export class StudentConversationDetailsComponent implements OnInit {
   protected conversation: Conversation;
   @Input()
   protected sysTableList: SysTableRow[];
+<<<<<<< HEAD
+  @Output()
+  protected newConver= new EventEmitter();
+  // @Input()
+  // protected newConver :Conversation;
+=======
 
+  @ViewChild('task') TaskComponent:TaskComponent;
+
+>>>>>>> 42028593fd1e71d823ad0c8dbe7f3ccc47af2ed8
 
   protected iPersonId: number = 1;
 
@@ -40,6 +49,25 @@ export class StudentConversationDetailsComponent implements OnInit {
     this.appProxy.post("SetConversations", { conversation: this.conversation, iPersonId: this.iPersonId })
       .then(
         data => {
+         
+            this.newConver.emit(null);
+            // this.newConver.push({
+            //   iConversationId: this.conversation.iConversationId,
+            //   iPersonId: this.conversation.iPersonId,
+            //   iConversationType: this.sysTableList.filter(s => s.iSysTableRowId ==  this.conversation.iConversationType)[0],
+            //   dConversationDate:  this.conversation.dConversationDate,
+            //   dtConversationTime:  this.conversation.dtConversationTime,
+            //   nvConversationSummary:  this.conversation.nvConversationSummary,
+            //   dtNextConversationDate: this.conversation.dtNextConversationDate
+            // });
+            // this.conversation=this.newConver;
+          // }
+          // else {
+          //   this.conversation['nvConversationDate'] = this.conversation.dConversationDate.toLocaleDateString();
+          //   this.conversation['nvConversationTime'] = this.conversation.dtConversationTime.toLocaleTimeString();
+          //   this.conversation['nvNextConversationDate'] = this.conversation.dtNextConversationDate.toLocaleDateString();
+          //   this.conversation['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == this.conversation.iConversationType)[0].nvValue;
+          // }
           if (data) {
             alert("good");
             this.Conversation.emit(null);
@@ -47,19 +75,29 @@ export class StudentConversationDetailsComponent implements OnInit {
           else
             alert("no good");
         });
+<<<<<<< HEAD
+  }
+=======
+        this.TaskComponent.saveTask();
 }
 
 
 
+>>>>>>> 42028593fd1e71d823ad0c8dbe7f3ccc47af2ed8
 
-ngOnInit() {
-  if (this.conversation == null)
-    this.conversation = new Conversation();
-  // this.sub=this.route.params.subscribe(params=>{
-  //   this.iconversationId=+params['conversationId'];
-  // });
+  ngOnInit() {
+    if (this.conversation == null)
+      this.conversation = new Conversation();
+    // this.sub=this.route.params.subscribe(params=>{
+    //   this.iconversationId=+params['conversationId'];
+    // });
+    this.conversation['nvConversationDate'] = new Date((this.conversation.dConversationDate).getTime());
 
-}
+    // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
+if((this.conversation.dtConversationTime).getMinutes() <10)
+    this.conversation['nvConversationTime'] = (this.conversation.dtConversationTime).getHours() + ':'+'0'+(this.conversation.dtConversationTime).getMinutes();
+
+  }
   //  ngOnDestroy() {
   //    this.sub.unsubscribe();
   //    }

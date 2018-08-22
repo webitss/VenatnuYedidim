@@ -7,9 +7,9 @@
 
 
         <div *ngIf="meeting != null" class="meetingDetails">
-                <app-student-meeting-details [sysTableRowList]="sysTableRowList" [meeting]="meeting" (Meeting)="close()"></app-student-meeting-details> 
+                <app-student-meeting-details [sysTableRowList]="sysTableRowList" [meeting]="meeting" (NewMeeting)="addNewMeeting()" (Meeting)="close()"></app-student-meeting-details> 
              </div> 
-            
+
  
 <!-- <div class="row"> -->
  <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="meetingList"  (clickCell)="editMeeting($event)"></app-vy-table>

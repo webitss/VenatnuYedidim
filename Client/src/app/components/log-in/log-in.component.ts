@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewContainerRef } from '@angular/core';
 import { User } from '../../classes/user';
 import { AppProxy } from '../../services/app.proxy';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-log-in',
@@ -10,11 +11,15 @@ import { Router } from '@angular/router';
 })
 export class LogInComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private router: Router) { }
+  constructor(private appProxy: AppProxy, private router: Router, private appComponent: AppComponent) { }
 
   ngOnInit() {
     this.user = null;
+    this.imgHeight = window.innerHeight;
+
   }
+
+  protected imgHeight: number;
 
   @Input()
   protected nvUserName: string;
@@ -23,19 +28,21 @@ export class LogInComponent implements OnInit {
   protected nvPassword: string;
 
   @Input()
-  protected user: User
+  protected user: User;
 
   logIn() {
     this.appProxy.post("Login", { nvUserName: this.nvUserName, nvPassword: this.nvPassword }).then(
       data => {
-        debugger;
-        this.user = data;
-        localStorage.setItem("user",JSON.stringify(this.user));
-        this.router.navigate(['students']);
-      }
-    ).catch(err => {
-      alert("שם משתמש או סיסמה שגויים!");
-    })
+        if (data != null) {
+          this.user = data;
+          this.appComponent.instance.userName = this.user.nvUserName;
+          localStorage.setItem("user",JSON.stringify(data));
+          this.router.navigate(['students']);
+        }
+        else {
+          alert("שם משתמש או סיסמה שגויים!");
+        }
+      })
   };
 
 }

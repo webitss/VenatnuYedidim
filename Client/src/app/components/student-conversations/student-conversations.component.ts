@@ -22,7 +22,8 @@ export class StudentConversationsComponent implements OnInit {
   protected conversationSelect: Conversation;
   @Output()
   protected sysTableList: SysTableRow[];
-
+  @Input()
+  protected newConver: Conversation;
   @Input()
   public lstColumns = [
     {
@@ -51,7 +52,7 @@ export class StudentConversationsComponent implements OnInit {
       title: 'תאריך שיחה הבאה',
       name: 'nvNextConversationDate'
     },
-    
+
 
   ];
   public lstDataRows = [];
@@ -77,13 +78,17 @@ export class StudentConversationsComponent implements OnInit {
     this.conversationSelect.dtNextConversationDate = new Date();
 
   }
+  // add(newConver)
+  // {
+  //   this.conversationsList.push(this.newConver);
 
-
+  // }
   deleteConversation(iConversationId: number, iUserId: number) {
     this.appProxy.post("DeleteConversations", { iConversationId: iConversationId, iUserId: 1 })
       .then(
         data => {
           this.conversationsList = data;
+          this.conversationsList.push(this.newConver);
           alert("sucsses");
         }).catch(err => {
           alert(err);
@@ -123,14 +128,20 @@ export class StudentConversationsComponent implements OnInit {
   //     });
   //   });
   // }}
-  ngOnInit() {
+  ngOnInit() { 
+    this.selecList();
+  }
+  saveNewConver()
+  {
+    this.selecList();
+  }
+  selecList() {
     this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
       .then(data => {
         this.conversationsList = data;
         this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
           this.sysTableList = val;
           this.conversationsList.forEach(c => {
-          
             c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
             c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
             c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleDateString();
@@ -141,5 +152,6 @@ export class StudentConversationsComponent implements OnInit {
         });
 
       });
+
   }
 }

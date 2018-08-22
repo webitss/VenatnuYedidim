@@ -42,20 +42,28 @@ type:Task;
           
         });
      this.task=new Task();
+     this.task.nvComment=" עם התלמיד: "
+         
       }
     // );
 
-    // saveTask() {
-    //   debugger;
-    //   alert(this.task);
-    //   // this.appProxy.post("SetTask", { user: this.task, iUserId: 1 }).then(data => {
-    //   //   if (data == true) {
-    //   //     alert("המשימה נוספה בהצלחה!");
-    //   //   }
-    //   //   else
-    //   //     alert("error!");
-    //   // })
-    // }
+    saveTask() {
+      // alert("id:"+ this.task.iTaskId);
+      // alert("dtTaskdate:" +this.task.dtTaskdate);
+      // alert("iTaskType:" +this.task.iTaskType);
+      // alert("tTaskTime:" +this.task.tTaskTime);
+      debugger;
+      alert(this.task);
+      // JSON.parse(localStorage.getItem("user")).iPersonId
+      this.appProxy.post('SetTask', { task:this.task,iUserId:1 }).then(data => {
+        if (data) {
+          alert("המשימה נוספה בהצלחה!");
+        }
+        else
+          alert("error!");
+      })
+    }
+ 
 
   }
 

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
@@ -21,6 +22,8 @@ namespace Service.Entities
         public int iBelongingType { get; set; }
         [DataMember]
         public string nvDocumentName { get; set; }
+        [DataMember]
+        public string nvDocumentType { get; set; }
         [DataMember]
         public int iCategoryType { get; set; }
         [DataMember]
@@ -137,8 +140,6 @@ namespace Service.Entities
             }
 
         }
-
-
 
         #endregion
     }

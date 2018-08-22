@@ -1,3 +1,19 @@
-<p>
-  event-media works!
-</p>
+<div class="row">
+  <div class="col col-sm-8"></div>
+  <div class="col col-sm-4">
+    <button (click)="addDocument()" class="btn-add btn-circle">הוספת מדיה</button>
+  </div>
+</div>
+
+
+<div class="uploadDocumentComponent" *ngIf="document!=null">
+  <app-upload-document [document]="document" (closeMe)="closeDocumentDialog()"></app-upload-document>
+</div>
+
+<div class="media-area">
+  <ul>
+    <li *ngFor="let d of documents" class="media">
+      <app-media [document]="d"></app-media>
+    </li>
+  </ul>
+</div>
