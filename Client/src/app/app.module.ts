@@ -67,11 +67,8 @@ import { TaskComponent } from './components/task/task.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
 import { ShowImageComponent } from './components/show-image/show-image.component';
-
 //import { GooglePlaceModule } from "ngx-google-places-autocomplete";
-
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
 @NgModule({
   declarations: [
     //templates
