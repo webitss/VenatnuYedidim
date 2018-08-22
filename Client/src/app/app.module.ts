@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from "@angular/http";
 import { RouterModule, Route } from '@angular/router';
+import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 //import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
@@ -148,13 +149,14 @@ import { ShowImageComponent } from './components/show-image/show-image.component
     FormsModule,
     HttpModule,
     HttpClientModule,
-   // NguiDatetimePickerModule,
+    NguiDatetimePickerModule, 
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
       // { path: "", component: ShowImageComponent },
       { path: "", component: LogInComponent },
       { path: "students", component: StudentsComponent },
       {
+        
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
           { path: "", component: StudentDetailsComponent },
