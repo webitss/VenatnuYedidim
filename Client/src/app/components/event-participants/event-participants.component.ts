@@ -55,7 +55,7 @@ export class EventParticipantsComponent implements OnInit {
           this.participant.forEach(p => {
 
             p['iArriveStatusType'] = this.sysTableRowList.filter(s => s.iSysTableRowId ==parseInt (p.lstObject.iArrivalStatusType))[0].nvValue;
-            // p['iParticipantType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iSatusType);
+            p['iParticipantType'] = this.sysTableRowList.filter(s => s.iSysTableRowId ==parseInt (p.lstObject.iArrivalStatusType))[0].nvValue;
           });
 
 
