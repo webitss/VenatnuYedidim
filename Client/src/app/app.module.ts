@@ -66,11 +66,8 @@ import { EventMediaComponent } from './components/event-media/event-media.compon
 import { TaskComponent } from './components/task/task.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
-<<<<<<< HEAD
 import { ShowImageComponent } from './components/show-image/show-image.component';
 
-=======
->>>>>>> 542100c010e292cdf0d494e09ff06d968d9093eb
 //import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -132,10 +129,6 @@ import { ShowImageComponent } from './components/show-image/show-image.component
     EventMediaComponent,
 
     TaskComponent,
-<<<<<<< HEAD
-
-=======
->>>>>>> 542100c010e292cdf0d494e09ff06d968d9093eb
 
     LogInComponent,
 
@@ -145,13 +138,6 @@ import { ShowImageComponent } from './components/show-image/show-image.component
 
    
   ],
-<<<<<<< HEAD
- 
-  imports: [
-    // NgbModule.forRoot(),
-   // Ng2SearchPipeModule,
-
-=======
  //imports: [ 
     // Ng2SearchPipeModule,
     
@@ -160,7 +146,6 @@ import { ShowImageComponent } from './components/show-image/show-image.component
   imports: [
     // NgbModule.forRoot(),
    // Ng2SearchPipeModule,
->>>>>>> 542100c010e292cdf0d494e09ff06d968d9093eb
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -168,7 +153,7 @@ import { ShowImageComponent } from './components/show-image/show-image.component
    // NguiDatetimePickerModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
-      { path: "", component: ShowImageComponent },
+      // { path: "", component: ShowImageComponent },
       { path: "", component: LogInComponent },
       { path: "students", component: StudentsComponent },
       {
