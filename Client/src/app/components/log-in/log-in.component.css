@@ -1,5 +1,5 @@
 .background-logo { 
-    background-image: url("../../assets/images/logo.jpg");
+    background-image: url("../../../assets/images/logo.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -12,7 +12,7 @@
     opacity: 1;
 }
 .small-logo{
-    background-image: url("../../assets/images/logo.jpg");
+    background-image: url("../../../assets/images/logo.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -30,7 +30,7 @@
 .usr-icon{
     width: 5%;
     height: 25px;
-    background-image: url(../../assets/icons/usr.png);
+    background-image: url("../../../assets/icons/usr.png");
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -38,7 +38,7 @@
 .lock{
     width: 5%;
     height: 25px;
-    background-image: url(../../assets/icons/lock.png);
+    background-image: url("../../../assets/icons/lock.png");
     background-repeat: no-repeat;
     background-size: cover;
     /* float: left; */

@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from "@angular/http";
 import { RouterModule, Route } from '@angular/router';
+import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 //import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
@@ -11,7 +12,7 @@ import { RouterModule, Route } from '@angular/router';
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
 import { VyTableFilterPipe } from './templates/vy-table/vy-table-filter.pipe';
-import { VyTableOrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
+import { VyTableOrderByPipe, OrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
 
 //--- Pipes ---
 import { FilterPipe } from './pipes/filter.pipe';
@@ -64,7 +65,7 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
 import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-checked.pipe';
 import { EventMediaComponent } from './components/event-media/event-media.component';
 import { TaskComponent } from './components/task/task.component';
-import { LogInComponent } from './log-in/log-in.component';
+import { LogInComponent } from './components/log-in/log-in.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
 import { ShowImageComponent } from './components/show-image/show-image.component';
 //import { GooglePlaceModule } from "ngx-google-places-autocomplete";
@@ -76,6 +77,7 @@ import { ShowImageComponent } from './components/show-image/show-image.component
     VyTableComponent,
     VyTableFilterPipe,
     VyTableOrderByPipe,
+    OrderByPipe,
 
     // pipes
     FilterPipe,
@@ -147,13 +149,14 @@ import { ShowImageComponent } from './components/show-image/show-image.component
     FormsModule,
     HttpModule,
     HttpClientModule,
-   // NguiDatetimePickerModule,
+    NguiDatetimePickerModule, 
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
       // { path: "", component: ShowImageComponent },
       { path: "", component: LogInComponent },
       { path: "students", component: StudentsComponent },
       {
+        
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
           { path: "", component: StudentDetailsComponent },
