@@ -37,16 +37,17 @@ namespace Service.Entities
         [DataMember]
         public string nvCity { get; set; }
 
-
+        
         [NoSQL]
         [DataMember]
         public Dictionary<string, string> lstObject { get; set; }
 
         #endregion
 
-        //Person() {
-        //    lstObject = new Dictionary<string, string>();
-        //}
+       public Person()
+        {
+            lstObject = new Dictionary<string, string>();
+        }
         #region Methods
 
         public static Person GetPerson(int iPersonId)

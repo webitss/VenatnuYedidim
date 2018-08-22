@@ -18,7 +18,7 @@ namespace Service.Entities
         [DataMember]
         public int iPersonId { get; set; }
         [DataMember]
-        public int iArrivalStatus { get; set; }
+        public int iArrivalStatusType { get; set; }
 
         #endregion
 
@@ -38,7 +38,7 @@ namespace Service.Entities
                     p.nvPhone = dt.Rows[i]["nvPhone"].ToString();
                     p.nvMobile = dt.Rows[i]["nvMobile"].ToString();
                     p.nvEmail = dt.Rows[i]["nvEmail"].ToString();
-                    p.lstObject.Add("iArrivalStatus", dt.Rows[i]["iArrivalStatus"].ToString());
+                    p.lstObject.Add("iArrivalStatusType", dt.Rows[i]["iArrivalStatusType"].ToString());
                     //p.lstObject.Add("iSatusType", dt.Rows[i]["iSatusType"].ToString());
 
                     participants.Add(p);
