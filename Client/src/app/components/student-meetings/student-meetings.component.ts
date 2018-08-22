@@ -67,6 +67,9 @@ export class StudentMeetingsComponent implements OnInit {
   addNewMeeting(meeting: Meeting) {
     this.meetingList.push(meeting);
   }
+  newMeeting(){
+    this.GetMeetingsByStudentId();
+  }
   GetMeetingsByStudentId() {
     this.appProxy.post("GetMeetingsByStudentId", { iPersonId: 1 }).then(
       data => {
