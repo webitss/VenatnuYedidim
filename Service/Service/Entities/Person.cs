@@ -13,7 +13,7 @@ namespace Service.Entities
     public class Person
     {
         #region Data Members
-        
+
         [DataMember]
         public int iPersonId { get; set; }
         [DataMember]
@@ -48,6 +48,8 @@ namespace Service.Entities
         {
             lstObject = new Dictionary<string, string>();
         }
+
+      
         #region Methods
 
         public static Person GetPerson(int iPersonId)

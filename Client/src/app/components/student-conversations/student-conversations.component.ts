@@ -22,7 +22,8 @@ export class StudentConversationsComponent implements OnInit {
   protected conversationSelect: Conversation;
   @Output()
   protected sysTableList: SysTableRow[];
-
+  @Input()
+  protected newConver:Conversation;
   @Input()
   public lstColumns = [
     {
@@ -84,6 +85,7 @@ export class StudentConversationsComponent implements OnInit {
       .then(
         data => {
           this.conversationsList = data;
+          this.conversationsList.push(this.newConver);
           alert("sucsses");
         }).catch(err => {
           alert(err);
@@ -130,7 +132,6 @@ export class StudentConversationsComponent implements OnInit {
         this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
           this.sysTableList = val;
           this.conversationsList.forEach(c => {
-          
             c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
             c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
             c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleDateString();

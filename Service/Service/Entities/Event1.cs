@@ -63,16 +63,17 @@ namespace Service.Entities
                 parameters.Add(new SqlParameter("nvPlace", oEvent.nvPlace));
                 parameters.Add(new SqlParameter("nvComments", oEvent.nvComments));
                 parameters.Add(new SqlParameter("iUserId", iUserId));
+                parameters.Add(new SqlParameter("participantIds", ObjectGenerator<TInt>.GetDataTable(to)));
+
 
                 //parameters.Find(x => x.ParameterName == "iCreatedByUserId").Value = iUserId;
                 SqlDataAccess.ExecuteDatasetSP("TEvent_INS/UPD", parameters);
 
-                List<SqlParameter> sqlParameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("iEventId", oEvent.iEventId));
-                parameters.Add(new SqlParameter("iUserId", iUserId));
+                //List<SqlParameter> sqlParameters = new List<SqlParameter>();
+                //sqlParameters.Add(new SqlParameter("iUserId", iUserId));
+                //sqlParameters.Add(new SqlParameter("participantIds", ObjectGenerator<TInt>.GetDataTable(to)));
 
-
-                SqlDataAccess.ExecuteDatasetSP("TParticipantsInsertStudents_INS", parameters);
+                //SqlDataAccess.ExecuteDatasetSP("TParticipants_INS", sqlParameters);
 
                 
                 return true;
