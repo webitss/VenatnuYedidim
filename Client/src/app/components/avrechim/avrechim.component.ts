@@ -19,6 +19,7 @@ export class AvrechimComponent implements OnInit {
  avrech:Avrech
    avrechimList:Avrech[];
    @ViewChild('avrechim') avrechim:any;
+   protected currentComponent:any;
    public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
 
   constructor(private router: Router,private appProxy:AppProxy) { }
@@ -65,5 +66,8 @@ export class AvrechimComponent implements OnInit {
   tableToExcel(t){
     debugger;
     this.avrechim.tableToExcel(t);
+  }
+  onRouterOutletActivate(event) {
+    this.currentComponent = event;
   }
 }

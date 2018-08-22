@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit, Output, Input, ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Event1 } from '../../classes/event';
 import { Subject } from 'rxjs/Subject';
@@ -10,6 +10,7 @@ import { PARAMETERS } from '@angular/core/src/util/decorators';
 import { Tint } from '../../classes/tint';
 import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
+import { VyMultySelectComponent } from '../../templates/vy-multy-select/vy-multy-select.component';
 
 @Component({
   selector: 'app-event-details',
@@ -25,11 +26,16 @@ export class EventDetailsComponent implements OnInit {
 to:Array<any>;
 participantsToSend:Array<Tint>=new Array<Tint>();
 
+@ViewChild('child')VyMultySelect: VyMultySelectComponent;
+
   save() {
+    this.participantsToSend.splice(0, this.participantsToSend.length);
     this.e.dtEventDate = new Date(this.e.dtEventDate);
     this.to.forEach(t=>{
       this.participantsToSend.push(new Tint(t.iSysTableRowId));
     })
+    // this.VyMultySelect.save();
+
     this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: 1 , to:this.participantsToSend})
       .then(
         data => {

@@ -28,6 +28,6 @@
 
 
   <!-- (onSave)="getFromChild($event)" -->
-  <app-vy-multy-select *ngIf="!isDetails" [fullList]="sysTableRowList" [titleStr]="title" [inputTitle]="inputTitle" (onSave)="getFromChild($event)" ></app-vy-multy-select>
+  <app-vy-multy-select #child *ngIf="!isDetails" [fullList]="sysTableRowList" [titleStr]="title" [inputTitle]="inputTitle" (onSave)="getFromChild($event)" ></app-vy-multy-select>
 
 </form>
