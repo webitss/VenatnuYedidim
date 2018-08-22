@@ -42,7 +42,7 @@
     
       <div class="form-group ">
         <label for="time">שעה:</label>
-        <input type="time" class="form-control" id="time" name="time" value="{{meeting.dtHour}} " (ngModelChange)="meeting.dtHour = $event"  >
+        <input type="time" class="form-control" id="time" name="time" [(ngModel)]="meeting.dtHour " (ngModelChange)="meeting.dtHour = $event"  >
       </div>
 
     </div>
