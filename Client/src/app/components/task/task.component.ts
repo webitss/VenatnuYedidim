@@ -45,25 +45,22 @@ type:Task;
       }
     // );
 
-    // saveTask() {
-    //   debugger;
-    //   alert(this.task);
-    //   // this.appProxy.post("SetTask", { user: this.task, iUserId: 1 }).then(data => {
-    //   //   if (data == true) {
-    //   //     alert("המשימה נוספה בהצלחה!");
-    //   //   }
-    //   //   else
-    //   //     alert("error!");
-    //   // })
-    // }
-    save(){
-      alert("id:"+ this.task.iTaskId);
-      alert("dtTaskdate:" +this.task.dtTaskdate);
-      alert("iTaskType:" +this.task.iTaskType);
-      alert("tTaskTime:" +this.task.tTaskTime);
-
+    saveTask() {
+      // alert("id:"+ this.task.iTaskId);
+      // alert("dtTaskdate:" +this.task.dtTaskdate);
+      // alert("iTaskType:" +this.task.iTaskType);
+      // alert("tTaskTime:" +this.task.tTaskTime);
       debugger;
+      alert(this.task);
+      this.appProxy.post("SetTask", { task:this.task,userId:JSON.parse(localStorage.getItem("user")).iPersonId }).then(data => {
+        if (data == true) {
+          alert("המשימה נוספה בהצלחה!");
+        }
+        else
+          alert("error!");
+      })
     }
+ 
 
   }
 

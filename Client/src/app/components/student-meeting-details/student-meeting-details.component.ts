@@ -7,6 +7,7 @@ import { timeout } from 'q';
 import { TIMEOUT } from 'dns';
 import { Timeouts } from 'selenium-webdriver';
 import { TaskComponent } from '../task/task.component';
+import { NguiDatetime } from '@ngui/datetime-picker';
 
 @Component({
   selector: 'app-student-meeting-details',
@@ -46,7 +47,7 @@ export class StudentMeetingDetailsComponent implements OnInit {
           // debugger;
         },
       );
-      this.TaskComponent.save();
+      this.TaskComponent.saveTask();
     
       }
 
@@ -54,10 +55,17 @@ export class StudentMeetingDetailsComponent implements OnInit {
   ngOnInit() {
   
    this.meeting['dtDate'] = new Date((this.meeting.dtMeetingDate).getTime());
-  
-   this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ' '+new Date((this.meeting.dtMeetingDate).getMinutes());
+
+    // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
+
+    this.meeting['dtHour'] = (this.meeting.dtMeetingDate).getHours() + ':'+(this.meeting.dtMeetingDate).getMinutes();
 
 
+
+
+    // var time = new datetime().utc("09:25", "HH:mm");
+    // time.add(20, 'hours'); // time operations follow time-math logic
+    // var s = time.format("HH:mm");
     //  this.meeting['dtHour'] =new Date(this.meeting.dtMeetingDate).getHours()+new Date(this.meeting.dtMeetingDate).getMinutes();
 
   

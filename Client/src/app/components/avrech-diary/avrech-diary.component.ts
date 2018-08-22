@@ -36,7 +36,7 @@ export class AvrechDiaryComponent implements OnInit {
   }
   saveTask() {
     debugger;
-    this.TaskComponent.save();
+    this.TaskComponent.saveTask();
 
     // alert("type: "+this.task.iTaskType);
     // alert("dtTaskdate: "+this.task.dtTaskdate);

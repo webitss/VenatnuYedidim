@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { Task } from '../../classes/task';
+import { TaskComponent } from '../task/task.component';
 
 @Component({
   selector: 'app-student-conversation-details',
@@ -19,6 +20,8 @@ export class StudentConversationDetailsComponent implements OnInit {
   protected conversation: Conversation;
   @Input()
   protected sysTableList: SysTableRow[];
+
+  @ViewChild('task') TaskComponent:TaskComponent;
 
 
   protected iPersonId: number = 1;
@@ -47,6 +50,7 @@ export class StudentConversationDetailsComponent implements OnInit {
           else
             alert("no good");
         });
+        this.TaskComponent.saveTask();
 }
 
 
