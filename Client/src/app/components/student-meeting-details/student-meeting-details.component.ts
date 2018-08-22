@@ -52,8 +52,8 @@ export class StudentMeetingDetailsComponent implements OnInit {
    this.meeting['dtDate'] = new Date((this.meeting.dtMeetingDate).getTime());
 
     // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
-
-    this.meeting['dtHour'] = (this.meeting.dtMeetingDate).getHours() + ':'+(this.meeting.dtMeetingDate).getMinutes();
+if((this.meeting.dtMeetingDate).getMinutes() <10)
+    this.meeting['dtHour'] = (this.meeting.dtMeetingDate).getHours() + ':'+'0'+(this.meeting.dtMeetingDate).getMinutes();
 
 
 
