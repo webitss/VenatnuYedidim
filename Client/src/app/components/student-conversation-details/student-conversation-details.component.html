@@ -25,15 +25,15 @@
           </select>
         </div>
         <br/>
-        <div class="form-group ">
+        <!-- <div class="form-group ">
           <label for="conversationDate">תאריך</label>
           <input type="date" name="conversationDate" class="form-control" [ngModel]="conversation.dConversationDate|date:'yyyy-MM-dd'"
             (ngModelChange)="conversation.dConversationDate = $event" [ngModelOptions]="{standalone: true}" />
-        </div>
-        <!-- <div class="form-control">
+        </div> -->
+        <div class="form-control">
             <label for="conversationDate">תאריך</label>
           <input name="conversationDate" [(ngModel)]="conversation.dConversationDate" ngui-datetime-picker date-only="true" close-on-select="false">
-        </div> -->
+        </div>
 
         <div class="form-group ">
           <label for="conversationDateTime">שעה</label>
@@ -56,12 +56,11 @@
         </div> -->
         <div class="form-control">
           <label for="nextConversationDate">תאריך שיחה הבאה</label>
-          <input name="dtNextConversationDate" [(ngModel)]="conversation.dtNextConversationDate" ngui-datetime-picker date-only="true"
-            close-on-select="false">
+          <input name="dtNextConversationDate" [(ngModel)]="conversation.dtNextConversationDate" ngui-datetime-picker date-only="true" close-on-select="false">
         </div>
 
       </div>
-      <app-task></app-task>
+      <app-task #task></app-task>
     </div>
   </div>
   <!-- [type]="typeTask" -->

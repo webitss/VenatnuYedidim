@@ -32,10 +32,18 @@ namespace Service.Entities
                 List<SqlParameter> parameters = new List<SqlParameter>();
                 parameters.Add(new SqlParameter("nvUserName", nvUserName));
                 parameters.Add(new SqlParameter("nvPassword", nvPassword));
-                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TUser_ByUserNameAndPassword_SLCT", parameters).Tables[0].Rows[0];
-                User user = ObjectGenerator<User>.GeneratFromDataRow(dr);
+                DataRow dr;
+                DataSet ds = SqlDataAccess.ExecuteDatasetSP("TUser_ByUserNameAndPassword_SLCT", parameters);
+                if (ds.Tables[0].Rows.Count != 0)
+                    dr = ds.Tables[0].Rows[0];
+                else
+                    dr = null;
+                User user;
+                if (dr != null)
+                   return ObjectGenerator<User>.GeneratFromDataRow(dr);
+                return null;
 
-                return user;
+                 
             }
             catch (Exception ex)
             {
@@ -76,14 +84,15 @@ namespace Service.Entities
         }
 
 
-        public static bool SetUser(User user, int iUserId){
+        public static bool SetUser(User user, int iUserId)
+        {
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<User>.GetSqlParametersFromObject(user);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
                 SqlDataAccess.ExecuteDatasetSP("TUser_INS/UPD", parameters);
                 return true;
-                
+
             }
 
             catch (Exception ex)
