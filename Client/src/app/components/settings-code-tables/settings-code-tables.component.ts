@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SysTableService } from '../../services/sys-table.service';
 import { error } from 'util';
 import { SysTableRow } from '../../classes/SysTableRow';
@@ -35,12 +35,16 @@ export class SettingsCodeTableComponent implements OnInit {
     name: 'nvValue'
   }]
   private readonly newProperty = this;
+  @ViewChild('CodeTables') CodeTables:any;
 
   constructor(private sysTableService: SysTableService, private appProxy: AppProxy) { }
 
   ngOnInit() {
 
-    this.sysTableService.getTableNames().then(data => this.tableNames = data, error => alert(error));
+    this.sysTableService.getTableNames().then(data => 
+    
+      this.tableNames = data,
+    error => alert(error));
 
   }
   public getValues() {
@@ -116,5 +120,8 @@ export class SettingsCodeTableComponent implements OnInit {
   close() {
     this.divNewValue = false
     this.showOverlap = false
+  }
+  tableToExcel(){
+    this.CodeTables.tableToExcel();
   }
 }

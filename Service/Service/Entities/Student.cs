@@ -29,9 +29,9 @@ namespace Service.Entities
         [DataMember]
         public bool? bDeathMother { get; set; }
         [DataMember]
-        public string nvCauseOfDeathFather { get; set; }
+        public string iCauseOfDeathFather { get; set; }
         [DataMember]
-        public string nvCauseOfDeathMother { get; set; }
+        public string iCauseOfDeathMother { get; set; }
         [DataMember]
         public DateTime? dtAddStudentDate { get; set; }
         [DataMember]

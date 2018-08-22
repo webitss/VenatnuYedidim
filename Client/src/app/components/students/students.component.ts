@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Student } from '../../classes/student';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
@@ -12,13 +12,13 @@ import { CardsUnionComponent } from '../cards-union/cards-union.component';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
+  flag:boolean;
 
-  // 
   constructor(private appProxy: AppProxy, private router: Router,private route: ActivatedRoute ) { }
   param:any;
   id: number;
   studentList: Student[];
-
+  @ViewChild('students') students:any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   ngOnInit() {
 
@@ -36,7 +36,7 @@ export class StudentsComponent implements OnInit {
     }, err => { alert(err); });
 
 
-    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true));
+    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true,false));
     this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
     this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
     this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
@@ -51,9 +51,9 @@ export class StudentsComponent implements OnInit {
   editStudent(e) {
     this.router.navigate(['students/student/'+e.iPersonId+'/'+'student-details']);
   }
-
   cardsUnion()
   {
+    this.flag==true
     // const modalRef = this.modalService.open(CardsUnionComponent);
   
     // modalRef.result.then((result) => {
@@ -66,12 +66,8 @@ export class StudentsComponent implements OnInit {
   // type: 'html'
 
 
-
-
-
-
-
-
-
-
+  tableToExcel(){
+    debugger;
+    this.students.tableToExcel();
+  }
 }

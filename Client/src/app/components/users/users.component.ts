@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { User } from '../../classes/user';
 import { AppProxy } from '../../services/app.proxy';
@@ -15,10 +15,11 @@ import { SysTableService } from '../../services/sys-table.service';
 export class UsersComponent implements OnInit {
 
   constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService) { }
+  @ViewChild('users') users:any;
 
   ngOnInit() {
     this.iPersonId = 0;
-    this.appProxy.post("GetUsers", { iPersonId: this.iPersonId }).then(data => {
+    this.appProxy.post("GetUsers", { iPersonId: JSON.parse(localStorage.getItem("user")).iPersonId }).then(data => {
       this.lstDataRows = data;
 
       this.lstDataRows.forEach(u => {
@@ -42,7 +43,7 @@ export class UsersComponent implements OnInit {
 
 
   public lstColumns = [
-    new VyTableColumn('עריכה', 'edit', 'html', true),
+    new VyTableColumn('עריכה', 'edit', 'html', true,false),
     new VyTableColumn('שם משפחה', 'nvLastName'),
     new VyTableColumn('שם פרטי', 'nvFirstName'),
     new VyTableColumn('נייד', 'nvMobile'),
@@ -55,5 +56,8 @@ export class UsersComponent implements OnInit {
 
   editUser(u: User) {
     this.router.navigate(['users/user/', u.iPersonId]);
+  }
+  tableToExcel(){
+    this.users.tableToExcel();
   }
 }

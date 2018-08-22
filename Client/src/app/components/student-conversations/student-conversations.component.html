@@ -1,11 +1,12 @@
-
-    
-
-
+<div class="row first-row">
+    <div class="add-area">
+        <button class="btn-circle btn-add" (click)="addConversation()"> הוספת פגישה +</button>
+    </div>
+</div>
 <div *ngIf="conversationSelect!=null">
-<app-student-conversation-details [conversation]="conversationSelect" [sysTableList]="sysTableList" class="conversationDetails" (Conversation)="close()"></app-student-conversation-details>
+    <app-student-conversation-details [conversation]="conversationSelect" [sysTableList]="sysTableList" class="conversationDetails"
+        (Conversation)="close()"></app-student-conversation-details>
 </div>
 
 
 <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="conversationsList" (clickCell)="editConversation($event)"></app-vy-table>
-

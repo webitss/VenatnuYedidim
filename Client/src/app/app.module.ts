@@ -64,11 +64,11 @@ import { UploadDocumentComponent } from './components/upload-document/upload-doc
 import { FilterBMultySelectCheckedPipe } from './pipes/filter-b-multy-select-checked.pipe';
 import { EventMediaComponent } from './components/event-media/event-media.component';
 import { TaskComponent } from './components/task/task.component';
+import { LogInComponent } from './components/log-in/log-in.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
-
-
+import { ShowImageComponent } from './components/show-image/show-image.component';
+//import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
 @NgModule({
   declarations: [
     //templates
@@ -121,15 +121,26 @@ import { CardsUnionComponent } from './components/cards-union/cards-union.compon
     SettingYeshivaComponent,
 
     UploadDocumentComponent,
-    
+
     FilterBMultySelectCheckedPipe,
-    
+
     EventMediaComponent,
-    
+
     TaskComponent,
-    
-    CardsUnionComponent,
+
+    LogInComponent,
+
+
+    ShowImageComponent,
+
+
+   
   ],
+ //imports: [ 
+    // Ng2SearchPipeModule,
+    
+   // CardsUnionComponent,
+  //],
   imports: [
     // NgbModule.forRoot(),
    // Ng2SearchPipeModule,
@@ -137,28 +148,32 @@ import { CardsUnionComponent } from './components/cards-union/cards-union.compon
     FormsModule,
     HttpModule,
     HttpClientModule,
+   // NguiDatetimePickerModule,
     RouterModule.forRoot([
-     // { path: "", component: StudentsComponent },
+      // { path: "", component: StudentsComponent },
+      // { path: "", component: ShowImageComponent },
+      { path: "", component: LogInComponent },
       { path: "students", component: StudentsComponent },
       {
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
           { path: "", component: StudentDetailsComponent },
-         //{ path: "", component: StudentDetailsComponent },
+          //{ path: "", component: StudentDetailsComponent },
           { path: "student-details", component: StudentDetailsComponent },
           {
-            path: "student-meetings", component: StudentMeetingsComponent},
-            // children: [
-            //   { path: "student-meeting-details/:iMeetingId", component: StudentMeetingDetailsComponent }
-            // ]
-          
+            path: "student-meetings", component: StudentMeetingsComponent
+          },
+          // children: [
+          //   { path: "student-meeting-details/:iMeetingId", component: StudentMeetingDetailsComponent }
+          // ]
+
           {
             path: "student-conversations", component: StudentConversationsComponent, children: [
               { path: "student-conversation-details/:ConversationId", component: StudentConversationDetailsComponent },
             ]
           },
           {
-            path:"student-documents",component:StudentDocumentsComponent
+            path: "student-documents", component: StudentDocumentsComponent
           }
 
         ]
@@ -211,7 +226,7 @@ import { CardsUnionComponent } from './components/cards-union/cards-union.compon
           { path: "settings-frontend", component: SettingsFrontendComponent },
         ]
       },
-     { path: "task", component: TaskComponent }
+      { path: "task", component: TaskComponent }
 
     ], { useHash: true })
   ],
