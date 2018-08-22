@@ -19,30 +19,30 @@ export class StudentMeetingsComponent implements OnInit {
   id: number;
   meeting: Meeting;
   flag: number;
-  sysTableRowList:SysTableRow[];
+  sysTableRowList: SysTableRow[];
 
-  constructor(private appProxy: AppProxy ,private sysTableService: SysTableService ) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService) { }
 
 
   public lstColumns = [{
     title: 'עריכה',
     name: 'edit',
-    bClickCell:true,
+    bClickCell: true,
     type: 'html'
 
   },
   {
     title: 'סוג פגישה',
     name: 'nvMeetingType',
-   
-    
+
+
   },
   {
     title: 'תאריך',
     name: 'nvDate',
   },
   {
-    title  : 'שעה',
+    title: 'שעה',
     name: 'nvHour'
   },
   {
@@ -50,42 +50,46 @@ export class StudentMeetingsComponent implements OnInit {
     name: 'nvSummary',
   }]
 
-  editMeeting(meeting:Meeting){
-    
-      this.meeting = meeting;
-    
-      this.flag = 1;
+  editMeeting(meeting: Meeting) {
+
+    this.meeting = meeting;
+
+    this.flag = 1;
   }
 
-  addMeeting(){
+  addMeeting() {
     this.meeting = new Meeting();
-    this.meeting.dtMeetingDate = new Date(); 
+    this.meeting.dtMeetingDate = new Date();
   }
-  close(){
+  close() {
     this.meeting = null;
   }
-  addNewMeeting(meeting:Meeting){
-      this.meetingList.push(meeting);
+  addNewMeeting(meeting: Meeting) {
+    this.meetingList.push(meeting);
   }
-  ngOnInit() {
+  GetMeetingsByStudentId() {
     this.appProxy.post("GetMeetingsByStudentId", { iPersonId: 1 }).then(
       data => {
         //alert("good");
         this.meetingList = data;
         this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(data => {
-          this.sysTableRowList =  data;
+          this.sysTableRowList = data;
           this.meetingList.forEach(m => {
             m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
             m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
             m['edit'] = '<div class="edit"></div>';
-            m['nvMeetingType'] = this.sysTableRowList.filter(s=> s.iSysTableRowId == m.iMeetingType)[0].nvValue;
-        });
-      
-          
+            m['nvMeetingType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0].nvValue;
+          });
+
+
         });
         debugger;
       }
     );
+  }
+
+  ngOnInit() {
+this.GetMeetingsByStudentId();
   }
 
 }
