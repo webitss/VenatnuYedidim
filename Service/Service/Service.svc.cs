@@ -67,6 +67,15 @@ namespace Service
 
         #endregion
 
+        #region Task
+
+        public bool SetTask(Task task, int iUserId)
+        {
+            return Task.SetTask(task, iUserId);
+        }
+
+        #endregion
+
         #region Student
 
         public List<Student> GetStudentList(int iUserId)
