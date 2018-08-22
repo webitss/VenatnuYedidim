@@ -155,6 +155,7 @@ import { ShowImageComponent } from './components/show-image/show-image.component
       { path: "", component: LogInComponent },
       { path: "students", component: StudentsComponent },
       {
+        
         path: "students/student/:iPersonId", component: StudentComponent,
         children: [
           { path: "", component: StudentDetailsComponent },
