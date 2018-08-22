@@ -11,7 +11,7 @@ import { RouterModule, Route } from '@angular/router';
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
 import { VyTableFilterPipe } from './templates/vy-table/vy-table-filter.pipe';
-import { VyTableOrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
+import { VyTableOrderByPipe, OrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
 
 //--- Pipes ---
 import { FilterPipe } from './pipes/filter.pipe';
@@ -76,6 +76,7 @@ import { CardsUnionComponent } from './components/cards-union/cards-union.compon
     VyTableComponent,
     VyTableFilterPipe,
     VyTableOrderByPipe,
+    OrderByPipe,
 
     // pipes
     FilterPipe,

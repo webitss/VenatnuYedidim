@@ -27,3 +27,12 @@
   background: white url("./../../../assets/icons/search.png") left no-repeat;
   /* padding-right: 97px; */
 }
+
+.pagination-page{
+  padding: 4px;
+}
+
+.pagination-current-page{
+  text-decoration: underline;
+  color: rgb(207, 37, 94);
+}
