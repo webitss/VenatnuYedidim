@@ -4,7 +4,7 @@ export class Student implements Person {
 
 
     public iPersonId: number;
-    public nvFirstName: String;
+    public nvFirstName: string;
     public nvLastName: string;
     public nvIdentityCard: string;
     public nvPhone: string;
@@ -31,7 +31,6 @@ export class Student implements Person {
     public nvComment: string;
 
     constructor() {
-
         this.dtBirthdate = new Date();
         this.dtAddStudentDate= new Date();
     }
