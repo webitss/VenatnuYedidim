@@ -40,7 +40,7 @@ export class UploadDocumentComponent implements OnInit {
     });
 
   }
-  protected save = { document: '', name: '' };
+  protected save = { document: '', name: '',type:'' };
 
 
   loadDocument(event, callback) {
@@ -58,7 +58,7 @@ export class UploadDocumentComponent implements OnInit {
 
         fileReader.onload = function (e) {
           nvBase64File = (e.target as any).result;
-          if (callback) { callback.document = nvBase64File; callback.name = name; }
+          if (callback) { callback.document = nvBase64File; callback.name = name;  callback.type = type;}
           // if (callback) callback(nvBase64File,name);
         }
         fileReader.readAsDataURL(file);
@@ -71,6 +71,7 @@ export class UploadDocumentComponent implements OnInit {
 
   saveFile() {
     this.document.nvDocumentName = this.save.name;
+    this.document.nvDocumentType = this.save.type;
 
     this.appProxy.post('SetDocument', { document: this.document, nvBase64File: this.save.document }).then(data => this.closeDialog()
       , err => alert(err));
