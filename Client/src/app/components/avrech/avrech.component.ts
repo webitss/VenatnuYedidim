@@ -15,7 +15,7 @@ export class AvrechComponent implements OnInit {
   protected currentComponent: any;
 
 
-  
+
 
   constructor(private router: Router, private route: ActivatedRoute, private appProxy:AppProxy) {
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { VyTableColumn } from './vy-table.classes';
+import { VyTableOrderByPipe, OrderByPipe } from './vy-table-order-by.pipe';
 
 @Component({
   selector: 'app-vy-table',
@@ -28,12 +29,14 @@ export class VyTableComponent implements OnInit {
     this.lstOrderByFields = new Array<any>();
     // this.lstOrderByFields.push({'aa': 'number'})
     // this.lstOrderByFields.push('-bb')
+    this.lstPagesNum = new Array<number>();
   }
 
   clickCellFunc(item) {
     this.clickCell.emit(item);
   }
   createTableFromData() {
+    //  let table = "<table><thead><tr><th>מוטי</th></tr></thead><tbody><tr><td>ראובני</td></tr></tbody></table>";
     let table = "<table><thead><tr>";
     this.lstColumns.forEach(column => {
       if (column.bExcel)
@@ -49,59 +52,40 @@ export class VyTableComponent implements OnInit {
       table += "</tr>";
     });
     table += "</tbody></table>";
+    // debugger;
     return table;
-    // return document.getElementById('tId').innerHTML
   }
 
   ngOnInit() {
-
+    // setTimeout(() => {
+    //   this.lstDataRows = this.lstDataRows.concat(this.lstDataRows)
+    //   this.lstDataRows = this.lstDataRows.concat(this.lstDataRows)
+    // }, 1000)
   }
 
   moveToPage(pageNum: number) {
-    this.lstCurrentDataRows = this.lstDataRows.slice((pageNum - 1) * this.iCountRows, (pageNum * this.iCountRows) + this.iCountRows);
-    this.iStartNumRow = pageNum * this.iCountRows;
-    this.iEndNumRow = this.iStartNumRow + this.lstCurrentDataRows.length;
-    this.updateLstPagesNum();
-  }
-
-  moveToNextPage() {
-    this.lstCurrentDataRows = this.lstDataRows.slice(this.iEndNumRow, this.iEndNumRow + this.iCountRows);
-    this.iStartNumRow = this.iEndNumRow;
-    this.iEndNumRow = this.iEndNumRow + this.lstCurrentDataRows.length;
-    this.updateLstPagesNum();
-  }
-
-  moveToPrevPage() {
-    this.lstCurrentDataRows = this.lstDataRows.slice((this.iStartNumRow - this.iCountRows) < 0 ? 0 : (this.iStartNumRow - this.iCountRows), this.iStartNumRow);
-    this.iStartNumRow = (this.iStartNumRow - this.iCountRows) < 0 ? 0 : (this.iStartNumRow - this.iCountRows);
-    this.iEndNumRow = this.iStartNumRow + this.lstCurrentDataRows.length;
-    this.updateLstPagesNum();
-  }
-
-  updateLstPagesNum() {
-    let currentPage = (this.iStartNumRow / this.iCountRows) + 1;
-    this.lstPagesNum = [currentPage];
-    for (let i = 1; i < (this.countPagesDisplayed / 2); i++) {
-      if ((currentPage + i) < (this.lstDataRows.length / this.iCountRows))//next
-        this.lstPagesNum.push(currentPage + i);
-      if ((currentPage - i) > 0)//prev
-        this.lstPagesNum.push(currentPage - i);
+    if (!(pageNum == this.currentPage || pageNum < 0 || (this.iEndNumRow == this.lstDataRows.length && pageNum > this.currentPage))) {
+      this.lstCurrentDataRows = this.lstDataRows.slice((pageNum) * this.iCountRows, (pageNum * this.iCountRows) + this.iCountRows);
+      this.iStartNumRow = pageNum * this.iCountRows;
+      this.iEndNumRow = this.iStartNumRow + this.lstCurrentDataRows.length;
+      this.updateLstPagesNum();
     }
-    // this.lstPagesNum //order by
   }
 
+  protected currentPage: number = 0;
+  updateLstPagesNum() {
+    this.currentPage = (this.iStartNumRow / this.iCountRows);
+    this.currentPage = this.currentPage < 0 ? 0 : this.currentPage;
 
-  // var tableToExcel = (function() {
-  //   var uri = 'data:application/vnd.ms-excel;base64,'
-  //     , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
-  //     , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
-  //     , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
-  //   return function(table, name) {
-  //     if (!table.nodeType) table = document.getElementById(table)
-  //     var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
-  //     window.location.href = uri + base64(format(template, ctx))
-  //   }
-  // })()
+    this.lstPagesNum = [this.currentPage];
+    for (let i = 1; i < (this.countPagesDisplayed / 2); i++) {
+      if ((this.currentPage + i) < (this.lstDataRows.length / this.iCountRows))//next
+        this.lstPagesNum.push(this.currentPage + i);
+      if ((this.currentPage - i) >= 0)//prev
+        this.lstPagesNum.push(this.currentPage - i);
+    }
+    this.lstPagesNum = new OrderByPipe().transform(this.lstPagesNum);
+  }
   
 
   public tableToExcel() {
@@ -112,7 +96,19 @@ export class VyTableComponent implements OnInit {
         return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; })
       }
     var ctx = { worksheet: name || 'Worksheet', table: this.createTableFromData()}
+    debugger;
     window.location.href = uri + base64(format(template, ctx))
   }
-
 }
+// public tableToExcel(t) {
+//   let uri = 'data:application/vnd.ms-excel;base64,'
+//   , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+//   , base64 = function(s) { return window.btoa(eval('unescape(encodeURIComponent(s))')) }
+//     , format = function (s, c) {
+//       return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; })
+//     }
+//     if (!t.nodeType) t = document.getElementById(t)
+//     var ctx = {worksheet: name || 'Worksheet', table: t.innerHTML}
+//   debugger;
+//   window.location.href = uri + base64(format(template, ctx))
+//  }

@@ -25,26 +25,24 @@
           </option>
         </select>
       </div>
-{{meeting.dtDate }}date:
-{{meeting.dtHour}}hour:
+<!-- {{meeting.dtDate }}date:
+{{meeting.dtHour}}hour: -->
       <!-- <div class="form-group ">
         <label for="date">תאריך:</label>
         <input type="date" class="form-control" name="date" id="date" [(ngModel)]="meeting.dtDate" (ngModelChange)="meeting.dtDate = $event"  >
       </div> -->
-      <div class="form-group ">
+      <!-- <div class="form-group ">
         <label for="date">תאריך:</label>
         <input type="date" class="form-control" name="date" id="date" [(ngModel)]="meeting.dtDate" (ngModelChange)="meeting.dtDate = $event" >
-      </div>
-<div class="form-control">
-      <input  [(ngModel)]="meeting.dtDate"  ngui-datetime-picker date-only="true" close-on-select="false"  name="dtDate">
+      </div> -->
+<div class="form-group">
+    <label for="dtDate">תאריך:</label>
+      <input class="form-control" [(ngModel)]="meeting.dtDate"  ngui-datetime-picker date-only="true" close-on-select="false" id="dtDate" name="dtDate">
     </div>
     
-
-
-
       <div class="form-group ">
         <label for="time">שעה:</label>
-        <input type="time" class="form-control" id="time" name="time" [(ngModel)]="meeting.dtHour " (ngModelChange)="meeting.dtHour = $event"  >
+        <input type="time" class="form-control" id="time" name="time" value="{{meeting.dtHour}} " (ngModelChange)="meeting.dtHour = $event"  >
       </div>
 
     </div>
