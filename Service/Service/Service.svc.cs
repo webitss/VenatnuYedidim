@@ -72,10 +72,7 @@ namespace Service
 
         public bool SetTask(Task task, int iUserId)
         {
-
-
-
-            return Task.SetTask(task, iUserId);
+             return Task.SetTask(task, iUserId);
         }
 
         #endregion
