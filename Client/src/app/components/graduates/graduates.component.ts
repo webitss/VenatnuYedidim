@@ -43,8 +43,11 @@ export class GraduatesComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
 
 }
-tableToExcel(){
+downloadExcel(){
   debugger;
-  this.graduates.tableToExcel();
+  this.graduates.downloadExcel();
 }
+tableToPdf(name:string){
+  this.graduates.downloadPdf(name,'pdf');
+    }
 }

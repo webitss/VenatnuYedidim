@@ -4,15 +4,21 @@ import { HttpClient } from "@angular/common/http";
 @Injectable()
 export class AppProxy {
 
-  // public static baseUrl = 'http://localhost:14777/';
-  public static baseUrl = 'http://localhost:14776/';
+  public static baseDevUrl = 'http://localhost:14776/';
+  public static baseQAUrl = 'http://qa.webit-track.com/VenatnuYedidim/Service/';
+  public static getBaseUrl() {
+    if (location.host == 'qa.webit-track.com')
+      return AppProxy.baseQAUrl;
+    else
+      return AppProxy.baseDevUrl;
+  }
 
   constructor(private http: HttpClient) { }
 
   public post(url: string, data: any = {}): Promise<any> {
-    
+
     return this.http
-      .post(`${AppProxy.baseUrl + 'Service.svc/'}${url.trim()}`, this.convertData(data, true))
+      .post(`${AppProxy.getBaseUrl() + 'Service.svc/'}${url.trim()}`, this.convertData(data, true))
       .toPromise()
       .then(data => { return this.convertData(data, false) })
       .catch(error => {
@@ -23,7 +29,7 @@ export class AppProxy {
 
   public get(url: string): Promise<any> {
     return this.http
-      .get(`${AppProxy.baseUrl + 'Service.svc/'}${url.trim()}`)
+      .get(`${AppProxy.getBaseUrl() + 'Service.svc/'}${url.trim()}`)
       .toPromise()
       .then(result => { return this.convertData(result, false) })
       .catch(error => {
@@ -99,5 +105,5 @@ export class AppProxy {
     }
     return isArr ? arrayData : objectData;
   }
-  
+
 }

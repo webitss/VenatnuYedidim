@@ -7,7 +7,7 @@
    margin-right: 15%;
     border:1px solid rgb(175, 175, 175);
      width: 35%;
-      height: 25%;
+      height: 50%;
       padding: 50px;
       background-color: white;
       z-index: 999;
@@ -15,6 +15,11 @@
 .Student-affiliation{
 font-weight: bold;
 } 
+
+.my-div {
+      margin-top: 1.5vw;
+    margin-right: 6vw;
+}
 button{
       float: left;
       border-radius:30px;

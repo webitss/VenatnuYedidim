@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, ViewContainerRef } from '@angular/cor
 import { AppProxy } from '../../services/app.proxy';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app/app.component';
+import { GlobalService } from '../../services/global.service';
+// import {GoogleCity} from '../../directives/googleCity';
 
 @Component({
   selector: 'app-log-in',
@@ -10,7 +12,7 @@ import { AppComponent } from '../app/app.component';
 })
 export class LogInComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private router: Router, private appComponent: AppComponent) { }
+  constructor(private appProxy: AppProxy, private router: Router, private appComponent: AppComponent, private globalService: GlobalService) { }
 
   ngOnInit() {
     this.imgHeight = window.innerHeight;
@@ -34,6 +36,7 @@ export class LogInComponent implements OnInit {
           data["iUserId"] = data.iPersonId;
           this.appComponent.instance.userName = data.nvUserName;
           localStorage.setItem("user",JSON.stringify(data));
+          this.globalService.user = data;
           this.router.navigate(['students']);
         }
         else {

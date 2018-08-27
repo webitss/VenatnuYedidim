@@ -16,17 +16,16 @@ import { SysTableRow } from '../../classes/SysTableRow';
 
 export class SettingYeshivaComponent implements OnInit {
   
-  protected yeshiva:Yeshiva=new Yeshiva;
-  
   @Output() 
-  Yeshiva=new EventEmitter();
+  public closeYeshiva=new EventEmitter();
 
   @Input()
   public iYeshivaId: number;
+
   @Input()
   protected sysTableList:SysTableRow[];
-  @Input()
-  yeshiva1:Yeshiva;
+
+  protected yeshiva:Yeshiva=new Yeshiva();
 
   constructor(private appProxy: AppProxy,private ActivatedRoute:ActivatedRoute,private router:Router) { }
 
@@ -43,7 +42,7 @@ export class SettingYeshivaComponent implements OnInit {
   }
 
   cancel() {
-    this.Yeshiva.emit(null);
+    this.closeYeshiva.emit(null);
   }
 
   save() {
@@ -52,8 +51,8 @@ export class SettingYeshivaComponent implements OnInit {
       .then(
         data => {
             this.yeshiva = data;
+            this.closeYeshiva.emit(null);
             alert("נשמר בהצלחה");
-            this.Yeshiva.emit(null);
         })
     }
     else{
@@ -61,8 +60,8 @@ export class SettingYeshivaComponent implements OnInit {
       .then(
         data=> {
           this.yeshiva=data;
+          this.closeYeshiva.emit(null);
           alert("נשמר בהצלחה");
-          this.Yeshiva.emit(null);
         } 
       )
     }

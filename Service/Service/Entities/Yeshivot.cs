@@ -99,6 +99,24 @@ namespace Service.Entities
             }
         }
 
+        public static bool DeleteYeshiva(int iYeshivaId, int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iYeshivaId", iYeshivaId));
+                parameters.Add(new SqlParameter("iLastModifyUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TYeshivot_DEL", parameters);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("DeleteYeshivot/TYeshivot_DEL", "ex" + ex);
+                return false;
+            }
+        }
+
         #endregion
     }
 }

@@ -121,7 +121,7 @@ export class SettingsCodeTableComponent implements OnInit {
     this.divNewValue = false
     this.showOverlap = false
   }
-  tableToExcel(){
-    this.CodeTables.tableToExcel();
+  downloadExcel(){
+    this.CodeTables.downloadExcel();
   }
 }

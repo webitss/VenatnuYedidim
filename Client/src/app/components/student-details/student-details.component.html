@@ -27,11 +27,20 @@
             <label for="phone"> טלפון :</label>
             <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="student.nvPhone" [ngModelOptions]="{standalone: true}"
                 minlength="9" maxlength="9" #phone="ngModel">
-            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger">
+            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
                 <div *ngIf="(phone.errors.minlength||phone.errors.maxlength)">
                     <p>מספר טלפון אינו תקין </p>
                 </div>
             </div>
+        </div>
+        <div class="form-group ">
+            <label for="email"> מייל :</label>
+            <input type="email" class="form-control" id="email" name="email" #email="ngModel"
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  [(ngModel)]="student.nvEmail" [ngModelOptions]="{standalone: true}">
+            <div  *ngIf="email.errors && email.errors.pattern">
+                מייל לא תקין
+            </div>
+            
         </div>
     </div>
     <div class="row">
@@ -55,8 +64,9 @@
 
         <div class="form-group ">
             <label for="street"> כתובת :</label>
-            <input type="text" class="form-control" id="street" name="street" [(ngModel)]="student.nvAddress" [ngModelOptions]="{standalone: true}">
+            <input type="text" class="form-control" id="street" name="street" [(ngModel)]="student.nvAddress" [ngModelOptions]="{standalone: true}" >
         </div>
+        
 
         <div class="form-group ">
             <label for="city"> עיר :</label>
