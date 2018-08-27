@@ -15,6 +15,7 @@ student2:Student;
 student:Student=new Student();
 model:number;
 
+
   studentList:Student[];
   students:boolean=false;
 
@@ -26,12 +27,11 @@ model:number;
    this.activatedRoute.parent.params.subscribe(params => {
       this.id = params['iPersonId'];
     });
-
     this.appProxy.post('GetAvrechStudents', { iPersonId: 1 }).then(
       data => 
       {
         this.studentList = data;
-
+debugger;
       }
       , err => alert(err));
   }
@@ -52,6 +52,7 @@ model:number;
 
    unionOk()
    {
+     alert("ddddd");
      debugger;
    }
 }
