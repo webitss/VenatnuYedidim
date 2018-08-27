@@ -20,7 +20,6 @@ import { FilterPipe } from './pipes/filter.pipe';
 //--- services ---
 import { AppProxy } from './services/app.proxy';
 import { SysTableService } from './services/sys-table.service';
-import { GlobalService } from './services/global.service';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
 
@@ -70,8 +69,10 @@ import { LogInComponent } from './components/log-in/log-in.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
 import { ShowImageComponent } from './components/show-image/show-image.component';
 import { SafeUrl } from './directives/safe-url';
+import { GoogleCity } from './directives/googleCity';
 import { FitElement } from './directives/fit-element';
 import { MediaComponent } from './components/media/media.component';
+import { GlobalService } from './services/global.service';
 //import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
@@ -145,7 +146,7 @@ import { MediaComponent } from './components/media/media.component';
 
 
     MediaComponent,
-
+    GoogleCity,
 
    
   ],
@@ -244,7 +245,7 @@ import { MediaComponent } from './components/media/media.component';
 
     ], { useHash: true })
   ],
-  providers: [AppProxy, SysTableService, GlobalService],
+  providers: [AppProxy, SysTableService,GlobalService],
   bootstrap: [AppComponent],
   // entryComponents:[
   //   CardsUnionComponent
