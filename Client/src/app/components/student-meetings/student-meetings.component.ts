@@ -4,6 +4,7 @@ import { AppProxy } from '../../services/app.proxy';
 import { StudentMeetingDetailsComponent } from '../student-meeting-details/student-meeting-details.component';
 import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -14,14 +15,15 @@ import { SysTableRow } from '../../classes/SysTableRow';
 })
 export class StudentMeetingsComponent implements OnInit {
   iMeetingId: number;
-
+  private sub: any;
+  iPersonId:number;
   protected meetingList: Array<Meeting>;
   id: number;
   meeting: Meeting;
   flag: number;
   sysTableRowList: SysTableRow[];
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute) { }
 
 
   public lstColumns = [{
@@ -68,10 +70,10 @@ export class StudentMeetingsComponent implements OnInit {
     this.meetingList.push(meeting);
   }
   newMeeting(){
-    this.GetMeetingsByStudentId();
+    // this.GetMeetingsByStudentId();
   }
-  GetMeetingsByStudentId() {
-    this.appProxy.post("GetMeetingsByStudentId", { iPersonId: 1 }).then(
+  GetMeetingsByStudentId(id: number) {
+    this.appProxy.post("GetMeetingsByStudentId", { iPersonId: id }).then(
       data => {
         //alert("good");
         this.meetingList = data;
@@ -92,8 +94,14 @@ export class StudentMeetingsComponent implements OnInit {
   }
 
   ngOnInit() {
-this.GetMeetingsByStudentId();
+    this.sub = this.route.parent.params.subscribe(params => {
+      this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
+   });
+ 
+this.GetMeetingsByStudentId(this.iPersonId);
   }
-
+ ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }
 
