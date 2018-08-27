@@ -98,15 +98,15 @@
     <Content Include="bin\NReco.PdfGenerator.dll" />
     <Content Include="bin\Service.dll" />
     <Content Include="bin\Service.pdb" />
-    <Content Include="Files\bg.jpg" />
-    <Content Include="Files\חמווווד.png" />
-    <Content Include="Files\תמונה סרוקה.jpg" />
+    <Content Include="bin\System.Net.Http.dll" />
     <Content Include="Global.asax" />
+    <Content Include="msvcp120.dll" />
+    <Content Include="msvcr120.dll" />
     <Content Include="Service.svc" />
-    <Content Include="Files\תעודת זהות.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="wkhtmltopdf.exe" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Conversation.cs" />
@@ -139,19 +139,17 @@
     <Compile Include="Utilities\SendMessagesHandler.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Files\" />
     <Folder Include="Logs\" />
-    <Folder Include="Utilities\Files\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\NLog.config" />
     <Content Include="bin\Service.dll.config" />
-    <Content Include="Files\forms.pdf" />
-    <Content Include="Files\אודי קורות חיים.pdf" />
     <None Include="Properties\PublishProfiles\aaa.pubxml" />
     <None Include="Properties\PublishProfiles\bbb.pubxml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Service.csproj.rej" />
     <Content Include="Service.csproj.user.rej" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
