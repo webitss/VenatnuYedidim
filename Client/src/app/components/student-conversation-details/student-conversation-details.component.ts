@@ -5,6 +5,7 @@ import { Conversation } from '../../classes/conversation';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { Task } from '../../classes/task';
 import { TaskComponent } from '../task/task.component';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-student-conversation-details',
@@ -13,11 +14,13 @@ import { TaskComponent } from '../task/task.component';
 })
 export class StudentConversationDetailsComponent implements OnInit {
   private sub: any;
+  protected iUserId: number;
   @Output()
   Conversation = new EventEmitter();
   typeTask: Task;
   @Input()
   protected conversation: Conversation;
+  protected currentConver: Conversation;
   @Input()
   protected sysTableList: SysTableRow[];
 
@@ -33,7 +36,7 @@ export class StudentConversationDetailsComponent implements OnInit {
 
   protected iPersonId: number = 1;
 
-  constructor(private route: ActivatedRoute, private appProxy: AppProxy) { }
+  constructor(private route: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService) { }
 
   cancel() {
     this.Conversation.emit(null);
@@ -41,17 +44,23 @@ export class StudentConversationDetailsComponent implements OnInit {
 
 
   saveConversation() {
-    this.conversation.dConversationDate = new Date(this.conversation.dConversationDate);
-    this.conversation.dtConversationTime = new Date(this.conversation.dtConversationTime);
-    this.conversation.dtNextConversationDate = new Date(this.conversation.dtNextConversationDate);
-    if (this.conversation.iConversationId == null) {
-      this.conversation.iPersonId = 7;
+    this.currentConver.dConversationDate = new Date(this.conversation.dConversationDate);
+    this.currentConver.dtConversationTime = new Date(this.conversation.dtConversationTime);
+    this.currentConver.dtNextConversationDate = new Date(this.conversation.dtNextConversationDate);
+    if (this.currentConver.iConversationId == null) {
+      //this.currentConver.iPersonId = 7;
     }
-    this.appProxy.post("SetConversations", { conversation: this.conversation, iPersonId: this.iPersonId })
+    this.appProxy.post("SetConversations", { conversation: this.currentConver, iUserId: this.iUserId })
       .then(
         data => {
+           
+          if (this.currentConver.iConversationId != null) {
+           this.conversation = new Conversation();
+            this.conversation = Object.assign({}, this.currentConver);
+          }
+        
 
-          this.newConver.emit(null);
+          this.newConver.emit(this.conversation);
           // this.newConver.push({
           //   iConversationId: this.conversation.iConversationId,
           //   iPersonId: this.conversation.iPersonId,
@@ -79,33 +88,50 @@ export class StudentConversationDetailsComponent implements OnInit {
 
     this.TaskComponent.saveTask();
   }
+  
 
-
+reset() {
+   
+        this.currentConver.dConversationDate.setDate(null);
+        this.currentConver.dtConversationTime.setTime(null);
+        this.currentConver.dtNextConversationDate.setDate(null);
+    }
 
 
 
   ngOnInit() {
-    if (this.conversation == null)
-      this.conversation = new Conversation();
+    this.iUserId = this.globalService.getUser()['iUserId'];
+    this.currentConver = new Conversation();
+    this.currentConver = Object.assign({}, this.conversation);
     // this.sub=this.route.params.subscribe(params=>{
     //   this.iconversationId=+params['conversationId'];
     // });
-    
-    this.conversation['conversationDate'] = new Date((this.conversation.dConversationDate).getTime());
-    //this.conversation['dtNextConversationDate'] = new Date((this.conversation.dtNextConversationDate).getTime());
-    // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
-    if ((this.conversation.dtConversationTime).getMinutes() < 10)
-      this.minutes = '0' + (this.conversation.dtConversationTime).getMinutes().toString();
+
+    this.conversation['conversationDate'] = new Date((this.currentConver.dConversationDate).getTime());
+
+    //this.currentConver['dtHour'] = new Date((this.currentConver.dtConversationTime).getHours()) + ':'+new Date((this.currentConver.dtConversationTime).getMinutes());
+    if ((this.currentConver.dtConversationTime).getMinutes() < 10)
+      this.minutes = '0' + (this.currentConver.dtConversationTime).getMinutes().toString();
     else
-      this.minutes = (this.conversation.dtConversationTime).getMinutes().toString();
+      this.minutes = (this.currentConver.dtConversationTime).getMinutes().toString();
 
-    if ((this.conversation.dtConversationTime).getHours() < 10)
-      this.hours = '0' + (this.conversation.dtConversationTime).getHours().toString();
+    if ((this.currentConver.dtConversationTime).getHours() < 10)
+      this.hours = '0' + (this.currentConver.dtConversationTime).getHours().toString();
     else
-      this.hours = (this.conversation.dtConversationTime).getHours().toString();
+      this.hours = (this.currentConver.dtConversationTime).getHours().toString();
 
+    //this.currentConver['nextConversationDate'] = new Date((this.currentConver.dtNextConversationDate).getTime());
+    if ((this.currentConver.dtNextConversationDate).getMinutes() < 10)
+      this.minutes = '0' + (this.currentConver.dtNextConversationDate).getMinutes().toString();
+    else
+      this.minutes = (this.currentConver.dtNextConversationDate).getMinutes().toString();
 
-    this.conversation['conversationTime'] = this.hours + ':' + this.minutes;
+    if ((this.currentConver.dtNextConversationDate).getHours() < 10)
+      this.hours = '0' + (this.currentConver.dtNextConversationDate).getHours().toString();
+    else
+      this.hours = (this.currentConver.dtNextConversationDate).getHours().toString();
+    this.currentConver['nextConversationDate'] = new Date((this.currentConver.dtNextConversationDate).getTime()) + this.hours + ':' + this.minutes;
+    this.currentConver['conversationTime'] = this.hours + ':' + this.minutes;
     //  ngOnDestroy() {
     //    this.sub.unsubscribe();
     //    }

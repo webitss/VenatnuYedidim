@@ -3,11 +3,13 @@ import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
 import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 import { StudentConversationDetailsComponent } from '../student-conversation-details/student-conversation-details.component';
 import { Title } from '@angular/platform-browser';
 import { SelectorListContext } from '@angular/compiler';
-
+import { GlobalService } from '../../services/global.service'
 
 @Component({
   selector: 'app-student-conversations',
@@ -16,7 +18,8 @@ import { SelectorListContext } from '@angular/compiler';
 })
 export class StudentConversationsComponent implements OnInit {
 
-  protected iPersonId: number = 7;
+  protected iUserId: number;
+  protected iPersonId:number;
   protected flag: number;
   protected conversationsList: Array<Conversation> = new Array<Conversation>();
   protected conversationSelect: Conversation;
@@ -57,7 +60,8 @@ export class StudentConversationsComponent implements OnInit {
   ];
   public lstDataRows = [];
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private route: ActivatedRoute) { }
+
 
   // newConversation() {
   //   this.conversationSelect = new Conversation();
@@ -73,10 +77,10 @@ export class StudentConversationsComponent implements OnInit {
 
   addConversation() {
     this.conversationSelect = new Conversation();
-    this.conversationSelect.dConversationDate = new Date();
-    this.conversationSelect.dtConversationTime = new Date();
-    this.conversationSelect.dtNextConversationDate = new Date();
-
+    this.conversationSelect.dConversationDate = null;
+    this.conversationSelect.dtConversationTime = null;
+    this.conversationSelect.dtNextConversationDate = null;
+    
   }
   // add(newConver)
   // {
@@ -84,11 +88,11 @@ export class StudentConversationsComponent implements OnInit {
 
   // }
   deleteConversation(iConversationId: number, iUserId: number) {
-    this.appProxy.post("DeleteConversations", { iConversationId: iConversationId, iUserId: 1 })
+    this.appProxy.post("DeleteConversations", { iConversationId: iConversationId, iUserId: this.iUserId })
       .then(
         data => {
           this.conversationsList = data;
-          this.conversationsList.push(this.newConver);
+
           alert("sucsses");
         }).catch(err => {
           alert(err);
@@ -128,11 +132,18 @@ export class StudentConversationsComponent implements OnInit {
   //     });
   //   });
   // }}
-  ngOnInit() { 
+  ngOnInit() {
+    this.iUserId=this.globalService.getUser()['iUserId'];
+    this.route.parent.params.subscribe(params => {
+      this.iPersonId = params['iPersonId'];
+    });
+
+    this.iUserId = this.globalService.getUser()['iUserId'];
     this.selecList();
   }
-  saveNewConver()
-  {
+  saveNewConver(event) {
+    //debugger;
+    //this.conversationsList.push(event);
     this.selecList();
   }
   selecList() {
@@ -144,7 +155,7 @@ export class StudentConversationsComponent implements OnInit {
           this.conversationsList.forEach(c => {
             c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
             c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
-            c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleDateString();
+            c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
             c['edit'] = '<div class="edit"></div>';
             c['delete'] = '<div class="delete"></div>';
             c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
