@@ -90,6 +90,7 @@ export class StudentConversationDetailsComponent implements OnInit {
     // this.sub=this.route.params.subscribe(params=>{
     //   this.iconversationId=+params['conversationId'];
     // });
+    
     this.conversation['conversationDate'] = new Date((this.conversation.dConversationDate).getTime());
     //this.conversation['dtNextConversationDate'] = new Date((this.conversation.dtNextConversationDate).getTime());
     // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
