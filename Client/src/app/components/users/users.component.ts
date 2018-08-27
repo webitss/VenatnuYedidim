@@ -59,7 +59,10 @@ export class UsersComponent implements OnInit {
   editUser(u: User) {
     this.router.navigate(['users/user/', u.iPersonId]);
   }
-  tableToExcel(){
-    this.users.tableToExcel();
+  downloadExcel(){
+    this.users.downloadExcel();
   }
+  tableToPdf(name:string){
+    this.users.downloadPdf(name,'pdf');
+      }
 }

@@ -50,21 +50,21 @@ namespace Service.Entities
 
         }
 
-        internal static bool SetMeeting(Meeting meeting, int iUserId)
+        internal static int SetMeeting(Meeting meeting, int iUserId)
         {
             try
             {
-
+                
                 List<SqlParameter> parameters = ObjectGenerator<Meeting>.GetSqlParametersFromObject(meeting);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
-                SqlDataAccess.ExecuteDatasetSP("TMeeting_UPD/INS", parameters);
-
-                return true;
+                int id = int.Parse(SqlDataAccess.ExecuteDatasetSP("TMeeting_UPD/INS", parameters).Tables[0].Rows[0][0].ToString());
+           
+                return id;
             }
             catch (Exception ex)
             {
                 Log.LogError("SetMeeting / TMeeting_UPD/INS", "ex" + ex);
-                return false;
+                return 0;
             }
         }
 

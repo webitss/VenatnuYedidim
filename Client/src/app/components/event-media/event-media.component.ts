@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Document } from '../../classes/document';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-event-media',
@@ -13,7 +14,7 @@ export class EventMediaComponent implements OnInit {
   document: Document;
   documents: any[]=new Array();
 
-  constructor(private appProxy: AppProxy, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private appProxy: AppProxy,private globalService:GlobalService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.activatedRoute.parent.params.subscribe(params => {
@@ -42,7 +43,7 @@ export class EventMediaComponent implements OnInit {
   }
 
   deleteDocument(id){
-    this.appProxy.post('DeleteDocument', { iDocumentId: id }).then(data => {
+    this.appProxy.post('DeleteDocument', { iDocumentId: id ,iLastModifyUserId:this.globalService.getUser()['iUserId']}).then(data => {
       alert("success"),err=>alert("error")
     }
       , err => alert(err));

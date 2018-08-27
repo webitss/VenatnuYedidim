@@ -31,5 +31,9 @@ li{
     margin-left: 8%;
     margin-top: 100px;
 }
+li>button{
+    width: 10%;
+    height: 10%;;
+}
 
   

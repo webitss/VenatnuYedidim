@@ -2,7 +2,7 @@
 <div class="row component-name-header">
         <div class="col-sm-4 component-name"> מוסדות</div>
         <div class="actions col-sm-8">
-            <button class="btn btn-small excel" (click)="tableToExcel()" value="Export to Excel"></button>
+            <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
             <button class="btn btn-small">s</button>
             <button (click)="iYeshivaId = 0">מוסד חדש</button>
         </div>
@@ -10,8 +10,9 @@
 
 <div *ngIf="iYeshivaId != null">
 
-    <app-setting-yeshiva #yeshivot [yeshiva1]="yeshiva" [sysTableList]="sysTableList" [iYeshivaId]="iYeshivaId" (Yeshiva)="close()"></app-setting-yeshiva>
+    <app-setting-yeshiva #yeshivot [sysTableList]="sysTableList" [iYeshivaId]="iYeshivaId" (closeYeshiva)="close()"></app-setting-yeshiva>
     
 </div>
 
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="editYeshiva($event)"></app-vy-table>
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="deleteYeshiva($event)"></app-vy-table>
+ 

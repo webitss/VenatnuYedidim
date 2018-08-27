@@ -1,4 +1,4 @@
-<div class="row col-sm-12">
+<div class="row col-sm-12" *ngIf="currentTask">
   <div class="form-group col-sm-3">
     <label for="taskType">סוג משימה</label>
     <select name="taskType" class="form-control" name="taskType" [(ngModel)]="task.iTaskType">
@@ -8,7 +8,7 @@
   <!-- <select [(ngModel)]="user.iPermissionId" class="form-control" name="iPermissionId">
     <option [value]="item.iSysTableRowId" *ngFor="let item of lst" [selected]="item.iSysTableRowId==user.iPermissionId">{{item.nvValue}}</option>
   </select> -->
-  <div class="form-group col-sm-3">
+  <div class="form-group col-sm-3" >
     <label for="dtDate">תאריך</label>
 
     <!-- <input type="date" name="taskDate" class="form-control" [(ngModel)]="task.dtTaskdate" /> -->

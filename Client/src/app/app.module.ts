@@ -5,6 +5,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from "@angular/http";
 import { RouterModule, Route } from '@angular/router';
 import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
+// import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 //import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
@@ -20,7 +21,6 @@ import { FilterPipe } from './pipes/filter.pipe';
 //--- services ---
 import { AppProxy } from './services/app.proxy';
 import { SysTableService } from './services/sys-table.service';
-import { GlobalService } from './services/global.service';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
 
@@ -70,9 +70,11 @@ import { LogInComponent } from './components/log-in/log-in.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
 import { ShowImageComponent } from './components/show-image/show-image.component';
 import { SafeUrl } from './directives/safe-url';
+import { GoogleCity } from './directives/googleCity';
 import { FitElement } from './directives/fit-element';
 import { MediaComponent } from './components/media/media.component';
-//import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { GlobalService } from './services/global.service';
+
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
@@ -87,6 +89,7 @@ import { MediaComponent } from './components/media/media.component';
     FilterPipe,
 
     //directives
+    GoogleCity,
     SafeUrl,    
     FitElement,
 
@@ -145,7 +148,7 @@ import { MediaComponent } from './components/media/media.component';
 
 
     MediaComponent,
-
+   
 
    
   ],
@@ -164,8 +167,9 @@ import { MediaComponent } from './components/media/media.component';
     NguiDatetimePickerModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
-      // { path: "", component: ShowImageComponent },
-      { path: "", component: LogInComponent },
+    { path: "ShowImage", component: ShowImageComponent },
+
+     { path: "", component: LogInComponent },
       { path: "students", component: StudentsComponent },
       {
 
@@ -244,7 +248,7 @@ import { MediaComponent } from './components/media/media.component';
 
     ], { useHash: true })
   ],
-  providers: [AppProxy, SysTableService, GlobalService],
+  providers: [AppProxy, SysTableService,GlobalService],
   bootstrap: [AppComponent],
   // entryComponents:[
   //   CardsUnionComponent

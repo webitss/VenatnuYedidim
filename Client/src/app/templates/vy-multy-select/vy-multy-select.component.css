@@ -12,35 +12,83 @@
     margin-right: 50%;
 
 }
+
+.check-all {
+    line-height: 18px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+input[type="checkbox"] {
+    margin: 5px;
+}
+
 .vy-multy-select{
-    height: 100px;
-     width: 300px;
-     padding: 2%;
+    /* height: 100px; */
+     /* width: 300px; */
+     /* padding: 2%; */
+     width: 100%;
      background-color: white;
 
 }
-.multy-select{
+
+.multy-select {
+    width: 100%;
+ 
+}
+/* .multy-select{
     border: 1px solid rgb(175, 175, 175); 
     width: 230px;
      height: 25px;
      margin-top: 0;
      padding: 0;
-}
+} */
 /*.choose-students{
     width: 40%;
 }*/
+.multy-select .form-control img {
+    width: 4%;
+    float: left;
+    margin-top: 4px;
+}
+
+.multy-select .form-control {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    height: 27px;
+    padding: 6px 12px;
+
+}
+
+.click {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
 .open-list{
-    padding: 10px;
+    padding: 20px 0;
    /* margin-right: 150px;*/
     background-color: white;
-    border: 1px solid rgb(175, 175, 175);
-    border-top: 0;
+    border: 1px solid rgba(169, 169, 169, 0.37);
+    /* border-top: 0; */
+    overflow: visible !important;
+    position: relative;
+    top:-16px;
+    
    /* width:230px;*/
 }
+
 .search{
     width: 100%;
     border-left: 0px;
     border-right: 0px;
+    margin: 10px;
 }
 
 

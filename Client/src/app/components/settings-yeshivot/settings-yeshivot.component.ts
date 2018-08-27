@@ -20,8 +20,7 @@ export class SettingsYeshivotComponent implements OnInit {
   protected yeshivaList: Array<Yeshiva> = new Array<Yeshiva>();
   protected iYeshivaId: number;
   protected lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
-  protected yeshiva1:Yeshiva;
-
+  protected yeshiva:Yeshiva;
   @ViewChild('yeshivot') yeshivot:any;
 
  
@@ -40,6 +39,7 @@ export class SettingsYeshivotComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('מייל', 'nvEmail'))
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'))
     this.lstColumns.push(new VyTableColumn('תפקיד', 'nvRoleType'))
+    this.lstColumns.push(new VyTableColumn('מחיקה','delete','html',true,false))
 
     this.appProxy.post('GetAllYeshivot').then(data => {
       this.yeshivaList = data;
@@ -47,21 +47,39 @@ export class SettingsYeshivotComponent implements OnInit {
         this.sysTableList=val;
         this.yeshivaList.forEach(y=> {
           y['edit'] = '<div class="edit"></div>';
+          y['delete'] = '<div> class="delete"></div>';
           y['nvRoleType']=this.sysTableList.filter(x=>x.iSysTableRowId==y.iRoleType)[0].nvValue;
         });
       });
     });
   }
 
+  public setYeshiva(yeshiva){
+
+    // if(event)
+    //   this.editYeshiva(yeshiva);
+    // else
+    //   this.deleteYeshiva(yeshiva);
+  }
+
   public editYeshiva(yeshiva) {
     this.iYeshivaId = yeshiva.iYeshivaId;
   }
 
-  close() {
-    this.yeshiva1 = null;
+  public DeleteYeshiva(yeshiva){
+    this.iYeshivaId=yeshiva.iYeshivaId;
+    this.appProxy.post('DeleteYeshiva').then(data=>{
+      this.yeshiva=data;
+      
+
+    })
   }
 
-  tableToExcel(){
-    this.yeshivot.tableToExcel();
+  close() {
+    this.iYeshivaId = null;
+  }
+
+  downloadExcel(){
+    this.yeshivot.downloadExcel();
   }
 }

@@ -181,6 +181,23 @@ namespace Service.Entities
                 return false;
             }
         }
+        public static bool UnionCards(Student student,int iStudent2)
+        {
+            try
+            {
+                List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
+                parameters.Add(new SqlParameter("iStudent2", iStudent2));
+                SqlDataAccess.ExecuteDatasetSP("TStudentUnionCards_UPD", parameters);
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                Log.LogError("TStudentUnionCards_UPD / TStudentUnionCards_UPD", "ex" + ex);
+                return false;
+            }
+        }
+        
     }
 
 }
