@@ -6,16 +6,15 @@
 <div class="background-logo col-sm-12" [style.height.px]="imgHeight">
   <div class="col-sm-4"></div>
   <div class="my-div col-sm-4">
-    <!-- <div class="small-logo col-sm-2"></div> -->
-    <div>
-      <div class="usr-icon"></div>
-      <input type="text" name="user-name" [(ngModel)]="nvUserName" class="form-control" placeholder="שם משתמש">
+    <div class="row">
+      <img src="../../../assets/images/logo.jpg" height="50px;" class="img"/>
     </div>
-    <div>
-      <div class="lock"></div>
-      <input type="password" name="password" [(ngModel)]="nvPassword" class="form-control" placeholder="סיסמה">
+    <div class="row">
+      <input type="text" name="user-name" [(ngModel)]="nvUserName" class="form-control usr-input" placeholder="שם משתמש">
     </div>
-    <!-- <div class="col-sm-3"></div> -->
+    <div class="row">
+      <input type="password" name="password" [(ngModel)]="nvPassword" class="form-control lock-input" placeholder="סיסמה">
+    </div>
     <button class="btn btn-circle1 btn-pink my-btn" (click)="logIn()">כניסה</button>
   </div>
 </div>

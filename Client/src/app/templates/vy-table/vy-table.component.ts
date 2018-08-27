@@ -37,11 +37,8 @@ export class VyTableComponent implements OnInit {
     item['columnClickName'] = colName;
     this.clickCell.emit(item);
   }
-  createTableFromData() {
-    //  let table = "<table><thead><tr><th>מוטי</th></tr></thead><tbody><tr><td>ראובני</td></tr></tbody></table>";
-    
-  }
-createTableForPdf(){
+
+  createTable(){
   let table= "<table id='avrechim' style='width: 100%; background-color:#f9e4b1; height: 500px;><thead><tr style='text-align: initial'>";
     this.lstColumns.forEach(column => {
       if (column.bExcel)
@@ -61,11 +58,7 @@ createTableForPdf(){
     return table;
 }
   ngOnInit() {
-    // setTimeout(() => {
-    //   this.lstDataRows = this.lstDataRows.concat(this.lstDataRows)
-    //   this.lstDataRows = this.lstDataRows.concat(this.lstDataRows)
-    // }, 1000)
-    //  this.downloadFile("aaaaaaaa", "pdf");
+
   }
 
   moveToPage(pageNum: number) {
@@ -92,22 +85,23 @@ createTableForPdf(){
     this.lstPagesNum = new OrderByPipe().transform(this.lstPagesNum);
   }
 
-  public tableToExcel() {
+  public downloadExcel() {
     let uri = 'data:application/vnd.ms-excel;base64,'
       , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
       , base64 = function (s) { return window.btoa(eval('unescape(encodeURIComponent(s))')) }
       , format = function (s, c) {
         return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; })
       }
-    var ctx = { worksheet: name || 'Worksheet', table: this.createTableFromData() }
+    var ctx = { worksheet: name || 'Worksheet', table: this.createTable() }
     debugger;
     window.location.href = uri + base64(format(template, ctx))
   }
   
-  downloadFile(name: string, type: string,componentName:string) {
+  downloadPdf(componentName:string,type: string) {
+    debugger;
     let header="<div><h1>ונתנו ידידים</h1><br/><br/><h2>טבלת "+componentName+"</h2></div>";
     let footer= "<div style='font-weight: bold; background-color: #f7c853 '>סה\"\כ שורות: "+this.lstDataRows.length;
-    this.appProxy.post('GeneratPdf', { headerHtml: header, bodyHtml: this.createTableForPdf, footerHtml: footer })
+    this.appProxy.post('GeneratPdf', { headerHtml: header, bodyHtml: this.createTable(), footerHtml: footer })
       .then(res => {
         let binaryString = window.atob(res);
         let binaryLen = binaryString.length;
@@ -116,12 +110,11 @@ createTableForPdf(){
           let ascii = binaryString.charCodeAt(i);
           bytes[i] = ascii;
         }
-
         let file = type ? new Blob([bytes], { type: type }) : new Blob([bytes]);
         let link = document.createElement('a');
         link.setAttribute('id', 'linkDownload');
         link.href = window.URL.createObjectURL(file);
-        link.download = name + (type ? '.' + type : '');
+        link.download = componentName + (type ? '.' + type : '');
         link.click();
         try {
           document.getElementById('linkDownload').remove();

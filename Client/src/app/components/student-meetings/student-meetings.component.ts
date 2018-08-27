@@ -58,7 +58,10 @@ export class StudentMeetingsComponent implements OnInit {
 
     this.flag = 1;
   }
-
+updateMeeting(meeting:Meeting){
+ this.meetingList.slice( this.meetingList.indexOf(this.meetingList.find(m => m.iMeetingId == meeting.iMeetingId),0),1);
+this.meetingList.push(meeting);
+}
   addMeeting() {
     this.meeting = new Meeting();
     this.meeting.dtMeetingDate = new Date();
@@ -69,8 +72,18 @@ export class StudentMeetingsComponent implements OnInit {
   addNewMeeting(meeting: Meeting) {
     this.meetingList.push(meeting);
   }
-  newMeeting(){
-     this.GetMeetingsByStudentId(this.iPersonId);
+  newMeeting(newMeeting:Meeting){
+    this.changeTable(newMeeting);
+    this.meetingList.push(newMeeting);
+
+    //  this.GetMeetingsByStudentId(this.iPersonId);
+  }
+
+  changeTable(m:Meeting){
+    m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
+    m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
+    m['edit'] = '<div class="edit"></div>';
+    m['nvMeetingType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0].nvValue;
   }
   GetMeetingsByStudentId(id: number) {
     this.appProxy.post("GetMeetingsByStudentId", { iPersonId: id }).then(
@@ -80,10 +93,7 @@ export class StudentMeetingsComponent implements OnInit {
         this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(data => {
           this.sysTableRowList = data;
           this.meetingList.forEach(m => {
-            m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
-            m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
-            m['edit'] = '<div class="edit"></div>';
-            m['nvMeetingType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0].nvValue;
+            this.changeTable(m);
           });
 
 

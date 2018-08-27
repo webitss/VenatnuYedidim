@@ -4,8 +4,8 @@
 <div class=" row component-name-header">
         <div class="col-sm-4 component-name">תלמידים</div>
         <div class="actions col-sm-8">
-    <button class="btn btn-small excel" (click)="tableToExcel()" value="Export to Excel"></button>
-    <button class="btn btn-small" cl>s</button>
+    <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
+    <button class="btn btn-small" (click)="tableToPdf('תלמידים')">s</button>
     <button class="btn btn-circle1 btn-orange" (click)="flag=true"> איחוד כרטיסים</button>
     <button class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">תלמיד חדש</button>
 </div>
