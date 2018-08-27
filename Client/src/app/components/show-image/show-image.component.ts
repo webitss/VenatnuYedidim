@@ -20,7 +20,7 @@ protected name:string
 protected lstColumns = [{
  
   title: 'ערך',
-  type: 'html',
+  type: 'html',      
  
 },
 {
