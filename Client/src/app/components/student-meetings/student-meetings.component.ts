@@ -94,7 +94,7 @@ export class StudentMeetingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sub = this.route.parent.params.subscribe(params => {
+    this.sub = this.route.parent.parent.params.subscribe(params => {
       this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
    });
  
