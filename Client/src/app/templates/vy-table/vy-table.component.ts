@@ -33,7 +33,8 @@ export class VyTableComponent implements OnInit {
     this.lstPagesNum = new Array<number>();
   }
 
-  clickCellFunc(item) {
+  clickCellFunc(item, colName) {
+    item['columnClickName'] = colName;
     this.clickCell.emit(item);
   }
   createTableFromData() {
