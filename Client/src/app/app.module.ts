@@ -69,7 +69,7 @@ import { LogInComponent } from './components/log-in/log-in.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
 import { ShowImageComponent } from './components/show-image/show-image.component';
 import { SafeUrl } from './directives/safe-url';
-import { GoogleCity } from './directives/googleCity';
+// import { GoogleCity } from './directives/googleCity';
 import { FitElement } from './directives/fit-element';
 import { MediaComponent } from './components/media/media.component';
 import { GlobalService } from './services/global.service';
@@ -88,6 +88,7 @@ import { GlobalService } from './services/global.service';
     FilterPipe,
 
     //directives
+    // GoogleCity,
     SafeUrl,    
     FitElement,
 
@@ -146,7 +147,7 @@ import { GlobalService } from './services/global.service';
 
 
     MediaComponent,
-    GoogleCity,
+   
 
    
   ],
