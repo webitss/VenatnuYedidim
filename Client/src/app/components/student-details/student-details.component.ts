@@ -124,7 +124,7 @@ export class StudentDetailsComponent implements OnInit {
     if (this.paramRout != '0') {
 
 
-      this.appProxy.post("UpdateStudent", { student: this.student, iUserId: 1 }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
+      this.appProxy.post("UpdateStudent", { student: this.student, iUserId:1 }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
     }
     else {
       debugger;
@@ -134,7 +134,7 @@ export class StudentDetailsComponent implements OnInit {
       if (this.isCheckedMother = true) {
         this.student.bDeathMother = true;
       }
-      this.appProxy.post("AddStudent", { student: this.student, iUserId: 3 }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
+      this.appProxy.post("AddStudent", { student: this.student, iUserId: 1 }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
     }
   }
 
