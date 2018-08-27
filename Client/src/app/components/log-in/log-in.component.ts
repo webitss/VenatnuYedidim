@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, ViewContainerRef } from '@angular/core';
-import { User } from '../../classes/user';
 import { AppProxy } from '../../services/app.proxy';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AppComponent } from '../app/app.component';
 
 @Component({
@@ -14,7 +13,6 @@ export class LogInComponent implements OnInit {
   constructor(private appProxy: AppProxy, private router: Router, private appComponent: AppComponent) { }
 
   ngOnInit() {
-    this.user = null;
     this.imgHeight = window.innerHeight;
 
   }
@@ -27,15 +25,14 @@ export class LogInComponent implements OnInit {
   @Input()
   protected nvPassword: string;
 
-  @Input()
-  protected user: User;
 
   logIn() {
     this.appProxy.post("Login", { nvUserName: this.nvUserName, nvPassword: this.nvPassword }).then(
       data => {
         if (data != null) {
-          this.user = data;
-          this.appComponent.instance.userName = this.user.nvUserName;
+          // this.user = data;
+          data["iUserId"] = data.iPersonId;
+          this.appComponent.instance.userName = data.nvUserName;
           localStorage.setItem("user",JSON.stringify(data));
           this.router.navigate(['students']);
         }
