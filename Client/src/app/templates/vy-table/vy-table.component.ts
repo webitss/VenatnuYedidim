@@ -101,7 +101,7 @@ export class VyTableComponent implements OnInit {
     debugger;
     let header="<div><h1>ונתנו ידידים</h1><br/><br/><h2>טבלת "+componentName+"</h2></div>";
     let footer= "<div style='font-weight: bold; background-color: #f7c853 '>סה\"\כ שורות: "+this.lstDataRows.length;
-    this.appProxy.post('GeneratPdf', { headerHtml: header, bodyHtml: this.createTableForPdf(), footerHtml: footer })
+    this.appProxy.post('GeneratPdf', { headerHtml: header, bodyHtml: this.createTable(), footerHtml: footer })
       .then(res => {
         let binaryString = window.atob(res);
         let binaryLen = binaryString.length;

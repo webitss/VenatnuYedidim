@@ -35,7 +35,7 @@ protected lstColumns = [{
   ngOnInit() {
   }
   get baseFileUrl(){
-    return AppProxy.baseUrl+'Files/';
+    return AppProxy.getBaseUrl()+'Files/';
   }
   
 }
