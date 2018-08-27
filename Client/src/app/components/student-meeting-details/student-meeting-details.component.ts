@@ -15,7 +15,6 @@ import { NguiDatetime } from '@ngui/datetime-picker';
   styleUrls: ['./student-meeting-details.component.css']
 })
 export class StudentMeetingDetailsComponent implements OnInit {
-  private sub: any;
   @Output() Meeting = new EventEmitter();
   @Output() NewMeeting = new EventEmitter();
 
@@ -31,6 +30,8 @@ export class StudentMeetingDetailsComponent implements OnInit {
   hours: string;
 
   @ViewChild('task') TaskComponent:TaskComponent;
+  sub: any;
+  iPersonId: number;
 
   close(){
      this.Meeting.emit(null);
@@ -43,8 +44,9 @@ export class StudentMeetingDetailsComponent implements OnInit {
    
     this.meeting.dtMeetingDate = new Date(this.meeting['dtDate']+' '+this.meeting['dtHour']);
     if(this.currentMeeting.iMeetingId == null)
-    this.meeting.iPersonId = 1;
+    this.meeting.iPersonId = this.iPersonId;
 
+    //  this.globalService.getUser()['iUserId']
 
     
 
@@ -76,7 +78,14 @@ export class StudentMeetingDetailsComponent implements OnInit {
   }
 currentMeeting:Meeting;
   constructor(private route: ActivatedRoute, private appProxi: AppProxy) { }
+
   ngOnInit() {
+
+    
+      this.sub = this.route.parent.parent.params.subscribe(params => {
+        this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
+     });
+  
     this.currentMeeting = new Meeting();
    this.currentMeeting = Object.assign({},this.meeting);
    
@@ -98,5 +107,8 @@ currentMeeting:Meeting;
 
   }
 
-
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+ 
 }
