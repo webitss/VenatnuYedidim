@@ -2,6 +2,7 @@
 using Service.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Net.Mail;
 
 namespace Service
 {
@@ -71,6 +72,9 @@ namespace Service
 
         public bool SetTask(Task task, int iUserId)
         {
+
+
+
             return Task.SetTask(task, iUserId);
         }
 
@@ -83,12 +87,12 @@ namespace Service
             return Student.GetStudentList(iUserId);
         }
 
-        public Student GetStudentById( int iUserId)
+        public Student GetStudentById(int iUserId)
         {
-            return Student.GetStudentById( iUserId);
+            return Student.GetStudentById(iUserId);
         }
-        
-        public  bool AddStudentsToAvrech(List<T2Int> studentAndAvrechArr, int iUserId)
+
+        public bool AddStudentsToAvrech(List<T2Int> studentAndAvrechArr, int iUserId)
         {
             return Student.AddStudentsToAvrech(studentAndAvrechArr, iUserId);
         }
@@ -115,7 +119,7 @@ namespace Service
         #region Event
         public bool SetEvent(Event1 oEvent, int iUserId, List<TInt> to)
         {
-            return Event1.SetEvent(oEvent, iUserId,to);
+            return Event1.SetEvent(oEvent, iUserId, to);
         }
 
         public List<Event1> GetEventsList(int iUserId)
@@ -165,7 +169,7 @@ namespace Service
 
         #endregion
 
-      
+
 
         #region SysTableRow
         public List<SysTableRow> GetValues(int iSysTableId)
@@ -173,9 +177,9 @@ namespace Service
 
             return SysTableRow.GetValues(iSysTableId);
         }
-          public bool UpdateValue(SysTableRow sysTableRow)
+        public bool UpdateValue(SysTableRow sysTableRow)
         {
-           return SysTableRow.UpdateValue(sysTableRow);
+            return SysTableRow.UpdateValue(sysTableRow);
         }
         public bool AddValue(SysTableRow sysTableRow)
         {
@@ -233,7 +237,7 @@ namespace Service
 
         public bool EditYeshiva(Yeshivot yeshiva, int iYeshivaId)
         {
-            return Yeshivot.EditYeshiva(yeshiva,iYeshivaId);
+            return Yeshivot.EditYeshiva(yeshiva, iYeshivaId);
         }
 
         public Yeshivot getYeshivaById(int iYeshivaId)
@@ -261,8 +265,8 @@ namespace Service
         {
             return Document.SetDocument(document, nvBase64File);
         }
-       
-        
+
+
         public List<Document> GetDocumentsByItemId(int iItemId)
         {
             return Document.GetDocumentsByItemId(iItemId);
@@ -287,7 +291,7 @@ namespace Service
 
 
         #region Fileshandler
-        
+
         public string GeneratPdf(string headerHtml, string bodyHtml, string footerHtml)
         {
             return Fileshandler.GeneratPdf(headerHtml, bodyHtml, footerHtml);
@@ -295,5 +299,13 @@ namespace Service
 
         #endregion
 
+        #region SendMessagesHandler
+
+        public bool SendEmailOrFax(string from, string to, string subject, string body, List<Attachment> lAttach)
+        {
+            return SendMessagesHandler.SendEmailOrFax(from, to, subject, body, lAttach);
+        }
+
+        #endregion
     }
 }

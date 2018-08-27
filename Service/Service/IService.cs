@@ -2,6 +2,7 @@
 using Service.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Net.Mail;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 
@@ -493,6 +494,19 @@ RequestFormat = WebMessageFormat.Json)]
             ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json)]
         bool SetMeeting(Meeting meeting, int iUserId);
+
+        #endregion
+
+        #region SendMessagesHandler
+
+        [OperationContract]
+        [WebInvoke(
+              Method = "POST",
+              UriTemplate = "SendEmailOrFax",
+              BodyStyle = WebMessageBodyStyle.WrappedRequest,
+              ResponseFormat = WebMessageFormat.Json,
+              RequestFormat = WebMessageFormat.Json)]
+        bool SendEmailOrFax(string from, string to, string subject, string body, List<Attachment> lAttach);
 
         #endregion
     }

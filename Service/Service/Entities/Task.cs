@@ -18,9 +18,7 @@ namespace Service.Entities
         [DataMember]
         public int iTaskType { get; set; }
         [DataMember]
-        public DateTime dtTaskdate { get; set; }
-        [DataMember]
-        public TimeSpan tTaskTime { get; set; }
+        public DateTime dtTaskdatetime{ get; set; }
         [DataMember]
         public string nvComment { get; set; }
 
@@ -31,7 +29,7 @@ namespace Service.Entities
 
         public Task()
         {
-            dtTaskdate = new DateTime();
+            dtTaskdatetime = new DateTime();
         }
 
 

@@ -19,8 +19,9 @@ export class UsersComponent implements OnInit {
   @ViewChild('users') users:any;
 
   ngOnInit() {
-    this.iPersonId = 0;
-    this.appProxy.post("GetUsers", { iPersonId: this.globalService.getUser()['iUserId'] }).then(data => {
+    this.iPersonId =  this.globalService.getUser()['iUserId'];
+    debugger
+    this.appProxy.post("GetUsers", { iPersonId: this.iPersonId}).then(data => {
       this.lstDataRows = data;
 
       this.lstDataRows.forEach(u => {
