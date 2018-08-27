@@ -74,6 +74,8 @@ import { GoogleCity } from './directives/googleCity';
 import { FitElement } from './directives/fit-element';
 import { MediaComponent } from './components/media/media.component';
 import { GlobalService } from './services/global.service';
+import { GaleryComponent } from './components/galery/galery.component';
+
 
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
@@ -148,6 +150,12 @@ import { GlobalService } from './services/global.service';
 
 
     MediaComponent,
+
+
+    GaleryComponent,
+
+
+    
    
 
    
