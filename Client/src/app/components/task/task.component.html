@@ -9,13 +9,18 @@
     <option [value]="item.iSysTableRowId" *ngFor="let item of lst" [selected]="item.iSysTableRowId==user.iPermissionId">{{item.nvValue}}</option>
   </select> -->
   <div class="form-group col-sm-3">
-    <label for="taskDate">תאריך</label>
-    <input type="date" name="taskDate" class="form-control" [(ngModel)]="task.dtTaskdate" />
+    <label for="dtDate">תאריך</label>
+
+    <!-- <input type="date" name="taskDate" class="form-control" [(ngModel)]="task.dtTaskdate" /> -->
+    <input class="form-control" [(ngModel)]="currentTask.dtDate"  ngui-datetime-picker date-only="true" close-on-select="false" id="dtDate" name="dtDate">
+
     <!-- [ngModel]="conversation.dConversationDate| date:'d/M/yy'  -->
   </div>
   <div class="form-group col-sm-3">
     <label for="taskTime">שעה</label>
-    <input type="time" name="taskTime" class="form-control" [(ngModel)]="task.tTaskTime" />
+    <input type="time" class="form-control" id="time" name="taskTime" [(ngModel)]="currentTask.dtHour"   >
+    <!-- (ngModelChange)="task.dtHour = $event" -->
+    <!-- <input type="time" name="taskTime" class="form-control" [(ngModel)]="task.tTaskTime" /> -->
     <!-- [ngModel]="con versation.dtConversationTime| date:'shortTime'" -->
   </div>
   <div class="row col-sm-12">

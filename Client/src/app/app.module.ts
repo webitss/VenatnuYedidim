@@ -20,6 +20,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 //--- services ---
 import { AppProxy } from './services/app.proxy';
 import { SysTableService } from './services/sys-table.service';
+import { GlobalService } from './services/global.service';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
 
@@ -243,7 +244,7 @@ import { MediaComponent } from './components/media/media.component';
 
     ], { useHash: true })
   ],
-  providers: [AppProxy, SysTableService],
+  providers: [AppProxy, SysTableService, GlobalService],
   bootstrap: [AppComponent],
   // entryComponents:[
   //   CardsUnionComponent
