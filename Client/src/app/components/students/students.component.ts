@@ -24,7 +24,7 @@ export class StudentsComponent implements OnInit {
 
     
   
-    this.id = 0;
+    this.id = 1;
 
     this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
       this.studentList = data;
