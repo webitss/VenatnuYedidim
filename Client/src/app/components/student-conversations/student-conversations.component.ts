@@ -77,10 +77,10 @@ export class StudentConversationsComponent implements OnInit {
 
   addConversation() {
     this.conversationSelect = new Conversation();
-    this.conversationSelect.dConversationDate = new Date();
-    this.conversationSelect.dtConversationTime = new Date();
-    this.conversationSelect.dtNextConversationDate = new Date();
-
+    this.conversationSelect.dConversationDate = null;
+    this.conversationSelect.dtConversationTime = null;
+    this.conversationSelect.dtNextConversationDate = null;
+    
   }
   // add(newConver)
   // {
@@ -155,7 +155,7 @@ export class StudentConversationsComponent implements OnInit {
           this.conversationsList.forEach(c => {
             c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
             c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
-            c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleDateString();
+            c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
             c['edit'] = '<div class="edit"></div>';
             c['delete'] = '<div class="delete"></div>';
             c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;

@@ -48,15 +48,18 @@ export class StudentConversationDetailsComponent implements OnInit {
     this.currentConver.dtConversationTime = new Date(this.conversation.dtConversationTime);
     this.currentConver.dtNextConversationDate = new Date(this.conversation.dtNextConversationDate);
     if (this.currentConver.iConversationId == null) {
-      this.currentConver.iPersonId = 7;
+      //this.currentConver.iPersonId = 7;
     }
     this.appProxy.post("SetConversations", { conversation: this.currentConver, iUserId: this.iUserId })
       .then(
         data => {
+           
           if (this.currentConver.iConversationId != null) {
-            this.conversation = new Conversation();
+           this.conversation = new Conversation();
             this.conversation = Object.assign({}, this.currentConver);
           }
+        
+
           this.newConver.emit(this.conversation);
           // this.newConver.push({
           //   iConversationId: this.conversation.iConversationId,
@@ -85,8 +88,14 @@ export class StudentConversationDetailsComponent implements OnInit {
 
     this.TaskComponent.saveTask();
   }
+  
 
-
+reset() {
+   
+        this.currentConver.dConversationDate.setDate(null);
+        this.currentConver.dtConversationTime.setTime(null);
+        this.currentConver.dtNextConversationDate.setDate(null);
+    }
 
 
 
@@ -121,7 +130,7 @@ export class StudentConversationDetailsComponent implements OnInit {
       this.hours = '0' + (this.currentConver.dtNextConversationDate).getHours().toString();
     else
       this.hours = (this.currentConver.dtNextConversationDate).getHours().toString();
-      this.currentConver['nextConversationDate'] = new Date((this.currentConver.dtNextConversationDate).getTime())+this.hours + ':' + this.minutes;
+    this.currentConver['nextConversationDate'] = new Date((this.currentConver.dtNextConversationDate).getTime()) + this.hours + ':' + this.minutes;
     this.currentConver['conversationTime'] = this.hours + ':' + this.minutes;
     //  ngOnDestroy() {
     //    this.sub.unsubscribe();
