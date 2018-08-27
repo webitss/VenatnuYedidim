@@ -42,7 +42,10 @@
 
         <span>הגדרות</span>
       </li>
+      <li [ngClass]="{'appSelect': router.url.indexOf('settings') != -1}" class="nav-item" routerLink='/ShowImage'>
 
+        <span>תדמית</span>
+      </li>
     </ul>
     <!-- </div> -->
     <div class="col-sm-3">
@@ -67,6 +70,8 @@
 </div> -->
   <!-- <input type="file" value="העלה תמונה" (change)="LoadImage($event,saveFile)"/> -->
 </div>
+
+ 
 <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
 
 

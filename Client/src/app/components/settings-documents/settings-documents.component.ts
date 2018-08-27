@@ -34,7 +34,7 @@ export class SettingsDocumentsComponent implements OnInit {
           nvIdentityCard: element.lstObject['nvIdentityCard'],
           nvCategory: element.lstObject['nvCategory'],
           nvDocumentName: element.nvDocumentName,
-          open: '<a href=' + AppProxy.baseUrl + 'Files/' + element.nvDocumentName + ' target="_blank"> פתח מסמך</a>'
+          open: '<a href=' + AppProxy.getBaseUrl()  + 'Files/' + element.nvDocumentName + ' target="_blank"> פתח מסמך</a>'
         });
       });
     }
@@ -43,7 +43,7 @@ export class SettingsDocumentsComponent implements OnInit {
   }
 
   // get staticBaseUrl() {
-  //   return AppProxy.baseUrl;
+  //   return AppProxy.getBaseUrl() ;
   // }
 
 
