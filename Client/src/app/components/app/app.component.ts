@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../classes/user';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-root',
@@ -16,12 +17,12 @@ export class AppComponent implements OnInit {
   protected name: string;
 
   public instance: AppComponent;
-  public userName: string = JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")).nvUserName : "משתמש";
-  constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute) { }
+  public userName: string = this.globalService.getUser() !=  null ?  this.globalService.getUser().nvUserName : "משתמש";
+  constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute, private globalService: GlobalService) { }
 
   ngOnInit() {
     this.instance = this;
-    if (JSON.parse(localStorage.getItem("user")) == null)
+    if (this.globalService.getUser() == null)
 
       //alert(this.route.routeConfig.component.name);
       this.router.navigate(['']);
