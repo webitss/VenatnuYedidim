@@ -13,7 +13,7 @@
 <div class="media-area">
   <ul>
     <li *ngFor="let d of documents" class="media">
-      <app-media [document]="d"></app-media>
+      <app-media [document]="d"></app-media><br>
       <button class="btn btn-circle"(click)="deleteDocument(d.iDocumentId)">מחק</button>
     </li>
   </ul>

@@ -17,9 +17,11 @@ taskTypeList:Array<any>;
 @Output()
 @Input()
 task:Task;
-currentTask:Task;
+currentTask:Task=new Task();
 selectType:string;
 type:Task;
+iuserid:number;
+
 
   constructor(private appProxy: AppProxy ,private sysTableService:SysTableService , private globalService:GlobalService) { }
 
@@ -45,9 +47,6 @@ type:Task;
         // });
         debugger;
 
-        this.currentTask = new Task();
-
-        // if(this.task.iTaskId == 0){
 
         this.currentTask = Object.assign({},this.task);
          this.currentTask['dtDate'] = new Date((this.currentTask.dtTaskdatetime).getTime());
@@ -89,7 +88,9 @@ type:Task;
       alert(this.task);
       alert(this.currentTask);
       // JSON.parse(localStorage.getItem("user")).iPersonId
-      this.appProxy.post('SetTask', { task:this.task,iUserId:this.globalService.getUser['iUserId'] }).then(data => {
+    this.iuserid=this.globalService.getUser()['iUserId'];
+      debugger
+         this.appProxy.post('SetTask', { task:this.task,iUserId:this.iuserid }).then(data => {
         if (data) {
           alert("המשימה נוספה בהצלחה!");
         }
@@ -97,7 +98,6 @@ type:Task;
           alert("error!");
       })
     }
- 
 
   }
 

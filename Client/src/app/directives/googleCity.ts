@@ -2,7 +2,6 @@
 import { Component, OnInit, Input, Output, Directive, ElementRef, EventEmitter, NgZone, } from '@angular/core';
 import { NgModel } from '@angular/forms';
 
-
 declare var google: any;
 @Directive({
 
@@ -26,11 +25,13 @@ export class GoogleCity {
         this.modelValue = this.model;
         var input = this._el;
 
+        
+
         this.autocomplete = new google.maps.places.Autocomplete(input, {});
-        google.maps.event.addListener(this.autocomplete, 'place_changed', () => {
-            var place = this.autocomplete.getPlace();
-            this.zone.run(() => this.invokeEvent(place));
-        });
+        // google.maps.event.addListener(this.autocomplete, 'place_changed', () => {
+        //     var place = this.autocomplete.getPlace();
+        //     this.zone.run(() => this.invokeEvent(place));
+        // });
 
     }
 
