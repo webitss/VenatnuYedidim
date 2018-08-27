@@ -27,7 +27,7 @@
   </div>
 
 
-  <!-- (onSave)="getFromChild($event)" -->
-  <app-vy-multy-select #child *ngIf="!isDetails" [fullList]="sysTableRowList" [titleStr]="title" [inputTitle]="inputTitle" (onSave)="getFromChild($event)" ></app-vy-multy-select>
-
+  <div class="row">
+  <app-vy-multy-select #child *ngIf="!isDetails" [fullList]="sysTableRowList" [titleStr]="title" [inputTitle]="inputTitle" (onSave)="getFromChild($event)" class="col-sm-3"></app-vy-multy-select>
+</div>
 </form>
