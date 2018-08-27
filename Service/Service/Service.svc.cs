@@ -50,12 +50,12 @@ namespace Service
         //    return Meeting.SetMeeting(meeting, iUserId);
         //}
 
-        public bool SetMeeting(Meeting meeting, int iUserId)
+       
+
+        public int SetMeeting(Meeting meeting, int iUserId)
         {
             return Meeting.SetMeeting(meeting, iUserId);
         }
-
-
         //public bool UpdateMeeting(Meeting meeting, int iUserId)
         //{
         //    return Meeting.UpdateMeeting(meeting, iUserId);
@@ -283,17 +283,19 @@ namespace Service
             return Student.GetGraduatesList(iUserId);
         }
 
-        #endregion
-
-
-        #region Fileshandler
         
+
         public string GeneratPdf(string headerHtml, string bodyHtml, string footerHtml)
         {
-            return Fileshandler.GeneratPdf(headerHtml, bodyHtml, footerHtml);
+            throw new NotImplementedException();
         }
 
+      
+
         #endregion
+
+
+
 
     }
 }
