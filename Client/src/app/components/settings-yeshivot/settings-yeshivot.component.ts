@@ -61,7 +61,7 @@ export class SettingsYeshivotComponent implements OnInit {
     this.yeshiva1 = null;
   }
 
-  tableToExcel(){
-    this.yeshivot.tableToExcel();
+  downloadExcel(){
+    this.yeshivot.downloadExcel();
   }
 }

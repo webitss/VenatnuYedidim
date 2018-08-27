@@ -48,7 +48,10 @@ new VyTableColumn('מקום','nvPlace') ];
 
 
   }
-  tableToExcel(){
-    this.events.tableToExcel();
+  downloadExcel(){
+    this.events.downloadExcel();
   }
+  tableToPdf(name:string){
+    this.events.downloadPdf(name,'pdf');
+      }
 }

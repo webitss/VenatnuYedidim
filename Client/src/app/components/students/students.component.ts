@@ -66,8 +66,11 @@ export class StudentsComponent implements OnInit {
   // type: 'html'
 
 
-  tableToExcel(){
+  downloadExcel(){
     debugger;
-    this.students.tableToExcel();
+    this.students.downloadExcel();
   }
+  tableToPdf(name:string){
+    this.students.downloadPdf(name,'pdf');
+      }
 }
