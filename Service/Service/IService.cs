@@ -247,7 +247,7 @@ RequestFormat = WebMessageFormat.Json)]
        BodyStyle = WebMessageBodyStyle.WrappedRequest,
        ResponseFormat = WebMessageFormat.Json,
        RequestFormat = WebMessageFormat.Json)]
-        bool SetMeetig(Meeting meeting, int iUserId);
+        bool SetMeeting(Meeting meeting, int iUserId);
 
         //[WebInvoke(
         //  Method = "POST",
