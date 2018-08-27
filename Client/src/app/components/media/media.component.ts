@@ -19,6 +19,6 @@ export class MediaComponent implements OnInit {
   }
 
   get baseFileUrl(){
-    return AppProxy.baseUrl+'Files/';
+    return AppProxy.getBaseUrl() +'Files/';
   }
 }

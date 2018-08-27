@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HebrewDate } from '../../classes/hebrewDate';
 import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
+import { GlobalService } from '../../services/global.service';
 
 
 @Component({
@@ -14,7 +15,8 @@ import { SysTableRow } from '../../classes/SysTableRow';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router, private globalService:GlobalService) { }
+
 
   @Input() student: Student
 
@@ -123,8 +125,9 @@ export class StudentDetailsComponent implements OnInit {
     this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;
     if (this.paramRout != '0') {
 
-
-      this.appProxy.post("UpdateStudent", { student: this.student, iUserId: 1 }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
+      
+       
+      this.appProxy.post("UpdateStudent", { student: this.student, iUserId:this.globalService.getUser()['iUserId'] }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
     }
     else {
       debugger;
@@ -134,7 +137,7 @@ export class StudentDetailsComponent implements OnInit {
       if (this.isCheckedMother = true) {
         this.student.bDeathMother = true;
       }
-      this.appProxy.post("AddStudent", { student: this.student, iUserId: 3 }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
+      this.appProxy.post("AddStudent", { student: this.student, iUserId:this.globalService.getUser()['iUserId'] }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
     }
   }
 
@@ -142,3 +145,13 @@ export class StudentDetailsComponent implements OnInit {
 
 
 }
+
+
+
+
+
+
+
+
+
+
