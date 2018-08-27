@@ -18,7 +18,7 @@ export class Task {
     {
         this.iTaskId=0;
         // this.iTaskType=0;
-       // this.dtTaskdate = new Date();
+       this.dtTaskdatetime = new Date();
     }
 
 }

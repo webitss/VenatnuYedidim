@@ -41,8 +41,8 @@ export class EventMediaComponent implements OnInit {
     this.loadDocuments();
   }
 
-  deleteMedia(id){
-    this.appProxy.post('DeleteDocument', { iDocumentId: this.id }).then(data => {
+  deleteDocument(id){
+    this.appProxy.post('DeleteDocument', { iDocumentId: id }).then(data => {
       alert("success"),err=>alert("error")
     }
       , err => alert(err));

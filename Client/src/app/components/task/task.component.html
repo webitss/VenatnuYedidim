@@ -9,10 +9,10 @@
     <option [value]="item.iSysTableRowId" *ngFor="let item of lst" [selected]="item.iSysTableRowId==user.iPermissionId">{{item.nvValue}}</option>
   </select> -->
   <div class="form-group col-sm-3">
-    <label for="taskDate">תאריך</label>
+    <label for="dtDate">תאריך</label>
 
     <!-- <input type="date" name="taskDate" class="form-control" [(ngModel)]="task.dtTaskdate" /> -->
-    <input class="form-control" [(ngModel)]="currentTask.dtDate"  ngui-datetime-picker date-only="true" close-on-select="false" id="dtDate" name="taskDate">
+    <input class="form-control" [(ngModel)]="currentTask.dtDate"  ngui-datetime-picker date-only="true" close-on-select="false" id="dtDate" name="dtDate">
 
     <!-- [ngModel]="conversation.dConversationDate| date:'d/M/yy'  -->
   </div>
