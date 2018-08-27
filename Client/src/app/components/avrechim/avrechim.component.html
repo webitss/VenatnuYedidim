@@ -2,8 +2,8 @@
     <div class="col-sm-4 component-name">אברכים</div>
     <div class="actions col-sm-8">
 
-        <button class="btn btn-small excel" (click)="tableToExcel()" value="Export to Excel"></button>
-        <button class="btn btn-small" (click)="tableToPdf()">pdf</button>
+        <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
+        <button class="btn btn-small" (click)="tableToPdf('אברכים')">pdf</button>
         <button class="btn btn-circle1 btn-orange"> שליחת מייל</button>
         <button class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">אברך חדש</button>
     </div>
@@ -11,34 +11,5 @@
 
 <app-vy-table #avrechim [lstColumns]="lstColumns" [lstDataRows]="avrechimList" (clickCell)="editAvrech($event)"></app-vy-table>
 
-<!-- <table id="avrechim" style="width: 100%; background-color:#f9e4b1; height: 500px;">
-<thead>
-    <tr style="text-align: initial">
-        <th>חעלכל</th>
-        <th>חעלכל</th>
-        <th>חעלכל</th>
-        <th>חעלכל</th>
-    </tr>
-</thead>
-<tbody>
-    <tr style="text-align: initial;">
-        <td>ףעגכלעלגךלצעלך</td>
-        <td>ףעגכלעלגךלצעלך</td>
-        <td>ףעגכלעלגךלצעלך</td>
-        <td>ףעגכלעלגךלצעלך</td>
-    </tr>
-    <tr style="text-align: initial">
-        <td>ףעגכלעלגךלצעלך</td>
-        <td>ףעגכלעלגךלצעלך</td>
-        <td>ףעגכלעלגךלצעלך</td>
-        <td>ףעגכלעלגךלצעלך</td>
-    </tr>
-    <tr style="text-align: initial">
-        <td>ףעגכלעלגךלצעלך</td>
-        <td>ףעגכלעלגךלצעלך</td>
-        <td>ףעגכלעלגךלצעלך</td>
-        <td>ףעגכלעלגךלצעלך</td>
-    </tr>
-</tbody>
-</table> -->
+
 

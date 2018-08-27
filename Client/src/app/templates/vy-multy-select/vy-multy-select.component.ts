@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
 import { forEach } from '@angular/router/src/utils/collection';
 //import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @Component({
@@ -8,13 +8,13 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class VyMultySelectComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eRef: ElementRef) { }
   @Input()
   @Output()
   fullList: Array<any>;
   flag = false;
   checkboxValueSelectAll: boolean;
-
+  clicked=false;
 
   id: string;
 
@@ -33,6 +33,7 @@ export class VyMultySelectComponent implements OnInit {
 
 
   openOrClose() {
+    
   if (this.flag == false) {
       // if(this.selectedList!=null)
       this.selectedList.splice(0, this.selectedList.length);
@@ -52,6 +53,17 @@ save(){
     }
   });
 }
+
+@HostListener('document:click', ['$event'])
+  clickout(event) {
+    if(this.eRef.nativeElement.contains(event.target)) {
+      //alert("clicked inside");
+    } else {
+      this.flag=false;
+      this.clicked=false;
+    }
+  }
+
 
   selectAll() {
     if (this.checkboxValueSelectAll == true)

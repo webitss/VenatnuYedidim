@@ -113,7 +113,7 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         bool UpdateStudent(Student student, int iUserId);
 
-
+       
 
         [OperationContract]
         [WebInvoke(
@@ -124,6 +124,14 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         bool UpdateStatusStudent(int iPersonId, int iStatusType);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "UnionCards",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool UnionCards(Student student, int iStudent2);
         #endregion Student
 
         #region Avrech
@@ -243,11 +251,15 @@ RequestFormat = WebMessageFormat.Json)]
 
         [WebInvoke(
        Method = "POST",
-       UriTemplate = "SetTask",
+       UriTemplate = "SetMeeting",
        BodyStyle = WebMessageBodyStyle.WrappedRequest,
        ResponseFormat = WebMessageFormat.Json,
        RequestFormat = WebMessageFormat.Json)]
-        bool SetTask(Task task, int iUserId);
+<<<<<<< HEAD
+        int SetMeeting(Meeting meeting, int iUserId);
+=======
+        bool SetMeeting(Meeting meeting, int iUserId);
+>>>>>>> e6ff2be138d2555f8b80b383542f896b49f240af
 
         //[WebInvoke(
         //  Method = "POST",
@@ -489,11 +501,14 @@ RequestFormat = WebMessageFormat.Json)]
         #region Task
         [WebInvoke(
             Method = "POST",
-            UriTemplate = "SetMeeting",
+            UriTemplate = "SetTask",
             BodyStyle = WebMessageBodyStyle.WrappedRequest,
             ResponseFormat = WebMessageFormat.Json,
             RequestFormat = WebMessageFormat.Json)]
-        bool SetMeeting(Meeting meeting, int iUserId);
+<<<<<<< HEAD
+        bool SetTask(Task task, int iUserId);
+=======
+             bool SetTask(Task task, int iUserId);
 
         #endregion
 
@@ -507,6 +522,7 @@ RequestFormat = WebMessageFormat.Json)]
               ResponseFormat = WebMessageFormat.Json,
               RequestFormat = WebMessageFormat.Json)]
         bool SendEmailOrFax(string from, string to, string subject, string body, List<Attachment> lAttach);
+>>>>>>> e6ff2be138d2555f8b80b383542f896b49f240af
 
         #endregion
     }

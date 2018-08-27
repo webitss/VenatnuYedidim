@@ -19,7 +19,7 @@
 
       <div class="form-group">
         <label for="nvMeetingType">סוג פגישה</label>
-        <select [(ngModel)]="meeting.iMeetingType">
+        <select [(ngModel)]="currentMeeting.iMeetingType">
           <option *ngFor='let s of sysTableRowList' [value]="s.iSysTableRowId">
             {{s.nvValue}}
           </option>

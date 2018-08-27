@@ -23,8 +23,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.instance = this;
     if (this.globalService.getUser() == null)
-
-      //alert(this.route.routeConfig.component.name);
       this.router.navigate(['']);
 
     // this.appProxy.post('Login', { nvUserName: 'מערכת', nvPassword: '1234' })

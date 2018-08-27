@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppProxy } from '../../services/app.proxy';
 
 @Component({
   selector: 'app-show-image',
@@ -8,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class ShowImageComponent implements OnInit {
 
   constructor() { }
-protected name:string="ונתנו ידידים";
-protected listImage:object={};
+protected titaieName:string="ונתנו ידידים";
+
+protected divModal:boolean;
+
+protected listImage:string[]=["Background_Cliffhouse.jpg","Background_ForwardDirection_DeskScale.jpg","Background_ForwardDirection_RoomScale.jpg",
+"Background_RoomSetupDisambig.jpg","Background_RoomSetupDisambig_DeskScale.jpg","Background_RoomTracing_02.jpg"];
+protected password:string;
+protected name:string
 protected lstColumns = [{
  
   title: 'ערך',
@@ -27,5 +34,8 @@ protected lstColumns = [{
 ]
   ngOnInit() {
   }
-
+  get baseFileUrl(){
+    return AppProxy.getBaseUrl()+'Files/';
+  }
+  
 }
