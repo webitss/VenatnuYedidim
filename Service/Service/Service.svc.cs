@@ -51,12 +51,12 @@ namespace Service
         //    return Meeting.SetMeeting(meeting, iUserId);
         //}
 
-       
-
         public int SetMeeting(Meeting meeting, int iUserId)
         {
             return Meeting.SetMeeting(meeting, iUserId);
         }
+
+
         //public bool UpdateMeeting(Meeting meeting, int iUserId)
         //{
         //    return Meeting.UpdateMeeting(meeting, iUserId);
@@ -72,7 +72,7 @@ namespace Service
 
         public bool SetTask(Task task, int iUserId)
         {
-             return Task.SetTask(task, iUserId);
+            return Task.SetTask(task, iUserId);
         }
 
         #endregion
@@ -113,9 +113,9 @@ namespace Service
 
         public bool UnionCards(Student student, int iStudent2)
         {
-            return Student.UnionCards(student,iStudent2);
+            return Student.UnionCards(student, iStudent2);
+        }        
 
-        }
         #endregion
 
 
@@ -290,29 +290,18 @@ namespace Service
             return Student.GetGraduatesList(iUserId);
         }
 
-<<<<<<< HEAD
-        
-=======
         #endregion
 
 
         #region Fileshandler
->>>>>>> e6ff2be138d2555f8b80b383542f896b49f240af
 
         public string GeneratPdf(string headerHtml, string bodyHtml, string footerHtml)
         {
-            throw new NotImplementedException();
+            return Fileshandler.GeneratPdf(headerHtml, bodyHtml, footerHtml);
         }
-
-      
 
         #endregion
 
-<<<<<<< HEAD
-
-
-
-=======
         #region SendMessagesHandler
 
         public bool SendEmailOrFax(string from, string to, string subject, string body, List<Attachment> lAttach)
@@ -321,6 +310,5 @@ namespace Service
         }
 
         #endregion
->>>>>>> e6ff2be138d2555f8b80b383542f896b49f240af
     }
 }
