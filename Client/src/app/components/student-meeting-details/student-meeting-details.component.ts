@@ -46,6 +46,7 @@ export class StudentMeetingDetailsComponent implements OnInit {
     if(this.currentMeeting.iMeetingId == null)
     this.meeting.iPersonId = this.iPersonId;
 
+    //  this.globalService.getUser()['iUserId']
 
     
 
