@@ -1,16 +1,16 @@
-{{document.nvDocumentName}}
+<!-- {{document.nvDocumentName}} -->
 
 
 <div #condiv>
-  <img *ngIf="document.nvDocumentType && document.nvDocumentType.indexOf('image') != -1" [src]="baseFileUrl + document.nvDocumentName" fit-element
-     />
+  <img *ngIf="document.nvDocumentType && document.nvDocumentType.indexOf('image') != -1" [src]="baseFileUrl + document.nvDocumentName"
+  />
 
-  <audio *ngIf="document.nvDocumentType && document.nvDocumentType.indexOf('audio') != -1" controls fit-element poster="assets/images/audio-poster.gif">
+  <audio *ngIf="document.nvDocumentType && document.nvDocumentType.indexOf('audio') != -1" controls poster="assets/images/audio-poster.gif">
     <source [src]="baseFileUrl + document.nvDocumentName" [type]="document.nvDocumentType">
   </audio>
 
   <video *ngIf="document.nvDocumentType && document.nvDocumentType.indexOf('video') != -1" controls
-    fit-element >
+   >
     <source [src]="baseFileUrl + document.nvDocumentName" [type]="document.nvDocumentType">
   </video>
 

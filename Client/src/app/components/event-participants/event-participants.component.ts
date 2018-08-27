@@ -60,7 +60,7 @@ export class EventParticipantsComponent implements OnInit {
 
 
         });
-        alert("שגיאה בגישה לשרת");
+        alert("x");
       })
     });
 

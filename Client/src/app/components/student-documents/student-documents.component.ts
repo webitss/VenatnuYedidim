@@ -44,7 +44,7 @@ export class StudentDocumentsComponent implements OnInit {
           dtCreatedate: element.dtCreatedate.toLocaleDateString(),
           nvDocumentName: element.nvDocumentName,
           edit: '<div class="edit"></div>',
-          open: '<a href=' + AppProxy.baseUrl + 'Files/' + element.nvDocumentName + ' target="_blank"> פתח מסמך</a>',
+          open: '<a href=' + AppProxy.getBaseUrl() + 'Files/' + element.nvDocumentName + ' target="_blank"> פתח מסמך</a>',
           iDocumentId: element.iDocumentId
         });
       });
@@ -53,7 +53,7 @@ export class StudentDocumentsComponent implements OnInit {
 
   }
   get staticBaseUrl() {
-    return AppProxy.baseUrl;
+    return AppProxy.getBaseUrl() ;
   }
   addDocument() {
     this.document = new Document();
