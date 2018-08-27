@@ -4,9 +4,10 @@ import { Time } from "@angular/common";
 export class Task {
     public iTaskId: number;
     public iTaskType: number;
-    public dtTaskdate: Date;
-    public tTaskTime:Time;
+    public dtTaskdatetime: Date;
+    // public tTaskTime:Time;
     public nvComment:string;
+    public iPersonId:number;
     // public iCreatedByUserId: number;
     // public dtCreatedate: Date;
     // public iLastModifyUserId: number;
@@ -15,9 +16,9 @@ export class Task {
     
     public constructor() 
     {
-        this.iTaskId=0;
+       // this.iTaskId=0;
         // this.iTaskType=0;
-       // this.dtTaskdate = new Date();
+       this.dtTaskdatetime = new Date();
     }
 
 }

@@ -18,11 +18,11 @@ namespace Service.Entities
         [DataMember]
         public int iTaskType { get; set; }
         [DataMember]
-        public DateTime dtTaskdate { get; set; }
-        [DataMember]
-        public TimeSpan tTaskTime { get; set; }
+        public DateTime dtTaskdatetime{ get; set; }
         [DataMember]
         public string nvComment { get; set; }
+        [DataMember]
+        public string iPersonId { get; set; }
 
 
         #endregion
@@ -31,7 +31,7 @@ namespace Service.Entities
 
         public Task()
         {
-            dtTaskdate = new DateTime();
+            dtTaskdatetime = new DateTime();
         }
 
 
@@ -41,10 +41,9 @@ namespace Service.Entities
         {
             try
             {
-
                 List<SqlParameter> parameters = ObjectGenerator<Task>.GetSqlParametersFromObject(task);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
-                SqlDataAccess.ExecuteDatasetSP("TTask_UPD/INS", parameters);
+                SqlDataAccess.ExecuteDatasetSP("TTask_INS/UPD", parameters);
                 return true;
             }
             catch (Exception ex)

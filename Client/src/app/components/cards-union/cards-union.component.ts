@@ -15,6 +15,7 @@ student2:Student;
 student:Student=new Student();
 model:number;
 
+
   studentList:Student[];
   students:boolean=false;
 
@@ -23,15 +24,17 @@ model:number;
   constructor(private activatedRoute: ActivatedRoute, private appProxy:AppProxy) { }
 
   ngOnInit() {
+    this.student.dtAddStudentDate=null;
+    this.student.dtBirthdate=null;
+
    this.activatedRoute.parent.params.subscribe(params => {
       this.id = params['iPersonId'];
     });
-
     this.appProxy.post('GetAvrechStudents', { iPersonId: 1 }).then(
       data => 
       {
         this.studentList = data;
-
+debugger;
       }
       , err => alert(err));
   }
@@ -49,9 +52,31 @@ model:number;
     });
 
    }
-
+public studentValues;
+public student1Values;
+public  aa;
    unionOk()
    {
-     debugger;
-   }
+
+for(var f in this.student)
+{
+ if(this.student[f]==null)
+ this.student[f]=this.student1[f];
+}
+
+ this.appProxy.post('UnionCards', { student:this.student,iStudent2:this.student2.iPersonId }).then(
+      data => 
+      {
+       alert("האיחוד התבצע בהצלחה!")
+      }
+      , err => alert("שגיאה באיחוד הכרטיסים"));   
+}
+
+checkDisabled(field)
+{
+if(this.student1[field]==this.student2[field])
+return true;
+else
+return false;
+}
 }

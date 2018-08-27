@@ -3,36 +3,37 @@ import { Person } from "./person";
 export class Student implements Person {
 
 
-    public iPersonId: number;
-    public nvFirstName: string;
-    public nvLastName: string;
-    public nvIdentityCard: string;
-    public nvPhone: string;
-    public nvMobile: string;
-    public nvEmail: string;
-    public nvAddress: string;
-    public nvCity: string;
-    public nvStatus: string;
-    public nvBirthdate: string;
-    public dtBirthdate: Date;
+    public iPersonId: number=null;
+    public nvFirstName: string=null;
+    public nvLastName: string=null;
+    public nvIdentityCard: string=null;
+    public nvPhone: string=null;
+    public nvMobile: string=null;
+    public nvEmail: string=null;
+    public nvAddress: string=null;
+    public nvCity: string=null;
+    public nvStatus: string=null;
+    public nvBirthdate: string=null;
+    public dtBirthdate: Date= new Date();
 
-    public iStudentId: number;
-    public nvFatherDeathDate: string;
-    public bDeathFather: boolean;
-    public nvMotherDeathDate: string;
-    public bDeathMother: Boolean;
-    public iCauseOfDeathFather:number;
-    public iCauseOfDeathMother:number;
-    public nvImgStudent: string
-    public nvYeshivaName: string
-    public nvYeshivaStreet: string
-    public nvYeshivaCity: string
-    public dtAddStudentDate: Date;
-    public nvComment: string;
+    public iStudentId: number=null;
+    public nvFatherDeathDate: string=null;
+    public bDeathFather: boolean=false;
+    public nvMotherDeathDate: string=null;
+    public bDeathMother: Boolean=null;
+    public iCauseOfDeathFather:number=null;
+    public iCauseOfDeathMother:number=null;
+    public nvImgStudent: string=null;
+    public nvYeshivaName: string=null;
+    public nvYeshivaStreet: string=null;
+    public nvYeshivaCity: string=null;
+    public dtAddStudentDate: Date= new Date();
+    public nvComment: string=null;
 
     constructor() {
-        this.dtBirthdate = new Date();
-        this.dtAddStudentDate= new Date();
+       
     }
 
 }
+
+//AIzaSyDmcJWztCYo2xInukOD2bnFp-lPK-IFuCA 

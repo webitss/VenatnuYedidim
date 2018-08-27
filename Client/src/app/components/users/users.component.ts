@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { SysTableService } from '../../services/sys-table.service';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-users',
@@ -14,12 +15,13 @@ import { SysTableService } from '../../services/sys-table.service';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService) { }
+  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService, private globalService: GlobalService) { }
   @ViewChild('users') users:any;
 
   ngOnInit() {
-    this.iPersonId = 0;
-    this.appProxy.post("GetUsers", { iPersonId: JSON.parse(localStorage.getItem("user")).iPersonId }).then(data => {
+    this.iPersonId =  this.globalService.getUser()['iUserId'];
+    debugger
+    this.appProxy.post("GetUsers", { iPersonId: this.iPersonId}).then(data => {
       this.lstDataRows = data;
 
       this.lstDataRows.forEach(u => {

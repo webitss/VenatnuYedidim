@@ -5,6 +5,7 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { Router, ActivatedRoute } from '@angular/router';
 // import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CardsUnionComponent } from '../cards-union/cards-union.component';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-students',
@@ -14,7 +15,7 @@ import { CardsUnionComponent } from '../cards-union/cards-union.component';
 export class StudentsComponent implements OnInit {
   flag:boolean;
 
-  constructor(private appProxy: AppProxy, private router: Router,private route: ActivatedRoute ) { }
+  constructor(private appProxy: AppProxy, private router: Router,private route: ActivatedRoute,private globalService:GlobalService ) { }
   param:any;
   id: number;
   studentList: Student[];
@@ -24,7 +25,7 @@ export class StudentsComponent implements OnInit {
 
     
   
-    this.id = 0;
+    this.id = this.globalService.getUser()['iUserId'];
 
     this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
       this.studentList = data;
