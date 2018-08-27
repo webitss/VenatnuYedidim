@@ -5,6 +5,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from "@angular/http";
 import { RouterModule, Route } from '@angular/router';
 import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
+// import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 //import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
@@ -69,11 +70,11 @@ import { LogInComponent } from './components/log-in/log-in.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
 import { ShowImageComponent } from './components/show-image/show-image.component';
 import { SafeUrl } from './directives/safe-url';
-// import { GoogleCity } from './directives/googleCity';
+import { GoogleCity } from './directives/googleCity';
 import { FitElement } from './directives/fit-element';
 import { MediaComponent } from './components/media/media.component';
 import { GlobalService } from './services/global.service';
-//import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
@@ -88,7 +89,7 @@ import { GlobalService } from './services/global.service';
     FilterPipe,
 
     //directives
-    // GoogleCity,
+    GoogleCity,
     SafeUrl,    
     FitElement,
 
