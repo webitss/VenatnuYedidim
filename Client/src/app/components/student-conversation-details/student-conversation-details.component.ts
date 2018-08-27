@@ -14,7 +14,7 @@ import { GlobalService } from '../../services/global.service';
 })
 export class StudentConversationDetailsComponent implements OnInit {
   private sub: any;
-  protected iUserId:number;
+  protected iUserId: number;
   @Output()
   Conversation = new EventEmitter();
   typeTask: Task;
@@ -36,7 +36,7 @@ export class StudentConversationDetailsComponent implements OnInit {
 
   protected iPersonId: number = 1;
 
-  constructor(private route: ActivatedRoute, private appProxy: AppProxy,private globalService:GlobalService) { }
+  constructor(private route: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService) { }
 
   cancel() {
     this.Conversation.emit(null);
@@ -53,12 +53,11 @@ export class StudentConversationDetailsComponent implements OnInit {
     this.appProxy.post("SetConversations", { conversation: this.currentConver, iUserId: this.iUserId })
       .then(
         data => {
-          if (this.currentConver.iConversationId != null)
-           {
+          if (this.currentConver.iConversationId != null) {
             this.conversation = new Conversation();
             this.conversation = Object.assign({}, this.currentConver);
           }
-          this.newConver.emit(null);
+          this.newConver.emit(this.conversation);
           // this.newConver.push({
           //   iConversationId: this.conversation.iConversationId,
           //   iPersonId: this.conversation.iPersonId,
@@ -92,7 +91,7 @@ export class StudentConversationDetailsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.iUserId=this.globalService.getUser()['iUserId'];
+    this.iUserId = this.globalService.getUser()['iUserId'];
     this.currentConver = new Conversation();
     this.currentConver = Object.assign({}, this.conversation);
     // this.sub=this.route.params.subscribe(params=>{
@@ -100,7 +99,7 @@ export class StudentConversationDetailsComponent implements OnInit {
     // });
 
     this.conversation['conversationDate'] = new Date((this.currentConver.dConversationDate).getTime());
-    this.currentConver['dtNextConversationDate'] = new Date((this.currentConver.dtNextConversationDate).getTime());
+
     //this.currentConver['dtHour'] = new Date((this.currentConver.dtConversationTime).getHours()) + ':'+new Date((this.currentConver.dtConversationTime).getMinutes());
     if ((this.currentConver.dtConversationTime).getMinutes() < 10)
       this.minutes = '0' + (this.currentConver.dtConversationTime).getMinutes().toString();
@@ -112,7 +111,17 @@ export class StudentConversationDetailsComponent implements OnInit {
     else
       this.hours = (this.currentConver.dtConversationTime).getHours().toString();
 
+    //this.currentConver['nextConversationDate'] = new Date((this.currentConver.dtNextConversationDate).getTime());
+    if ((this.currentConver.dtNextConversationDate).getMinutes() < 10)
+      this.minutes = '0' + (this.currentConver.dtNextConversationDate).getMinutes().toString();
+    else
+      this.minutes = (this.currentConver.dtNextConversationDate).getMinutes().toString();
 
+    if ((this.currentConver.dtNextConversationDate).getHours() < 10)
+      this.hours = '0' + (this.currentConver.dtNextConversationDate).getHours().toString();
+    else
+      this.hours = (this.currentConver.dtNextConversationDate).getHours().toString();
+      this.currentConver['nextConversationDate'] = new Date((this.currentConver.dtNextConversationDate).getTime())+this.hours + ':' + this.minutes;
     this.currentConver['conversationTime'] = this.hours + ':' + this.minutes;
     //  ngOnDestroy() {
     //    this.sub.unsubscribe();

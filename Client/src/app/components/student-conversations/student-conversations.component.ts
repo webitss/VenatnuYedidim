@@ -141,7 +141,7 @@ export class StudentConversationsComponent implements OnInit {
     this.iUserId = this.globalService.getUser()['iUserId'];
     this.selecList();
   }
-  saveNewConver() {
+  saveNewConver(event) {
     //debugger;
     //this.conversationsList.push(event);
     this.selecList();
