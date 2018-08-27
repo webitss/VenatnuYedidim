@@ -113,6 +113,12 @@ namespace Service
         {
             return Student.UpdateStatusStudent(iPersonId, iStatusType);
         }
+
+        public bool UnionCards(Student student, int iStudent2)
+        {
+            return Student.UnionCards(student,iStudent2);
+
+        }
         #endregion
 
 

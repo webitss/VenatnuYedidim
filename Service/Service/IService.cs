@@ -113,7 +113,7 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         bool UpdateStudent(Student student, int iUserId);
 
-
+       
 
         [OperationContract]
         [WebInvoke(
@@ -124,6 +124,14 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         bool UpdateStatusStudent(int iPersonId, int iStatusType);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "UnionCards",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool UnionCards(Student student, int iStudent2);
         #endregion Student
 
         #region Avrech
