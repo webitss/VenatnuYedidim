@@ -8,10 +8,9 @@ export class AppProxy {
   public static baseQAUrl = 'http://qa.webit-track.com/VenatnuYedidim/Service/';
   public static getBaseUrl() {
     if (location.host == 'qa.webit-track.com')
-      return AppProxy.baseDevUrl;
-    else
       return AppProxy.baseQAUrl;
-
+    else
+      return AppProxy.baseDevUrl;
   }
 
   constructor(private http: HttpClient) { }
