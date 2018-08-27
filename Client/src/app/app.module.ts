@@ -163,8 +163,9 @@ import { MediaComponent } from './components/media/media.component';
     NguiDatetimePickerModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
-      // { path: "", component: ShowImageComponent },
-      { path: "", component: LogInComponent },
+    { path: "ShowImage", component: ShowImageComponent },
+
+     { path: "", component: LogInComponent },
       { path: "students", component: StudentsComponent },
       {
 
