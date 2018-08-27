@@ -24,6 +24,7 @@
     "@ngui/datetime-picker": "^0.16.2",
     "angular-swfobject": "^1.2.1",
     "angular2-google-chart": "^2.3.0",
+    "angular2-google-map-auto-complete": "^2.0.9",
     "angular5-toaster": "^1.0.2",
     "bootstrap": "^4.1.1",
     "bootstrap-rtl": "^3.3.4",

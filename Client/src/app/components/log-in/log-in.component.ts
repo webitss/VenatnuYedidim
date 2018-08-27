@@ -3,6 +3,7 @@ import { AppProxy } from '../../services/app.proxy';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app/app.component';
 import { GlobalService } from '../../services/global.service';
+// import {GoogleCity} from '../../directives/googleCity';
 
 @Component({
   selector: 'app-log-in',
