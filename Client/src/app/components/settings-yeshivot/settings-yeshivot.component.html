@@ -11,8 +11,13 @@
 <div *ngIf="iYeshivaId != null">
 
     <app-setting-yeshiva #yeshivot [sysTableList]="sysTableList" [iYeshivaId]="iYeshivaId" (closeYeshiva)="close()"></app-setting-yeshiva>
-    
+
 </div>
 
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="deleteYeshiva($event)"></app-vy-table>
- 
+<div *ngIf="iYeshivaId"> 
+
+    <app-setting-yeshiva-delete #yeshivot [iYeshivaId]="iYeshivaId" (closeYeshiva)="close()"></app-setting-yeshiva-delete>
+
+</div>
+
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="setYeshiva($event)"></app-vy-table>

@@ -65,7 +65,29 @@ namespace Service.Entities
             }
 
         }
+        //public static List<Document> GetImage()
+        //{
+        //    {
+        //        try
+        //        {
+        //            List<Document> documents = new List<Document>();
+        //            DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TDocuments_OfIMAGE_SLCT").Tables[0].Rows;
+        //            foreach (DataRow dr in drc)
+        //            {
+        //                documents.Add(ObjectGenerator<Document>.GeneratFromDataRow(dr));
+                       
+        //            }
+        //            return documents;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Log.LogError("GetDocuments / TDocuments_OfStudents_SLCT", ", ex " + ex);
+        //            return null;
+        //        }
 
+        //    }
+
+        //}
         //public static bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment)
         //{
         //    try

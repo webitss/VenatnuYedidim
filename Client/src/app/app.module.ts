@@ -7,7 +7,8 @@ import { RouterModule, Route } from '@angular/router';
 import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 // import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 //import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
+import { NgxGalleryModule } from 'ngx-gallery';
+import { NgxImageGalleryModule } from 'ngx-image-gallery';
 
 //--- templates ---
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
@@ -59,6 +60,7 @@ import { SettingsDocumentsComponent } from './components/settings-documents/sett
 import { SettingsFrontendComponent } from './components/settings-frontend/settings-frontend.component';
 
 import { SettingYeshivaComponent } from './components/setting-yeshiva/setting-yeshiva.component';
+import {SettingYeshivaDeleteComponent} from './components/setting-yeshiva-delete/setting-yeshiva-delete.component';
 
 // import { inject } from '@angular/core/testing';
 // import { injectElementRef } from '@angular/core/src/render3';
@@ -75,6 +77,7 @@ import { FitElement } from './directives/fit-element';
 import { MediaComponent } from './components/media/media.component';
 import { GlobalService } from './services/global.service';
 import { GaleryComponent } from './components/galery/galery.component';
+
 
 
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -144,7 +147,7 @@ import { GaleryComponent } from './components/galery/galery.component';
     TaskComponent,
 
     LogInComponent,
-
+    
 
     ShowImageComponent,
 
@@ -153,6 +156,9 @@ import { GaleryComponent } from './components/galery/galery.component';
 
 
     GaleryComponent,
+
+
+    SettingYeshivaDeleteComponent,
 
 
     
@@ -168,11 +174,13 @@ import { GaleryComponent } from './components/galery/galery.component';
   imports: [
     // NgbModule.forRoot(),
     // Ng2SearchPipeModule,
+    NgxGalleryModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     HttpClientModule,
     NguiDatetimePickerModule,
+    NgxImageGalleryModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
     { path: "ShowImage", component: ShowImageComponent },
@@ -245,7 +253,8 @@ import { GaleryComponent } from './components/galery/galery.component';
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "setting-yeshiva/:EditNewYeshiva", component: SettingYeshivaComponent }
+              { path: "setting-yeshiva/:EditNewYeshiva", component: SettingYeshivaComponent },
+              {path:"setting-yeshiva/setting-yeshiva-delete",component:SettingYeshivaDeleteComponent}
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },

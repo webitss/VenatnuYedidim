@@ -57,6 +57,7 @@ export class StudentConversationDetailsComponent implements OnInit {
           if (this.currentConver.iConversationId != null) {
             this.conversation = new Conversation();
             this.conversation = Object.assign({}, this.currentConver);
+
           }
 
 
@@ -85,7 +86,7 @@ export class StudentConversationDetailsComponent implements OnInit {
           else
             alert("no good");
         });
-
+//איפה למקם?
     this.TaskComponent.saveTask();
   }
 
