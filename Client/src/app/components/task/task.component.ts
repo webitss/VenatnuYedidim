@@ -97,14 +97,14 @@ export class TaskComponent implements OnInit {
       if (this.router.url == "/students/student/" + this.personId + "/student-meetings")//תלמידים ->פגישות
       {debugger;
         this.task.nvComment = " פגישה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
-        this.task.iPersonId = this.globalService.getUser()['user'].iUserId;//משתמש
+        this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
 
       }
       else
         if (this.router.url == "/students/student/" + this.personId + "/student-conversations")//תלמידים ->שיחות
         {debugger;
           this.task.nvComment = " שיחה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
-          this.task.iPersonId = this.globalService.getUser()['user'].iUserId;//משתמש
+          this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
         }
       }
       else
