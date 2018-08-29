@@ -3,6 +3,8 @@ import { Task } from "../../classes/task"
 import { SysTableService } from '../../services/sys-table.service';
 import { AppProxy } from '../../services/app.proxy';
 import { GlobalService } from '../../services/global.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Student } from '../../classes/student';
 
 @Component({
   selector: 'app-task',
@@ -23,12 +25,17 @@ export class TaskComponent implements OnInit {
   iuserid: number;
 
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private router: Router, private route: ActivatedRoute) { }
 
   minutes: string;
   hours: string;
 
+  personId: number;
+  student: Student;
+
   ngOnInit() {
+
+
     // this.appProxy.post("GetTask", { iPersonId: 1 }).then(
     //   data => {
     //     //alert("good");
@@ -45,7 +52,6 @@ export class TaskComponent implements OnInit {
       //     m['edit'] ='<div class="edit"></div>';
       //     m['nvMeetingType'] = this.sysTableRowList.filter(s=> s.iSysTableRowId == m.iMeetingType)[0].nvValue;
       // });
-      debugger;
 
 
       this.currentTask = Object.assign({}, this.task);
@@ -67,16 +73,51 @@ export class TaskComponent implements OnInit {
       // }
     });
     this.task = new Task();
-    this.task.nvComment = " עם התלמיד: "
 
+    this.route.parent.params.subscribe(params => {
+      this.personId = +params['iPersonId'];
+    });
+
+    if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
+    {
+      this.task.nvComment = " עם התלמיד: "
+      this.task.iPersonId = this.personId;//מי שלחצו עליו
+    }
+    else {
+      debugger;
+      alert(this.personId);
+      this.appProxy.post('GetStudentById', { iUserId:this.personId }).then(data => {
+        if (data) {
+          debugger;
+          // alert("personid"+this.personId);
+          // alert("jjjה!");
+          this.student = data;
+          // alert(this.student.nvLastName);
+        
+      if (this.router.url == "/students/student/" + this.personId + "/student-meetings")//תלמידים ->פגישות
+      {debugger;
+        this.task.nvComment = " פגישה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
+        this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
+
+      }
+      else
+        if (this.router.url == "/students/student/" + this.personId + "/student-conversations")//תלמידים ->שיחות
+        {debugger;
+          this.task.nvComment = " שיחה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
+          this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
+        }
+      }
+      else
+        alert("error!");
+    })
+    }
   }
   // );
 
   saveTask() {
 
     this.task.dtTaskdatetime = new Date(this.currentTask['dtDate'] + ' ' + this.currentTask['dtHour']);
-//    if (this.currentTask.iTaskId == 0)
-      this.task.iPersonId = 1;
+    //    if (this.currentTask.iTaskId == 0)
     debugger
     this.appProxy.post('SetTask', { task: this.task, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
       if (data) {

@@ -12,22 +12,37 @@ import { Student } from '../../classes/student';
 export class StudentComponent implements OnInit, OnDestroy {
   private sub: any;
   flag: number;
-  protected currentComponent:any;
-  
+  protected currentComponent: any;
+  student: Student;
+  id: number;
 
-
-  constructor(private route: ActivatedRoute,private appProxy:AppProxy) { }
+  constructor(private route: ActivatedRoute, private appProxy: AppProxy) { }
   // subscription:Subscription;
   ngOnInit() {
-
     this.sub = this.route.params.subscribe(params => {
-    this.flag = +params['iPersonId'];
-
+      this.flag = +params['iPersonId'];
     });
-   
-  }
+    debugger;
+    this.sub = this.route.params.subscribe(params => {
+      this.id = +params['iPersonId'];
+      debugger;
+      if (this.id != 0) {
+        this.appProxy.post("GetStudentById", { iPersonId: this.id }).then(data => { this.student = data; })
+      }
+    });
+  };
+
+  // ngOnInit() {
+  //   this.sub = this.route.params.subscribe(params => {
+  //      this.id = +params['id']; // (+) converts string 'id' to a number
+
+  //      // In a real app: dispatch action to load the details here.
+  //   });
+  // }
+
+
   onRouterOutletActivate(event) {
-   
+
     this.currentComponent = event;
   }
 

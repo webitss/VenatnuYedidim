@@ -38,12 +38,7 @@ namespace Service.Entities
         public string nvComment { get; set; }
         [DataMember]
         public int iStatusType { get; set; }
-        [DataMember]
-        public string nvYeshivaName { get; set; }
-        [DataMember]
-        public string nvYeshivaStreet { get; set; }
-        [DataMember]
-        public string nvYeshivaCity { get; set; }
+    
 
         #endregion
 
@@ -107,11 +102,11 @@ namespace Service.Entities
                 return null;
             }
         }
-        public static Student GetStudentById(int iPersonId)
+        public static Student GetStudentById(int iUserId)
         {
             try
             {
-                DataRow drc = SqlDataAccess.ExecuteDatasetSP("TStudentGetStudentbyId_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
+                DataRow drc = SqlDataAccess.ExecuteDatasetSP("TStudentGetStudentbyId_SLCT", new SqlParameter("iPersonId", iUserId)).Tables[0].Rows[0];
                 Student student = ObjectGenerator<Student>.GeneratFromDataRow(drc);
 
                 return student;
