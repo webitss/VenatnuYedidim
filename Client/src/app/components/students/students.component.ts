@@ -6,6 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 // import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CardsUnionComponent } from '../cards-union/cards-union.component';
 import { GlobalService } from '../../services/global.service';
+import { SysTableRow } from '../../classes/SysTableRow';
+import { SysTableService } from '../../services/sys-table.service';
 
 @Component({
   selector: 'app-students',
@@ -25,7 +27,7 @@ export class StudentsComponent implements OnInit {
 
     
   
-    this.id = this.globalService.getUser()['iUserId'];
+    this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 :  this.globalService.getUser().iPersonId;
 
     this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
       this.studentList = data;
