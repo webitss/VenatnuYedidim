@@ -11,6 +11,7 @@ import { Tint } from '../../classes/tint';
 import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { VyMultySelectComponent } from '../../templates/vy-multy-select/vy-multy-select.component';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-event-details',
@@ -36,7 +37,7 @@ participantsToSend:Array<Tint>=new Array<Tint>();
     })
     // this.VyMultySelect.save();
 
-    this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: 1 , to:this.participantsToSend})
+    this.appProxy.post('SetEvent', { oEvent: this.e, iUserId:   this.globalService.getUser()['iUserId'] , to:this.participantsToSend})
       .then(
         data => {
           alert("success" + data);
@@ -53,7 +54,8 @@ participantsToSend:Array<Tint>=new Array<Tint>();
   isDetails: boolean;
   sysTableRowList:SysTableRow[];
 
-  constructor(private appProxy: AppProxy, private router: ActivatedRoute,private sysTableService: SysTableService) { }
+  constructor(private appProxy: AppProxy, private router: ActivatedRoute,private sysTableService: SysTableService,
+     private globalService: GlobalService) { }
 
   ngOnInit() {
 

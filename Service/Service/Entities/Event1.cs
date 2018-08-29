@@ -36,7 +36,7 @@ namespace Service.Entities
         //public bool bSysRowStatus { get; set; }
 
         #endregion
-         
+
         public static List<Event1> GetEventsList(int? iUserId)
         {
             try
@@ -66,16 +66,33 @@ namespace Service.Entities
                 parameters.Add(new SqlParameter("participantIds", ObjectGenerator<TInt>.GetDataTable(to)));
 
 
-                //parameters.Find(x => x.ParameterName == "iCreatedByUserId").Value = iUserId;
-                SqlDataAccess.ExecuteDatasetSP("TEvent_INS/UPD", parameters);
+                if(oEvent.iEventId!=0)
+                    SqlDataAccess.ExecuteDatasetSP("TEvent_INS/UPD", parameters);
+                if (oEvent.iEventId == 0)
+                {
+                    User user = User.GetUser(iUserId);
+                    DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_INS/UPD", parameters).Tables[0].Rows;
+                    for (int i = 0; i < drc.Count; i++)
+                    {
 
-                //List<SqlParameter> sqlParameters = new List<SqlParameter>();
-                //sqlParameters.Add(new SqlParameter("iUserId", iUserId));
-                //sqlParameters.Add(new SqlParameter("participantIds", ObjectGenerator<TInt>.GetDataTable(to)));
+                        int iPersonId = int.Parse(drc[i]["iPersonId"].ToString());
+                        string nvEmail = drc[i]["nvEmail"].ToString();
+                        string body = "<b>הנך מוזמן ל" + oEvent.nvName +
+                            "</b><br>שיתקיים ב" + oEvent.nvPlace +
+                            "<br>בתאריך " + oEvent.dtEventDate + "<br>" + oEvent.nvComments +
+                             "<br><br> <b> בברכה </b> <br>" + user.nvFirstName + " " + user.nvLastName +
+                             "<br> עמותת ונתנו ידידים";
+                        string from=user.nvEmail;
+                        if(user.nvEmail=="" || user.nvEmail==null)
+                        {
+                            from = ConfigSettings.ReadSetting("Email");
+                        }
+                        SendMessagesHandler.SendEmailOrFax(from, nvEmail, oEvent.nvName, body, null);
+                    }
+                    //SendMessagesHandler.SendEmailOrFax()
+                }
 
-                //SqlDataAccess.ExecuteDatasetSP("TParticipants_INS", sqlParameters);
 
-                
                 return true;
             }
             catch (Exception ex)
@@ -99,7 +116,7 @@ namespace Service.Entities
                 return null;
             }
         }
-        
+
 
     }
 }

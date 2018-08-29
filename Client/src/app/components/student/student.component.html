@@ -1,6 +1,6 @@
 
 
-<div class="name-area">שם התלמיד</div>
+<div class="name-area"> תלמידים | {{student.nvFirstName+" "+student.nvLastName}} </div>
 <div class="content-area">
 <div class="header row">
         <nav class="navbar navbar-expand-sm nav header-navbar">
@@ -14,7 +14,7 @@
                     <span class="fullTab">פגישות
                       
                     </span>
-                  </li><li  *ngIf="flag!=0"  [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentConversations') != -1}" class="nav-item" routerLink="/students/student/7/student-conversations">
+                  </li><li  *ngIf="flag!=0"  [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentConversations') != -1}" class="nav-item" routerLink="student-conversations">
                       <span class="fullTab">
                             שיחות
                       </span>
@@ -37,7 +37,7 @@
         </nav>
         <div class="btn-area">
         <button class="btn-circle btn-save" (click)="save()">שמור v </button>
-        <button class="btn-circle btn-close" (click)="close()">סגור x </button>
+        <button class="btn-circle btn-close" routerLink="/students">סגור x </button>
         </div>
         </div>
 
