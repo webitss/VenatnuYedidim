@@ -7,7 +7,8 @@ import { RouterModule, Route } from '@angular/router';
 import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 // import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 //import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
+import { NgxGalleryModule } from 'ngx-gallery';
+import { NgxImageGalleryModule } from 'ngx-image-gallery';
 
 //--- templates ---
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
@@ -144,7 +145,7 @@ import { GaleryComponent } from './components/galery/galery.component';
     TaskComponent,
 
     LogInComponent,
-
+    
 
     ShowImageComponent,
 
@@ -168,11 +169,13 @@ import { GaleryComponent } from './components/galery/galery.component';
   imports: [
     // NgbModule.forRoot(),
     // Ng2SearchPipeModule,
+    NgxGalleryModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     HttpClientModule,
     NguiDatetimePickerModule,
+    NgxImageGalleryModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
     { path: "ShowImage", component: ShowImageComponent },
