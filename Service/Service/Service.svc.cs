@@ -228,9 +228,9 @@ namespace Service
 
         #region yeshivot
 
-        public List<Yeshivot> GetAllYeshivot(int iYeshivaId)
+        public List<Yeshivot> GetAllYeshivot()
         {
-            return Yeshivot.GetAllYeshivot(iYeshivaId);
+            return Yeshivot.GetAllYeshivot();
         }
 
         public bool AddYeshiva(Yeshivot yeshiva)
@@ -246,6 +246,10 @@ namespace Service
         public Yeshivot getYeshivaById(int iYeshivaId)
         {
             return Yeshivot.getYeshivaById(iYeshivaId);
+        }
+        public bool DeleteYeshiva(int iYeshivaId,int iLastModifyUserId)
+        {
+            return Yeshivot.DeleteYeshiva(iYeshivaId, iLastModifyUserId);
         }
 
         #endregion
