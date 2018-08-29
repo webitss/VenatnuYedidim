@@ -1,6 +1,6 @@
 
 
-<div class="name-area">שם התלמיד</div>
+<div class="name-area"> תלמידים | {{student.nvFirstName+" "+student.nvLastName}} </div>
 <div class="content-area">
 <div class="header row">
         <nav class="navbar navbar-expand-sm nav header-navbar">
@@ -37,7 +37,7 @@
         </nav>
         <div class="btn-area">
         <button class="btn-circle btn-save" (click)="save()">שמור v </button>
-        <button class="btn-circle btn-close" (click)="close()">סגור x </button>
+        <button class="btn-circle btn-close" routerLink="/students">סגור x </button>
         </div>
         </div>
 
