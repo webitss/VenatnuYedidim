@@ -27,7 +27,7 @@ export class StudentsComponent implements OnInit {
 
     
   
-    this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management;
+    this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 :  this.globalService.getUser().iPersonId;
 
     this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
       this.studentList = data;
