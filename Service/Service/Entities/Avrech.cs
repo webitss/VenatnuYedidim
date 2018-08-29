@@ -109,20 +109,8 @@ namespace Service.Entities
             }
         }
 
-        //public static List<string> GetNameAvrechByStudentId(int iPersonId)
-        //{
-        //    try
-        //    {
-        //        DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrech_GetNameAvrechByStudentId_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
-        //        List<string> nameAvrech = ObjectGenerator<string>.GeneratListFromDataRowCollection(drc);
-        //        return nameAvrech;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.LogError("GetNameAvrechByStudentId /TAvrech_GetNameAvrechByStudentId_SLCT", ", ex " + ex);
-        //        return null;
-        //    }
-        //}
+       
+        
 
     }
 }
