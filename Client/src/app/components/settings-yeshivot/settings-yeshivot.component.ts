@@ -68,7 +68,6 @@ export class SettingsYeshivotComponent implements OnInit {
 
   public deleteYeshiva(yeshiva) {
     this.iYeshivaId=yeshiva.iYeshivaId;
-    yeshiva.iYeshivaId=null;
   }
 
   close() {
