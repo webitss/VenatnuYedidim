@@ -66,14 +66,11 @@ namespace Service.Entities
                 parameters.Add(new SqlParameter("participantIds", ObjectGenerator<TInt>.GetDataTable(to)));
 
 
-                //parameters.Find(x => x.ParameterName == "iCreatedByUserId").Value = iUserId;
                 SqlDataAccess.ExecuteDatasetSP("TEvent_INS/UPD", parameters);
-
-                //List<SqlParameter> sqlParameters = new List<SqlParameter>();
-                //sqlParameters.Add(new SqlParameter("iUserId", iUserId));
-                //sqlParameters.Add(new SqlParameter("participantIds", ObjectGenerator<TInt>.GetDataTable(to)));
-
-                //SqlDataAccess.ExecuteDatasetSP("TParticipants_INS", sqlParameters);
+                if (oEvent.iEventId != 0)
+                {
+                    SendMessagesHandler.SendEmailOrFax()
+                }
 
                 
                 return true;
