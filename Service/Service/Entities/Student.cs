@@ -38,12 +38,7 @@ namespace Service.Entities
         public string nvComment { get; set; }
         [DataMember]
         public int iStatusType { get; set; }
-        [DataMember]
-        public string nvYeshivaName { get; set; }
-        [DataMember]
-        public string nvYeshivaStreet { get; set; }
-        [DataMember]
-        public string nvYeshivaCity { get; set; }
+    
 
         #endregion
 

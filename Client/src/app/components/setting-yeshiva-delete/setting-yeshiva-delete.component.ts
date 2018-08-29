@@ -33,4 +33,7 @@ export class SettingYeshivaDeleteComponent implements OnInit {
     });    
     this.closeYeshiva.emit(null);
   }
+  cancel(){
+    this.closeYeshiva.emit(null);
+  }
 }
