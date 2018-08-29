@@ -25,7 +25,7 @@ export class StudentsComponent implements OnInit {
 
     
   
-    this.id = this.globalService.getUser()['iUserId'];
+    this.id = 0;
 
     this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
       this.studentList = data;
