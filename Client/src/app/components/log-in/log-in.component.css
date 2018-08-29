@@ -52,8 +52,17 @@
     background-size: cover;
     /* float: left; */
 }
+
+.with-shadow{
+    background-color: white;
+    height: 80%;
+    top: 10%;
+    box-shadow:  1px 3px 22px 4px rgba(128,128,128,0.63);;
+}
+
 .my-btn{
     margin-left:45%;
     margin-top:20px;
     width:30%;
+    height: auto;
 }
