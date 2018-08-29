@@ -84,6 +84,9 @@ this.appProxy.get('GetDocuments').then(data => {
         big: 'localhost:14776/'  + 'Files/'+ element.nvDocumentName,
         
        
+
+
+        
       });
     });
     alert("this.galleryImages[0].small"+this.galleryImages[0].small)
