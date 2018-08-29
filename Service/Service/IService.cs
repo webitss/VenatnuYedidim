@@ -113,7 +113,7 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         bool UpdateStudent(Student student, int iUserId);
 
-       
+
 
         [OperationContract]
         [WebInvoke(
@@ -478,7 +478,7 @@ RequestFormat = WebMessageFormat.Json)]
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool SetDocument(Document document, string nvBase64File);
+        int SetDocument(Document document, string nvBase64File,int iUserId);
 
 
 
@@ -490,6 +490,17 @@ RequestFormat = WebMessageFormat.Json)]
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         List<Document> GetDocumentsByItemId(int iItemId);
+
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "DeleteDocument",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool DeleteDocument(int iDocumentId,int iLastModifyUserId);
+
         #endregion
 
         #region graduates

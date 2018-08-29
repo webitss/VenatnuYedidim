@@ -21,19 +21,21 @@ button{
     margin: auto;
     border: 1px solid#ccc;
 }
-ul{
+/* ul{
     float: right;
-}
+} */
 li{
     float: right;
     width: 15%;
     height: 200px;
     margin-left: 8%;
     margin-top: 100px;
+    list-style-type: none;
 }
 li>button{
-    width: 10%;
-    height: 10%;;
+    width: 50%;
+    height: 13%;
+    padding: 0px;
 }
 
   

@@ -85,33 +85,9 @@ namespace Service.Entities
         //            return null;
         //        }
 
-        //    }
 
-        //}
-        //public static bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment)
-        //{
-        //    try
-        //    {
-        //        List<SqlParameter> sqlParameters = new List<SqlParameter>();
-        //        sqlParameters.Add(new SqlParameter("iItemId", iItemId));
-        //        sqlParameters.Add(new SqlParameter("iBelongingType", iBelongingType));
-        //        sqlParameters.Add(new SqlParameter("nvDocumentName", nvFileName));
-        //        sqlParameters.Add(new SqlParameter("iCategoryType", iCategoryType));
-        //        sqlParameters.Add(new SqlParameter("nvComment", nvComment));
 
-        //        SqlDataAccess.ExecuteDatasetSP("TDocuments_INS", sqlParameters);
-
-        //        Fileshandler.SaveFileByBase64(nvBase64File, nvFileName);
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.LogError("AddFile /TDocuments_INS", "ex: " + ex);
-        //        return false;
-        //    }
-        //}
-
-        public static bool SetDocument(Document document, string nvBase64File)
+        public static int SetDocument(Document document, string nvBase64File,int iUserId)
         {
             try
             {
@@ -128,16 +104,21 @@ namespace Service.Entities
 
                 }
                 List<SqlParameter> sqlParameters = ObjectGenerator<Document>.GetSqlParametersFromObject(document);
+                sqlParameters.Add(new SqlParameter("iUserId", iUserId));
+
                 var dtCreatedate = sqlParameters.Where(s => s.ParameterName.Equals("dtCreatedate")).FirstOrDefault();
                 sqlParameters.Remove(dtCreatedate);
-                SqlDataAccess.ExecuteDatasetSP("TDocuments_INS/UPD", sqlParameters);
+                //SqlDataAccess.ExecuteDatasetSP("TDocuments_INS/UPD", sqlParameters);
 
-                return true;
+                //return true;
+
+                int id = int.Parse(SqlDataAccess.ExecuteDatasetSP("TDocuments_INS/UPD", sqlParameters).Tables[0].Rows[0][0].ToString());
+                return id;
             }
             catch (Exception ex)
             {
                 Log.LogError("SetDocument /TDocuments_INS/upd", "ex: " + ex);
-                return false;
+                return 0;
             }
         }
 
@@ -163,6 +144,24 @@ namespace Service.Entities
 
         }
 
+        public static bool DeleteDocument(int iDocumentId, int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iDocumentId", iDocumentId));
+                parameters.Add(new SqlParameter("iLastModifyUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TDocuments_DEL", parameters);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("DeleteDocument / TDocuments_DEL", "ex" + ex);
+                return false;
+            }
+        }
+        
         #endregion
     }
 }
