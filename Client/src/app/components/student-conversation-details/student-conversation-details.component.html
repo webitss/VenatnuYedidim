@@ -29,30 +29,33 @@
           <input type="date" name="conversationDate" class="form-control" [ngModel]="conversation.dConversationDate|date:'yyyy-MM-dd'"
             (ngModelChange)="conversation.dConversationDate = $event" [ngModelOptions]="{standalone: true}" />
         </div> -->
+
+
+        
         <div class="form-group">
           <label for="conversationDate">תאריך</label>
-          <input id="conversationDate" name="conversationDate" class="form-control" [(ngModel)]="currentConver.dConversationDate" ngui-datetime-picker date-only="true" close-on-select="false"
-          />
+          <input id="conversationDate" name="conversationDate" class="form-control" [(ngModel)]="currentConver.dConversationDate" ngui-datetime-picker
+            date-only="true" close-on-select="false" />
         </div>
 
         <div class="form-group">
           <label for="conversationTime">שעה</label>
-           <input id="conversationTime" type="time" class="form-control" name="conversationTime" [(ngModel)]="currentConver.conversationTime" [ngModelOptions]="{standalone: true}"
-          />
+          <input id="conversationTime" type="time" class="form-control" name="conversationTime" [(ngModel)]="currentConver.conversationTime"
+            [ngModelOptions]="{standalone: true}" />
         </div>
         <br/>
         <br/>
         <div class="row">
           <div class="form-group col-sm-12">
             <label for="conversationSummary">סיכום</label>
-            <input id="conversationSummary"  name="conversationSummary" type="text" class="form-control" [(ngModel)]="currentConver.nvConversationSummary" [ngModelOptions]="{standalone: true}"
-            />
+            <input id="conversationSummary" name="conversationSummary" type="text" class="form-control" [(ngModel)]="currentConver.nvConversationSummary"
+              [ngModelOptions]="{standalone: true}" />
           </div>
         </div>
         <div class="form-group">
           <label for="nextConversationDate">תאריך שיחה הבאה</label>
-          <input id="nextConversationDate" name="nextConversationDate" class="form-control" [(ngModel)]="currentConver.dtNextConversationDate" ngui-datetime-picker 
-            close-on-select="false" />
+          <input id="nextConversationDate" name="nextConversationDate" class="form-control" [(ngModel)]="currentConver.dtNextConversationDate"
+            ngui-datetime-picker close-on-select="false" />
         </div>
 
       </div>

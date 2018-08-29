@@ -21,6 +21,7 @@ export class SettingsYeshivotComponent implements OnInit {
   protected iYeshivaId: number;
   protected lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   protected yeshiva:Yeshiva;
+  protected iuserId:number;
   @ViewChild('yeshivot') yeshivot:any;
 
  
@@ -55,24 +56,19 @@ export class SettingsYeshivotComponent implements OnInit {
   }
 
   public setYeshiva(yeshiva){
-
-    // if(event)
-    //   this.editYeshiva(yeshiva);
-    // else
-    //   this.deleteYeshiva(yeshiva);
+    if('edit')
+      this.editYeshiva(yeshiva);
+    else if('delete')
+      this.deleteYeshiva(yeshiva);
   }
 
   public editYeshiva(yeshiva) {
     this.iYeshivaId = yeshiva.iYeshivaId;
   }
 
-  public DeleteYeshiva(yeshiva){
+  public deleteYeshiva(yeshiva) {
     this.iYeshivaId=yeshiva.iYeshivaId;
-    this.appProxy.post('DeleteYeshiva').then(data=>{
-      this.yeshiva=data;
-      
-
-    })
+    yeshiva.iYeshivaId=null;
   }
 
   close() {
