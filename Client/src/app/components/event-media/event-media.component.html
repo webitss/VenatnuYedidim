@@ -7,14 +7,14 @@
 
 
 <div class="uploadDocumentComponent" *ngIf="document!=null">
-  <app-upload-document [document]="document" (closeMe)="closeDocumentDialog()"></app-upload-document>
+  <app-upload-document [document]="document" (closeMe)="closeDocumentDialog(true)" (closeMeNoSave)="closeDocumentDialog(false)"></app-upload-document>
 </div>
 
-<div class="media-area">
   <ul>
-    <li *ngFor="let d of documents" class="media">
-      <app-media [document]="d"></app-media><br>
+    <li *ngFor="let d of documents" class="media-item">
+      <app-media [document]="d"></app-media><br/>
       <button class="btn btn-circle"(click)="deleteDocument(d.iDocumentId)">מחק</button>
+      <button class="btn btn-circle"(click)="editDocument(d.iDocumentId)">ערוך</button>
+      
     </li>
   </ul>
-</div>
