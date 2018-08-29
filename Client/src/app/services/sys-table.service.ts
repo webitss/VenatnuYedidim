@@ -54,6 +54,8 @@ export class SysTableService {
     }
   } 
 
+  public static permissionType = {Management: 5}
+
   constructor(private appProxy: AppProxy) { }
   ////#region מקבל ID של טבלה מחזיר ערכים מאותה טבלה 
   getValues(iSysTableId: number): Promise<Array<SysTableRow>> {
