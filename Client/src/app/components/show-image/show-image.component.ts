@@ -79,9 +79,9 @@ this.appProxy.get('GetDocuments').then(data => {
     this.documents.forEach(element => {
       debugger;
       this.galleryImages.push({
-        small:'http://localhost:14776/'  + 'Files/'+ element.nvDocumentName,
-        medium:  'http://localhost:14776/'  + 'Files/'+element.nvDocumentName,
-        big: 'http://localhost:14776/'  + 'Files/'+ element.nvDocumentName,
+        small:'localhost:14776/'  + 'Files/'+ element.nvDocumentName,
+        medium:  'localhost:14776/'  + 'Files/'+element.nvDocumentName,
+        big: 'localhost:14776/'  + 'Files/'+ element.nvDocumentName,
         
        
       });
