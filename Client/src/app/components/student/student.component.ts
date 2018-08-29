@@ -22,10 +22,10 @@ export class StudentComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.flag = +params['iPersonId'];
     });
-    debugger;
+  
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['iPersonId'];
-      debugger;
+    
       if (this.id != 0) {
         this.appProxy.post("GetStudentById", { iPersonId: this.id }).then(data => { this.student = data; })
       }
