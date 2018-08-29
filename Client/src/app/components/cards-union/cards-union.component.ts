@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Student } from '../../classes/student';
 import { ActivatedRoute } from '@angular/router';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-cards-union',
@@ -21,16 +22,16 @@ model:number;
 
   id:number;
 
-  constructor(private activatedRoute: ActivatedRoute, private appProxy:AppProxy) { }
+  constructor(private activatedRoute: ActivatedRoute, private appProxy:AppProxy,private globalService:GlobalService) { }
 
   ngOnInit() {
     this.student.dtAddStudentDate=null;
     this.student.dtBirthdate=null;
-
+// this.student.dtAddStudentDate.toLocaleDateString();
    this.activatedRoute.parent.params.subscribe(params => {
       this.id = params['iPersonId'];
     });
-    this.appProxy.post('GetAvrechStudents', { iPersonId: 1 }).then(
+    this.appProxy.post('GetAvrechStudents', { iPersonId:this.globalService.getUser()['iUserId'] }).then(
       data => 
       {
         this.studentList = data;
