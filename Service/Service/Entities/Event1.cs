@@ -69,7 +69,7 @@ namespace Service.Entities
                 SqlDataAccess.ExecuteDatasetSP("TEvent_INS/UPD", parameters);
                 if (oEvent.iEventId != 0)
                 {
-                    SendMessagesHandler.SendEmailOrFax()
+                    //SendMessagesHandler.SendEmailOrFax()
                 }
 
                 
