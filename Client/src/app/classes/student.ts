@@ -24,9 +24,6 @@ export class Student implements Person {
     public iCauseOfDeathFather:number=null;
     public iCauseOfDeathMother:number=null;
     public nvImgStudent: string=null;
-    public nvYeshivaName: string=null;
-    public nvYeshivaStreet: string=null;
-    public nvYeshivaCity: string=null;
     public dtAddStudentDate: Date= new Date();
     public nvComment: string=null;
 

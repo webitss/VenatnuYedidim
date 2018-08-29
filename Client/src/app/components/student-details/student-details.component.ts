@@ -6,6 +6,7 @@ import { HebrewDate } from '../../classes/hebrewDate';
 import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { GlobalService } from '../../services/global.service';
+import { Yeshiva } from '../../classes/Yeshiva';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { GlobalService } from '../../services/global.service';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router, private globalService:GlobalService) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router, private globalService: GlobalService) { }
 
 
   @Input() student: Student
@@ -34,11 +35,15 @@ export class StudentDetailsComponent implements OnInit {
   diedDateFatherArr = new Array<string>();
   diedDateMotherArr = new Array<string>();
   sysTableRowList: SysTableRow[];
+  yeshivaList: Yeshiva[];
 
   ngOnInit() {
     this.bornDateHebrewStudent = new HebrewDate();
     this.diedDateHebrewFather = new HebrewDate();
     this.diedDateHebrewMother = new HebrewDate();
+  //  this.appProxy.get('GetAllYeshivot')
+
+
 
     this.route.parent.params.subscribe(params => {
       this.paramRout = params['iPersonId'];
@@ -47,7 +52,6 @@ export class StudentDetailsComponent implements OnInit {
         this.appProxy.post("GetStudentById", { iPersonId: params['iPersonId'] }).then(data => {
 
           this.student = data;
-          debugger;
           // this.student.dtBirthdate.getTime();
           // this.student.dtAddStudentDate.getTime();
 
@@ -125,9 +129,9 @@ export class StudentDetailsComponent implements OnInit {
     this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;
     if (this.paramRout != '0') {
 
-      
-       
-      this.appProxy.post("UpdateStudent", { student: this.student, iUserId:this.globalService.getUser()['iUserId'] }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
+
+
+      this.appProxy.post("UpdateStudent", { student: this.student, iUserId: this.globalService.getUser()['iUserId'] }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
     }
     else {
       debugger;
@@ -137,7 +141,7 @@ export class StudentDetailsComponent implements OnInit {
       if (this.isCheckedMother = true) {
         this.student.bDeathMother = true;
       }
-      this.appProxy.post("AddStudent", { student: this.student, iUserId:this.globalService.getUser()['iUserId'] }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
+      this.appProxy.post("AddStudent", { student: this.student, iUserId: this.globalService.getUser()['iUserId'] }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
     }
   }
 

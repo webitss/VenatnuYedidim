@@ -19,7 +19,7 @@ import { GlobalService } from '../../services/global.service'
 export class StudentConversationsComponent implements OnInit {
 
   protected iUserId: number;
-  protected iPersonId:number;
+  protected iPersonId: number;
   protected flag: number;
   protected conversationsList: Array<Conversation> = new Array<Conversation>();
   protected conversationSelect: Conversation;
@@ -34,6 +34,10 @@ export class StudentConversationsComponent implements OnInit {
       name: 'edit',
       bClickCell: true,
       type: 'html'
+    },
+    {
+      title: 'שם אברך',
+      name: 'nvNameAvrech',
     },
     {
       title: 'סוג שיחה',
@@ -80,7 +84,7 @@ export class StudentConversationsComponent implements OnInit {
     this.conversationSelect.dConversationDate = null;
     this.conversationSelect.dtConversationTime = null;
     this.conversationSelect.dtNextConversationDate = null;
-    
+
   }
   // add(newConver)
   // {
@@ -133,7 +137,7 @@ export class StudentConversationsComponent implements OnInit {
   //   });
   // }}
   ngOnInit() {
-    this.iUserId=this.globalService.getUser()['iUserId'];
+    this.iUserId = this.globalService.getUser()['iUserId'];
     this.route.parent.params.subscribe(params => {
       this.iPersonId = params['iPersonId'];
     });

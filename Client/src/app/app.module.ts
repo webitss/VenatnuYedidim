@@ -63,6 +63,7 @@ import { SettingsDocumentsComponent } from './components/settings-documents/sett
 import { SettingsFrontendComponent } from './components/settings-frontend/settings-frontend.component';
 
 import { SettingYeshivaComponent } from './components/setting-yeshiva/setting-yeshiva.component';
+import {SettingYeshivaDeleteComponent} from './components/setting-yeshiva-delete/setting-yeshiva-delete.component';
 
 // import { inject } from '@angular/core/testing';
 // import { injectElementRef } from '@angular/core/src/render3';
@@ -79,6 +80,7 @@ import { FitElement } from './directives/fit-element';
 import { MediaComponent } from './components/media/media.component';
 
 import { GaleryComponent } from './components/galery/galery.component';
+
 
 
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -157,6 +159,9 @@ import { GaleryComponent } from './components/galery/galery.component';
 
 
     GaleryComponent,
+
+
+    SettingYeshivaDeleteComponent,
 
 
     
@@ -249,7 +254,8 @@ import { GaleryComponent } from './components/galery/galery.component';
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "setting-yeshiva/:EditNewYeshiva", component: SettingYeshivaComponent }
+              { path: "setting-yeshiva/:EditNewYeshiva", component: SettingYeshivaComponent },
+              {path:"setting-yeshiva/setting-yeshiva-delete",component:SettingYeshivaDeleteComponent}
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },
