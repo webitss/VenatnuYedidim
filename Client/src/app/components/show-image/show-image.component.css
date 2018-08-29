@@ -40,3 +40,18 @@ background-color: darksalmon;
     margin-top: 15px;
     margin-bottom: 15px;
   }
+  .ngx-gallery-thumbnail.ngx-gallery-active {  
+  background-color: crimson;
+}
+ngx-gallery /deep/ .ngx-gallery-arrow {
+    background-color: aquamarine;
+}
+ngx-gallery /deep/ ngx-gallery-image .ngx-gallery-arrow {
+  background-color: black
+}
+ngx-gallery /deep/ ngx-gallery-thumbnails .ngx-gallery-arrow {
+  background-color: chartreuse
+}
+ngx-gallery /deep/ ngx-gallery-preview .ngx-gallery-arrow {
+    background-color: beige
+}
