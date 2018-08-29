@@ -72,11 +72,13 @@ export class StudentMeetingDetailsComponent implements OnInit {
           //     }
           alert(data);
           this.Meeting.emit(null);
+
+         this.TaskComponent.saveTask();
+          
         }
        else
        alert("failed");
 
-        // this.TaskComponent.saveTask();
 
         // debugger;
       },

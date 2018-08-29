@@ -83,7 +83,7 @@ namespace Service
          BodyStyle = WebMessageBodyStyle.WrappedRequest,
          ResponseFormat = WebMessageFormat.Json,
          RequestFormat = WebMessageFormat.Json)]
-        Student GetStudentById(int iPersonId);
+        Student GetStudentById(int iUserId);
 
         [OperationContract]
         [WebInvoke(
@@ -358,7 +358,7 @@ RequestFormat = WebMessageFormat.Json)]
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Yeshivot> GetAllYeshivot(int iYeshivaId);
+        List<Yeshivot> GetAllYeshivot();
 
         [OperationContract]
         [WebInvoke(
@@ -377,6 +377,15 @@ RequestFormat = WebMessageFormat.Json)]
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         Yeshivot getYeshivaById(int iYeshivaId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "DeleteYeshiva",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool DeleteYeshiva(int iYeshivaId,int iLastModifyUserId);
 
         #endregion
 
@@ -452,7 +461,7 @@ RequestFormat = WebMessageFormat.Json)]
          RequestFormat = WebMessageFormat.Json)]
         List<Document> GetDocuments();
 
-
+       
         //[OperationContract]
         //[WebInvoke(
         //Method = "POST",

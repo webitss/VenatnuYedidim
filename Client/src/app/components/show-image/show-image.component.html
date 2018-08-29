@@ -39,12 +39,14 @@
     </header>
     <div id="text" class="text"> text</div>
     <div id="img" class="image"> 
-      <table *ngFor="let img of listImage">
+      <!-- <table *ngFor="let img of listImage">
         <div class="row ">
 <img class="Image col-sm-12" [src]="baseFileUrl+img"/>
 </div>
-      </table> 
-            
+      </table>  -->
+      <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery> 
+    
     </div>
-  // <app-galery></app-galery> 
+    
+  
    
