@@ -53,12 +53,13 @@ export class StudentConversationDetailsComponent implements OnInit {
     this.appProxy.post("SetConversations", { conversation: this.currentConver, iUserId: this.iUserId })
       .then(
         data => {
-           
+
           if (this.currentConver.iConversationId != null) {
-           this.conversation = new Conversation();
+            this.conversation = new Conversation();
             this.conversation = Object.assign({}, this.currentConver);
+
           }
-        
+
 
           this.newConver.emit(this.conversation);
           // this.newConver.push({
@@ -85,17 +86,17 @@ export class StudentConversationDetailsComponent implements OnInit {
           else
             alert("no good");
         });
-
+//איפה למקם?
     this.TaskComponent.saveTask();
   }
-  
 
-reset() {
-   
-        this.currentConver.dConversationDate.setDate(null);
-        this.currentConver.dtConversationTime.setTime(null);
-        this.currentConver.dtNextConversationDate.setDate(null);
-    }
+
+  reset() {
+
+    this.currentConver.dConversationDate.setDate(null);
+    this.currentConver.dtConversationTime.setTime(null);
+    this.currentConver.dtNextConversationDate.setDate(null);
+  }
 
 
 
