@@ -170,6 +170,8 @@ namespace Service
             return Avrech.UpdateUserNameAndPassword(iPersonId, nvUserName, nvPassword, iUserId);
         }
 
+
+       
         #endregion
 
 
@@ -268,9 +270,9 @@ namespace Service
         //{
         //    return Document.AddFile(iItemId, iBelongingType, iCategoryType, nvBase64File, nvFileName, nvComment);
         //}
-        public bool SetDocument(Document document, string nvBase64File)
+        public int SetDocument(Document document, string nvBase64File,int iUserId)
         {
-            return Document.SetDocument(document, nvBase64File);
+            return Document.SetDocument(document, nvBase64File, iUserId);
         }
 
 
@@ -278,6 +280,14 @@ namespace Service
         {
             return Document.GetDocumentsByItemId(iItemId);
         }
+
+
+        public bool DeleteDocument(int iDocumentId, int iLastModifyUserId)
+        {
+            return Document.DeleteDocument(iDocumentId, iLastModifyUserId);
+        }
+
+       
 
         #endregion
 

@@ -7,7 +7,8 @@ import { RouterModule, Route } from '@angular/router';
 import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 // import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 //import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
+import { NgxGalleryModule } from 'ngx-gallery';
+import { NgxImageGalleryModule } from 'ngx-image-gallery';
 
 //--- templates ---
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
@@ -21,6 +22,10 @@ import { FilterPipe } from './pipes/filter.pipe';
 //--- services ---
 import { AppProxy } from './services/app.proxy';
 import { SysTableService } from './services/sys-table.service';
+import { GlobalService } from './services/global.service';
+import { DialogService } from './services/dialog.service';
+import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
+
 //--- components ---
 import { AppComponent } from './components/app/app.component';
 
@@ -73,7 +78,7 @@ import { SafeUrl } from './directives/safe-url';
 import { GoogleCity } from './directives/googleCity';
 import { FitElement } from './directives/fit-element';
 import { MediaComponent } from './components/media/media.component';
-import { GlobalService } from './services/global.service';
+
 import { GaleryComponent } from './components/galery/galery.component';
 
 
@@ -145,7 +150,7 @@ import { GaleryComponent } from './components/galery/galery.component';
     TaskComponent,
 
     LogInComponent,
-
+    
 
     ShowImageComponent,
 
@@ -170,16 +175,18 @@ import { GaleryComponent } from './components/galery/galery.component';
   imports: [
     // NgbModule.forRoot(),
     // Ng2SearchPipeModule,
+    NgxGalleryModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     HttpClientModule,
     NguiDatetimePickerModule,
+    NgxImageGalleryModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
     { path: "ShowImage", component: ShowImageComponent },
 
-     { path: "", component: LogInComponent },
+     { path: "", component: LogInComponent, canDeactivate: [CanDeactivateGuard] },
       { path: "students", component: StudentsComponent },
       {
 
@@ -258,7 +265,7 @@ import { GaleryComponent } from './components/galery/galery.component';
 
     ], { useHash: true })
   ],
-  providers: [AppProxy, SysTableService,GlobalService],
+  providers: [AppProxy, SysTableService, GlobalService, CanDeactivateGuard, DialogService],
   bootstrap: [AppComponent],
   // entryComponents:[
   //   CardsUnionComponent

@@ -3,18 +3,18 @@ import { Observable } from 'rxjs/Observable';
 import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 export interface CanComponentDeactivate {
-  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+  canDeactivate: () => boolean;
 }
 
 @Injectable()
 export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
-  canDeactivate(component: CanComponentDeactivate, 
-           route: ActivatedRouteSnapshot, 
-           state: RouterStateSnapshot) {
 
-     let url: string = state.url;
-     console.log('Url: '+ url);
+  canDeactivate(component: CanComponentDeactivate,
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot) {
 
-     return component.canDeactivate ? component.canDeactivate() : true;
+    let url: string = state.url;
+    console.log('Url: ' + url);
+    return component.canDeactivate ? component.canDeactivate(): true;
   }
 } 

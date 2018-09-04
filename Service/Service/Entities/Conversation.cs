@@ -31,6 +31,10 @@ namespace Service.Entities
         [DataMember]
         public DateTime dtNextConversationDate { get; set; }
 
+        [NoSQL]
+        [DataMember]
+        public Dictionary<string, string> lstObject { get; set; }
+
 
         #endregion
         public Conversation()
@@ -38,6 +42,7 @@ namespace Service.Entities
             dConversationDate = new DateTime();
             dtConversationTime = new DateTime();
             dtNextConversationDate = new DateTime();
+            lstObject = new Dictionary<string, string>();
         }
 
 
@@ -45,8 +50,15 @@ namespace Service.Entities
         {
             try
             {
-                DataRowCollection dt = SqlDataAccess.ExecuteDatasetSP("TConversation_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
-                List<Conversation> conversations = ObjectGenerator<Conversation>.GeneratListFromDataRowCollection(dt);
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TConversation_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
+                List<Conversation> conversations = new List<Conversation>();
+                foreach (DataRow dr in drc)
+                {
+                    conversations.Add(ObjectGenerator<Conversation>.GeneratFromDataRow(dr));
+                    conversations.Last().lstObject.Add("nvLastName", dr["nvLastName"].ToString());
+                    conversations.Last().lstObject.Add("nvFirstName", dr["nvFirstName"].ToString());
+                }
+                //List<Conversation> conversations = ObjectGenerator<Conversation>.GeneratListFromDataRowCollection(dt);
                 return conversations;
             }
             catch (Exception ex)

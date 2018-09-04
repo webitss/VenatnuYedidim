@@ -41,9 +41,8 @@ export class StudentDetailsComponent implements OnInit {
     this.bornDateHebrewStudent = new HebrewDate();
     this.diedDateHebrewFather = new HebrewDate();
     this.diedDateHebrewMother = new HebrewDate();
-  //  this.appProxy.get('GetAllYeshivot')
 
-
+    this.appProxy.post("GetAllYeshivot").then(date => { this.yeshivaList = date; })
 
     this.route.parent.params.subscribe(params => {
       this.paramRout = params['iPersonId'];
@@ -94,8 +93,10 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   changeStatusParent(parentType) {
+    debugger;
     switch (parentType) {
       case 1:
+      
         if (this.student.bDeathFather == true) {
           if (this.isCheckedFather == false) {
             this.fatherDead = true;
@@ -125,23 +126,29 @@ export class StudentDetailsComponent implements OnInit {
 
 
   saveStudent() {
-
+    debugger;
     this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;
     if (this.paramRout != '0') {
-
-
-
-      this.appProxy.post("UpdateStudent", { student: this.student, iUserId: this.globalService.getUser()['iUserId'] }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
+      this.appProxy.post("UpdateStudent", { student: this.student, iUserId: this.globalService.getUser().iPersonId}).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
     }
+    
     else {
-      debugger;
-      if (this.isCheckedFather = true) {
+      if (this.fatherDead = true) {
         this.student.bDeathFather = true;
+        this.student.nvFatherDeathDate = this.diedDateHebrewFather.Day + " " + this.diedDateHebrewFather.Month + " " + this.diedDateHebrewFather.Year;
       }
-      if (this.isCheckedMother = true) {
+      else {
+        this.student.nvFatherDeathDate = null;
+      }
+      if (this.motherDead = true) {
         this.student.bDeathMother = true;
+        this.student.nvMotherDeathDate = this.diedDateHebrewMother.Day + " " + this.diedDateHebrewMother.Month + " " + this.diedDateHebrewMother.Year;
       }
-      this.appProxy.post("AddStudent", { student: this.student, iUserId: this.globalService.getUser()['iUserId'] }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
+      else {
+        this.student.nvMotherDeathDate = null;
+      }
+      debugger;
+      this.appProxy.post("AddStudent", { student: this.student, iUserId: this.globalService.getUser().iPersonId}).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
     }
   }
 

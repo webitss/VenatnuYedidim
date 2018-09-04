@@ -5,6 +5,7 @@ import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 // import { EventEmitter } from 'events';
 import { Document } from '../../classes/document';
+import { GlobalService } from '../../services/global.service';
 
 
 @Component({
@@ -17,13 +18,15 @@ export class UploadDocumentComponent implements OnInit {
   closeMe = new EventEmitter();
 
   @Output()
+  closeMeNoSave = new EventEmitter();
+  @Output()
   @Input()
   protected document: Document;
 
   sheetTypes: SysTableRow[];
   id: any;
   component: string;
-  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService) { }
+  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
 
   ngOnInit() {
     // this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => this.sheetTypes = data
@@ -31,16 +34,17 @@ export class UploadDocumentComponent implements OnInit {
     // this.save.name = this.document.nvDocumentName;
 
     this.activatedRoute.url.subscribe(url => {
-    this.component = url.toString();
+      this.component = url.toString();
       if (this.component == "student-documents") {
         this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => this.sheetTypes = data
           , err => alert('error'));
-        this.save.name = this.document.nvDocumentName;
       }
+      this.save.name = this.document.nvDocumentName; 
+      this.save.type=this.document.nvDocumentType;     
     });
 
   }
-  protected save = { document: '', name: '',type:'' };
+  protected save = { document: '', name: '', type: '' };
 
 
   loadDocument(event, callback) {
@@ -52,13 +56,12 @@ export class UploadDocumentComponent implements OnInit {
 
       if ((window as any).FileReader) {
         var fileReader = new FileReader();
-
         name = file.name;
         type = file.type;
 
         fileReader.onload = function (e) {
           nvBase64File = (e.target as any).result;
-          if (callback) { callback.document = nvBase64File; callback.name = name;  callback.type = type;}
+          if (callback) { callback.document = nvBase64File; callback.name = name; callback.type = type; }
           // if (callback) callback(nvBase64File,name);
         }
         fileReader.readAsDataURL(file);
@@ -70,15 +73,24 @@ export class UploadDocumentComponent implements OnInit {
 
 
   saveFile() {
+    //debugger;
     this.document.nvDocumentName = this.save.name;
     this.document.nvDocumentType = this.save.type;
 
-    this.appProxy.post('SetDocument', { document: this.document, nvBase64File: this.save.document }).then(data => this.closeDialog()
+    this.appProxy.post('SetDocument', { document: this.document, nvBase64File: this.save.document, iUserId: this.globalService.getUser()['iUserId'] }).then(
+      data => {
+        if (data == 0)
+          alert("error in save data")
+        else { this.document.iDocumentId = data; this.closeDialog(); }
+      }
       , err => alert(err));
   }
 
 
   closeDialog() {
     this.closeMe.emit(null);
+  }
+  closeAndNoSave() {
+    this.closeMeNoSave.emit();
   }
 }
