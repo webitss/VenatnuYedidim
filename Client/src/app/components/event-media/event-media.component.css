@@ -37,5 +37,24 @@ li>button{
     height: 13%;
     padding: 0px;
 }
+.btn-del{
+    background-image: url("../../../assets/icons/trash.png");
+}
+.btn-edit{
+    background-image: url("../../../assets/icons/edit.png");
+}
+.btn-del,.btn-edit{
+    border-radius: 0px;
+    margin-left: 2%;
+    height: 25px;
+}
+.buttons{
+    padding-left: 30%;
+    margin-top: -10%;
+    visibility: hidden;
+}
+.media-item:hover>.buttons{
+    visibility: visible;
 
+}
   

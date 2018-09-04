@@ -9,11 +9,20 @@ import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 //import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { NgxImageGalleryModule } from 'ngx-image-gallery';
+// import { CommonModule } from '@angular/common';
+// import { FlatpickrModule } from 'angularx-flatpickr';
+// import { CalendarModule, DateAdapter } from 'angular-calendar';
+// import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+// import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+// import {MatButtonModule} from '@angular/material';
+
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { IgxCalendarModule } from 'igniteui-angular';
 
 //--- templates ---
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
-import { VyTableFilterPipe } from './templates/vy-table/vy-table-filter.pipe';
+import{VyTableFilterPipe}from './templates/vy-table/vy-table-filter.pipe';
 import { VyTableOrderByPipe, OrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
 
 //--- Pipes ---
@@ -64,7 +73,6 @@ import { SettingsDocumentsComponent } from './components/settings-documents/sett
 import { SettingsFrontendComponent } from './components/settings-frontend/settings-frontend.component';
 
 import { SettingYeshivaComponent } from './components/setting-yeshiva/setting-yeshiva.component';
-import {SettingYeshivaDeleteComponent} from './components/setting-yeshiva-delete/setting-yeshiva-delete.component';
 
 // import { inject } from '@angular/core/testing';
 // import { injectElementRef } from '@angular/core/src/render3';
@@ -81,6 +89,7 @@ import { FitElement } from './directives/fit-element';
 import { MediaComponent } from './components/media/media.component';
 
 import { GaleryComponent } from './components/galery/galery.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 
 
@@ -162,12 +171,8 @@ import { GaleryComponent } from './components/galery/galery.component';
     GaleryComponent,
 
 
-    SettingYeshivaDeleteComponent,
 
-
-    
-   
-
+    CalendarComponent,
    
   ],
  //imports: [ 
@@ -176,6 +181,14 @@ import { GaleryComponent } from './components/galery/galery.component';
    
   //],
   imports: [
+    // BrowserAnimationsModule, IgxCalendarModule,
+    // CommonModule,
+    // NgbModalModule,
+    // FlatpickrModule.forRoot(),
+    // CalendarModule.forRoot({
+    //   provide: DateAdapter,
+    //   useFactory: adapterFactory
+    // }),
     // NgbModule.forRoot(),
     // Ng2SearchPipeModule,
     NgxGalleryModule,
@@ -257,20 +270,21 @@ import { GaleryComponent } from './components/galery/galery.component';
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "setting-yeshiva/:EditNewYeshiva", component: SettingYeshivaComponent },
-              {path:"setting-yeshiva/setting-yeshiva-delete",component:SettingYeshivaDeleteComponent}
+              { path: "setting-yeshiva/:EditNewYeshiva", component: SettingYeshivaComponent }
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },
           { path: "settings-frontend", component: SettingsFrontendComponent },
         ]
       },
-      { path: "task", component: TaskComponent }
+      { path: "task", component: TaskComponent },
+      { path: "calendar", component: CalendarComponent }
 
     ], { useHash: true })
   ],
   providers: [AppProxy, SysTableService, GlobalService, CanDeactivateGuard, DialogService],
   bootstrap: [AppComponent],
+  // exports: [CalendarComponent]
   // entryComponents:[
   //   CardsUnionComponent
   // ]

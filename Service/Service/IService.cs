@@ -83,7 +83,7 @@ namespace Service
          BodyStyle = WebMessageBodyStyle.WrappedRequest,
          ResponseFormat = WebMessageFormat.Json,
          RequestFormat = WebMessageFormat.Json)]
-        Student GetStudentById(int iUserId);
+        Student GetStudentById(int iPersonId);
 
         [OperationContract]
         [WebInvoke(
