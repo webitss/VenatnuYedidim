@@ -89,7 +89,7 @@ this.appProxy.get('GetDocuments').then(data => {
         
       });
     });
-    alert("this.galleryImages[0].small"+this.galleryImages[0].small)
+    alert("this.galleryImages[0].small"+this.galleryImages[this.galleryImages.length-1].small)
   }
     , err => alert(err));
 
