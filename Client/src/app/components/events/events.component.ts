@@ -20,7 +20,7 @@ edit(e){
 
 }
 
-  public lstColumns = [
+ public lstColumns = [
 new VyTableColumn('עריכה','edit','html', true,false),
 new VyTableColumn('שם ארוע','nvName'),
 new VyTableColumn('תאריך','dtEventDate'),
