@@ -15,11 +15,11 @@ namespace Service.Entities
     {
         #region Data Members
 
-       // [DataMember]
+        // [DataMember]
         //public int iStudentId { get; set; }
         [DataMember]
         public string nvImgStudent { get; set; }
-  
+
         [DataMember]
         public string nvFatherDeathDate { get; set; }
         [DataMember]
@@ -38,16 +38,17 @@ namespace Service.Entities
         public string nvComment { get; set; }
         [DataMember]
         public int iStatusType { get; set; }
-    
+
 
         #endregion
 
-        public static bool AddStudentsToAvrech(List<T2Int> studentAndAvrechArr, int iUserId) {
+        public static bool AddStudentsToAvrech(List<T2Int> studentAndAvrechArr, int iUserId)
+        {
             try
             {
-                
+
                 List<SqlParameter> sqlParameters = new List<SqlParameter>();
-                 sqlParameters.Add(new SqlParameter("iUserId", iUserId));
+                sqlParameters.Add(new SqlParameter("iUserId", iUserId));
                 sqlParameters.Add(new SqlParameter("studentAndAvrechArr", ObjectGenerator<T2Int>.GetDataTable(studentAndAvrechArr)));
 
                 SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_INS/UPD", sqlParameters);
@@ -67,14 +68,14 @@ namespace Service.Entities
         {
             try
             {
-                
+
 
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TStudentGetStudentByUser_SLCT", new SqlParameter("iUserId", iUserId)).Tables[0].Rows;
                 List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
                 return students;
             }
 
-   
+
 
             catch (Exception ex)
             {
@@ -111,7 +112,7 @@ namespace Service.Entities
 
                 return student;
             }
-            
+
 
             catch (Exception ex)
             {
@@ -122,13 +123,15 @@ namespace Service.Entities
 
 
 
-       
 
 
-        public static bool AddStudent(Student student, int iUserId)
+
+        public static bool AddStudent(Student student, string base64Image, int iUserId)
         {
             try
             {
+                if (base64Image != "")
+                    student.nvImgStudent = Fileshandler.SaveFileByBase64(base64Image, student.nvImgStudent, "Students//");
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
                 SqlDataAccess.ExecuteDatasetSP("TStudent_INS", parameters);
@@ -143,10 +146,19 @@ namespace Service.Entities
         }
 
 
-        public static bool UpdateStudent(Student student, int iUserId)
+        public static bool UpdateStudent(Student student, string base64Image, int iUserId)
         {
             try
             {
+                if (base64Image != "")
+                {
+                    student.nvImgStudent = Fileshandler.SaveFileByBase64(base64Image, student.nvImgStudent, "Students//");
+                    DataRow dr = SqlDataAccess.ExecuteDatasetSP("TStudentGetStudentbyId_SLCT", new SqlParameter("iPersonId", student.iPersonId)).Tables[0].Rows[0];
+                    string prevName = ObjectGenerator<Student>.GeneratFromDataRow(dr).nvImgStudent;
+                    if (prevName != "")
+                        Fileshandler.DeleteFile(prevName, "Students//");
+                }
+
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
                 SqlDataAccess.ExecuteDatasetSP("TStudent_UPD", parameters);
@@ -176,7 +188,7 @@ namespace Service.Entities
                 return false;
             }
         }
-        public static bool UnionCards(Student student,int iStudent2)
+        public static bool UnionCards(Student student, int iStudent2)
         {
             try
             {
@@ -192,7 +204,7 @@ namespace Service.Entities
                 return false;
             }
         }
-        
+
     }
 
 }
