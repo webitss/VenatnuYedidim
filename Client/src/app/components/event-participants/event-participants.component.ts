@@ -35,7 +35,7 @@ export class EventParticipantsComponent implements OnInit {
     name: 'nvParticipantType'
   }, {
     title: 'סטטוס הגעה',
-    name: 'ArriveStatusType'
+    name: 'iArriveStatusType'
   },
 
   ]
