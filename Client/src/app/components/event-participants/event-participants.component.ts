@@ -35,7 +35,7 @@ export class EventParticipantsComponent implements OnInit {
     name: 'nvParticipantType'
   }, {
     title: 'סטטוס הגעה',
-    name: 'ArriveStatusType'
+    name: 'iArriveStatusType'
   },
 
   ]
@@ -53,9 +53,11 @@ export class EventParticipantsComponent implements OnInit {
         this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
           this.sysTableRowList = data;
           this.participant.forEach(p => {
+            debugger;
 
             p['iArriveStatusType'] = this.sysTableRowList.filter(s => s.iSysTableRowId ==parseInt (p.lstObject.iArrivalStatusType))[0].nvValue;
-            p['nvParticipantType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.nvParticipantType)[0].nvValue;
+            p['nvParticipantType'] = p.lstObject.nvParticipantType;
+            
           });
 
 
@@ -63,9 +65,6 @@ export class EventParticipantsComponent implements OnInit {
         alert("x");
       })
     });
-
-
-
   }
 
 

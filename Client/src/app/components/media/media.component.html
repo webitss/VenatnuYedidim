@@ -9,8 +9,7 @@
     <source [src]="baseFileUrl + document.nvDocumentName" [type]="document.nvDocumentType">
   </audio>
 
-  <video *ngIf="document.nvDocumentType && document.nvDocumentType.indexOf('video') != -1" controls
-   >
+  <video *ngIf="document.nvDocumentType && document.nvDocumentType.indexOf('video') != -1" controls [title]="document.nvComment">
     <source [src]="baseFileUrl + document.nvDocumentName" [type]="document.nvDocumentType">
   </video>
 
