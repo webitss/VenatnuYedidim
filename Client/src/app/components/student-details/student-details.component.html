@@ -1,6 +1,9 @@
 <div class="imageStudent">
-    <div class="chooseFile"></div>
-    <input type="file" class="file">
+    <div class="image"></div>
+    <div class="upload">
+        <label for="LoadDocument" class="browse" class="chooseFile"><img src="../../../assets/icons/picture.png"></label>
+        <input type="file" (change)="loadDocument($event,save)" name="LoadDocument" id="LoadDocument" />
+    </div>
 </div>
 <div class="form">
     <div class="row">
@@ -13,6 +16,7 @@
             <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="student.nvFirstName" [ngModelOptions]="{standalone: true}">
         </div>
         <div class="form-group ">
+            
             <label for="identity">תעודת זהות :</label>
             <input type="text" class="form-control" id="identity" name="identity" [(ngModel)]="student.nvIdentityCard" [ngModelOptions]="{standalone: true}"
                 minlength="9" maxlength="9" #identity="ngModel">
@@ -35,12 +39,12 @@
         </div>
         <div class="form-group ">
             <label for="email"> מייל :</label>
-            <input type="email" class="form-control" id="email" name="email" #email="ngModel"
-            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  [(ngModel)]="student.nvEmail" [ngModelOptions]="{standalone: true}">
-            <div  *ngIf="email.errors && email.errors.pattern">
+            <input type="email" class="form-control" id="email" name="email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                [(ngModel)]="student.nvEmail" [ngModelOptions]="{standalone: true}">
+            <div *ngIf="email.errors && email.errors.pattern">
                 מייל לא תקין
             </div>
-            
+
         </div>
     </div>
     <div class="row">
@@ -56,30 +60,30 @@
 
         <div class="form-group ">
             <label for="dtBornDate"> תאריך לידה לועזי:</label>
-            <input type="date" class="form-control" id="dtBornDate" name="dtBornDate" [ngModel]="student.dtBirthdate  | date:'yyyy-MM-dd' " (ngModelChange)="e.dtBirthdate = $event"
-                [ngModelOptions]="{standalone: true}">
+            <input type="date" class="form-control" id="dtBornDate" name="dtBornDate" [ngModel]="student.dtBirthdate  | date:'yyyy-MM-dd' "
+                (ngModelChange)="e.dtBirthdate = $event" [ngModelOptions]="{standalone: true}">
         </div>
         <!-- ngui-datetime-picker date-only="true" close-on-select="false" -->
         <!-- | date:'yyyy-MM-dd' -->
 
         <div class="form-group ">
             <label for="street"> כתובת :</label>
-            <input type="text" class="form-control" id="street" name="street" [(ngModel)]="student.nvAddress" [ngModelOptions]="{standalone: true}" >
+            <input type="text" class="form-control" id="street" name="street" [(ngModel)]="student.nvAddress" [ngModelOptions]="{standalone: true}">
         </div>
-        
+
 
         <div class="form-group ">
             <label for="city"> עיר :</label>
             <input type="text" class="form-control" id="city" name="city" [(ngModel)]="student.nvCity" [ngModelOptions]="{standalone: true}">
         </div>
     </div>
- 
+
     <div class="row">
 
         <div class="form-group">
             <label for="yeshivaName">מוסד לימודים :</label>
-            <select class="form-control" >
-                <option *ngFor="let ye of yeshivaList" >{{ye.nvYeshivaName}}</option>
+            <select class="form-control">
+                <option *ngFor="let ye of yeshivaList">{{ye.nvYeshivaName}}</option>
             </select>
             <!-- <input type="text" class="form-control" id="yeshivaName" name="yeshivaName" [(ngModel)]="nvYeshivaName" [ngModelOptions]="{standalone: true}"> -->
         </div>
@@ -98,7 +102,8 @@
 
         <div class="form-group ">
             <label for="dateAdd"> תאריך הצטרפות :</label>
-            <input type="date" class="form-control" id="dateAdd" name="dateAdd" [ngModel]="student.dtAddStudentDate | date:'yyyy-MM-dd' " (ngModelChange)="e.dtAddStudentDate = $event" [ngModelOptions]="{standalone: true}">
+            <input type="date" class="form-control" id="dateAdd" name="dateAdd" [ngModel]="student.dtAddStudentDate | date:'yyyy-MM-dd' "
+                (ngModelChange)="e.dtAddStudentDate = $event" [ngModelOptions]="{standalone: true}">
         </div>
     </div>
     <div class="row">
