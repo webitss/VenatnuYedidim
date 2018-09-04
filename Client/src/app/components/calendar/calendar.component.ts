@@ -34,7 +34,7 @@ const colors: any = {
 export class CalendarComponent implements OnInit {
 
   daysNameArr: Array<string> = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"];
-  daysMonthNameArr: Array<number>=new Array();
+  daysMonthNameArr: Array<number> = new Array();
 
   oneOfMonth: any;
   dayOfWeek: number;
@@ -42,10 +42,7 @@ export class CalendarComponent implements OnInit {
   year: number;
   month: number;
   ngOnInit() {
-    debugger
-for (let i =1; i <= 31; i++) 
-  this.daysMonthNameArr[i-1]=i;
-  
+
     debugger
     this.dayOfWeek = new Date().getDay() + 1;
     this.oneOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1).getDay() + 1;
