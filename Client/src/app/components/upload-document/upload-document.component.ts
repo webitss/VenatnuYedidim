@@ -39,7 +39,8 @@ export class UploadDocumentComponent implements OnInit {
         this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => this.sheetTypes = data
           , err => alert('error'));
       }
-      this.save.name = this.document.nvDocumentName;      
+      this.save.name = this.document.nvDocumentName; 
+      this.save.type=this.document.nvDocumentType;     
     });
 
   }
@@ -73,6 +74,7 @@ export class UploadDocumentComponent implements OnInit {
 
 
   saveFile() {
+    debugger;
     this.document.nvDocumentName = this.save.name;
     this.document.nvDocumentType = this.save.type;
 
