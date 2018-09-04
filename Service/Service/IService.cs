@@ -83,7 +83,7 @@ namespace Service
          BodyStyle = WebMessageBodyStyle.WrappedRequest,
          ResponseFormat = WebMessageFormat.Json,
          RequestFormat = WebMessageFormat.Json)]
-        Student GetStudentById(int iUserId);
+        Student GetStudentById(int iPersonId);
 
         [OperationContract]
         [WebInvoke(
@@ -101,7 +101,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool AddStudent(Student student, int iUserId);
+        bool AddStudent(Student student,string base64Image, int iUserId);
 
 
         [OperationContract]
@@ -111,7 +111,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool UpdateStudent(Student student, int iUserId);
+        bool UpdateStudent(Student student, string base64Image, int iUserId);
 
 
 

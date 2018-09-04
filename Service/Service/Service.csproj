@@ -140,7 +140,7 @@
     <Compile Include="Utilities\SendMessagesHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Files\" />
+    <Folder Include="Files\Students\" />
     <Folder Include="Logs\" />
   </ItemGroup>
   <ItemGroup>

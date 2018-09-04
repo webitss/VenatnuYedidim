@@ -11,10 +11,12 @@ body{
     color: white !important;
 }
 
+
 /* .navbar-collapse{
     margin-top: 50px;
     margin-bottom: 50px;
-    border-bottom: 2px solid rgb(207, 37, 94);
+    border-bottom: 2px solid rgb(207, 
+    37, 94);
    
 } */
 
@@ -151,14 +153,19 @@ body{
     
 }
 
-.edit
+.edit,.delete
 {
     background-size: contain;
     background-repeat: no-repeat;
     width: 30px;
     height: 30px;
-     background-image: url("../src/assets/images/pencil.png");
     cursor: pointer;
+}
+.edit{
+    background-image: url("../src/assets/images/pencil.png");    
+}
+.delete{
+    background-image: url("../src/assets/icons/garbage.png");    
 }
 .avrechim{
     float: right;
