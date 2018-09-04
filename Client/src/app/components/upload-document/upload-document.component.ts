@@ -56,7 +56,6 @@ export class UploadDocumentComponent implements OnInit {
 
       if ((window as any).FileReader) {
         var fileReader = new FileReader();
-
         name = file.name;
         type = file.type;
 
@@ -74,7 +73,7 @@ export class UploadDocumentComponent implements OnInit {
 
 
   saveFile() {
-    debugger;
+    //debugger;
     this.document.nvDocumentName = this.save.name;
     this.document.nvDocumentType = this.save.type;
 

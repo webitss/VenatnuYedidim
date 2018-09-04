@@ -39,6 +39,7 @@ button{
 #documentName{
     height: 60px;
     padding-top: 27px;
+    text-align: right;
 }
 h3{
     text-align: right;

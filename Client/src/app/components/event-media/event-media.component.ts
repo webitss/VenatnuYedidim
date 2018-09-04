@@ -49,6 +49,7 @@ export class EventMediaComponent implements OnInit {
         this.document.iItemId = element.iItemId;
         this.document.nvComment = element.nvComment;
         this.document.nvDocumentName = element.nvDocumentName;
+        this.document.nvDocumentType=element.nvDocumentType;
       }
     });
   }
