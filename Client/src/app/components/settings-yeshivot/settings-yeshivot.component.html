@@ -8,16 +8,21 @@
         </div>
     </div>
 
-<div *ngIf="iYeshivaId != null">
+<div *ngIf="(iYeshivaId != null && !flag)">
 
-    <app-setting-yeshiva #yeshivot [sysTableList]="sysTableList" [iYeshivaId]="iYeshivaId" (closeYeshiva)="close()"></app-setting-yeshiva>
-
-</div>
-
-<div *ngIf="iYeshivaId"> 
-
-    <app-setting-yeshiva-delete #yeshivot [iYeshivaId]="iYeshivaId" (closeYeshiva)="close()"></app-setting-yeshiva-delete>
+    <app-setting-yeshiva #yeshivot [sysTableList]="sysTableList"  (closeYeshiva)="close()"></app-setting-yeshiva>
 
 </div>
 
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="setYeshiva($event)"></app-vy-table>
+<div *ngIf="flag">
+       <div class="settingYeshivaDelete">
+            <p>
+               האם אתה בטוח שברצונך למחוק מוסד זה?
+            </p>
+            <button (click)="delete()">כן</button>
+            <button (click)="close()">לא</button>
+        </div>
+</div>
+
+    <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="setYeshiva($event)"></app-vy-table>
+<!-- [iYeshivaId]="iYeshivaId" (closeYeshiva)="close()" -->
