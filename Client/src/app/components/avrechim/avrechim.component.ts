@@ -63,7 +63,7 @@ export class AvrechimComponent implements OnInit {
   }
   deleteAvrech(e)
   {
-
+// this.appProxy.post
   }
 
   downloadExcel(t){
