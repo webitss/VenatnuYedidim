@@ -43,13 +43,13 @@ export class EventParticipantsComponent implements OnInit {
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
 
   public lstColumns = [
-    new VyTableColumn('שם פרטי','nvName'),
-    new VyTableColumn('שם משפחה','nvName'),
-    new VyTableColumn('טלפון','nvPlace'),
-    new VyTableColumn('נייד','nvPlace'),
-    new VyTableColumn('מייל','nvPlace'),
-    new VyTableColumn('סוג משתמש','nvPlace'),
-    new VyTableColumn('סטטוס הגעה','nvPlace','html', true,false), ];
+    new VyTableColumn('שם פרטי','nvFirstName'),
+    new VyTableColumn('שם משפחה','nvLastName'),
+    new VyTableColumn('טלפון','nvPhone'),
+    new VyTableColumn('נייד','nvMobile'),
+    new VyTableColumn('מייל','nvEmail'),
+    new VyTableColumn('סוג משתמש','nvParticipantType'),
+    new VyTableColumn('סטטוס הגעה','iArriveStatusType','html', true,false), ];
       public lstDataRows = [];
     
 
@@ -61,6 +61,22 @@ export class EventParticipantsComponent implements OnInit {
       this.iEventId = +params['iEventId'];
       this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(data => {
         this.participant = data;
+        this.participant.forEach(p => {
+          this.lstDataRows.push({
+            iEventId: p.iEventId,
+            nvFirstName: p.nvFirstName,
+            nvLasttName: p.nvLasttName,
+            nvPhone: p.nvPhone,
+            nvMobile: p.nvMobile,
+            nvEmail: p.nvEmail,
+            nvParticipantType: p.nvParticipantType,
+            iArriveStatusType: p.iArriveStatusType,
+
+            
+            // edit: '<div class="edit"></div>'
+  
+          });
+        });
         
         this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
           this.sysTableRowList = data;
