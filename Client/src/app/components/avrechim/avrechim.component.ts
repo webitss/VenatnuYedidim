@@ -63,7 +63,10 @@ export class AvrechimComponent implements OnInit {
   }
   deleteAvrech(e)
   {
-// this.appProxy.post
+    this.appProxy.post('DeleteAvrech', e)
+    .then(result => {
+      if (result) { alert('שמירת הקובץ התבצעה בהצלחה'); } else { alert('שמירת הקובץ נכשלה'); }
+    });
   }
 
   downloadExcel(t){
