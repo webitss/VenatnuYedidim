@@ -56,7 +56,6 @@ export class UploadDocumentComponent implements OnInit {
 
       if ((window as any).FileReader) {
         var fileReader = new FileReader();
-debugger;
         name = file.name;
         type = file.type;
 
