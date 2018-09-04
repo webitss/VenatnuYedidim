@@ -20,24 +20,26 @@ import { GlobalService } from '../../services/global.service';
 })
 export class EventDetailsComponent implements OnInit {
   list: Array<any> = new Array<any>();
-  title:string="";
-  inputTitle:string="עבור";
+  title: string = "";
+  inputTitle: string = "עבור";
+  touched = false;
 
   protected e: Event1;
-to:Array<any>;
-participantsToSend:Array<Tint>=new Array<Tint>();
+  to: Array<any>;
+  participantsToSend: Array<Tint> = new Array<Tint>();
 
-@ViewChild('child')VyMultySelect: VyMultySelectComponent;
+  @ViewChild('child') VyMultySelect: VyMultySelectComponent;
+
 
   save() {
     this.participantsToSend.splice(0, this.participantsToSend.length);
     this.e.dtEventDate = new Date(this.e.dtEventDate);
-    this.to.forEach(t=>{
+    this.to.forEach(t => {
       this.participantsToSend.push(new Tint(t.iSysTableRowId));
     })
     // this.VyMultySelect.save();
 
-    this.appProxy.post('SetEvent', { oEvent: this.e, iUserId:   this.globalService.getUser()['iUserId'] , to:this.participantsToSend})
+    this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: this.globalService.getUser()['iUserId'], to: this.participantsToSend })
       .then(
         data => {
           alert("success" + data);
@@ -52,10 +54,10 @@ participantsToSend:Array<Tint>=new Array<Tint>();
   private sub: any;
   private iEventId: number;
   isDetails: boolean;
-  sysTableRowList:SysTableRow[];
+  sysTableRowList: SysTableRow[];
 
-  constructor(private appProxy: AppProxy, private router: ActivatedRoute,private sysTableService: SysTableService,
-     private globalService: GlobalService) { }
+  constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService,
+    private globalService: GlobalService) { }
 
   ngOnInit() {
 
@@ -75,18 +77,18 @@ participantsToSend:Array<Tint>=new Array<Tint>();
     });
 
 
-  this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data=>{
-    this.sysTableRowList=data;
-    this.sysTableRowList.forEach(s=>{
-     // s.iSysTableRowId
-      s['value']= s.nvValue;
+    this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
+      this.sysTableRowList = data;
+      this.sysTableRowList.forEach(s => {
+        // s.iSysTableRowId
+        s['value'] = s.nvValue;
+      })
+      //alert("success"+this.sysTableRowList[0].nvValue);
+    }, err => {
+      // alert("error")
     })
-    //alert("success"+this.sysTableRowList[0].nvValue);
-  },err=>{
-   // alert("error")
-  })
 
-//this.participantsToSend=new Array<string>();
+    //this.participantsToSend=new Array<string>();
 
   }
 
