@@ -7,6 +7,7 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { EventEmitter } from 'events';
 import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 @Component({
   selector: 'app-settings-yeshivot',
@@ -22,6 +23,9 @@ export class SettingsYeshivotComponent implements OnInit {
   protected lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   protected yeshiva:Yeshiva;
   protected iuserId:number;
+  protected iLastModifyUserId:number;
+  protected flag;
+  protected vyTable:VyTableComponent;
   @ViewChild('yeshivot') yeshivot:any;
 
  
@@ -56,22 +60,34 @@ export class SettingsYeshivotComponent implements OnInit {
   }
 
   public setYeshiva(yeshiva){
-    if('edit')
-      this.editYeshiva(yeshiva);
-    else if('delete')
-      this.deleteYeshiva(yeshiva);
+    // if()
+       this.editYeshiva(yeshiva);
+    // else 
+       this.deleteYeshiva(yeshiva);
   }
 
   public editYeshiva(yeshiva) {
     this.iYeshivaId = yeshiva.iYeshivaId;
+    this.flag=false;
   }
 
   public deleteYeshiva(yeshiva) {
     this.iYeshivaId=yeshiva.iYeshivaId;
+    this.flag=true;
+  }
+
+  delete() {
+    this.appProxy.post('DeleteYeshiva',{iYeshivaId:this.iYeshivaId,iLastModifyUserId:this.iLastModifyUserId})
+    .then(
+        data=>{
+        this.yeshiva=data;
+        alert("הישיבה נמחקה בהצלחה");
+    });    
   }
 
   close() {
     this.iYeshivaId = null;
+    
   }
 
   downloadExcel(){
