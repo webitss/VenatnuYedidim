@@ -1,6 +1,7 @@
 
 
  <div  class="add-student">
+   <div class="close" (click)="close()">x</div>
   <span class="Student-affiliation">איחוד כרטיסים</span>
   <div class="form-group">
     
@@ -110,7 +111,7 @@
         <span class="col-sm-4"> תאריך הצטרפות:</span>
           <input type="radio" class="col-sm-1" id="st1AddStudentDate" name="stAddStudentDate" value="{{student1.dtAddStudentDate}}" [(ngModel)]="student.dtAddStudentDate"  checked="checked">
           <label class="col-sm-3" for="st1AddStudentDate">{{student1.dtAddStudentDate.toLocaleDateString()}}</label>
-          <input type="radio" class="col-sm-1" id="st2AddStudentDate" name="stAddStudentDate" value="{{student2.dtAddStudentDate}}" [(ngModel)]="student.dtAddStudentDate" [disabled]="student1.dtAddStudentDate==student2.dtAddStudentDate" >
+          <input type="radio" class="col-sm-1" id="st2AddStudentDate" name="stAddStudentDate" value="{{student2.dtAddStudentDate}}" [(ngModel)]="student.dtAddStudentDate" [disabled]="student1.dtAddStudentDate.toLocaleDateString()==student2.dtAddStudentDate.toLocaleDateString()" >
           <label class="col-sm-3" for="st2AddStudentDate">{{student2.dtAddStudentDate.toLocaleDateString()}}</label>
         </div>
 
@@ -120,7 +121,7 @@
             <input type="radio" class="col-sm-1" id="st1FatherDeathDate" name="stFatherDeathDate" value="{{student1.nvFatherDeathDate}}" [(ngModel)]="student.nvFatherDeathDate"  checked="checked">        
             <label *ngIf="student1.bDeathFather==false" class="col-sm-3" for="st1FatherDeathDate">האב חי</label>
             <label *ngIf="student1.bDeathFather==true" class="col-sm-3" for="st1FatherDeathDate">{{student1.nvFatherDeathDate}}</label>
-              <input type="radio" class="col-sm-1" id="st2FatherDeathDate" name="stFatherDeathDate" value="{{student2.nvFatherDeathDate}}" [(ngModel)]="student.nvFatherDeathDate"  [disabled]="student1.nvFatherDeathDate==student2.nvFatherDeathDate">
+              <input type="radio" class="col-sm-1" id="st2FatherDeathDate" name="stFatherDeathDate" value="{{student2.nvFatherDeathDate}}" [(ngModel)]="student.nvFatherDeathDate"  [disabled]="student1.nvFatherDeathDate==student2.nvFatherDeathDate||student1.bDeathFather==false&&student2.bDeathFather==false"/>
               <label *ngIf="student2.bDeathFather==false" class="col-sm-3" for="st2FatherDeathDate">האב חי</label>
               <label *ngIf="student2.bDeathFather==true" class="col-sm-3" for="st2FatherDeathDate">{{student2.nvFatherDeathDate}}</label>
             </div>
@@ -130,7 +131,7 @@
                 <input type="radio" class="col-sm-1" id="st1MotherDeathDate" name="stMotherDeathDate" value="{{student1.nvMotherDeathDate}}" [(ngModel)]="student.nvMotherDeathDate"  checked="checked">
                 <label *ngIf="student1.bDeathMother==true" class="col-sm-3" for="st1MotherDeathDate">{{student1.nvMotherDeathDate}}</label>               
                 <label *ngIf="student1.bDeathMother==false" class="col-sm-3" for="st1MotherDeathDate">האם חיה</label>               
-                <input type="radio" class="col-sm-1" id="st2MotherDeathDate" name="stMotherDeathDate" value="{{student2.nvMotherDeathDate}}" [(ngModel)]="student.nvMotherDeathDate"  [disabled]="student1.nvMotherDeathDate==student2.nvMotherDeathDate">
+                <input type="radio" class="col-sm-1" id="st2MotherDeathDate" name="stMotherDeathDate" value="{{student2.nvMotherDeathDate}}" [(ngModel)]="student.nvMotherDeathDate"  [disabled]="student1.nvMotherDeathDate==student2.nvMotherDeathDate||student1.bDeathMother==false&&student2.bDeathMother==false"/>
                 <label  *ngIf="student2.bDeathMother==true" class="col-sm-3" for="st2MotherDeathDate">{{student2.nvMotherDeathDate}}</label>               
                 <label  *ngIf="student2.bDeathMother==false" class="col-sm-3" for="st2MotherDeathDate">האם חיה</label>
               </div>
@@ -144,5 +145,5 @@
                 </div>
             
 </div>
-<button type="submit" class="btn-pink1" (click)="unionOk()" >אישור</button>
+<button type="submit" class="btn-pink1 ok" (click)="unionOk()" >אישור</button>
   </form>
