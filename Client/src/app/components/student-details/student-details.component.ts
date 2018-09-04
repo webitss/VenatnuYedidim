@@ -166,6 +166,46 @@ export class StudentDetailsComponent implements OnInit {
   }
 
 
+  protected save = { document: '', name: '' };
+
+
+  loadDocument(event, callback) {
+    let name, type, nvBase64File;
+
+    const fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      const file: File = fileList[0];
+
+      if ((window as any).FileReader) {
+        var fileReader = new FileReader();
+        name = file.name;
+        type = file.type;
+
+        fileReader.onload = function (e) {
+          nvBase64File = (e.target as any).result;
+          if (callback) { callback.document = nvBase64File; callback.name = name; }
+        }
+        fileReader.readAsDataURL(file);
+
+      }
+    }
+
+  }
+
+
+  // saveFile() {
+  //   //debugger;
+  //   this.document.nvDocumentName = this.save.name;
+  //   this.document.nvDocumentType = this.save.type;
+
+  //   this.appProxy.post('SetDocument', { document: this.document, nvBase64File: this.save.document, iUserId: this.globalService.getUser()['iUserId'] }).then(
+  //     data => {
+  //       if (data == 0)
+  //         alert("error in save data")
+  //       else { this.document.iDocumentId = data; this.closeDialog(); }
+  //     }
+  //     , err => alert(err));
+  // }
 
 
 }
