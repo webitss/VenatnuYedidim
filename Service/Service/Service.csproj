@@ -120,6 +120,7 @@
     <Compile Include="Entities\Participant.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\Student.cs" />
+    <Compile Include="Entities\TGlobalParameters.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Yeshivot.cs" />
     <Compile Include="Global.asax.cs">
@@ -139,7 +140,7 @@
     <Compile Include="Utilities\SendMessagesHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Files\" />
+    <Folder Include="Files\Students\" />
     <Folder Include="Logs\" />
   </ItemGroup>
   <ItemGroup>

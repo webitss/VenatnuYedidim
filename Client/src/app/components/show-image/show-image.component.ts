@@ -17,7 +17,9 @@ protected titaieName:string="ונתנו ידידים";
 
 protected divModal:boolean;
 
-protected listImage:string[]=["assets/IMG_5650.JPG","assets/חוף ים.jpg","assets/3-big.jpg",]
+protected listImage:string[]=["http://localhost:14776/Files/red.jpg","assets/חוף ים.jpg",
+"assets/3-big.jpg","assets/IMG_5650.JPG",
+"assets/IMG_5650.JPG","assets/IMG_5650.JPG",]
 protected documents: any;
 protected password:string;
 protected name:string;
@@ -77,24 +79,32 @@ ngOnInit(): void {
 this.appProxy.get('GetDocuments').then(data => {
   this.documents = data;
     this.documents.forEach(element => {
-      debugger;
+     
+      if(element.nvDocumentName=="red.jpg"){
+        debugger;
       this.galleryImages.push({
-        small:'localhost:14776/'  + 'Files/'+ element.nvDocumentName,
-        medium:  'localhost:14776/'  + 'Files/'+element.nvDocumentName,
-        big: 'localhost:14776/'  + 'Files/'+ element.nvDocumentName,
+        small:'http://localhost:14776/Files/'  + element.nvDocumentName,
+        medium:  'http://localhost:14776/Files/'+element.nvDocumentName,
+        big: 'http://localhost:14776/Files/'  + element.nvDocumentName,
         
-       
+     
+
+        
 
 
         
       });
+    }
     });
-    alert("this.galleryImages[0].small"+this.galleryImages[0].small)
+    alert("this.galleryImages[0].small"+this.galleryImages[this.galleryImages.length].small)
   }
     , err => alert(err));
 
 }
-
+saveLogin(){
+  
 }
+}
+
 
 

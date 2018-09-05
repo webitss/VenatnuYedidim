@@ -1,5 +1,5 @@
-<p>
-  event-participants works!
-</p>
 
 <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="participant"></app-vy-table>
+<select value='+p.iArriveStatusType+'>
+  <option *ngFor="let s of sysTableRowList"></option>
+</select>
