@@ -84,7 +84,12 @@ namespace Service
             return Student.GetStudentList(iUserId);
         }
 
-        public Student GetStudentById(int iUserId)
+		public List<Yeshivot> GetYeshivotOfStudent(int iPersonId)
+		{
+			return Student.GetYeshivotOfStudent(iPersonId);
+		}
+
+		public Student GetStudentById(int iUserId)
         {
             return Student.GetStudentById(iUserId);
         }

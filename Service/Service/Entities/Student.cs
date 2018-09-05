@@ -57,12 +57,11 @@ namespace Service.Entities
             }
             catch (Exception ex)
             {
-
                 return false;
-
             }
-
         }
+
+
 
         public static List<Student> GetStudentList(int iUserId)
         {
@@ -205,6 +204,28 @@ namespace Service.Entities
             }
         }
 
-    }
+		public static List<Yeshivot> GetYeshivotOfStudent(int iPersonId)
+		{
+			try
+			{
+
+
+				DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TYeshivotGetYeshivotOfStudent_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
+				List<Yeshivot> Yeshivots = ObjectGenerator<Yeshivot>.GeneratListFromDataRowCollection(drc);
+				return Yeshivots;
+			}
+
+
+
+			catch (Exception ex)
+			{
+				Log.LogError("GetStudentList / TStudentGetStudentByUser_SLCT", "ex" + ex);
+				return null;
+			}
+		}
+
+
+
+	}
 
 }
