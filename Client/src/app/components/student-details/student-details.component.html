@@ -1,5 +1,8 @@
-<div class="imageStudent">
-    <div class="image"></div>
+<div class="imageStudent" [class.no]="!student.nvImgStudent && save.image==''">
+    <div class="image">
+        <img *ngIf="student.nvImgStudent && save.image==''"  [src]="baseFileUrl + student.nvImgStudent">
+        <img *ngIf="save.image"  [src]="save.image">      
+    </div>
     <div class="upload">
         <label for="LoadDocument" class="browse" class="chooseFile"><img src="../../../assets/icons/picture.png"></label>
         <input type="file" (change)="loadDocument($event,save)" name="LoadDocument" id="LoadDocument" />

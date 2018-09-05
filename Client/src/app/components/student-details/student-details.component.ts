@@ -49,7 +49,7 @@ export class StudentDetailsComponent implements OnInit {
       this.paramRout = params['iPersonId'];
       debugger;
       if (params['iPersonId'] != '0') {
-       
+
         this.appProxy.post("GetStudentById", { iPersonId: this.paramRout }).then(data => {
           debugger;
           this.student = data;
@@ -139,7 +139,9 @@ export class StudentDetailsComponent implements OnInit {
 
 
   saveStudent() {
-    debugger;
+    //debugger;
+    if (this.save.name != '')
+      this.student.nvImgStudent = this.save.name;
     this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;
     if (this.fatherDead == true) {
       this.student.bDeathFather = true;
@@ -158,15 +160,17 @@ export class StudentDetailsComponent implements OnInit {
       this.student.nvMotherDeathDate = null;
     }
     if (this.paramRout != '0') {
-      this.appProxy.post("UpdateStudent", { student: this.student, iUserId: this.globalService.getUser().iPersonId }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
+      this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.globalService.getUser().iPersonId }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
     }
     else
-      this.appProxy.post("AddStudent", { student: this.student, iUserId: this.globalService.getUser().iPersonId }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
+      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.globalService.getUser().iPersonId }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
 
   }
 
-
-  protected save = { document: '', name: '' };
+  get baseFileUrl(){
+    return AppProxy.getBaseUrl() +'Files/Students/';
+  }
+  protected save = { image: '', name: '' };
 
 
   loadDocument(event, callback) {
@@ -183,7 +187,7 @@ export class StudentDetailsComponent implements OnInit {
 
         fileReader.onload = function (e) {
           nvBase64File = (e.target as any).result;
-          if (callback) { callback.document = nvBase64File; callback.name = name; }
+          if (callback) { callback.image = nvBase64File; callback.name = name; }
         }
         fileReader.readAsDataURL(file);
 
@@ -191,23 +195,6 @@ export class StudentDetailsComponent implements OnInit {
     }
 
   }
-
-
-  // saveFile() {
-  //   //debugger;
-  //   this.document.nvDocumentName = this.save.name;
-  //   this.document.nvDocumentType = this.save.type;
-
-  //   this.appProxy.post('SetDocument', { document: this.document, nvBase64File: this.save.document, iUserId: this.globalService.getUser()['iUserId'] }).then(
-  //     data => {
-  //       if (data == 0)
-  //         alert("error in save data")
-  //       else { this.document.iDocumentId = data; this.closeDialog(); }
-  //     }
-  //     , err => alert(err));
-  // }
-
-
 }
 
 

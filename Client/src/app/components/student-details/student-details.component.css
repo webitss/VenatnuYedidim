@@ -8,6 +8,10 @@
     height: 600px;
     background-color: #e6e4e4;
     float: right;
+    width: 25%;
+}
+.image>img{
+    width: 100%;
 }
 #LoadDocument{
     visibility: hidden;
@@ -17,7 +21,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    margin-right: 40%; 
+    margin-right: 43%; 
     cursor: pointer;
 }
 .image{
@@ -28,6 +32,9 @@
     width: 60%;
     margin-right: 18%;
     margin-top: 28%;
+}
+.no{
+    background-image: url("../../../assets/icons/noImage.png");
 }
 #date{
     width: 0%;

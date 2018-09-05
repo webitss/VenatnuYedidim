@@ -94,15 +94,15 @@ namespace Service
             return Student.AddStudentsToAvrech(studentAndAvrechArr, iUserId);
         }
 
-        public bool AddStudent(Student student, int iUserId)
+        public bool AddStudent(Student student,string base64Image, int iUserId)
         {
-            return Student.AddStudent(student, iUserId);
+            return Student.AddStudent(student, base64Image,iUserId);
         }
 
 
-        public bool UpdateStudent(Student student, int iUserId)
+        public bool UpdateStudent(Student student, string base64Image, int iUserId)
         {
-            return Student.UpdateStudent(student, iUserId);
+            return Student.UpdateStudent(student, base64Image, iUserId);
         }
 
 
