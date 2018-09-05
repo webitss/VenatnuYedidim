@@ -36,22 +36,31 @@ export class StudentDetailsComponent implements OnInit {
   diedDateMotherArr = new Array<string>();
   sysTableRowList: SysTableRow[];
   yeshivaList: Yeshiva[];
+  yeshivaListOfStudent: Yeshiva[];
+  addYeshivaToStudent = { iPersonId: 0, iYeshivaId: 0 };
+  yeshivaSelected: Yeshiva;
+
 
   ngOnInit() {
     this.bornDateHebrewStudent = new HebrewDate();
     this.diedDateHebrewFather = new HebrewDate();
     this.diedDateHebrewMother = new HebrewDate();
+    this.yeshivaSelected = new Yeshiva();
+    // this.yeshivaSelected.nvCity="";
+    // this.yeshivaSelected.nvAddress="";
+    // this.addYeshivaToStudent.iPersonId
+    // this.addYeshivaToStudent.iYeshivaId
 
     this.appProxy.post("GetAllYeshivot").then(date => { this.yeshivaList = date; })
 
     this.route.parent.params.subscribe(params => {
 
       this.paramRout = params['iPersonId'];
-      debugger;
+
       if (params['iPersonId'] != '0') {
 
         this.appProxy.post("GetStudentById", { iPersonId: this.paramRout }).then(data => {
-          debugger;
+
           this.student = data;
           // this.student.dtBirthdate.getTime();
           // this.student.dtAddStudentDate.getTime();
@@ -74,9 +83,6 @@ export class StudentDetailsComponent implements OnInit {
             this.diedDateHebrewMother.Year = this.diedDateMotherArr[2];
           }
 
-
-
-          debugger;
           if (this.student.bDeathFather == true) {
             this.fatherDeadDetails = true;
             this.isCheckedFather = true;
@@ -96,11 +102,30 @@ export class StudentDetailsComponent implements OnInit {
       this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data; });
 
     });
+    this.appProxy.post("GetYeshivotOfStudent", { iPersonId: this.paramRout }).then(data => this.yeshivaListOfStudent = data);
     // this.route.parent.params.subscribe(params => { this.paramRout = params['iPersonId'] });
   }
 
+
+  selectYesh(event: any) {
+if(event.currentTarget.value=='בחר מוסד')
+  {
+    this.yeshivaSelected.nvAddress =null;
+    this.yeshivaSelected.nvCity =null;
+  }
+ 
+    this.yeshivaList.forEach(e => {
+      if (e.nvYeshivaName == event.currentTarget.value) {
+        this.yeshivaSelected.nvYeshivaName = e.nvYeshivaName;
+        this.yeshivaSelected.nvAddress = e.nvAddress;
+        this.yeshivaSelected.nvCity = e.nvCity;
+      }
+
+    })
+  }
+
   changeStatusParent(parentType) {
-    debugger;
+
     switch (parentType) {
       case 1:
         if (this.student.bDeathFather == true) {
@@ -167,8 +192,8 @@ export class StudentDetailsComponent implements OnInit {
 
   }
 
-  get baseFileUrl(){
-    return AppProxy.getBaseUrl() +'Files/Students/';
+  get baseFileUrl() {
+    return AppProxy.getBaseUrl() + 'Files/Students/';
   }
   protected save = { image: '', name: '' };
 
