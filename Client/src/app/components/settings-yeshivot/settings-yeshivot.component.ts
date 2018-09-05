@@ -22,10 +22,8 @@ export class SettingsYeshivotComponent implements OnInit {
   protected iYeshivaId: number;
   protected lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   protected yeshiva:Yeshiva;
-  protected iuserId:number;
   protected iLastModifyUserId:number;
   protected flag;
-  protected vyTable:VyTableComponent;
   @ViewChild('yeshivot') yeshivot:any;
 
  
@@ -52,7 +50,7 @@ export class SettingsYeshivotComponent implements OnInit {
         this.sysTableList=val;
         this.yeshivaList.forEach(y=> {
           y['edit'] = '<div class="edit"></div>';
-          y['delete'] = '<div> class="delete"></div>';
+          y['delete'] = '<div class="delete"></div>';
           y['nvRoleType']=this.sysTableList.filter(x=>x.iSysTableRowId==y.iRoleType)[0].nvValue;
         });
       });
@@ -60,9 +58,9 @@ export class SettingsYeshivotComponent implements OnInit {
   }
 
   public setYeshiva(yeshiva){
-    // if()
+    if(yeshiva.columnClickName=="edit")
        this.editYeshiva(yeshiva);
-    // else 
+    else 
        this.deleteYeshiva(yeshiva);
   }
 
