@@ -14,7 +14,7 @@
     </nav>
 
     <div class="btn-area">
-      <button class="btn-circle btn-save" (click)="saveUser()">שמור V</button>
+      <button class="btn-circle btn-save " [class.disabled]="!isDisabled()" (click)="saveUser()" [disabled]="!isDisabled()">שמור V</button>
       <button class="btn-circle btn-close" routerLink="/users">סגור X</button>
     </div>
   </div>
