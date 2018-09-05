@@ -12,4 +12,15 @@
 <app-vy-table #avrechim [lstColumns]="lstColumns" [lstDataRows]="avrechimList" (clickCell)="click($event)"></app-vy-table>
 
 
-
+<div *ngIf="flag">
+    <div  class="content-modal">
+        <div class="close" (click)="flag=false">x</div>
+       <span class="caption-delete">מחיקת אברך</span>
+         <p>
+            האם אתה בטוח שברצונך למחוק אברך זה?
+         </p>
+         <button class="btn-yesNo" (click)="delete()">כן</button>
+         <button class="btn-yesNo" (click)="flag=false">לא</button>
+     </div>
+    </div>     
+<!-- </div> -->
