@@ -14,8 +14,11 @@
     <li *ngFor="let d of documents" class="media-item">
       <app-media [document]="d"></app-media><br/>
       <div class="buttons">
-      <button class="btn btn-del"(click)="deleteDocument(d.iDocumentId)"></button>
-      <button class="btn btn-edit"(click)="editDocument(d.iDocumentId)"></button>
+      <button class="btn btn-del"(click)="deleteDocument(d.iDocumentId)" title="מחק"></button>
+      <button class="btn btn-edit"(click)="editDocument(d.iDocumentId)" title="ערוך"></button>
+      <button *ngIf="d.bShowInTadmit==0" class="btn btn-plus"(click)="changeTadmitStatus(d.iDocumentId)" title="הוסף לאתר תדמית"></button>
+      <button *ngIf="d.bShowInTadmit==1" class="btn btn-minus"(click)="changeTadmitStatus(d.iDocumentId)" title="הסר מאתר תדמית"></button>
+      
       </div>
     </li>
   </ul>
