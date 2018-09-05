@@ -63,9 +63,13 @@ export class AvrechimComponent implements OnInit {
   }
   deleteAvrech(e)
   {
-    this.appProxy.post('DeleteAvrech', e)
+    this.appProxy.post('DeleteAvrech', {iPersonId:e.iPersonId})
     .then(result => {
-      if (result) { alert('שמירת הקובץ התבצעה בהצלחה'); } else { alert('שמירת הקובץ נכשלה'); }
+      if (result) {
+        debugger;
+        this.avrechimList.splice(this.avrechimList.indexOf(this.avrechimList.find(e)),1);        
+         alert('המחיקה התבצעה בהצלחה'); 
+    } else { alert(' המחיקה נכשלה'); }
     });
   }
 

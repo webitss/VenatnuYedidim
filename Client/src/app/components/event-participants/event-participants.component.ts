@@ -39,13 +39,13 @@ export class EventParticipantsComponent implements OnInit {
           this.lstDataRows.push({
             iEventId: p.iEventId,
             nvFirstName: p.nvFirstName,
-            nvLasttName: p.nvLasttName,
+            nvLastName: p.nvLastName,
             nvPhone: p.nvPhone,
             nvMobile: p.nvMobile,
             nvEmail: p.nvEmail,
             nvParticipantType: p.nvParticipantType,
            // iArriveStatusType: p.iArriveStatusType,
-            iArriveStatusType:'<select value="'+p.iArriveStatusType+'"> <option *ngFor="let s of sysTableRowList" >{{s.nvValue}}</option></select>'
+            iArriveStatusType:'<select value="'+p.iArriveStatusType+'"> <option *ngFor="let s of sysTableRowList" [ngValue]="s.nvValue" >{{s.nvValue}}</option></select>'
           
           });
         });
@@ -60,7 +60,7 @@ export class EventParticipantsComponent implements OnInit {
           });
 
         });
-        alert("x");
+        // alert("x");
       })
     });
   }
