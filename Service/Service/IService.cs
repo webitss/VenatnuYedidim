@@ -183,6 +183,16 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         bool DeleteAvrechStudent(int iAvrechId, int iStudentId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "DeleteAvrech",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool DeleteAvrech(int iPersonId);
+        
         #endregion
 
 
