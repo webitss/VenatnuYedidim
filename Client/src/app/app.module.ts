@@ -105,7 +105,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 
     // pipes
     FilterPipe,
-
+ 
     //directives
     GoogleCity,
     SafeUrl,    
@@ -284,6 +284,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
   ],
   providers: [AppProxy, SysTableService, GlobalService, CanDeactivateGuard, DialogService],
   bootstrap: [AppComponent],
+
   // exports: [CalendarComponent]
   // entryComponents:[
   //   CardsUnionComponent
