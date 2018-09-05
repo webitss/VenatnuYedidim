@@ -63,7 +63,7 @@ export class CalendarComponent implements OnInit {
 
 
     // this.dayOfWeek = new Date().getDay();
-    alert((new Date(this.year,2, 1).getDay()-2)%7);
+    alert((new Date(this.year,12, 1).getDay()-2)%7);
     this.oneOfMonth = new Date(this.year, this.month, 1).getDay();
     this.lenOfMonth = new Date(this.year, this.month, 0).getDate();
 
