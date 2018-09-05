@@ -37,11 +37,11 @@ namespace Service.Entities
 
         #region Methods
 
-        public static List<Yeshivot> GetAllYeshivot(int iYeshivaId)
+        public static List<Yeshivot> GetAllYeshivot()
         {
             try
             {
-                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TYeshivot_SLCT", new SqlParameter("iYeshivaId", iYeshivaId)).Tables[0].Rows;
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TYeshivot_SLCT").Tables[0].Rows;
                 List <Yeshivot> yeshivots = ObjectGenerator<Yeshivot>.GeneratListFromDataRowCollection(drc);
 
                 return yeshivots;
@@ -99,13 +99,13 @@ namespace Service.Entities
             }
         }
 
-        public static bool DeleteYeshiva(int iYeshivaId, int iUserId)
+        public static bool DeleteYeshiva(int iYeshivaId, int iLastModifyUserId)
         {
             try
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();
                 parameters.Add(new SqlParameter("iYeshivaId", iYeshivaId));
-                parameters.Add(new SqlParameter("iLastModifyUserId", iUserId));
+                parameters.Add(new SqlParameter("iLastModifyUserId", iLastModifyUserId));
                 SqlDataAccess.ExecuteDatasetSP("TYeshivot_DEL", parameters);
 
                 return true;

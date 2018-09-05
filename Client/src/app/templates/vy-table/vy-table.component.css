@@ -3,6 +3,7 @@
     /* border: 1px solid gray; */
     padding: 10px;
     text-align: right;
+    word-wrap:break-word;
 }
 
 .cell-title,small-title{

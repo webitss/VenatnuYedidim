@@ -36,7 +36,7 @@ namespace Service.Entities
         //public bool bSysRowStatus { get; set; }
 
         #endregion
-         
+
         public static List<Event1> GetEventsList(int? iUserId)
         {
             try
@@ -56,6 +56,8 @@ namespace Service.Entities
         {
             try
             {
+                bool isNew;
+                isNew = oEvent.iEventId == 0 ? true : false;
                 List<SqlParameter> parameters = new List<SqlParameter>();
                 parameters.Add(new SqlParameter("iEventId", oEvent.iEventId));
                 parameters.Add(new SqlParameter("nvName", oEvent.nvName));
@@ -66,13 +68,39 @@ namespace Service.Entities
                 parameters.Add(new SqlParameter("participantIds", ObjectGenerator<TInt>.GetDataTable(to)));
 
 
-                SqlDataAccess.ExecuteDatasetSP("TEvent_INS/UPD", parameters);
-                if (oEvent.iEventId != 0)
+                if(!isNew)
+                    SqlDataAccess.ExecuteDatasetSP("TEvent_INS/UPD", parameters);
+                if (isNew)
                 {
+                    User user = User.GetUser(iUserId);
+                    DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_INS/UPD", parameters).Tables[0].Rows;
+                    for (int i = 0; i < drc.Count; i++)
+                    {
+                        int iPersonId = int.Parse(drc[i]["iPersonId"].ToString());
+                        string nvEmail = drc[i]["nvEmail"].ToString();
+                        string body = "<b>הנך מוזמן ל" + oEvent.nvName +
+                            "</b><br>שיתקיים ב" + oEvent.nvPlace +
+                            "<br>בתאריך " + oEvent.dtEventDate + "<br>" + oEvent.nvComments +
+                             "<br><br> <b> בברכה </b> <br>" + user.nvFirstName + " " + user.nvLastName +
+                             "<br> עמותת ונתנו ידידים";
+                        string from=user.nvEmail;
+                        if(user.nvEmail=="" || user.nvEmail==null)
+                        {
+                            from = ConfigSettings.ReadSetting("Email");
+                        }
+                        if(SendMessagesHandler.SendEmailOrFax(from, nvEmail, oEvent.nvName, body, null)==true)
+                        {
+                            List<SqlParameter> param = new List<SqlParameter>();
+                            param.Add(new SqlParameter("iEventId", drc[i]["iEventId"]));
+                            param.Add(new SqlParameter("iPersonId", iPersonId));
+                            param.Add(new SqlParameter("iStatusType", 34));  //סטטוס קיבל הודעה
+                            SqlDataAccess.ExecuteDatasetSP("TParticipantsUpdateArrivalStatus_UPD", param);
+                        }
+                    }
                     //SendMessagesHandler.SendEmailOrFax()
                 }
 
-                
+
                 return true;
             }
             catch (Exception ex)
@@ -96,7 +124,7 @@ namespace Service.Entities
                 return null;
             }
         }
-        
+
 
     }
 }

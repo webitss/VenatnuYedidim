@@ -1,16 +1,17 @@
-import { Component, OnInit, Output, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, Input, ViewChild, EventEmitter } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Event1 } from '../../classes/event';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { EventComponent } from '../event/event.component';
 import { ActivatedRoute } from '@angular/router';
-import { FormArrayName } from '@angular/forms';
+import { FormArrayName, NgForm } from '@angular/forms';
 import { PARAMETERS } from '@angular/core/src/util/decorators';
 import { Tint } from '../../classes/tint';
 import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { VyMultySelectComponent } from '../../templates/vy-multy-select/vy-multy-select.component';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-event-details',
@@ -19,24 +20,39 @@ import { VyMultySelectComponent } from '../../templates/vy-multy-select/vy-multy
 })
 export class EventDetailsComponent implements OnInit {
   list: Array<any> = new Array<any>();
-  title:string="";
-  inputTitle:string="עבור";
+  title: string = "";
+  inputTitle: string = "עבור";
+  touched = false;
 
   protected e: Event1;
-to:Array<any>;
-participantsToSend:Array<Tint>=new Array<Tint>();
+  to: Array<any>;
+  participantsToSend: Array<Tint> = new Array<Tint>();
 
-@ViewChild('child')VyMultySelect: VyMultySelectComponent;
+  @ViewChild(NgForm) form;
+
+  checkFormValidity() {
+    return this.form.valid;
+  }
+
+  selectValid = false;
+  isValid = this.selectValid && this.form.valid;
+
+  checkIfSelectIsValid() {
+    return this.to.length > 0;
+  }
+
+  @ViewChild('child') VyMultySelect: VyMultySelectComponent;
+
 
   save() {
     this.participantsToSend.splice(0, this.participantsToSend.length);
     this.e.dtEventDate = new Date(this.e.dtEventDate);
-    this.to.forEach(t=>{
+    this.to.forEach(t => {
       this.participantsToSend.push(new Tint(t.iSysTableRowId));
     })
     // this.VyMultySelect.save();
 
-    this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: 1 , to:this.participantsToSend})
+    this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: this.globalService.getUser()['iUserId'], to: this.participantsToSend })
       .then(
         data => {
           alert("success" + data);
@@ -45,15 +61,20 @@ participantsToSend:Array<Tint>=new Array<Tint>();
         });
   }
 
+  @Output() updateValid = new EventEmitter();
+
   getFromChild(list: Array<any>) {
     this.to = list;
+    this.selectValid = this.checkIfSelectIsValid();
+    this.isValid = this.selectValid && this.form.valid;
   }
   private sub: any;
   private iEventId: number;
   isDetails: boolean;
-  sysTableRowList:SysTableRow[];
+  sysTableRowList: SysTableRow[];
 
-  constructor(private appProxy: AppProxy, private router: ActivatedRoute,private sysTableService: SysTableService) { }
+  constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService,
+    private globalService: GlobalService) { }
 
   ngOnInit() {
 
@@ -73,18 +94,18 @@ participantsToSend:Array<Tint>=new Array<Tint>();
     });
 
 
-  this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data=>{
-    this.sysTableRowList=data;
-    this.sysTableRowList.forEach(s=>{
-     // s.iSysTableRowId
-      s['value']= s.nvValue;
+    this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
+      this.sysTableRowList = data;
+      this.sysTableRowList.forEach(s => {
+        // s.iSysTableRowId
+        s['value'] = s.nvValue;
+      })
+      //alert("success"+this.sysTableRowList[0].nvValue);
+    }, err => {
+      // alert("error")
     })
-    //alert("success"+this.sysTableRowList[0].nvValue);
-  },err=>{
-   // alert("error")
-  })
 
-//this.participantsToSend=new Array<string>();
+    //this.participantsToSend=new Array<string>();
 
   }
 

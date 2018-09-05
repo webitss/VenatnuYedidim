@@ -1,16 +1,15 @@
 <!-- {{document.nvDocumentName}} -->
 
 
-<div #condiv>
+<div #condiv class="img-container ">
   <img *ngIf="document.nvDocumentType && document.nvDocumentType.indexOf('image') != -1" [src]="baseFileUrl + document.nvDocumentName"
-  />
+  [title]="document.nvComment"/>
 
   <audio *ngIf="document.nvDocumentType && document.nvDocumentType.indexOf('audio') != -1" controls poster="assets/images/audio-poster.gif">
     <source [src]="baseFileUrl + document.nvDocumentName" [type]="document.nvDocumentType">
   </audio>
 
-  <video *ngIf="document.nvDocumentType && document.nvDocumentType.indexOf('video') != -1" controls
-   >
+  <video *ngIf="document.nvDocumentType && document.nvDocumentType.indexOf('video') != -1" controls [title]="document.nvComment">
     <source [src]="baseFileUrl + document.nvDocumentName" [type]="document.nvDocumentType">
   </video>
 

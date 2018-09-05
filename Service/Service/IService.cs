@@ -101,7 +101,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool AddStudent(Student student, int iUserId);
+        bool AddStudent(Student student,string base64Image, int iUserId);
 
 
         [OperationContract]
@@ -111,9 +111,9 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool UpdateStudent(Student student, int iUserId);
+        bool UpdateStudent(Student student, string base64Image, int iUserId);
 
-       
+
 
         [OperationContract]
         [WebInvoke(
@@ -183,6 +183,16 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         bool DeleteAvrechStudent(int iAvrechId, int iStudentId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "DeleteAvrech",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool DeleteAvrech(int iPersonId);
+        
         #endregion
 
 
@@ -358,7 +368,7 @@ RequestFormat = WebMessageFormat.Json)]
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Yeshivot> GetAllYeshivot(int iYeshivaId);
+        List<Yeshivot> GetAllYeshivot();
 
         [OperationContract]
         [WebInvoke(
@@ -377,6 +387,15 @@ RequestFormat = WebMessageFormat.Json)]
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         Yeshivot getYeshivaById(int iYeshivaId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "DeleteYeshiva",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool DeleteYeshiva(int iYeshivaId,int iLastModifyUserId);
 
         #endregion
 
@@ -452,7 +471,7 @@ RequestFormat = WebMessageFormat.Json)]
          RequestFormat = WebMessageFormat.Json)]
         List<Document> GetDocuments();
 
-
+       
         //[OperationContract]
         //[WebInvoke(
         //Method = "POST",
@@ -469,7 +488,7 @@ RequestFormat = WebMessageFormat.Json)]
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool SetDocument(Document document, string nvBase64File);
+        int SetDocument(Document document, string nvBase64File,int iUserId);
 
 
 
@@ -481,6 +500,17 @@ RequestFormat = WebMessageFormat.Json)]
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         List<Document> GetDocumentsByItemId(int iItemId);
+
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "DeleteDocument",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool DeleteDocument(int iDocumentId,int iLastModifyUserId);
+
         #endregion
 
         #region graduates

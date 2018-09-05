@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Student } from '../../classes/student';
 import { ActivatedRoute } from '@angular/router';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-cards-union',
@@ -20,17 +21,20 @@ model:number;
   students:boolean=false;
 
   id:number;
+  @Output() onClose: EventEmitter<any> = new EventEmitter();
 
-  constructor(private activatedRoute: ActivatedRoute, private appProxy:AppProxy) { }
+  constructor(private activatedRoute: ActivatedRoute, private appProxy:AppProxy,private globalService:GlobalService) { }
 
   ngOnInit() {
+
+
+    
     this.student.dtAddStudentDate=null;
     this.student.dtBirthdate=null;
-
    this.activatedRoute.parent.params.subscribe(params => {
       this.id = params['iPersonId'];
     });
-    this.appProxy.post('GetAvrechStudents', { iPersonId: 1 }).then(
+    this.appProxy.post('GetStudentList', { iUserId:this.globalService.getUser()['iUserId'] }).then(
       data => 
       {
         this.studentList = data;
@@ -49,12 +53,15 @@ debugger;
     this.studentList.forEach(e=>{
     if(e.iPersonId==event.currentTarget.value)
       this.student2=e;
+      debugger;
+      
     });
 
    }
-public studentValues;
-public student1Values;
-public  aa;
+
+   get baseFileUrl(){
+    return 'http://localhost:14776/Files/Students/';
+  }
    unionOk()
    {
 
@@ -63,6 +70,16 @@ for(var f in this.student)
  if(this.student[f]==null)
  this.student[f]=this.student1[f];
 }
+if(this.student.nvMotherDeathDate=="")
+this.student.bDeathMother=false;
+else
+this.student.bDeathMother=true;
+
+if(this.student.nvFatherDeathDate=="")
+this.student.bDeathFather=false;
+else
+this.student.bDeathFather=true;
+
 
  this.appProxy.post('UnionCards', { student:this.student,iStudent2:this.student2.iPersonId }).then(
       data => 
@@ -78,5 +95,9 @@ if(this.student1[field]==this.student2[field])
 return true;
 else
 return false;
+}
+close()
+{
+  this.onClose.emit();
 }
 }

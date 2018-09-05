@@ -10,8 +10,9 @@
     border-color: hotpink;
    
 }
-myTable{
+.myTable{
     float: left;
+    height: 550px;
 }
 .edit{
 

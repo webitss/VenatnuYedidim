@@ -7,6 +7,7 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { EventEmitter } from 'events';
 import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 @Component({
   selector: 'app-settings-yeshivot',
@@ -21,6 +22,8 @@ export class SettingsYeshivotComponent implements OnInit {
   protected iYeshivaId: number;
   protected lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   protected yeshiva:Yeshiva;
+  protected iLastModifyUserId:number;
+  protected flag;
   @ViewChild('yeshivot') yeshivot:any;
 
  
@@ -47,7 +50,7 @@ export class SettingsYeshivotComponent implements OnInit {
         this.sysTableList=val;
         this.yeshivaList.forEach(y=> {
           y['edit'] = '<div class="edit"></div>';
-          y['delete'] = '<div> class="delete"></div>';
+          y['delete'] = '<div class="delete"></div>';
           y['nvRoleType']=this.sysTableList.filter(x=>x.iSysTableRowId==y.iRoleType)[0].nvValue;
         });
       });
@@ -55,28 +58,34 @@ export class SettingsYeshivotComponent implements OnInit {
   }
 
   public setYeshiva(yeshiva){
-
-    // if(event)
-    //   this.editYeshiva(yeshiva);
-    // else
-    //   this.deleteYeshiva(yeshiva);
+    if(yeshiva.columnClickName=="edit")
+       this.editYeshiva(yeshiva);
+    else 
+       this.deleteYeshiva(yeshiva);
   }
 
   public editYeshiva(yeshiva) {
     this.iYeshivaId = yeshiva.iYeshivaId;
+    this.flag=false;
   }
 
-  public DeleteYeshiva(yeshiva){
+  public deleteYeshiva(yeshiva) {
     this.iYeshivaId=yeshiva.iYeshivaId;
-    this.appProxy.post('DeleteYeshiva').then(data=>{
-      this.yeshiva=data;
-      
+    this.flag=true;
+  }
 
-    })
+  delete() {
+    this.appProxy.post('DeleteYeshiva',{iYeshivaId:this.iYeshivaId,iLastModifyUserId:this.iLastModifyUserId})
+    .then(
+        data=>{
+        this.yeshiva=data;
+        alert("הישיבה נמחקה בהצלחה");
+    });    
   }
 
   close() {
     this.iYeshivaId = null;
+    this.flag=null;
   }
 
   downloadExcel(){

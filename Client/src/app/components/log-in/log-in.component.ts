@@ -3,6 +3,8 @@ import { AppProxy } from '../../services/app.proxy';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app/app.component';
 import { GlobalService } from '../../services/global.service';
+import { DialogService } from '../../services/dialog.service';
+import { Observable } from 'rxjs/Observable';
 // import {GoogleCity} from '../../directives/googleCity';
 
 @Component({
@@ -12,7 +14,7 @@ import { GlobalService } from '../../services/global.service';
 })
 export class LogInComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private router: Router, private appComponent: AppComponent, private globalService: GlobalService) { }
+  constructor(private appProxy: AppProxy, private router: Router, private appComponent: AppComponent, private globalService: GlobalService, private dialogService: DialogService) { }
 
   ngOnInit() {
     this.imgHeight = window.innerHeight;
@@ -29,14 +31,16 @@ export class LogInComponent implements OnInit {
 
 
   logIn() {
+    debugger
     this.appProxy.post("Login", { nvUserName: this.nvUserName, nvPassword: this.nvPassword }).then(
       data => {
         if (data != null) {
           // this.user = data;
           data["iUserId"] = data.iPersonId;
           this.appComponent.instance.userName = data.nvUserName;
-          localStorage.setItem("user",JSON.stringify(data));
+          localStorage.setItem("user", JSON.stringify(data));
           this.globalService.user = data;
+
           this.router.navigate(['students']);
         }
         else {
@@ -45,4 +49,11 @@ export class LogInComponent implements OnInit {
       })
   };
 
+  canDeactivate() {
+    if (this.globalService.getUser() != null)
+      return true;
+    return false;// this.dialogService.confirm('Discard changes for Person?');
+
+
+  }
 }

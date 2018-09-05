@@ -35,6 +35,7 @@ export class AvrechimComponent implements OnInit {
       
       a => {
          a['open'] = '<div class="edit"></div>'; 
+         a['delete'] = '<div class="delete"></div>'; 
         });
  
 
@@ -42,14 +43,50 @@ export class AvrechimComponent implements OnInit {
     );
 
     this.lstColumns.push(new VyTableColumn('פתיחה', 'open', 'html', true,false));
+    this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true,false));
     this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
     this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
     this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
     this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));   
   }
-  editAvrech(e) {
-        this.router.navigate(['avrechim/avrech/',e.iPersonId])
+  avrechId:number;
+  flag=false;
+  click(e)
+  {
+    this.avrechId=e.iPersonId;
+    if(e.columnClickName=="open")
+    this.editAvrech();
+    else
+    this.deleteAvrech();
+
+  }
+  editAvrech() {
+        this.router.navigate(['avrechim/avrech/',this.avrechId])
+  }
+  deleteAvrech()
+  {
+    this.flag=true;
+  }
+
+  delete()
+  {
+    this.appProxy.post('DeleteAvrech', {iPersonId:this.avrechId})
+    .then(result => {
+      if (result) {
+        let i=0;
+        this.avrechimList.forEach(e=>{
+        
+          if(e.iPersonId==this.avrechId)
+          this.avrechimList.splice(i,1);
+          i++;
+          
+        });
+              
+ 
+    } else { alert(' המחיקה נכשלה'); }
+    this.flag=false;
+    });
   }
 
   downloadExcel(t){

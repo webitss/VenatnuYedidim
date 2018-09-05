@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-//import { WavesModule, LightBoxModule } from 'ng-uikit-pro-standard'
-
+// import { WavesModule, LightBoxModule } from 'ng-uikit-pro-standard'
 @Component({
   selector: 'app-galery',
   templateUrl: './galery.component.html',

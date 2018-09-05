@@ -1,11 +1,14 @@
 
 
- <div  class="add-student">
-  <span class="Student-affiliation">איחוד כרטיסים</span>
+ <div  class="content-modal">
+   <div class="close" (click)="close()">x</div>
+  <span class="caption-cardsUnion">איחוד כרטיסים</span>
   <div class="form-group">
+    
   <select class="form-control" (change)="student1Change($event)">
       <option *ngFor="let student of studentList" value="{{student.iPersonId}}">{{student.nvFirstName}}  {{student.nvLastName}}</option>
     </select>
+  
   </div>
   <div class="form-group">
     <select class="form-control" (change)="student2Change($event)">
@@ -17,132 +20,123 @@
   <form *ngIf="student1&&student2&&students" class="students" #form1>
     <div class="students-details">
       <div class="st-details col-sm-6">
-          <span class="col-sm-3">שם פרטי:</span>
-              <input type="radio" class="col-sm-1" id="st1FirstName" name="stFirstName" value="{{student1.nvFirstName}}" [(ngModel)]="student.nvFirstName"  checked>
-              <label  class="col-sm-3" for="st1FirstName">{{student1.nvFirstName}}</label>
-              <input type="radio" class="col-sm-1" id="st2FirstName" name="stFirstName" value="{{student2.nvFirstName}}" [(ngModel)]="student.nvFirstName">
+          <span class="col-sm-4" >שם פרטי:</span>
+              <input type="radio" class="col-sm-1" id="st1FirstName" name="stFirstName" value="{{student1.nvFirstName}}" [(ngModel)]="student.nvFirstName" checked>
+              <label  class="col-sm-3" for="st1FirstName" >{{student1.nvFirstName}}</label>
+              <input type="radio" class="col-sm-1" id="st2FirstName" name="stFirstName" value="{{student2.nvFirstName}}" [(ngModel)]="student.nvFirstName" [disabled]="student1.nvFirstName==student2.nvFirstName">
               <label class="col-sm-3" for="st2FirstName">{{student2.nvFirstName}}</label>
 </div>
 <div class="st-details col-sm-6">
-    <span class="col-sm-3">שם משפחה:</span>
-        <input type="radio" class="col-sm-1" id="st1LastName" name="stLastName" value="{{student1.nvLastName}}" [(ngModel)]="student.nvLastName" checked >
+    <span class="col-sm-4">שם משפחה:</span>
+        <input type="radio" class="col-sm-1" id="st1LastName" name="stLastName" value="{{student1.nvLastName}}" [(ngModel)]="student.nvLastName" checked="checked" >
         <label class="col-sm-3" for="st1LastName">{{student1.nvLastName}}</label>
-        <input type="radio" class="col-sm-1" id="st2LastName" name="stLastName" value="{{student2.nvLastName}}" [(ngModel)]="student.nvLastName" >
+        <input type="radio" class="col-sm-1" id="st2LastName" name="stLastName" value="{{student2.nvLastName}}" [(ngModel)]="student.nvLastName" [disabled]="student1.nvLastName==student2.nvLastName" >
         <label class="col-sm-3" for="st2LastName">{{student2.nvLastName}}</label>
 </div>
 
 <div class="st-details col-sm-6">
-  <span class="col-sm-3">ת.ז :</span>
-      <input type="radio" class="col-sm-1" id="st1IdentityCard" name="stIdentityCard" value="{{student1.nvIdentityCard}}" [(ngModel)]="student.nvIdentityCard" checked>
+  <span class="col-sm-4">ת.ז :</span>
+      <input type="radio" class="col-sm-1" id="st1IdentityCard" name="stIdentityCard" value="{{student1.nvIdentityCard}}" [(ngModel)]="student.nvIdentityCard" checked="checked">
       <label class="col-sm-3" for="st1IdentityCard">{{student1.nvIdentityCard}}</label>
-      <input type="radio" class="col-sm-1" id="st2IdentityCard" name="stIdentityCard" value="{{student2.nvIdentityCard}}" [(ngModel)]="student.nvIdentityCard" >
+      <input type="radio" class="col-sm-1" id="st2IdentityCard" name="stIdentityCard" value="{{student2.nvIdentityCard}}" [(ngModel)]="student.nvIdentityCard"  [disabled]="student1.nvIdentityCard==student2.nvIdentityCard">
       <label class="col-sm-3" for="st2IdentityCard">{{student2.nvIdentityCard}}</label>
 </div>
 
 
 <div class="st-details col-sm-6">
-    <span class="col-sm-3"> טלפון:</span>
-        <input type="radio" class="col-sm-1" id="st1FirstName" name="stPhone" value="{{student1.nvPhone}}" [(ngModel)]="student.nvPhone"  checked>
-        <label class="col-sm-3" for="st1FirstName">{{student1.nvPhone}}</label>
-        <input type="radio" class="col-sm-1" id="st2FirstName" name="stPhone" value="{{student2.nvPhone}}" [(ngModel)]="student.nvPhone">
-        <label class="col-sm-3" for="st2FirstName">{{student2.nvPhone}}</label>
+    <span class="col-sm-4"> טלפון:</span>
+        <input type="radio" class="col-sm-1" id="st1Phone" name="stPhone" value="{{student1.nvPhone}}" [(ngModel)]="student.nvPhone"  checked="checked">
+        <label class="col-sm-3" for="st1Phone">{{student1.nvPhone}}</label>
+        <input type="radio" class="col-sm-1" id="st2Phone" name="stPhone" value="{{student2.nvPhone}}" [(ngModel)]="student.nvPhone" [disabled]="student1.nvPhone==student2.nvPhone">
+        <label class="col-sm-3" for="st2Phone">{{student2.nvPhone}}</label>
 </div>
 
 <div class="st-details col-sm-6">
-<span class="col-sm-3"> נייד:</span>
-  <input type="radio" class="col-sm-1" id="st1LastName" name="stMobile" value="{{student1.nvMobile}}" [(ngModel)]="student.nvMobile" checked>
-  <label class="col-sm-3" for="st1LastName">{{student1.nvMobile}}</label>
-  <input type="radio" class="col-sm-1" id="st2LastName" name="stMobile" value="{{student2.nvMobile}}" [(ngModel)]="student.nvMobile" >
-  <label class="col-sm-3" for="st2LastName">{{student2.nvMobile}}</label>
+<span class="col-sm-4"> נייד:</span>
+  <input type="radio" class="col-sm-1" id="st1Mobile" name="stMobile" value="{{student1.nvMobile}}" [(ngModel)]="student.nvMobile" checked="checked">
+  <label class="col-sm-3" for="st1Mobile">{{student1.nvMobile}}</label>
+  <input type="radio" class="col-sm-1" id="st2Mobile" name="stMobile" value="{{student2.nvMobile}}" [(ngModel)]="student.nvMobile" [disabled]="student1.nvMobile==student2.nvMobile" >
+  <label class="col-sm-3" for="st2Mobile">{{student2.nvMobile}}</label>
 </div>
 <div class="st-details col-sm-6">
-<span class="col-sm-3">אימייל:</span>
-  <input type="radio" class="col-sm-1" id="st1IdentityCard" name="stEmail" value="{{student1.nvEmail}}" [(ngModel)]="student.nvEmail" checked>
-  <label class="col-sm-3" for="st1IdentityCard">{{student1.nvEmail}}</label>
-  <input type="radio" class="col-sm-1" id="st2IdentityCard" name="stEmail" value="{{student2.nvEmail}}" [(ngModel)]="student.nvEmail" >
-  <label class="col-sm-3" for="st2IdentityCard">{{student2.nvEmail}}</label>
+<span class="col-sm-4">אימייל:</span>
+  <input type="radio" class="col-sm-1" id="st1Email" name="stEmail" value="{{student1.nvEmail}}" [(ngModel)]="student.nvEmail" checked="checked">
+  <label class="col-sm-3" for="st1Email">{{student1.nvEmail}}</label>
+  <input type="radio" class="col-sm-1" id="st2Email" name="stEmail" value="{{student2.nvEmail}}" [(ngModel)]="student.nvEmail" [disabled]="student1.nvEmail==student2.nvEmail" >
+  <label class="col-sm-3" for="st2Email">{{student2.nvEmail}}</label>
 </div>
 
 <div class="st-details col-sm-6">
-    <span class="col-sm-3"> כתובת:</span>
-        <input type="radio" class="col-sm-1" id="st1Address" name="stAddress" value="{{student1.nvAddress}}" [(ngModel)]="student.nvAddress"  checked>
+    <span class="col-sm-4"> כתובת:</span>
+        <input type="radio" class="col-sm-1" id="st1Address" name="stAddress" value="{{student1.nvAddress}}" [(ngModel)]="student.nvAddress"  checked="checked">
         <label class="col-sm-3" for="st1Address">{{student1.nvAddress}}</label>
-        <input type="radio" class="col-sm-1" id="st2Address" name="stAddress" value="{{student2.nvAddress}}" [(ngModel)]="student.nvAddress">
+        <input type="radio" class="col-sm-1" id="st2Address" name="stAddress" value="{{student2.nvAddress}}" [(ngModel)]="student.nvAddress" [disabled]="student1.nvAddress==student2.nvAddress">
         <label class="col-sm-3" for="st2Address">{{student2.nvAddress}}</label>
 </div>
 <div class="st-details col-sm-6">
-<span class="col-sm-3"> עיר:</span>
-  <input type="radio" class="col-sm-1" id="st1City" name="stCity" value="{{student1.nvCity}}" [(ngModel)]="student.nvCity" checked>
+<span class="col-sm-4"> עיר:</span>
+  <input type="radio" class="col-sm-1" id="st1City" name="stCity" value="{{student1.nvCity}}" [(ngModel)]="student.nvCity" checked="checked">
   <label class="col-sm-3" for="st1City">{{student1.nvCity}}</label>
-  <input type="radio" class="col-sm-1" id="st2City" name="stCity" value="{{student2.nvCity}}" [(ngModel)]="student.nvCity" >
+  <input type="radio" class="col-sm-1" id="st2City" name="stCity" value="{{student2.nvCity}}" [(ngModel)]="student.nvCity" [disabled]="student1.nvCity==student2.nvCity" >
   <label class="col-sm-3" for="st2City">{{student2.nvCity}}</label>
 </div>
 
-<div class="st-details col-sm-6">
-<span class="col-sm-3">תאריך לידה:</span>
-  <input type="radio" class="col-sm-1" id="st1Birthdate" name="stBirthdate" value="{{student1.nvBirthdate}}" [(ngModel)]="student.nvBirthdate" checked>
-  <label class="col-sm-3" for="st1Birthdate">{{student1.nvBirthdate}}</label>
-  <input type="radio" class="col-sm-1" id="st2Birthdate" name="stBirthdate" value="{{student2.nvBirthdate}}" [(ngModel)]="student.nvBirthdate" >
-  <label class="col-sm-3" for="st2Birthdate">{{student2.nvBirthdate}}</label>
-</div>
 
-<div class="st-details col-sm-6">
-<span class="col-sm-3">שם ישיבה:</span>
-  <input type="radio" class="col-sm-1" id="st1YeshivaName" name="stYeshivaName" value="{{student1.nvYeshivaName}}" [(ngModel)]="student.nvYeshivaName" checked>
-  <label class="col-sm-3" for="st1YeshivaName">{{student1.nvYeshivaName}}</label>
-  <input type="radio" class="col-sm-1" id="st2YeshivaName" name="stYeshivaName" value="{{student2.nvYeshivaName}}" [(ngModel)]="student.nvYeshivaName" >
-  <label class="col-sm-3" for="st2YeshivaName">{{student2.nvYeshivaName}}</label>
-</div>
-
-<div class="st-details col-sm-6">
-    <span class="col-sm-3">רחוב הישיבה:</span>
-        <input type="radio" class="col-sm-1" id="st1YeshivaStreet" name="stYeshivaStreet" value="{{student1.nvYeshivaStreet}}" [(ngModel)]="student.nvYeshivaStreet"  checked>
-        <label class="col-sm-3" for="st1YeshivaStreet">{{student1.nvYeshivaStreet}}</label>
-        <input type="radio" class="col-sm-1" id="st2YeshivaStreet" name="stYeshivaStreet" value="{{student2.nvYeshivaStreet}}" [(ngModel)]="student.nvYeshivaStreet">
-        <label class="col-sm-3" for="st2YeshivaStreet">{{student2.nvYeshivaStreet}}</label>
-</div>
-<div class="st-details col-sm-6">
-<span class="col-sm-3">עיר הישיבה:</span>
-  <input type="radio" class="col-sm-1" id="st1YeshivaCity" name="stYeshivaCity" value="{{student1.nvYeshivaCity}}" [(ngModel)]="student.nvYeshivaCity" checked>
-  <label class="col-sm-3" for="st1YeshivaCity">{{student1.nvYeshivaCity}}</label>
-  <input type="radio" class="col-sm-1" id="st2YeshivaCity" name="stYeshivaCity" value="{{student2.nvYeshivaCity}}" [(ngModel)]="student.nvYeshivaCity" >
-  <label class="col-sm-3" for="st2YeshivaCity">{{student2.nvYeshivaCity}}</label>
-</div>
-<!-- <div class="st-details col-sm-6">
-<span class="col-sm-3">תאריך הצטרפות:</span>
-  <input type="radio" class="col-sm-1" id="st1AddStudentDate" name="stAddStudentDate" value="{{student1.dtAddStudentDate}}" [(ngModel)]="student.dtAddStudentDate" checked>
-  <label class="col-sm-3" for="st1AddStudentDate">{{student1.dtAddStudentDate}}</label>
-  <input type="radio" class="col-sm-1" id="st2AddStudentDate" name="stAddStudentDate" value="{{student2.dtAddStudentDate}}" [(ngModel)]="student.dtAddStudentDate" >
-  <label class="col-sm-3" for="st2AddStudentDate">{{student2.dtAddStudentDate.Day}}-{{student2.dtAddStudentDate.Month}}-{{student2.dtAddStudentDate.Year}}</label>
-</div> -->
-
-<div class="st-details col-sm-6">
-    <span class="col-sm-3"> הערות:</span>
-      <input type="radio" class="col-sm-1" id="st1Comment" name="stComment" value="{{student1.nvComment}}" [(ngModel)]="student.nvComment" checked>
-      <label class="col-sm-3" for="st1Comment">{{student1.nvComment}}</label>
-      <input type="radio" class="col-sm-1" id="st2Comment" name="stComment" value="{{student2.nvComment}}" [(ngModel)]="student.nvComment" >
-      <label class="col-sm-3" for="st2Comment">{{student2.nvComment}}</label>
-    </div>
-
-    <div class="st-details col-sm-6">
-      <span class="col-sm-3"> תאריך לידה:</span>
-        <input type="radio" class="col-sm-1" id="st1Birthdate" name="stBirthdate" value="{{student1.nvBirthdate}}" [(ngModel)]="student.nvBirthdate" checked>
-        <label class="col-sm-3" for="st1Birthdate">{{student1.nvBirthdate}}</label>
-        <input type="radio" class="col-sm-1" id="st2Birthdate" name="stBirthdate" value="{{student2.nvBirthdate}}" [(ngModel)]="student.nvBirthdate" >
-        <label class="col-sm-3" for="st2Birthdate">{{student2.nvBirthdate}}</label>
-      </div>
 
       <div class="st-details col-sm-6">
-        <span class="col-sm-3"> הערות:</span>
-          <input type="radio" class="col-sm-1" id="st1AddStudentDate" name="stAddStudentDate" value="{{student1.nvComment}}" [(ngModel)]="student.nvComment" checked>
-          <label class="col-sm-3" for="st1AddStudentDate">{{student1.nvComment}}</label>
-          <input type="radio" class="col-sm-1" id="st2AddStudentDate" name="stAddStudentDate" value="{{student2.nvComment}}" [(ngModel)]="student.nvComment" >
-          <label class="col-sm-3" for="st2AddStudentDate">{{student2.nvComment}}</label>
+        <span class="col-sm-4"> תאריך הצטרפות:</span>
+          <input type="radio" class="col-sm-1" id="st1AddStudentDate" name="stAddStudentDate" value="{{student1.dtAddStudentDate}}" [(ngModel)]="student.dtAddStudentDate"  checked="checked">
+          <label class="col-sm-3" for="st1AddStudentDate">{{student1.dtAddStudentDate.toLocaleDateString()}}</label>
+          <input type="radio" class="col-sm-1" id="st2AddStudentDate" name="stAddStudentDate" value="{{student2.dtAddStudentDate}}" [(ngModel)]="student.dtAddStudentDate" [disabled]="student1.dtAddStudentDate.toLocaleDateString()==student2.dtAddStudentDate.toLocaleDateString()" >
+          <label class="col-sm-3" for="st2AddStudentDate">{{student2.dtAddStudentDate.toLocaleDateString()}}</label>
         </div>
+
+        <div class="st-details col-sm-6">
+          <span class="col-sm-4"> תאריך יום הולדת:</span>
+            <input type="radio" class="col-sm-1" id="st1Birthdate" name="stBirthdate" value="{{student1.nvBirthdate}}" [(ngModel)]="student.nvBirthdate"  checked="checked">
+            <label class="col-sm-3" for="st1Birthdate">{{student1.nvBirthdate}}</label>
+            <input type="radio" class="col-sm-1" id="st2Birthdate" name="stBirthdate" value="{{student2.nvBirthdate}}" [(ngModel)]="student.nvBirthdate" [disabled]="student1.nvBirthdate==student2.nvBirthdate" >
+            <label class="col-sm-3" for="st2Birthdate">{{student2.nvBirthdate}}</label>
+          </div>
+  
+          <div class="st-details col-sm-6">
+            <span class="col-sm-4">  תאריך פטירת  האב:</span>
+             
+            <input type="radio" class="col-sm-1" id="st1FatherDeathDate" name="stFatherDeathDate" value="{{student1.nvFatherDeathDate}}" [(ngModel)]="student.nvFatherDeathDate"  checked="checked">        
+            <label *ngIf="student1.bDeathFather==false" class="col-sm-3" for="st1FatherDeathDate">האב חי</label>
+            <label *ngIf="student1.bDeathFather==true" class="col-sm-3" for="st1FatherDeathDate">{{student1.nvFatherDeathDate}}</label>
+              <input type="radio" class="col-sm-1" id="st2FatherDeathDate" name="stFatherDeathDate" value="{{student2.nvFatherDeathDate}}" [(ngModel)]="student.nvFatherDeathDate"  [disabled]="student1.nvFatherDeathDate==student2.nvFatherDeathDate||student1.bDeathFather==false&&student2.bDeathFather==false"/>
+              <label *ngIf="student2.bDeathFather==false" class="col-sm-3" for="st2FatherDeathDate">האב חי</label>
+              <label *ngIf="student2.bDeathFather==true" class="col-sm-3" for="st2FatherDeathDate">{{student2.nvFatherDeathDate}}</label>
+            </div>
+
+            <div class="st-details col-sm-6">
+              <span class="col-sm-4">  תאריך פטירת  האם:</span>
+                <input type="radio" class="col-sm-1" id="st1MotherDeathDate" name="stMotherDeathDate" value="{{student1.nvMotherDeathDate}}" [(ngModel)]="student.nvMotherDeathDate"  checked="checked">
+                <label *ngIf="student1.bDeathMother==true" class="col-sm-3" for="st1MotherDeathDate">{{student1.nvMotherDeathDate}}</label>               
+                <label *ngIf="student1.bDeathMother==false" class="col-sm-3" for="st1MotherDeathDate">האם חיה</label>               
+                <input type="radio" class="col-sm-1" id="st2MotherDeathDate" name="stMotherDeathDate" value="{{student2.nvMotherDeathDate}}" [(ngModel)]="student.nvMotherDeathDate"  [disabled]="student1.nvMotherDeathDate==student2.nvMotherDeathDate||student1.bDeathMother==false&&student2.bDeathMother==false"/>
+                <label  *ngIf="student2.bDeathMother==true" class="col-sm-3" for="st2MotherDeathDate">{{student2.nvMotherDeathDate}}</label>               
+                <label  *ngIf="student2.bDeathMother==false" class="col-sm-3" for="st2MotherDeathDate">האם חיה</label>
+              </div>
+
+              <div class="st-details col-sm-6">
+                <span class="col-sm-4"> הערות:</span>
+                  <input type="radio" class="col-sm-1" id="st1Comment" name="stComment" value="{{student1.nvComment}}" [(ngModel)]="student.nvComment" checked="checked">
+                  <label class="col-sm-3" for="st1Comment">{{student1.nvComment}}</label>
+                  <input type="radio" class="col-sm-1" id="st2Comment" name="stComment" value="{{student2.nvComment}}" [(ngModel)]="student.nvComment" [disabled]="student1.nvComment==student2.nvComment" >
+                  <label class="col-sm-3" for="st2Comment">{{student2.nvComment}}</label>
+                </div>
+
+                <div class="st-details col-sm-6">
+                  <span class="col-sm-4"> הערות:</span>
+                    <input type="radio" class="col-sm-1" id="st1Comment" name="stComment" value="{{student1.nvImgStudent}}" [(ngModel)]="student.nvImgStudent" checked="checked">
+                    <img class="imgStudent" *ngIf="student1.nvImgStudent"  [src]="baseFileUrl + student1.nvImgStudent">
+                    <input type="radio" class="col-sm-1" id="st2Comment" name="stComment" value="{{student2.nvImgStudent}}" [(ngModel)]="student.nvImgStudent" [disabled]="student1.nvImgStudent==student2.nvImgStudent" >
+                    <img class="imgStudent" *ngIf="student1.nvImgStudent"  [src]="baseFileUrl + student2.nvImgStudent">
+                  </div>
+        
+            
 </div>
-<!-- <span *ngIf="!validate">נא למלא את כל השדות!</span> -->
-<button type="submit" class="btn-pink1" (click)="unionOk()" >אישור</button>
-<!-- <button type="submit" class="btn-pink1" (click)="unionOk()" [disabled]="form.valid"  >אישור</button> -->
-
-
+<button type="submit" class="btn-pink1 ok" (click)="unionOk()" >אישור</button>
   </form>

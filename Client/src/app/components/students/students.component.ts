@@ -46,7 +46,7 @@ export class StudentsComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
     this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
     this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
-
+    this.lstColumns.push(new VyTableColumn(' משויך לאברך', ''));
   
   }
 

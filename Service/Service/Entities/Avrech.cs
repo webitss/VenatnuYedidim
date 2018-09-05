@@ -90,6 +90,22 @@ namespace Service.Entities
                 return false;
             }
         }
+
+        public static bool DeleteAvrech(int iPersonId)
+        {
+            try
+            {
+                SqlDataAccess.ExecuteDatasetSP("TAvrech_DEL", new SqlParameter("iPersonId", iPersonId));
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+       
+        
         public static bool UpdateUserNameAndPassword(int iPersonId, string nvUserName, string nvPassword, int iUserId)
         {
             try
@@ -108,6 +124,9 @@ namespace Service.Entities
                 return false;
             }
         }
+
+       
+        
 
     }
 }

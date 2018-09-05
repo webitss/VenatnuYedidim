@@ -16,7 +16,7 @@
 </div>
 
 <div *ngIf="flag==true"> 
-    <app-cards-union></app-cards-union>
+    <app-cards-union (onClose)="flag=false"></app-cards-union>
 </div> 
 
 

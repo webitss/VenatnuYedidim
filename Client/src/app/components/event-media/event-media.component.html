@@ -7,14 +7,18 @@
 
 
 <div class="uploadDocumentComponent" *ngIf="document!=null">
-  <app-upload-document [document]="document" (closeMe)="closeDocumentDialog()"></app-upload-document>
+  <app-upload-document [document]="document" (closeMe)="closeDocumentDialog(true)" (closeMeNoSave)="closeDocumentDialog(false)"></app-upload-document>
 </div>
 
-<div class="media-area">
   <ul>
-    <li *ngFor="let d of documents" class="media">
-      <app-media [document]="d"></app-media><br>
-      <button class="btn btn-circle"(click)="deleteDocument(d.iDocumentId)">מחק</button>
+    <li *ngFor="let d of documents" class="media-item">
+      <app-media [document]="d"></app-media><br/>
+      <div class="buttons">
+      <button class="btn btn-del"(click)="deleteDocument(d.iDocumentId)" title="מחק"></button>
+      <button class="btn btn-edit"(click)="editDocument(d.iDocumentId)" title="ערוך"></button>
+      <button *ngIf="d.bShowInTadmit==0" class="btn btn-plus"(click)="changeTadmitStatus(d.iDocumentId)" title="הוסף לאתר תדמית"></button>
+      <button *ngIf="d.bShowInTadmit==1" class="btn btn-minus"(click)="changeTadmitStatus(d.iDocumentId)" title="הסר מאתר תדמית"></button>
+      
+      </div>
     </li>
   </ul>
-</div>

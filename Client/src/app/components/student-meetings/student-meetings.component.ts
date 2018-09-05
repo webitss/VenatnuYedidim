@@ -5,6 +5,7 @@ import { StudentMeetingDetailsComponent } from '../student-meeting-details/stude
 import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { ActivatedRoute } from '@angular/router';
+import { element } from 'protractor';
 
 
 
@@ -58,8 +59,15 @@ export class StudentMeetingsComponent implements OnInit {
 
     this.flag = 1;
   }
+  m:Meeting;
 updateMeeting(meeting:Meeting){
- this.meetingList.slice( this.meetingList.indexOf(this.meetingList.find(m => m.iMeetingId == meeting.iMeetingId),0),1);
+ this.meetingList.splice( this.meetingList.indexOf(this.meetingList.find(m => m.iMeetingId == meeting.iMeetingId),0),1);
+//  this.meetingList.filter(m => m.iMeetingId == meeting.iMeetingId)[0]= meeting;
+// this.meetingList.forEach(element => {
+//   if(element.iMeetingId == meeting.iMeetingId)
+//   element = meeting;
+// })
+ 
 this.meetingList.push(meeting);
 }
   addMeeting() {
@@ -80,6 +88,7 @@ this.meetingList.push(meeting);
   }
 
   changeTable(m:Meeting){
+    
     m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
     m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
     m['edit'] = '<div class="edit"></div>';

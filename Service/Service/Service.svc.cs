@@ -94,15 +94,15 @@ namespace Service
             return Student.AddStudentsToAvrech(studentAndAvrechArr, iUserId);
         }
 
-        public bool AddStudent(Student student, int iUserId)
+        public bool AddStudent(Student student,string base64Image, int iUserId)
         {
-            return Student.AddStudent(student, iUserId);
+            return Student.AddStudent(student, base64Image,iUserId);
         }
 
 
-        public bool UpdateStudent(Student student, int iUserId)
+        public bool UpdateStudent(Student student, string base64Image, int iUserId)
         {
-            return Student.UpdateStudent(student, iUserId);
+            return Student.UpdateStudent(student, base64Image, iUserId);
         }
 
 
@@ -169,6 +169,11 @@ namespace Service
         {
             return Avrech.UpdateUserNameAndPassword(iPersonId, nvUserName, nvPassword, iUserId);
         }
+        public bool DeleteAvrech(int iPersonId)
+        {
+            return Avrech.DeleteAvrech(iPersonId);
+        }
+        
 
         #endregion
 
@@ -228,9 +233,9 @@ namespace Service
 
         #region yeshivot
 
-        public List<Yeshivot> GetAllYeshivot(int iYeshivaId)
+        public List<Yeshivot> GetAllYeshivot()
         {
-            return Yeshivot.GetAllYeshivot(iYeshivaId);
+            return Yeshivot.GetAllYeshivot();
         }
 
         public bool AddYeshiva(Yeshivot yeshiva)
@@ -246,6 +251,10 @@ namespace Service
         public Yeshivot getYeshivaById(int iYeshivaId)
         {
             return Yeshivot.getYeshivaById(iYeshivaId);
+        }
+        public bool DeleteYeshiva(int iYeshivaId,int iLastModifyUserId)
+        {
+            return Yeshivot.DeleteYeshiva(iYeshivaId, iLastModifyUserId);
         }
 
         #endregion
@@ -264,9 +273,9 @@ namespace Service
         //{
         //    return Document.AddFile(iItemId, iBelongingType, iCategoryType, nvBase64File, nvFileName, nvComment);
         //}
-        public bool SetDocument(Document document, string nvBase64File)
+        public int SetDocument(Document document, string nvBase64File,int iUserId)
         {
-            return Document.SetDocument(document, nvBase64File);
+            return Document.SetDocument(document, nvBase64File, iUserId);
         }
 
 
@@ -274,6 +283,14 @@ namespace Service
         {
             return Document.GetDocumentsByItemId(iItemId);
         }
+
+
+        public bool DeleteDocument(int iDocumentId, int iLastModifyUserId)
+        {
+            return Document.DeleteDocument(iDocumentId, iLastModifyUserId);
+        }
+
+       
 
         #endregion
 

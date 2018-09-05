@@ -11,7 +11,7 @@
         </div>
         <div class="col-sm-4">
             <button class="btn-circle btn-save" (click)="saveFile()">שמור v </button>
-            <button class="btn-circle btn-close" (click)="closeDialog(false)">סגור x </button>
+            <button class="btn-circle btn-close" (click)="closeAndNoSave()">סגור x </button>
         </div>
     </div>
     <div class="content">
@@ -36,7 +36,7 @@
                 <input type="file" (change)="loadDocument($event,save)" name="LoadDocument" id="LoadDocument" />
             </div>
 
-            <div class="form-group">
+            <div class="form-group documentName">
                 <label for="documentName">שם הקובץ</label>
                 <div class="form-control" id="documentName">{{save.name}}</div>
             </div>

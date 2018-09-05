@@ -73,23 +73,25 @@
             <input type="text" class="form-control" id="city" name="city" [(ngModel)]="student.nvCity" [ngModelOptions]="{standalone: true}">
         </div>
     </div>
-
+ 
     <div class="row">
-
 
         <div class="form-group">
             <label for="yeshivaName">מוסד לימודים :</label>
-            <input type="text" class="form-control" id="yeshivaName" name="yeshivaName" [(ngModel)]="student.nvYeshivaName" [ngModelOptions]="{standalone: true}">
+            <select class="form-control" >
+                <option *ngFor="let ye of yeshivaList" >{{ye.nvYeshivaName}}</option>
+            </select>
+            <!-- <input type="text" class="form-control" id="yeshivaName" name="yeshivaName" [(ngModel)]="nvYeshivaName" [ngModelOptions]="{standalone: true}"> -->
         </div>
 
         <div class="form-group ">
             <label for="yesivaStreet">כתובת מוסד :</label>
-            <input type="text" class="form-control" id="yesivaStreet" name="yesivaStreet" [(ngModel)]="student.nvYeshivaStreet" [ngModelOptions]="{standalone: true}">
+            <input type="text" class="form-control" id="yesivaStreet" name="yesivaStreet"   >
         </div>
 
         <div class="form-group ">
             <label for="yeshivaCity">עיר מוסד :</label>
-            <input type="text" class="form-control" id="yeshivaCity" name="yeshivaCity" [(ngModel)]="student.nvYeshivaCity" [ngModelOptions]="{standalone: true}">
+            <input type="text" class="form-control" id="yeshivaCity" name="yeshivaCity" [(ngModel)]="nvYeshivaCity" [ngModelOptions]="{standalone: true}">
         </div>
         <!-- <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/> -->
 

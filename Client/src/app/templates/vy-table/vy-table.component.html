@@ -28,7 +28,7 @@
 
   <div class="sammary-rows">סה"כ {{lstDataRows.length}} רשומות</div>
 
-  <div class="pagination">
+  <div class="pagination" *ngIf="lstPagesNum.length > 1">
     <span (click)="currentPage != 0 ? moveToPage(0) : ''" class="pagination-page"  [ngStyle]="{'color': (currentPage == 0 ? 'gray' : 'black')}" title="להתחלה"><<</span>
     <span (click)="currentPage != 0 ? moveToPage(currentPage - 1) : ''" class="pagination-page" [ngStyle]="{'color': (currentPage == 0 ? 'gray' : 'black')}" title="הקודם"><</span>
     <span *ngFor="let i of lstPagesNum" (click)="i != currentPage ? moveToPage(i) : ''" class="pagination-page" [ngClass]="{'pagination-current-page': i == currentPage}">{{i+1}}</span>

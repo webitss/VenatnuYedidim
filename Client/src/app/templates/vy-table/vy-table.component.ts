@@ -3,6 +3,7 @@ import { VyTableColumn } from './vy-table.classes';
 import { VyTableOrderByPipe, OrderByPipe } from './vy-table-order-by.pipe';
 import { AppProxy } from '../../services/app.proxy';
 
+
 @Component({
   selector: 'app-vy-table',
   templateUrl: './vy-table.component.html',
@@ -112,11 +113,23 @@ export class VyTableComponent implements OnInit {
     debugger;
     window.location.href = uri + base64(format(template, ctx))
   }
-
-  public downloadPdf(componentName: string, type: string) {
+  public current_date=new Date();
+  downloadPdf(componentName:string,type: string) {
     debugger;
-    let header = "<div><h1>ונתנו ידידים</h1><br/><br/><h2>טבלת " + componentName + "</h2></div>";
-    let footer = "<div style='font-weight: bold; background-color: #f7c853 '>סה\"\כ שורות: " + this.lstDataRows.length;
+    // let date:Date;
+    // let d=new Date().getUTCFullYear()+"/"+new Date().getMonth();
+    
+    
+    var dt = new Date();
+    var mm = dt.getMonth() + 1;
+    var dd = dt.getDate();
+    var yyyy = dt.getFullYear();
+    var format = dd + '/' + mm + '/' + yyyy
+ 
+      //  var d = new Date().toLocaleDateString('dd/mm/yy');
+    debugger;
+    let header="<div  style='direction: rtl;'><h1>ונתנו ידידים</h1><p style='direction: ltr;'>"+format+"</p><br/><br/><h2 style='text-align:center;'>טבלת "+componentName+"</h2></div>";
+    let footer= "<div style='font-weight: bold;  '>סה\"\כ שורות: "+this.lstDataRows.length;
     this.appProxy.post('GeneratPdf', { headerHtml: header, bodyHtml: this.createTable(), footerHtml: footer })
       .then(res => {
         let binaryString = window.atob(res);

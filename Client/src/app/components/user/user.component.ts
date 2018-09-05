@@ -39,6 +39,12 @@ export class UserComponent implements OnInit {
     this.currentComponent = event;
   }
 
+  formValid=false;
+
+  isDisabled():boolean {
+    return this.currentComponent.form.valid;
+  }
+
   saveUser() {
     this.currentComponent.saveUser();
   }

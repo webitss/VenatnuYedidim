@@ -1,0 +1,16 @@
+<div class="row">
+  <div (click)="prevMonth()"><</div>
+  <div (click)="nextMonth()">></div>
+  <table>
+    <thead>
+      <th *ngFor="let d of daysNameArr" class="col-sm-1">{{d}}</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of daysMonthNameArr">
+        <td *ngFor="let d of i" class="col-sm-1" (click)="openNewTask=true">{{d}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-task *ngIf="openNewTask==true"></app-task>
