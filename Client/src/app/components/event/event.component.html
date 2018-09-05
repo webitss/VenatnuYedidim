@@ -27,10 +27,13 @@
 
 
         </nav>
+        <!-- isDisabled() -->
         <div class="btn-area">
-            <button class="btn-circle btn-save" (click)="save()">שמור v </button>
+        
+        <button class="btn-circle btn-save disabled" (click)="save()" [disabled]="!isDisabled()">שמור v </button>
             <button class="btn-circle btn-close" routerLink="/events">סגור x </button>
         </div>
+
     </div>
 
     <!-- <div class="navbar-collapse row">
