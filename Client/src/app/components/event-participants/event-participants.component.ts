@@ -39,9 +39,9 @@ export class EventParticipantsComponent implements OnInit {
 
         this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
           this.sysTableRowList = data;
-          this.sysTableRowList.forEach(p=>{
-            p
-          })
+          // this.sysTableRowList.forEach(p=>{
+          //   p
+          // })
           res.forEach(p => {
             // this.participant.forEach(p => {
               this.lstDataRows.push({
