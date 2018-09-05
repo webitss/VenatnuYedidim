@@ -16,30 +16,7 @@ export class EventParticipantsComponent implements OnInit {
   private sub: any;
   protected participant: Array<any> = new Array<any>();
   sysTableRowList: SysTableRow[];
-  // protected lstColumns = [{
-  //   title: 'שם פרטי',
-  //   name: 'nvFirstName'
-  // }, {
-  //   title: 'שם משפחה',
-  //   name: 'nvLastName'
-  // }, {
-  //   title: 'טלפון',
-  //   name: 'nvPhone'
-  // }, {
-  //   title: 'נייד',
-  //   name: 'nvMobile'
-  // }, {
-  //   title: 'מייל',
-  //   name: 'nvEmail'
-  // }, {
-  //   title: 'סוג משתתף',
-  //   name: 'nvParticipantType'
-  // }, {
-  //   title: 'סטטוס הגעה',
-  //   name: 'iArriveStatusType'
-  // },
-
-  // ]
+ 
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
 
   public lstColumns = [
@@ -52,9 +29,6 @@ export class EventParticipantsComponent implements OnInit {
     new VyTableColumn('סטטוס הגעה','iArriveStatusType','html', true,false), ];
       public lstDataRows = [];
     
-
-
-
   ngOnInit() {
 
     this.sub = this.router.parent.params.subscribe(params => {
@@ -70,24 +44,20 @@ export class EventParticipantsComponent implements OnInit {
             nvMobile: p.nvMobile,
             nvEmail: p.nvEmail,
             nvParticipantType: p.nvParticipantType,
-            iArriveStatusType: p.iArriveStatusType,
-
-            
-            // edit: '<div class="edit"></div>'
-  
+           // iArriveStatusType: p.iArriveStatusType,
+            iArriveStatusType:'<select value="'+p.iArriveStatusType+'"> <option *ngFor="let s of sysTableRowList" >{{s.nvValue}}</option></select>'
+          
           });
         });
         
         this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
           this.sysTableRowList = data;
           this.participant.forEach(p => {
-            debugger;
-
+            // debugger;
             p['iArriveStatusType'] = this.sysTableRowList.filter(s => s.iSysTableRowId ==parseInt (p.lstObject.iArrivalStatusType))[0].nvValue;
             p['nvParticipantType'] = p.lstObject.nvParticipantType;
             
           });
-
 
         });
         alert("x");
