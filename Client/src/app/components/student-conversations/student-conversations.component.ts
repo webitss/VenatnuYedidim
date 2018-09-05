@@ -136,6 +136,24 @@ export class StudentConversationsComponent implements OnInit {
   //     });
   //   });
   // }}
+  
+  changeTable(c:Conversation){
+    c['nvLastName']=c['lstObject'].nvFirstName+" "+c['lstObject'].nvLastName;
+    c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
+    c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
+    c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
+    c['edit'] = '<div class="edit"></div>';
+    c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
+  }
+  saveNewConver(event) {
+    //debugger;
+    //this.conversationsList.push(event);
+    this.changeTable(event);
+  }
+  selecList() {
+   
+
+  }
   ngOnInit() {
     this.iUserId = this.globalService.getUser()['iUserId'];
     this.route.parent.params.subscribe(params => {
@@ -143,30 +161,18 @@ export class StudentConversationsComponent implements OnInit {
     });
 
     this.iUserId = this.globalService.getUser()['iUserId'];
-    this.selecList();
-  }
-  saveNewConver(event) {
-    //debugger;
-    //this.conversationsList.push(event);
-    this.selecList();
-  }
-  selecList() {
-    this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
+     this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
       .then(data => {
         this.conversationsList = data;
         this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
           this.sysTableList = val;
           this.conversationsList.forEach(c => {
-            c['nvLastName']=c['lstObject'].nvFirstName+" "+c['lstObject'].nvLastName;
-            c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
-            c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
-            c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
-            c['edit'] = '<div class="edit"></div>';
-            c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
+            this.changeTable(c);
+           
           });
         });
 
       });
-
+    
   }
 }
