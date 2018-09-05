@@ -50,26 +50,42 @@ export class AvrechimComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
     this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));   
   }
+  avrechId:number;
+  flag=false;
   click(e)
   {
-    
+    this.avrechId=e.iPersonId;
     if(e.columnClickName=="open")
-    this.editAvrech(e);
+    this.editAvrech();
     else
-    this.deleteAvrech(e);
+    this.deleteAvrech();
+
   }
-  editAvrech(e) {
-        this.router.navigate(['avrechim/avrech/',e.iPersonId])
+  editAvrech() {
+        this.router.navigate(['avrechim/avrech/',this.avrechId])
   }
-  deleteAvrech(e)
+  deleteAvrech()
   {
-    this.appProxy.post('DeleteAvrech', {iPersonId:e.iPersonId})
+    this.flag=true;
+  }
+
+  delete()
+  {
+    this.appProxy.post('DeleteAvrech', {iPersonId:this.avrechId})
     .then(result => {
       if (result) {
-        debugger;
-        this.avrechimList.splice(this.avrechimList.indexOf(this.avrechimList.find(e)),1);        
-         alert('המחיקה התבצעה בהצלחה'); 
+        let i=0;
+        this.avrechimList.forEach(e=>{
+        
+          if(e.iPersonId==this.avrechId)
+          this.avrechimList.splice(i,1);
+          i++;
+          
+        });
+              
+ 
     } else { alert(' המחיקה נכשלה'); }
+    this.flag=false;
     });
   }
 

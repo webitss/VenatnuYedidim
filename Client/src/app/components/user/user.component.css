@@ -6,3 +6,10 @@ button{
     float: left;
     margin-left: 10px;
 } */
+.disabled {
+    cursor: not-allowed;
+}
+
+.disabled:hover {
+    background-color: #D9D9D9;
+}

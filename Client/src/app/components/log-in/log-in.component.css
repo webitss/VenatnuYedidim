@@ -20,8 +20,8 @@
     
 }  */
 .img{
-    margin-right: 30%;
-   top: 35%;
+
+   margin-left: 40%;
 }
 .form-control{
     background-color: transparent;
@@ -62,6 +62,8 @@
     height: 80%;
     top: 10%;
     box-shadow:  1px 3px 22px 4px rgba(128,128,128,0.63);
+    padding: 10%;
+    
 }
 
 .my-btn{

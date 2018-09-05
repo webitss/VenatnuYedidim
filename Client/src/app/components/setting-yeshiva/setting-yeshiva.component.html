@@ -4,10 +4,15 @@
     <button (click)="save()">שמור v </button>
 
 
-    <div class="form-group">
-      <label>שם מוסד:</label>
-      <input class=inputYeshiva type="text" maxlength="50" required="required" [(ngModel)]="yeshiva.nvYeshivaName" [ngModelOptions]="{standalone: true}"/>
+<div class="form-group">
+      <label for='yeshiva-name'>שם מוסד:</label>
+      <input class=inputYeshiva name='yeshiva-name' type="text" maxlength="50" required="required" [(ngModel)]="yeshiva.nvYeshivaName" [ngModelOptions]="{standalone: true}"/>
+      <div *ngIf="name.invalid && (name.dirty || name.touched)">
+      <div *ngIf="(name.errors.required)" class="text-danger text-right">
+      <strong>שדה נדרש!</strong>
     </div>
+  </div>
+</div>
 
     <div class="form-group">
       <label>כתובת:</label>
