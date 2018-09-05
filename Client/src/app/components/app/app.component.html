@@ -9,7 +9,7 @@
             </ul>
             </nav>
             </div> -->
-<div  class="box" *ngIf="router.url != '/'">
+<div class="box" *ngIf="router.url != '/'">
   <nav class="navbar navbar-expand-sm nav">
     <div class="col-sm-1">
       <a class="navbar-brand title" href="#">
@@ -49,7 +49,8 @@
     </ul>
     <!-- </div> -->
     <div class="col-sm-3">
-      <div id="t-Text_2" (click)="goToUserDetails()" class="n pie label singleline autofit firer click ie-background commentable user" style="float: left">
+      <div id="t-Text_2" (click)="goToUserDetails()" class="n pie label singleline autofit firer click ie-background commentable user"
+        style="float: left">
         <div class="backgroundLayer"></div>
         <div class="paddingLayer">
           <div class="content">
@@ -71,8 +72,7 @@
   <!-- <input type="file" value="העלה תמונה" (change)="LoadImage($event,saveFile)"/> -->
 </div>
 
- 
-<router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
 
-
-<!-- <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="aaaa($event)"></app-vy-table> -->
+<div class="main-page">
+  <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
+</div>

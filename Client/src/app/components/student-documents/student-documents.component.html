@@ -4,9 +4,10 @@
         <button (click)="addDocument()" class="btn-add btn-circle">העלאת מסמך</button>
     </div>
 </div>
+<div class="main-table">
 <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editDocument($event)"></app-vy-table>
 
-
+</div>
 
 <div class="uploadDocumentComponent" *ngIf="document!=null">
     <app-upload-document [document]="document" (closeMe)="closeDocumentDialog()"></app-upload-document>

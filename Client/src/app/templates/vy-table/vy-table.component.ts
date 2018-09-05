@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, OnChanges } from '@angular/core';
 import { VyTableColumn } from './vy-table.classes';
 import { VyTableOrderByPipe, OrderByPipe } from './vy-table-order-by.pipe';
 import { AppProxy } from '../../services/app.proxy';
@@ -10,36 +10,79 @@ import { AppProxy } from '../../services/app.proxy';
 })
 export class VyTableComponent implements OnInit {
 
-  protected iCountRows = 2;
-  protected countPagesDisplayed = 5;
+  protected Math = Math
+  protected currentPage: number = 0;
+  protected iCountRows = 25;
   protected iStartNumRow = 0;
   protected iEndNumRow = 0;
+  protected countPagesDisplayed = 5;
   protected lstPagesNum: Array<number> = new Array<number>();
 
   @Input()
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   @Input()
-  public lstDataRows: Array<any> = new Array<any>();
-  protected lstCurrentDataRows: Array<any> = new Array<any>();
+  public lstDataRows: Array<any>;
+  protected lstCurrentDataRows: Array<any>;
   @Output()
   public clickCell: EventEmitter<any> = new EventEmitter<any>();
 
   private lstOrderByFields: Array<any>
-  private table: string;
+
   constructor(private appProxy: AppProxy) {
     this.lstOrderByFields = new Array<any>();
     // this.lstOrderByFields.push({'aa': 'number'})
     // this.lstOrderByFields.push('-bb')
-    this.lstPagesNum = new Array<number>();
+    // this.lstPagesNum = new Array<number>();
   }
 
-  clickCellFunc(item, colName) {
+  public ngOnInit() {
+
+  }
+
+  ngOnChanges() {
+    if (this.lstDataRows && this.lstDataRows.length > 0) {
+      this.currentPage = -1;
+      this.moveToPage(0);
+    }
+  }
+
+  ngDoCheck() {
+    if (this.lstDataRows && this.lstDataRows.length > 0 && this.lstCurrentDataRows == null) {
+      this.ngOnChanges();
+    }
+  }
+
+  public moveToPage(pageNum: number) {
+    if (!(pageNum == this.currentPage || pageNum < 0 || (this.iEndNumRow == this.lstDataRows.length && pageNum > this.currentPage))) {
+      this.lstCurrentDataRows = this.lstDataRows.slice((pageNum) * this.iCountRows, (pageNum * this.iCountRows) + this.iCountRows);
+      this.iStartNumRow = pageNum * this.iCountRows;
+      this.iEndNumRow = this.iStartNumRow + this.lstCurrentDataRows.length;
+      this.updateLstPagesNum();
+    }
+  }
+
+  public updateLstPagesNum() {
+    this.currentPage = Math.ceil(this.iStartNumRow / this.iCountRows);
+    this.currentPage = this.currentPage < 0 ? 0 : this.currentPage;
+
+    this.lstPagesNum = [this.currentPage];
+    for (let i = 1; i < (this.countPagesDisplayed / 2); i++) {
+      if ((this.currentPage + i) < (this.lstDataRows.length / this.iCountRows))//next
+        this.lstPagesNum.push(this.currentPage + i);
+      if ((this.currentPage - i) >= 0)//prev
+        this.lstPagesNum.push(this.currentPage - i);
+    }
+    this.lstPagesNum = new OrderByPipe().transform(this.lstPagesNum);
+  }
+
+  public clickCellFunc(item, colName) {
     item['columnClickName'] = colName;
     this.clickCell.emit(item);
   }
 
-  createTable(){
-  let table= "<table id='avrechim' style='width: 100%; background-color:#f9e4b1; height: 500px;><thead><tr style='text-align: initial'>";
+
+  private createTable() {
+    let table = "<table id='avrechim' style='width: 100%; background-color:#f9e4b1; height: 500px;><thead><tr style='text-align: initial'>";
     this.lstColumns.forEach(column => {
       if (column.bExcel)
         table += "<th>" + column.title + "</th>";
@@ -53,36 +96,9 @@ export class VyTableComponent implements OnInit {
       });
       table += "</tr>";
     });
-    table+"</tbody></table>"
+    table + "</tbody></table>"
     // debugger;
     return table;
-}
-  ngOnInit() {
-
-  }
-
-  moveToPage(pageNum: number) {
-    if (!(pageNum == this.currentPage || pageNum < 0 || (this.iEndNumRow == this.lstDataRows.length && pageNum > this.currentPage))) {
-      this.lstCurrentDataRows = this.lstDataRows.slice((pageNum) * this.iCountRows, (pageNum * this.iCountRows) + this.iCountRows);
-      this.iStartNumRow = pageNum * this.iCountRows;
-      this.iEndNumRow = this.iStartNumRow + this.lstCurrentDataRows.length;
-      this.updateLstPagesNum();
-    }
-  }
-
-  protected currentPage: number = 0;
-  updateLstPagesNum() {
-    this.currentPage = (this.iStartNumRow / this.iCountRows);
-    this.currentPage = this.currentPage < 0 ? 0 : this.currentPage;
-
-    this.lstPagesNum = [this.currentPage];
-    for (let i = 1; i < (this.countPagesDisplayed / 2); i++) {
-      if ((this.currentPage + i) < (this.lstDataRows.length / this.iCountRows))//next
-        this.lstPagesNum.push(this.currentPage + i);
-      if ((this.currentPage - i) >= 0)//prev
-        this.lstPagesNum.push(this.currentPage - i);
-    }
-    this.lstPagesNum = new OrderByPipe().transform(this.lstPagesNum);
   }
 
   public downloadExcel() {
@@ -96,11 +112,11 @@ export class VyTableComponent implements OnInit {
     debugger;
     window.location.href = uri + base64(format(template, ctx))
   }
-  
-  downloadPdf(componentName:string,type: string) {
+
+  public downloadPdf(componentName: string, type: string) {
     debugger;
-    let header="<div><h1>ונתנו ידידים</h1><br/><br/><h2>טבלת "+componentName+"</h2></div>";
-    let footer= "<div style='font-weight: bold; background-color: #f7c853 '>סה\"\כ שורות: "+this.lstDataRows.length;
+    let header = "<div><h1>ונתנו ידידים</h1><br/><br/><h2>טבלת " + componentName + "</h2></div>";
+    let footer = "<div style='font-weight: bold; background-color: #f7c853 '>סה\"\כ שורות: " + this.lstDataRows.length;
     this.appProxy.post('GeneratPdf', { headerHtml: header, bodyHtml: this.createTable(), footerHtml: footer })
       .then(res => {
         let binaryString = window.atob(res);
@@ -125,5 +141,3 @@ export class VyTableComponent implements OnInit {
       })
   }
 }
-
-

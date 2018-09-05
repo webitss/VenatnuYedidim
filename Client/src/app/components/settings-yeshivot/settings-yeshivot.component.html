@@ -13,6 +13,6 @@
     <app-setting-yeshiva #yeshivot [sysTableList]="sysTableList" [iYeshivaId]="iYeshivaId" (closeYeshiva)="close()"></app-setting-yeshiva>
     
 </div>
-
+<div class="main-table">
 <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="deleteYeshiva($event)"></app-vy-table>
- 
+ </div>

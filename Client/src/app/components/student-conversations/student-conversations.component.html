@@ -8,5 +8,5 @@
      (Conversation)="close()" (newConver)="saveNewConver($event)"></app-student-conversation-details>
 </div>
 
-
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="conversationsList" (clickCell)="editConversation($event)" ></app-vy-table>
+<div class="main-table">
+<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="conversationsList" (clickCell)="editConversation($event)" ></app-vy-table></div>
