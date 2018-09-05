@@ -25,6 +25,8 @@ export class StudentConversationDetailsComponent implements OnInit {
   protected sysTableList: SysTableRow[];
 
   @Output()
+  protected UpdateConver = new EventEmitter();
+  @Output()
   protected newConver = new EventEmitter();
   // @Input()
   // protected newConver :Conversation;
@@ -42,26 +44,31 @@ export class StudentConversationDetailsComponent implements OnInit {
     this.Conversation.emit(null);
   }
 
-
   saveConversation() {
     this.currentConver.dConversationDate = new Date(this.conversation.dConversationDate);
     this.currentConver.dtConversationTime = new Date(this.conversation.dtConversationTime);
     this.currentConver.dtNextConversationDate = new Date(this.conversation.dtNextConversationDate);
     if (this.currentConver.iConversationId == null) {
-      //this.currentConver.iPersonId = 7;
+      this.currentConver.iPersonId = 7;
     }
     this.appProxy.post("SetConversations", { conversation: this.currentConver, iUserId: this.iUserId })
       .then(
         data => {
 
-          if (this.currentConver.iConversationId != null) {
-            this.conversation = new Conversation();
-            this.conversation = Object.assign({}, this.currentConver);
+          if (data != 0) {
+            if (this.currentConver.iConversationId != null) {
+              this.currentConver.iConversationId = data;
+              this.newConver.emit(this.currentConver);
 
+            }
           }
+          else
+            this.UpdateConver.emit(this.currentConver);
 
 
-          this.newConver.emit(this.conversation);
+<<<<<<< HEAD
+          alert(data);
+          this.Conversation.emit(null);
           // this.newConver.push({
           //   iConversationId: this.conversation.iConversationId,
           //   iPersonId: this.conversation.iPersonId,
@@ -79,16 +86,28 @@ export class StudentConversationDetailsComponent implements OnInit {
           //   this.conversation['nvNextConversationDate'] = this.conversation.dtNextConversationDate.toLocaleDateString();
           //   this.conversation['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == this.conversation.iConversationType)[0].nvValue;
           // }
+          // if (data) {
+          //   alert("good");
+          //   this.Conversation.emit(null);
+          // }
+          // else
+          //   alert("no good");
+=======
+          this.newConver.emit(this.conversation);
           if (data) {
             alert("good");
             this.Conversation.emit(null);
           }
           else
             alert("no good");
+>>>>>>> 17ff4bc1e58a547fa818ac6d80fb2905c84252ae
         });
-//איפה למקם?
-    this.TaskComponent.saveTask();
   }
+
+  //איפה למקם?
+  //this.TaskComponent.saveTask();
+
+
 
 
   reset() {

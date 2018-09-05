@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, OnDestroy } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
 import { SysTableService } from '../../services/sys-table.service';
@@ -18,6 +18,7 @@ import { GlobalService } from '../../services/global.service'
 })
 export class StudentConversationsComponent implements OnInit {
 
+  private sub: any;
   protected iUserId: number;
   protected iPersonId: number;
   protected flag: number;
@@ -136,37 +137,69 @@ export class StudentConversationsComponent implements OnInit {
   //     });
   //   });
   // }}
-  ngOnInit() {
-    this.iUserId = this.globalService.getUser()['iUserId'];
-    this.route.parent.params.subscribe(params => {
-      this.iPersonId = params['iPersonId'];
-    });
 
-    this.iUserId = this.globalService.getUser()['iUserId'];
-    this.selecList();
-  }
+  
   saveNewConver(event) {
     //debugger;
     //this.conversationsList.push(event);
-    this.selecList();
+    this.changeTable(event);
   }
-  selecList() {
-    this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
+  
+  ngOnInit() {
+    debugger;
+    this.iUserId = this.globalService.getUser()['iUserId'];
+    this.route.parent.params.subscribe(params => {
+      this.iPersonId = +params['iPersonId'];
+      //this.iPersonId.toString();
+
+    });
+
+    this.iUserId = this.globalService.getUser()['iUserId'];
+
+    this.selecList(this.iPersonId);
+  }
+  updateConver() {
+    //debugger;
+    this.conversationsList.slice(this.conversationsList.indexOf(this.conversationsList.find(m => m.iConversationId == this.conversationSelect.iConversationId), 0), 1);
+    this.conversationsList.push(this.conversationSelect);
+    //this.conversationsList.push(event);
+    this.selecList(this.iPersonId);
+  }
+  addNewMeeting(conver: Conversation) {
+    this.conversationsList.push(conver);
+  }
+  newMeeting(newConver: Conversation) {
+    this.changeTable(newConver);
+    this.conversationsList.push(newConver);
+
+    //  this.GetMeetingsByStudentId(this.iPersonId);
+  }
+  changeTable(c: Conversation) {
+
+    c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
+    c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
+    c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
+    c['edit'] = '<div class="edit"></div>';
+    c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
+    c['nvLastName'] = c['lstObject'].nvFirstName + " " + c['lstObject'].nvLastName;
+  }
+  selecList(id) {
+    this.appProxy.post("GetConversations", { iPersonId: id })
       .then(data => {
         this.conversationsList = data;
         this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
           this.sysTableList = val;
           this.conversationsList.forEach(c => {
-            c['nvLastName']=c['lstObject'].nvFirstName+" "+c['lstObject'].nvLastName;
-            c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
-            c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
-            c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
-            c['edit'] = '<div class="edit"></div>';
-            c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
+            this.changeTable(c);
+
           });
         });
-
-      });
-
+      })
   }
+
+
+  // ngOnDestroy() {
+  //           this.sub.unsubscribe();
+  //         }
 }
+

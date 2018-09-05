@@ -4,8 +4,8 @@
    
       </button>
   <nav class="navbar navbar-expand-sm nav"> <span class="header">{{titaieName}}</span>
-    <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="divModal=true" mdbWavesEffect>Launch demo modal</button>
-
+    <button type="button" mdbBtn color="primary"  class="relative waves-light glyphicon glyphicon-user" (click)="divModal=true" mdbWavesEffect>login</button>
+    
     <div id="vmdbModal" *ngIf="divModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -14,6 +14,7 @@
               <span aria-hidden="true">×</span>
             </button>
             <h4 class="modal-title w-100" id="myModalLabel">מנהל</h4>
+           
           </div>
           <div class="modal-body">
              
@@ -28,8 +29,8 @@
             
           </div>
           <div class="modal-footer">
-            <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="divModal=false" mdbWavesEffect>Close</button>
-            <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="divModal=false">Save changes</button>
+          
+            <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="saveLogin()">login</button>
           </div>
         </div>
       </div>
