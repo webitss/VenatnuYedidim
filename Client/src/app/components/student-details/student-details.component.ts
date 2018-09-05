@@ -167,8 +167,8 @@ export class StudentDetailsComponent implements OnInit {
 
   }         
 
-  get baseFileUrl(){
-    return AppProxy.getBaseUrl() +'Files/Students/';
+  get baseFileUrl(){   
+    return AppProxy.getBaseUrl() +'Files/';
   }
   protected save = { image: '', name: '' };
 
