@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, Input, ViewChild, EventEmitter } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Event1 } from '../../classes/event';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { EventComponent } from '../event/event.component';
 import { ActivatedRoute } from '@angular/router';
-import { FormArrayName } from '@angular/forms';
+import { FormArrayName, NgForm } from '@angular/forms';
 import { PARAMETERS } from '@angular/core/src/util/decorators';
 import { Tint } from '../../classes/tint';
 import { SysTableService } from '../../services/sys-table.service';
@@ -28,6 +28,19 @@ export class EventDetailsComponent implements OnInit {
   to: Array<any>;
   participantsToSend: Array<Tint> = new Array<Tint>();
 
+  @ViewChild(NgForm) form;
+
+  checkFormValidity() {
+    return this.form.valid;
+  }
+
+  selectValid = false;
+  isValid = this.selectValid && this.form.valid;
+
+  checkIfSelectIsValid() {
+    return this.to.length > 0;
+  }
+
   @ViewChild('child') VyMultySelect: VyMultySelectComponent;
 
 
@@ -48,8 +61,12 @@ export class EventDetailsComponent implements OnInit {
         });
   }
 
+  @Output() updateValid = new EventEmitter();
+
   getFromChild(list: Array<any>) {
     this.to = list;
+    this.selectValid = this.checkIfSelectIsValid();
+    this.isValid = this.selectValid && this.form.valid;
   }
   private sub: any;
   private iEventId: number;

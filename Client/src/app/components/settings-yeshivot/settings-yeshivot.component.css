@@ -15,8 +15,9 @@
     z-index: 100;
     width: 20%;
     height: 100px;
-    background:lightgrey;
+    background:rgb(238, 233, 233);
     border:2px;
     top:30%;
     left: 500px;
+    position: rtl;
 }

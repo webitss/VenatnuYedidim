@@ -16,17 +16,18 @@ import { GlobalService } from '../../services/global.service';
 export class UsersComponent implements OnInit {
 
   constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService, private globalService: GlobalService) { }
-  @ViewChild('users') users:any;
+  @ViewChild('users') users: any;
 
   ngOnInit() {
-    this.iPersonId =  this.globalService.getUser()['iUserId'];
+    this.iPersonId = this.globalService.getUser()['iUserId'];
     debugger
-    this.appProxy.post("GetUsers", { iPersonId: this.iPersonId}).then(data => {
+    this.appProxy.post("GetUsers", { iPersonId: this.iPersonId }).then(data => {
       this.lstDataRows = data;
 
       this.lstDataRows.forEach(u => {
 
         u["edit"] = "<div class='edit'></div>";
+        u["delete"] = "<div class='delete'></div>";
       });
 
       this.sysTableService.getValues(SysTableService.dataTables.permissionType.iSysTableId).then(data => {
@@ -45,7 +46,8 @@ export class UsersComponent implements OnInit {
 
 
   public lstColumns = [
-    new VyTableColumn('עריכה', 'edit', 'html', true,false),
+    new VyTableColumn('עריכה', 'edit', 'html', true, false),
+    new VyTableColumn('מחיקה', 'delete', 'html', true, false),
     new VyTableColumn('שם משפחה', 'nvLastName'),
     new VyTableColumn('שם פרטי', 'nvFirstName'),
     new VyTableColumn('נייד', 'nvMobile'),
@@ -54,15 +56,29 @@ export class UsersComponent implements OnInit {
   ];
   public lstDataRows = [];
 
+  click(e) {
+    if (e.columnClickName == 'edit')
+      this.editUser(e);
+    else
+      this.deleteUser(e);
 
+  }
 
   editUser(u: User) {
     this.router.navigate(['users/user/', u.iPersonId]);
   }
-  downloadExcel(){
+
+  deleteUser(u: User) {
+    this.appProxy.post('DeleteUser',{iPersonId: u.iPersonId}).then(data=>{
+
+    });
+  }
+
+  downloadExcel() {
     this.users.downloadExcel();
   }
-  tableToPdf(name:string){
-    this.users.downloadPdf(name,'pdf');
-      }
+
+  tableToPdf(name: string) {
+    this.users.downloadPdf(name, 'pdf');
+  }
 }

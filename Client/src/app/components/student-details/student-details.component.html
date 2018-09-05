@@ -21,7 +21,6 @@
             <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="student.nvFirstName" [ngModelOptions]="{standalone: true}">
         </div>
         <div class="form-group ">
-
             <label for="identity">תעודת זהות :</label>
             <input type="text" class="form-control" id="identity" name="identity" [(ngModel)]="student.nvIdentityCard" [ngModelOptions]="{standalone: true}"
                 minlength="9" maxlength="9" #identity="ngModel">
@@ -44,12 +43,12 @@
         </div>
         <div class="form-group ">
             <label for="email"> מייל :</label>
-            <input type="email" class="form-control" id="email" name="email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-                [(ngModel)]="student.nvEmail" [ngModelOptions]="{standalone: true}">
-            <div *ngIf="email.errors && email.errors.pattern">
+            <input type="email" class="form-control" id="email" name="email" #email="ngModel"
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  [(ngModel)]="student.nvEmail" [ngModelOptions]="{standalone: true}">
+            <div  *ngIf="email.errors && email.errors.pattern">
                 מייל לא תקין
             </div>
-
+            
         </div>
         <div class="form-group ">
             <label for="dateAdd"> תאריך הצטרפות :</label>
@@ -70,17 +69,17 @@
 
         <div class="form-group ">
             <label for="dtBornDate"> תאריך לידה לועזי:</label>
-            <input type="date" class="form-control" id="dtBornDate" name="dtBornDate" [ngModel]="student.dtBirthdate  | date:'yyyy-MM-dd' "
-                (ngModelChange)="e.dtBirthdate = $event" [ngModelOptions]="{standalone: true}">
+            <input type="date" class="form-control" id="dtBornDate" name="dtBornDate" [ngModel]="student.dtBirthdate  | date:'yyyy-MM-dd' " (ngModelChange)="e.dtBirthdate = $event"
+                [ngModelOptions]="{standalone: true}">
         </div>
         <!-- ngui-datetime-picker date-only="true" close-on-select="false" -->
         <!-- | date:'yyyy-MM-dd' -->
 
         <div class="form-group ">
             <label for="street"> כתובת :</label>
-            <input type="text" class="form-control" id="street" name="street" [(ngModel)]="student.nvAddress" [ngModelOptions]="{standalone: true}">
+            <input type="text" class="form-control" id="street" name="street" [(ngModel)]="student.nvAddress" [ngModelOptions]="{standalone: true}" >
         </div>
-
+        
 
         <div class="form-group ">
             <label for="city"> עיר :</label>

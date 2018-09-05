@@ -8,6 +8,7 @@ using System.ServiceModel.Web;
 
 namespace Service
 {
+
 	[ServiceContract]
 	public interface IService
 	{
@@ -136,11 +137,11 @@ namespace Service
 
 		[OperationContract]
 		[WebInvoke(
-	    Method = "POST",
-	    UriTemplate = "GetYeshivotOfStudent",
-	    BodyStyle = WebMessageBodyStyle.WrappedRequest,
-	    ResponseFormat = WebMessageFormat.Json,
-	    RequestFormat = WebMessageFormat.Json)]
+		Method = "POST",
+		UriTemplate = "GetYeshivotOfStudent",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
 		List<Yeshivot> GetYeshivotOfStudent(int iPersonId);
 
 
@@ -197,6 +198,16 @@ namespace Service
 		ResponseFormat = WebMessageFormat.Json,
 		RequestFormat = WebMessageFormat.Json)]
 		bool DeleteAvrechStudent(int iAvrechId, int iStudentId);
+
+		[OperationContract]
+		[WebInvoke(
+		 Method = "POST",
+		 UriTemplate = "DeleteAvrech",
+		 BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		 ResponseFormat = WebMessageFormat.Json,
+		 RequestFormat = WebMessageFormat.Json)]
+		bool DeleteAvrech(int iPersonId);
+
 		#endregion
 
 

@@ -16,7 +16,7 @@ import { GlobalService } from '../../services/global.service';
   styleUrls: ['./student-meeting-details.component.css']
 })
 export class StudentMeetingDetailsComponent implements OnInit {
-  @Output() Meeting = new EventEmitter();
+  @Output() Close = new EventEmitter();
   @Output() NewMeeting = new EventEmitter<Meeting>();
   @Output() UpdateMeeting = new EventEmitter<Meeting>();
 
@@ -31,35 +31,37 @@ export class StudentMeetingDetailsComponent implements OnInit {
   minutes: string;
   hours: string;
 
-  @ViewChild('task') TaskComponent:TaskComponent;
+  @ViewChild('task') TaskComponent: TaskComponent;
   sub: any;
   iPersonId: number;
 
-  close(){
-     this.Meeting.emit(null);
+  close() {
+    this.Close.emit(null);
   }
 
   save() {
     // this.meeting.dtMeetingDate = new Date(this.meeting.dtMeetingDate);
     // this.meeting.nvMeetingType
     //פגישה חדשה
-   
-    this.meeting.dtMeetingDate = new Date(this.meeting['dtDate']+' '+this.meeting['dtHour']);
-    if(this.currentMeeting.iMeetingId == null)
-    this.currentMeeting.iPersonId = this.iPersonId;
-   
+
+    this.currentMeeting.dtMeetingDate = new Date(this.currentMeeting['dtDate'] + ' ' + this.currentMeeting['dtHour']);
+    // this.currentMeeting['nvDate'] = this.currentMeeting['dtDate'].toLocaleDateString();
+    // this.currentMeeting['nvHour'] = this.currentMeeting['dtHour'].toLocaleTimeString();
+
+    if (this.currentMeeting.iMeetingId == null)
+      this.currentMeeting.iPersonId = this.iPersonId;
+
     this.appProxi.post("SetMeeting", { meeting: this.currentMeeting, iUserId: this.globalService.getUser()['iUserId'] }).then(
       data => {
-        if(data != 0){
-          if(this.currentMeeting.iMeetingId == null)
-          {
-                      this.currentMeeting.iMeetingId = data;
-                      this.NewMeeting.emit(this.currentMeeting);
+        if (data != 0) {
+          if (this.currentMeeting.iMeetingId == null) {
+            this.currentMeeting.iMeetingId = data;
+            this.NewMeeting.emit(this.currentMeeting);
           }
           // this.meeting =  Object.assign({},this.currentMeeting);
           else
-          this.UpdateMeeting.emit(this.currentMeeting);
-  
+            this.UpdateMeeting.emit(this.currentMeeting);
+
           // if (this.meeting.iMeetingId == null) {          
           //   this.meeting = data;          
           //   this.NewMeeting.emit(this.meeting);
@@ -70,34 +72,34 @@ export class StudentMeetingDetailsComponent implements OnInit {
           //   this.meeting['edit'] = '<div class="edit"></div>';
           //   this.meeting['nvMeetingType'] = this.sysTableRowList.filter(s=> s.iSysTableRowId == this.meeting.iMeetingType)[0].nvValue;    
           //     }
-          alert(data);
-          this.Meeting.emit(null);
+          this.Close.emit(null);
 
-         this.TaskComponent.saveTask();
-          
+          //  this.TaskComponent.saveTask();
+
         }
-       else
-       alert("failed");
+        else
+          alert("failed");
 
 
         // debugger;
       },
     );
   }
-currentMeeting:Meeting;
-  constructor(private route: ActivatedRoute, private appProxi: AppProxy , private globalService: GlobalService) { }
+  currentMeeting: Meeting;
+  constructor(private route: ActivatedRoute, private appProxi: AppProxy, private globalService: GlobalService) { }
 
   ngOnInit() {
 
-    
-      this.sub = this.route.parent.params.subscribe(params => {
-        this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
-     });
-  
+
+    this.sub = this.route.parent.params.subscribe(params => {
+      this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
+    });
+
     this.currentMeeting = new Meeting();
-   this.currentMeeting = Object.assign({},this.meeting);
-   
+    this.currentMeeting = Object.assign({}, this.meeting);
+
     this.currentMeeting['dtDate'] = new Date((this.currentMeeting.dtMeetingDate).getTime());
+
 
     // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
     if ((this.meeting.dtMeetingDate).getMinutes() < 10)
@@ -118,5 +120,5 @@ currentMeeting:Meeting;
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
- 
+
 }

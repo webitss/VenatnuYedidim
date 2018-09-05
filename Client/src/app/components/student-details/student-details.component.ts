@@ -190,10 +190,10 @@ if(event.currentTarget.value=='בחר מוסד')
     else
       this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.globalService.getUser().iPersonId }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
 
-  }
+  }         
 
-  get baseFileUrl() {
-    return AppProxy.getBaseUrl() + 'Files/Students/';
+  get baseFileUrl(){   
+    return AppProxy.getBaseUrl() +'Files/';
   }
   protected save = { image: '', name: '' };
 

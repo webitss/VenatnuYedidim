@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
+import { NgxGalleryImage, NgxGalleryOptions, NgxGalleryAnimation } from 'ngx-gallery';
 
-import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+// import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 
 @Component({
   selector: 'app-show-image',
@@ -76,6 +77,8 @@ ngOnInit(): void {
 //   big: this.listImage[i]
 // })
 // }
+
+//GetDocumentsOfTadmit צריך להיות GetDocuments הוספתי לך פונקציה אחרת ששולפת רק את המסמכים של התדמית. במקום   
 this.appProxy.get('GetDocuments').then(data => {
   this.documents = data;
     this.documents.forEach(element => {
