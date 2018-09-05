@@ -87,7 +87,7 @@ export class SettingsYeshivotComponent implements OnInit {
 
   close() {
     this.iYeshivaId = null;
-    
+    this.flag=null;
   }
 
   downloadExcel(){
