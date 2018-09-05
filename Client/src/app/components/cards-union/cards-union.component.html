@@ -127,6 +127,15 @@
                   <input type="radio" class="col-sm-1" id="st2Comment" name="stComment" value="{{student2.nvComment}}" [(ngModel)]="student.nvComment" [disabled]="student1.nvComment==student2.nvComment" >
                   <label class="col-sm-3" for="st2Comment">{{student2.nvComment}}</label>
                 </div>
+
+                <div class="st-details col-sm-6">
+                  <span class="col-sm-4"> הערות:</span>
+                    <input type="radio" class="col-sm-1" id="st1Comment" name="stComment" value="{{student1.nvImgStudent}}" [(ngModel)]="student.nvImgStudent" checked="checked">
+                    <img class="imgStudent" *ngIf="student1.nvImgStudent"  [src]="baseFileUrl + student1.nvImgStudent">
+                    <input type="radio" class="col-sm-1" id="st2Comment" name="stComment" value="{{student2.nvImgStudent}}" [(ngModel)]="student.nvImgStudent" [disabled]="student1.nvImgStudent==student2.nvImgStudent" >
+                    <img class="imgStudent" *ngIf="student1.nvImgStudent"  [src]="baseFileUrl + student2.nvImgStudent">
+                  </div>
+        
             
 </div>
 <button type="submit" class="btn-pink1 ok" (click)="unionOk()" >אישור</button>
