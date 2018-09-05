@@ -27,7 +27,7 @@ export class SettingYeshivaComponent implements OnInit {
 
   protected yeshiva:Yeshiva=new Yeshiva();
 
-  constructor(private appProxy: AppProxy,private ActivatedRoute:ActivatedRoute,private router:Router) { }
+  constructor(private appProxy: AppProxy, private router:Router) { }
 
   ngOnInit() {
     if(this.iYeshivaId == 0)
@@ -41,18 +41,20 @@ export class SettingYeshivaComponent implements OnInit {
       );
   }
 
-  cancel() {
-    this.closeYeshiva.emit(null);
-  }
-
   save() {
-    if(this.yeshiva.iYeshivaId==0){
+    if(this.yeshiva.iYeshivaId==0) {
        this.appProxy.post('AddYeshiva', { yeshiva: this.yeshiva })
       .then(
         data => {
             this.yeshiva = data;
-            this.closeYeshiva.emit(null);
+            if(this.yeshiva.nvYeshivaName==null || this.yeshiva.nvAddress==null || this.yeshiva.nvCity==null || 
+              this.yeshiva.nvContact==null || this.yeshiva.nvEmail==null || this.yeshiva.nvMobile==null || 
+              this.yeshiva.iRoleType == null)
+              alert("חובה למלא את כל השדות!!");
+              else{
+                this.closeYeshiva.emit(null);
             alert("נשמר בהצלחה");
+              }
         })
     }
     else{
@@ -65,5 +67,9 @@ export class SettingYeshivaComponent implements OnInit {
         } 
       )
     }
+  }
+
+  cancel() {
+    this.closeYeshiva.emit(null);
   }
 }
