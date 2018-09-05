@@ -59,6 +59,9 @@ debugger;
 
    }
 
+   get baseFileUrl(){
+    return 'http://localhost:14776/Files/Students/';
+  }
    unionOk()
    {
 

@@ -28,6 +28,13 @@ export class EventComponent implements OnInit {
 
   isDetails: boolean = true;
 
+  formValid=false;
+
+  isDisabled():boolean {
+    return this.currentComponent.isValid;
+  }
+
+
  
 
   save() {

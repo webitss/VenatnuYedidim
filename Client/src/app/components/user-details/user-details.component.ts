@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild } from '@angular/core';
 import { User } from '../../classes/user';
 import { Person } from '../../classes/person';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SysTableService } from '../../services/sys-table.service';
 import { GlobalService } from '../../services/global.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-user-details',
@@ -44,6 +45,14 @@ export class UserDetailsComponent implements OnInit {
 
   @Output()
   isManeger: boolean = false;
+  notFocused: boolean = true;
+
+  
+  @ViewChild(NgForm) form;
+
+  checkFormValidity() {
+    return this.form.valid;
+  }
 
   public lst: Array<any>;
 
