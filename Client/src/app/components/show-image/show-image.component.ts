@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 
-import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+// import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 
 @Component({
   selector: 'app-show-image',
@@ -9,8 +9,8 @@ import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gal
   styleUrls: ['./show-image.component.css']
 })
 export class ShowImageComponent implements OnInit {
-  galleryOptions: NgxGalleryOptions[];
-  galleryImages: NgxGalleryImage[]=new Array<NgxGalleryImage>();
+  // galleryOptions: NgxGalleryOptions[];
+  // galleryImages: NgxGalleryImage[]=new Array<NgxGalleryImage>();
 
   constructor(private appProxy: AppProxy) { }
 protected titaieName:string="ונתנו ידידים";
