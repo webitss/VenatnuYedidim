@@ -65,7 +65,7 @@ listToSelect:Array<any>;
     
     this.activatedRoute.parent.params.subscribe(params => {
 
-      alert(params['iPersonId']);
+     
       this.id = params['iPersonId'];
     })
     this.appProxy.post('GetAvrechStudents', { iPersonId: this.id }).then(data => this.allStudents = data

@@ -77,6 +77,8 @@ ngOnInit(): void {
 //   big: this.listImage[i]
 // })
 // }
+
+//GetDocumentsOfTadmit צריך להיות GetDocuments הוספתי לך פונקציה אחרת ששולפת רק את המסמכים של התדמית. במקום   
 this.appProxy.get('GetDocuments').then(data => {
   this.documents = data;
     this.documents.forEach(element => {
