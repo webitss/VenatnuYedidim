@@ -137,6 +137,14 @@ export class StudentConversationsComponent implements OnInit {
   //     });
   //   });
   // }}
+
+  
+  saveNewConver(event) {
+    //debugger;
+    //this.conversationsList.push(event);
+    this.changeTable(event);
+  }
+  
   ngOnInit() {
     debugger;
     this.iUserId = this.globalService.getUser()['iUserId'];
@@ -147,6 +155,7 @@ export class StudentConversationsComponent implements OnInit {
     });
 
     this.iUserId = this.globalService.getUser()['iUserId'];
+
     this.selecList(this.iPersonId);
   }
   updateConver() {
@@ -166,7 +175,7 @@ export class StudentConversationsComponent implements OnInit {
     //  this.GetMeetingsByStudentId(this.iPersonId);
   }
   changeTable(c: Conversation) {
-    
+
     c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
     c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
     c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
@@ -182,10 +191,12 @@ export class StudentConversationsComponent implements OnInit {
           this.sysTableList = val;
           this.conversationsList.forEach(c => {
             this.changeTable(c);
+
           });
         });
       })
   }
+
 
   // ngOnDestroy() {
   //           this.sub.unsubscribe();

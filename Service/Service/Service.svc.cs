@@ -169,9 +169,12 @@ namespace Service
         {
             return Avrech.UpdateUserNameAndPassword(iPersonId, nvUserName, nvPassword, iUserId);
         }
+        public bool DeleteAvrech(int iPersonId)
+        {
+            return Avrech.DeleteAvrech(iPersonId);
+        }
+        
 
-
-       
         #endregion
 
 

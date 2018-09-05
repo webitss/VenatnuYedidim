@@ -56,7 +56,7 @@ export class SettingYeshivaComponent implements OnInit {
         })
     }
     else{
-      this.appProxy.post('EditYeshiva',{yeshiva:this.yeshiva,iYeshivaId:this.yeshiva.iYeshivaId})
+       this.appProxy.post('EditYeshiva',{yeshiva:this.yeshiva,iYeshivaId:this.yeshiva.iYeshivaId})
       .then(
         data=> {
           this.yeshiva=data;
