@@ -106,7 +106,7 @@ import { settingsFrontend } from './services/settings-frontend.service';
 
     // pipes
     FilterPipe,
-
+ 
     //directives
     GoogleCity,
     SafeUrl,    
@@ -285,6 +285,7 @@ import { settingsFrontend } from './services/settings-frontend.service';
   ],
   providers: [AppProxy, SysTableService, GlobalService, CanDeactivateGuard, DialogService,settingsFrontend],
   bootstrap: [AppComponent],
+
   // exports: [CalendarComponent]
   // entryComponents:[
   //   CardsUnionComponent

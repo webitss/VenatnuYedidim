@@ -66,6 +66,7 @@ export class StudentConversationDetailsComponent implements OnInit {
             this.UpdateConver.emit(this.currentConver);
 
 
+<<<<<<< HEAD
 // <<<<<<< HEAD
 //           alert(data);
 //           this.Conversation.emit(null);
@@ -101,6 +102,15 @@ export class StudentConversationDetailsComponent implements OnInit {
 //           else
 //             alert("no good");
 // >>>>>>> 17ff4bc1e58a547fa818ac6d80fb2905c84252ae
+=======
+          this.newConver.emit(this.conversation);
+          if (data) {
+            alert("good");
+            this.Conversation.emit(null);
+          }
+          else
+            alert("no good");
+>>>>>>> 684a3b3ca2d7862de5e022acfa38a4820fe9b146
         });
   }
 

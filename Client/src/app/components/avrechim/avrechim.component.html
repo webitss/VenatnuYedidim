@@ -1,7 +1,6 @@
 <div class="row component-name-header">
     <div class="col-sm-4 component-name">אברכים</div>
     <div class="actions col-sm-8">
-
         <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
         <button class="btn btn-small" (click)="tableToPdf('אברכים')">pdf</button>
         <button class="btn btn-circle1 btn-orange"> שליחת מייל</button>
@@ -9,8 +8,9 @@
     </div>
 </div>
 
+<div class="main-table">
 <app-vy-table #avrechim [lstColumns]="lstColumns" [lstDataRows]="avrechimList" (clickCell)="click($event)"></app-vy-table>
-
+</div>
 
 <div  class="modal fade" >
     <div class="modal-dialog">

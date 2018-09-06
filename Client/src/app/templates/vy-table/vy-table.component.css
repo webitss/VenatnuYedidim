@@ -24,9 +24,39 @@
 .cell-filter{
   opacity: 0.5;
 }
-#search {
+
+.vy-filter-search {
   background: white url("./../../../assets/icons/search.png") left no-repeat;
-  /* padding-right: 97px; */
+}
+
+.vy-table{
+  height: 100%;
+}
+
+.vy-filter-row{
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.vy-tbody{
+  overflow: auto;
+  margin-right: -15px;
+  margin-left: -15px;
+  height: calc(100% - 104px);
+}
+
+.vy-row{
+  margin: 0;
+}
+
+
+.sammary-rows{
+  float: right;
+}
+
+.pagination{
+  float: left;
+  direction: ltr;
 }
 
 .pagination-page{

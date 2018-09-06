@@ -11,7 +11,9 @@
 </div>
 </div>
 
+<div class="main-table">
  <app-vy-table #students [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editStudent($event)"></app-vy-table> 
+</div>
 
 <div *ngIf="flag==true"> 
     <app-cards-union (onClose)="flag=false"></app-cards-union>
