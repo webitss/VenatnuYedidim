@@ -547,6 +547,26 @@ RequestFormat = WebMessageFormat.Json)]
         bool SendEmailOrFax(string from, string to, string subject, string body, List<Attachment> lAttach);
 
         #endregion
+        #region GlobalParameters
+
+        [OperationContract]
+        [WebInvoke(
+              Method = "POST",
+              UriTemplate = "SaveGlobalParameters",
+              BodyStyle = WebMessageBodyStyle.WrappedRequest,
+              ResponseFormat = WebMessageFormat.Json,
+              RequestFormat = WebMessageFormat.Json)]
+        bool SaveGlobalParameters(List<TGlobalParameters> GlobalParameters);
+        [OperationContract]
+        [WebInvoke(
+             Method = "GET",
+             UriTemplate = "GetGlobalParameters",
+             BodyStyle = WebMessageBodyStyle.WrappedRequest,
+             ResponseFormat = WebMessageFormat.Json,
+             RequestFormat = WebMessageFormat.Json)]
+        List<TGlobalParameters> GetGlobalParameters();
+      
+        #endregion
     }
 
 }

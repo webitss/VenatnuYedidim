@@ -2,5 +2,6 @@ export class TGlobalParameters
     {
         public  iParameterId:number;
         public  nvTitle :string;
-        public nvValue:string 
+        //צריך לבדוק איפה לשמור
+        public nvValue:string;
     }

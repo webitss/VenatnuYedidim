@@ -66,41 +66,41 @@ export class StudentConversationDetailsComponent implements OnInit {
             this.UpdateConver.emit(this.currentConver);
 
 
-<<<<<<< HEAD
-          alert(data);
-          this.Conversation.emit(null);
-          // this.newConver.push({
-          //   iConversationId: this.conversation.iConversationId,
-          //   iPersonId: this.conversation.iPersonId,
-          //   iConversationType: this.sysTableList.filter(s => s.iSysTableRowId ==  this.conversation.iConversationType)[0],
-          //   dConversationDate:  this.conversation.dConversationDate,
-          //   dtConversationTime:  this.conversation.dtConversationTime,
-          //   nvConversationSummary:  this.conversation.nvConversationSummary,
-          //   dtNextConversationDate: this.conversation.dtNextConversationDate
-          // });
-          // this.conversation=this.newConver;
-          // }
-          // else {
-          //   this.conversation['nvConversationDate'] = this.conversation.dConversationDate.toLocaleDateString();
-          //   this.conversation['nvConversationTime'] = this.conversation.dtConversationTime.toLocaleTimeString();
-          //   this.conversation['nvNextConversationDate'] = this.conversation.dtNextConversationDate.toLocaleDateString();
-          //   this.conversation['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == this.conversation.iConversationType)[0].nvValue;
-          // }
-          // if (data) {
-          //   alert("good");
-          //   this.Conversation.emit(null);
-          // }
-          // else
-          //   alert("no good");
-=======
-          this.newConver.emit(this.conversation);
-          if (data) {
-            alert("good");
-            this.Conversation.emit(null);
-          }
-          else
-            alert("no good");
->>>>>>> 17ff4bc1e58a547fa818ac6d80fb2905c84252ae
+// <<<<<<< HEAD
+//           alert(data);
+//           this.Conversation.emit(null);
+//           // this.newConver.push({
+//           //   iConversationId: this.conversation.iConversationId,
+//           //   iPersonId: this.conversation.iPersonId,
+//           //   iConversationType: this.sysTableList.filter(s => s.iSysTableRowId ==  this.conversation.iConversationType)[0],
+//           //   dConversationDate:  this.conversation.dConversationDate,
+//           //   dtConversationTime:  this.conversation.dtConversationTime,
+//           //   nvConversationSummary:  this.conversation.nvConversationSummary,
+//           //   dtNextConversationDate: this.conversation.dtNextConversationDate
+//           // });
+//           // this.conversation=this.newConver;
+//           // }
+//           // else {
+//           //   this.conversation['nvConversationDate'] = this.conversation.dConversationDate.toLocaleDateString();
+//           //   this.conversation['nvConversationTime'] = this.conversation.dtConversationTime.toLocaleTimeString();
+//           //   this.conversation['nvNextConversationDate'] = this.conversation.dtNextConversationDate.toLocaleDateString();
+//           //   this.conversation['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == this.conversation.iConversationType)[0].nvValue;
+//           // }
+//           // if (data) {
+//           //   alert("good");
+//           //   this.Conversation.emit(null);
+//           // }
+//           // else
+//           //   alert("no good");
+// =======
+//           this.newConver.emit(this.conversation);
+//           if (data) {
+//             alert("good");
+//             this.Conversation.emit(null);
+//           }
+//           else
+//             alert("no good");
+// >>>>>>> 17ff4bc1e58a547fa818ac6d80fb2905c84252ae
         });
   }
 

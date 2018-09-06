@@ -94,9 +94,9 @@ namespace Service
             return Student.AddStudentsToAvrech(studentAndAvrechArr, iUserId);
         }
 
-        public bool AddStudent(Student student,string base64Image, int iUserId)
+        public bool AddStudent(Student student, string base64Image, int iUserId)
         {
-            return Student.AddStudent(student, base64Image,iUserId);
+            return Student.AddStudent(student, base64Image, iUserId);
         }
 
 
@@ -114,7 +114,7 @@ namespace Service
         public bool UnionCards(Student student, int iStudent2)
         {
             return Student.UnionCards(student, iStudent2);
-        }        
+        }
 
         #endregion
 
@@ -173,7 +173,7 @@ namespace Service
         {
             return Avrech.DeleteAvrech(iPersonId);
         }
-        
+
 
         #endregion
 
@@ -252,7 +252,7 @@ namespace Service
         {
             return Yeshivot.getYeshivaById(iYeshivaId);
         }
-        public bool DeleteYeshiva(int iYeshivaId,int iLastModifyUserId)
+        public bool DeleteYeshiva(int iYeshivaId, int iLastModifyUserId)
         {
             return Yeshivot.DeleteYeshiva(iYeshivaId, iLastModifyUserId);
         }
@@ -273,7 +273,7 @@ namespace Service
         //{
         //    return Document.AddFile(iItemId, iBelongingType, iCategoryType, nvBase64File, nvFileName, nvComment);
         //}
-        public int SetDocument(Document document, string nvBase64File,int iUserId)
+        public int SetDocument(Document document, string nvBase64File, int iUserId)
         {
             return Document.SetDocument(document, nvBase64File, iUserId);
         }
@@ -290,7 +290,7 @@ namespace Service
             return Document.DeleteDocument(iDocumentId, iLastModifyUserId);
         }
 
-       
+
 
         #endregion
 
@@ -324,6 +324,18 @@ namespace Service
         public bool SendEmailOrFax(string from, string to, string subject, string body, List<Attachment> lAttach)
         {
             return SendMessagesHandler.SendEmailOrFax(from, to, subject, body, lAttach);
+        }
+        #endregion
+        #region GlobalParameters
+
+        public bool SaveGlobalParameters(List<TGlobalParameters> GlobalParameters)
+        {
+            return TGlobalParameters.SaveGlobalParameters(GlobalParameters);
+        }
+
+        public List<TGlobalParameters> GetGlobalParameters()
+        {
+            return TGlobalParameters.GetGlobalParameters();
         }
 
         #endregion

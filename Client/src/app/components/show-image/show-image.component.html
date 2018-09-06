@@ -3,7 +3,7 @@
     <button type="button" class="btn btn-default btn-sm">
    
       </button>
-  <nav class="navbar navbar-expand-sm nav"> <span class="header">{{titaieName}}</span>
+  <nav class="navbar navbar-expand-sm nav"> <span class="header">{{settingsFrontend.GlobalHeader.nvTitle}}</span>
     <button type="button" mdbBtn color="primary"  class="relative waves-light glyphicon glyphicon-user" (click)="divModal=true" mdbWavesEffect>login</button>
     
     <div id="vmdbModal" *ngIf="divModal">
@@ -38,7 +38,8 @@
   </nav>
 
     </header>
-    <div id="text" class="text"> text</div>
+    <div id="VerMarch" class="VerMarch"> {{settingsFrontend.GlobalVerMarch.nvTitle}}</div>
+    <div id="MarchSF" class="MarchSF"> {{settingsFrontend.GlobalMarchSF.nvTitle}}</div>
     <div id="img" class="image"> 
       <!-- <table *ngFor="let img of listImage">
         <div class="row ">

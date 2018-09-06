@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { NgxGalleryImage, NgxGalleryOptions, NgxGalleryAnimation } from 'ngx-gallery';
+import { settingsFrontend } from '../../services/settings-frontend.service';
 
 // import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 
@@ -10,10 +11,11 @@ import { NgxGalleryImage, NgxGalleryOptions, NgxGalleryAnimation } from 'ngx-gal
   styleUrls: ['./show-image.component.css']
 })
 export class ShowImageComponent implements OnInit {
+ 
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[]=new Array<NgxGalleryImage>();
 
-  constructor(private appProxy: AppProxy) { }
+  constructor(private appProxy: AppProxy, private settingsFrontend:settingsFrontend) { }
 protected titaieName:string="ונתנו ידידים";
 
 protected divModal:boolean;
@@ -23,7 +25,7 @@ protected listImage:string[]=["http://localhost:14776/Files/red.jpg","assets/ח�
 "assets/IMG_5650.JPG","assets/IMG_5650.JPG",]
 protected documents: any;
 protected password:string;
-protected name:string;
+
 
 protected lstColumns = [{
  
@@ -83,20 +85,14 @@ this.appProxy.get('GetDocuments').then(data => {
   this.documents = data;
     this.documents.forEach(element => {
      
-      if(element.nvDocumentName=="red.jpg"){
-        debugger;
-      this.galleryImages.push({
-        small:'http://localhost:14776/Files/'  + element.nvDocumentName,
-        medium:  'http://localhost:14776/Files/'+element.nvDocumentName,
-        big: 'http://localhost:14776/Files/'  + element.nvDocumentName,
-        
      
-
-        
-
-
-        
-      });
+      if(element.nvDocumentName=="red.jpg" ||element.nvDocumentName=="yellow(9).jpg"){
+       
+      this.galleryImages.push({
+        small:AppProxy.baseDevUrl+'/Files/'  + element.nvDocumentName,
+        medium: AppProxy.baseDevUrl+'/Files/'+element.nvDocumentName,
+        big: AppProxy.baseDevUrl+'/Files/'  + element.nvDocumentName,
+    });
     }
     });
     alert("this.galleryImages[0].small"+this.galleryImages[this.galleryImages.length].small)
