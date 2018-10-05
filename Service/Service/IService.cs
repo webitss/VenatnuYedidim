@@ -65,6 +65,15 @@ namespace Service
 		  RequestFormat = WebMessageFormat.Json)]
 		bool SetUser(User user, int iUserId);
 
+		[OperationContract]
+		[WebInvoke(
+		  Method = "POST",
+		  UriTemplate = "DeleteUser",
+		  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		  ResponseFormat = WebMessageFormat.Json,
+		  RequestFormat = WebMessageFormat.Json)]
+		bool DeleteUser(int iPersonId);
+
 		#endregion
 
 		#region Student
@@ -216,6 +225,15 @@ RequestFormat = WebMessageFormat.Json)]
 		 ResponseFormat = WebMessageFormat.Json,
 		 RequestFormat = WebMessageFormat.Json)]
 		bool DeleteAvrech(int iPersonId);
+
+		[OperationContract]
+		[WebInvoke(
+	Method = "POST",
+	UriTemplate = "GetAvrechimByStudentId",
+	BodyStyle = WebMessageBodyStyle.WrappedRequest,
+	ResponseFormat = WebMessageFormat.Json,
+	RequestFormat = WebMessageFormat.Json)]
+		List<Avrech> GetAvrechimByStudentId(int iPersonId);
 
 		#endregion
 
@@ -433,7 +451,7 @@ RequestFormat = WebMessageFormat.Json)]
 		BodyStyle = WebMessageBodyStyle.WrappedRequest,
 		ResponseFormat = WebMessageFormat.Json,
 		RequestFormat = WebMessageFormat.Json)]
-		bool SetConversations(Conversation conversation, int iPersonId);
+		int SetConversations(Conversation conversation, int iUserId);
 
 		//[OperationContract]
 		//[WebInvoke(
@@ -528,7 +546,37 @@ RequestFormat = WebMessageFormat.Json)]
 		RequestFormat = WebMessageFormat.Json)]
 		bool DeleteDocument(int iDocumentId, int iLastModifyUserId);
 
-		#endregion
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "GET",
+        UriTemplate = "GetDocumentsOfTadmit",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Document> GetDocumentsOfTadmit();
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "GET",
+        UriTemplate = "GetMoreDocumentsOfTadmit",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Document> GetMoreDocumentsOfTadmit();
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "changeTadmitStatus",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool changeTadmitStatus(int iDocumentId,int iUserId);
+
+        
+        #endregion
+
 
 		#region graduates
 		[OperationContract]
@@ -564,6 +612,7 @@ RequestFormat = WebMessageFormat.Json)]
 		bool SendEmailOrFax(string from, string to, string subject, string body, List<Attachment> lAttach);
 
 		#endregion
+
 		#region GlobalParameters
 
 		[OperationContract]

@@ -17,10 +17,13 @@ export class EventParticipantsComponent implements OnInit {
   private sub: any;
   protected participant: Array<any> = new Array<any>();
   sysTableRowList: SysTableRow[];
- 
+  protected iPerson:number;
+  protected flag;
+  protected iLastModifyUserId:number;
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
 
   public lstColumns = [
+    new VyTableColumn('מחיקה','delete','html',true,false),
     new VyTableColumn('שם פרטי','nvFirstName'),
     new VyTableColumn('שם משפחה','nvLastName'),
     new VyTableColumn('טלפון','nvPhone'),
@@ -39,12 +42,13 @@ export class EventParticipantsComponent implements OnInit {
 
         this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
           this.sysTableRowList = data;
-          // this.sysTableRowList.forEach(p=>{
-          //   p
-          // })
+          //  this.sysTableRowList.forEach(p=>{
+          //    p
+          
           res.forEach(p => {
             // this.participant.forEach(p => {
               this.lstDataRows.push({
+                delete:p.delete,
                 iEventId: p.iEventId,
                 nvFirstName: p.nvFirstName,
                 nvLastName: p.nvLastName,
@@ -59,16 +63,36 @@ export class EventParticipantsComponent implements OnInit {
               //  iArriveStatusType: this.sysTableRowList.filter(s => s.iSysTableRowId ==parseInt (p.lstObject.iArrivalStatusType))[0].nvValue;
               });
             });
-
+          // });
+           this.lstDataRows.forEach(p=> {
+             p['delete'] = '<div class="delete"></div>';
+           });
         });
         // alert("x");
       })
     });
   }
+  // public deleteYeshiva(yeshiva) {
+  //   this.iPerson=yeshiva.iYeshivaId;
+  //   this.flag=true;
+  // }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
+  // delete() {
+  //   this.appProxy.post('DeleteParticipant',{iYeshivaId:this.iPerson,iLastModifyUserId:this.iLastModifyUserId})
+  //   .then(
+  //       data=>{
+  //       this.iPerson=data;
+  //       alert("המשתתף נמחק בהצלחה");
+  //   });    
+  // }
+
+  // close() {
+  //   this.iPerson = null;
+  //   this.flag=null;
+  // }
+  // ngOnDestroy() {
+  //   this.sub.unsubscribe();
+  // }
 
 
 

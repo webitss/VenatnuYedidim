@@ -38,6 +38,11 @@ namespace Service
             return User.SetUser(user, iUserId);
         }
 
+        public bool DeleteUser(int iPersonId)
+        {
+            return User.DeleteUser(iPersonId);
+        }
+
         #endregion
 
         #region Meeting
@@ -179,13 +184,18 @@ namespace Service
             return Avrech.DeleteAvrech(iPersonId);
         }
 
+		public List<Avrech> GetAvrechimByStudentId(int iPersonId) {
+			return Avrech.GetAvrechimByStudentId(iPersonId);
+				}
 
-        #endregion
+
+
+		#endregion
 
 
 
-        #region SysTableRow
-        public List<SysTableRow> GetValues(int iSysTableId)
+		#region SysTableRow
+		public List<SysTableRow> GetValues(int iSysTableId)
         {
 
             return SysTableRow.GetValues(iSysTableId);
@@ -217,9 +227,9 @@ namespace Service
         {
             return Conversation.GetConversations(iPersonId);
         }
-        public bool SetConversations(Conversation conversation, int iPersonId)
+        public int SetConversations(Conversation conversation, int iUserId)
         {
-            return Conversation.SetConversation(conversation, iPersonId);
+            return Conversation.SetConversations(conversation, iUserId);
         }
         //public bool AddConversations(Conversation conversation, int iPersonId)
         //{
@@ -295,13 +305,25 @@ namespace Service
             return Document.DeleteDocument(iDocumentId, iLastModifyUserId);
         }
 
+        public List<Document> GetDocumentsOfTadmit()
+        {
+            return Document.GetDocumentsOfTadmit();
+        }
 
+        public List<Document> GetMoreDocumentsOfTadmit()
+        {
+            return Document.GetMoreDocumentsOfTadmit();
+        }
 
-        #endregion
+        public bool changeTadmitStatus(int iDocumentId,int iUserId) { 
+              return Document.changeTadmitStatus(iDocumentId,iUserId);
+        }
 
-        #region participant
+    #endregion
 
-        public List<Person> GetParticipantsList(int iEventId)
+    #region participant
+
+    public List<Person> GetParticipantsList(int iEventId)
         {
             return Participant.GetParticipantsList(iEventId);
         }

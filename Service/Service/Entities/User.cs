@@ -101,6 +101,22 @@ namespace Service.Entities
                 return false;
             }
         }
+
+        public static bool DeleteUser(int iPersonId)
+        {
+            try
+            {
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TUser_DEL", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
+                return true;
+
+            }
+
+            catch (Exception ex)
+            {
+                Log.LogError("DeleteUser / TUser_DEL", "ex: " + ex);
+                return false;
+            }
+        }
         #endregion
     }
 }

@@ -51,6 +51,11 @@ export class StudentDetailsComponent implements OnInit {
     // this.addYeshivaToStudent.iPersonId
     // this.addYeshivaToStudent.iYeshivaId
 
+
+  
+
+
+
     this.appProxy.post("GetAllYeshivot").then(date => { this.yeshivaList = date; })
 
     this.route.parent.params.subscribe(params => {
@@ -91,6 +96,9 @@ export class StudentDetailsComponent implements OnInit {
             this.motherDeadDetails = true;
             this.isCheckedMother = true;
           }
+
+
+
         });
       }
       else {
@@ -103,6 +111,8 @@ export class StudentDetailsComponent implements OnInit {
 
     });
     this.appProxy.post("GetYeshivotOfStudent", { iPersonId: this.paramRout }).then(data => this.yeshivaListOfStudent = data);
+
+    
     // this.route.parent.params.subscribe(params => { this.paramRout = params['iPersonId'] });
   }
 

@@ -25,6 +25,8 @@ export class SettingsYeshivotComponent implements OnInit {
   protected iLastModifyUserId:number;
   protected flag;
   @ViewChild('yeshivot') yeshivot:any;
+  @Output() 
+  public closeYeshiva=new EventEmitter();
 
  
   @Output()
@@ -80,6 +82,7 @@ export class SettingsYeshivotComponent implements OnInit {
         data=>{
         this.yeshiva=data;
         alert("הישיבה נמחקה בהצלחה");
+        this.closeYeshiva.emit(null);
     });    
   }
 

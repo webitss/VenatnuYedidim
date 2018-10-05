@@ -6,6 +6,6 @@ export class Document {
     nvDocumentType:string;
     iCategoryType: number;
     nvComment: string;
-    bShowInTadmit:number;
+    bShowInTadmit:boolean;
     dtCreatedate:Date;
 }
