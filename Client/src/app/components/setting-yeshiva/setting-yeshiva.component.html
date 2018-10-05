@@ -1,4 +1,4 @@
-<form class="settingYeshiva">
+<form class="settingYeshiva" #form="ngForm">
 
     <button (click)="cancel()">סגור x </button>
     <button (click)="save()">שמור v </button>
@@ -75,7 +75,6 @@
           </div>
         </div>
       </div>-->
-      <div (onSave)="getFromChild($event)" ></div>
       <div *ngIf="(to==undefined||to.length==0 ) && touched==true">
           <div class="text-danger text-right">
             <strong>שדה נדרש!</strong>

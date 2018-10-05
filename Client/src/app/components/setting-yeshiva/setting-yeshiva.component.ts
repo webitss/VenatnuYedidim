@@ -28,26 +28,6 @@ export class SettingYeshivaComponent implements OnInit {
 
   protected yeshiva:Yeshiva=new Yeshiva();
 
-  touched = false;
-  @ViewChild(NgForm) form;
-  to: Array<any>;
-  
-  checkFormValidity() {
-    return this.form.valid;
-  }
-
-  checkIfSelectIsValid() {
-    return this.to.length > 0;
-  }
-
-  selectValid = false;
-  isValid = this.selectValid && this.form.valid;
-
-  getFromChild(list: Array<any>) {
-    this.to=list;
-    this.selectValid = this.checkIfSelectIsValid();
-    this.isValid = this.selectValid && this.form.valid;
-  }
 
   constructor(private appProxy: AppProxy, private router:Router) { }
 
