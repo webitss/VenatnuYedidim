@@ -65,10 +65,19 @@ namespace Service
 		  RequestFormat = WebMessageFormat.Json)]
 		bool SetUser(User user, int iUserId);
 
-		#endregion
+        [OperationContract]
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "DeleteUser",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+        bool DeleteUser(int iPersonId);
 
-		#region Student
-		[OperationContract]
+        #endregion
+
+        #region Student
+        [OperationContract]
 		[WebInvoke(
 		 Method = "POST",
 		 UriTemplate = "GetStudentList",
@@ -564,6 +573,7 @@ RequestFormat = WebMessageFormat.Json)]
 		bool SendEmailOrFax(string from, string to, string subject, string body, List<Attachment> lAttach);
 
 		#endregion
+
 		#region GlobalParameters
 
 		[OperationContract]

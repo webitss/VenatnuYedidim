@@ -38,6 +38,11 @@ namespace Service
             return User.SetUser(user, iUserId);
         }
 
+        public bool DeleteUser(int iPersonId)
+        {
+            return User.DeleteUser(iPersonId);
+        }
+
         #endregion
 
         #region Meeting
