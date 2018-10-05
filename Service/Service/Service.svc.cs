@@ -217,9 +217,9 @@ namespace Service
         {
             return Conversation.GetConversations(iPersonId);
         }
-        public bool SetConversations(Conversation conversation, int iPersonId)
+        public int SetConversations(Conversation conversation, int iUserId)
         {
-            return Conversation.SetConversation(conversation, iPersonId);
+            return Conversation.SetConversations(conversation, iUserId);
         }
         //public bool AddConversations(Conversation conversation, int iPersonId)
         //{

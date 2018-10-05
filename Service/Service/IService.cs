@@ -433,7 +433,7 @@ RequestFormat = WebMessageFormat.Json)]
 		BodyStyle = WebMessageBodyStyle.WrappedRequest,
 		ResponseFormat = WebMessageFormat.Json,
 		RequestFormat = WebMessageFormat.Json)]
-		bool SetConversations(Conversation conversation, int iPersonId);
+		int SetConversations(Conversation conversation, int iUserId);
 
 		//[OperationContract]
 		//[WebInvoke(
