@@ -46,14 +46,12 @@ debugger;
     this.studentList.forEach(e=>{
       if(e.iPersonId==event.currentTarget.value)
       this.student1=e;
-      debugger;
     });
   }
   student2Change(event:any){
     this.studentList.forEach(e=>{
     if(e.iPersonId==event.currentTarget.value)
       this.student2=e;
-      debugger;
       
     });
 
@@ -62,6 +60,7 @@ debugger;
    get baseFileUrl(){
     return 'http://localhost:14776/Files/Students/';
   }
+
    unionOk()
    {
 
@@ -81,12 +80,19 @@ else
 this.student.bDeathFather=true;
 
 
- this.appProxy.post('UnionCards', { student:this.student,iStudent2:this.student2.iPersonId }).then(
+ this.appProxy.post('UnionCards', { student:this.student,iStudent2:this.student2.iPersonId}).then(
       data => 
       {
-       alert("האיחוד התבצע בהצלחה!")
+      if(data==true)
+      {
+        alert("האיחוד התבצע בבהצלחה");
+  this.onClose.emit();
+        
       }
-      , err => alert("שגיאה באיחוד הכרטיסים"));   
+      else
+      alert("שגיאה באיחוד הכרטיסים")
+      }
+      , err => alert("שגיאה בגישה לשרת"));   
 }
 
 checkDisabled(field)
@@ -100,4 +106,6 @@ close()
 {
   this.onClose.emit();
 }
+
+
 }

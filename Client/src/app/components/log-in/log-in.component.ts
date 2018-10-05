@@ -18,7 +18,8 @@ export class LogInComponent implements OnInit {
 
   ngOnInit() {
     this.imgHeight = window.innerHeight;
-
+    if (JSON.parse(localStorage.getItem("user")) != null)
+    this.router.navigate(['students']);
   }
 
   protected imgHeight: number;
