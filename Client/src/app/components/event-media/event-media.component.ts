@@ -14,7 +14,8 @@ export class EventMediaComponent implements OnInit {
   document: Document;
   documents: any[] = new Array();
 
-  constructor(private appProxy: AppProxy, private globalService: GlobalService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private appProxy: AppProxy, private globalService: GlobalService,
+              private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.activatedRoute.parent.params.subscribe(params => {
@@ -41,7 +42,7 @@ export class EventMediaComponent implements OnInit {
 
   editDocument(id) {
     this.documents.forEach(element => {
-      if (element.iDocumentId ==id) {
+      if (element.iDocumentId === id) {
         this.document = new Document();
         this.document.iBelongingType = 3;
         this.document.iCategoryType = 0;
@@ -68,7 +69,7 @@ export class EventMediaComponent implements OnInit {
       if(i==len)
         this.documents.push(this.document);
     }
-    this.document = null;    
+    this.document = null;
     // this.loadDocuments();
   }
 
@@ -81,6 +82,14 @@ export class EventMediaComponent implements OnInit {
           break;
         }
       }
+    }
+      , err => alert(err));
+  }
+
+  changeTadmitStatus(iDocumentId: number) {
+    this.appProxy.post('GetDocumentsByItemId', { iItemId: this.id }).then(data => {
+      this.documents = data;
+      console.log(this.documents);
     }
       , err => alert(err));
   }

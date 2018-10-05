@@ -38,6 +38,11 @@ namespace Service
             return User.SetUser(user, iUserId);
         }
 
+        public bool DeleteUser(int iPersonId)
+        {
+            return User.DeleteUser(iPersonId);
+        }
+
         #endregion
 
         #region Meeting
@@ -298,6 +303,16 @@ namespace Service
         public bool DeleteDocument(int iDocumentId, int iLastModifyUserId)
         {
             return Document.DeleteDocument(iDocumentId, iLastModifyUserId);
+        }
+
+        public List<Document> GetDocumentsOfTadmit()
+        {
+            return Document.GetDocumentsOfTadmit();
+        }
+
+        public List<Document> GetMoreDocumentsOfTadmit()
+        {
+            return Document.GetMoreDocumentsOfTadmit();
         }
 
 
