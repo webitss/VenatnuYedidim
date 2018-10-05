@@ -528,10 +528,28 @@ RequestFormat = WebMessageFormat.Json)]
 		RequestFormat = WebMessageFormat.Json)]
 		bool DeleteDocument(int iDocumentId, int iLastModifyUserId);
 
-		#endregion
+        [OperationContract]
+        [WebInvoke(
+        Method = "GET",
+        UriTemplate = "GetDocumentsOfTadmit",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Document> GetDocumentsOfTadmit();
 
-		#region graduates
-		[OperationContract]
+        [OperationContract]
+        [WebInvoke(
+        Method = "GET",
+        UriTemplate = "GetMoreDocumentsOfTadmit",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Document> GetMoreDocumentsOfTadmit();
+
+        #endregion
+
+        #region graduates
+        [OperationContract]
 		[WebInvoke(
 		Method = "POST",
 		UriTemplate = "GetGraduatesList",

@@ -29,6 +29,8 @@ namespace Service.Entities
         [DataMember]
         public string nvComment { get; set; }
         [DataMember]
+        public bool bShowInTadmit { get; set; }
+        [DataMember]
         public DateTime? dtCreatedate { get; set; }
 
 
@@ -161,7 +163,41 @@ namespace Service.Entities
                 return false;
             }
         }
-        
+        public static List<Document> GetDocumentsOfTadmit()
+        {
+            {
+                try
+                {
+                    DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TDocuments_OfTadmit_SLCT").Tables[0].Rows;
+                    List<Document> documents = ObjectGenerator<Document>.GeneratListFromDataRowCollection(drc);
+                    return documents;
+                }
+                catch (Exception ex)
+                {
+                    Log.LogError("GetDocumentsOfTadmit / TDocuments_OfTdmit_SLCT", ", ex " + ex);
+                    return null;
+                }
+
+            }
+        }
+            public static List<Document> GetMoreDocumentsOfTadmit()
+            {
+                {
+                    try
+                    {
+                        DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TDocuments_MoreOfTadmit_SLCT").Tables[0].Rows;
+                        List<Document> documents = ObjectGenerator<Document>.GeneratListFromDataRowCollection(drc);
+                        return documents;
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.LogError("GetMoreDocumentsOfTadmit / TDocuments_MoreOfTadmit_SLCT", ", ex " + ex);
+                        return null;
+                    }
+
+                }
+
+            }
         #endregion
     }
 }
