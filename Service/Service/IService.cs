@@ -583,9 +583,39 @@ RequestFormat = WebMessageFormat.Json)]
 			 RequestFormat = WebMessageFormat.Json)]
 		List<TGlobalParameters> GetGlobalParameters();
 
-		#endregion
+        #endregion
+
+        #region PresenceAvrech
+
+        [OperationContract]
+        [WebInvoke(
+           Method = "POST",
+           UriTemplate = "GetPresenceAvrechById",
+           BodyStyle = WebMessageBodyStyle.WrappedRequest,
+           ResponseFormat = WebMessageFormat.Json,
+           RequestFormat = WebMessageFormat.Json)]
+           List<PresenceAvrech> GetPresenceAvrechById(int iPersonId);
+
+        [OperationContract]
+        [WebInvoke(
+          Method = "POST",
+          UriTemplate = "DeletePresenceAvrech",
+          BodyStyle = WebMessageBodyStyle.WrappedRequest,
+          ResponseFormat = WebMessageFormat.Json,
+          RequestFormat = WebMessageFormat.Json)]
+          bool DeletePresenceAvrech(int ipresenceAvrech, int iLastModifyUserId);
 
 
+        [OperationContract]
+        [WebInvoke(
+           Method = "POST",
+           UriTemplate = "SetPresence",
+           BodyStyle = WebMessageBodyStyle.WrappedRequest,
+           ResponseFormat = WebMessageFormat.Json,
+           RequestFormat = WebMessageFormat.Json)]
+           bool SetPresence(PresenceAvrech presenceAvrech);
 
-	}
+        #endregion
+
+    }
 }

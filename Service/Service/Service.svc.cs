@@ -344,5 +344,23 @@ namespace Service
         }
 
         #endregion
+        #region presenceAvrech
+
+        public List<PresenceAvrech> GetPresenceAvrechById(int iPresenceAvrech)
+        {
+            return PresenceAvrech.GetPresenceAvrechById(iPresenceAvrech);
+        }
+
+        public bool SetPresence(PresenceAvrech presenceAvrech)
+        {
+            return PresenceAvrech.SetPresence(presenceAvrech);
+        }
+
+        public bool DeletePresenceAvrech(int ipresenceAvrech, int iLastModifyUserId)
+        {
+            return PresenceAvrech.DeletePresenceAvrech(ipresenceAvrech,iLastModifyUserId);
+        }
+
+        #endregion
     }
 }
