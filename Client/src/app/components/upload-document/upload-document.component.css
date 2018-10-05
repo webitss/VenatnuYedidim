@@ -48,3 +48,7 @@ h3{
 .form-group.documentName{
     width: 60%;
 }
+.checkbox {
+  margin-top: 1%;
+  margin-left: 1%;
+}

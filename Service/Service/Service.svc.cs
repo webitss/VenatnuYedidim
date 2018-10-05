@@ -38,6 +38,11 @@ namespace Service
             return User.SetUser(user, iUserId);
         }
 
+        public bool DeleteUser(int iPersonId)
+        {
+            return User.DeleteUser(iPersonId);
+        }
+
         #endregion
 
         #region Meeting
@@ -179,13 +184,18 @@ namespace Service
             return Avrech.DeleteAvrech(iPersonId);
         }
 
+		public List<Avrech> GetAvrechimByStudentId(int iPersonId) {
+			return Avrech.GetAvrechimByStudentId(iPersonId);
+				}
 
-        #endregion
+
+
+		#endregion
 
 
 
-        #region SysTableRow
-        public List<SysTableRow> GetValues(int iSysTableId)
+		#region SysTableRow
+		public List<SysTableRow> GetValues(int iSysTableId)
         {
 
             return SysTableRow.GetValues(iSysTableId);
@@ -305,13 +315,15 @@ namespace Service
             return Document.GetMoreDocumentsOfTadmit();
         }
 
+        public bool changeTadmitStatus(int iDocumentId,int iUserId) { 
+              return Document.changeTadmitStatus(iDocumentId,iUserId);
+        }
 
+    #endregion
 
-        #endregion
+    #region participant
 
-        #region participant
-
-        public List<Person> GetParticipantsList(int iEventId)
+    public List<Person> GetParticipantsList(int iEventId)
         {
             return Participant.GetParticipantsList(iEventId);
         }
