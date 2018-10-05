@@ -53,6 +53,21 @@ namespace Service.Entities
             }
         }
 
+        public static List<Task> GetTasksByPersonId( int iPersonId)
+        {
+            try
+            {
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TTask_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
+                List<Task> tasks = ObjectGenerator<Task>.GeneratListFromDataRowCollection(drc);
+                return tasks;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetTasksByPersonId / TTask_SLCT", ", ex " + ex);
+                return null;
+            }
+        }
+
      
     
      

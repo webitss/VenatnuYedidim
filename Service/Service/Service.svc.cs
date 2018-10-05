@@ -75,6 +75,11 @@ namespace Service
             return Task.SetTask(task, iUserId);
         }
 
+        public List<Task> GetTasksByPersonId( int iPersonId)
+        {
+            return Task.GetTasksByPersonId(iPersonId);
+        }
+
         #endregion
 
         #region Student

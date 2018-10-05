@@ -5,6 +5,7 @@ import { AppProxy } from '../../services/app.proxy';
 import { GlobalService } from '../../services/global.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Student } from '../../classes/student';
+import { AvrechDiaryComponent } from "../../components/avrech-diary/avrech-diary.component"
 
 @Component({
   selector: 'app-task',
@@ -80,51 +81,49 @@ export class TaskComponent implements OnInit {
 
     if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
     {
-      this.task.nvComment = " עם התלמיד: "
+      this.task.nvComments = " עם התלמיד: "
       this.task.iPersonId = this.personId;//מי שלחצו עליו
     }
     else {
-      debugger;
       alert(this.personId);
-      this.appProxy.post('GetStudentById', { iUserId:this.personId }).then(data => {
+      this.appProxy.post('GetStudentById', { iUserId: this.personId }).then(data => {
         if (data) {
-          debugger;
           // alert("personid"+this.personId);
           // alert("jjjה!");
           this.student = data;
           // alert(this.student.nvLastName);
-        
-      if (this.router.url == "/students/student/" + this.personId + "/student-meetings")//תלמידים ->פגישות
-      {debugger;
-        this.task.nvComment = " פגישה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
-        this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
 
-      }
-      else
-        if (this.router.url == "/students/student/" + this.personId + "/student-conversations")//תלמידים ->שיחות
-        {debugger;
-          this.task.nvComment = " שיחה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
-          this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
+          if (this.router.url == "/students/student/" + this.personId + "/student-meetings")//תלמידים ->פגישות
+          {
+            this.task.nvComments = " פגישה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
+            this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
+
+          }
+          else
+            if (this.router.url == "/students/student/" + this.personId + "/student-conversations")//תלמידים ->שיחות
+            {
+              this.task.nvComments = " שיחה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
+              this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
+            }
         }
-      }
-      else
-        alert("error!");
-    })
+        else
+          alert("error!");
+      })
     }
   }
   // );
 
   saveTask() {
-
     this.task.dtTaskdatetime = new Date(this.currentTask['dtDate'] + ' ' + this.currentTask['dtHour']);
     //    if (this.currentTask.iTaskId == 0)
-    debugger
+    
+debugger
     this.appProxy.post('SetTask', { task: this.task, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
       if (data) {
         alert("המשימה נוספה בהצלחה!");
+        //close
+        // this.avrechDiaryComponent.close();
       }
-      else
-        alert("error!");
     })
   }
 
