@@ -29,6 +29,8 @@ namespace Service.Entities
         [DataMember]
         public string nvComment { get; set; }
         [DataMember]
+        public bool bShowInTadmit { get; set; }
+        [DataMember]
         public DateTime? dtCreatedate { get; set; }
 
 
@@ -75,7 +77,7 @@ namespace Service.Entities
         //            foreach (DataRow dr in drc)
         //            {
         //                documents.Add(ObjectGenerator<Document>.GeneratFromDataRow(dr));
-                       
+
         //            }
         //            return documents;
         //        }
@@ -87,17 +89,17 @@ namespace Service.Entities
 
 
 
-        public static int SetDocument(Document document, string nvBase64File,int iUserId)
+        public static int SetDocument(Document document, string nvBase64File, int iUserId)
         {
             try
             {
                 if (nvBase64File != "")
                 {
-                    document.nvDocumentName= Fileshandler.SaveFileByBase64(nvBase64File, document.nvDocumentName);
+                    document.nvDocumentName = Fileshandler.SaveFileByBase64(nvBase64File, document.nvDocumentName);
                     if (document.iDocumentId != 0)
                     {
                         DataRow dr = SqlDataAccess.ExecuteDatasetSP("TDocuments_ByDocumentId_SLCT", new SqlParameter("iDocumentId", document.iDocumentId)).Tables[0].Rows[0];
-                        string prevName= ObjectGenerator<Document>.GeneratFromDataRow(dr).nvDocumentName;
+                        string prevName = ObjectGenerator<Document>.GeneratFromDataRow(dr).nvDocumentName;
                         Fileshandler.DeleteFile(prevName);
                     }
 
@@ -161,7 +163,58 @@ namespace Service.Entities
                 return false;
             }
         }
-        
+        public static List<Document> GetDocumentsOfTadmit()
+        {
+            {
+                try
+                {
+                    DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TDocuments_OfTadmit_SLCT").Tables[0].Rows;
+                    List<Document> documents = ObjectGenerator<Document>.GeneratListFromDataRowCollection(drc);
+                    return documents;
+                }
+                catch (Exception ex)
+                {
+                    Log.LogError("GetDocumentsOfTadmit / TDocuments_OfTdmit_SLCT", ", ex " + ex);
+                    return null;
+                }
+
+            }
+        }
+        public static List<Document> GetMoreDocumentsOfTadmit()
+        {
+            {
+                try
+                {
+                    DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TDocuments_MoreOfTadmit_SLCT").Tables[0].Rows;
+                    List<Document> documents = ObjectGenerator<Document>.GeneratListFromDataRowCollection(drc);
+                    return documents;
+                }
+                catch (Exception ex)
+                {
+                    Log.LogError("GetMoreDocumentsOfTadmit / TDocuments_MoreOfTadmit_SLCT", ", ex " + ex);
+                    return null;
+                }
+
+            }
+
+        }
+        public static bool changeTadmitStatus(int iDocumentId,int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iDocumentId", iDocumentId));
+                parameters.Add(new SqlParameter("iLastModifyUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TDocuments_ChangeTadmitStatus_UPD", parameters);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("changeTadmitStatus / TDocuments_ChangeTadmitStatus_UPD", "ex" + ex);
+                return false;
+            }
+        }
+
         #endregion
     }
 }
