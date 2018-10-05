@@ -43,13 +43,25 @@ li>button{
 .btn-edit{
     background-image: url("../../../assets/icons/edit.png");
 }
-.btn-del,.btn-edit{
+.btn-plus{
+  background-image: url("../../../assets/icons/add.png");
+}
+.btn-minus{
+  background-image: url("../../../assets/icons/minus.png");
+}
+
+
+.btn-del,.btn-edit,.btn-plus,.btn-minus{
     border-radius: 0px;
     margin-left: 2%;
     height: 25px;
 }
 .buttons{
-    padding-left: 30%;
+<<<<<<< HEAD
+    padding-left: 10%;
+=======
+    padding-left: 25%;
+>>>>>>> added0df24faab3c530e6411e13d40ccd64a6877
     margin-top: -10%;
     visibility: hidden;
 }
@@ -57,4 +69,3 @@ li>button{
     visibility: visible;
 
 }
-  
