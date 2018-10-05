@@ -18,7 +18,8 @@ export class LogInComponent implements OnInit {
 
   ngOnInit() {
     this.imgHeight = window.innerHeight;
-
+    if (JSON.parse(localStorage.getItem("user")) != null)
+    this.router.navigate(['students']);
   }
 
   protected imgHeight: number;
@@ -39,7 +40,7 @@ export class LogInComponent implements OnInit {
           data["iUserId"] = data.iPersonId;
           this.appComponent.instance.userName = data.nvUserName;
           localStorage.setItem("user", JSON.stringify(data));
-          this.globalService.user = data;
+          this.globalService.setUser(data);
 
           this.router.navigate(['students']);
         }

@@ -69,11 +69,15 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(u: User) {
+    if(this.globalService.getUser().iPermissionId = 5)//הודעת אזהרה לפני מחיקת מנהל - 5 זה סטטוס מנהל
+
     this.appProxy.post('DeleteUser',{iPersonId: u.iPersonId}).then(data=>{
 
     });
   }
-
+ //איכות 9797441 רבי טרפון
+ //מונוליין 9741456
+//שנהב קצות החושן 23 9941818 0527175162
   downloadExcel() {
     this.users.downloadExcel();
   }
