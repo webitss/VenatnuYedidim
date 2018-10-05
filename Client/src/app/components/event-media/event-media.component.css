@@ -57,6 +57,7 @@ li>button{
     height: 25px;
 }
 .buttons{
+    padding-left: 10%;
     margin-top: -10%;
     visibility: hidden;
 }
