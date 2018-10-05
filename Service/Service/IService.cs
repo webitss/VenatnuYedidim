@@ -65,6 +65,15 @@ namespace Service
 		  RequestFormat = WebMessageFormat.Json)]
 		bool SetUser(User user, int iUserId);
 
+		[OperationContract]
+		[WebInvoke(
+		  Method = "POST",
+		  UriTemplate = "DeleteUser",
+		  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		  ResponseFormat = WebMessageFormat.Json,
+		  RequestFormat = WebMessageFormat.Json)]
+		bool DeleteUser(int iPersonId);
+
 		#endregion
 
 		#region Student
@@ -216,6 +225,15 @@ RequestFormat = WebMessageFormat.Json)]
 		 ResponseFormat = WebMessageFormat.Json,
 		 RequestFormat = WebMessageFormat.Json)]
 		bool DeleteAvrech(int iPersonId);
+
+		[OperationContract]
+		[WebInvoke(
+	Method = "POST",
+	UriTemplate = "GetAvrechimByStudentId",
+	BodyStyle = WebMessageBodyStyle.WrappedRequest,
+	ResponseFormat = WebMessageFormat.Json,
+	RequestFormat = WebMessageFormat.Json)]
+		List<Avrech> GetAvrechimByStudentId(int iPersonId);
 
 		#endregion
 
@@ -528,6 +546,7 @@ RequestFormat = WebMessageFormat.Json)]
 		RequestFormat = WebMessageFormat.Json)]
 		bool DeleteDocument(int iDocumentId, int iLastModifyUserId);
 
+
         [OperationContract]
         [WebInvoke(
         Method = "GET",
@@ -560,6 +579,12 @@ RequestFormat = WebMessageFormat.Json)]
 
         #region graduates
         [OperationContract]
+=======
+		#endregion
+
+		#region graduates
+		[OperationContract]
+>>>>>>> 1a67a4d0d641e57dce390f85d733fa897ddb99c7
 		[WebInvoke(
 		Method = "POST",
 		UriTemplate = "GetGraduatesList",
@@ -592,6 +617,7 @@ RequestFormat = WebMessageFormat.Json)]
 		bool SendEmailOrFax(string from, string to, string subject, string body, List<Attachment> lAttach);
 
 		#endregion
+
 		#region GlobalParameters
 
 		[OperationContract]
