@@ -300,6 +300,16 @@ namespace Service
             return Document.DeleteDocument(iDocumentId, iLastModifyUserId);
         }
 
+        public List<Document> GetDocumentsOfTadmit()
+        {
+            return Document.GetDocumentsOfTadmit();
+        }
+
+        public List<Document> GetMoreDocumentsOfTadmit()
+        {
+            return Document.GetMoreDocumentsOfTadmit();
+        }
+
 
 
         #endregion
