@@ -1,28 +1,7 @@
 import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit, Output, Input } from '@angular/core';
-// import {startOfDay,endOfDay, subDays,addDays,endOfMonth,isSameDay, isSameMonth, addHours} from 'date-fns';
-import { Subject } from 'rxjs';
-// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// import {
-//   CalendarEvent,
-//   CalendarEventAction,
-//   CalendarEventTimesChangedEvent,
-//   CalendarView
-// } from 'angular-calendar';
-
-// const colors: any = {
-//   red: {
-//     primary: '#ad2121',
-//     secondary: '#FAE3E3'
-//   },
-//   blue: {
-//     primary: '#1e90ff',
-//     secondary: '#D1E8FF'
-//   },
-//   yellow: {
-//     primary: '#e3bc08',
-//     secondary: '#FDF1BA'
-//   }
-// };
+import { AppProxy } from "../../services/app.proxy"
+import { ActivatedRoute } from '@angular/router';
+import { Task } from '../../classes/task';
 @Component({
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,13 +13,14 @@ import { Subject } from 'rxjs';
 export class CalendarComponent implements OnInit {
   @Output()
   daysNameArr: Array<string> = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"];
-  daysMonthNameArr: number[][];// = new Array();
+  daysMonthNameArr: any[][];// = new Array();
   i: number;
   oneOfMonth: any;
   lenOfMonth: any;
   // dayOfWeek: number;
   dayOfMonth: number;
   year: number;
+  @Input()
   month: number;
   day: number;
   d: number;
@@ -49,26 +29,36 @@ export class CalendarComponent implements OnInit {
   @Output()
   @Input()
   openNewTask: boolean = false;
+
+  id: number;
+
+  taskList: Array<Task> = new Array<Task>();
+
   ngOnInit() {
 
     this.month = new Date().getMonth() + 1;
     this.year = new Date().getFullYear();
+
+    this.activatedRoute.parent.params.subscribe(params => {
+      this.id = params['iPersonId'];
+    })
+
+    this.appProxy.post("GetTasksByPersonId", { iPersonId: this.id }).then(
+      data => {
+        this.taskList = data;
+      });
+
 
     this.createCalendar();
     //  alert(new Date().getDay());
   }
 
   createCalendar() {
-    debugger
 
-
-    // this.dayOfWeek = new Date().getDay();
-    alert((new Date(this.year,12, 1).getDay()-2)%7);
-    this.oneOfMonth = new Date(this.year, this.month, 1).getDay();
+    this.oneOfMonth = new Date(this.year, this.month - 1, 1).getDay() + 1;
     this.lenOfMonth = new Date(this.year, this.month, 0).getDate();
 
     this.d = 1;
-
 
     this.daysMonthNameArr = [];
     for (this.i = 0; this.i < (this.lenOfMonth + this.oneOfMonth) / 7; this.i++) {
@@ -77,13 +67,15 @@ export class CalendarComponent implements OnInit {
       for (let j = 0; j < 7; j++) {
         if (this.i == 0 && j < this.oneOfMonth - 1 || this.d > this.lenOfMonth)
           this.daysMonthNameArr[this.i][j] = 0;
-        else
+        else {
           this.daysMonthNameArr[this.i][j] = this.d++;
+         //הוספת משימה
+        }
       }
     }
   }
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy) { }
 
   prevMonth() {
     if (this.month == 1) {

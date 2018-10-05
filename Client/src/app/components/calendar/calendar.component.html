@@ -1,6 +1,7 @@
 <div class="row">
   <div (click)="prevMonth()"><</div>
   <div (click)="nextMonth()">></div>
+  <p>{{month}}/{{year}}</p>
   <table>
     <thead>
       <th *ngFor="let d of daysNameArr" class="col-sm-1">{{d}}</th>
