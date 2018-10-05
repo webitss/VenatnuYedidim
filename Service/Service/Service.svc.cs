@@ -179,13 +179,18 @@ namespace Service
             return Avrech.DeleteAvrech(iPersonId);
         }
 
+		public List<Avrech> GetAvrechimByStudentId(int iPersonId) {
+			return Avrech.GetAvrechimByStudentId(iPersonId);
+				}
 
-        #endregion
+
+
+		#endregion
 
 
 
-        #region SysTableRow
-        public List<SysTableRow> GetValues(int iSysTableId)
+		#region SysTableRow
+		public List<SysTableRow> GetValues(int iSysTableId)
         {
 
             return SysTableRow.GetValues(iSysTableId);
