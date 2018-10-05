@@ -68,8 +68,11 @@ namespace Service.Entities
             }
         }
 
+<<<<<<< HEAD
 
-        public static bool SetConversation(Conversation conversation, int iUserId)
+=======
+>>>>>>> d2a95d158bd2d8c50f64a2dcc59502fcf0566bf6
+        public static int SetConversations(Conversation conversation, int iUserId)
         {
 
             try
@@ -77,14 +80,15 @@ namespace Service.Entities
                 List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
                 parameters.Add(new SqlParameter("iCreatedByUserId", iUserId));
                 SqlDataAccess.ExecuteDatasetSP("TConversation_INS/UPD", parameters);
-                return true;
+				int id = int.Parse(SqlDataAccess.ExecuteDatasetSP("SetConversations / TConversation_INS/UPD", parameters).Tables[0].Rows[0][0].ToString());
 
+				return id;
 
-            }
+			}
             catch (Exception ex)
             {
-                Log.LogError("SetConversation / TConversation_INS/UPD", "ex" + ex + ", conversation: " + JsonConvert.SerializeObject(conversation));
-                return false;
+                Log.LogError("SetConversations / TConversation_INS/UPD", "ex" + ex + ", conversation: " + JsonConvert.SerializeObject(conversation));
+                return 0;
             }
         }
         //public static bool AddConversation(Conversation conversation, int iPersonId)
@@ -140,6 +144,6 @@ namespace Service.Entities
                 Log.LogError("DeleteConversation / TConversation_DEL", "ex" + ex);
                 return false;
             }
-        }
+        }       
     }
 }

@@ -33,7 +33,6 @@ export class StudentsComponent implements OnInit {
 
 
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
-    debugger;
     this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
       this.studentList = data;
       // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
@@ -44,11 +43,11 @@ export class StudentsComponent implements OnInit {
         this.yeshivaListOfStudent = data;
           student['nvYeshivaName'] = this.yeshivaListOfStudent[this.yeshivaListOfStudent.length - 1].nvYeshivaName;
         });
-    debugger;
       this.appProxy.post("GetAvrechimByStudentId", { iPersonId: student.iPersonId }).then(data => {
           this.avrechimListOfStudent = data;
+          student['nvAvrechName']="";
             this.avrechimListOfStudent.forEach(avrech => {
-              student['nvAvrechName'] += " " + avrech.nvFirstName + avrech.nvLastName + " ";
+              student['nvAvrechName'] += "-"+" " + avrech.nvFirstName +" "+ avrech.nvLastName +'<br/>' ;
             });
 
           });
@@ -65,7 +64,7 @@ this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
 this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
 this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
 this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
-this.lstColumns.push(new VyTableColumn(' משויך לאברך', 'nvAvrechName'));
+this.lstColumns.push(new VyTableColumn(' משויך לאברך','nvAvrechName','html'));
 
   }
 
