@@ -68,7 +68,10 @@ namespace Service.Entities
             }
         }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d2a95d158bd2d8c50f64a2dcc59502fcf0566bf6
         public static int SetConversations(Conversation conversation, int iUserId)
         {
 
@@ -141,6 +144,6 @@ namespace Service.Entities
                 Log.LogError("DeleteConversation / TConversation_DEL", "ex" + ex);
                 return false;
             }
-        }
+        }       
     }
 }
