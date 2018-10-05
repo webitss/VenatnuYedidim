@@ -37,6 +37,12 @@ export class StudentConversationsComponent implements OnInit {
       type: 'html'
     },
     {
+      title: 'מחיקה',
+      name: 'delete',
+      bClickCell: true,
+      type: 'html'
+    },
+    {
       title: 'שם אברך',
       name: 'nvLastName',
     },
@@ -75,10 +81,15 @@ export class StudentConversationsComponent implements OnInit {
   close() {
     this.conversationSelect = null;
   }
-  editConversation(conver: Conversation) {
-    this.conversationSelect = conver;
+  click(conver) {
+    if (conver.columnClickName == 'delete')
+      this.deleteConversation(conver.iConversationId, this.iUserId)
+    else
+      this.conversationSelect = conver;
     this.flag = 1;
+
   }
+
 
   addConversation() {
     this.conversationSelect = new Conversation();
@@ -92,17 +103,24 @@ export class StudentConversationsComponent implements OnInit {
   //   this.conversationsList.push(this.newConver);
 
   // }
+
+
   deleteConversation(iConversationId: number, iUserId: number) {
     this.appProxy.post("DeleteConversations", { iConversationId: iConversationId, iUserId: this.iUserId })
-      .then(
-        data => {
-          this.conversationsList = data;
-
-          alert("sucsses");
-        }).catch(err => {
-          alert(err);
-        });
+      .then(data => {
+        //this.conversationsList = data;
+        let len = this.conversationsList.length;
+        for (let i = 0; i < len; i++) {
+          if (this.conversationsList[i].iConversationId == iConversationId) {
+            this.conversationsList.splice(i, 1);
+            break;
+          }
+        }
+      }
+        , err => alert(err));
   }
+
+
 
   //   ngOnInit() {
   //     this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
@@ -138,13 +156,13 @@ export class StudentConversationsComponent implements OnInit {
   //   });
   // }}
 
-  
+
   saveNewConver(event) {
     //debugger;
     //this.conversationsList.push(event);
     this.changeTable(event);
   }
-  
+
   ngOnInit() {
     debugger;
     this.iUserId = this.globalService.getUser()['iUserId'];
@@ -175,13 +193,14 @@ export class StudentConversationsComponent implements OnInit {
     //  this.GetMeetingsByStudentId(this.iPersonId);
   }
   changeTable(c: Conversation) {
-
+    c['edit'] = '<div class="edit"></div>';
+    c['delete'] = '<div class="delete"></div>';
     c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
     c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
     c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
-    c['edit'] = '<div class="edit"></div>';
-    c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
+
     c['nvLastName'] = c['lstObject'].nvFirstName + " " + c['lstObject'].nvLastName;
+    c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
   }
   selecList(id) {
     this.appProxy.post("GetConversations", { iPersonId: id })

@@ -44,19 +44,20 @@ li>button{
     background-image: url("../../../assets/icons/edit.png");
 }
 .btn-plus{
-  background-image: url("../../../assets/icons/plus.png");
+  background-image: url("../../../assets/icons/add.png");
 }
 .btn-minus{
-  background-image: url("../../../assets/icons/edit.png");
+  background-image: url("../../../assets/icons/minus.png");
 }
 
 
-.btn-del,.btn-edit{
+.btn-del,.btn-edit,.btn-plus,.btn-minus{
     border-radius: 0px;
     margin-left: 2%;
     height: 25px;
 }
 .buttons{
+    padding-left: 25%;
     margin-top: -10%;
     visibility: hidden;
 }
