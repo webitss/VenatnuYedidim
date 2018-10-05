@@ -565,7 +565,14 @@ RequestFormat = WebMessageFormat.Json)]
 
 		#endregion
 		#region GlobalParameters
-
+		[OperationContract]
+		[WebInvoke(
+			  Method = "POST",
+			  UriTemplate = "UpdGlobalParameters",
+			  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+			  ResponseFormat = WebMessageFormat.Json,
+			  RequestFormat = WebMessageFormat.Json)]
+		bool UpdGlobalParameters(List<TGlobalParameters> GlobalParameters);
 		[OperationContract]
 		[WebInvoke(
 			  Method = "POST",

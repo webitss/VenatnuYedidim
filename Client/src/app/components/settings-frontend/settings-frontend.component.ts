@@ -17,13 +17,25 @@ export class SettingsFrontendComponent implements OnInit {
   }
 private saveGlobalParams(){
  
-  this.settingsFrontend.GlobalHeader.nvValue="כותרת";
+  this.settingsFrontend.GlobalHeader.nvTitle="כותרת";
+  this.settingsFrontend.GlobalHeader.iParameterId=1
   this.GlobalParameters.push(this.settingsFrontend.GlobalHeader);
-  this.settingsFrontend.GlobalVerMarch.nvValue="טקט ראשי ";
+  this.settingsFrontend.GlobalVerMarch.nvTitle="טקט ראשי ";
+  this.settingsFrontend.GlobalVerMarch.iParameterId=2
   this.GlobalParameters.push(this.settingsFrontend.GlobalVerMarch);
-  this.settingsFrontend.GlobalMarchSF.nvValue="טקסט משני";
+  this.settingsFrontend.GlobalMarchSF.nvTitle="טקסט משני";
+  this.settingsFrontend.GlobalVerMarch.iParameterId=3
   this.GlobalParameters.push(this.settingsFrontend.GlobalMarchSF);
-  
-this.settingsFrontend.SaveGlobalParameters(this.GlobalParameters).then(l=>alert(l));
+
+  if(this.settingsFrontend.GetGlobalParameters()){
+  this.settingsFrontend.updateGlobalParameters(this.GlobalParameters).then(
+
+    l=>alert("udp"));
+  }
+
+  else
+this.settingsFrontend.SaveGlobalParameters(this.GlobalParameters).then(
+
+  l=>alert("ins"));
 }
 }

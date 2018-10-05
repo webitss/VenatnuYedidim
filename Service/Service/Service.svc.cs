@@ -343,6 +343,11 @@ namespace Service
             return TGlobalParameters.GetGlobalParameters();
         }
 
-        #endregion
-    }
+		public bool UpdGlobalParameters(List<TGlobalParameters> GlobalParameters)
+		{
+			return TGlobalParameters.UpdGlobalParameters(GlobalParameters);
+		}
+
+		#endregion
+	}
 }
