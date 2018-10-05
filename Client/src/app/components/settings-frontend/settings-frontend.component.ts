@@ -32,7 +32,6 @@ private saveGlobalParams(){
 
     l=>alert("udp"));
   }
-
   else
 this.settingsFrontend.SaveGlobalParameters(this.GlobalParameters).then(
 
