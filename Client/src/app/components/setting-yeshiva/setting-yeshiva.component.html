@@ -66,8 +66,7 @@
 
   <div class="form-group">
     <label for='yeshiva-roleType'>תפקיד:</label>
-    <div>
-    <select name='yeshiva-roleType' [(ngModel)]="yeshiva.iRoleType" #mobile="ngModel" required>
+    <select name='yeshiva-roleType' [(ngModel)]="yeshiva.iRoleType" #roleType="ngModel" required>
       <option *ngFor='let y of sysTableList' [value]="y.iSysTableRowId">{{y.nvValue}}</option>
     </select>
     <div *ngIf="roleType.invalid && (roleType.dirty || roleType.touched)">
@@ -75,6 +74,5 @@
           <strong>שדה נדרש!</strong>
         </div>
       </div>
-  </div>
   </div>
 </form>
