@@ -14,6 +14,7 @@ namespace Service
     {
         #region Person
 
+<<<<<<< HEAD
         //[OperationContract]
         //[WebInvoke(
         //   Method = "POST",
@@ -235,6 +236,230 @@ namespace Service
 
         [OperationContract]
         [WebInvoke(
+=======
+		//[OperationContract]
+		//[WebInvoke(
+		//   Method = "POST",
+		//   UriTemplate = "GetPerson",
+		//   BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		//   ResponseFormat = WebMessageFormat.Json,
+		//   RequestFormat = WebMessageFormat.Json)]
+		//Person GetPerson(int iPersonId);
+
+		#endregion
+
+
+		#region User
+
+		[OperationContract]
+		[WebInvoke(
+		   Method = "POST",
+		   UriTemplate = "GetUsers",
+		   BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		   ResponseFormat = WebMessageFormat.Json,
+		   RequestFormat = WebMessageFormat.Json)]
+		List<User> GetUsers(int iPersonId);
+
+		[OperationContract]
+		[WebInvoke(
+		  Method = "POST",
+		  UriTemplate = "Login",
+		  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		  ResponseFormat = WebMessageFormat.Json,
+		  RequestFormat = WebMessageFormat.Json)]
+		User Login(string nvUserName, string nvPassword);
+
+
+		[OperationContract]
+		[WebInvoke(
+		   Method = "POST",
+		   UriTemplate = "GetUser",
+		   BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		   ResponseFormat = WebMessageFormat.Json,
+		   RequestFormat = WebMessageFormat.Json)]
+		User GetUser(int iPersonId);
+
+		[OperationContract]
+		[WebInvoke(
+		  Method = "POST",
+		  UriTemplate = "SetUser",
+		  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		  ResponseFormat = WebMessageFormat.Json,
+		  RequestFormat = WebMessageFormat.Json)]
+		bool SetUser(User user, int iUserId);
+
+		#endregion
+
+		#region Student
+		[OperationContract]
+		[WebInvoke(
+		 Method = "POST",
+		 UriTemplate = "GetStudentList",
+		 BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		 ResponseFormat = WebMessageFormat.Json,
+		 RequestFormat = WebMessageFormat.Json)]
+		List<Student> GetStudentList(int iUserId);
+
+		[OperationContract]
+		[WebInvoke(
+		 Method = "POST",
+		 UriTemplate = "GetStudentById",
+		 BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		 ResponseFormat = WebMessageFormat.Json,
+		 RequestFormat = WebMessageFormat.Json)]
+		Student GetStudentById(int iPersonId);
+
+		[OperationContract]
+		[WebInvoke(
+		 Method = "POST",
+		 UriTemplate = "AddStudentsToAvrech",
+		 BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		 ResponseFormat = WebMessageFormat.Json,
+		 RequestFormat = WebMessageFormat.Json)]
+		bool AddStudentsToAvrech(List<T2Int> studentAndAvrechArr, int iUserId);
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "AddStudent",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		bool AddStudent(Student student, string base64Image, int iUserId);
+
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "UpdateStudent",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		bool UpdateStudent(Student student, string base64Image, int iUserId);
+
+
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "UpdateStatusStudent",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		bool UpdateStatusStudent(int iPersonId, int iStatusType);
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "UnionCards",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		bool UnionCards(Student student, int iStudent2);
+
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "GetYeshivotOfStudent",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		List<Yeshivot> GetYeshivotOfStudent(int iPersonId);
+
+
+		#endregion Student
+
+
+
+		#region Avrech
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "GetAllAvrechim",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		List<Avrech> GetAllAvrechim(int? iPersonId);
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "GetAvrechById",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		Avrech GetAvrechById(int? iPersonId);
+
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "UpdateAvrech",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		bool UpdateAvrech(Avrech avrech, int iUserId);
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "UpdateUserNameAndPassword",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		bool UpdateUserNameAndPassword(int iPersonId, string nvUserName, string nvPassword, int iUserId);
+
+		[OperationContract]
+		[WebInvoke(
+ Method = "POST",
+UriTemplate = "GetAvrechStudents",
+BodyStyle = WebMessageBodyStyle.WrappedRequest,
+ResponseFormat = WebMessageFormat.Json,
+RequestFormat = WebMessageFormat.Json)]
+		List<Student> GetAvrechStudents(int iPersonId);
+
+
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "DeleteAvrechStudent",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		bool DeleteAvrechStudent(int iAvrechId, int iStudentId);
+
+		[OperationContract]
+		[WebInvoke(
+		 Method = "POST",
+		 UriTemplate = "DeleteAvrech",
+		 BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		 ResponseFormat = WebMessageFormat.Json,
+		 RequestFormat = WebMessageFormat.Json)]
+		bool DeleteAvrech(int iPersonId);
+
+		#endregion
+
+
+
+
+
+
+		#region events
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "SetEvent",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		bool SetEvent(Event1 oEvent, int iUserId, List<TInt> to);
+
+		[OperationContract]
+		[WebInvoke(
+>>>>>>> 15574716b4feea82551ef2f11e7bb701bc3ffd90
 Method = "POST",
 UriTemplate = "GetEventsList",
 BodyStyle = WebMessageBodyStyle.WrappedRequest,
@@ -250,6 +475,7 @@ UriTemplate = "GetEvent",
 BodyStyle = WebMessageBodyStyle.WrappedRequest,
 ResponseFormat = WebMessageFormat.Json,
 RequestFormat = WebMessageFormat.Json)]
+<<<<<<< HEAD
 
         Event1 GetEvent(int? iEventId);
         #endregion
@@ -584,6 +810,11 @@ RequestFormat = WebMessageFormat.Json)]
 
         #endregion
     }
+=======
+
+		Event1 GetEvent(int? iEventId);
+		#endregion
+>>>>>>> 15574716b4feea82551ef2f11e7bb701bc3ffd90
 
 		//Event1 GetEvent(int? iEventId);
 		//#endregion
@@ -859,6 +1090,7 @@ RequestFormat = WebMessageFormat.Json)]
 		//BodyStyle = WebMessageBodyStyle.WrappedRequest,
 		//ResponseFormat = WebMessageFormat.Json,
 		//RequestFormat = WebMessageFormat.Json)]
+<<<<<<< HEAD
 		//bool DeleteDocument(int iDocumentId, int iLastModifyUserId);
 
 		//#endregion
@@ -899,3 +1131,116 @@ RequestFormat = WebMessageFormat.Json)]
 		//#endregion
 	}
 
+=======
+		//bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment);
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "SetDocument",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		int SetDocument(Document document, string nvBase64File, int iUserId);
+
+
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "GetDocumentsByItemId",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		List<Document> GetDocumentsByItemId(int iItemId);
+
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "DeleteDocument",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		bool DeleteDocument(int iDocumentId, int iLastModifyUserId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "GET",
+        UriTemplate = "GetDocumentsOfTadmit",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Document> GetDocumentsOfTadmit();
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "GET",
+        UriTemplate = "GetMoreDocumentsOfTadmit",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Document> GetMoreDocumentsOfTadmit();
+
+        #endregion
+
+        #region graduates
+        [OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "GetGraduatesList",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		List<Student> GetGraduatesList(int iUserId);
+		#endregion
+
+		#region Task
+		[WebInvoke(
+			Method = "POST",
+			UriTemplate = "SetTask",
+			BodyStyle = WebMessageBodyStyle.WrappedRequest,
+			ResponseFormat = WebMessageFormat.Json,
+			RequestFormat = WebMessageFormat.Json)]
+		bool SetTask(Task task, int iUserId);
+
+		#endregion
+
+		#region SendMessagesHandler
+
+		[OperationContract]
+		[WebInvoke(
+			  Method = "POST",
+			  UriTemplate = "SendEmailOrFax",
+			  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+			  ResponseFormat = WebMessageFormat.Json,
+			  RequestFormat = WebMessageFormat.Json)]
+		bool SendEmailOrFax(string from, string to, string subject, string body, List<Attachment> lAttach);
+
+		#endregion
+		#region GlobalParameters
+
+		[OperationContract]
+		[WebInvoke(
+			  Method = "POST",
+			  UriTemplate = "SaveGlobalParameters",
+			  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+			  ResponseFormat = WebMessageFormat.Json,
+			  RequestFormat = WebMessageFormat.Json)]
+		bool SaveGlobalParameters(List<TGlobalParameters> GlobalParameters);
+		[OperationContract]
+		[WebInvoke(
+			 Method = "GET",
+			 UriTemplate = "GetGlobalParameters",
+			 BodyStyle = WebMessageBodyStyle.WrappedRequest,
+			 ResponseFormat = WebMessageFormat.Json,
+			 RequestFormat = WebMessageFormat.Json)]
+		List<TGlobalParameters> GetGlobalParameters();
+
+		#endregion
+
+
+
+	}
+}
+>>>>>>> 15574716b4feea82551ef2f11e7bb701bc3ffd90
