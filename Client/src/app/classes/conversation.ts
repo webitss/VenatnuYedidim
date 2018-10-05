@@ -4,10 +4,13 @@ export class Conversation{
    public iConversationId:number;
    public iPersonId:number;
    public iConversationType:number;
-   public dConversationDate:Date;
-   public dtConversationTime:Date;
+   public dtConversationDate:Date;
+  
    public nvConversationSummary:string;
    public dtNextConversationDate:Date;
 
-    constructor(){}
+    constructor(){
+        this.dtConversationDate=new Date();
+        this.dtNextConversationDate=new Date();
+    }
 }

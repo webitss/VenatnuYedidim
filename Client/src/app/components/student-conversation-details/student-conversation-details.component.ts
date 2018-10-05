@@ -46,11 +46,14 @@ export class StudentConversationDetailsComponent implements OnInit {
   }
 
   saveConversation() {
-    this.currentConver.dConversationDate = new Date(this.currentConver.dConversationDate);
-    this.currentConver.dtConversationTime = new Date(this.currentConver.dtConversationTime);
-    //his.currentConver.dConversationDate =this.currentConver['conversationDate'].toLocaleDateString();
-    //this.currentConver.dtConversationTime = this.currentConver['conversationTime'].toLocaleDateString();
-    this.currentConver.dtNextConversationDate = new Date(this.currentConver.dtNextConversationDate);
+    this.currentConver.dtConversationDate = new Date(this.currentConver['conversationDate'] + ' ' + this.currentConver['conversationTime']);
+   
+    this.currentConver.dtNextConversationDate = new Date(this.currentConver['nextConversationDate']);
+    // this.currentConver.dtConversationDate = new Date(this.currentConver.dtConversationDate);
+    // this.currentConver.dtConversationTime = new Date(this.currentConver.dtConversationTime);
+    // //his.currentConver.dtConversationDate =this.currentConver['conversationDate'].toLocaleDateString();
+    // //this.currentConver.dtConversationTime = this.currentConver['conversationTime'].toLocaleDateString();
+    // this.currentConver.dtNextConversationDate = new Date(this.currentConver.dtNextConversationDate);
     if (this.currentConver.iConversationId == null) {
       this.currentConver.iPersonId = this.iPersonId;
     }
@@ -85,8 +88,8 @@ export class StudentConversationDetailsComponent implements OnInit {
 
   reset() {
 
-    this.currentConver.dConversationDate.setDate(null);
-    this.currentConver.dtConversationTime.setTime(null);
+    this.currentConver.dtConversationDate.setDate(null);
+    //this.currentConver.dtConversationTime.setTime(null);
     this.currentConver.dtNextConversationDate.setDate(null);
   }
 
@@ -103,18 +106,18 @@ export class StudentConversationDetailsComponent implements OnInit {
       // });
       if (this.currentConver.iConversationId != null) {
 
-        this.currentConver['conversationDate'] = new Date((this.currentConver.dConversationDate).getTime());
+        this.currentConver['conversationDate'] = new Date((this.currentConver.dtConversationDate).getTime());
 
         //this.currentConver['dtHour'] = new Date((this.currentConver.dtConversationTime).getHours()) + ':'+new Date((this.currentConver.dtConversationTime).getMinutes());
-        if ((this.currentConver.dtConversationTime).getMinutes() < 10)
-          this.minutes = '0' + (this.currentConver.dtConversationTime).getMinutes().toString();
+        if ((this.currentConver.dtConversationDate).getMinutes() < 10)
+          this.minutes = '0' + (this.currentConver.dtConversationDate).getMinutes().toString();
         else
-          this.minutes = (this.currentConver.dtConversationTime).getMinutes().toString();
+          this.minutes = (this.currentConver.dtConversationDate).getMinutes().toString();
 
-        if ((this.currentConver.dtConversationTime).getHours() < 10)
-          this.hours = '0' + (this.currentConver.dtConversationTime).getHours().toString();
+        if ((this.currentConver.dtConversationDate).getHours() < 10)
+          this.hours = '0' + (this.currentConver.dtConversationDate).getHours().toString();
         else
-          this.hours = (this.currentConver.dtConversationTime).getHours().toString();
+          this.hours = (this.currentConver.dtConversationDate).getHours().toString();
 
         //this.currentConver['nextConversationDate'] = new Date((this.currentConver.dtNextConversationDate).getTime());
         if ((this.currentConver.dtNextConversationDate).getMinutes() < 10)

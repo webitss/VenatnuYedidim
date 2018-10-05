@@ -19,15 +19,20 @@ export class SettingYeshivaComponent implements OnInit {
   
   @Output() 
   public closeYeshiva=new EventEmitter();
-
   @Input()
   public iYeshivaId: number;
-
   @Input()
   protected sysTableList:SysTableRow[];
-
   protected yeshiva:Yeshiva=new Yeshiva();
+  @ViewChild(NgForm) form;
 
+
+  formValid=false;
+
+  isDisabled():boolean {
+    if(this.isDisabled)
+      return this.form.valid;
+  }
 
   constructor(private appProxy: AppProxy, private router:Router) { }
 

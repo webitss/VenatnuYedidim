@@ -93,8 +93,8 @@ export class StudentConversationsComponent implements OnInit {
 
   addConversation() {
     this.conversationSelect = new Conversation();
-    this.conversationSelect.dConversationDate = null;
-    this.conversationSelect.dtConversationTime = null;
+    this.conversationSelect.dtConversationDate = null;
+    //this.conversationSelect.dtConversationTime = null;
     this.conversationSelect.dtNextConversationDate = null;
 
   }
@@ -195,13 +195,14 @@ export class StudentConversationsComponent implements OnInit {
   changeTable(c: Conversation) {
     c['edit'] = '<div class="edit"></div>';
     c['delete'] = '<div class="delete"></div>';
-    c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
-    c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
-    c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
+
 
     c['nvLastName'] = c['lstObject'].nvFirstName + " " + c['lstObject'].nvLastName;
     c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
-  }
+    c['nvConversationDate'] = c.dtConversationDate.toLocaleDateString();
+    c['nvConversationTime'] = c.dtConversationDate.toLocaleTimeString();
+    c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
+  }//??
   selecList(id) {
     this.appProxy.post("GetConversations", { iPersonId: id })
       .then(data => {
