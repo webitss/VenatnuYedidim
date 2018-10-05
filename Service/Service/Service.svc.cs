@@ -305,13 +305,15 @@ namespace Service
             return Document.GetMoreDocumentsOfTadmit();
         }
 
+        public bool changeTadmitStatus(int iDocumentId,int iUserId) { 
+              return Document.changeTadmitStatus(iDocumentId,iUserId);
+        }
 
+    #endregion
 
-        #endregion
+    #region participant
 
-        #region participant
-
-        public List<Person> GetParticipantsList(int iEventId)
+    public List<Person> GetParticipantsList(int iEventId)
         {
             return Participant.GetParticipantsList(iEventId);
         }

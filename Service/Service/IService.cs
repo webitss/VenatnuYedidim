@@ -546,6 +546,16 @@ RequestFormat = WebMessageFormat.Json)]
         RequestFormat = WebMessageFormat.Json)]
         List<Document> GetMoreDocumentsOfTadmit();
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "changeTadmitStatus",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool changeTadmitStatus(int iDocumentId,int iUserId);
+
+        
         #endregion
 
         #region graduates
