@@ -41,5 +41,9 @@
                 <div class="form-control" id="documentName">{{save.name}}</div>
             </div>
         </div>
+        <div class="row" *ngIf="component!='student-documents'">
+          <input class="checkbox" type="checkbox" [(ngModel)]="document.bShowInTadmit">
+          <div>הצג באתר תדמית</div>
+        </div>
     </div>
 </div>

@@ -11,20 +11,33 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 })
 export class EventsComponent implements OnInit {
   protected eventsList: Event1[];
-  @ViewChild('events') events:any;
+  @ViewChild('events') events: any;
 
   constructor(private appProxy: AppProxy, private router: Router) { }
 
-edit(e){
-  this.router.navigate(['events/event/', e.iEventId]);
+  edit(e) {
+    this.router.navigate(['events/event/', e.iEventId]);
+  }
 
-}
+  deleteEvent(e) {
+    //alert('delete');
+  }
 
- public lstColumns = [
-new VyTableColumn('עריכה','edit','html', true,false),
-new VyTableColumn('שם ארוע','nvName'),
-new VyTableColumn('תאריך','dtEventDate'),
-new VyTableColumn('מקום','nvPlace') ];
+  click(e) {
+    // this.avrechId = e.iPersonId;
+    if (e.columnClickName == "edit")
+      this.edit(e);
+    else
+      this.deleteEvent(e);
+
+  }
+
+  public lstColumns = [
+    new VyTableColumn('עריכה', 'edit', 'html', true, false),
+    new VyTableColumn('מחיקה', 'delete', 'html', true, false),
+    new VyTableColumn('שם ארוע', 'nvName'),
+    new VyTableColumn('תאריך', 'dtEventDate'),
+    new VyTableColumn('מקום', 'nvPlace')];
   public lstDataRows = [];
 
 
@@ -39,8 +52,8 @@ new VyTableColumn('מקום','nvPlace') ];
           nvName: e.nvName,
           dtEventDate: e.dtEventDate.toLocaleDateString(),
           nvPlace: e.nvPlace,
-          edit: '<div class="edit"></div>'
-
+          edit: '<div class="edit"></div>',
+          delete: '<div class="delete"></div>'
         });
       });
     }
@@ -48,10 +61,10 @@ new VyTableColumn('מקום','nvPlace') ];
 
 
   }
-  downloadExcel(){
+  downloadExcel() {
     this.events.downloadExcel();
   }
-  tableToPdf(name:string){
-    this.events.downloadPdf(name,'pdf');
-      }
+  tableToPdf(name: string) {
+    this.events.downloadPdf(name, 'pdf');
+  }
 }

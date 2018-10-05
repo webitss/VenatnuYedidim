@@ -20,7 +20,6 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.iPersonId = this.globalService.getUser()['iUserId'];
-    debugger
     this.appProxy.post("GetUsers", { iPersonId: this.iPersonId }).then(data => {
       this.lstDataRows = data;
 
@@ -68,17 +67,27 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['users/user/', u.iPersonId]);
   }
 
+  private alert: any;
   deleteUser(u: User) {
-    this.appProxy.post('DeleteUser',{iPersonId: u.iPersonId}).then(data=>{
-
-    });
+    if (u.iPermissionId == 5) {//מנהל
+      this.alert = confirm("יתכן ולאחר המחיקה לא יהיה מנהל למערכת ,האם אתה בטוח שברצונך למחוק מנהל?");
+      if (this.alert == true)
+        this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {
+        });
+    }
+    else {
+      this.alert = confirm("האם אתה בטוח שברצונך למחוק משתמש זה?");
+      if (this.alert == true)
+        this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {
+        });
+    }
   }
 
-  downloadExcel() {
-    this.users.downloadExcel();
-  }
+    downloadExcel() {
+      this.users.downloadExcel();
+    }
 
-  tableToPdf(name: string) {
-    this.users.downloadPdf(name, 'pdf');
+    tableToPdf(name: string) {
+      this.users.downloadPdf(name, 'pdf');
+    }
   }
-}
