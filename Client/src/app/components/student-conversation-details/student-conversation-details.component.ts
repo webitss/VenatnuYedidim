@@ -65,7 +65,6 @@ export class StudentConversationDetailsComponent implements OnInit {
           else
             this.UpdateConver.emit(this.currentConver);
 
-
 //           alert(data);
 //           this.Conversation.emit(null);
 //           // this.newConver.push({
@@ -99,8 +98,6 @@ export class StudentConversationDetailsComponent implements OnInit {
 //           }
 //           else
 //             alert("no good");
-
-
           this.newConver.emit(this.conversation);
           if (data) {
             alert("good");
@@ -108,7 +105,6 @@ export class StudentConversationDetailsComponent implements OnInit {
           }
           else
             alert("no good");
-
         });
   }
 

@@ -31,7 +31,12 @@ export class EventComponent implements OnInit {
   formValid=false;
 
   isDisabled():boolean {
-    return this.currentComponent.isValid;
+    if(this.isDetails){
+      return this.currentComponent.form.valid;
+    }
+    else 
+    return this.currentComponent.form.valid && this.currentComponent.checkIfSelectIsValid();
+    // return this.currentComponent.isValid;
   }
 
 

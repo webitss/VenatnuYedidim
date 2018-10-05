@@ -4,7 +4,7 @@ import { Event1 } from '../../classes/event';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { EventComponent } from '../event/event.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormArrayName, NgForm } from '@angular/forms';
 import { PARAMETERS } from '@angular/core/src/util/decorators';
 import { Tint } from '../../classes/tint';
@@ -34,28 +34,39 @@ export class EventDetailsComponent implements OnInit {
     return this.form.valid;
   }
 
+  ngAfterViewInit() {
+    if (this.isDetails)
+      this.isValid = this.form.valid;
+    else
+      this.isValid = this.form.valid && this.selectValid;
+
+  }
+
   selectValid = false;
-  isValid = this.selectValid && this.form.valid;
+  isValid = false;
 
   checkIfSelectIsValid() {
-    return this.to.length > 0;
+    if (this.to != undefined)
+      return this.to.length > 0;
+    return false;
   }
 
   @ViewChild('child') VyMultySelect: VyMultySelectComponent;
 
 
   save() {
-    this.participantsToSend.splice(0, this.participantsToSend.length);
-    this.e.dtEventDate = new Date(this.e.dtEventDate);
-    this.to.forEach(t => {
-      this.participantsToSend.push(new Tint(t.iSysTableRowId));
-    })
-    // this.VyMultySelect.save();
+    if (!this.isDetails) {
+      this.participantsToSend.splice(0, this.participantsToSend.length);
+      this.e.dtEventDate = new Date(this.e.dtEventDate);
+      this.to.forEach(t => {
+        this.participantsToSend.push(new Tint(t.iSysTableRowId));
+      })
+    }
 
     this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: this.globalService.getUser()['iUserId'], to: this.participantsToSend })
       .then(
         data => {
-          alert("success" + data);
+          this.route.navigate(['events/']);
         }).catch(err => {
           alert("error:" + err);
         });
@@ -74,7 +85,7 @@ export class EventDetailsComponent implements OnInit {
   sysTableRowList: SysTableRow[];
 
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService,
-    private globalService: GlobalService) { }
+    private globalService: GlobalService, private route: Router) { }
 
   ngOnInit() {
 
@@ -97,21 +108,13 @@ export class EventDetailsComponent implements OnInit {
     this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
       this.sysTableRowList = data;
       this.sysTableRowList.forEach(s => {
-        // s.iSysTableRowId
         s['value'] = s.nvValue;
       })
-      //alert("success"+this.sysTableRowList[0].nvValue);
     }, err => {
-      // alert("error")
     })
-
-    //this.participantsToSend=new Array<string>();
-
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 }
-
-
