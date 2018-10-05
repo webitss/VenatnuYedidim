@@ -40,7 +40,7 @@ export class LogInComponent implements OnInit {
           data["iUserId"] = data.iPersonId;
           this.appComponent.instance.userName = data.nvUserName;
           localStorage.setItem("user", JSON.stringify(data));
-          this.globalService.setUser(data);
+          this.globalService.user = data;
 
           this.router.navigate(['students']);
         }

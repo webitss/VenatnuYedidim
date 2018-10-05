@@ -112,6 +112,7 @@
     <Compile Include="Entities\Conversation.cs" />
     <Compile Include="Entities\Event1.cs" />
     <Compile Include="Entities\Document.cs" />
+    <Compile Include="Entities\PresenceAvrech.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\Meeting.cs" />
     <Compile Include="Entities\SysTableRow.cs" />
