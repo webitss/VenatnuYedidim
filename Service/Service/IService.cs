@@ -577,14 +577,9 @@ RequestFormat = WebMessageFormat.Json)]
         
         #endregion
 
-        #region graduates
-        [OperationContract]
-=======
-		#endregion
 
 		#region graduates
 		[OperationContract]
->>>>>>> 1a67a4d0d641e57dce390f85d733fa897ddb99c7
 		[WebInvoke(
 		Method = "POST",
 		UriTemplate = "GetGraduatesList",
