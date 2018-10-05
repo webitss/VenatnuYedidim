@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter,ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Yeshiva } from '../../classes/Yeshiva';
 import {ActivatedRoute,Router, ROUTER_CONFIGURATION} from '@angular/router'
+import {FormArrayName, NgForm} from '@angular/forms'
 // import { forEach } from '@angular/router/src/utils/collection';
 // import { element } from 'protractor';
 // import { EMLINK } from 'constants';
@@ -26,6 +27,27 @@ export class SettingYeshivaComponent implements OnInit {
   protected sysTableList:SysTableRow[];
 
   protected yeshiva:Yeshiva=new Yeshiva();
+
+  touched = false;
+  @ViewChild(NgForm) form;
+  to: Array<any>;
+  
+  checkFormValidity() {
+    return this.form.valid;
+  }
+
+  checkIfSelectIsValid() {
+    return this.to.length > 0;
+  }
+
+  selectValid = false;
+  isValid = this.selectValid && this.form.valid;
+
+  getFromChild(list: Array<any>) {
+    this.to=list;
+    this.selectValid = this.checkIfSelectIsValid();
+    this.isValid = this.selectValid && this.form.valid;
+  }
 
   constructor(private appProxy: AppProxy, private router:Router) { }
 
@@ -53,7 +75,7 @@ export class SettingYeshivaComponent implements OnInit {
               alert("חובה למלא את כל השדות!!");
               else{
                 this.closeYeshiva.emit(null);
-            alert("נשמר בהצלחה");
+                alert("נשמר בהצלחה");
               }
         })
     }
@@ -68,6 +90,7 @@ export class SettingYeshivaComponent implements OnInit {
       )
     }
   }
+
 
   cancel() {
     this.closeYeshiva.emit(null);
