@@ -68,7 +68,7 @@ namespace Service.Entities
             }
         }
 
-
+        public static int SetConversations(Conversation conversation, int iUserId)
         {
 
             try
