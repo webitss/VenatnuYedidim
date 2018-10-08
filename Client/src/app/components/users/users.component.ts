@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 
 import { User } from '../../classes/user';
 import { AppProxy } from '../../services/app.proxy';
@@ -16,8 +16,11 @@ import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService, private globalService: GlobalService, private vyTableComponent: VyTableComponent) { }
+  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService, private globalService: GlobalService) { }
   @ViewChild('users') users: any;
+
+  // @Output()
+  //  onRemoveUser: EventEmitter<User> = new EventEmitter<User>();
 
   ngOnInit() {
     this.iPersonId = this.globalService.getUser()['iUserId'];
@@ -75,7 +78,8 @@ export class UsersComponent implements OnInit {
       if (this.alert == true){
         this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {
         });
-        this.vyTableComponent.lstDataRows.splice(this.vyTableComponent.lstDataRows.indexOf(u),1);        
+        this.lstDataRows.splice(this.lstDataRows.indexOf(u),1);  
+        // this.onRemoveUser.emit();      
       }
     }
     else {
@@ -83,7 +87,8 @@ export class UsersComponent implements OnInit {
       if (this.alert == true){
         this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {
         });
-        this.vyTableComponent.lstDataRows.splice(this.vyTableComponent.lstDataRows.indexOf(u),1);        
+        this.lstDataRows.splice(this.lstDataRows.indexOf(u),1);
+        // this.onRemoveUser.emit();      
       }
     }
   }

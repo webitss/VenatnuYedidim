@@ -153,4 +153,7 @@ export class VyTableComponent implements OnInit {
         }
       })
   }
+  // removeFromList(item){
+  //   this.lstDataRows.splice(this.lstDataRows.indexOf(item),1);
+  // }
 }
