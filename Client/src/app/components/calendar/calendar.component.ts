@@ -42,14 +42,14 @@ export class CalendarComponent implements OnInit {
     this.activatedRoute.parent.params.subscribe(params => {
       this.id = params['iPersonId'];
     })
-
     this.appProxy.post("GetTasksByPersonId", { iPersonId: this.id }).then(
       data => {
         this.taskList = data;
+        this.createCalendar();
+
       });
 
 
-    this.createCalendar();
     //  alert(new Date().getDay());
   }
 
@@ -68,8 +68,14 @@ export class CalendarComponent implements OnInit {
         if (this.i == 0 && j < this.oneOfMonth - 1 || this.d > this.lenOfMonth)
           this.daysMonthNameArr[this.i][j] = 0;
         else {
-          this.daysMonthNameArr[this.i][j] = this.d++;
-         //הוספת משימה
+          this.daysMonthNameArr[this.i][j] = this.d;
+          //הוספת משימה
+          this.taskList.forEach(task => {
+            debugger
+            if (task.dtTaskdatetime.getDate() == this.d && task.dtTaskdatetime.getMonth()+1 == this.month && task.dtTaskdatetime.getFullYear() == this.year)
+              this.daysMonthNameArr["task"] = "dsad";
+          });
+          this.d++;
         }
       }
     }

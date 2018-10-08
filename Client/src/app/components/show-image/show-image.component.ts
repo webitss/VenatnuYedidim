@@ -82,11 +82,12 @@ ngOnInit(): void {
 
 //GetDocumentsOfTadmit צריך להיות GetDocuments הוספתי לך פונקציה אחרת ששולפת רק את המסמכים של התדמית. במקום   
 this.appProxy.get('GetDocuments').then(data => {
+  debugger;
   this.documents = data;
     this.documents.forEach(element => {
      
      
-      if(element.nvDocumentName=="red.jpg" ||element.nvDocumentName=="yellow(9).jpg"){
+      if(element.nvDocumentName=="Ayala.jpg" ||element.nvDocumentName=="ההבדל בין עבודה לנופש.jpg"){
        
       this.galleryImages.push({
         small:AppProxy.baseDevUrl+'/Files/'  + element.nvDocumentName,
