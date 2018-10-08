@@ -569,7 +569,13 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Task> GetTasksByPersonId(int iPersonId);
 
-
+        [WebInvoke(
+         Method = "POST",
+        UriTemplate = "DeleteTask",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool DeleteTask(int iTaskId);
         #endregion
 
         #region SendMessagesHandler
@@ -683,92 +689,8 @@ namespace Service
         #endregion
 
 
-<<<<<<< HEAD
     }
 
 
 
-=======
-<<<<<<< HEAD
-		#region graduates
-		[OperationContract]
-		[WebInvoke(
-		Method = "POST",
-		UriTemplate = "GetGraduatesList",
-		BodyStyle = WebMessageBodyStyle.WrappedRequest,
-		ResponseFormat = WebMessageFormat.Json,
-		RequestFormat = WebMessageFormat.Json)]
-		List<Student> GetGraduatesList(int iUserId);
-		#endregion
-
-		#region Task
-		[WebInvoke(
-			Method = "POST",
-			UriTemplate = "SetTask",
-			BodyStyle = WebMessageBodyStyle.WrappedRequest,
-			ResponseFormat = WebMessageFormat.Json,
-			RequestFormat = WebMessageFormat.Json)]
-		bool SetTask(Task task, int iUserId);
-
-		#endregion
-
-		#region SendMessagesHandler
-
-		[OperationContract]
-		[WebInvoke(
-			  Method = "POST",
-			  UriTemplate = "SendEmailOrFax",
-			  BodyStyle = WebMessageBodyStyle.WrappedRequest,
-			  ResponseFormat = WebMessageFormat.Json,
-			  RequestFormat = WebMessageFormat.Json)]
-		bool SendEmailOrFax(string from, string to, string subject, string body, List<Attachment> lAttach);
-
-		#endregion
-
-		#region GlobalParameters
-<<<<<<< HEAD
-		[OperationContract]
-		[WebInvoke(
-			  Method = "POST",
-			  UriTemplate = "UpdGlobalParameters",
-			  BodyStyle = WebMessageBodyStyle.WrappedRequest,
-			  ResponseFormat = WebMessageFormat.Json,
-			  RequestFormat = WebMessageFormat.Json)]
-		bool UpdGlobalParameters(List<TGlobalParameters> GlobalParameters);
-=======
-
->>>>>>> f51ffedf264bd1bf0778314daa231b5ce6472baa
-		[OperationContract]
-		[WebInvoke(
-			  Method = "POST",
-			  UriTemplate = "SaveGlobalParameters",
-			  BodyStyle = WebMessageBodyStyle.WrappedRequest,
-			  ResponseFormat = WebMessageFormat.Json,
-			  RequestFormat = WebMessageFormat.Json)]
-		bool SaveGlobalParameters(List<TGlobalParameters> GlobalParameters);
-		[OperationContract]
-		[WebInvoke(
-			 Method = "GET",
-			 UriTemplate = "GetGlobalParameters",
-			 BodyStyle = WebMessageBodyStyle.WrappedRequest,
-			 ResponseFormat = WebMessageFormat.Json,
-			 RequestFormat = WebMessageFormat.Json)]
-		List<TGlobalParameters> GetGlobalParameters();
-
-		#endregion
-
-
-
-	}
-<<<<<<< HEAD
-=======
-    }
->>>>>>> 2d355b4ba55a0569c8dad464d71fa798b9f30991
-=======
->>>>>>> 4da4de7f4b2c6aad7d4b27e8cc8015d7d8b423f5
-=======
-    }
->>>>>>> cf276a137f1cdaac7737de82d57851568ddf4df8
->>>>>>> f51ffedf264bd1bf0778314daa231b5ce6472baa
->>>>>>> d74002ce69bd1f73379f3b52b9a1154a221a9c8b
 }

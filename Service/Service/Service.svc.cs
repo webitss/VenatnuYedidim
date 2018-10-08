@@ -84,6 +84,10 @@ namespace Service
         {
             return Task.GetTasksByPersonId(iPersonId);
         }
+        public bool DeleteTask( int iTaskId)
+        {
+            return Task.DeleteTask(iTaskId);
+        }
 
         #endregion
 
@@ -370,15 +374,14 @@ namespace Service
             return TGlobalParameters.GetGlobalParameters();
         }
 
-<<<<<<< HEAD
 		public bool UpdGlobalParameters(List<TGlobalParameters> GlobalParameters)
 		{
 			return TGlobalParameters.UpdGlobalParameters(GlobalParameters);
 		}
 
-		#endregion
-	}
-=======
+		
+	
+
         #endregion
         #region presenceAvrech
 
@@ -399,5 +402,5 @@ namespace Service
 
         #endregion
     }
->>>>>>> 2d355b4ba55a0569c8dad464d71fa798b9f30991
+
 }
