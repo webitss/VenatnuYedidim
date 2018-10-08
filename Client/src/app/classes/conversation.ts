@@ -10,4 +10,8 @@ export class Conversation{
    public dtNextConversationDate:Date;
 
     constructor(){}
+    constructor(){
+        this.dtConversationDate=new Date();
+        this.dtNextConversationDate=new Date();
+    }
 }

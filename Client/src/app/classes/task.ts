@@ -6,7 +6,7 @@ export class Task {
     public iTaskType: number;
     public dtTaskdatetime: Date;
     // public tTaskTime:Time;
-    public nvComment:string;
+    public nvComments:string;
     public iPersonId:number;
     // public iCreatedByUserId: number;
     // public dtCreatedate: Date;

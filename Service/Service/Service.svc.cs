@@ -80,6 +80,11 @@ namespace Service
             return Task.SetTask(task, iUserId);
         }
 
+        public List<Task> GetTasksByPersonId( int iPersonId)
+        {
+            return Task.GetTasksByPersonId(iPersonId);
+        }
+
         #endregion
 
         #region Student
@@ -231,9 +236,9 @@ namespace Service
         {
             return Conversation.GetConversations(iPersonId);
         }
-        public bool SetConversations(Conversation conversation, int iPersonId)
+        public int SetConversations(Conversation conversation, int iUserId)
         {
-            return Conversation.SetConversation(conversation, iPersonId);
+            return Conversation.SetConversations(conversation, iUserId);
         }
         //public bool AddConversations(Conversation conversation, int iPersonId)
         //{
@@ -366,6 +371,24 @@ namespace Service
         public List<TGlobalParameters> GetGlobalParameters()
         {
             return TGlobalParameters.GetGlobalParameters();
+        }
+
+        #endregion
+        #region presenceAvrech
+
+        public List<PresenceAvrech> GetPresenceAvrechById(int iPresenceAvrech)
+        {
+            return PresenceAvrech.GetPresenceAvrechById(iPresenceAvrech);
+        }
+
+        public bool SetPresence(PresenceAvrech presenceAvrech)
+        {
+            return PresenceAvrech.SetPresence(presenceAvrech);
+        }
+
+        public bool DeletePresenceAvrech(int ipresenceAvrech, int iLastModifyUserId)
+        {
+            return PresenceAvrech.DeletePresenceAvrech(ipresenceAvrech,iLastModifyUserId);
         }
 
         #endregion
