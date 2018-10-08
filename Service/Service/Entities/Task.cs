@@ -68,7 +68,20 @@ namespace Service.Entities
             }
         }
 
-     
+        public static bool DeleteTask( int iTaskId)
+        {
+            try
+            {
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TTask_SLCT", new SqlParameter("iTaskId", iTaskId)).Tables[0].Rows;
+                List<Task> tasks = ObjectGenerator<Task>.GeneratListFromDataRowCollection(drc);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("DeleteTask / TTask_DEL", "ex" + ex);
+                return false;
+            }
+        }
     
      
 

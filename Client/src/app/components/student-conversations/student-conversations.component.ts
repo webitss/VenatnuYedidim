@@ -62,10 +62,10 @@ export class StudentConversationsComponent implements OnInit {
       title: 'סיכום שיחה',
       name: 'nvConversationSummary'
     },
-    {
-      title: 'תאריך שיחה הבאה',
-      name: 'nvNextConversationDate'
-    },
+    // {
+    //   title: 'תאריך שיחה הבאה',
+    //   name: 'nvNextConversationDate'
+    // },
 
 
   ];
@@ -95,7 +95,7 @@ export class StudentConversationsComponent implements OnInit {
     this.conversationSelect = new Conversation();
     this.conversationSelect.dtConversationDate = null;
     //this.conversationSelect.dtConversationTime = null;
-    this.conversationSelect.dtNextConversationDate = null;
+    //this.conversationSelect.dtNextConversationDate = null;
 
   }
   // add(newConver)
@@ -201,7 +201,7 @@ export class StudentConversationsComponent implements OnInit {
     c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
     c['nvConversationDate'] = c.dtConversationDate.toLocaleDateString();
     c['nvConversationTime'] = c.dtConversationDate.toLocaleTimeString();
-    c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
+    //c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
   }//??
   selecList(id) {
     this.appProxy.post("GetConversations", { iPersonId: id })

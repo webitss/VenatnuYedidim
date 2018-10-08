@@ -3,6 +3,7 @@ import { AppProxy } from '../../services/app.proxy';
 import { Student } from '../../classes/student';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../services/global.service';
+import { SysTableService } from '../../services/sys-table.service';
 
 @Component({
   selector: 'app-cards-union',
@@ -15,6 +16,8 @@ export class CardsUnionComponent implements OnInit {
 student2:Student;
 student:Student=new Student();
 model:number;
+sameNameStudents:boolean=true;
+
 
 
   studentList:Student[];
@@ -28,13 +31,13 @@ model:number;
   ngOnInit() {
 
 
-    
+    this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;    
     this.student.dtAddStudentDate=null;
     this.student.dtBirthdate=null;
-   this.activatedRoute.parent.params.subscribe(params => {
-      this.id = params['iPersonId'];
-    });
-    this.appProxy.post('GetStudentList', { iUserId:this.globalService.getUser()['iUserId'] }).then(
+  //  this.activatedRoute.parent.params.subscribe(params => {
+  //     this.id = params['iPersonId'];
+  //   });
+    this.appProxy.post('GetStudentList', { iUserId:this.id}).then(
       data => 
       {
         this.studentList = data;
@@ -45,14 +48,27 @@ debugger;
   student1Change(event:any){
     this.studentList.forEach(e=>{
       if(e.iPersonId==event.currentTarget.value)
+      {
       this.student1=e;
+      if(this.student2&&this.student2.iPersonId==e.iPersonId)
+      this.sameNameStudents=false;
+    else
+      this.sameNameStudents=true;
+
+      }
     });
   }
   student2Change(event:any){
     this.studentList.forEach(e=>{
     if(e.iPersonId==event.currentTarget.value)
+    {
       this.student2=e;
-      
+      if(this.student1&&this.student1.iPersonId==e.iPersonId)
+      this.sameNameStudents=false;
+      else
+      this.sameNameStudents=true;
+
+    }
     });
 
    }
