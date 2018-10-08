@@ -5,4 +5,6 @@
         <button class="btn btn-small" (click)="tableToPdf('בוגרים')">s</button>
     </div>
 </div>
-<app-vy-table #graduates [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editStudent($event)"></app-vy-table>
+<div class="main-table">
+    <app-vy-table #graduates [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editStudent($event)"></app-vy-table>
+</div>

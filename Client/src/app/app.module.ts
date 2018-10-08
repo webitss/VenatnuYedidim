@@ -90,6 +90,7 @@ import { MediaComponent } from './components/media/media.component';
 
 import { GaleryComponent } from './components/galery/galery.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { settingsFrontend } from './services/settings-frontend.service';
 
 
 
@@ -105,7 +106,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 
     // pipes
     FilterPipe,
-
+ 
     //directives
     GoogleCity,
     SafeUrl,    
@@ -282,8 +283,9 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 
     ], { useHash: true })
   ],
-  providers: [AppProxy, SysTableService, GlobalService, CanDeactivateGuard, DialogService],
+  providers: [AppProxy, SysTableService, GlobalService, CanDeactivateGuard, DialogService,settingsFrontend],
   bootstrap: [AppComponent],
+
   // exports: [CalendarComponent]
   // entryComponents:[
   //   CardsUnionComponent

@@ -10,12 +10,12 @@
 
 <div *ngIf="(iYeshivaId != null && !flag)">
 
-    <app-setting-yeshiva #yeshivot [sysTableList]="sysTableList" (closeYeshiva)="close()"></app-setting-yeshiva>
+    <app-setting-yeshiva #yeshivot [sysTableList]="sysTableList" [iYeshivaId]="iYeshivaId" (closeYeshiva)="close()"></app-setting-yeshiva>
 
 </div>
-
+<div class="main-table">
     <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="setYeshiva($event)"></app-vy-table>
-
+</div>
 
 <div *ngIf="flag" class="settingYeshivaDelete">
        <div>
@@ -26,4 +26,3 @@
             <button (click)="close()">לא</button>
         </div>
 </div>
-

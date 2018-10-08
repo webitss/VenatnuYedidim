@@ -1,8 +1,10 @@
+
 .background-logo { 
    background-image:  url("../../../assets/images/logo.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    width:100%;
 }
 .my-div{
     position: relative;

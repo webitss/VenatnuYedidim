@@ -43,7 +43,6 @@ namespace Service.Entities
             {
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TYeshivot_SLCT").Tables[0].Rows;
                 List <Yeshivot> yeshivots = ObjectGenerator<Yeshivot>.GeneratListFromDataRowCollection(drc);
-
                 return yeshivots;
             }
             catch (Exception ex)

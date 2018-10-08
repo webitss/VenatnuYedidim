@@ -1,15 +1,47 @@
+<div class="row">
+  <div class="Show">
+    <label for="header">כותרת</label>
+    <input id="header" type="text" [(ngModel)]="settingsFrontend.GlobalHeader.nvTitle" />
+    <br/>
+    <label for="VerMarch">טקסט ראשי</label>
+    <textarea id="VerMarch" rows="4" cols="50" [(ngModel)]="settingsFrontend.GlobalVerMarch.nvTitle">
+    </textarea>
+    <br/>
+    <label for="MarchSF">טקסט משני</label>
+    <textarea id="MarchSF" rows="4" cols="50" [(ngModel)]="settingsFrontend.GlobalMarchSF.nvTitle">
 
-<div class="Show">
-<label for="header">כותרת</label>
-<input id="header" type="text" [(ngModel)]="GlobalHeader.nvTitle"/><br/>
-<label for="VerMarch">טקסט ראשי</label>
-<textarea id="VerMarch" rows="4" cols="50" [(ngModel)]="GlobalVerMarch.nvTitle">
-    </textarea><br/>
-  <label for="MarchSF">טקסט משני</label>
-<textarea id="MarchSF" rows="4" cols="50"[(ngModel)]="GlobalMarchSF.nvTitle">
-  
+
 </textarea><br/>
 
-</div>
-<input type="button" value="שנה תצוגה" (click)="saveGlobalParams()">
 
+  </div>
+<div class="col col-sm-3"></div>
+<div class="col col-sm-2">
+  <input class="change" type="button" value="שנה תצוגה" (click)="saveGlobalParams()">
+</div>
+  <div class="col col-sm-2">
+    <button (click)="addDocument()" class="btn-add btn-circle">הוספת מדיה</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col col-sm-8"></div>
+  <!-- <div class="col col-sm-4">
+      <button (click)="addDocument()" class="btn-add btn-circle">הוספת מדיה</button>
+    </div> -->
+</div>
+
+
+<div class="uploadDocumentComponent" *ngIf="document!=null">
+  <app-upload-document [document]="document" (closeMe)="closeDocumentDialog(true)" (closeMeNoSave)="closeDocumentDialog(false)"></app-upload-document>
+</div>
+
+<ul>
+  <li *ngFor="let d of documents" class="media-item">
+    <app-media [document]="d"></app-media>
+    <br/>
+    <div class="buttons">
+      <button class="btn btn-del" (click)="deleteDocument(d.iDocumentId)" title="מחק"></button>
+      <button class="btn btn-edit" (click)="editDocument(d.iDocumentId)" title="ערוך"></button>
+    </div>
+  </li>
+</ul>

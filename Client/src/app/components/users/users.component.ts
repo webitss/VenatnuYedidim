@@ -7,6 +7,7 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { SysTableService } from '../../services/sys-table.service';
 import { GlobalService } from '../../services/global.service';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 @Component({
   selector: 'app-users',
@@ -15,12 +16,11 @@ import { GlobalService } from '../../services/global.service';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService, private globalService: GlobalService) { }
+  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService, private globalService: GlobalService, private vyTableComponent: VyTableComponent) { }
   @ViewChild('users') users: any;
 
   ngOnInit() {
     this.iPersonId = this.globalService.getUser()['iUserId'];
-    debugger
     this.appProxy.post("GetUsers", { iPersonId: this.iPersonId }).then(data => {
       this.lstDataRows = data;
 
@@ -68,17 +68,31 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['users/user/', u.iPersonId]);
   }
 
+  private alert: any;
   deleteUser(u: User) {
-    this.appProxy.post('DeleteUser',{iPersonId: u.iPersonId}).then(data=>{
-
-    });
+    if (u.iPermissionId == 5) {//מנהל
+      this.alert = confirm("יתכן ולאחר המחיקה לא יהיה מנהל למערכת ,האם אתה בטוח שברצונך למחוק מנהל?");
+      if (this.alert == true){
+        this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {
+        });
+        this.vyTableComponent.lstDataRows.splice(this.vyTableComponent.lstDataRows.indexOf(u),1);        
+      }
+    }
+    else {
+      this.alert = confirm("האם אתה בטוח שברצונך למחוק משתמש זה?");
+      if (this.alert == true){
+        this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {
+        });
+        this.vyTableComponent.lstDataRows.splice(this.vyTableComponent.lstDataRows.indexOf(u),1);        
+      }
+    }
   }
 
-  downloadExcel() {
-    this.users.downloadExcel();
-  }
+    downloadExcel() {
+      this.users.downloadExcel();
+    }
 
-  tableToPdf(name: string) {
-    this.users.downloadPdf(name, 'pdf');
+    tableToPdf(name: string) {
+      this.users.downloadPdf(name, 'pdf');
+    }
   }
-}
