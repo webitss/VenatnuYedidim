@@ -5,7 +5,7 @@ export class Conversation{
    public iPersonId:number;
    public iConversationType:number;
    public dConversationDate:Date;
-   public dtConversationTime:Date;
+   public dtConversationDate:Date;
    public nvConversationSummary:string;
    //public dtNextConversationDate:Date;
 
