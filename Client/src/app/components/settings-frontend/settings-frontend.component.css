@@ -1,4 +1,72 @@
 .Show{
     float: right;
-    
+
+}
+
+
+
+.uploadDocumentComponent{
+  position: fixed;
+  z-index: 100;
+  top: 40%;
+  right: 30%;
+  background: white;
+  border: 2px;
+  width: 40%;
+  border: solid rgb(207, 37, 94);
+}
+button{
+  height: 100%;
+  margin-left: 16%;
+}
+.row{
+  margin-bottom: 1%;
+}
+.media-area{
+  width: 80%;
+  margin: auto;
+  border: 1px solid#ccc;
+}
+/* ul{
+  float: right;
+} */
+li{
+  float: right;
+  width: 15%;
+  height: 200px;
+  margin-left: 8%;
+  margin-top: 100px;
+  list-style-type: none;
+}
+li>button{
+  width: 50%;
+  height: 13%;
+  padding: 0px;
+}
+.btn-del{
+  background-image: url("../../../assets/icons/trash.png");
+}
+.btn-edit{
+  background-image: url("../../../assets/icons/edit.png");
+}
+
+
+.btn-del,.btn-edit{
+  border-radius: 0px;
+  margin-left: 2%;
+  height: 25px;
+}
+.buttons{
+  padding-left: 25%;
+  margin-top: -10%;
+  visibility: hidden;
+}
+.media-item:hover>.buttons{
+  visibility: visible;
+
+}
+.btn-add{
+  height: 15%;
+  margin-left: 16%;
+  width: 70%;
 }
