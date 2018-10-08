@@ -60,9 +60,9 @@ export class SettingsYeshivotComponent implements OnInit {
   }
 
   public setYeshiva(yeshiva){
-    // if()
+   //if(yeshiva.culomnClickName=="edit")
        this.editYeshiva(yeshiva);
-    // else 
+  // else 
        this.deleteYeshiva(yeshiva);
   }
 
