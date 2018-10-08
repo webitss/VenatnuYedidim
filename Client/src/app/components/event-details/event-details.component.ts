@@ -30,9 +30,6 @@ export class EventDetailsComponent implements OnInit {
 
   @ViewChild(NgForm) form;
 
-  checkFormValidity() {
-    return this.form.valid;
-  }
 
   ngAfterViewInit() {
     if (this.isDetails)

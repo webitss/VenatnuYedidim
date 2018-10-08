@@ -102,11 +102,14 @@ namespace Service.Entities
             }
         }
 
-        public static bool DeleteUser(int iPersonId)
+        public static bool DeleteUser(int iPersonId, int iUserId)
         {
             try
             {
-                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TUser_DEL", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iPersonId", iPersonId));
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TUser_DEL", parameters).Tables[0].Rows;
                 return true;
 
             }
