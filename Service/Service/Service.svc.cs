@@ -137,7 +137,6 @@ namespace Service
 
         #endregion
 
-
         #region Event
         public bool SetEvent(Event1 oEvent, int iUserId, List<TInt> to)
         {
@@ -153,8 +152,15 @@ namespace Service
         {
             return Event1.GetEvent(iEventId);
         }
+        
+
+            public bool DeleteEvent(int iEventId, int iUserId)
+        {
+            return Event1.DeleteEvent(iEventId, iUserId);
+        }
 
         #endregion
+
         #region Avrech
 
 
@@ -200,8 +206,6 @@ namespace Service
 
 
 		#endregion
-
-
 
 		#region SysTableRow
 		public List<SysTableRow> GetValues(int iSysTableId)
@@ -345,7 +349,6 @@ namespace Service
 
         #endregion
 
-
         #region Fileshandler
 
         public string GeneratPdf(string headerHtml, string bodyHtml, string footerHtml)
@@ -374,20 +377,21 @@ namespace Service
             return TGlobalParameters.GetGlobalParameters();
         }
 
+
 		public bool UpdGlobalParameters(List<TGlobalParameters> GlobalParameters)
 		{
 			return TGlobalParameters.UpdGlobalParameters(GlobalParameters);
 		}
 
-		
-	
 
         #endregion
+
+	
         #region presenceAvrech
 
-        public List<PresenceAvrech> GetPresenceAvrechById(int iPresenceAvrech)
+        public List<PresenceAvrech> GetPresenceAvrechById(int iPersonId)
         {
-            return PresenceAvrech.GetPresenceAvrechById(iPresenceAvrech);
+            return PresenceAvrech.GetPresenceAvrechById(iPersonId);
         }
 
         public bool SetPresence(PresenceAvrech presenceAvrech)

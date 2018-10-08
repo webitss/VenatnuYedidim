@@ -31,7 +31,7 @@ export class SettingsFrontendComponent implements OnInit {
     alert(this.sysTableService.getValues(SysTableService.dataTables['belongSheetType'].iSysTableId)[0]);
     this.loadDocuments();
   }
-  
+
 
   loadDocuments() {
     this.appProxy.get('GetDocumentsOfTadmit').then(
@@ -102,6 +102,7 @@ export class SettingsFrontendComponent implements OnInit {
         err => alert(err)
       );
   }
+
 private saveGlobalParams(){
  
   this.settingsFrontend.GlobalHeader.nvTitle="כותרת";
@@ -124,4 +125,5 @@ this.settingsFrontend.SaveGlobalParameters(this.GlobalParameters).then(
 
   l=>alert("ins"));
 }
+
 }

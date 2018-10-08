@@ -3,23 +3,25 @@
  <div  class="content-modal">
    <div class="close" (click)="close()">x</div>
   <span class="caption-cardsUnion">איחוד כרטיסים</span>
+
   <div class="form-group">
     
   <select class="form-control" (change)="student1Change($event)">
     <option>בחר תלמיד</option>
-      <option *ngFor="let student of studentList" value="{{student.iPersonId}}">{{student.nvFirstName}}  {{student.nvLastName}}</option>
+      <option *ngFor="let student of studentList" value="{{student.iPersonId}}">{{student.iPersonId}}  {{student.nvFirstName}}  {{student.nvLastName}}</option>
     </select>
   
   </div>
   <div class="form-group">
     <select class="form-control" (change)="student2Change($event)">
     <option>בחר תלמיד</option>      
-        <option *ngFor="let student of studentList" value="{{student.iPersonId}}">{{student.nvFirstName}}  {{student.nvLastName}}</option>
+        <option *ngFor="let student of studentList" value="{{student.iPersonId}}">{{student.iPersonId}}  {{student.nvFirstName}}  {{student.nvLastName}}</option>
       </select>
       </div>
-  <button class="btn-pink1" (click)="students=true">אחד</button>
+      <div *ngIf="sameNameStudents==false"><span class="msg">יש לבחור שני תלמידים שונים לאיחוד</span></div>
+  <button class="btn-pink1" (click)="students=true">הצג</button>
   
-  <form *ngIf="student1&&student2&&students" class="students" #form1>
+  <form *ngIf="student1&&student2&&students&&sameNameStudents" class="students" #form1>
     <div class="students-details">
       <div class="st-details col-sm-6">
           <span class="col-sm-4 fieldName" >שם פרטי:</span>
@@ -140,5 +142,5 @@
         
             
 </div>
-<button type="submit" class="btn-pink1 ok" (click)="unionOk()">אישור</button>
+<button type="submit" class="btn-pink1 ok" (click)="unionOk()">אחד</button>
   </form>
