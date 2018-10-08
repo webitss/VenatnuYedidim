@@ -97,7 +97,6 @@ export class SettingsCodeTableComponent implements OnInit {
     Object.keys(SysTableService.dataTables).forEach(key => {
       if (SysTableService.dataTables[key].iSysTableId == this.idSysTableRow) {
         this.Mykey = key;
-
       }
     })
 

@@ -375,14 +375,18 @@ namespace Service
 		{
 			return TGlobalParameters.UpdGlobalParameters(GlobalParameters);
 		}
+		public bool InsGlobalParameters(List<TGlobalParameters> GlobalParameters)
+		{
+			return TGlobalParameters.InsGlobalParameters(GlobalParameters);
+		}
 
 		#endregion
-	
 
-       
-        #region presenceAvrech
 
-        public List<PresenceAvrech> GetPresenceAvrechById(int iPresenceAvrech)
+
+		#region presenceAvrech
+
+		public List<PresenceAvrech> GetPresenceAvrechById(int iPresenceAvrech)
         {
             return PresenceAvrech.GetPresenceAvrechById(iPresenceAvrech);
         }
@@ -397,7 +401,9 @@ namespace Service
             return PresenceAvrech.DeletePresenceAvrech(ipresenceAvrech,iLastModifyUserId);
         }
 
-        #endregion
-    }
+		
+
+		#endregion
+	}
 
 }
