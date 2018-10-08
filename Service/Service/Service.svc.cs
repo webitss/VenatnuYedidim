@@ -38,9 +38,9 @@ namespace Service
             return User.SetUser(user, iUserId);
         }
 
-        public bool DeleteUser(int iPersonId)
+        public bool DeleteUser(int iPersonId, int iUserId)
         {
-            return User.DeleteUser(iPersonId);
+            return User.DeleteUser(iPersonId, iUserId);
         }
 
         #endregion
@@ -285,10 +285,24 @@ namespace Service
             return Yeshivot.DeleteYeshiva(iYeshivaId, iLastModifyUserId);
         }
 
-        #endregion
+		public bool DeleteYeshivaOfStudent(int iPersonId,int iYeshivaId, int iUserId)
+		{
+			return Yeshivot.DeleteYeshivaOfStudent(iPersonId, iYeshivaId, iUserId);
+		}
 
-        #region Documents
-        public List<Document> GetDocuments()
+
+		public bool AddYeshivaToStudent(int iPersonId, int iYeshivaId, int iUserId)
+		{
+			return Yeshivot.AddYeshivaToStudent(iPersonId, iYeshivaId, iUserId);
+		}
+
+
+		
+
+		#endregion
+
+		#region Documents
+		public List<Document> GetDocuments()
         {
             return Document.GetDocuments();
         }
@@ -387,23 +401,16 @@ namespace Service
 			return TGlobalParameters.InsGlobalParameters(GlobalParameters);
 		}
 
-<<<<<<< HEAD
+
 		#endregion
 
 
 
 		#region presenceAvrech
 
-		public List<PresenceAvrech> GetPresenceAvrechById(int iPresenceAvrech)
-=======
 
-        #endregion
-
-	
-        #region presenceAvrech
 
         public List<PresenceAvrech> GetPresenceAvrechById(int iPersonId)
->>>>>>> 678082f8bfac9e1a307bd19f258e6888ed64b8ab
         {
             return PresenceAvrech.GetPresenceAvrechById(iPersonId);
         }

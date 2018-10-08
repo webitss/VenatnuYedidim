@@ -37,9 +37,9 @@ export class StudentDetailsComponent implements OnInit {
   sysTableRowList: SysTableRow[];
   yeshivaList: Yeshiva[];
   yeshivaListOfStudent: Yeshiva[];
-  addYeshivaToStudent = { iPersonId: 0, iYeshivaId: 0 };
+  // addYeshivaToStudent = { iPersonId: 0, iYeshivaId: 0 };
   yeshivaSelected: Yeshiva;
-
+  currentUser: number;
 
   ngOnInit() {
     this.bornDateHebrewStudent = new HebrewDate();
@@ -51,10 +51,7 @@ export class StudentDetailsComponent implements OnInit {
     // this.addYeshivaToStudent.iPersonId
     // this.addYeshivaToStudent.iYeshivaId
 
-
-  
-
-
+    this.currentUser = this.globalService.getUser().iPersonId;
 
     this.appProxy.post("GetAllYeshivot").then(date => { this.yeshivaList = date; })
 
@@ -112,27 +109,65 @@ export class StudentDetailsComponent implements OnInit {
     });
     this.appProxy.post("GetYeshivotOfStudent", { iPersonId: this.paramRout }).then(data => this.yeshivaListOfStudent = data);
 
-    
+
     // this.route.parent.params.subscribe(params => { this.paramRout = params['iPersonId'] });
   }
 
 
   selectYesh(event: any) {
-if(event.currentTarget.value=='בחר מוסד')
-  {
-    this.yeshivaSelected.nvAddress =null;
-    this.yeshivaSelected.nvCity =null;
-  }
- 
+    if (event.currentTarget.value == 'בחר מוסד') {
+      this.yeshivaSelected.nvAddress = null;
+      this.yeshivaSelected.nvCity = null;
+    }
+
     this.yeshivaList.forEach(e => {
       if (e.nvYeshivaName == event.currentTarget.value) {
         this.yeshivaSelected.nvYeshivaName = e.nvYeshivaName;
         this.yeshivaSelected.nvAddress = e.nvAddress;
         this.yeshivaSelected.nvCity = e.nvCity;
+        this.yeshivaSelected.iYeshivaId=e.iYeshivaId;
       }
 
     })
   }
+
+  //מחיקת ישיבה לתלמיד
+  deleteYeshivaOfStudent(iYeshivaId: number) {
+
+    this.appProxy.post("DeleteYeshivaOfStudent", {
+      iPersonId: this.paramRout, iYeshivaId: iYeshivaId, iUserId: this.currentUser
+    }).then(data => { alert("הישיבה נמחקה בהצלחה"); }, err => { alert("שגיאה במחיקת ישיבהיד"); });
+    var i = 0;
+    this.yeshivaListOfStudent.forEach(e => {
+      debugger;
+      if (e.iYeshivaId == iYeshivaId)
+        this.yeshivaListOfStudent.splice(i, 1);
+      i++;
+    });
+  }
+
+  addSelectYeshivaToStudent() {
+
+    this.appProxy.post("AddYeshivaToStudent", {
+      iPersonId: this.paramRout, iYeshivaId:
+        this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser}).then(data =>{
+    if(data)
+           alert("הישיבה נוספה בהצלחה")
+           else("שגיאה בהוספת ישיבה")
+          }
+           , err => alert("שגיאה"))
+    
+    var newYeshiva: Yeshiva=new Yeshiva();
+    debugger;
+    newYeshiva.nvYeshivaName = this.yeshivaSelected.nvYeshivaName;
+    newYeshiva.nvCity = this.yeshivaSelected.nvCity;
+    newYeshiva.nvAddress = this.yeshivaSelected.nvAddress;
+    this.yeshivaListOfStudent.push(newYeshiva);
+
+  }
+
+
+
 
   changeStatusParent(parentType) {
 
@@ -195,15 +230,16 @@ if(event.currentTarget.value=='בחר מוסד')
       this.student.nvMotherDeathDate = null;
     }
     if (this.paramRout != '0') {
-      this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.globalService.getUser().iPersonId }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
+      this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
     }
     else
-      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.globalService.getUser().iPersonId }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
 
-  }         
+      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
 
-  get baseFileUrl(){   
-    return AppProxy.getBaseUrl() +'Files/';
+  }
+
+  get baseFileUrl() {
+    return AppProxy.getBaseUrl() + 'Files/';
   }
   protected save = { image: '', name: '' };
 

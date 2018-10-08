@@ -10,7 +10,6 @@ using System.ServiceModel.Web;
 namespace Service
 {
 
-
     [ServiceContract]
     public interface IService
     {
@@ -736,6 +735,22 @@ namespace Service
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

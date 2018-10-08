@@ -14,6 +14,7 @@ import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 export class EventsComponent implements OnInit {
   protected eventsList: Event1[];
   @ViewChild('events') events: any;
+  @ViewChild(VyTableComponent) vyTableComponent:VyTableComponent;
 
   constructor(private appProxy: AppProxy, private router: Router, private globalService:GlobalService) { }
 
@@ -25,7 +26,8 @@ export class EventsComponent implements OnInit {
     this.appProxy.post('DeleteEvent', { iEventId: e.iEventId, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
       if (res == true) {
         alert('נמחק בהצלחה!');
-        // this.vyTableComponent.lstDataRows.splice(this.vyTableComponent.lstDataRows.indexOf(e),1);     
+        this.lstDataRows.splice(this.lstDataRows.indexOf(e),1);  
+        this.vyTableComponent.refreshTable(this.lstDataRows);     
       }
       else {
         alert('לא נמחק!');
