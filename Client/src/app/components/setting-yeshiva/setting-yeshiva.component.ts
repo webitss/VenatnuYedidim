@@ -54,16 +54,10 @@ export class SettingYeshivaComponent implements OnInit {
       .then(
         data => {
             this.yeshiva = data;
-            if(this.yeshiva.nvYeshivaName==null || this.yeshiva.nvAddress==null || this.yeshiva.nvCity==null || 
-              this.yeshiva.nvContact==null || this.yeshiva.nvEmail==null || this.yeshiva.nvMobile==null || 
-              this.yeshiva.iRoleType == null)
-              alert("חובה למלא את כל השדות!!");
-              else{
                 this.closeYeshiva.emit(null);
                 alert("נשמר בהצלחה");
               }
-        })
-    }
+        )}
     else{
        this.appProxy.post('EditYeshiva',{yeshiva:this.yeshiva,iYeshivaId:this.yeshiva.iYeshivaId})
       .then(
@@ -75,7 +69,6 @@ export class SettingYeshivaComponent implements OnInit {
       )
     }
   }
-
 
   cancel() {
     this.closeYeshiva.emit(null);
