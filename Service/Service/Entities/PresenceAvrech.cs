@@ -16,7 +16,9 @@ namespace Service.Entities
         //[NoSendToSQL]
         [DataMember]
         public int iPresenceAvrech { get; set; }
-        [DataMember]
+		[DataMember]
+		public int iPersonId { get; set; }
+		[DataMember]
         public DateTime dtDatePresence { get; set; }
         [DataMember]
         public float iHoursSum { get; set; }
@@ -30,27 +32,27 @@ namespace Service.Entities
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<PresenceAvrech>.GetSqlParametersFromObject(presence);
-                SqlDataAccess.ExecuteDatasetSP("TPresenceAvrech/UPD", parameters);
+                SqlDataAccess.ExecuteDatasetSP("TPresenceAvrech_INS/UPD", parameters);
                 return true;
             }
             catch (Exception ex)
             {
-                Log.LogError("SetPresence / TPresenceAvrech/UPD", "ex" + ex + ", presence: " + JsonConvert.SerializeObject(presence));
+                Log.LogError("SetPresence / TPresenceAvrech_INS/UPD", "ex" + ex + ", presence: " + JsonConvert.SerializeObject(presence));
                 return false;
             }
         }
-        public static List<PresenceAvrech> GetPresenceAvrechById(int iPresenceAvrech)
+        public static List<PresenceAvrech> GetPresenceAvrechById(int iPersonId)
         {
             try
             {
-                SqlParameter parameter = new SqlParameter("iPresenceAvrech", iPresenceAvrech);
+                SqlParameter parameter = new SqlParameter("iPersonId", iPersonId);
                 DataTable dt = SqlDataAccess.ExecuteDatasetSP("TPresenceAvrechById_SLCT", parameter).Tables[0];
                 DataRowCollection drc = dt.Rows;
                 return ObjectGenerator<PresenceAvrech>.GeneratListFromDataRowCollection(drc);
             }
             catch (Exception ex)
             {
-                Log.LogError("GetPresenceAvrechById / TPresenceAvrechById_SLCT", "iPresenceAvrech" + iPresenceAvrech + ", ex " + ex);
+                Log.LogError("GetPresenceAvrechById / TPresenceAvrechById_SLCT", "iPersonId" + iPersonId + ", ex " + ex);
                 return null;
             }
         }
