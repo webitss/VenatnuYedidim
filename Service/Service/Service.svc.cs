@@ -84,6 +84,10 @@ namespace Service
         {
             return Task.GetTasksByPersonId(iPersonId);
         }
+        public bool DeleteTask( int iTaskId)
+        {
+            return Task.DeleteTask(iTaskId);
+        }
 
         #endregion
 
@@ -378,16 +382,30 @@ namespace Service
 		{
 			return TGlobalParameters.UpdGlobalParameters(GlobalParameters);
 		}
+		public bool InsGlobalParameters(List<TGlobalParameters> GlobalParameters)
+		{
+			return TGlobalParameters.InsGlobalParameters(GlobalParameters);
+		}
 
+<<<<<<< HEAD
 		#endregion
-	
 
-       
+
+
+		#region presenceAvrech
+
+		public List<PresenceAvrech> GetPresenceAvrechById(int iPresenceAvrech)
+=======
+
+        #endregion
+
+	
         #region presenceAvrech
 
-        public List<PresenceAvrech> GetPresenceAvrechById(int iPresenceAvrech)
+        public List<PresenceAvrech> GetPresenceAvrechById(int iPersonId)
+>>>>>>> 678082f8bfac9e1a307bd19f258e6888ed64b8ab
         {
-            return PresenceAvrech.GetPresenceAvrechById(iPresenceAvrech);
+            return PresenceAvrech.GetPresenceAvrechById(iPersonId);
         }
 
         public bool SetPresence(PresenceAvrech presenceAvrech)
@@ -400,7 +418,9 @@ namespace Service
             return PresenceAvrech.DeletePresenceAvrech(ipresenceAvrech,iLastModifyUserId);
         }
 
-        #endregion
-    }
+		
+
+		#endregion
+	}
 
 }

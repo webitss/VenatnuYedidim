@@ -1,18 +1,25 @@
 <div class="row">
   <div class="Show">
     <label for="header">כותרת</label>
-    <input id="header" type="text" [(ngModel)]="settingsFrontend.GlobalHeader.nvTitle" />
+    <input id="header" type="text" [(ngModel)]="this.settingsFrontend.GlobalHeader.nvValue" />
     <br/>
     <label for="VerMarch">טקסט ראשי</label>
-    <textarea id="VerMarch" rows="4" cols="50" [(ngModel)]="settingsFrontend.GlobalVerMarch.nvTitle">
+    <textarea id="VerMarch" rows="4" cols="50" [(ngModel)]="settingsFrontend.GlobalVerMarch.nvValue">
     </textarea>
     <br/>
     <label for="MarchSF">טקסט משני</label>
-    <textarea id="MarchSF" rows="4" cols="50" [(ngModel)]="settingsFrontend.GlobalMarchSF.nvTitle">
+    <textarea id="MarchSF" rows="4" cols="50" [(ngModel)]="settingsFrontend.GlobalMarchSF.nvValue">
 
-
+<div class="Show">
+<label for="header">כותרת</label>
+<input id="header" type="text" [(ngModel)]="settingsFrontend.GlobalHeader.nvValue"/><br/>
+<label for="VerMarch">טקסט ראשי</label>
+<textarea id="VerMarch" rows="4" cols="50" [(ngModel)]="settingsFrontend.GlobalVerMarch.nvValue">
+    </textarea><br/>
+  <label for="MarchSF">טקסט משני</label>
+<textarea id="MarchSF" rows="4" cols="50"[(ngModel)]="settingsFrontend.GlobalMarchSF.nvValue">
+  
 </textarea><br/>
-
 
   </div>
 <div class="col col-sm-3"></div>
