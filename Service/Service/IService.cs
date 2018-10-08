@@ -424,6 +424,30 @@ namespace Service
 		RequestFormat = WebMessageFormat.Json)]
 		bool DeleteYeshiva(int iYeshivaId, int iLastModifyUserId);
 
+
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "DeleteYeshivaOfStudent",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		bool DeleteYeshivaOfStudent(int iPersonId,int iYeshivaId, int iUserId);
+
+		[OperationContract]
+		[WebInvoke(
+		Method = "POST",
+		UriTemplate = "AddYeshivaToStudent",
+		BodyStyle = WebMessageBodyStyle.WrappedRequest,
+		ResponseFormat = WebMessageFormat.Json,
+		RequestFormat = WebMessageFormat.Json)]
+		bool AddYeshivaToStudent(int iPersonId, int iYeshivaId, int iUserId);
+
+
+
+
+		
 		#endregion
 
 		#region Conversation

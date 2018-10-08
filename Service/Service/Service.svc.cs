@@ -277,10 +277,24 @@ namespace Service
             return Yeshivot.DeleteYeshiva(iYeshivaId, iLastModifyUserId);
         }
 
-        #endregion
+		public bool DeleteYeshivaOfStudent(int iPersonId,int iYeshivaId, int iUserId)
+		{
+			return Yeshivot.DeleteYeshivaOfStudent(iPersonId, iYeshivaId, iUserId);
+		}
 
-        #region Documents
-        public List<Document> GetDocuments()
+
+		public bool AddYeshivaToStudent(int iPersonId, int iYeshivaId, int iUserId)
+		{
+			return Yeshivot.AddYeshivaToStudent(iPersonId, iYeshivaId, iUserId);
+		}
+
+
+		
+
+		#endregion
+
+		#region Documents
+		public List<Document> GetDocuments()
         {
             return Document.GetDocuments();
         }
