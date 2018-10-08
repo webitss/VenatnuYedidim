@@ -7,6 +7,7 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { SysTableService } from '../../services/sys-table.service';
 import { GlobalService } from '../../services/global.service';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 @Component({
   selector: 'app-users',
@@ -15,7 +16,7 @@ import { GlobalService } from '../../services/global.service';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService, private globalService: GlobalService) { }
+  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService, private globalService: GlobalService, private vyTableComponent: VyTableComponent) { }
   @ViewChild('users') users: any;
 
   ngOnInit() {
@@ -74,16 +75,15 @@ export class UsersComponent implements OnInit {
       if (this.alert == true){
         this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {
         });
-        this.lstDataRows.splice(this.lstDataRows.indexOf(u),1);        
+        this.vyTableComponent.lstDataRows.splice(this.vyTableComponent.lstDataRows.indexOf(u),1);        
       }
     }
     else {
       this.alert = confirm("האם אתה בטוח שברצונך למחוק משתמש זה?");
       if (this.alert == true){
         this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {
-          this.lstDataRows.splice(this.lstDataRows.indexOf(u),1);
         });
-        this.lstDataRows.splice(this.lstDataRows.indexOf(u),1);        
+        this.vyTableComponent.lstDataRows.splice(this.vyTableComponent.lstDataRows.indexOf(u),1);        
       }
     }
   }

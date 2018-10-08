@@ -17,17 +17,20 @@ namespace Service.Entities
         public static bool SaveGlobalParameters(List<TGlobalParameters> GlobalParameters)
 
         {
-
             try
             {
 
+List<SqlParameter> parameters =new List<SqlParameter>();
 
-                
-                List<SqlParameter> parameters = ObjectGenerator<TGlobalParameters>.GetSqlParametersFromObject(GlobalParameters[0]);
+				for (int i = 0; i < GlobalParameters.Count(); i++)
+				{
 
-                    
+					parameters = ObjectGenerator<TGlobalParameters>.GetSqlParametersFromObject(GlobalParameters[i]);
+				
+               
 
                 SqlDataAccess.ExecuteDatasetSP("TGlobalParameters_INS", parameters);
+				}
 
                
                 return true;
@@ -39,14 +42,44 @@ namespace Service.Entities
             }
 
         }
-        public static List<TGlobalParameters> GetGlobalParameters()
+		public static bool UpdGlobalParameters(List<TGlobalParameters> GlobalParameters)
+
+		{
+			try
+			{
+
+				List<SqlParameter> parameters = new List<SqlParameter>();
+
+				for (int i = 0; i < GlobalParameters.Count(); i++)
+				{
+
+					parameters = ObjectGenerator<TGlobalParameters>.GetSqlParametersFromObject(GlobalParameters[i]);
+
+
+
+					SqlDataAccess.ExecuteDatasetSP("TGlobalParameters_UPD", parameters);
+					;
+				}
+
+
+				return true;
+			}
+			catch (Exception ex)
+			{
+				Log.LogError("UpdGlobalParameters / TSysTableRow_INS", ex + " , ex");
+				return false;
+			}
+
+		}
+		public static List<TGlobalParameters> GetGlobalParameters()
         {
             try
             {
                 
                 DataTable dt = SqlDataAccess.ExecuteDatasetSP("TGlobalParameters_SLCT").Tables[0];
                 DataRowCollection drc = dt.Rows;
-                return ObjectGenerator<TGlobalParameters>.GeneratListFromDataRowCollection(drc);
+				List<TGlobalParameters> TGlobalParameters = ObjectGenerator<TGlobalParameters>.GeneratListFromDataRowCollection(drc);
+				return TGlobalParameters;
             }
             catch (Exception ex)
             {

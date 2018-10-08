@@ -13,7 +13,7 @@ export class settingsFrontend {
     public GlobalVerMarch:TGlobalParameters=new TGlobalParameters();
     public GlobalMarchSF:TGlobalParameters=new TGlobalParameters();
   constructor(private appProxy:AppProxy) { 
-    this.GetGlobalParameters();
+
   }
   SaveGlobalParameters(GlobalParameters:Array<TGlobalParameters> ) : Promise<boolean>{
     return  this.appProxy.post("SaveGlobalParameters", { GlobalParameters: GlobalParameters }).
@@ -25,15 +25,28 @@ export class settingsFrontend {
           return false;
         });
 }
+updateGlobalParameters(GlobalParameters:Array<TGlobalParameters> ) : Promise<boolean>{
+  return  this.appProxy.post("UpdGlobalParameters", { GlobalParameters: GlobalParameters }).
+      then(l => {
+        if (l) {
+         
+          return true;
+        }
+        return false;
+      });
+}
 GetGlobalParameters(){
 
 alert("GetGlobalParameters")
-    this.appProxy.get('GetGlobalParameters').then(data => {this.Globals=data, 
-      
-        this.GlobalHeader=this.Globals[0]
-        
-        
-        
+    this.appProxy.get('GetGlobalParameters').then(data => {
+      debugger;
+      this.Globals=data, 
+     
+        this.GlobalHeader=this.Globals[0];
+        this.GlobalMarchSF=this.Globals[1];
+        this.GlobalVerMarch=this.Globals[2];
+       return true; 
     })
+    return false;
 }
 }
