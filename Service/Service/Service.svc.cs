@@ -285,10 +285,24 @@ namespace Service
             return Yeshivot.DeleteYeshiva(iYeshivaId, iLastModifyUserId);
         }
 
-        #endregion
+		public bool DeleteYeshivaOfStudent(int iPersonId,int iYeshivaId, int iUserId)
+		{
+			return Yeshivot.DeleteYeshivaOfStudent(iPersonId, iYeshivaId, iUserId);
+		}
 
-        #region Documents
-        public List<Document> GetDocuments()
+
+		public bool AddYeshivaToStudent(int iPersonId, int iYeshivaId, int iUserId)
+		{
+			return Yeshivot.AddYeshivaToStudent(iPersonId, iYeshivaId, iUserId);
+		}
+
+
+		
+
+		#endregion
+
+		#region Documents
+		public List<Document> GetDocuments()
         {
             return Document.GetDocuments();
         }
@@ -382,6 +396,10 @@ namespace Service
 		{
 			return TGlobalParameters.UpdGlobalParameters(GlobalParameters);
 		}
+		public bool InsGlobalParameters(List<TGlobalParameters> GlobalParameters)
+		{
+			return TGlobalParameters.InsGlobalParameters(GlobalParameters);
+		}
 
 
         #endregion
@@ -404,7 +422,9 @@ namespace Service
             return PresenceAvrech.DeletePresenceAvrech(ipresenceAvrech,iLastModifyUserId);
         }
 
-        #endregion
-    }
+		
+
+		#endregion
+	}
 
 }

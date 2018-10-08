@@ -47,7 +47,7 @@ export class StudentsComponent implements OnInit {
           this.avrechimListOfStudent = data;
           student['nvAvrechName']="";
             this.avrechimListOfStudent.forEach(avrech => {
-              student['nvAvrechName'] += "-"+" " + avrech.nvFirstName +" "+ avrech.nvLastName +'<br/>' ;
+              student['nvAvrechName'] +=" " + avrech.nvFirstName +" "+ avrech.nvLastName +'<br/>' ;
             });
 
           });
