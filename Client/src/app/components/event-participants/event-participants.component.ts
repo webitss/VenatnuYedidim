@@ -21,6 +21,7 @@ export class EventParticipantsComponent implements OnInit {
   protected flag;
   protected iLastModifyUserId: number;
   protected s: any;
+  protected sysTableRowList1: SysTableRow[];
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
 
   public lstColumns = [
@@ -42,8 +43,9 @@ export class EventParticipantsComponent implements OnInit {
 
         this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
           this.sysTableRowList = data;
-          //  this.sysTableRowList.forEach(pr => {
-          //   this.s = pr });
+            // this.sysTableRowList.forEach(pr => {
+            // this.sysTableRowList1.push = pr.nvValue
+            //  });
           res.forEach(p => {
             // this.participant.forEach(p => {
               this.lstDataRows.push({
