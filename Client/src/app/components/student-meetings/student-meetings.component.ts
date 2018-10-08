@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Meeting } from '../../classes/meeting';
 import { AppProxy } from '../../services/app.proxy';
 import { StudentMeetingDetailsComponent } from '../student-meeting-details/student-meeting-details.component';
@@ -6,6 +6,7 @@ import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { ActivatedRoute } from '@angular/router';
 import { element } from 'protractor';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 
 
@@ -60,15 +61,19 @@ export class StudentMeetingsComponent implements OnInit {
     this.flag = 1;
   }
   m:Meeting;
+  @ViewChild(VyTableComponent) cc:VyTableComponent;
 updateMeeting(meeting:Meeting){
- this.meetingList.splice( this.meetingList.indexOf(this.meetingList.find(m => m.iMeetingId == meeting.iMeetingId),0),1);
+  let l= this.meetingList.indexOf(this.meetingList.find(m1 => m1.iMeetingId == meeting.iMeetingId))
+  this.meetingList[l]=meeting;
+//  this.meetingList.splice( this.meetingList.indexOf(this.meetingList.find(m1 => m1.iMeetingId == meeting.iMeetingId)),1);
 //  this.meetingList.filter(m => m.iMeetingId == meeting.iMeetingId)[0]= meeting;
 // this.meetingList.forEach(element => {
 //   if(element.iMeetingId == meeting.iMeetingId)
 //   element = meeting;
 // })
- 
-this.meetingList.push(meeting);
+
+ //this.meetingList.push(meeting);
+ this.cc.refreshTable(this.meetingList)
 }
   addMeeting() {
     this.meeting = new Meeting();

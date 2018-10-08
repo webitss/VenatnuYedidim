@@ -10,7 +10,6 @@
       <div *ngIf="name.invalid && (name.dirty || name.touched)">
         <div *ngIf="(name.errors.required)" class="text-danger text-right">
           <strong>! </strong>שדה נדרש</div>
-      </div>
     </div>
   </div>
 
@@ -20,7 +19,6 @@
       <div *ngIf="address.invalid && (address.dirty || address.touched)">
         <div *ngIf="(address.errors.required)" class="text-danger text-right">
           <strong>! </strong>שדה נדרש</div>
-      </div>
     </div>
   </div>
 
@@ -30,7 +28,6 @@
       <div *ngIf="city.invalid && (city.dirty || city.touched)">
         <div *ngIf="(city.errors.required)" class="text-danger text-right">
           <strong>! </strong>שדה נדרש</div>
-      </div>
     </div>
   </div>
 
@@ -40,7 +37,6 @@
       <div *ngIf="contact.invalid && (contact.dirty || contact.touched)">
         <div *ngIf="(contact.errors.required)" class="text-danger text-right">
           <strong>! </strong>שדה נדרש</div>
-      </div>
     </div>
   </div>
 
@@ -50,7 +46,6 @@
       <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
         <div *ngIf="(phone.errors.required)" class="text-danger text-right">
           <strong>! </strong>שדה נדרש</div>
-      </div>
     </div>
   </div>
 
@@ -60,19 +55,17 @@
       <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
         <div *ngIf="(mobile.errors.required)" class="text-danger text-right">
           <strong>! </strong>שדה נדרש</div>
-      </div>
     </div>
   </div>
 
     <div class="form-group">
       <label for='roleType'>תפקיד:</label>
-        <select [(ngModel)]="yeshiva.iRoleType" [ngModelOptions]="{standalone: true}" required #roleType="ngModel">
+        <select [(ngModel)]="yeshiva.roleType" [ngModelOptions]="{standalone: true}" required #roleType="ngModel">
           <option *ngFor='let y of sysTableList' [value]="y.iSysTableRowId">{{y.nvValue}}</option>
         </select>
         <div *ngIf="roleType.invalid && (roleType.dirty || roleType.touched)">
           <div *ngIf="(roleType.errors.required)" class="text-danger text-right">
             <strong>! </strong>שדה נדרש</div>
-        </div>
       </div>
   </div>
 </form>
