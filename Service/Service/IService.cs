@@ -1,4 +1,5 @@
-﻿using Service.Entities;
+﻿
+using Service.Entities;
 using Service.Utilities;
 using System;
 using System.Collections.Generic;
@@ -6,18 +7,23 @@ using System.Net.Mail;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 
-
-
 namespace Service
 {
 
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
     [ServiceContract]
     public interface IService
     {
 
+<<<<<<< HEAD
+        #region User	
+=======
         #region User
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
         [OperationContract]
         [WebInvoke(
@@ -68,7 +74,11 @@ namespace Service
 
         #endregion
 
+<<<<<<< HEAD
+        #region Student	
+=======
         #region Student
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
         [OperationContract]
         [WebInvoke(
         Method = "POST",
@@ -146,9 +156,15 @@ namespace Service
         List<Yeshivot> GetYeshivotOfStudent(int iPersonId);
 
 
+<<<<<<< HEAD
+        #endregion Student	
+
+        #region Avrech	
+=======
         #endregion Student
 
         #region Avrech
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
         [OperationContract]
         [WebInvoke(
@@ -236,7 +252,11 @@ namespace Service
         #endregion
 
 
+<<<<<<< HEAD
+        #region events	
+=======
         #region events
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
         [OperationContract]
         [WebInvoke(
         Method = "POST",
@@ -266,7 +286,11 @@ namespace Service
         Event1 GetEvent(int? iEventId);
         #endregion
 
+<<<<<<< HEAD
+        #region Meeting	
+=======
         #region Meeting
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
         [OperationContract]
         [WebInvoke(
@@ -277,6 +301,15 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Meeting> GetMeetingsByStudentId(int iPersonId);
 
+<<<<<<< HEAD
+        //[WebInvoke(	
+        //  Method = "POST",	
+        //  UriTemplate = "AddMeeting",	
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,	
+        //  ResponseFormat = WebMessageFormat.Json,	
+        //  RequestFormat = WebMessageFormat.Json)]	
+        //bool AddMeeting(Meeting meeting, int iUserId);	
+=======
         //[WebInvoke(
         //  Method = "POST",
         //  UriTemplate = "AddMeeting",
@@ -284,6 +317,7 @@ namespace Service
         //  ResponseFormat = WebMessageFormat.Json,
         //  RequestFormat = WebMessageFormat.Json)]
         //bool AddMeeting(Meeting meeting, int iUserId);
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
 
 
@@ -295,6 +329,15 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         int SetMeeting(Meeting meeting, int iUserId);
 
+<<<<<<< HEAD
+        //[WebInvoke(	
+        //  Method = "POST",	
+        //  UriTemplate = "UpdateMeeting",	
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,	
+        //  ResponseFormat = WebMessageFormat.Json,	
+        //  RequestFormat = WebMessageFormat.Json)]	
+        //bool UpdateMeeting(Meeting meeting, int iUserId);	
+=======
         //[WebInvoke(
         //  Method = "POST",
         //  UriTemplate = "UpdateMeeting",
@@ -302,6 +345,7 @@ namespace Service
         //  ResponseFormat = WebMessageFormat.Json,
         //  RequestFormat = WebMessageFormat.Json)]
         //bool UpdateMeeting(Meeting meeting, int iUserId);
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
         [WebInvoke(
         Method = "POST",
@@ -311,10 +355,17 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         bool DeleteMeeting(int iMeetingId, int iUserId);
 
+<<<<<<< HEAD
+        #endregion Meeting	
+
+
+        #region files	
+=======
         #endregion Meeting
 
 
         #region files
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
         [OperationContract]
         [WebInvoke(
@@ -336,7 +387,11 @@ namespace Service
 
         #endregion
 
+<<<<<<< HEAD
+        #region SysTableRow	
+=======
         #region SysTableRow
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
         [OperationContract]
         [WebInvoke(
         Method = "POST",
@@ -366,7 +421,11 @@ namespace Service
         bool AddValue(SysTableRow sysTableRow);
         #endregion
 
+<<<<<<< HEAD
+        #region SysTables	
+=======
         #region SysTables
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
         [OperationContract]
         [WebInvoke(
         Method = "GET",
@@ -378,7 +437,11 @@ namespace Service
 
         #endregion
 
+<<<<<<< HEAD
+        #region yeshivot	
+=======
         #region yeshivot
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
         [OperationContract]
         [WebInvoke(
@@ -427,7 +490,11 @@ namespace Service
 
         #endregion
 
+<<<<<<< HEAD
+        #region Conversation	
+=======
         #region Conversation
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
         [OperationContract]
         [WebInvoke(
@@ -447,6 +514,25 @@ namespace Service
         int SetConversations(Conversation conversation, int iUserId);
 
 
+<<<<<<< HEAD
+        //[OperationContract]	
+        //[WebInvoke(	
+        //  Method = "POST",	
+        //  UriTemplate = "AddConversations",	
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,	
+        //  ResponseFormat = WebMessageFormat.Json,	
+        //  RequestFormat = WebMessageFormat.Json)]	
+        //bool AddConversations(Conversation conversation, int iPersonId);	
+
+        //[OperationContract]	
+        //[WebInvoke(	
+        //  Method = "POST",	
+        //  UriTemplate = "UpdateConversations",	
+        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,	
+        //  ResponseFormat = WebMessageFormat.Json,	
+        //  RequestFormat = WebMessageFormat.Json)]	
+        //bool UpdateConversations(Conversation conversation, int iPersonId);	
+=======
         //[OperationContract]
         //[WebInvoke(
         //  Method = "POST",
@@ -464,6 +550,7 @@ namespace Service
         //  ResponseFormat = WebMessageFormat.Json,
         //  RequestFormat = WebMessageFormat.Json)]
         //bool UpdateConversations(Conversation conversation, int iPersonId);
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
         [OperationContract]
         [WebInvoke(
@@ -474,9 +561,15 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         bool DeleteConversations(int iConversationId, int iPersonId);
 
+<<<<<<< HEAD
+        #endregion Conversation	
+
+        #region participiant	
+=======
         #endregion Conversation
 
         #region participiant
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
         [OperationContract]
         [WebInvoke(
@@ -489,7 +582,11 @@ namespace Service
 
         #endregion
 
+<<<<<<< HEAD
+        #region Documents	
+=======
         #region Documents
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
         [OperationContract]
         [WebInvoke(
@@ -501,6 +598,16 @@ namespace Service
         List<Document> GetDocuments();
 
 
+<<<<<<< HEAD
+        //[OperationContract]	
+        //[WebInvoke(	
+        //Method = "POST",	
+        //UriTemplate = "AddFile",	
+        //BodyStyle = WebMessageBodyStyle.WrappedRequest,	
+        //ResponseFormat = WebMessageFormat.Json,	
+        //RequestFormat = WebMessageFormat.Json)]	
+        //bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment);	
+=======
         //[OperationContract]
         //[WebInvoke(
         //Method = "POST",
@@ -509,6 +616,7 @@ namespace Service
         //ResponseFormat = WebMessageFormat.Json,
         //RequestFormat = WebMessageFormat.Json)]
         //bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment);
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
         [OperationContract]
         [WebInvoke(
@@ -543,7 +651,11 @@ namespace Service
 
         #endregion
 
+<<<<<<< HEAD
+        #region graduates	
+=======
         #region graduates
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
         [OperationContract]
         [WebInvoke(
         Method = "POST",
@@ -554,7 +666,11 @@ namespace Service
         List<Student> GetGraduatesList(int iUserId);
         #endregion
 
+<<<<<<< HEAD
+        #region Task	
+=======
         #region Task
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
         [WebInvoke(
         Method = "POST",
         UriTemplate = "SetTask",
@@ -575,7 +691,11 @@ namespace Service
 
         #endregion
 
+<<<<<<< HEAD
+        #region SendMessagesHandler	
+=======
         #region SendMessagesHandler
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
         [OperationContract]
         [WebInvoke(
@@ -587,7 +707,11 @@ namespace Service
         bool SendEmailOrFax(string from, string to, string subject, string body, List<Attachment> lAttach);
 
         #endregion
+<<<<<<< HEAD
+        #region GlobalParameters	
+=======
         #region GlobalParameters
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
         [OperationContract]
         [WebInvoke(
@@ -608,6 +732,20 @@ namespace Service
 
         #endregion
 
+<<<<<<< HEAD
+        #region Documents	
+
+
+
+        //[OperationContract]	
+        //[WebInvoke(	
+        //Method = "POST",	
+        //UriTemplate = "AddFile",	
+        //BodyStyle = WebMessageBodyStyle.WrappedRequest,	
+        //ResponseFormat = WebMessageFormat.Json,	
+        //RequestFormat = WebMessageFormat.Json)]	
+        //bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment);	
+=======
         #region Documents
 
 
@@ -620,6 +758,7 @@ namespace Service
         //ResponseFormat = WebMessageFormat.Json,
         //RequestFormat = WebMessageFormat.Json)]
         //bool AddFile(int iItemId, int iBelongingType, int iCategoryType, string nvBase64File, string nvFileName, string nvComment);
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
 
 
@@ -653,7 +792,11 @@ namespace Service
 
         #endregion
 
+<<<<<<< HEAD
+        #region PresenceAvrech	
+=======
         #region PresenceAvrech
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
 
         [OperationContract]
         [WebInvoke(
@@ -691,6 +834,46 @@ namespace Service
 
 
 }
+<<<<<<< HEAD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
 =======
 	[ServiceContract]
 	public interface IService
@@ -1371,3 +1554,4 @@ namespace Service
 
 }
 >>>>>>> dcfa098d9ddf433962220def1d718b17bdc929f4
+>>>>>>> 28bf174dbb98d5b3316e3cb400a437065da32af5
