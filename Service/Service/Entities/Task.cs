@@ -68,12 +68,15 @@ namespace Service.Entities
             }
         }
 
-        public static bool DeleteTask( int iTaskId)
+        public static bool DeleteTask(int iTaskId, int iPersonId)
         {
             try
             {
-                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TTask_SLCT", new SqlParameter("iTaskId", iTaskId)).Tables[0].Rows;
-                List<Task> tasks = ObjectGenerator<Task>.GeneratListFromDataRowCollection(drc);
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iTaskId", iTaskId));
+                parameters.Add(new SqlParameter("iPersonId", iPersonId));
+                SqlDataAccess.ExecuteDatasetSP("TTask_DEL", parameters);
+
                 return true;
             }
             catch (Exception ex)

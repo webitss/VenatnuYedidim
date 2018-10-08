@@ -38,9 +38,9 @@ namespace Service
             return User.SetUser(user, iUserId);
         }
 
-        public bool DeleteUser(int iPersonId)
+        public bool DeleteUser(int iPersonId, int iUserId)
         {
-            return User.DeleteUser(iPersonId);
+            return User.DeleteUser(iPersonId,iUserId);
         }
 
         #endregion
@@ -84,9 +84,9 @@ namespace Service
         {
             return Task.GetTasksByPersonId(iPersonId);
         }
-        public bool DeleteTask( int iTaskId)
+        public bool DeleteTask(int iTaskId, int iPersonId)
         {
-            return Task.DeleteTask(iTaskId);
+            return Task.DeleteTask(iTaskId,iPersonId);
         }
 
         #endregion

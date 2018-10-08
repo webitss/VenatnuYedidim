@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Task } from '../../classes/task';
 import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
 import { SysTableService } from '../../services/sys-table.service';
+import { GlobalService } from '../../services/global.service';
 @Component({
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -105,7 +106,7 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService) { }
+  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService:GlobalService) { }
 
   prevMonth() {
     if (this.month == 1) {
@@ -128,7 +129,8 @@ export class CalendarComponent implements OnInit {
   }
 
   deleteTask(taskId: number) {
-    this.appProxy.post("DeleteTask", { iTaskId: taskId }).then(
+    debugger
+    this.appProxy.post("DeleteTask", { iTaskId: taskId,iPersonId:this.globalService.getUser().iPersonId}).then(
       data => {
         alert("task remove");
       });
