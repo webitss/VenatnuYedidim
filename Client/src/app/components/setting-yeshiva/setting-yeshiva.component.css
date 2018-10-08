@@ -10,9 +10,21 @@
     border: 2px;
     width: 60%;
     height: 30%;
-    border: solid rgb(207, 37, 94);
-    
+    border: solid rgb(207, 37, 94);  
 }
+
 .form-group {
     margin:5px;
+}
+
+.btn-yesNo{
+    float: left;
+    border-radius:30px;
+    width:75px;
+    margin-left:10px;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    border: 1px rgb(207, 37, 94) solid;
+    color: rgb(207, 37, 94);
 }
