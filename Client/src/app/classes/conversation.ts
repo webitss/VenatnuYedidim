@@ -7,11 +7,10 @@ export class Conversation{
    public dConversationDate:Date;
    public dtConversationTime:Date;
    public nvConversationSummary:string;
-   public dtNextConversationDate:Date;
+   //public dtNextConversationDate:Date;
 
-    constructor(){}
     constructor(){
         this.dtConversationDate=new Date();
-        this.dtNextConversationDate=new Date();
+        //this.dtNextConversationDate=new Date();
     }
 }
