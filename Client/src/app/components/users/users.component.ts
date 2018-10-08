@@ -73,12 +73,14 @@ export class UsersComponent implements OnInit {
       this.alert = confirm("יתכן ולאחר המחיקה לא יהיה מנהל למערכת ,האם אתה בטוח שברצונך למחוק מנהל?");
       if (this.alert == true)
         this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {
+          this.lstDataRows.splice(this.lstDataRows.indexOf(u),1);
         });
     }
     else {
       this.alert = confirm("האם אתה בטוח שברצונך למחוק משתמש זה?");
       if (this.alert == true)
         this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {
+          this.lstDataRows.splice(this.lstDataRows.indexOf(u),1);
         });
     }
   }
