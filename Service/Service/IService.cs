@@ -266,6 +266,15 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         Event1 GetEvent(int? iEventId);
+
+        [OperationContract]
+        [WebInvoke(
+     Method = "POST",
+     UriTemplate = "DeleteEvent",
+     BodyStyle = WebMessageBodyStyle.WrappedRequest,
+     ResponseFormat = WebMessageFormat.Json,
+     RequestFormat = WebMessageFormat.Json)]
+        bool DeleteEvent(int iEventId, int iUserId);
         #endregion
 
 
@@ -613,7 +622,7 @@ namespace Service
         bool SendEmailOrFax(string from, string to, string subject, string body, List<Attachment> lAttach);
 
         #endregion
- 
+
         #region GlobalParameters	
 
         [OperationContract]
@@ -756,4 +765,3 @@ namespace Service
 
 
 
-	
