@@ -9,3 +9,4 @@ export class Document {
     bShowInTadmit:boolean;
     dtCreatedate:Date;
 }
+    

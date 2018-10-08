@@ -69,6 +69,7 @@ namespace Service.Entities
         }
 
 
+        public static int SetConversations(Conversation conversation, int iUserId)
         {
 
             try
@@ -140,6 +141,6 @@ namespace Service.Entities
                 Log.LogError("DeleteConversation / TConversation_DEL", "ex" + ex);
                 return false;
             }
-        }
+        }       
     }
 }
