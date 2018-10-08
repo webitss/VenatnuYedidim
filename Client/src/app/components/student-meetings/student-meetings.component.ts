@@ -18,6 +18,7 @@ import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 export class StudentMeetingsComponent implements OnInit {
   iMeetingId: number;
   private sub: any;
+  private alert: any;
   iPersonId:number;
   protected meetingList: Array<Meeting>;
   id: number;
@@ -36,6 +37,11 @@ export class StudentMeetingsComponent implements OnInit {
 
   },
   {
+    title: 'מחיקה',
+    name: 'delete',
+    type:'html'
+  },
+  {
     title: 'סוג פגישה',
     name: 'nvMeetingType',
 
@@ -52,27 +58,31 @@ export class StudentMeetingsComponent implements OnInit {
   {
     title: 'סיכום',
     name: 'nvSummary',
-  }]
+  }
+  ]
 
   editMeeting(meeting: Meeting) {
-
     this.meeting = meeting;
-
     this.flag = 1;
   }
+
+  deleteMeeting(meeting: Meeting){
+    //לסיים את הפונקציה
+      this.alert = confirm("האם אתה בטוח שברצונך למחוק פגישה זו?");
+      if (this.alert == true){
+        this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId ,iUserId:meeting}).then(data => {
+        });
+        // this.vyTableComponent.lstDataRows.splice(this.vyTableComponent.lstDataRows.indexOf(u),1);        
+      }
+   
+  }
+
   m:Meeting;
+
   @ViewChild(VyTableComponent) cc:VyTableComponent;
 updateMeeting(meeting:Meeting){
   let l= this.meetingList.indexOf(this.meetingList.find(m1 => m1.iMeetingId == meeting.iMeetingId))
   this.meetingList[l]=meeting;
-//  this.meetingList.splice( this.meetingList.indexOf(this.meetingList.find(m1 => m1.iMeetingId == meeting.iMeetingId)),1);
-//  this.meetingList.filter(m => m.iMeetingId == meeting.iMeetingId)[0]= meeting;
-// this.meetingList.forEach(element => {
-//   if(element.iMeetingId == meeting.iMeetingId)
-//   element = meeting;
-// })
-
- //this.meetingList.push(meeting);
  this.cc.refreshTable(this.meetingList)
 }
   addMeeting() {
@@ -88,8 +98,6 @@ updateMeeting(meeting:Meeting){
   newMeeting(newMeeting:Meeting){
     this.changeTable(newMeeting);
     this.meetingList.push(newMeeting);
-
-    //  this.GetMeetingsByStudentId(this.iPersonId);
   }
 
   changeTable(m:Meeting){
@@ -97,12 +105,12 @@ updateMeeting(meeting:Meeting){
     m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
     m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
     m['edit'] = '<div class="edit"></div>';
+    m['delete'] = '<div class="delete"></div>';
     m['nvMeetingType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0].nvValue;
   }
   GetMeetingsByStudentId(id: number) {
     this.appProxy.post("GetMeetingsByStudentId", { iPersonId: id }).then(
       data => {
-        //alert("good");
         this.meetingList = data;
         this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(data => {
           this.sysTableRowList = data;
