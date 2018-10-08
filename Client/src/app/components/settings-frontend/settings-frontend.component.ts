@@ -31,18 +31,7 @@ export class SettingsFrontendComponent implements OnInit {
     alert(this.sysTableService.getValues(SysTableService.dataTables['belongSheetType'].iSysTableId)[0]);
     this.loadDocuments();
   }
-  private saveGlobalParams() {
-    this.settingsFrontend.GlobalHeader.nvValue = 'כותרת';
-    this.GlobalParameters.push(this.settingsFrontend.GlobalHeader);
-    this.settingsFrontend.GlobalVerMarch.nvValue = 'טקט ראשי ';
-    this.GlobalParameters.push(this.settingsFrontend.GlobalVerMarch);
-    this.settingsFrontend.GlobalMarchSF.nvValue = 'טקסט משני';
-    this.GlobalParameters.push(this.settingsFrontend.GlobalMarchSF);
-
-    this.settingsFrontend
-      .SaveGlobalParameters(this.GlobalParameters)
-      .then(l => alert(l));
-  }
+ 
 
   loadDocuments() {
     this.appProxy.get('GetDocumentsOfTadmit').then(
@@ -113,7 +102,7 @@ export class SettingsFrontendComponent implements OnInit {
         err => alert(err)
       );
   }
-<<<<<<< HEAD
+
 private saveGlobalParams(){
  
   this.settingsFrontend.GlobalHeader.nvTitle="כותרת";
@@ -136,6 +125,5 @@ this.settingsFrontend.SaveGlobalParameters(this.GlobalParameters).then(
 
   l=>alert("ins"));
 }
-=======
->>>>>>> f51ffedf264bd1bf0778314daa231b5ce6472baa
+
 }

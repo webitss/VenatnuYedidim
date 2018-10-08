@@ -370,16 +370,16 @@ namespace Service
             return TGlobalParameters.GetGlobalParameters();
         }
 
-<<<<<<< HEAD
+
 		public bool UpdGlobalParameters(List<TGlobalParameters> GlobalParameters)
 		{
 			return TGlobalParameters.UpdGlobalParameters(GlobalParameters);
 		}
 
 		#endregion
-	}
-=======
-        #endregion
+	
+
+       
         #region presenceAvrech
 
         public List<PresenceAvrech> GetPresenceAvrechById(int iPresenceAvrech)
@@ -399,5 +399,5 @@ namespace Service
 
         #endregion
     }
->>>>>>> 2d355b4ba55a0569c8dad464d71fa798b9f30991
+
 }
