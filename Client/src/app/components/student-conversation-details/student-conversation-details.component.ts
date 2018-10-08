@@ -48,7 +48,7 @@ export class StudentConversationDetailsComponent implements OnInit {
   saveConversation() {
     this.currentConver.dtConversationDate = new Date(this.currentConver['conversationDate'] + ' ' + this.currentConver['conversationTime']);
    
-    this.currentConver.dtNextConversationDate = new Date(this.currentConver['nextConversationDate']);
+   // this.currentConver.dtNextConversationDate = new Date(this.currentConver['nextConversationDate']);
     // this.currentConver.dtConversationDate = new Date(this.currentConver.dtConversationDate);
     // this.currentConver.dtConversationTime = new Date(this.currentConver.dtConversationTime);
     // //his.currentConver.dtConversationDate =this.currentConver['conversationDate'].toLocaleDateString();
@@ -70,14 +70,32 @@ export class StudentConversationDetailsComponent implements OnInit {
           this.UpdateConver.emit(this.currentConver);
 
 
-        this.newConver.emit(this.conversation);
-        if (data) {
-          alert("good");
+          alert(data);
           this.Conversation.emit(null);
-        }
-        else
-          alert("no good");
-      });
+          // this.newConver.push({
+          //   iConversationId: this.conversation.iConversationId,
+          //   iPersonId: this.conversation.iPersonId,
+          //   iConversationType: this.sysTableList.filter(s => s.iSysTableRowId ==  this.conversation.iConversationType)[0],
+          //   dConversationDate:  this.conversation.dConversationDate,
+          //   dtConversationTime:  this.conversation.dtConversationTime,
+          //   nvConversationSummary:  this.conversation.nvConversationSummary,
+          //   dtNextConversationDate: this.conversation.dtNextConversationDate
+          // });
+          // this.conversation=this.newConver;
+          // }
+          // else {
+          //   this.conversation['nvConversationDate'] = this.conversation.dConversationDate.toLocaleDateString();
+          //   this.conversation['nvConversationTime'] = this.conversation.dtConversationTime.toLocaleTimeString();
+          //   this.conversation['nvNextConversationDate'] = this.conversation.dtNextConversationDate.toLocaleDateString();
+          //   this.conversation['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == this.conversation.iConversationType)[0].nvValue;
+          // }
+          // if (data) {
+          //   alert("good");
+          //   this.Conversation.emit(null);
+          // }
+          // else
+          //   alert("no good");
+        });
   }
 
   //איפה למקם?
@@ -90,7 +108,7 @@ export class StudentConversationDetailsComponent implements OnInit {
 
     this.currentConver.dtConversationDate.setDate(null);
     //this.currentConver.dtConversationTime.setTime(null);
-    this.currentConver.dtNextConversationDate.setDate(null);
+    //this.currentConver.dtNextConversationDate.setDate(null);
   }
 
 
@@ -120,16 +138,16 @@ export class StudentConversationDetailsComponent implements OnInit {
           this.hours = (this.currentConver.dtConversationDate).getHours().toString();
 
         //this.currentConver['nextConversationDate'] = new Date((this.currentConver.dtNextConversationDate).getTime());
-        if ((this.currentConver.dtNextConversationDate).getMinutes() < 10)
-          this.minutes = '0' + (this.currentConver.dtNextConversationDate).getMinutes().toString();
-        else
-          this.minutes = (this.currentConver.dtNextConversationDate).getMinutes().toString();
+        // if ((this.currentConver.dtNextConversationDate).getMinutes() < 10)
+        //   this.minutes = '0' + (this.currentConver.dtNextConversationDate).getMinutes().toString();
+        // else
+        //   this.minutes = (this.currentConver.dtNextConversationDate).getMinutes().toString();
 
-        if ((this.currentConver.dtNextConversationDate).getHours() < 10)
-          this.hours = '0' + (this.currentConver.dtNextConversationDate).getHours().toString();
-        else
-          this.hours = (this.currentConver.dtNextConversationDate).getHours().toString();
-        this.currentConver['nextConversationDate'] = new Date((this.currentConver.dtNextConversationDate).getTime()) + this.hours + ':' + this.minutes;
+        // if ((this.currentConver.dtNextConversationDate).getHours() < 10)
+        //   this.hours = '0' + (this.currentConver.dtNextConversationDate).getHours().toString();
+        // else
+        //   this.hours = (this.currentConver.dtNextConversationDate).getHours().toString();
+        // this.currentConver['nextConversationDate'] = new Date((this.currentConver.dtNextConversationDate).getTime()) + this.hours + ':' + this.minutes;
         this.currentConver['conversationTime'] = this.hours + ':' + this.minutes;
         //  ngOnDestroy() {
         //    this.sub.unsubscribe();

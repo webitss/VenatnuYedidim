@@ -84,6 +84,10 @@ namespace Service
         {
             return Task.GetTasksByPersonId(iPersonId);
         }
+        public bool DeleteTask( int iTaskId)
+        {
+            return Task.DeleteTask(iTaskId);
+        }
 
         #endregion
 
@@ -133,7 +137,6 @@ namespace Service
 
         #endregion
 
-
         #region Event
         public bool SetEvent(Event1 oEvent, int iUserId, List<TInt> to)
         {
@@ -149,8 +152,15 @@ namespace Service
         {
             return Event1.GetEvent(iEventId);
         }
+        
+
+            public bool DeleteEvent(int iEventId, int iUserId)
+        {
+            return Event1.DeleteEvent(iEventId, iUserId);
+        }
 
         #endregion
+
         #region Avrech
 
 
@@ -196,8 +206,6 @@ namespace Service
 
 
 		#endregion
-
-
 
 		#region SysTableRow
 		public List<SysTableRow> GetValues(int iSysTableId)
@@ -341,7 +349,6 @@ namespace Service
 
         #endregion
 
-
         #region Fileshandler
 
         public string GeneratPdf(string headerHtml, string bodyHtml, string footerHtml)
@@ -380,6 +387,7 @@ namespace Service
 			return TGlobalParameters.InsGlobalParameters(GlobalParameters);
 		}
 
+<<<<<<< HEAD
 		#endregion
 
 
@@ -387,8 +395,17 @@ namespace Service
 		#region presenceAvrech
 
 		public List<PresenceAvrech> GetPresenceAvrechById(int iPresenceAvrech)
+=======
+
+        #endregion
+
+	
+        #region presenceAvrech
+
+        public List<PresenceAvrech> GetPresenceAvrechById(int iPersonId)
+>>>>>>> 678082f8bfac9e1a307bd19f258e6888ed64b8ab
         {
-            return PresenceAvrech.GetPresenceAvrechById(iPresenceAvrech);
+            return PresenceAvrech.GetPresenceAvrechById(iPersonId);
         }
 
         public bool SetPresence(PresenceAvrech presenceAvrech)

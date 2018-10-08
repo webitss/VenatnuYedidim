@@ -116,8 +116,6 @@ export class TaskComponent implements OnInit {
   saveTask() {
     this.task.dtTaskdatetime = new Date(this.currentTask['dtDate'] + ' ' + this.currentTask['dtHour']);
     //    if (this.currentTask.iTaskId == 0)
-    
-debugger
     this.appProxy.post('SetTask', { task: this.task, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
       if (data) {
         alert("המשימה נוספה בהצלחה!");

@@ -3,6 +3,8 @@ import { AppProxy } from '../../services/app.proxy';
 import { Event1 } from '../../classes/event';
 import { Router } from '@angular/router';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
+import { GlobalService } from '../../services/global.service';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 @Component({
   selector: 'app-events',
@@ -13,14 +15,22 @@ export class EventsComponent implements OnInit {
   protected eventsList: Event1[];
   @ViewChild('events') events: any;
 
-  constructor(private appProxy: AppProxy, private router: Router) { }
+  constructor(private appProxy: AppProxy, private router: Router, private globalService:GlobalService) { }
 
   edit(e) {
     this.router.navigate(['events/event/', e.iEventId]);
   }
 
   deleteEvent(e) {
-    //alert('delete');
+    this.appProxy.post('DeleteEvent', { iEventId: e.iEventId, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
+      if (res == true) {
+        alert('נמחק בהצלחה!');
+        // this.vyTableComponent.lstDataRows.splice(this.vyTableComponent.lstDataRows.indexOf(e),1);     
+      }
+      else {
+        alert('לא נמחק!');
+      }
+    });
   }
 
   click(e) {

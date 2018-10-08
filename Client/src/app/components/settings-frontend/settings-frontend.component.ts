@@ -31,7 +31,7 @@ export class SettingsFrontendComponent implements OnInit {
     alert(this.sysTableService.getValues(SysTableService.dataTables['belongSheetType'].iSysTableId)[0]);
     this.loadDocuments();
   }
- 
+
 
   loadDocuments() {
     this.appProxy.get('GetDocumentsOfTadmit').then(

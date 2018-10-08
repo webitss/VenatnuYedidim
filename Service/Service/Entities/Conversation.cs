@@ -23,13 +23,12 @@ namespace Service.Entities
         [DataMember]
         public int iConversationType { get; set; }
         [DataMember]
-        public DateTime dConversationDate { get; set; }
-        [DataMember]
-        public DateTime dtConversationTime { get; set; }
+        public DateTime dtConversationDate { get; set; }
+       
         [DataMember]
         public string nvConversationSummary { get; set; }
-        [DataMember]
-        public DateTime dtNextConversationDate { get; set; }
+        //[DataMember]
+        //public DateTime dtNextConversationDate { get; set; }
 
         [NoSQL]
         [DataMember]
@@ -39,9 +38,9 @@ namespace Service.Entities
         #endregion
         public Conversation()
         {
-            dConversationDate = new DateTime();
-            dtConversationTime = new DateTime();
-            dtNextConversationDate = new DateTime();
+            dtConversationDate = new DateTime();
+           
+            //dtNextConversationDate = new DateTime();
             lstObject = new Dictionary<string, string>();
         }
 
