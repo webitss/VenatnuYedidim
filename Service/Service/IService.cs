@@ -661,7 +661,7 @@ namespace Service
 		BodyStyle = WebMessageBodyStyle.WrappedRequest,
 		ResponseFormat = WebMessageFormat.Json,
 		RequestFormat = WebMessageFormat.Json)]
-		List<PresenceAvrech> GetPresenceAvrechById(int iPresenceAvrech);
+		List<PresenceAvrech> GetPresenceAvrechById(int iPersonId);
 
 		[OperationContract]
 		[WebInvoke(

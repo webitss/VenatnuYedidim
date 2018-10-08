@@ -382,9 +382,9 @@ namespace Service
        
         #region presenceAvrech
 
-        public List<PresenceAvrech> GetPresenceAvrechById(int iPresenceAvrech)
+        public List<PresenceAvrech> GetPresenceAvrechById(int iPersonId)
         {
-            return PresenceAvrech.GetPresenceAvrechById(iPresenceAvrech);
+            return PresenceAvrech.GetPresenceAvrechById(iPersonId);
         }
 
         public bool SetPresence(PresenceAvrech presenceAvrech)

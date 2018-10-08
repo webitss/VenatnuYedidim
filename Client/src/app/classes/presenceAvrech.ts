@@ -1,5 +1,6 @@
 export class PresenceAvrech {
     iPresenceAvrech:number;
-    dtDateP:Date;
+    dtDatePresence:Date;
     iHoursSum:number;
+    iPersonId:number;
 }
