@@ -128,7 +128,6 @@ namespace Service
 
         #endregion
 
-
         #region Event
         public bool SetEvent(Event1 oEvent, int iUserId, List<TInt> to)
         {
@@ -144,8 +143,15 @@ namespace Service
         {
             return Event1.GetEvent(iEventId);
         }
+        
+
+            public bool DeleteEvent(int iEventId, int iUserId)
+        {
+            return Event1.DeleteEvent(iEventId, iUserId);
+        }
 
         #endregion
+
         #region Avrech
 
 
@@ -191,8 +197,6 @@ namespace Service
 
 
 		#endregion
-
-
 
 		#region SysTableRow
 		public List<SysTableRow> GetValues(int iSysTableId)
@@ -335,7 +339,6 @@ namespace Service
         }
 
         #endregion
-
 
         #region Fileshandler
 
