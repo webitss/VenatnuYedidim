@@ -19,22 +19,42 @@ export class AvrechPresenceComponent implements OnInit {
 
   public lstColumns = [
     new VyTableColumn('עריכה', 'edit', 'html', true,false),
-    new VyTableColumn('תאריך','dtDatePresence'),
-    new VyTableColumn('סך שעות','dtDatePresence')
+    new VyTableColumn('תאריך','nvDate'),
+    new VyTableColumn('סך שעות','iHoursSum')
   ];
       public lstDataRows = [];
-    
-
   ngOnInit() {
     this.sub = this.router.parent.params.subscribe(params => {
       this.iPersonId = +params["iPersonId"];
-      alert(this.iPersonId);
       debugger;
-      this.appProxy.post('GetPresenceAvrechById', { iPresenceAvrech: this.iPersonId }).then(data => {
-        this.PA = data;
+      this.appProxy.post('GetPresenceAvrechById', { iPersonId: this.iPersonId }).then(res => {
+        res.forEach(p=>{
+this.lstDataRows.push({
+  iPersonId:p.iPersonId,
+  iPresenceAvrech:p.iPresenceAvrech,
+  ['nvDate']: p.dtDatePresence.toLocaleDateString(),
+  // dtDatePresence:p.dtDatePresence,
+  iHoursSum:p.iHoursSum,
+  edit: '<div class="edit"></div>',
+})
+        })
+        // this.PA = data;
+        // alert(data.length);
       })
   });
 }
 
 }
-
+// iPresenceAvrech:number;
+//     dtDateP:Date;
+//     iHoursSum:number;
+//     iPersonId:number;
+// res.forEach(e => {
+//   this.lstDataRows.push({
+//     iEventId: e.iEventId,
+//     nvName: e.nvName,
+//     dtEventDate: e.dtEventDate.toLocaleDateString(),
+//     nvPlace: e.nvPlace,
+//     edit: '<div class="edit"></div>',
+//     delete: '<div class="delete"></div>'
+//   });
