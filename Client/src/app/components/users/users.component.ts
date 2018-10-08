@@ -18,6 +18,7 @@ export class UsersComponent implements OnInit {
 
   constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService, private globalService: GlobalService) { }
   @ViewChild('users') users: any;
+  @ViewChild(VyTableComponent) vyTableComponent:VyTableComponent;
 
   // @Output()
   //  onRemoveUser: EventEmitter<User> = new EventEmitter<User>();
@@ -79,7 +80,7 @@ export class UsersComponent implements OnInit {
         this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {
         });
         this.lstDataRows.splice(this.lstDataRows.indexOf(u),1);  
-        // this.onRemoveUser.emit();      
+        this.vyTableComponent.refreshTable(this.lstDataRows);
       }
     }
     else {
@@ -88,7 +89,7 @@ export class UsersComponent implements OnInit {
         this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {
         });
         this.lstDataRows.splice(this.lstDataRows.indexOf(u),1);
-        // this.onRemoveUser.emit();      
+        this.vyTableComponent.refreshTable(this.lstDataRows);
       }
     }
   }
