@@ -16,6 +16,7 @@ export class SettingsFrontendComponent implements OnInit {
   private GlobalParameters: TGlobalParameters[] = new Array<
     TGlobalParameters
   >();
+  belongSheetType:number;
   document: Document;
   documents: any[] = new Array();
   constructor(
@@ -26,9 +27,8 @@ export class SettingsFrontendComponent implements OnInit {
     private router: Router,
     private sysTableService: SysTableService
   ) {}
-  ngOnInit() {
-    alert(SysTableService.dataTables['belongSheetType'].iSysTableId);
-    alert(this.sysTableService.getValues(SysTableService.dataTables['belongSheetType'].iSysTableId)[0]);
+  ngOnInit() {   
+    this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType= data.filter(x => x.nvValue == 'תדמית')[0].iSysTableRowId);
     this.loadDocuments();
   }
 
@@ -46,7 +46,7 @@ export class SettingsFrontendComponent implements OnInit {
   addDocument() {
     this.document = new Document();
     this.document.bShowInTadmit = false;
-    this.document.iBelongingType = 0;
+    this.document.iBelongingType =  this.belongSheetType;
     this.document.iCategoryType = 0;
   }
 
@@ -54,7 +54,7 @@ export class SettingsFrontendComponent implements OnInit {
     this.documents.forEach(element => {
       if (element.iDocumentId === id) {
         this.document = new Document();
-        this.document.iBelongingType = 3;
+        this.document.iBelongingType =  this.belongSheetType;
         this.document.iCategoryType = 0;
         this.document.iDocumentId = element.iDocumentId;
         this.document.iItemId = element.iItemId;
@@ -106,6 +106,7 @@ export class SettingsFrontendComponent implements OnInit {
 private saveGlobalParams(){
  
   this.settingsFrontend.GlobalHeader.nvTitle="כותרת";
+  
   this.settingsFrontend.GlobalHeader.iParameterId=1
   this.GlobalParameters.push(this.settingsFrontend.GlobalHeader);
   this.settingsFrontend.GlobalVerMarch.nvTitle="טקט ראשי ";
@@ -114,16 +115,24 @@ private saveGlobalParams(){
   this.settingsFrontend.GlobalMarchSF.nvTitle="טקסט משני";
   this.settingsFrontend.GlobalVerMarch.iParameterId=3
   this.GlobalParameters.push(this.settingsFrontend.GlobalMarchSF);
+ 
+  this.settingsFrontend.GetGlobalParameters().then(res=>{
+    
+    if((<any>res).length>0){
+      this.settingsFrontend.updateGlobalParameters(this.GlobalParameters).then(
 
-  if(this.settingsFrontend.GetGlobalParameters()){
-  this.settingsFrontend.updateGlobalParameters(this.GlobalParameters).then(
-
-    l=>alert("udp"));
-  }
-  else
-this.settingsFrontend.SaveGlobalParameters(this.GlobalParameters).then(
-
-  l=>alert("ins"));
+        l=>alert("udp"));
+     
+    }
+    else{
+      this.settingsFrontend.SaveGlobalParameters(this.GlobalParameters).then(
+      
+        l=>alert("ins"));
+      }
+  });
+ 
 }
+ 
+
 
 }

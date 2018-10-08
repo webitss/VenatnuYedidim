@@ -2,12 +2,13 @@
 <div class="main-table">
   <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table>
 </div>
-<!-- <select value="'+p.iArriveStatusType+'"> <option *ngFor="let s of sysTableRowList" [ngValue]="s.nvValue" >{{s.nvValue}}</option></select>
 
-<select value='+p.iArriveStatusType+'>
-  <option *ngFor="let s of sysTableRowList"></option>
+<select > <option *ngFor="let s of sysTableRowList"  >{{s.nvValue}}</option></select>
+
+<!-- <select value='+p.iArriveStatusType+'>
+  <option *ngFor="let s of sysTableRowList1"></option>
 </select> -->
-<div *ngIf="flag" class="settingParticipantDelete">
+<!-- <div *ngIf="flag" class="settingParticipantDelete">
   <div>
        <p>
           האם אתה בטוח שברצונך למחוק משתתף זה?
@@ -15,4 +16,4 @@
        <button (click)="delete()">כן</button>
        <button (click)="close()">לא</button>
    </div>
-</div>
+</div> -->

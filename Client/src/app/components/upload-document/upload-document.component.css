@@ -38,8 +38,9 @@ button{
 }
 #documentName{
     height: 60px;
-    padding-top: 27px;
+    padding-top: 7px;
     text-align: right;
+    color:blue;
 }
 h3{
     text-align: right;

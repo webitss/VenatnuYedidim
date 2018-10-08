@@ -71,6 +71,35 @@ List<SqlParameter> parameters =new List<SqlParameter>();
 			}
 
 		}
+		public static bool InsGlobalParameters(List<TGlobalParameters> GlobalParameters)
+
+		{
+			try
+			{
+
+				List<SqlParameter> parameters = new List<SqlParameter>();
+
+				for (int i = 0; i < GlobalParameters.Count(); i++)
+				{
+
+					parameters = ObjectGenerator<TGlobalParameters>.GetSqlParametersFromObject(GlobalParameters[i]);
+
+
+
+					SqlDataAccess.ExecuteDatasetSP("TGlobalParameters_INS", parameters);
+					;
+				}
+
+
+				return true;
+			}
+			catch (Exception ex)
+			{
+				Log.LogError("InsGlobalParameters / TSysTableRow_INS", ex + " , ex");
+				return false;
+			}
+
+		}
 		public static List<TGlobalParameters> GetGlobalParameters()
         {
             try

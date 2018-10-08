@@ -4,6 +4,7 @@ import { Document } from '../../classes/document';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { element } from 'protractor';
+import { SysTableService } from "../../services/sys-table.service";
 
 @Component({
   selector: 'app-student-documents',
@@ -11,6 +12,7 @@ import { element } from 'protractor';
   styleUrls: ['./student-documents.component.css']
 })
 export class StudentDocumentsComponent implements OnInit {
+  belongSheetType: number;
   document: Document;
   id: number;
   public lstDataRows = new Array();
@@ -18,7 +20,7 @@ export class StudentDocumentsComponent implements OnInit {
   upload = false;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
 
-  constructor(private appProxy: AppProxy, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private appProxy: AppProxy, private activatedRoute: ActivatedRoute, private router: Router, private sysTableService: SysTableService  ) { }
 
   ngOnInit() {
     this.activatedRoute.parent.params.subscribe(params => {
@@ -31,6 +33,8 @@ export class StudentDocumentsComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('שם מסמך', 'nvDocumentName'));
     this.lstColumns.push(new VyTableColumn('פתיחה', 'open', 'html'));
 
+    this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType= data.filter(x => x.nvValue == 'תלמיד')[0].iSysTableRowId);
+    
     this.loadDocuments();
 
   }
@@ -57,7 +61,7 @@ export class StudentDocumentsComponent implements OnInit {
   addDocument() {
     this.document = new Document();
     this.document.iItemId = this.id;
-    this.document.iBelongingType = 4;
+    this.document.iBelongingType = this.belongSheetType;
   }
   editDocument(e) {
     //alert(e.iDocumentId);
@@ -65,7 +69,7 @@ export class StudentDocumentsComponent implements OnInit {
     this.documents.forEach(element => {
       if (element.iDocumentId == e.iDocumentId) {
         this.document = new Document();
-        this.document.iBelongingType = 4;
+        this.document.iBelongingType = this.belongSheetType;
         this.document.iCategoryType = element.iCategoryType;
         this.document.iDocumentId = element.iDocumentId;
         this.document.iItemId = element.iItemId;
