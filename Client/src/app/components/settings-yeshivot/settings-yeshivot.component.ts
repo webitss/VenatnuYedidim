@@ -37,6 +37,7 @@ export class SettingsYeshivotComponent implements OnInit {
   ngOnInit() {
 
     this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true,false))
+    this.lstColumns.push(new VyTableColumn('מחיקה','delete','html',true,false))
     this.lstColumns.push(new VyTableColumn('שם מוסד', 'nvYeshivaName'))
     this.lstColumns.push(new VyTableColumn('כתובת ', 'nvAddress'))
     this.lstColumns.push(new VyTableColumn('עיר', 'nvCity'))
@@ -44,8 +45,7 @@ export class SettingsYeshivotComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('מייל', 'nvEmail'))
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'))
     this.lstColumns.push(new VyTableColumn('תפקיד', 'nvRoleType'))
-    this.lstColumns.push(new VyTableColumn('מחיקה','delete','html',true,false))
-
+   
     this.appProxy.post('GetAllYeshivot').then(data => {
       this.yeshivaList = data;
       this.sysTableService.getValues(SysTableService.dataTables.roleType.iSysTableId).then(val=> {
@@ -60,9 +60,9 @@ export class SettingsYeshivotComponent implements OnInit {
   }
 
   public setYeshiva(yeshiva){
-    if(yeshiva.columnClickName=="edit")
+   if(yeshiva.columnClickName=='edit')
        this.editYeshiva(yeshiva);
-    else 
+   else 
        this.deleteYeshiva(yeshiva);
   }
 
@@ -81,8 +81,9 @@ export class SettingsYeshivotComponent implements OnInit {
     .then(
         data=>{
         this.yeshiva=data;
+        this.iYeshivaId=null;
+        this.flag=null;
         alert("הישיבה נמחקה בהצלחה");
-        this.closeYeshiva.emit(null);
     });    
   }
 

@@ -1,12 +1,11 @@
-﻿using Service.Entities;
+﻿
+using Service.Entities;
 using Service.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Net.Mail;
 using System.ServiceModel;
 using System.ServiceModel.Web;
-
-
 
 namespace Service
 {
@@ -690,3 +689,4 @@ namespace Service
 
 
 }
+

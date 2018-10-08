@@ -2,7 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter,ViewChild } from '@angul
 import { AppProxy } from '../../services/app.proxy';
 import { Yeshiva } from '../../classes/Yeshiva';
 import {ActivatedRoute,Router, ROUTER_CONFIGURATION} from '@angular/router'
-import {FormArrayName, NgForm} from '@angular/forms'
+import {FormArrayName, NgForm, Validator} from '@angular/forms'
 // import { forEach } from '@angular/router/src/utils/collection';
 // import { element } from 'protractor';
 // import { EMLINK } from 'constants';
