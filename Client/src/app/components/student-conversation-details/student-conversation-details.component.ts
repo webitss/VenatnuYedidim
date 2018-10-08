@@ -33,6 +33,8 @@ export class StudentConversationDetailsComponent implements OnInit {
   // protected newConver :Conversation;
   hours: string;
   minutes: string;
+  date:string;
+  taskSelect:boolean=false;
 
   @ViewChild('task') TaskComponent: TaskComponent;
 
@@ -46,14 +48,7 @@ export class StudentConversationDetailsComponent implements OnInit {
   }
 
   saveConversation() {
-    this.currentConver.dtConversationDate = new Date(this.currentConver['conversationDate'] + ' ' + this.currentConver['conversationTime']);
-   
-   // this.currentConver.dtNextConversationDate = new Date(this.currentConver['nextConversationDate']);
-    // this.currentConver.dtConversationDate = new Date(this.currentConver.dtConversationDate);
-    // this.currentConver.dtConversationTime = new Date(this.currentConver.dtConversationTime);
-    // //his.currentConver.dtConversationDate =this.currentConver['conversationDate'].toLocaleDateString();
-    // //this.currentConver.dtConversationTime = this.currentConver['conversationTime'].toLocaleDateString();
-    // this.currentConver.dtNextConversationDate = new Date(this.currentConver.dtNextConversationDate);
+    this.currentConver.dtConversationDate=new Date(this.currentConver.dtConversationDate+' '+this.currentConver['conversationTime']);
     if (this.currentConver.iConversationId == null) {
       this.currentConver.iPersonId = this.iPersonId;
     }
@@ -70,34 +65,7 @@ export class StudentConversationDetailsComponent implements OnInit {
           this.UpdateConver.emit(this.currentConver);
 
 
-<<<<<<< HEAD
-          alert(data);
-          this.Conversation.emit(null);
-          // this.newConver.push({
-          //   iConversationId: this.conversation.iConversationId,
-          //   iPersonId: this.conversation.iPersonId,
-          //   iConversationType: this.sysTableList.filter(s => s.iSysTableRowId ==  this.conversation.iConversationType)[0],
-          //   dConversationDate:  this.conversation.dConversationDate,
-          //   dtConversationTime:  this.conversation.dtConversationTime,
-          //   nvConversationSummary:  this.conversation.nvConversationSummary,
-          //   dtNextConversationDate: this.conversation.dtNextConversationDate
-          // });
-          // this.conversation=this.newConver;
-          // }
-          // else {
-          //   this.conversation['nvConversationDate'] = this.conversation.dConversationDate.toLocaleDateString();
-          //   this.conversation['nvConversationTime'] = this.conversation.dtConversationTime.toLocaleTimeString();
-          //   this.conversation['nvNextConversationDate'] = this.conversation.dtNextConversationDate.toLocaleDateString();
-          //   this.conversation['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == this.conversation.iConversationType)[0].nvValue;
-          // }
-          // if (data) {
-          //   alert("good");
-          //   this.Conversation.emit(null);
-          // }
-          // else
-          //   alert("no good");
-        });
-=======
+
         this.newConver.emit(this.conversation);
         if (data) {
           alert("good");
@@ -106,7 +74,7 @@ export class StudentConversationDetailsComponent implements OnInit {
         else
           alert("no good");
       });
->>>>>>> 445eed9ac5ed87c77526f85920de646f71988651
+
   }
 
   //איפה למקם?
@@ -135,7 +103,8 @@ export class StudentConversationDetailsComponent implements OnInit {
       // });
       if (this.currentConver.iConversationId != null) {
 
-        this.currentConver['conversationDate'] = new Date((this.currentConver.dtConversationDate).getTime());
+        this.date=this.currentConver.dtConversationDate.getDate().toLocaleString();
+        this.currentConver['conversationDate'] = this.date;
 
         //this.currentConver['dtHour'] = new Date((this.currentConver.dtConversationTime).getHours()) + ':'+new Date((this.currentConver.dtConversationTime).getMinutes());
         if ((this.currentConver.dtConversationDate).getMinutes() < 10)

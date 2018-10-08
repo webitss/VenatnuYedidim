@@ -33,8 +33,8 @@
 
         <div class="form-group">
           <label for="conversationDate">תאריך</label>
-          <input id="conversationDate" name="conversationDate" class="form-control" [(ngModel)]="currentConver.dtConversationDate" ngui-datetime-picker
-            date-only="true" close-on-select="false" />
+          <input id="conversationDate" name="conversationDate" class="form-control" [(ngModel)]="currentConver.dtConversationDate"
+            ngui-datetime-picker date-only="true" close-on-select="false" />
         </div>
 
         <div class="form-group">
@@ -47,18 +47,27 @@
         <div class="row">
           <div class="form-group col-sm-12">
             <label for="conversationSummary">סיכום</label>
-            <input id="conversationSummary" name="conversationSummary" type="text" class="form-control" [(ngModel)]="currentConver.nvConversationSummary"
-              [ngModelOptions]="{standalone: true}" />
+            <textarea id="conversationSummary" name="conversationSummary" class="form-control" [(ngModel)]="currentConver.nvConversationSummary"
+              [ngModelOptions]="{standalone: true}"></textarea>
           </div>
         </div>
         <!-- <div class="form-group">
           <label for="nextConversationDate">תאריך שיחה הבאה</label>
-          <input id="nextConversationDate" name="nextConversationDate" class="form-control" [(ngModel)]="currentConver.dtNextConversationDate"
             ngui-datetime-picker close-on-select="false" />
         </div> -->
 
       </div>
-      <app-task #task></app-task>
+
+      <div *ngIf="conversation.iConversationId==null">
+        <div *ngIf="taskSelect==false">
+          <input id="task" name="task" type="button" value="הוספת משימה" (click)="taskSelect=true" />
+        </div>
+        <div *ngIf="taskSelect==true">
+          <app-task #task></app-task>
+        </div>
+
+      </div>
+
     </div>
   </div>
-  <!-- [type]="typeTask" -->
+  <!-- [type]="typeTask " -->
