@@ -70,7 +70,6 @@ export class StudentConversationDetailsComponent implements OnInit {
           this.UpdateConver.emit(this.currentConver);
 
 
-<<<<<<< HEAD
           alert(data);
           this.Conversation.emit(null);
           // this.newConver.push({
@@ -97,16 +96,6 @@ export class StudentConversationDetailsComponent implements OnInit {
           // else
           //   alert("no good");
         });
-=======
-        this.newConver.emit(this.conversation);
-        if (data) {
-          alert("good");
-          this.Conversation.emit(null);
-        }
-        else
-          alert("no good");
-      });
->>>>>>> 445eed9ac5ed87c77526f85920de646f71988651
   }
 
   //איפה למקם?
