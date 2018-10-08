@@ -53,8 +53,8 @@ export class VyTableComponent implements OnInit {
     }
   }
 
-  public moveToPage(pageNum: number) {
-    if (!(pageNum == this.currentPage || pageNum < 0 || (this.iEndNumRow == this.lstDataRows.length && pageNum > this.currentPage))) {
+  public moveToPage(pageNum: number,move=false) {
+    if (move || !(pageNum == this.currentPage || pageNum < 0 || (this.iEndNumRow == this.lstDataRows.length && pageNum > this.currentPage))) {
       this.lstCurrentDataRows = this.lstDataRows.slice((pageNum) * this.iCountRows, (pageNum * this.iCountRows) + this.iCountRows);
       this.iStartNumRow = pageNum * this.iCountRows;
       this.iEndNumRow = this.iStartNumRow + this.lstCurrentDataRows.length;
@@ -152,5 +152,13 @@ export class VyTableComponent implements OnInit {
           console.log(e);
         }
       })
+  }
+  // removeFromList(item){
+  //   this.lstDataRows.splice(this.lstDataRows.indexOf(item),1);
+  // }
+  public refreshTable(newList)
+  {
+    this.lstDataRows=newList;
+    this.moveToPage(this.currentPage,true);
   }
 }

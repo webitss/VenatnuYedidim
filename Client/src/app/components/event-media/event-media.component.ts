@@ -3,6 +3,7 @@ import { Document } from "../../classes/document";
 import { AppProxy } from "../../services/app.proxy";
 import { ActivatedRoute, Router } from "@angular/router";
 import { GlobalService } from "../../services/global.service";
+import { SysTableService } from "../../services/sys-table.service";
 
 @Component({
   selector: "app-event-media",
@@ -10,6 +11,7 @@ import { GlobalService } from "../../services/global.service";
   styleUrls: ["./event-media.component.css"]
 })
 export class EventMediaComponent implements OnInit {
+  belongSheetType: number;
   id: number;
   document: Document;
   documents: any[] = new Array();
@@ -18,7 +20,8 @@ export class EventMediaComponent implements OnInit {
     private appProxy: AppProxy,
     private globalService: GlobalService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private sysTableService: SysTableService    
   ) {}
 
   ngOnInit() {
@@ -26,6 +29,9 @@ export class EventMediaComponent implements OnInit {
       this.id = params["iEventId"];
     });
 
+    // this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => console.log( data.filter(x => x.nvValue == 'ארוע')[0].iSysTableRowId));    
+    
+    this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType= data.filter(x => x.nvValue == 'ארוע')[0].iSysTableRowId);    
     this.loadDocuments();
   }
 
@@ -43,7 +49,7 @@ export class EventMediaComponent implements OnInit {
     this.document = new Document();
     this.document.iItemId = this.id;
     this.document.bShowInTadmit = false;
-    this.document.iBelongingType = 3;
+    this.document.iBelongingType = this.belongSheetType;
     this.document.iCategoryType = 0;
   }
 
@@ -51,7 +57,7 @@ export class EventMediaComponent implements OnInit {
     this.documents.forEach(element => {
       if (element.iDocumentId === id) {
         this.document = new Document();
-        this.document.iBelongingType = 3;
+        this.document.iBelongingType = this.belongSheetType;
         this.document.iCategoryType = 0;
         this.document.iDocumentId = element.iDocumentId;
         this.document.iItemId = element.iItemId;

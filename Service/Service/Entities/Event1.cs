@@ -126,5 +126,23 @@ namespace Service.Entities
         }
 
 
+        public static bool DeleteEvent(int? iEventId, int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> sqlParameters = new List<SqlParameter>();
+                sqlParameters.Add(new SqlParameter("iEventId", iEventId));
+                sqlParameters.Add(new SqlParameter("iUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TEvent_DEL",sqlParameters );
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetEvent / TEvent_GetEvent_SLCT", "ex" + ex);
+                return false;
+            }
+        }
+
+
     }
 }

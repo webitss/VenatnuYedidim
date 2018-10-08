@@ -5,3 +5,11 @@ th,td{
     border:1px black solid;
 }
 
+.tr{
+    display: flex;
+    flex-wrap: wrap;
+}
+.task{
+    border:1px solid black;
+}
+
