@@ -60,13 +60,14 @@ export class VyTableComponent implements OnInit {
   }
   sortTable(sight,colName)
   {
+    let dir=sight>0?'':'-';
     this.lstSortColumns[colName]=sight;
     
     if(sight!=0)
     {
-      let lst =Object.assign( this.lstDataRows);
-      this.lstCurrentDataRows = new VyTableOrderByPipe().transform(lst,[colName]);
-      this.moveToPage(this.currentPage,true);
+      let lst =Object.assign(this.lstDataRows);
+      this.lstCurrentDataRows = new VyTableOrderByPipe().transform(lst,[dir+colName]);
+     // this.moveToPage(this.currentPage,true);
     }
     else
       this.moveToPage(this.currentPage,true);
