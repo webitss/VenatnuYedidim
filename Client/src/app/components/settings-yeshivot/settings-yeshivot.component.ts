@@ -61,9 +61,6 @@ export class SettingsYeshivotComponent implements OnInit {
     });
   }
 
-  // public changeTable(y:Yeshiva){
-  
-  // }
 
   public setYeshiva(yeshiva){
    if(yeshiva.columnClickName=='edit')
