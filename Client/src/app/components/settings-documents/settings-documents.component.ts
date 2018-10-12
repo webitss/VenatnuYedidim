@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 
@@ -11,11 +11,7 @@ export class SettingsDocumentsComponent implements OnInit {
   public lstDataRows = new Array();
   documents: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
-
-
-
-
-
+  @ViewChild('AppVyTable') AppVyTable:any;
 
   constructor(private appProxy: AppProxy) { }
 
@@ -41,7 +37,12 @@ export class SettingsDocumentsComponent implements OnInit {
       , err => alert(err));
 
   }
-
+  downloadExcel(){
+    this.AppVyTable.downloadExcel();
+  }
+  tableToPdf(name:string){
+    this.AppVyTable.downloadPdf(name,'pdf');
+  }
   // get staticBaseUrl() {
   //   return AppProxy.getBaseUrl() ;
   // }

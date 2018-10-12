@@ -29,7 +29,7 @@ export class EventMediaComponent implements OnInit {
       this.id = params["iEventId"];
     });
 
-    // this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => console.log( data.filter(x => x.nvValue == 'ארוע')[0].iSysTableRowId));    
+    //this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => console.log(data.filter(x => x.nvValue == 'ארוע')[0].iSysTableRowId));    
     
     this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType= data.filter(x => x.nvValue == 'ארוע')[0].iSysTableRowId);    
     this.loadDocuments();

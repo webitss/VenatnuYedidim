@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="col-sm-4">
-            <button class="btn-circle btn-save" (click)="saveFile()">שמור v </button>
+            <button class="btn-circle btn-save" (click)="saveFile()" [disabled]="save.name==undefined">שמור v </button>
             <button class="btn-circle btn-close" (click)="closeAndNoSave()">סגור x </button>
         </div>
     </div>
@@ -20,6 +20,7 @@
             <div class="form-group" *ngIf="component=='student-documents'">
                 <label for="category">קטגורית מסמך</label>
                 <select [(ngModel)]="document.iCategoryType" id="category" class="form-control">
+                    <!-- <option value="0">בחר</option> -->
                     <option *ngFor="let s of sheetTypes" value={{s.iSysTableRowId}}>{{s.nvValue}}</option>
                 </select>
             </div>

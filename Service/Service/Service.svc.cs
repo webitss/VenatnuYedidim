@@ -86,10 +86,10 @@ namespace Service
         {
             return Task.GetTasksByPersonId(iPersonId);
         }
-        //public bool DeleteTask(int iTaskId, int iPersonId)
-        //{
-        //    return Task.DeleteTask(iTaskId,iPersonId);
-        //}
+        public bool DeleteTask(int iTaskId, int iPersonId)
+        {
+            return Task.DeleteTask(iTaskId, iPersonId);
+        }
 
         #endregion
 
@@ -141,6 +141,13 @@ namespace Service
             return Student.DeleteStudent(iPersonId, iUserId);
         }
         
+
+
+        public bool DeleteStudent(int istudent, int iUserId)
+        {
+            return Student.DeleteStudent( istudent,iUserId);
+
+        }
 
         #endregion
 
