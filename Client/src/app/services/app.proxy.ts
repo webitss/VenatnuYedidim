@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { debug } from "util";
 
 @Injectable()
 export class AppProxy {
@@ -16,7 +17,7 @@ export class AppProxy {
   constructor(private http: HttpClient) { }
 
   public post(url: string, data: any = {}): Promise<any> {
-
+  
     return this.http
       .post(`${AppProxy.getBaseUrl() + 'Service.svc/'}${url.trim()}`, this.convertData(data, true))
       .toPromise()
