@@ -26,12 +26,13 @@ export class StudentDocumentsComponent implements OnInit {
     this.activatedRoute.parent.params.subscribe(params => {
       this.id = params['iPersonId'];
     });
-
     this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true));
+    this.lstColumns.push(new VyTableColumn('מסמך', 'open', 'html'));
+    this.lstColumns.push(new VyTableColumn('תיאור', 'nvComment'));
     this.lstColumns.push(new VyTableColumn('קטגוריה למסמך', 'nvCategory'));
     this.lstColumns.push(new VyTableColumn('תאריך העלאה', 'dtCreatedate'));
-    this.lstColumns.push(new VyTableColumn('שם מסמך', 'nvDocumentName'));
-    this.lstColumns.push(new VyTableColumn('פתיחה', 'open', 'html'));
+    
+   
 
     this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType= data.filter(x => x.nvValue == 'תלמיד')[0].iSysTableRowId);
     
@@ -46,10 +47,11 @@ export class StudentDocumentsComponent implements OnInit {
         this.lstDataRows.push({
           nvCategory: element.lstObject['nvCategory'],
           dtCreatedate: element.dtCreatedate.toLocaleDateString(),
-          nvDocumentName: element.nvDocumentName,
+          nvComment: element.nvComment,
           edit: '<div class="edit"></div>',
-          open: '<a href=' + AppProxy.getBaseUrl() + 'Files/' + element.nvDocumentName + ' target="_blank"> פתח מסמך</a>',
+          open: '<a href=' + AppProxy.getBaseUrl() + 'Files/' + element.nvDocumentName + ' target="_blank">'+element.nvDocumentName+'</a>',
           iDocumentId: element.iDocumentId
+          
         });
       });
     }

@@ -12,49 +12,59 @@ import { PresenceAvrech } from '../../classes/presenceAvrech';
 })
 export class AvrechPresenceComponent implements OnInit {
 
-  private sub:any;
-  private iPersonId:number;
-  protected PA:PresenceAvrech;
+  private sub: any;
+  private iPersonId: number;
+  protected PA: PresenceAvrech;
+  presences: any;
+  presence:PresenceAvrech;
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
 
   public lstColumns = [
-    new VyTableColumn('עריכה', 'edit', 'html', true,false),
-    new VyTableColumn('תאריך','nvDate'),
-    new VyTableColumn('סך שעות','iHoursSum')
+    new VyTableColumn('עריכה', 'edit', 'html', true, false),
+    new VyTableColumn('תאריך', 'nvDate'),
+    new VyTableColumn('סך שעות', 'iHoursSum')
   ];
-      public lstDataRows = [];
+  public lstDataRows = [];
   ngOnInit() {
     this.sub = this.router.parent.params.subscribe(params => {
       this.iPersonId = +params["iPersonId"];
       debugger;
       this.appProxy.post('GetPresenceAvrechById', { iPersonId: this.iPersonId }).then(res => {
-        res.forEach(p=>{
-this.lstDataRows.push({
-  iPersonId:p.iPersonId,
-  iPresenceAvrech:p.iPresenceAvrech,
-  ['nvDate']: p.dtDatePresence.toLocaleDateString(),
-  // dtDatePresence:p.dtDatePresence,
-  iHoursSum:p.iHoursSum,
-  edit: '<div class="edit"></div>',
-})
+        this.presences=res;
+        this.presences.forEach(p => {
+          this.lstDataRows.push({
+            iPersonId: p.iPersonId,
+            iPresenceAvrech: p.iPresenceAvrech,
+            ['nvDate']: p.dtDatePresence.toLocaleDateString(),
+            // dtDatePresence:p.dtDatePresence,
+            iHoursSum: p.iHoursSum,
+            edit: '<div class="edit"></div>',
+          })
         })
         // this.PA = data;
         // alert(data.length);
       })
-  });
+    });
+  }
+  click(e) {
+    // debugger;
+    // this.iPersonId = e.iPersonId;
+    // if (e.columnClickName == "edit")
+    //   this.editPresence();
+
+  }
+  editPresence(e) {
+    debugger;
+    this.presences.forEach(element => {
+      if (element.iPresenceAvrech == e.presenceAvrech) {
+        alert(this.presence.iHoursSum);
+        this.presence = new PresenceAvrech();
+        this.presence.dtDatePresence = element.dtDatePresence;
+        this.presence.iHoursSum = element.iHoursSum;
+      }
+    });
+    
 }
 
+
 }
-// iPresenceAvrech:number;
-//     dtDateP:Date;
-//     iHoursSum:number;
-//     iPersonId:number;
-// res.forEach(e => {
-//   this.lstDataRows.push({
-//     iEventId: e.iEventId,
-//     nvName: e.nvName,
-//     dtEventDate: e.dtEventDate.toLocaleDateString(),
-//     nvPlace: e.nvPlace,
-//     edit: '<div class="edit"></div>',
-//     delete: '<div class="delete"></div>'
-//   });

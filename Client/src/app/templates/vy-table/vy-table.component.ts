@@ -18,6 +18,7 @@ export class VyTableComponent implements OnInit {
   protected iEndNumRow = 0;
   protected countPagesDisplayed = 5;
   protected lstPagesNum: Array<number> = new Array<number>();
+  protected lstSortColumns:any={};
 
   @Input()
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
@@ -53,7 +54,26 @@ export class VyTableComponent implements OnInit {
     }
   }
 
-  public moveToPage(pageNum: number,move=false) {
+  filterChange(col) {
+    this.lstCurrentDataRows = this.lstDataRows.filter(row => row[col.name].indexOf(col.filter) > -1);
+    this.moveToPage(0);
+  }
+  sortTable(sight,colName)
+  {
+    let dir=sight>0?'':'-';
+    this.lstSortColumns[colName]=sight;
+    
+    if(sight!=0)
+    {
+      let lst =Object.assign(this.lstDataRows);
+      this.lstCurrentDataRows = new VyTableOrderByPipe().transform(lst,[dir+colName]);
+     // this.moveToPage(this.currentPage,true);
+    }
+    else
+      this.moveToPage(this.currentPage,true);
+  }
+
+  public moveToPage(pageNum: number, move = false) {
     if (move || !(pageNum == this.currentPage || pageNum < 0 || (this.iEndNumRow == this.lstDataRows.length && pageNum > this.currentPage))) {
       this.lstCurrentDataRows = this.lstDataRows.slice((pageNum) * this.iCountRows, (pageNum * this.iCountRows) + this.iCountRows);
       this.iStartNumRow = pageNum * this.iCountRows;
@@ -113,23 +133,23 @@ export class VyTableComponent implements OnInit {
     debugger;
     window.location.href = uri + base64(format(template, ctx))
   }
-  public current_date=new Date();
-  downloadPdf(componentName:string,type: string) {
+  public current_date = new Date();
+  downloadPdf(componentName: string, type: string) {
     debugger;
     // let date:Date;
     // let d=new Date().getUTCFullYear()+"/"+new Date().getMonth();
-    
-    
+
+
     var dt = new Date();
     var mm = dt.getMonth() + 1;
     var dd = dt.getDate();
     var yyyy = dt.getFullYear();
     var format = dd + '/' + mm + '/' + yyyy
- 
-      //  var d = new Date().toLocaleDateString('dd/mm/yy');
+
+    //  var d = new Date().toLocaleDateString('dd/mm/yy');
     debugger;
-    let header="<div  style='direction: rtl;'><h1>ונתנו ידידים</h1><p style='direction: ltr;'>"+format+"</p><br/><br/><h2 style='text-align:center;'>טבלת "+componentName+"</h2></div>";
-    let footer= "<div style='font-weight: bold;  '>סה\"\כ שורות: "+this.lstDataRows.length;
+    let header = "<div  style='direction: rtl;'><h1>ונתנו ידידים</h1><p style='direction: ltr;'>" + format + "</p><br/><br/><h2 style='text-align:center;'>טבלת " + componentName + "</h2></div>";
+    let footer = "<div style='font-weight: bold;  '>סה\"\כ שורות: " + this.lstDataRows.length;
     this.appProxy.post('GeneratPdf', { headerHtml: header, bodyHtml: this.createTable(), footerHtml: footer })
       .then(res => {
         let binaryString = window.atob(res);
@@ -156,9 +176,8 @@ export class VyTableComponent implements OnInit {
   // removeFromList(item){
   //   this.lstDataRows.splice(this.lstDataRows.indexOf(item),1);
   // }
-  public refreshTable(newList)
-  {
-    this.lstDataRows=newList;
-    this.moveToPage(this.currentPage,true);
+  public refreshTable(newList) {
+    this.lstDataRows = newList;
+    this.moveToPage(this.currentPage, true);
   }
 }

@@ -1,3 +1,6 @@
 <div class="main-table">
-  <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table>
+  <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editPresence($event)"></app-vy-table>
 </div>
+<div class="openPresence" *ngIf="presence!=null">
+  <app-open-presence [presence]="presence"></app-open-presence>
+</div> 
