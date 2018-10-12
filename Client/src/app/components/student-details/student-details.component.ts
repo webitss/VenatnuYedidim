@@ -147,7 +147,7 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   addSelectYeshivaToStudent() {
-
+    debugger;
     this.appProxy.post("AddYeshivaToStudent", {
       iPersonId: this.paramRout, iYeshivaId:
         this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser}).then(data =>{
@@ -158,12 +158,12 @@ export class StudentDetailsComponent implements OnInit {
            , err => alert("שגיאה"))
     
     var newYeshiva: Yeshiva=new Yeshiva();
-    debugger;
     newYeshiva.nvYeshivaName = this.yeshivaSelected.nvYeshivaName;
     newYeshiva.nvCity = this.yeshivaSelected.nvCity;
     newYeshiva.nvAddress = this.yeshivaSelected.nvAddress;
     this.yeshivaListOfStudent.push(newYeshiva);
 
+    
   }
 
 
