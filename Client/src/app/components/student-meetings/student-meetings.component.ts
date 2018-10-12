@@ -7,6 +7,7 @@ import { SysTableRow } from '../../classes/SysTableRow';
 import { ActivatedRoute } from '@angular/router';
 import { element } from 'protractor';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { GlobalService } from '../../services/global.service';
 
 
 
@@ -26,7 +27,7 @@ export class StudentMeetingsComponent implements OnInit {
   flag: number;
   sysTableRowList: SysTableRow[];
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private globalService: GlobalService) { }
 
 
   public lstColumns = [{
@@ -39,6 +40,7 @@ export class StudentMeetingsComponent implements OnInit {
   {
     title: 'מחיקה',
     name: 'delete',
+    bClickCell: true,
     type:'html'
   },
   {
@@ -67,12 +69,12 @@ export class StudentMeetingsComponent implements OnInit {
   }
 
   deleteMeeting(meeting: Meeting){
-    //לסיים את הפונקציה
       this.alert = confirm("האם אתה בטוח שברצונך למחוק פגישה זו?");
       if (this.alert == true){
-        this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId ,iUserId:meeting}).then(data => {
+        this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId ,iUserId: this.globalService.getUser()['iUserId']}).then(data => {
+          this.meetingList.splice(this.meetingList.indexOf(meeting), 1);
+          this.cc.refreshTable(this.meetingList);
         });
-        // this.vyTableComponent.lstDataRows.splice(this.vyTableComponent.lstDataRows.indexOf(u),1);        
       }
    
   }
@@ -80,6 +82,15 @@ export class StudentMeetingsComponent implements OnInit {
   m:Meeting;
 
   @ViewChild(VyTableComponent) cc:VyTableComponent;
+
+  click(e) {
+    if (e.columnClickName == 'edit')
+      this.editMeeting(e);
+    else
+      this.deleteMeeting(e);
+
+  }
+
 updateMeeting(meeting:Meeting){
   let l= this.meetingList.indexOf(this.meetingList.find(m1 => m1.iMeetingId == meeting.iMeetingId))
   this.meetingList[l]=meeting;
