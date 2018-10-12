@@ -68,7 +68,7 @@ export class EventParticipantsComponent implements OnInit {
         });
         // alert("x");
       })
-    });
+    };
   }
   // public deleteYeshiva(yeshiva) {
   //   this.iPerson=yeshiva.iYeshivaId;
@@ -94,4 +94,4 @@ export class EventParticipantsComponent implements OnInit {
 
 
 
-}
+

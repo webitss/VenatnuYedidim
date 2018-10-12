@@ -65,7 +65,6 @@ export class StudentConversationDetailsComponent implements OnInit {
           this.UpdateConver.emit(this.currentConver);
 
 
-<<<<<<< HEAD
 
         this.newConver.emit(this.conversation);
         if (data) {
@@ -76,9 +75,8 @@ export class StudentConversationDetailsComponent implements OnInit {
           alert("no good");
       });
 
-=======
-          alert(data);
-          this.Conversation.emit(null);
+          // alert(data);
+          // this.Conversation.emit(null);
           // this.newConver.push({
           //   iConversationId: this.conversation.iConversationId,
           //   iPersonId: this.conversation.iPersonId,
@@ -102,8 +100,7 @@ export class StudentConversationDetailsComponent implements OnInit {
           // }
           // else
           //   alert("no good");
-        });
->>>>>>> b163900339470da8fc073965fe2b2439e453b85f
+        // });
   }
 
   //איפה למקם?
