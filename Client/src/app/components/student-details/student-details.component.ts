@@ -40,8 +40,11 @@ export class StudentDetailsComponent implements OnInit {
   // addYeshivaToStudent = { iPersonId: 0, iYeshivaId: 0 };
   yeshivaSelected: Yeshiva;
   currentUser: number;
+  days:string[]=["א","ב","ג","ד","ה","ו","ז","ח","ט","י","יא","יב","יג","יד","טו","טז","יז","יח","יט","כ","כא","כב","כג","כד","כה","כו","כז","כח","כט","ל"];
+  monthes:string[]=["תשרי","חשוון","כסלו","טבת","שבט","אדר","ניסן","אייר","סיוון","תמוז","אב","אלול"];
 
   ngOnInit() {
+
     this.bornDateHebrewStudent = new HebrewDate();
     this.diedDateHebrewFather = new HebrewDate();
     this.diedDateHebrewMother = new HebrewDate();
@@ -156,7 +159,7 @@ export class StudentDetailsComponent implements OnInit {
            else("שגיאה בהוספת ישיבה")
           }
            , err => alert("שגיאה"))
-    
+
     var newYeshiva: Yeshiva=new Yeshiva();
     debugger;
     newYeshiva.nvYeshivaName = this.yeshivaSelected.nvYeshivaName;

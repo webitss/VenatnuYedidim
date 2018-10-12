@@ -18,6 +18,8 @@ export class AvrechimComponent implements OnInit {
 
   avrech: Avrech
   avrechimList: Avrech[];
+ mailList:string[]=[];
+
   @ViewChild('avrechim') avrechim: any;
   protected currentComponent: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
@@ -94,5 +96,18 @@ export class AvrechimComponent implements OnInit {
   }
   tableToPdf(name: string) {
     this.avrechim.downloadPdf(name, 'pdf');
+  }
+  mailToAvrechim()
+  {
+this.avrechimList.forEach(avrech => {
+  this.mailList[length]=avrech.nvEmail;
+});
+
+this.appProxy.post('MailToAvrechim', { mailList: this.mailList })
+      .then(result => {
+
+      }
+    ,err=>{}
+  );
   }
 }

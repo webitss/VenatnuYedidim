@@ -48,7 +48,7 @@
             <div  *ngIf="email.errors && email.errors.pattern">
                 מייל לא תקין
             </div>
-            
+
         </div>
         <div class="form-group ">
             <label for="dateAdd"> תאריך הצטרפות :</label>
@@ -59,10 +59,25 @@
     <div class="row">
         <div class="form-group ">
             <label for="nvBornDateDay"> תאריך לידה עברי:</label>
-            <input type="text" class="form-control" id="nvBornDateDay" name="nvBornDateDay" [(ngModel)]="bornDateHebrewStudent.Day" [ngModelOptions]="{standalone: true}"
+            <!-- <input type="text" class="form-control" id="nvBornDateDay" name="nvBornDateDay" [(ngModel)]="bornDateHebrewStudent.Day" [ngModelOptions]="{standalone: true}"
                 placeholder="יום">
             <input type="text" class="form-control" id="nvBornDateMonth" name="nvBornDateMonth" [(ngModel)]="bornDateHebrewStudent.Month"
                 [ngModelOptions]="{standalone: true}" placeholder="חודש">
+            <input type="text" class="form-control" id="nvBornDateYear" name="nvBornDateYear" [(ngModel)]="bornDateHebrewStudent.Year"
+                [ngModelOptions]="{standalone: true}" placeholder="שנה"> -->
+                <select class="form-control" id="nvBornDateDay" name="nvBornDateDay" [(ngModel)]="bornDateHebrewStudent.Day" [ngModelOptions]="{standalone: true}"
+                >
+
+              <option *ngFor="let day of days">
+{{day}}
+              </option>
+            </select>
+            <select class="form-control" id="nvBornDateMonth" name="nvBornDateMonth" [(ngModel)]="bornDateHebrewStudent.Month"
+                [ngModelOptions]="{standalone: true}" >
+                <option *ngFor="let month of monthes">
+                    {{month}}
+                                  </option>
+              </select>
             <input type="text" class="form-control" id="nvBornDateYear" name="nvBornDateYear" [(ngModel)]="bornDateHebrewStudent.Year"
                 [ngModelOptions]="{standalone: true}" placeholder="שנה">
         </div>
@@ -79,7 +94,7 @@
             <label for="street"> כתובת :</label>
             <input type="text" class="form-control" id="street" name="street" [(ngModel)]="student.nvAddress" [ngModelOptions]="{standalone: true}" >
         </div>
-        
+
 
         <div class="form-group ">
             <label for="city"> עיר :</label>

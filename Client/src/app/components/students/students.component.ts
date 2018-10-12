@@ -38,6 +38,7 @@ export class StudentsComponent implements OnInit {
       // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
       this.studentList.forEach(student => {
         student['edit'] = '<div class="edit"></div>';
+        student['delete'] = '<div class="delete"></div>';
 
         this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
         this.yeshivaListOfStudent = data;
@@ -58,6 +59,7 @@ export class StudentsComponent implements OnInit {
 
 
 this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true, false));
+this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true, false));
 this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
 this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
 this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
@@ -71,6 +73,28 @@ this.lstColumns.push(new VyTableColumn(' משויך לאברך','nvAvrechName','
 
 editStudent(e) {
   this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);
+}
+
+deleteEvent(e) {
+  this.appProxy.post('DeleteStudent', { iPersonId: e.iPersonId, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
+    if (res == true) {
+      alert('נמחק בהצלחה!');
+       this.lstDataRows.splice(this.lstDataRows.indexOf(e),1);
+      this.vyTableComponent.refreshTable(this.lstDataRows);
+    }
+    else {
+      alert('לא נמחק!');
+    }
+  });
+}
+
+click(e) {
+  // this.avrechId = e.iPersonId;
+  if (e.columnClickName == "edit")
+    this.editStudent(e);
+  else
+    this.deleteEvent(e);
+
 }
 cardsUnion() {
   this.flag == true

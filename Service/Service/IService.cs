@@ -144,6 +144,15 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Yeshivot> GetYeshivotOfStudent(int iPersonId);
 
+        [OperationContract]
+        [WebInvoke(
+      Method = "POST",
+      UriTemplate = "DeleteStudent",
+      BodyStyle = WebMessageBodyStyle.WrappedRequest,
+      ResponseFormat = WebMessageFormat.Json,
+      RequestFormat = WebMessageFormat.Json)]
+       bool DeleteStudent(int iPersonId,int iUserId);
+
         #endregion Student
 
 
@@ -229,6 +238,16 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Avrech> GetAvrechimByStudentId(int iPersonId);
 
+        [OperationContract]
+        [WebInvoke(
+       Method = "POST",
+       UriTemplate = "MailToAvrechim",
+       BodyStyle = WebMessageBodyStyle.WrappedRequest,
+       ResponseFormat = WebMessageFormat.Json,
+       RequestFormat = WebMessageFormat.Json)]
+       bool MailToAvrechim(string[] mailList);
+
+        
         #endregion
 
 
