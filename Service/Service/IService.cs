@@ -285,17 +285,6 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Meeting> GetMeetingsByStudentId(int iPersonId);
 
-
-        //[WebInvoke(	
-        //  Method = "POST",	
-        //  UriTemplate = "AddMeeting",	
-        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,	
-        //  ResponseFormat = WebMessageFormat.Json,	
-        //  RequestFormat = WebMessageFormat.Json)]	
-        //bool AddMeeting(Meeting meeting, int iUserId);	
-
-
-
         [WebInvoke(
         Method = "POST",
         UriTemplate = "SetMeeting",
@@ -304,16 +293,6 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         int SetMeeting(Meeting meeting, int iUserId);
 
-
-        //[WebInvoke(	
-        //  Method = "POST",	
-        //  UriTemplate = "UpdateMeeting",	
-        //  BodyStyle = WebMessageBodyStyle.WrappedRequest,	
-        //  ResponseFormat = WebMessageFormat.Json,	
-        //  RequestFormat = WebMessageFormat.Json)]	
-        //bool UpdateMeeting(Meeting meeting, int iUserId);	
-
-
         [WebInvoke(
         Method = "POST",
         UriTemplate = "DeleteMeeting",
@@ -321,7 +300,6 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         bool DeleteMeeting(int iMeetingId, int iUserId);
-
 
         #endregion Meeting
 
