@@ -8,8 +8,8 @@
           {{col.title}}
         <!-- </div> -->
         <!-- <span class="glyphicon">&#xe140;</span> -->
-        <button  [ngStyle]="{'background-color':(lstSortColumns[col.name] && lstSortColumns[col.name]>0) ? 'yellow' : '' }" (click)='sortTable(1,col.name)'>^</button>
-        <button [ngStyle]="{'background-color':(lstSortColumns[col.name] && lstSortColumns[col.name]<0) ? 'yellow' : '' }" (click)='sortTable(-1,col.name)'>V</button>
+        <button  [ngStyle]="{'background-color':(lstSortColumns[col.name] && lstSortColumns[col.name]>0) ? 'yellow' : '' }" (click)='sortTable(1,col.name)'>V</button>
+        <button [ngStyle]="{'background-color':(lstSortColumns[col.name] && lstSortColumns[col.name]<0) ? 'yellow' : '' }" (click)='sortTable(-1,col.name)'>^</button>
         <button  (click)='sortTable(0,col.name)'>X</button>
       </div>
 
