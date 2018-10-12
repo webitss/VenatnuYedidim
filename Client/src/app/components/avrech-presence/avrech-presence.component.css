@@ -1,0 +1,20 @@
+.openPresence{
+    position: fixed;
+    z-index: 100;
+    top: 40%;
+    right: 30%;
+    background: white;
+    border: 2px;
+    width: 40%;
+    border: solid rgb(207, 37, 94);
+}
+/* button{
+    height: 100%;
+    margin-left: 16%;
+}
+.row{
+    margin-bottom: 1%;
+} */
+.cell{
+    overflow-y: hidden;
+}

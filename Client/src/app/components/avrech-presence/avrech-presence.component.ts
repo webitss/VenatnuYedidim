@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute } from '@angular/router';
 import { SysTableService } from '../../services/sys-table.service';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { PresenceAvrech } from '../../classes/presenceAvrech';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 @Component({
   selector: 'app-avrech-presence',
@@ -11,6 +12,7 @@ import { PresenceAvrech } from '../../classes/presenceAvrech';
   styleUrls: ['./avrech-presence.component.css']
 })
 export class AvrechPresenceComponent implements OnInit {
+
 
   private sub: any;
   private iPersonId: number;
@@ -53,18 +55,21 @@ export class AvrechPresenceComponent implements OnInit {
     //   this.editPresence();
 
   }
+  @ViewChild(VyTableComponent) cc:VyTableComponent;
+
   editPresence(e) {
     debugger;
-    this.presences.forEach(element => {
-      if (element.iPresenceAvrech == e.presenceAvrech) {
-        alert(this.presence.iHoursSum);
-        this.presence = new PresenceAvrech();
-        this.presence.dtDatePresence = element.dtDatePresence;
-        this.presence.iHoursSum = element.iHoursSum;
-      }
-    });
-    
+    this.presence=e;
+    // this.cc.refreshTable(this.presences)
+
 }
 
-
+closeDocumentDialog() {
+  this.presence = null;
+  this.lstDataRows=new Array();
+  this.openPresence();
+}
+openPresence(){
+  throw new Error("Method not implemented.");
+}
 }
