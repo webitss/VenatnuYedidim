@@ -37,7 +37,8 @@ export class StudentsComponent implements OnInit {
       this.studentList = data;
       // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
       this.studentList.forEach(student => {
-        student['edit'] = '<div class="edit"></div>';
+        student['edit'] = '<div class="edit"></div>'
+        student['delete']='<div class = "delete"></>';
 
         this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
         this.yeshivaListOfStudent = data;
@@ -58,6 +59,7 @@ export class StudentsComponent implements OnInit {
 
 
 this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true, false));
+this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true, false));
 this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
 this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
 this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
@@ -69,8 +71,10 @@ this.lstColumns.push(new VyTableColumn(' משויך לאברך','nvAvrechName','
   }
 
 
-editStudent(e) {
+  editAndDeleteStudent(e) {
+
   this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);
+  
 }
 cardsUnion() {
   this.flag == true

@@ -9,7 +9,7 @@
 
   <div name="filters" class="row vy-filter-row">
     <div *ngFor="let col of lstColumns" class="col cell cell-filter" [ngStyle]="col.filterStyle">
-      <input type="text" [(ngModel)]="col.filter" class="form-control vy-filter-search">
+      <input type="text" [(ngModel)]="col.filter" (keyup)="filterChange(col)" class="form-control vy-filter-search">
     </div>
   </div>
 

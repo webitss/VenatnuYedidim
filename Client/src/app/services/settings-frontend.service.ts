@@ -26,6 +26,7 @@ export class settingsFrontend {
         });
 }
 updateGlobalParameters(GlobalParameters:Array<TGlobalParameters> ) : Promise<boolean>{
+  alert(GlobalParameters.length);
   debugger;
   return  this.appProxy.post("UpdGlobalParameters", { GlobalParameters: GlobalParameters }).
       then(l => {
