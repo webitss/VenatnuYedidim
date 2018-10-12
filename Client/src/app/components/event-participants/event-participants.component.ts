@@ -21,7 +21,7 @@ export class EventParticipantsComponent implements OnInit {
   protected flag;
   protected iLastModifyUserId: number;
   protected s: any;
-  protected sysTableRowList1: string[];
+  protected personsList: string[];
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
 
   public lstColumns = [
@@ -35,6 +35,17 @@ export class EventParticipantsComponent implements OnInit {
     new VyTableColumn('סטטוס הגעה', 'iArriveStatusType', 'html', true, false)
   ];
       public lstDataRows = [];
+     
+      addParticipants(){
+        // this.appProxy.post( "GetPersonList").then(data => {
+        //   this.personsList = data;
+
+        // });
+        alert("func")
+      }
+      close() {
+      //  להוסיף את המשתתפים שנבחרו
+      }
   ngOnInit() {
 
     this.sub = this.router.parent.params.subscribe(params => {
