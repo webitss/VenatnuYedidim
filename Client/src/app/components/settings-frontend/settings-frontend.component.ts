@@ -104,21 +104,22 @@ export class SettingsFrontendComponent implements OnInit {
   }
 
 private saveGlobalParams(){
- 
+ alert("LLLLLLLLLLLL")
   this.settingsFrontend.GlobalHeader.nvTitle="כותרת";
   
-  this.settingsFrontend.GlobalHeader.iParameterId=1
+  this.settingsFrontend.GlobalHeader.iParameterId=167
   this.GlobalParameters.push(this.settingsFrontend.GlobalHeader);
   this.settingsFrontend.GlobalVerMarch.nvTitle="טקט ראשי ";
-  this.settingsFrontend.GlobalVerMarch.iParameterId=2
+  this.settingsFrontend.GlobalVerMarch.iParameterId=168
   this.GlobalParameters.push(this.settingsFrontend.GlobalVerMarch);
   this.settingsFrontend.GlobalMarchSF.nvTitle="טקסט משני";
-  this.settingsFrontend.GlobalVerMarch.iParameterId=3
+  this.settingsFrontend.GlobalVerMarch.iParameterId=169
   this.GlobalParameters.push(this.settingsFrontend.GlobalMarchSF);
  
   this.settingsFrontend.GetGlobalParameters().then(res=>{
-    
+    alert("JJJJJJJJJJJJJJJJJJJJJJ")
     if((<any>res).length>0){
+   
       this.settingsFrontend.updateGlobalParameters(this.GlobalParameters).then(
 
         l=>alert("udp"));
