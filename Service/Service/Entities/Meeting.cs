@@ -107,7 +107,7 @@ namespace Service.Entities
             {
                 List<SqlParameter> parameters=new List<SqlParameter>();
                 parameters.Add(new SqlParameter("iMeetingId", iMeetingId));
-                parameters.Add(new SqlParameter("iLastModifyUserId", iUserId));
+                parameters.Add(new SqlParameter("iUserId", iUserId));
                 SqlDataAccess.ExecuteDatasetSP("TMeeting_DEL", parameters);
 
                 return true;
