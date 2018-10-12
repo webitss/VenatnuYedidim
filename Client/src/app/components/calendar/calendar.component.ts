@@ -16,7 +16,7 @@ import { GlobalService } from '../../services/global.service';
 export class CalendarComponent implements OnInit {
   @Output()
   daysNameArr: Array<string> = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"];
-  daysMonthNameArr: any[][];// = new Array();
+  daysMonthNameArr: any[][]=[];// = new Array();
   i: number;
   oneOfMonth: any;
   lenOfMonth: any;
@@ -39,6 +39,7 @@ export class CalendarComponent implements OnInit {
   taskTypeList: Array<any>;
 
   ngOnInit() {
+// alert(this.daysMonthNameArr);
     this.month = new Date().getMonth() + 1;
     this.year = new Date().getFullYear();
 
@@ -47,9 +48,9 @@ export class CalendarComponent implements OnInit {
     })
 
     this.appProxy.post("GetTasksByPersonId", { iPersonId: this.id }).then(
-      data => {
+      data1 => {
         //if (data != null) {
-        this.taskList = data;
+        this.taskList = data1;
 
         this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
           this.taskTypeList = data;
@@ -92,7 +93,7 @@ export class CalendarComponent implements OnInit {
                 }
               });
               let t = this.typeText + " " + task.dtTaskdatetime.getHours() + ":" + task.dtTaskdatetime.getMinutes();
-              tasks.push({ string: t, id: task.iTaskId });
+              tasks.push({ string: t, id: task.iTaskId ,i:this.i,j:j});
               // tasks.push(task);
               //this.t = task;
             }
@@ -106,7 +107,7 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService:GlobalService) { }
+  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
 
   prevMonth() {
     if (this.month == 1) {
@@ -127,13 +128,22 @@ export class CalendarComponent implements OnInit {
       this.month += 1;
     this.createCalendar()
   }
-
-  deleteTask(taskId: number) {
-    debugger
-    this.appProxy.post("DeleteTask", { iTaskId: taskId,iPersonId:this.globalService.getUser().iPersonId}).then(
+  task:Task;
+  deleteTask(taskId: number,i:number,j:number) {
+    this.appProxy.post("DeleteTask", { iTaskId: taskId, iPersonId: this.globalService.getUser().iPersonId }).then(
       data => {
-        alert("task remove");
+        if (data == true) {
+          // alert("task remove");
+          // this.task=this.taskList.find(t => t.iTaskId == taskId);
+          alert(this.daysMonthNameArr[i][j]['tasks'].indexOf(this.daysMonthNameArr[i][j]['tasks'].find(t => t.id == taskId)));
+          this.daysMonthNameArr[i][j]['tasks'].splice(this.daysMonthNameArr[i][j]['tasks'].indexOf(this.daysMonthNameArr[i][j]['tasks'].find(t => t.id == taskId)), 1);
+          window.location.reload();
+
+        }
       });
   }
 
+  public trackItem (index: number, item: any) {
+    return item.trackId;
+  }
 }

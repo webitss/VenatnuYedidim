@@ -68,23 +68,23 @@ namespace Service.Entities
             }
         }
 
-        //public static bool DeleteTask(int iTaskId, int iPersonId)
-        //{
-        //    try
-        //    {
-        //        List<SqlParameter> parameters = new List<SqlParameter>();
-        //        parameters.Add(new SqlParameter("iTaskId", iTaskId));
-        //        parameters.Add(new SqlParameter("iPersonId", iPersonId));
-        //        SqlDataAccess.ExecuteDatasetSP("TTask_DEL", parameters);
+        public static bool DeleteTask(int iTaskId, int iPersonId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iTaskId", iTaskId));
+                parameters.Add(new SqlParameter("iPersonId", iPersonId));
+                SqlDataAccess.ExecuteDatasetSP("TTask_DEL", parameters);
 
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.LogError("DeleteTask / TTask_DEL", "ex" + ex);
-        //        return false;
-        //    }
-        //}
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("DeleteTask / TTask_DEL", "ex" + ex);
+                return false;
+            }
+        }
     
      
 
