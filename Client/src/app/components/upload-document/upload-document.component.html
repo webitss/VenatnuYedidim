@@ -37,11 +37,11 @@
             </div>
 
             <div class="form-group documentName">
-                <label for="documentName">שם הקובץ</label>
-                <div class="form-control" id="documentName">{{save.name}}</div>
+                <!-- <label for="documentName">שם הקובץ</label> -->
+                <div  id="documentName">{{save.name}}</div>
             </div>
         </div>
-        <div class="row" *ngIf="component!='student-documents'">
+        <div class="row" *ngIf="component=='event-media'">
           <input class="checkbox" type="checkbox" [(ngModel)]="document.bShowInTadmit">
           <div>הצג באתר תדמית</div>
         </div>

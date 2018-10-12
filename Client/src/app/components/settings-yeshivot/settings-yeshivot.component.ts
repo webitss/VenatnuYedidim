@@ -25,6 +25,7 @@ export class SettingsYeshivotComponent implements OnInit {
   protected iLastModifyUserId:number;
   protected flag;
   @ViewChild('yeshivot') yeshivot:any;
+  @ViewChild(VyTableComponent) vyTableComponent:VyTableComponent;
   @Output() 
   public closeYeshiva=new EventEmitter();
 
@@ -51,13 +52,15 @@ export class SettingsYeshivotComponent implements OnInit {
       this.sysTableService.getValues(SysTableService.dataTables.roleType.iSysTableId).then(val=> {
         this.sysTableList=val;
         this.yeshivaList.forEach(y=> {
-          y['edit'] = '<div class="edit"></div>';
-          y['delete'] = '<div class="delete"></div>';
-          y['nvRoleType']=this.sysTableList.filter(x=>x.iSysTableRowId==y.iRoleType)[0].nvValue;
+            y['edit'] = '<div class="edit"></div>';
+            y['delete'] = '<div class="delete"></div>';
+            y['nvRoleType']=this.sysTableList.filter(x=>x.iSysTableRowId==y.iRoleType)[0].nvValue;
+        //  this.changeTable(y);
         });
       });
     });
   }
+
 
   public setYeshiva(yeshiva){
    if(yeshiva.columnClickName=='edit')
@@ -84,7 +87,9 @@ export class SettingsYeshivotComponent implements OnInit {
         this.iYeshivaId=null;
         this.flag=null;
         alert("הישיבה נמחקה בהצלחה");
-    });    
+    });  
+    this.yeshivaList.splice(this.yeshivaList.indexOf(this.yeshiva),1);
+    this.vyTableComponent.refreshTable(this.yeshivaList);  
   }
 
   close() {

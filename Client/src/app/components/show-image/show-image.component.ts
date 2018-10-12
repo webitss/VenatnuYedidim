@@ -2,20 +2,22 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { NgxGalleryImage, NgxGalleryOptions, NgxGalleryAnimation } from 'ngx-gallery';
 import { settingsFrontend } from '../../services/settings-frontend.service';
+import { Alert } from 'selenium-webdriver';
 
 // import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
-
+const GLOBAL={title:"כותרת",GlobalVerMarch:"טקט ראשי ",GlobalMarchSF:"טקסט משני"}
 @Component({
   selector: 'app-show-image',
   templateUrl: './show-image.component.html',
   styleUrls: ['./show-image.component.css']
 })
 export class ShowImageComponent implements OnInit {
- 
+  
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[]=new Array<NgxGalleryImage>();
 
   constructor(private appProxy: AppProxy, private settingsFrontend:settingsFrontend) { }
+ 
 protected titaieName:string="ונתנו ידידים";
 
 protected divModal:boolean;
@@ -69,8 +71,16 @@ ngOnInit(): void {
           preview: false
       }
   ];
-
-
+  this.settingsFrontend.GetGlobalParameters().then(res=>{
+ 
+   this.settingsFrontend.GlobalHeader=(<any>res).find(r=>r.nvTitle==[GLOBAL.title]),
+   this.settingsFrontend.GlobalMarchSF=(<any>res).find(r=>r.nvTitle==[GLOBAL.GlobalVerMarch]),
+ this.settingsFrontend.GlobalVerMarch=(<any>res).find(r=>r.nvTitle==[GLOBAL.GlobalMarchSF])
+ 
+})
+    
+     
+ 
 // for(var i=0;i<this.listImage.length;i++)
 // {
 // this.galleryImages.push( {
@@ -81,11 +91,11 @@ ngOnInit(): void {
 // }
 
 //GetDocumentsOfTadmit צריך להיות GetDocuments הוספתי לך פונקציה אחרת ששולפת רק את המסמכים של התדמית. במקום   
-this.appProxy.get('GetDocuments').then(data => {
+this.appProxy.get('GetDocumentsOfTadmit').then(data => {
   debugger;
   this.documents = data;
     this.documents.forEach(element => {
-     
+     debugger;
      
       if(element.nvDocumentName=="Ayala.jpg" ||element.nvDocumentName=="ההבדל בין עבודה לנופש.jpg"){
        

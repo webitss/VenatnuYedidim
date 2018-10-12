@@ -15,6 +15,6 @@ export class Yeshiva{
   public iRoleType:number;
   
   constructor(){
-    this.iYeshivaId=0;
+   
   }
 }

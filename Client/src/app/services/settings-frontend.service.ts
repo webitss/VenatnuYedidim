@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { User } from '../classes/user';
 import { TGlobalParameters } from '../classes/TGlobalParameters';
 import { AppProxy } from './app.proxy';
-import { Alert } from 'selenium-webdriver';
+import { Alert, promise } from 'selenium-webdriver';
 
 @Injectable()
 export class settingsFrontend {
@@ -26,6 +26,7 @@ export class settingsFrontend {
         });
 }
 updateGlobalParameters(GlobalParameters:Array<TGlobalParameters> ) : Promise<boolean>{
+  debugger;
   return  this.appProxy.post("UpdGlobalParameters", { GlobalParameters: GlobalParameters }).
       then(l => {
         if (l) {
@@ -35,18 +36,10 @@ updateGlobalParameters(GlobalParameters:Array<TGlobalParameters> ) : Promise<boo
         return false;
       });
 }
-GetGlobalParameters(){
+GetGlobalParameters():Promise<TGlobalParameters>{
 
-alert("GetGlobalParameters")
-    this.appProxy.get('GetGlobalParameters').then(data => {
-      debugger;
-      this.Globals=data, 
-     
-        this.GlobalHeader=this.Globals[0];
-        this.GlobalMarchSF=this.Globals[1];
-        this.GlobalVerMarch=this.Globals[2];
-       return true; 
-    })
-    return false;
+  return this.appProxy.get("GetGlobalParameters");
+
 }
+
 }
