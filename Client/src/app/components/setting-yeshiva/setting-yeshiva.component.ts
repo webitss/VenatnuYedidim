@@ -9,6 +9,7 @@ import {FormArrayName, NgForm, Validator} from '@angular/forms'
 import { SettingsYeshivotComponent } from '../settings-yeshivot/settings-yeshivot.component';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import {} from '../../components/settings-yeshivot/settings-yeshivot.component';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class SettingYeshivaComponent implements OnInit {
   protected yeshiva:Yeshiva=new Yeshiva();
   @ViewChild(NgForm) form;
   @ViewChild(VyTableComponent) vyTableComponent:VyTableComponent;
+  public setting:SettingsYeshivotComponent;
 
 
   formValid=false;
@@ -52,13 +54,14 @@ export class SettingYeshivaComponent implements OnInit {
   }
 
   save() {
-    if(this.yeshiva.iYeshivaId==0) {
+    if(this.iYeshivaId ==0) {
        this.appProxy.post('AddYeshiva', { yeshiva: this.yeshiva })
       .then(
         data => {
             this.yeshiva = data;
                 this.closeYeshiva.emit(null);
                 alert("נשמר בהצלחה");
+                this.setting.changeTable(this.yeshiva);
               }
         )}
     else{
@@ -68,6 +71,7 @@ export class SettingYeshivaComponent implements OnInit {
           this.yeshiva=data;
           this.closeYeshiva.emit(null);
           alert("נשמר בהצלחה");
+          this.setting.changeTable(this.yeshiva);
         } 
       )
       this.vyTableComponent.refreshTable(this.yeshiva);  

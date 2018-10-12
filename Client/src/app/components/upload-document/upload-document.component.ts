@@ -40,7 +40,7 @@ export class UploadDocumentComponent implements OnInit {
           , err => alert('error'));
       }
       this.save.name = this.document.nvDocumentName; 
-      this.save.type=this.document.nvDocumentType;     
+      this.save.type=this.document.nvDocumentType;    
     });
 
   }
