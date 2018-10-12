@@ -204,7 +204,7 @@ namespace Service
         [OperationContract]
         [WebInvoke(
         Method = "POST",
-        UriTemplate = "GetAvrechStudents",
+        UriTemplate = "DeleteAvrechStudent",
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
@@ -599,13 +599,13 @@ namespace Service
         List<Task> GetTasksByPersonId(int iPersonId);
 
 
-        [WebInvoke(
-         Method = "POST",
-        UriTemplate = "DeleteTask",
-        BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        ResponseFormat = WebMessageFormat.Json,
-        RequestFormat = WebMessageFormat.Json)]
-        bool DeleteTask(int iTaskId,int iPersonId);
+        //[WebInvoke(
+        // Method = "POST",
+        //UriTemplate = "DeleteTask",
+        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //ResponseFormat = WebMessageFormat.Json,
+        //RequestFormat = WebMessageFormat.Json)]
+        //bool DeleteTask(int iTaskId,int iPersonId);
         #endregion
 
 
