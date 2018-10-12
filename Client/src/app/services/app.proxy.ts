@@ -17,7 +17,7 @@ export class AppProxy {
   constructor(private http: HttpClient) { }
 
   public post(url: string, data: any = {}): Promise<any> {
-   
+  
     return this.http
       .post(`${AppProxy.getBaseUrl() + 'Service.svc/'}${url.trim()}`, this.convertData(data, true))
       .toPromise()

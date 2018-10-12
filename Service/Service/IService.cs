@@ -635,7 +635,15 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         bool SaveGlobalParameters(List<TGlobalParameters> GlobalParameters);
-        [OperationContract]
+		[OperationContract]
+		[WebInvoke(
+	  Method = "POST",
+	  UriTemplate = "UpdGlobalParameters",
+	  BodyStyle = WebMessageBodyStyle.WrappedRequest,
+	  ResponseFormat = WebMessageFormat.Json,
+	  RequestFormat = WebMessageFormat.Json)]
+		bool UpdGlobalParameters(List<TGlobalParameters> GlobalParameters);
+		[OperationContract]
         [WebInvoke(
         Method = "GET",
         UriTemplate = "GetGlobalParameters",
