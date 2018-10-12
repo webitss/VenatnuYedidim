@@ -7,6 +7,7 @@ import { SysTableRow } from '../../classes/SysTableRow';
 import { ActivatedRoute } from '@angular/router';
 import { element } from 'protractor';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { GlobalService } from '../../services/global.service';
 
 
 
@@ -18,6 +19,7 @@ import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 export class StudentMeetingsComponent implements OnInit {
   iMeetingId: number;
   private sub: any;
+  private alert: any;
   iPersonId:number;
   protected meetingList: Array<Meeting>;
   id: number;
@@ -25,7 +27,7 @@ export class StudentMeetingsComponent implements OnInit {
   flag: number;
   sysTableRowList: SysTableRow[];
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private globalService: GlobalService) { }
 
 
   public lstColumns = [{
@@ -34,6 +36,12 @@ export class StudentMeetingsComponent implements OnInit {
     bClickCell: true,
     type: 'html'
 
+  },
+  {
+    title: 'מחיקה',
+    name: 'delete',
+    bClickCell: true,
+    type:'html'
   },
   {
     title: 'סוג פגישה',
@@ -52,27 +60,40 @@ export class StudentMeetingsComponent implements OnInit {
   {
     title: 'סיכום',
     name: 'nvSummary',
-  }]
+  }
+  ]
 
   editMeeting(meeting: Meeting) {
-
     this.meeting = meeting;
-
     this.flag = 1;
   }
+
+  deleteMeeting(meeting: Meeting){
+      this.alert = confirm("האם אתה בטוח שברצונך למחוק פגישה זו?");
+      if (this.alert == true){
+        this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId ,iUserId: this.globalService.getUser()['iUserId']}).then(data => {
+          this.meetingList.splice(this.meetingList.indexOf(meeting), 1);
+          this.cc.refreshTable(this.meetingList);
+        });
+      }
+   
+  }
+
   m:Meeting;
+
   @ViewChild(VyTableComponent) cc:VyTableComponent;
+
+  click(e) {
+    if (e.columnClickName == 'edit')
+      this.editMeeting(e);
+    else
+      this.deleteMeeting(e);
+
+  }
+
 updateMeeting(meeting:Meeting){
   let l= this.meetingList.indexOf(this.meetingList.find(m1 => m1.iMeetingId == meeting.iMeetingId))
   this.meetingList[l]=meeting;
-//  this.meetingList.splice( this.meetingList.indexOf(this.meetingList.find(m1 => m1.iMeetingId == meeting.iMeetingId)),1);
-//  this.meetingList.filter(m => m.iMeetingId == meeting.iMeetingId)[0]= meeting;
-// this.meetingList.forEach(element => {
-//   if(element.iMeetingId == meeting.iMeetingId)
-//   element = meeting;
-// })
-
- //this.meetingList.push(meeting);
  this.cc.refreshTable(this.meetingList)
 }
   addMeeting() {
@@ -88,8 +109,6 @@ updateMeeting(meeting:Meeting){
   newMeeting(newMeeting:Meeting){
     this.changeTable(newMeeting);
     this.meetingList.push(newMeeting);
-
-    //  this.GetMeetingsByStudentId(this.iPersonId);
   }
 
   changeTable(m:Meeting){
@@ -97,12 +116,12 @@ updateMeeting(meeting:Meeting){
     m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
     m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
     m['edit'] = '<div class="edit"></div>';
+    m['delete'] = '<div class="delete"></div>';
     m['nvMeetingType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0].nvValue;
   }
   GetMeetingsByStudentId(id: number) {
     this.appProxy.post("GetMeetingsByStudentId", { iPersonId: id }).then(
       data => {
-        //alert("good");
         this.meetingList = data;
         this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(data => {
           this.sysTableRowList = data;

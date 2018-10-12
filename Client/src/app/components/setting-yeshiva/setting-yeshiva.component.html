@@ -63,7 +63,7 @@
 
     <div class="form-control">
       <label for='roleType'>תפקיד:</label>
-        <select id="roleType" [(ngModel)]="yeshiva.roleType" required #roleType="ngModel">
+        <select id='roleType' [(ngModel)]="yeshiva.roleType" required #roleType="ngModel" [ngModelOptions]="{standalone: true}">
           <option *ngFor='let y of sysTableList' [value]="y.iSysTableRowId">{{y.nvValue}}</option>
         </select>
         <div *ngIf="roleType.invalid && (roleType.dirty || roleType.touched)">
@@ -72,3 +72,4 @@
       </div>
   </div>
 </form>
+
