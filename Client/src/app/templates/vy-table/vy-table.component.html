@@ -1,9 +1,18 @@
 <div name="table" class="vy-table">
   <div name="columns" class="row">
+
     <div *ngFor="let col of lstColumns" class="col cell cell-title" [ngStyle]="col.titleStyle">
       <div class="small-title">
-        {{col.title}}
+        <!-- <span class="glyphicon col-2">&#xe151;</span> -->
+        <!-- <div class=" col-10"> -->
+          {{col.title}}
+        <!-- </div> -->
+        <!-- <span class="glyphicon">&#xe140;</span> -->
+        <!-- <button  [ngStyle]="{'background-color':(lstSortColumns[col.name] && lstSortColumns[col.name]>1) ? 'yellow' : '' }" (click)='sortTable(1,col.name)'>^</button>
+        <button [ngStyle]="{'background-color':(lstSortColumns[col.name] && lstSortColumns[col.name]<1) ? 'yellow' : '' }" (click)='sortTable(-1,col.name)'>V</button>
+        <button  (click)='sortTable(0,col.name)'>X</button> -->
       </div>
+
     </div>
   </div>
 
@@ -14,7 +23,7 @@
   </div>
 
   <div class="vy-tbody" *ngIf="lstCurrentDataRows">
-    <div name="rows" *ngFor="let row of lstCurrentDataRows | vyTableFilter : lstColumns | vyTableOrderBy : lstOrderByFields; let i = index"
+    <div name="rows" *ngFor="let row of lstCurrentDataRows | vyTableOrderBy : lstOrderByFields; let i = index"
       [ngClass]="{'even': i%2 == 0}" class="row vy-row">
       <div *ngFor="let col of lstColumns" class="col cell" [ngStyle]="col.cellStyle" (click)="col.bClickCell ? clickCellFunc(row, col.name): ''">
         <div *ngIf="col.type == 'html'" [innerHtml]="row[col.name]"></div>
@@ -29,11 +38,17 @@
   <div class="sammary-rows">סה"כ {{lstDataRows.length}} רשומות</div>
 
   <div class="pagination" *ngIf="lstPagesNum.length > 1">
-    <span (click)="currentPage != 0 ? moveToPage(0) : ''" class="pagination-page"  [ngStyle]="{'color': (currentPage == 0 ? 'gray' : 'black')}" title="להתחלה"><<</span>
-    <span (click)="currentPage != 0 ? moveToPage(currentPage - 1) : ''" class="pagination-page" [ngStyle]="{'color': (currentPage == 0 ? 'gray' : 'black')}" title="הקודם"><</span>
-    <span *ngFor="let i of lstPagesNum" (click)="i != currentPage ? moveToPage(i) : ''" class="pagination-page" [ngClass]="{'pagination-current-page': i == currentPage}">{{i+1}}</span>
-    <span (click)="iEndNumRow != lstDataRows.length ? moveToPage(currentPage + 1) : ''" class="pagination-page" [ngStyle]="{'color': (iEndNumRow == lstDataRows.length ? 'gray' : 'black')}"title="הבא">></span>
-    <span (click)="iEndNumRow != lstDataRows.length ? moveToPage(Math.ceil(lstDataRows.length / iCountRows)-1) : ''" class="pagination-page"  [ngStyle]="{'color': (iEndNumRow == lstDataRows.length ? 'gray' : 'black')}" title="לסוף">>></span>
+    <span (click)="currentPage != 0 ? moveToPage(0) : ''" class="pagination-page" [ngStyle]="{'color': (currentPage == 0 ? 'gray' : 'black')}"
+      title="להתחלה">
+      <<</span>
+        <span (click)="currentPage != 0 ? moveToPage(currentPage - 1) : ''" class="pagination-page" [ngStyle]="{'color': (currentPage == 0 ? 'gray' : 'black')}"
+          title="הקודם">
+          <</span>
+            <span *ngFor="let i of lstPagesNum" (click)="i != currentPage ? moveToPage(i) : ''" class="pagination-page" [ngClass]="{'pagination-current-page': i == currentPage}">{{i+1}}</span>
+            <span (click)="iEndNumRow != lstDataRows.length ? moveToPage(currentPage + 1) : ''" class="pagination-page" [ngStyle]="{'color': (iEndNumRow == lstDataRows.length ? 'gray' : 'black')}"
+              title="הבא">></span>
+            <span (click)="iEndNumRow != lstDataRows.length ? moveToPage(Math.ceil(lstDataRows.length / iCountRows)-1) : ''" class="pagination-page"
+              [ngStyle]="{'color': (iEndNumRow == lstDataRows.length ? 'gray' : 'black')}" title="לסוף">>></span>
   </div>
 
 </div>

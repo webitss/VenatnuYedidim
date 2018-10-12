@@ -18,6 +18,7 @@ export class VyTableComponent implements OnInit {
   protected iEndNumRow = 0;
   protected countPagesDisplayed = 5;
   protected lstPagesNum: Array<number> = new Array<number>();
+  protected lstSortColumns:any={};
 
   @Input()
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
@@ -56,6 +57,19 @@ export class VyTableComponent implements OnInit {
   filterChange(col) {
     this.lstCurrentDataRows = this.lstDataRows.filter(row => row[col.name].indexOf(col.filter) > -1);
     this.moveToPage(0);
+  }
+  sortTable(sight,colName)
+  {
+    this.lstSortColumns[colName]=sight;
+    
+    if(sight!=0)
+    {
+      let lst =Object.assign( this.lstDataRows);
+      this.lstCurrentDataRows = new VyTableOrderByPipe().transform(lst,[colName]);
+      this.moveToPage(this.currentPage,true);
+    }
+    else
+      this.moveToPage(this.currentPage,true);
   }
 
   public moveToPage(pageNum: number, move = false) {
