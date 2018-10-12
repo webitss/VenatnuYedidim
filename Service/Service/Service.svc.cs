@@ -137,6 +137,13 @@ namespace Service
             return Student.UnionCards(student, iStudent2);
         }
 
+
+        public bool DeleteStudent(int istudent, int iUserId)
+        {
+            return Student.DeleteStudent( istudent,iUserId);
+
+        }
+
         #endregion
 
         #region Event

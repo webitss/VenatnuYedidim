@@ -43,12 +43,12 @@
         </div>
         <div class="form-group ">
             <label for="email"> מייל :</label>
-            <input type="email" class="form-control" id="email" name="email" #email="ngModel"
-            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  [(ngModel)]="student.nvEmail" [ngModelOptions]="{standalone: true}">
-            <div  *ngIf="email.errors && email.errors.pattern">
+            <input type="email" class="form-control" id="email" name="email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                [(ngModel)]="student.nvEmail" [ngModelOptions]="{standalone: true}">
+            <div *ngIf="email.errors && email.errors.pattern">
                 מייל לא תקין
             </div>
-            
+
         </div>
         <div class="form-group ">
             <label for="dateAdd"> תאריך הצטרפות :</label>
@@ -59,70 +59,40 @@
     <div class="row">
         <div class="form-group ">
             <label for="nvBornDateDay"> תאריך לידה עברי:</label>
-            <input type="text" class="form-control" id="nvBornDateDay" name="nvBornDateDay" [(ngModel)]="bornDateHebrewStudent.Day" [ngModelOptions]="{standalone: true}"
-                placeholder="יום">
-            <input type="text" class="form-control" id="nvBornDateMonth" name="nvBornDateMonth" [(ngModel)]="bornDateHebrewStudent.Month"
-                [ngModelOptions]="{standalone: true}" placeholder="חודש">
+            <select  class="form-control" id="nvBornDateDay" name="nvBornDateDay" [(ngModel)]="bornDateHebrewStudent.Day">
+                <option>בחר יום</option>
+                <option *ngFor="let day of dateDayArr">{{day}}</option>
+            </select>
+            <select type="text" class="form-control" id="nvBornDateMonth" name="nvBornDateMonth" [(ngModel)]="bornDateHebrewStudent.Month">
+                <option>בחר חודש</option>
+                <option *ngFor="let month of dateMonthArr">{{month}}</option>
+            </select>
             <input type="text" class="form-control" id="nvBornDateYear" name="nvBornDateYear" [(ngModel)]="bornDateHebrewStudent.Year"
                 [ngModelOptions]="{standalone: true}" placeholder="שנה">
         </div>
 
+      
+        
+
+
         <div class="form-group ">
             <label for="dtBornDate"> תאריך לידה לועזי:</label>
-            <input type="date" class="form-control" id="dtBornDate" name="dtBornDate" [ngModel]="student.dtBirthdate  | date:'yyyy-MM-dd' " (ngModelChange)="e.dtBirthdate = $event"
-                [ngModelOptions]="{standalone: true}">
+            <input type="date" class="form-control" id="dtBornDate" name="dtBornDate" [ngModel]="student.dtBirthdate  | date:'yyyy-MM-dd' "
+                (ngModelChange)="e.dtBirthdate = $event" [ngModelOptions]="{standalone: true}">
         </div>
         <!-- ngui-datetime-picker date-only="true" close-on-select="false" -->
         <!-- | date:'yyyy-MM-dd' -->
 
         <div class="form-group ">
             <label for="street"> כתובת :</label>
-            <input type="text" class="form-control" id="street" name="street" [(ngModel)]="student.nvAddress" [ngModelOptions]="{standalone: true}" >
+            <input type="text" class="form-control" id="street" name="street" [(ngModel)]="student.nvAddress" [ngModelOptions]="{standalone: true}">
         </div>
-        
+
 
         <div class="form-group ">
             <label for="city"> עיר :</label>
             <input type="text" class="form-control" id="city" name="city" [(ngModel)]="student.nvCity" [ngModelOptions]="{standalone: true}">
         </div>
-    </div>
-    <div *ngFor="let yeshiva of yeshivaListOfStudent">
-        <div class="row">
-            <div class="form-group">
-                <label for="yeshivaName">מוסד לימודים :</label>
-                <div>{{yeshiva.nvYeshivaName}}</div>
-            </div>
-
-            <div class="form-group ">
-                <label for="yesivaStreet">כתובת מוסד :</label>
-                <div>{{yeshiva.nvAddress}}</div>
-            </div>
-            <div class="form-group ">
-                <label for="yeshivaCity">עיר מוסד :</label>
-                <div>{{yeshiva.nvCity}}</div>
-            </div>
-        </div>
-        <button (click)="deleteYeshivaOfStudent(yeshiva.iYeshivaId)">מחק מוסד לימודים</button>
-    </div>
-<button (click)="addYeshiva=true">הוסף מוסד</button>
-    <div class="row" *ngIf="addYeshiva">
-        <div class="form-group">
-            <label for="yeshivaName">מוסד לימודים :</label>
-            <select  class="form-control" id="yesivaStreet" name="yesivaName" (change)="selectYesh($event)"  >
-                <option > בחר מוסד </option>
-                <option *ngFor="let yesh of yeshivaList"  >{{yesh.nvYeshivaName}}</option>
-            </select>
-        </div>
-        <div class="form-group ">
-            <label for="yesivaStreet">כתובת מוסד :</label>
-            <input type="text" class="form-control" id="yesivaStreet" name="yesivaStreet" [(ngModel)]="yeshivaSelected.nvAddress">
-        </div>
-
-        <div class="form-group ">
-            <label for="yeshivaCity">עיר מוסד :</label>
-            <input type="text" class="form-control" id="yeshivaCity" name="yeshivaCity" [(ngModel)]="yeshivaSelected.nvCity">
-        </div>
-        <button (click)="addSelectYeshivaToStudent()">הוסף</button>
     </div>
 
     <div class="row">
@@ -182,6 +152,46 @@
             </div>
         </div>
     </div>
+
+    <div *ngFor="let yeshiva of yeshivaListOfStudent">
+        <div class="row">
+            <div class="form-group">
+                <label for="yeshivaName">מוסד לימודים :</label>
+                <div>{{yeshiva.nvYeshivaName}}</div>
+            </div>
+
+            <div class="form-group ">
+                <label for="yesivaStreet">כתובת מוסד :</label>
+                <div>{{yeshiva.nvAddress}}</div>
+            </div>
+            <div class="form-group ">
+                <label for="yeshivaCity">עיר מוסד :</label>
+                <div>{{yeshiva.nvCity}}</div>
+            </div>
+        </div>
+        <button (click)="deleteYeshivaOfStudent(yeshiva.iYeshivaId)">מחק מוסד לימודים</button>
+    </div>
+    <button (click)="addYeshiva=true">הוסף מוסד</button>
+    <div class="row" *ngIf="addYeshiva">
+        <div class="form-group">
+            <label for="yeshivaName">מוסד לימודים :</label>
+            <select class="form-control" id="yesivaStreet" name="yesivaName" (change)="selectYesh($event)">
+                <option> בחר מוסד </option>
+                <option *ngFor="let yesh of yeshivaList">{{yesh.nvYeshivaName}}</option>
+            </select>
+        </div>
+        <div class="form-group ">
+            <label for="yesivaStreet">כתובת מוסד :</label>
+            <input type="text" class="form-control" id="yesivaStreet" name="yesivaStreet" [(ngModel)]="yeshivaSelected.nvAddress">
+        </div>
+
+        <div class="form-group ">
+            <label for="yeshivaCity">עיר מוסד :</label>
+            <input type="text" class="form-control" id="yeshivaCity" name="yeshivaCity" [(ngModel)]="yeshivaSelected.nvCity">
+        </div>
+        <button (click)="addSelectYeshivaToStudent()">הוסף</button>
+    </div>
+
     <div class="row">
         <div class="form-group col-sm-12">
             <label for='comment'>הערות</label>

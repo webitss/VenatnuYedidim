@@ -134,6 +134,14 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         bool UnionCards(Student student, int iStudent2);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "DeleteStudent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool DeleteStudent(int  istudent, int iUserId);
 
         [OperationContract]
         [WebInvoke(
