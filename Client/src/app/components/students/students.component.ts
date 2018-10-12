@@ -25,7 +25,7 @@ export class StudentsComponent implements OnInit {
   studentList: Student[];
   yeshivaListOfStudent: Yeshiva[];
   avrechimListOfStudent: Avrech[]
-
+  private alert: any;
   @ViewChild('students') students: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   ngOnInit() {
@@ -38,63 +38,74 @@ export class StudentsComponent implements OnInit {
       // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
       this.studentList.forEach(student => {
         student['edit'] = '<div class="edit"></div>'
-        student['delete']='<div class = "delete"></>';
+        student['delete'] = '<div class = "delete"></>';
 
         this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
-        this.yeshivaListOfStudent = data;
+          this.yeshivaListOfStudent = data;
           student['nvYeshivaName'] = this.yeshivaListOfStudent[this.yeshivaListOfStudent.length - 1].nvYeshivaName;
         });
-      this.appProxy.post("GetAvrechimByStudentId", { iPersonId: student.iPersonId }).then(data => {
+        this.appProxy.post("GetAvrechimByStudentId", { iPersonId: student.iPersonId }).then(data => {
           this.avrechimListOfStudent = data;
-          student['nvAvrechName']="";
-            this.avrechimListOfStudent.forEach(avrech => {
-              student['nvAvrechName'] +=" " + avrech.nvFirstName +" "+ avrech.nvLastName +'<br/>' ;
-            });
-
+          student['nvAvrechName'] = "";
+          this.avrechimListOfStudent.forEach(avrech => {
+            student['nvAvrechName'] += " " + avrech.nvFirstName + " " + avrech.nvLastName + '<br/>';
           });
+
+        });
       });
-  }, err => { alert(err); });
+    }, err => { alert(err); });
 
 
 
 
-this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true, false));
-this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true, false));
-this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
-this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
-this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
-this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
-this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
-this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
-this.lstColumns.push(new VyTableColumn(' משויך לאברך','nvAvrechName','html'));
+    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true, false));
+    this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true, false));
+    this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
+    this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
+    this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
+    this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
+    this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
+    this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
+    this.lstColumns.push(new VyTableColumn(' משויך לאברך', 'nvAvrechName', 'html'));
 
   }
 
 
   editAndDeleteStudent(e) {
+    debugger;
+    if (e.columnClickName == 'edit')
+      this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);
+    else {
+      this.alert = confirm("האם אתה בטוח שברצונך למחוק תלמיד זה?");
+      if (this.alert == true) {
+      this.appProxy.post("DeleteStudent",{iStudent:e.iPersonId,iUserId:this.globalService.getUser()});
 
-  this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);
-  
-}
-cardsUnion() {
-  this.flag == true
-  // const modalRef = this.modalService.open(CardsUnionComponent);
-
-  // modalRef.result.then((result) => {
-  //   console.log(result);
-  // }).catch((error) => {
-  //   console.log(error);
-  // });
-}
-// clickCell:true,
-// type: 'html'
+      }
+    }
+  }
 
 
-downloadExcel() {
-  debugger;
-  this.students.downloadExcel();
-}
-tableToPdf(name: string) {
-  this.students.downloadPdf(name, 'pdf');
-}
+
+
+  cardsUnion() {
+    this.flag == true
+    // const modalRef = this.modalService.open(CardsUnionComponent);
+
+    // modalRef.result.then((result) => {
+    //   console.log(result);
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
+  }
+  // clickCell:true,
+  // type: 'html'
+
+
+  downloadExcel() {
+    debugger;
+    this.students.downloadExcel();
+  }
+  tableToPdf(name: string) {
+    this.students.downloadPdf(name, 'pdf');
+  }
 }

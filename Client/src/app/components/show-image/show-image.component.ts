@@ -5,7 +5,7 @@ import { settingsFrontend } from '../../services/settings-frontend.service';
 import { Alert } from 'selenium-webdriver';
 
 // import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
-const GLOBAL={title:"כותרת",GlobalVerMarch:"טקט ראשי ",GlobalMarchSF:"טקסט משני"}
+const GLOBAL={title:"כותרת",GlobalVerMarch:"טקט ראשי",GlobalMarchSF:"טקסט משני"}
 @Component({
   selector: 'app-show-image',
   templateUrl: './show-image.component.html',
@@ -72,10 +72,14 @@ ngOnInit(): void {
       }
   ];
   this.settingsFrontend.GetGlobalParameters().then(res=>{
- 
+
    this.settingsFrontend.GlobalHeader=(<any>res).find(r=>r.nvTitle==[GLOBAL.title]),
+   
+   
    this.settingsFrontend.GlobalMarchSF=(<any>res).find(r=>r.nvTitle==[GLOBAL.GlobalVerMarch]),
+
  this.settingsFrontend.GlobalVerMarch=(<any>res).find(r=>r.nvTitle==[GLOBAL.GlobalMarchSF])
+
  
 })
     
