@@ -1,0 +1,13 @@
+<div class=" row component-name-header">
+  <div class="col-sm-4 component-name">ארועים שהשתתף</div>
+  <div class="actions col-sm-8">
+    <!-- <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button> -->
+    <!-- <button class="btn btn-small" (click)="tableToPdf('משתמשים')">s</button> -->
+    <button class="btn btn-circle1 btn-pink" [class.btn-disabled]="globalService.getUser().iPermittionId != 5 && globalService.getUser().iPermittionId != 6" [disabled]="globalService.getUser().iPermittionId != 5"
+      routerLink="/students-events/students-event/0">ארוע חדש</button>
+  </div>
+</div>
+<router-outlet></router-outlet>
+<div class="main-table">
+  <app-vy-table #studentsEvents [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="click($event)"></app-vy-table>
+</div>

@@ -41,7 +41,7 @@ namespace Service
         public bool DeleteUser(int iPersonId, int iUserId)
         {
 
-            return User.DeleteUser(iPersonId,iUserId);
+            return User.DeleteUser(iPersonId, iUserId);
 
         }
 
@@ -82,7 +82,7 @@ namespace Service
             return Task.SetTask(task, iUserId);
         }
 
-        public List<Task> GetTasksByPersonId( int iPersonId)
+        public List<Task> GetTasksByPersonId(int iPersonId)
         {
             return Task.GetTasksByPersonId(iPersonId);
         }
@@ -100,12 +100,12 @@ namespace Service
             return Student.GetStudentList(iUserId);
         }
 
-		public List<Yeshivot> GetYeshivotOfStudent(int iPersonId)
-		{
-			return Student.GetYeshivotOfStudent(iPersonId);
-		}
+        public List<Yeshivot> GetYeshivotOfStudent(int iPersonId)
+        {
+            return Student.GetYeshivotOfStudent(iPersonId);
+        }
 
-		public Student GetStudentById(int iUserId)
+        public Student GetStudentById(int iUserId)
         {
             return Student.GetStudentById(iUserId);
         }
@@ -154,13 +154,17 @@ namespace Service
         {
             return Event1.GetEvent(iEventId);
         }
-        
 
-            public bool DeleteEvent(int iEventId, int iUserId)
+
+        public bool DeleteEvent(int iEventId, int iUserId)
         {
             return Event1.DeleteEvent(iEventId, iUserId);
         }
 
+        public List<Event1> GetEventsByStudent(int iPersonId)
+        {
+            return Event1.GetEventsByStudent(iPersonId);
+        }
         #endregion
 
         #region Avrech
@@ -201,16 +205,17 @@ namespace Service
             return Avrech.DeleteAvrech(iPersonId);
         }
 
-		public List<Avrech> GetAvrechimByStudentId(int iPersonId) {
-			return Avrech.GetAvrechimByStudentId(iPersonId);
-				}
+        public List<Avrech> GetAvrechimByStudentId(int iPersonId)
+        {
+            return Avrech.GetAvrechimByStudentId(iPersonId);
+        }
 
 
 
-		#endregion
+        #endregion
 
-		#region SysTableRow
-		public List<SysTableRow> GetValues(int iSysTableId)
+        #region SysTableRow
+        public List<SysTableRow> GetValues(int iSysTableId)
         {
 
             return SysTableRow.GetValues(iSysTableId);
@@ -287,24 +292,24 @@ namespace Service
             return Yeshivot.DeleteYeshiva(iYeshivaId, iLastModifyUserId);
         }
 
-		public bool DeleteYeshivaOfStudent(int iPersonId,int iYeshivaId, int iUserId)
-		{
-			return Yeshivot.DeleteYeshivaOfStudent(iPersonId, iYeshivaId, iUserId);
-		}
+        public bool DeleteYeshivaOfStudent(int iPersonId, int iYeshivaId, int iUserId)
+        {
+            return Yeshivot.DeleteYeshivaOfStudent(iPersonId, iYeshivaId, iUserId);
+        }
 
 
-		public bool AddYeshivaToStudent(int iPersonId, int iYeshivaId, int iUserId)
-		{
-			return Yeshivot.AddYeshivaToStudent(iPersonId, iYeshivaId, iUserId);
-		}
+        public bool AddYeshivaToStudent(int iPersonId, int iYeshivaId, int iUserId)
+        {
+            return Yeshivot.AddYeshivaToStudent(iPersonId, iYeshivaId, iUserId);
+        }
 
 
-		
 
-		#endregion
 
-		#region Documents
-		public List<Document> GetDocuments()
+        #endregion
+
+        #region Documents
+        public List<Document> GetDocuments()
         {
             return Document.GetDocuments();
         }
@@ -344,15 +349,16 @@ namespace Service
             return Document.GetMoreDocumentsOfTadmit();
         }
 
-        public bool changeTadmitStatus(int iDocumentId,int iUserId) { 
-              return Document.changeTadmitStatus(iDocumentId,iUserId);
+        public bool changeTadmitStatus(int iDocumentId, int iUserId)
+        {
+            return Document.changeTadmitStatus(iDocumentId, iUserId);
         }
 
-    #endregion
+        #endregion
 
-    #region participant
+        #region participant
 
-    public List<Person> GetParticipantsList(int iEventId)
+        public List<Person> GetParticipantsList(int iEventId)
         {
             return Participant.GetParticipantsList(iEventId);
         }
@@ -394,22 +400,22 @@ namespace Service
         }
 
 
-		public bool UpdGlobalParameters(List<TGlobalParameters> GlobalParameters)
-		{
-			return TGlobalParameters.UpdGlobalParameters(GlobalParameters);
-		}
-		public bool InsGlobalParameters(List<TGlobalParameters> GlobalParameters)
-		{
-			return TGlobalParameters.InsGlobalParameters(GlobalParameters);
-		}
+        public bool UpdGlobalParameters(List<TGlobalParameters> GlobalParameters)
+        {
+            return TGlobalParameters.UpdGlobalParameters(GlobalParameters);
+        }
+        public bool InsGlobalParameters(List<TGlobalParameters> GlobalParameters)
+        {
+            return TGlobalParameters.InsGlobalParameters(GlobalParameters);
+        }
 
 
 
-		#endregion
+        #endregion
 
 
 
-		#region presenceAvrech
+        #region presenceAvrech
 
 
 
@@ -426,12 +432,12 @@ namespace Service
 
         public bool DeletePresenceAvrech(int ipresenceAvrech, int iLastModifyUserId)
         {
-            return PresenceAvrech.DeletePresenceAvrech(ipresenceAvrech,iLastModifyUserId);
+            return PresenceAvrech.DeletePresenceAvrech(ipresenceAvrech, iLastModifyUserId);
         }
 
-		
 
-		#endregion
-	}
+
+        #endregion
+    }
 
 }
