@@ -52,13 +52,13 @@ export class SysTableService {
       iSysTableId: 11,
       SysTableRow: []
     }
-  } 
+  }
 
-  public static permissionType = {Management: 5}
+  public static permissionType = { Management: 5 }
 
   constructor(private appProxy: AppProxy) { }
   ////#region מקבל ID של טבלה מחזיר ערכים מאותה טבלה 
-  getValues(iSysTableId: number): Promise<Array<SysTableRow>> {
+  getValues(iSysTableId: number, col?:any): Promise<Array<SysTableRow>> {
 
     console.log(iSysTableId + "arived");
     for (let key in SysTableService.dataTables) {
@@ -69,7 +69,7 @@ export class SysTableService {
       if (SysTableService.dataTables[key].iSysTableId == iSysTableId) {
         this.Mykey = key;
         if (SysTableService.dataTables[key].SysTableRow.length > 0) {
-
+          if(col)col(SysTableService.dataTables[key].SysTableRow)
           return Promise.resolve(SysTableService.dataTables[key].SysTableRow);
 
         }
@@ -111,11 +111,11 @@ export class SysTableService {
 
   }
 
-  addValue(row: SysTableRow) : Promise<boolean>{
-  return  this.appProxy.post("AddValue", { sysTableRow: row }).
+  addValue(row: SysTableRow): Promise<boolean> {
+    return this.appProxy.post("AddValue", { sysTableRow: row }).
       then(l => {
         if (l) {
-         
+
           return true;
         }
         return false;

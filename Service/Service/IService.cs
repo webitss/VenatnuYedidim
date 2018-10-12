@@ -607,13 +607,13 @@ namespace Service
         List<Task> GetTasksByPersonId(int iPersonId);
 
 
-        //[WebInvoke(
-        // Method = "POST",
-        //UriTemplate = "DeleteTask",
-        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //ResponseFormat = WebMessageFormat.Json,
-        //RequestFormat = WebMessageFormat.Json)]
-        //bool DeleteTask(int iTaskId,int iPersonId);
+        [WebInvoke(
+         Method = "POST",
+        UriTemplate = "DeleteTask",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool DeleteTask(int iTaskId, int iPersonId);
         #endregion
 
 

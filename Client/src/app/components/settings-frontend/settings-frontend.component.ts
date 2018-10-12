@@ -104,7 +104,7 @@ export class SettingsFrontendComponent implements OnInit {
   }
 
 private saveGlobalParams(){
- alert("LLLLLLLLLLLL")
+
   this.settingsFrontend.GlobalHeader.nvTitle="כותרת";
   
   this.settingsFrontend.GlobalHeader.iParameterId=167
@@ -115,9 +115,9 @@ private saveGlobalParams(){
   this.settingsFrontend.GlobalMarchSF.nvTitle="טקסט משני";
   this.settingsFrontend.GlobalVerMarch.iParameterId=169
   this.GlobalParameters.push(this.settingsFrontend.GlobalMarchSF);
- 
+ debugger;
   this.settingsFrontend.GetGlobalParameters().then(res=>{
-    alert("JJJJJJJJJJJJJJJJJJJJJJ")
+ 
     if((<any>res).length>0){
    
       this.settingsFrontend.updateGlobalParameters(this.GlobalParameters).then(

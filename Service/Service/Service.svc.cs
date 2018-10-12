@@ -86,10 +86,10 @@ namespace Service
         {
             return Task.GetTasksByPersonId(iPersonId);
         }
-        //public bool DeleteTask(int iTaskId, int iPersonId)
-        //{
-        //    return Task.DeleteTask(iTaskId,iPersonId);
-        //}
+        public bool DeleteTask(int iTaskId, int iPersonId)
+        {
+            return Task.DeleteTask(iTaskId, iPersonId);
+        }
 
         #endregion
 

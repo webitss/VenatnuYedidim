@@ -52,15 +52,19 @@ export class SettingsYeshivotComponent implements OnInit {
       this.sysTableService.getValues(SysTableService.dataTables.roleType.iSysTableId).then(val=> {
         this.sysTableList=val;
         this.yeshivaList.forEach(y=> {
-            y['edit'] = '<div class="edit"></div>';
-            y['delete'] = '<div class="delete"></div>';
-            y['nvRoleType']=this.sysTableList.filter(x=>x.iSysTableRowId==y.iRoleType)[0].nvValue;
-        //  this.changeTable(y);
+
+        this.changeTable(y);
         });
       });
     });
   }
 
+  public changeTable(y:Yeshiva)
+  {
+    y['edit'] = '<div class="edit"></div>';
+    y['delete'] = '<div class="delete"></div>';
+    y['nvRoleType']=this.sysTableList.filter(x=>x.iSysTableRowId==y.iRoleType)[0].nvValue;
+  }
 
   public setYeshiva(yeshiva){
    if(yeshiva.columnClickName=='edit')
@@ -72,11 +76,13 @@ export class SettingsYeshivotComponent implements OnInit {
   public editYeshiva(yeshiva) {
     this.iYeshivaId = yeshiva.iYeshivaId;
     this.flag=false;
+    this.changeTable(yeshiva);
   }
 
   public deleteYeshiva(yeshiva) {
     this.iYeshivaId=yeshiva.iYeshivaId;
     this.flag=true;
+    this.changeTable(yeshiva);
   }
 
   delete() {
