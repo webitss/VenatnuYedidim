@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit {
 
   constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService, private globalService: GlobalService) { }
   @ViewChild('users') users: any;
-  @ViewChild(VyTableComponent) vyTableComponent:VyTableComponent;
+  @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
 
   // @Output()
   //  onRemoveUser: EventEmitter<User> = new EventEmitter<User>();
@@ -73,32 +73,25 @@ export class UsersComponent implements OnInit {
   }
 
   private alert: any;
+  private flag: boolean = false;
   deleteUser(u: User) {
-    if (u.iPermissionId == 5) {//מנהל
+    if (u.iPermissionId == 5) //מנהל
       this.alert = confirm("יתכן ולאחר המחיקה לא יהיה מנהל למערכת ,האם אתה בטוח שברצונך למחוק מנהל?");
-      if (this.alert == true){
-        this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {
-        });
-        this.lstDataRows.splice(this.lstDataRows.indexOf(u),1);  
-        this.vyTableComponent.refreshTable(this.lstDataRows);
-      }
-    }
-    else {
+    else 
       this.alert = confirm("האם אתה בטוח שברצונך למחוק משתמש זה?");
-      if (this.alert == true){
-        this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {
-        });
-        this.lstDataRows.splice(this.lstDataRows.indexOf(u),1);
-        this.vyTableComponent.refreshTable(this.lstDataRows);
-      }
+
+    if(this.alert == true){
+      this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId }).then(data => {});
+      this.lstDataRows.splice(this.lstDataRows.indexOf(u), 1);
+      this.vyTableComponent.refreshTable(this.lstDataRows);
     }
   }
 
-    downloadExcel() {
-      this.users.downloadExcel();
-    }
-
-    tableToPdf(name: string) {
-      this.users.downloadPdf(name, 'pdf');
-    }
+  downloadExcel() {
+    this.users.downloadExcel();
   }
+
+  tableToPdf(name: string) {
+    this.users.downloadPdf(name, 'pdf');
+  }
+}

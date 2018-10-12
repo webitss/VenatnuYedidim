@@ -50,16 +50,12 @@ export class UserDetailsComponent implements OnInit {
   
   @ViewChild(NgForm) form;
 
-  checkFormValidity() {
-    return this.form.valid;
-  }
-
   public lst: Array<any>;
 
   saveUser() {
     this.appProxy.post("SetUser", { user: this.user, iUserId: 1 }).then(data => {
       if (data == true) {
-        alert("המשתמש נוסף בהצלחה!");
+        alert("המשתמש נשמר בהצלחה!");
         this.router.navigate(['users']);
       }
 

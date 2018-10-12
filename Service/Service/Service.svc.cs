@@ -40,7 +40,9 @@ namespace Service
 
         public bool DeleteUser(int iPersonId, int iUserId)
         {
+
             return User.DeleteUser(iPersonId,iUserId);
+
         }
 
         #endregion
@@ -402,10 +404,15 @@ namespace Service
 		}
 
 
-        #endregion
 
-	
-        #region presenceAvrech
+		#endregion
+
+
+
+		#region presenceAvrech
+
+
+
 
         public List<PresenceAvrech> GetPresenceAvrechById(int iPersonId)
         {
