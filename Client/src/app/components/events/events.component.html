@@ -14,7 +14,6 @@
         <button class="btn btn-circle1 btn-pink" routerLink="/events/event/0">אירוע חדש</button>
     </div>
 </div>
-<!-- <button class="btn" (click)="flag=true">open modal</button> -->
 <app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flag" [header]="header" (close)="flag=false" (ok)="flag=false; deleteEvent(eventIdToDelete);"></app-vy-pop-up>
 
 <div class="main-table">

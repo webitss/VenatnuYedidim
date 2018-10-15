@@ -20,8 +20,8 @@
             שיחות
           </span>
         </li>
-        <li *ngIf="flag!=0" [ngClass]="{'select': currentComponent.constructor.name.indexOf('sr') != -1}" class="nav-item" href="#">
-          <span class="fullTab">
+        <li *ngIf="flag!=0" [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentEvents') != -1}" class="nav-item">
+          <span class="fullTab" routerLink="student-events">
             ארועים שהשתתף
           </span>
         </li>

@@ -46,6 +46,8 @@ import { StudentConversationsComponent } from './components/student-conversation
 import { StudentDocumentsComponent } from './components/student-documents/student-documents.component';
 import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
 import { StudentMeetingDetailsComponent } from './components/student-meeting-details/student-meeting-details.component';
+import { StudentEventsComponent } from './components/student-events/student-events.component';
+import { StudentEventDetailsComponent } from './components/student-event-details/student-event-details.component';
 
 import { AvrechimComponent } from './components/avrechim/avrechim.component';
 import { AvrechComponent } from './components/avrech/avrech.component';
@@ -96,6 +98,7 @@ import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
 
 
 
+
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
@@ -125,6 +128,8 @@ import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
     StudentConversationDetailsComponent,
     StudentMeetingDetailsComponent,
     StudentDocumentsComponent,
+    StudentEventsComponent,
+    StudentEventDetailsComponent,
     CardsUnionComponent,
 
     AvrechimComponent,
@@ -236,7 +241,20 @@ import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
           },
           {
             path: "student-documents", component: StudentDocumentsComponent
-          }
+          },
+          {
+            path: "student-events", component: StudentEventsComponent
+            //  children:[
+            //   {path: "student-event-details/:iEventId", component: StudentEventDetailsComponent}
+            // ]
+          },
+          {
+            path: "student-events-details/:iEventId", component: StudentEventDetailsComponent
+            // ,children: [
+            //   { path: "", component: UserDetailsComponent },
+            //   { path: "student-event-details", component: StudentEventDetailsComponent }
+            //]
+          },
 
         ]
       },

@@ -29,7 +29,6 @@ export class EventsComponent implements OnInit {
   }
 
   deleteEvent(e) {
-    debugger;
     this.appProxy.post('DeleteEvent', { iEventId: e, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
       if (res == true) {
         //alert('נמחק בהצלחה!');
@@ -59,8 +58,8 @@ export class EventsComponent implements OnInit {
   }
 
   public lstColumns = [
-    new VyTableColumn('עריכה', 'edit', 'html', true, false),
-    new VyTableColumn('מחיקה', 'delete', 'html', true, false),
+    new VyTableColumn('', 'edit', 'html', true, false),
+    new VyTableColumn('', 'delete', 'html', true, false),
     new VyTableColumn('שם ארוע', 'nvName'),
     new VyTableColumn('תאריך', 'dtEventDate'),
     new VyTableColumn('מקום', 'nvPlace')];
