@@ -33,6 +33,9 @@ export class SettingsCodeTableComponent implements OnInit {
   {
     title: 'ערך',
     name: 'nvValue'
+  },{
+    title: 'שם הטבלה',
+    name: 'nvName'
   }]
   private readonly newProperty = this;
   @ViewChild('CodeTables') CodeTables:any;
