@@ -26,13 +26,14 @@ namespace Service.Entities
         #endregion
 
         #region Methods
-        public static bool SetPresence(PresenceAvrech presence)
+        public static bool SetPresence(PresenceAvrech presence, int iUserId)
         {
 
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<PresenceAvrech>.GetSqlParametersFromObject(presence);
-                SqlDataAccess.ExecuteDatasetSP("TPresenceAvrech_INS/UPD", parameters);
+				parameters.Add(new SqlParameter("iUserId", iUserId));
+				SqlDataAccess.ExecuteDatasetSP("TPresenceAvrech_INS/UPD", parameters);
                 return true;
             }
             catch (Exception ex)

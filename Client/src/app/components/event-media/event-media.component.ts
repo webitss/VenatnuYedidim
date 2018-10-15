@@ -15,14 +15,18 @@ export class EventMediaComponent implements OnInit {
   id: number;
   document: Document;
   documents: any[] = new Array();
+  flag = false;
+  message: string;
+  header = "אישור מחיקת מדיה";
+  mediaIdToDelete: number;
 
   constructor(
     private appProxy: AppProxy,
     private globalService: GlobalService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private sysTableService: SysTableService    
-  ) {}
+    private sysTableService: SysTableService
+  ) { }
 
   ngOnInit() {
     this.activatedRoute.parent.params.subscribe(params => {
@@ -30,8 +34,8 @@ export class EventMediaComponent implements OnInit {
     });
 
     //this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => console.log(data.filter(x => x.nvValue == 'ארוע')[0].iSysTableRowId));    
-    
-    this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType= data.filter(x => x.nvValue == 'ארוע')[0].iSysTableRowId);    
+
+    this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType = data.filter(x => x.nvValue == 'ארוע')[0].iSysTableRowId);
     this.loadDocuments();
   }
 
@@ -68,6 +72,12 @@ export class EventMediaComponent implements OnInit {
 
       }
     });
+  }
+
+  deleteDoc(id) {
+    this.mediaIdToDelete = id;
+    this.message="האם אתה בטוח שברצונך למחוק?";
+    this.flag = true;
   }
 
   closeDocumentDialog(save) {
@@ -108,7 +118,7 @@ export class EventMediaComponent implements OnInit {
   }
 
   changeTadmitStatus(iDocumentId: number) {
-    this.appProxy.post('changeTadmitStatus', { iDocumentId: iDocumentId , iUserId: this.globalService.getUser()['iUserId']}).then(
+    this.appProxy.post('changeTadmitStatus', { iDocumentId: iDocumentId, iUserId: this.globalService.getUser()['iUserId'] }).then(
       data => {
         if (data === true) {
           let len = this.documents.length;

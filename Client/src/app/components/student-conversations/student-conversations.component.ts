@@ -32,13 +32,13 @@ export class StudentConversationsComponent implements OnInit {
   @Input()
   public lstColumns = [
     {
-      title: 'עריכה',
+      title: '',
       name: 'edit',
       bClickCell: true,
       type: 'html'
     },
     {
-      title: 'מחיקה',
+      title: '',
       name: 'delete',
       bClickCell: true,
       type: 'html'

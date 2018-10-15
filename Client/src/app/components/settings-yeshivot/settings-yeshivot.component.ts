@@ -46,7 +46,7 @@ export class SettingsYeshivotComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('מייל', 'nvEmail'))
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'))
     this.lstColumns.push(new VyTableColumn('תפקיד', 'nvRoleType'))
-   
+
     this.appProxy.post('GetAllYeshivot').then(data => {
       this.yeshivaList = data;
       this.sysTableService.getValues(SysTableService.dataTables.roleType.iSysTableId).then(val=> {
@@ -92,10 +92,11 @@ export class SettingsYeshivotComponent implements OnInit {
         this.yeshiva=data;
         this.iYeshivaId=null;
         this.flag=null;
+        this.yeshivaList.splice(this.yeshivaList.indexOf(this.yeshiva),1);
+        this.vyTableComponent.refreshTable(this.yeshivaList);  
         alert("הישיבה נמחקה בהצלחה");
     });  
-    this.yeshivaList.splice(this.yeshivaList.indexOf(this.yeshiva),1);
-    this.vyTableComponent.refreshTable(this.yeshivaList);  
+    
   }
 
   close() {

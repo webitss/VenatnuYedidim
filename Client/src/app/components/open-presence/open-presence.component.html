@@ -2,10 +2,10 @@
 <div class="form ">
   <div class="row ">
       <div class="col-sm-8">
-          <div *ngIf="presence.iPresenceId">
+          <div *ngIf="presence.iPersonId">
               <h3>עריכת נוכחות</h3>
           </div>
-          <div *ngIf="presence.iPresenceId==null">
+          <div *ngIf="presence.iPersonId==null">
               <h3>הוספת נוכחות</h3>
           </div>
       </div>
@@ -26,7 +26,7 @@
 
           <div class="form-group">
               <label for="date">תאריך</label>
-              <input type="date" [(ngModel)]="presence.dtDatePresence" id="date" class="form-control">
+              <input  [(ngModel)]="presence.dtDate"  ngui-datetime-picker date-only="true" id="date" class="form-control">
           </div>
           
           <div class="form-group">
