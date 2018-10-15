@@ -30,6 +30,9 @@ export class AvrechDiaryComponent implements OnInit {
   //   debugger;
   //   this.currentComponent = event;
   // }
+  closeMe(){
+    this.flag= false;
+  }
   addTask() {
     this.flag = true;
     // this.task = new Task()
