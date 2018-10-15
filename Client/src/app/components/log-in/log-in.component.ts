@@ -32,7 +32,6 @@ export class LogInComponent implements OnInit {
 
 
   logIn() {
-    debugger
     this.appProxy.post("Login", { nvUserName: this.nvUserName, nvPassword: this.nvPassword }).then(
       data => {
         if (data != null) {
@@ -53,7 +52,7 @@ export class LogInComponent implements OnInit {
   canDeactivate() {
     if (this.globalService.getUser() != null)
       return true;
-    return false;// this.dialogService.confirm('Discard changes for Person?');
+    return false;
 
 
   }

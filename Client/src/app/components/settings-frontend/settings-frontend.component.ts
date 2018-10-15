@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TGlobalParameters } from '../../classes/TGlobalParameters';
-import { settingsFrontend } from '../../services/settings-frontend.service';
+import { settingsFrontend, GLOBAL } from '../../services/settings-frontend.service';
 import { AppProxy } from '../../services/app.proxy';
 import { GlobalService } from '../../services/global.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,6 +13,10 @@ import { SysTableService } from '../../services/sys-table.service';
   styleUrls: ['./settings-frontend.component.css']
 })
 export class SettingsFrontendComponent implements OnInit {
+  private GlobalHeader:TGlobalParameters=new TGlobalParameters();
+
+  private  GlobalVerMarch:TGlobalParameters=new TGlobalParameters();
+  private GlobalMarchSF:TGlobalParameters=new TGlobalParameters();
   private GlobalParameters: TGlobalParameters[] = new Array<
     TGlobalParameters
   >();
@@ -20,7 +24,7 @@ export class SettingsFrontendComponent implements OnInit {
   document: Document;
   documents: any[] = new Array();
   constructor(
-    private settingsFrontend: settingsFrontend,
+    public settingsFrontend: settingsFrontend,
     private appProxy: AppProxy,
     private globalService: GlobalService,
     private activatedRoute: ActivatedRoute,
@@ -30,6 +34,10 @@ export class SettingsFrontendComponent implements OnInit {
   ngOnInit() {   
     this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType= data.filter(x => x.nvValue == 'תדמית')[0].iSysTableRowId);
     this.loadDocuments();
+  this.settingsFrontend.setGlobalParameters();
+  this.GlobalHeader=this.settingsFrontend.GlobalHeader;
+  this.GlobalMarchSF=this.settingsFrontend.GlobalMarchSF;
+  this.GlobalVerMarch=this.settingsFrontend.GlobalVerMarch;
   }
 
 
@@ -104,22 +112,23 @@ export class SettingsFrontendComponent implements OnInit {
   }
 
 private saveGlobalParams(){
+alert("saveGlobalParams")
 
-  this.settingsFrontend.GlobalHeader.nvTitle="כותרת";
-  
-  this.settingsFrontend.GlobalHeader.iParameterId=167
+  this.settingsFrontend.GlobalHeader.nvTitle=GLOBAL.title;
+  this.settingsFrontend.GlobalHeader.nvValue=this.GlobalHeader.nvValue;
+ 
   this.GlobalParameters.push(this.settingsFrontend.GlobalHeader);
-  this.settingsFrontend.GlobalVerMarch.nvTitle="טקט ראשי ";
-  this.settingsFrontend.GlobalVerMarch.iParameterId=168
+  this.settingsFrontend.GlobalVerMarch.nvTitle=GLOBAL.GlobalVerMarch;
+  this.settingsFrontend.GlobalVerMarch.nvValue=this.GlobalVerMarch.nvValue;
   this.GlobalParameters.push(this.settingsFrontend.GlobalVerMarch);
-  this.settingsFrontend.GlobalMarchSF.nvTitle="טקסט משני";
-  this.settingsFrontend.GlobalVerMarch.iParameterId=169
+  this.settingsFrontend.GlobalMarchSF.nvTitle=GLOBAL.GlobalMarchSF;
+  this.settingsFrontend.GlobalMarchSF.nvValue=this.GlobalMarchSF.nvValue;
   this.GlobalParameters.push(this.settingsFrontend.GlobalMarchSF);
  debugger;
   this.settingsFrontend.GetGlobalParameters().then(res=>{
  
     if((<any>res).length>0){
-   
+
       this.settingsFrontend.updateGlobalParameters(this.GlobalParameters).then(
 
         l=>alert("udp"));
