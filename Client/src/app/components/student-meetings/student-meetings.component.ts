@@ -31,14 +31,12 @@ export class StudentMeetingsComponent implements OnInit {
 
 
   public lstColumns = [{
-    title: 'עריכה',
     name: 'edit',
     bClickCell: true,
     type: 'html'
 
   },
   {
-    title: 'מחיקה',
     name: 'delete',
     bClickCell: true,
     type:'html'

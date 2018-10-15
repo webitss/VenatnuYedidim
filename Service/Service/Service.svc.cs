@@ -86,10 +86,10 @@ namespace Service
         {
             return Task.GetTasksByPersonId(iPersonId);
         }
-        //public bool DeleteTask(int iTaskId, int iPersonId)
-        //{
-        //    return Task.DeleteTask(iTaskId,iPersonId);
-        //}
+        public bool DeleteTask(int iTaskId, int iPersonId)
+        {
+            return Task.DeleteTask(iTaskId, iPersonId);
+        }
 
         #endregion
 
@@ -135,6 +135,13 @@ namespace Service
         public bool UnionCards(Student student, int iStudent2)
         {
             return Student.UnionCards(student, iStudent2);
+        }
+
+
+        public bool DeleteStudent(int istudent, int iUserId)
+        {
+            return Student.DeleteStudent( istudent,iUserId);
+
         }
 
         #endregion
@@ -347,10 +354,15 @@ namespace Service
         public bool changeTadmitStatus(int iDocumentId,int iUserId) { 
               return Document.changeTadmitStatus(iDocumentId,iUserId);
         }
+        public string GetBase64StringForDocument(string documentName)
+        {
+            return Document.GetBase64StringForDocument(documentName);
+        }
+        
 
-    #endregion
+        #endregion
 
-    #region participant
+        #region participant
 
     public List<Person> GetParticipantsList(int iEventId)
         {
