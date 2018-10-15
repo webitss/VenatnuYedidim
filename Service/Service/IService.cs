@@ -260,6 +260,14 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Event1> GetEventsList(int iUserId);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetEventsByStudent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Event1> GetEventsByStudent(int iPersonId);
 
         [OperationContract]
         [WebInvoke(
@@ -569,6 +577,15 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         bool DeleteDocument(int iDocumentId, int iLastModifyUserId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetBase64StringForDocument",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        string GetBase64StringForDocument(string documentName);
 
 
         #endregion

@@ -4,13 +4,20 @@
     margin-top: 5%; */
   
 }
-
+.title{
+    padding-bottom: 2%;
+padding-right: 2%;
+}
 
 button{
     margin-top:  4%;
     margin-left: 4%;
 }
-
+.btn-add{
+    padding: 2%;
+    margin-bottom: 4%;
+    margin-left: 100%;
+}
 /* .row1{
     margin-left: 5%;
     margin-right: 5%;

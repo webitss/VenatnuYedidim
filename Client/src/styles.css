@@ -168,6 +168,14 @@ body{
 .delete{
     background-image: url("../src/assets/icons/garbage.png");    
 }
+.download{
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-image: url("../src/assets/icons/download.png");
+}
 .avrechim{
     float: right;
     font-size: 20px;
@@ -230,3 +238,12 @@ height: 650px;
 ::-webkit-scrollbar-thumb:hover {
     background: #555; 
 }
+<<<<<<< HEAD
+
+.btn-disabled{
+    /* background-color: #888; */
+    opacity: 0.5;
+    cursor:no-drop;
+}
+=======
+>>>>>>> 1ca34a1ad91cbd69c2543764640aa042ec5b4956

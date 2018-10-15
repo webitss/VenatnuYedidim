@@ -17,15 +17,15 @@ export class UserDetailsComponent implements OnInit {
   constructor(private appProxy: AppProxy, private globalService: GlobalService, private router: Router, private route: ActivatedRoute, private sysTableService: SysTableService) { }
 
   ngOnInit() {
+    this.user = new User();
     this.route.parent.params.subscribe(params => {
       if (params['iPersonId'] != '0') {
         this.appProxy.post("GetUser", { iPersonId: params['iPersonId'] })
           .then(data => {
             this.user = data;
+          }).catch(err=>{
+            alert(err);
           });
-      }
-      else {
-        this.user = new User();
       }
     });
     this.sysTableService.getValues(4).then(data => {
@@ -53,15 +53,16 @@ export class UserDetailsComponent implements OnInit {
   public lst: Array<any>;
 
   saveUser() {
-    this.appProxy.post("SetUser", { user: this.user, iUserId: 1 }).then(data => {
+    this.appProxy.post("SetUser", { user: this.user, iUserId: this.globalService.getUser().iPersonId }).then(data => {
       if (data == true) {
         alert("המשתמש נשמר בהצלחה!");
         this.router.navigate(['users']);
       }
-
       else
         alert("error!");
-    })
+    }).catch(err=>{
+      alert(err);
+    });
   }
 
 }

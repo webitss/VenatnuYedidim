@@ -1,3 +1,6 @@
+<div>
+  <button (click)="addPresence()" class="btn-add btn-circle">הוספת נוכחות</button>
+</div>
 <div class="main-table">
   <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editPresence($event)"></app-vy-table>
 </div>

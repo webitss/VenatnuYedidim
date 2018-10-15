@@ -64,6 +64,7 @@ export class StudentDocumentsComponent implements OnInit {
     this.document = new Document();
     this.document.iItemId = this.id;
     this.document.iBelongingType = this.belongSheetType;
+    this.document.iCategoryType=0;
   }
   editDocument(e) {
     //alert(e.iDocumentId);
@@ -77,6 +78,8 @@ export class StudentDocumentsComponent implements OnInit {
         this.document.iItemId = element.iItemId;
         this.document.nvComment = element.nvComment;
         this.document.nvDocumentName = element.nvDocumentName;
+        if(this.document.iCategoryType==undefined)
+        this.document.iCategoryType=0;
       }
     });
 
