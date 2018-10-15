@@ -3,6 +3,8 @@ import { AppProxy } from '../../services/app.proxy';
 import { Participants } from '../../classes/participants';
 import { ActivatedRoute } from '@angular/router';
 import { SysTableRow } from '../../classes/SysTableRow';
+import { Person } from '../../classes/person';
+
 import { SysTableService } from '../../services/sys-table.service';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { NgIf } from '@angular/common';
@@ -18,12 +20,19 @@ export class EventParticipantsComponent implements OnInit {
   protected participant: Array<any> = new Array<any>();
   protected sysTableRowList: SysTableRow[];
   protected iPerson: number;
-  protected flag;
+  protected flag:boolean;
   protected iLastModifyUserId: number;
   protected s: any;
   protected personsList: string[];
+  listToSelect: any[];
+  allPersons: Array<Person>;
+  title:string="רשימת כולם";
+  inputTitle:string="בחר משתתפים";
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
 
+  cancelAdd(event) {
+    this.flag = false;
+  }
   public lstColumns = [
     new VyTableColumn('מחיקה', 'delete', 'html', true, false),
     new VyTableColumn('שם פרטי', 'nvFirstName'),
@@ -41,13 +50,33 @@ export class EventParticipantsComponent implements OnInit {
         //   this.personsList = data;
 
         // });
+       
         alert("func")
       }
       close() {
       //  להוסיף את המשתתפים שנבחרו
       }
   ngOnInit() {
+    
+    this.listToSelect=new Array<any>();
 
+    this.appProxy.post('GetPersonList', { iPersonId: 0 }).then(
+      data =>{
+
+       this.allPersons = data
+      //  this.allPersons.forEach(
+      //   st => {
+      //      st['delete'] = '<button class="btn delete" >מחק</button>'; 
+      //     });
+
+          this.allPersons.forEach(
+            person=>{
+              this.listToSelect.push({value:person.nvFirstName+' '+person.nvLastName+" "});
+            }
+          );
+    }
+      , err => alert(err));
+    
     this.sub = this.router.parent.params.subscribe(params => {
       this.iEventId = +params['iEventId'];
       this.appProxy.post( "GetParticipantsList" , { iEventId: this.iEventId }).then(res => {
