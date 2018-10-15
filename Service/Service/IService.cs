@@ -756,7 +756,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool SetPresence(PresenceAvrech presenceAvrech);
+        bool SetPresence(PresenceAvrech presenceAvrech, int iUserId);
 
         #endregion
 

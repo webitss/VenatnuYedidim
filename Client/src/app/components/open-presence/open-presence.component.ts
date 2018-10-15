@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PresenceAvrech } from '../../classes/presenceAvrech';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-open-presence',
@@ -10,7 +11,7 @@ import { AppProxy } from '../../services/app.proxy';
 })
 export class OpenPresenceComponent implements OnInit {
 
-  constructor(  private appProxy: AppProxy ) { }
+  constructor(  private appProxy: AppProxy,private globalService:GlobalService ) { }
   @Input()
   @Output()
   closeMe = new EventEmitter();
@@ -20,6 +21,7 @@ export class OpenPresenceComponent implements OnInit {
   @Input()
   protected presence: PresenceAvrech;
   ngOnInit() {
+    this.presence['dtDate'] = new Date((this.presence.dtDatePresence).getTime());
   }
   closeDialog() {
     this.closeMe.emit(null);
@@ -31,7 +33,7 @@ export class OpenPresenceComponent implements OnInit {
     // this.presence.dtDatePresence = this.save.name;
     // this.document.nvDocumentType = this.save.type;
 debugger;
-    this.appProxy.post('SetPresence', { presenceAvrech: this.presence}).then(
+    this.appProxy.post('SetPresence', { presenceAvrech: this.presence,iUserId:this.globalService.getUser()['iUserId']}).then(
       data => {
         if (data == 0)
           alert("error in save data")
@@ -40,4 +42,5 @@ debugger;
       , err => alert("err"));
 
   }
+
 }

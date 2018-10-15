@@ -437,9 +437,9 @@ namespace Service
             return PresenceAvrech.GetPresenceAvrechById(iPersonId);
         }
 
-        public bool SetPresence(PresenceAvrech presenceAvrech)
+        public bool SetPresence(PresenceAvrech presenceAvrech, int iUserId)
         {
-            return PresenceAvrech.SetPresence(presenceAvrech);
+            return PresenceAvrech.SetPresence(presenceAvrech,  iUserId);
         }
 
         public bool DeletePresenceAvrech(int ipresenceAvrech, int iLastModifyUserId)
