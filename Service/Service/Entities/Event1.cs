@@ -26,6 +26,7 @@ namespace Service.Entities
         public string nvComments { get; set; }
         [DataMember]
         public int iCreatedByUserId { get; set; }
+
         //[DataMember]
         //public DateTime? dtCreatedate { get; set; }
         //[DataMember]

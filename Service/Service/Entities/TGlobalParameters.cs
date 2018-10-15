@@ -47,9 +47,7 @@ List<SqlParameter> parameters =new List<SqlParameter>();
 		{
 			try
 			{
-				GlobalParameters[0].iParameterId = 167;
-				GlobalParameters[0].iParameterId = 168;
-				GlobalParameters[0].iParameterId = 169;
+				
 				List<SqlParameter> parameters = new List<SqlParameter>();
 
 				for (int i = 0; i < GlobalParameters.Count(); i++)
