@@ -52,7 +52,8 @@ export class StudentConversationDetailsComponent implements OnInit {
     this.conver.iPersonId = this.conversation.iPersonId;
     this.conver.iConversationId = this.conversation.iConversationId;
     this.conver.iConversationType = this.conversation.iConversationType;
-    this.conver.nvConversationSummary = this.conversation.nvConversationSummary;
+    this.conver.nvConversationSummary = this.currentConver.nvConversationSummary;
+    if(this.conver.iConversationId)
     this.conver.dtConversationDate = new Date(this.currentConver['dtDate']);
     if (this.currentConver.iConversationId == null) {
       this.conver.iPersonId = this.iPersonId;
