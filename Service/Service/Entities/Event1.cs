@@ -27,20 +27,20 @@ namespace Service.Entities
         [DataMember]
         public int iCreatedByUserId { get; set; }
 
-<<<<<<< HEAD
-=======
-        [NoSendToSQL]
-        [DataMember]
-        public int iArrivalStatusType { get; set; }
->>>>>>> e66fa32781388f11142c415964b0c0196ab9b0d1
-        //[DataMember]
-        //public DateTime? dtCreatedate { get; set; }
-        //[DataMember]
-        //public int iLastModifyUserId { get; set; }
-        //[DataMember]
-        //public DateTime? dtLastModifyDate { get; set; }
-        //[DataMember]
-        //public bool bSysRowStatus { get; set; }
+//<<<<<<< HEAD
+//=======
+//        [NoSendToSQL]
+//        [DataMember]
+//        public int iArrivalStatusType { get; set; }
+//>>>>>>> e66fa32781388f11142c415964b0c0196ab9b0d1
+//        //[DataMember]
+//        //public DateTime? dtCreatedate { get; set; }
+//        //[DataMember]
+//        //public int iLastModifyUserId { get; set; }
+//        //[DataMember]
+//        //public DateTime? dtLastModifyDate { get; set; }
+//        //[DataMember]
+//        //public bool bSysRowStatus { get; set; }
 
         #endregion
 
