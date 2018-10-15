@@ -18,3 +18,7 @@
 .cell{
     overflow-y: hidden;
 }
+.btn-circle{
+    margin-bottom: 2%;
+    width: 15%;
+}
