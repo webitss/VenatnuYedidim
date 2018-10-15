@@ -188,6 +188,7 @@ import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
 
 
 
+    VyPopUpComponent,
    
   ],
  //imports: [ 
