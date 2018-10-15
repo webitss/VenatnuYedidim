@@ -63,6 +63,7 @@
     <label for='yeshiva-roleType'>תפקיד:</label>
     <select id='roleType' name='yeshiva-roleType' [(ngModel)]="yeshiva.iRoleType" [ngModelOptions]="{standalone: true}" required
       #roleType="ngModel">
+      <option [ngValue]="undefined" disabled>בחר</option>
       <option *ngFor='let y of sysTableList' [value]="y.iSysTableRowId">
         {{y.nvValue}}
       </option>

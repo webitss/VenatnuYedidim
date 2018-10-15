@@ -46,7 +46,7 @@ export class SettingsYeshivotComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('מייל', 'nvEmail'))
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'))
     this.lstColumns.push(new VyTableColumn('תפקיד', 'nvRoleType'))
-   
+
     this.appProxy.post('GetAllYeshivot').then(data => {
       this.yeshivaList = data;
       this.sysTableService.getValues(SysTableService.dataTables.roleType.iSysTableId).then(val=> {
