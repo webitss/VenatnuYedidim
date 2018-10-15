@@ -27,6 +27,12 @@ namespace Service.Entities
         [DataMember]
         public int iCreatedByUserId { get; set; }
 
+<<<<<<< HEAD
+=======
+        [NoSendToSQL]
+        [DataMember]
+        public int iArrivalStatusType { get; set; }
+>>>>>>> e66fa32781388f11142c415964b0c0196ab9b0d1
         //[DataMember]
         //public DateTime? dtCreatedate { get; set; }
         //[DataMember]
@@ -49,6 +55,21 @@ namespace Service.Entities
             catch (Exception ex)
             {
                 Log.LogError("GetEventsList / TEvent_SLCT", "ex" + ex);
+                return null;
+            }
+        }
+
+        public static List<Event1> GetEventsByStudent(int iPersonId)
+        {
+            try
+            {
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_ByStudent_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
+                List<Event1> events = ObjectGenerator<Event1>.GeneratListFromDataRowCollection(drc);
+                return events;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetEventsByStudent / TEvent_ByStudent_SLCT", "ex" + ex);
                 return null;
             }
         }

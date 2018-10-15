@@ -14,20 +14,27 @@ import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 export class EventsComponent implements OnInit {
   protected eventsList: Event1[];
   @ViewChild('events') events: any;
-  @ViewChild(VyTableComponent) vyTableComponent:VyTableComponent;
-
-  constructor(private appProxy: AppProxy, private router: Router, private globalService:GlobalService) { }
+  @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
+  message:string;
+  flag = false;
+  header = "אישור מחיקת אירוע";
+  eventIdToDelete:number;
+  myFunc() {
+    alert('sadsa');
+  }
+  constructor(private appProxy: AppProxy, private router: Router, private globalService: GlobalService) { }
 
   edit(e) {
     this.router.navigate(['events/event/', e.iEventId]);
   }
 
   deleteEvent(e) {
-    this.appProxy.post('DeleteEvent', { iEventId: e.iEventId, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
+    this.appProxy.post('DeleteEvent', { iEventId: e, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
       if (res == true) {
-        alert('נמחק בהצלחה!');
-        this.lstDataRows.splice(this.lstDataRows.indexOf(e),1);  
-        this.vyTableComponent.refreshTable(this.lstDataRows);     
+        //alert('נמחק בהצלחה!');
+        const i=this.lstDataRows.find(x=>x.iEventId=e);
+        this.lstDataRows.splice(this.lstDataRows.indexOf(i), 1);
+        this.vyTableComponent.refreshTable(this.lstDataRows);
       }
       else {
         alert('לא נמחק!');
@@ -35,18 +42,24 @@ export class EventsComponent implements OnInit {
     });
   }
 
+  deleteE(e: Event1) {
+    this.message='האם ברצונך למחוק את '+e.nvName+'?';
+    this.eventIdToDelete=e.iEventId;
+    this.flag=true;
+  }
+
   click(e) {
     // this.avrechId = e.iPersonId;
     if (e.columnClickName == "edit")
       this.edit(e);
     else
-      this.deleteEvent(e);
+      this.deleteE(e);
 
   }
 
   public lstColumns = [
-    new VyTableColumn('עריכה', 'edit', 'html', true, false),
-    new VyTableColumn('מחיקה', 'delete', 'html', true, false),
+    new VyTableColumn('', 'edit', 'html', true, false),
+    new VyTableColumn('', 'delete', 'html', true, false),
     new VyTableColumn('שם ארוע', 'nvName'),
     new VyTableColumn('תאריך', 'dtEventDate'),
     new VyTableColumn('מקום', 'nvPlace')];

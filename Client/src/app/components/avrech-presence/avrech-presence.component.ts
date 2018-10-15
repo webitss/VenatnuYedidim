@@ -48,22 +48,24 @@ export class AvrechPresenceComponent implements OnInit {
       })
     });
   }
-  click(e) {
-    // debugger;
-    // this.iPersonId = e.iPersonId;
-    // if (e.columnClickName == "edit")
-    //   this.editPresence();
 
-  }
   @ViewChild(VyTableComponent) cc:VyTableComponent;
 
   editPresence(e) {
     debugger;
-    this.presence=e;
+     this.presence=new PresenceAvrech();
+     this.presence.iPresenceAvrech=e.iPresenceAvrech;
+     this.presence.iPersonId=e.iPersonId;
+     this.presence.dtDatePresence=e.nvDate;
+     this.presence.iHoursSum=e.iHoursSum;
+
     // this.cc.refreshTable(this.presences)
 
 }
-
+addPresence() {
+  this.presence = new PresenceAvrech();
+  this.presence.iPersonId = this.iPersonId;
+}
 closeDocumentDialog() {
   this.presence = null;
   this.lstDataRows=new Array();

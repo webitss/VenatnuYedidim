@@ -24,6 +24,8 @@ export class UserComponent implements OnInit {
           .then(data => {
             this.user = data;
             this.title = this.user.nvUserName;
+          }).catch(err=>{
+              alert(err);
           });
       }
       else {

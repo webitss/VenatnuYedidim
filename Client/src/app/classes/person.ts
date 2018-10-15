@@ -22,6 +22,7 @@ export class Person {
         this.nvEmail = '';
         this.nvAddress = '';
         this.nvCity = '';
+        this.nvStatus = '';
         this.nvBirthdate='';
         this.dtBirthdate=new Date();
 
