@@ -1,7 +1,12 @@
-
-<!-- <ul *ngFor="let d of documents">
-<li>{{d.iDocumentId}}, {{d.nvDocumentName}}, {{d.lstObject['nvCategory']}}, {{d.lstObject['nvIdentityCard']}},{{d.lstObject['nvName']}}</li>
-</ul> -->
+<div class="row">
+    <div class="col col-sm-10"></div>
+    <div class="col col-sm-1">
+        <button class="btn excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
+    </div>
+    <div class="col col-sm-1">
+        <button class="btn" (click)="tableToPdf('מסמכים')" title="הורד pdf">pdf</button>
+    </div>
+</div>
 <div class="main-table">
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table>
+    <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" #AppVyTable></app-vy-table>
 </div>

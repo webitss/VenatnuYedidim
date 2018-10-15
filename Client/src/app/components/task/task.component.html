@@ -26,7 +26,8 @@
   <div class="row col-sm-12">
     <div class="form-group col-sm-10">
       <label for="commenst">הערה</label>
-      <input type="text" name="comment" class="form-control" [(ngModel)]="task.nvComment" />
+      <textarea name='comment' class="form-control" [(ngModel)]="task.nvComment" [ngModelOptions]="{standalone: true}"></textarea>
+      <!-- <input type="text" name="comment" class="form-control" [(ngModel)]="task.nvComment" /> -->
     </div>
   </div>
 </div>

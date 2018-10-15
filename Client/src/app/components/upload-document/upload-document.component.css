@@ -56,3 +56,8 @@ h3{
 .form-group{
     width: 35%;
 }
+button[disabled]
+{
+    background-color: rgb(228, 147, 174);
+    cursor: not-allowed;
+}
