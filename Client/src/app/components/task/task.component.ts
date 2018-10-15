@@ -85,7 +85,7 @@ export class TaskComponent implements OnInit {
       this.task.iPersonId = this.personId;//מי שלחצו עליו
     }
     else {
-      alert(this.personId);
+      // alert(this.personId);
       this.appProxy.post('GetStudentById', { iUserId: this.personId }).then(data => {
         if (data) {
           // alert("personid"+this.personId);
