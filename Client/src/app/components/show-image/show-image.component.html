@@ -39,15 +39,20 @@
 
     </header>
     <div id="VerMarch" class="VerMarch">{{settingsFrontend.GlobalMarchSF.nvValue}}</div>
-    <div id="MarchSF" class="MarchSF">{{settingsFrontend.GlobalMarchSF.nvValue}}</div>
+    <div id="MarchSF" class="MarchSF">{{settingsFrontend.GlobalVerMarch.nvValue}}</div>
     <div id="img" class="image"> 
       <!-- <table *ngFor="let img of listImage">
         <div class="row ">
 <img class="Image col-sm-12" [src]="baseFileUrl+img"/>
 </div>
       </table>  -->
-      <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery> 
-    
+      <ngx-gallery [options]="galleryOptions" [images]="galleryImages"(onOpen)="galleryOpened($event)"
+      
+      (onClose)="galleryClosed()"
+      (onImageClicked)="galleryImageClicked($event)"
+      (onImageChange)="galleryImageChanged($event)"
+      (onDelete)="deleteImage($event)"></ngx-gallery> 
+    <input type="button" value="הבא" (onClick)="nextImage()"/>
     </div>
     
   

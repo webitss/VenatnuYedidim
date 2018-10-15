@@ -26,6 +26,11 @@ namespace Service.Entities
         public string nvComments { get; set; }
         [DataMember]
         public int iCreatedByUserId { get; set; }
+
+
+        [NoSendToSQL]
+        [DataMember]
+        public int iArrivalStatusType { get; set; }
         //[DataMember]
         //public DateTime? dtCreatedate { get; set; }
         //[DataMember]
@@ -48,6 +53,21 @@ namespace Service.Entities
             catch (Exception ex)
             {
                 Log.LogError("GetEventsList / TEvent_SLCT", "ex" + ex);
+                return null;
+            }
+        }
+
+        public static List<Event1> GetEventsByStudent(int iPersonId)
+        {
+            try
+            {
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_ByStudent_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
+                List<Event1> events = ObjectGenerator<Event1>.GeneratListFromDataRowCollection(drc);
+                return events;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetEventsByStudent / TEvent_ByStudent_SLCT", "ex" + ex);
                 return null;
             }
         }
