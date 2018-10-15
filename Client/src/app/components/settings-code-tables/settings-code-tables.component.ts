@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output } from '@angular/core';
 import { SysTableService } from '../../services/sys-table.service';
 import { error } from 'util';
 import { SysTableRow } from '../../classes/SysTableRow';
@@ -6,6 +6,8 @@ import { SysTables } from '../../classes/SysTables';
 import { AppProxy } from '../../services/app.proxy';
 import { forEach } from '@angular/router/src/utils/collection';
 import { t } from '@angular/core/src/render3';
+// import { EventEmitter } from 'protractor';
+import {EventEmitter} from 'events'
 
 @Component({
   selector: 'app-settings-code-tables',
@@ -36,6 +38,7 @@ export class SettingsCodeTableComponent implements OnInit {
   }]
   private readonly newProperty = this;
   @ViewChild('CodeTables') CodeTables:any;
+
 
   constructor(private sysTableService: SysTableService, private appProxy: AppProxy) { }
 
@@ -119,7 +122,10 @@ export class SettingsCodeTableComponent implements OnInit {
   close() {
     this.divNewValue = false
     this.showOverlap = false
+    this.toEdit=false;
   }
+
+
   downloadExcel(){
     this.CodeTables.downloadExcel();
   }

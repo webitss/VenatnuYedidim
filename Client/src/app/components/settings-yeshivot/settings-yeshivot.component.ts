@@ -92,10 +92,11 @@ export class SettingsYeshivotComponent implements OnInit {
         this.yeshiva=data;
         this.iYeshivaId=null;
         this.flag=null;
+        this.yeshivaList.splice(this.yeshivaList.indexOf(this.yeshiva),1);
+        this.vyTableComponent.refreshTable(this.yeshivaList);  
         alert("הישיבה נמחקה בהצלחה");
     });  
-    this.yeshivaList.splice(this.yeshivaList.indexOf(this.yeshiva),1);
-    this.vyTableComponent.refreshTable(this.yeshivaList);  
+    
   }
 
   close() {

@@ -1,75 +1,75 @@
 <form class="settingYeshiva" #form="ngForm">
- <!-- [formGroup]="yeshiva-form" -->
-  <button class="btn-yesNo" (click)="cancel()" >סגור x </button>
+
+  <button class="btn-yesNo" (click)="cancel()">סגור x </button>
   <button class="btn-yesNo" (click)="save()" [ngClass]="{'disabled': !isDisabled() }" [disabled]="!isDisabled()">שמור v </button>
 
 
-    <div class="form-control">
-      <label for='yeshiva-name'>שם מוסד:</label>
-      <input class=inputYeshiva type="text" name='yeshiva-name' [(ngModel)]="yeshiva.nvYeshivaName" required #name="ngModel"/>
-      <div *ngIf="name.invalid && (name.dirty || name.touched)">
-        <div *ngIf="(name.errors.required)" class="text-danger text-right">
-          <strong>! </strong>שדה נדרש</div>
+  <div class="form-control">
+    <label for='yeshiva-name'>שם מוסד:</label>
+    <input class=inputYeshiva type="text" name='yeshiva-name' [(ngModel)]="yeshiva.nvYeshivaName" required #name="ngModel" />
+    <div *ngIf="name.invalid && (name.dirty || name.touched)">
+      <div *ngIf="(name.errors.required)" class="text-danger text-right">
+        <strong>! </strong>שדה נדרש</div>
     </div>
   </div>
 
-    <div class="form-control">
-      <label for='yeshiva-address'>כתובת:</label>
-      <input class=inputYeshiva type="text" name='yeshiva-address' [(ngModel)]="yeshiva.nvAddress" required #address="ngModel"/>
-      <div *ngIf="address.invalid && (address.dirty || address.touched)">
-        <div *ngIf="(address.errors.required)" class="text-danger text-right">
-          <strong>! </strong>שדה נדרש</div>
+  <div class="form-control">
+    <label for='yeshiva-address'>כתובת:</label>
+    <input class=inputYeshiva type="text" name='yeshiva-address' [(ngModel)]="yeshiva.nvAddress" required #address="ngModel"
+    />
+    <div *ngIf="address.invalid && (address.dirty || address.touched)">
+      <div *ngIf="(address.errors.required)" class="text-danger text-right">
+        <strong>! </strong>שדה נדרש</div>
     </div>
   </div>
 
-    <div class="form-control">
-      <label for='yeshiva-city'>עיר:</label>
-      <input class=inputYeshiva type="text" name='yeshiva-city' [(ngModel)]="yeshiva.nvCity" required #city="ngModel"/>
-      <div *ngIf="city.invalid && (city.dirty || city.touched)">
-        <div *ngIf="(city.errors.required)" class="text-danger text-right">
-          <strong>! </strong>שדה נדרש</div>
+  <div class="form-control">
+    <label for='yeshiva-city'>עיר:</label>
+    <input class=inputYeshiva type="text" name='yeshiva-city' [(ngModel)]="yeshiva.nvCity" required #city="ngModel"/>
+    <div *ngIf="city.invalid && (city.dirty || city.touched)">
+      <div *ngIf="(city.errors.required)" class="text-danger text-right">
+        <strong>! </strong>שדה נדרש</div>
     </div>
   </div>
 
-    <div class="form-control">
-      <label for='yeshiva-contact'>שם איש קשר:</label>
-      <input class=inputYeshiva type="text" name='yeshiva-contact' [(ngModel)]="yeshiva.nvContact" required #contact="ngModel"/>
-      <div *ngIf="contact.invalid && (contact.dirty || contact.touched)">
-        <div *ngIf="(contact.errors.required)" class="text-danger text-right">
-          <strong>! </strong>שדה נדרש</div>
+  <div class="form-control">
+    <label for='yeshiva-contact'>שם איש קשר:</label>
+    <input class=inputYeshiva type="text" name='yeshiva-contact' [(ngModel)]="yeshiva.nvContact" required #contact="ngModel"/>
+    <div *ngIf="contact.invalid && (contact.dirty || contact.touched)">
+      <div *ngIf="(contact.errors.required)" class="text-danger text-right">
+        <strong>! </strong>שדה נדרש</div>
     </div>
   </div>
 
-    <div class="form-control">
-      <label for='yeshiva-phone'>טלפון:</label>
-      <input class=inputYeshiva type="text" name='yeshiva-phone'[(ngModel)]="yeshiva.nvMobile" required #phone="ngModel" />
-      <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
-        <div *ngIf="(phone.errors.required)" class="text-danger text-right">
-          <strong>! </strong>שדה נדרש</div>
+  <div class="form-control">
+    <label for='yeshiva-phone'>טלפון:</label>
+    <input class=inputYeshiva type="text" name='yeshiva-phone' [(ngModel)]="yeshiva.nvMobile" required #phone="ngModel" />
+    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+      <div *ngIf="(phone.errors.required)" class="text-danger text-right">
+        <strong>! </strong>שדה נדרש</div>
     </div>
   </div>
 
-    <div class="form-control">
-      <label for='yeshiva-mobile'>מייל:</label>
-      <input class=inputYeshiva type="email" name='yeshiva-mobile' [(ngModel)]="yeshiva.nvEmail" required #mobile="ngModel"/>
-      <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
-        <div *ngIf="(mobile.errors.required)" class="text-danger text-right">
-          <strong>! </strong>שדה נדרש</div>      
-        </div>
-          <!-- <span class="text-danger" *ngIf="yeshiva-form.controls['email'].hasError('email') && 
-          (yeshiva-form.controls['email'].dirty || yeshiva-form.controls['email'].touched)">
-          Please enter valid email address</span> -->
+  <div class="form-control">
+    <label for='yeshiva-mobile'>מייל:</label>
+    <input class=inputYeshiva type="email" name='yeshiva-mobile' [(ngModel)]="yeshiva.nvEmail" required #mobile="ngModel" />
+    <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
+      <div *ngIf="(mobile.errors.required)" class="text-danger text-right">
+        <strong>! </strong>שדה נדרש</div>
+    </div>
   </div>
 
-    <div class="form-control">
-      <label for='roleType'>תפקיד:</label>
-        <select id='roleType' [(ngModel)]="yeshiva.roleType" required #roleType="ngModel" [ngModelOptions]="{standalone: true}">
-          <option *ngFor='let y of sysTableList' [value]="y.iSysTableRowId">{{y.nvValue}}</option>
-        </select>
-        <div *ngIf="roleType.invalid && (roleType.dirty || roleType.touched)">
-          <div *ngIf="(roleType.errors.required)" class="text-danger text-right">
-            <strong>! </strong>שדה נדרש</div>
-      </div>
+  <div class="form-control">
+    <label for='yeshiva-roleType'>תפקיד:</label>
+    <select id='roleType' name='yeshiva-roleType' [(ngModel)]="yeshiva.iRoleType" [ngModelOptions]="{standalone: true}" required
+      #roleType="ngModel">
+      <option *ngFor='let y of sysTableList' [value]="y.iSysTableRowId">
+        {{y.nvValue}}
+      </option>
+    </select>
+    <div *ngIf="roleType.invalid && (roleType.dirty || roleType.touched)">
+      <div *ngIf="(roleType.errors.required)" class="text-danger text-right">
+        <strong>! </strong>שדה נדרש</div>
+    </div>
   </div>
 </form>
-
