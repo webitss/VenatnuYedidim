@@ -47,7 +47,6 @@ import { StudentDocumentsComponent } from './components/student-documents/studen
 import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
 import { StudentMeetingDetailsComponent } from './components/student-meeting-details/student-meeting-details.component';
 import { StudentEventsComponent } from './components/student-events/student-events.component';
-import { StudentEventComponent } from './components/student-event/student-event.component';
 import { StudentEventDetailsComponent } from './components/student-event-details/student-event-details.component';
 
 import { AvrechimComponent } from './components/avrechim/avrechim.component';
@@ -129,7 +128,6 @@ import { OpenPresenceComponent } from './components/open-presence/open-presence.
     StudentMeetingDetailsComponent,
     StudentDocumentsComponent,
     StudentEventsComponent,
-    StudentEventComponent,
     StudentEventDetailsComponent,
     CardsUnionComponent,
 
@@ -241,13 +239,16 @@ import { OpenPresenceComponent } from './components/open-presence/open-presence.
           },
           {
             path: "student-events", component: StudentEventsComponent
+            //  children:[
+            //   {path: "student-event-details/:iEventId", component: StudentEventDetailsComponent}
+            // ]
           },
           {
-            path: "student-events/event/:iEventId", component: StudentEventComponent,
-            children: [
-              { path: "", component: UserDetailsComponent },
-              { path: "student-event-details", component: StudentEventDetailsComponent }
-            ]
+            path: "student-events-details/:iEventId", component: StudentEventDetailsComponent
+            // ,children: [
+            //   { path: "", component: UserDetailsComponent },
+            //   { path: "student-event-details", component: StudentEventDetailsComponent }
+            //]
           },
 
         ]

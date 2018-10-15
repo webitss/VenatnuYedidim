@@ -3,7 +3,7 @@
     <div class="actions col-sm-8">
         <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
         <button class="btn btn-small" (click)="tableToPdf('משתמשים')">s</button>
-        <button class="btn btn-circle1 btn-pink" [class.btn-disabled]="globalService.getUser().iPermittionId != 5" [disabled]="globalService.getUser().iPermittionId != 5"
+        <button class="btn btn-circle1 btn-pink" [class.btn-disabled]="globalService.getUser().iPermissionId != 5" [disabled]="globalService.getUser().iPermissionId != 5"
             routerLink="/users/user/0">משתמש חדש</button>
     </div>
 </div>

@@ -53,7 +53,7 @@ export class UserDetailsComponent implements OnInit {
   public lst: Array<any>;
 
   saveUser() {
-    this.appProxy.post("SetUser", { user: this.user, iUserId: 1 }).then(data => {
+    this.appProxy.post("SetUser", { user: this.user, iUserId: this.globalService.getUser().iPersonId }).then(data => {
       if (data == true) {
         alert("המשתמש נשמר בהצלחה!");
         this.router.navigate(['users']);

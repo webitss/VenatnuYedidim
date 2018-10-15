@@ -40,7 +40,6 @@ export class UsersComponent implements OnInit {
     }).catch(err=>{
       alert(err);
     });
-
   }
 
 
@@ -49,8 +48,8 @@ export class UsersComponent implements OnInit {
 
 
   public lstColumns = [
-    new VyTableColumn('', 'edit', 'html', true, false),
-    new VyTableColumn('', 'delete', 'html', true, false),
+    new VyTableColumn('עריכה', 'edit', 'html', true, false),
+    new VyTableColumn('מחיקה', 'delete', 'html', true, false),
     new VyTableColumn('שם משפחה', 'nvLastName'),
     new VyTableColumn('שם פרטי', 'nvFirstName'),
     new VyTableColumn('נייד', 'nvMobile'),
