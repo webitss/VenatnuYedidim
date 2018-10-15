@@ -2,7 +2,8 @@
 .meetingDetails{
     position: fixed;
     z-index: 100;
-    top: 25%;
+    top: 15%;
+    /* height: 200px; */
     right: 25%;
     background:white;
     border: 2px;
@@ -16,7 +17,9 @@ img{
     height: 2px;
  
 }
-
+.btn-add{
+    margin-bottom: 2%;
+}
 .table{
     height: 800px;
     width: 100%;

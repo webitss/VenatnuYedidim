@@ -10,10 +10,11 @@ export class settingsFrontend {
     
     public  Globals:TGlobalParameters[]=new  Array<TGlobalParameters>();
     public GlobalHeader:TGlobalParameters=new TGlobalParameters();
+
     public GlobalVerMarch:TGlobalParameters=new TGlobalParameters();
     public GlobalMarchSF:TGlobalParameters=new TGlobalParameters();
   constructor(private appProxy:AppProxy) { 
-
+    
   }
   SaveGlobalParameters(GlobalParameters:Array<TGlobalParameters> ) : Promise<boolean>{
     return  this.appProxy.post("SaveGlobalParameters", { GlobalParameters: GlobalParameters }).

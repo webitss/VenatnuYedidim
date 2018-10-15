@@ -215,6 +215,13 @@ namespace Service.Entities
             }
         }
 
+        public static string GetBase64StringForDocument(string documentName)
+        {
+            string documentPath = @AppDomain.CurrentDomain.BaseDirectory + ConfigSettings.ReadSetting("FileFolderPath") + documentName;
+            byte[] imageBytes = System.IO.File.ReadAllBytes(documentPath);
+            string base64String = Convert.ToBase64String(imageBytes);
+            return base64String;
+        }
         #endregion
     }
 }

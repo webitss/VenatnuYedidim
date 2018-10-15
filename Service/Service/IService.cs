@@ -134,6 +134,14 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         bool UnionCards(Student student, int iStudent2);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "DeleteStudent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool DeleteStudent(int  istudent, int iUserId);
 
         [OperationContract]
         [WebInvoke(
@@ -570,6 +578,15 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         bool DeleteDocument(int iDocumentId, int iLastModifyUserId);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetBase64StringForDocument",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        string GetBase64StringForDocument(string documentName);
+
 
         #endregion
 
@@ -607,13 +624,13 @@ namespace Service
         List<Task> GetTasksByPersonId(int iPersonId);
 
 
-        //[WebInvoke(
-        // Method = "POST",
-        //UriTemplate = "DeleteTask",
-        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //ResponseFormat = WebMessageFormat.Json,
-        //RequestFormat = WebMessageFormat.Json)]
-        //bool DeleteTask(int iTaskId,int iPersonId);
+        [WebInvoke(
+         Method = "POST",
+        UriTemplate = "DeleteTask",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool DeleteTask(int iTaskId, int iPersonId);
         #endregion
 
 

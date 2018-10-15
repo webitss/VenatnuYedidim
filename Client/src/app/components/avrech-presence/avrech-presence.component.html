@@ -1,6 +1,9 @@
+<div>
+  <button (click)="addPresence()" class="btn-add btn-circle">הוספת נוכחות</button>
+</div>
 <div class="main-table">
   <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editPresence($event)"></app-vy-table>
 </div>
 <div class="openPresence" *ngIf="presence!=null">
-  <app-open-presence [presence]="presence"></app-open-presence>
+  <app-open-presence [presence]="presence" (closeMe)="closeDocumentDialog()" (closeMeNoSave)="closeDocumentDialog()"></app-open-presence>
 </div> 

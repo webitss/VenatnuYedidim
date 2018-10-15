@@ -56,7 +56,23 @@ namespace Service.Entities
                 return null;
             }
         }
-        public static bool DeletePresenceAvrech(int iPresenceAvrech,int iLastModifyUserId)
+		//public static List<PresenceAvrech> GetPresenceAvrechByIdPresence(int iPresenceAvrech)
+		//{
+		//	try
+		//	{
+		//		SqlParameter parameter = new SqlParameter("iPresenceAvrech", iPresenceAvrech);
+		//		da dt = SqlDataAccess.ExecuteDatasetSP("TPresenceAvrechByIdPresence_SLCT", parameter);
+		//		DataRow dr = dt;
+		//		return ObjectGenerator<PresenceAvrech>.GeneratListFromDataRowCollection(drc);
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		Log.LogError("GetPresenceAvrechByIdPresence / TPresenceAvrechByIdPresence_SLCT", "@iPresenceAvrech" + @iPresenceAvrech + ", ex " + ex);
+		//		return null;
+		//	}
+		//}
+
+		public static bool DeletePresenceAvrech(int iPresenceAvrech,int iLastModifyUserId)
         {
             try
             {
@@ -69,6 +85,7 @@ namespace Service.Entities
             }
             #endregion
         }
+
     }
 }
 

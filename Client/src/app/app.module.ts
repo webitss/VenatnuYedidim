@@ -94,6 +94,7 @@ import { GaleryComponent } from './components/galery/galery.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { settingsFrontend } from './services/settings-frontend.service';
 import { OpenPresenceComponent } from './components/open-presence/open-presence.component';
+import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
 
 
 
@@ -184,6 +185,9 @@ import { OpenPresenceComponent } from './components/open-presence/open-presence.
 
 
     OpenPresenceComponent,
+
+
+
    
   ],
  //imports: [ 
