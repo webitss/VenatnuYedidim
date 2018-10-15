@@ -4,9 +4,9 @@
         <button class="btn excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
     </div>
     <div class="col col-sm-1">
-        <button class="btn" (click)="tableToPdf('מסמכים')" title="הורד pdf">pdf</button>
+        <button class="btn pdf" (click)="tableToPdf('מסמכים')" title="הורד pdf"></button>
     </div>
 </div>
 <div class="main-table">
-    <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" #AppVyTable></app-vy-table>
+    <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"  (clickCell)="download($event)" #AppVyTable></app-vy-table>
 </div>

@@ -354,10 +354,15 @@ namespace Service
         public bool changeTadmitStatus(int iDocumentId,int iUserId) { 
               return Document.changeTadmitStatus(iDocumentId,iUserId);
         }
+        public string GetBase64StringForDocument(string documentName)
+        {
+            return Document.GetBase64StringForDocument(documentName);
+        }
+        
 
-    #endregion
+        #endregion
 
-    #region participant
+        #region participant
 
     public List<Person> GetParticipantsList(int iEventId)
         {
