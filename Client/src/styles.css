@@ -168,6 +168,14 @@ body{
 .delete{
     background-image: url("../src/assets/icons/garbage.png");    
 }
+.download{
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-image: url("../src/assets/icons/download.png");
+}
 .avrechim{
     float: right;
     font-size: 20px;
