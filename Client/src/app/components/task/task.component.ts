@@ -6,6 +6,7 @@ import { GlobalService } from '../../services/global.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Student } from '../../classes/student';
 import { AvrechDiaryComponent } from "../../components/avrech-diary/avrech-diary.component"
+import { CalendarComponent } from '../calendar/calendar.component';
 
 @Component({
   selector: 'app-task',
@@ -33,96 +34,87 @@ export class TaskComponent implements OnInit {
 
   personId: number;
   student: Student;
-
+  isNew: boolean = false;
   ngOnInit() {
-
-
-    // this.appProxy.post("GetTask", { iPersonId: 1 }).then(
-    //   data => {
-    //     //alert("good");
-    //     this.taskList = data;
+    this.currentTask = Object.assign({}, this.task);
+      if (this.task == undefined) {
+        this.task = new Task();
+        this.isNew = true;
+      }
     this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
       this.taskTypeList = data;
-      //this.task.iTaskType=this.type['iSysTableRowId'];
+      
 
-
-      // this.sysTableRowList =  data;
-      //   this.meetingList.forEach(m => {
-      //     m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
-      //     m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
-      //     m['edit'] ='<div class="edit"></div>';
-      //     m['nvMeetingType'] = this.sysTableRowList.filter(s=> s.iSysTableRowId == m.iMeetingType)[0].nvValue;
-      // });
-
-
-      this.currentTask = Object.assign({}, this.task);
-      this.currentTask['dtDate'] = new Date((this.currentTask.dtTaskdatetime).getTime());
+      this.currentTask['dtDate'] = this.task.dtTaskdatetime;//.getTime();
 
       // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
       if ((this.task.dtTaskdatetime).getMinutes() < 10)
-        this.minutes = '0' + (this.currentTask.dtTaskdatetime).getMinutes().toString();
+        this.minutes = '0' + (this.task.dtTaskdatetime).getMinutes().toString();
       else
-        this.minutes = (this.currentTask.dtTaskdatetime).getMinutes().toString();
+        this.minutes = (this.task.dtTaskdatetime).getMinutes().toString();
 
-      if ((this.currentTask.dtTaskdatetime).getHours() < 10)
-        this.hours = '0' + (this.currentTask.dtTaskdatetime).getHours().toString();
+      if ((this.task.dtTaskdatetime).getHours() < 10)
+        this.hours = '0' + (this.task.dtTaskdatetime).getHours().toString();
       else
-        this.hours = (this.currentTask.dtTaskdatetime).getHours().toString();
-
+        this.hours = (this.task.dtTaskdatetime).getHours().toString();
 
       this.currentTask['dtHour'] = this.hours + ':' + this.minutes;
-      // }
     });
-    this.task = new Task();
 
     this.route.parent.params.subscribe(params => {
       this.personId = +params['iPersonId'];
     });
+    debugger
+    if (this.isNew == true) {
+      if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
+      {
+        this.task.nvComments = " עם התלמיד: "
+        this.task.iPersonId = this.personId;//מי שלחצו עליו
+      }
+      else {
+        // alert(this.personId);
+        this.appProxy.post('GetStudentById', { iUserId: this.personId }).then(data => {
+          if (data) {
+            this.student = data;
+            if (this.router.url == "/students/student/" + this.personId + "/student-meetings")//תלמידים ->פגישות
+            {
+              this.task.nvComments = " פגישה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
+              this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
 
-    if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
-    {
-      this.task.nvComments = " עם התלמיד: "
-      this.task.iPersonId = this.personId;//מי שלחצו עליו
-    }
-    else {
-      // alert(this.personId);
-      this.appProxy.post('GetStudentById', { iUserId: this.personId }).then(data => {
-        if (data) {
-          // alert("personid"+this.personId);
-          // alert("jjjה!");
-          this.student = data;
-          // alert(this.student.nvLastName);
-
-          if (this.router.url == "/students/student/" + this.personId + "/student-meetings")//תלמידים ->פגישות
-          {
-            this.task.nvComments = " פגישה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
-            this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
+            }
+            else
+              if (this.router.url == "/students/student/" + this.personId + "/student-conversations")//תלמידים ->שיחות
+              {
+                this.task.nvComments = " שיחה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
+                this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
+              }
 
           }
           else
-            if (this.router.url == "/students/student/" + this.personId + "/student-conversations")//תלמידים ->שיחות
-            {
-              this.task.nvComments = " שיחה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
-              this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
-            }
-        }
-        else
-          alert("error!");
-      })
+            alert("error!");
+                     
+        });
+      }
     }
+  
   }
-  // );
-
+  @Output() close:EventEmitter<any>= new EventEmitter<any>();
+// addOrEdit:boolean=false;
   saveTask() {
+    debugger
     this.task.dtTaskdatetime = new Date(this.currentTask['dtDate'] + ' ' + this.currentTask['dtHour']);
     //    if (this.currentTask.iTaskId == 0)
     this.appProxy.post('SetTask', { task: this.task, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
       if (data) {
+      
+      
         alert("המשימה נוספה בהצלחה!");
+        this.close.emit();
         //close
-        // this.avrechDiaryComponent.close();
       }
-    })
+    },err=>{
+    });
+    
   }
 
 }

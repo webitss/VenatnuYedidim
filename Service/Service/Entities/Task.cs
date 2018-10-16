@@ -20,7 +20,7 @@ namespace Service.Entities
         [DataMember]
         public DateTime dtTaskdatetime{ get; set; }
         [DataMember]
-        public string nvComment { get; set; }
+        public string nvComments { get; set; }
         [DataMember]
         public string iPersonId { get; set; }
 
