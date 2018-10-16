@@ -27,6 +27,8 @@ namespace Service.Entities
         [DataMember]
         public int iCreatedByUserId { get; set; }
 
+
+
         [NoSendToSQL]
         [DataMember]
         public int iArrivalStatusType { get; set; }

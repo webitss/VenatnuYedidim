@@ -81,7 +81,7 @@ export class UploadDocumentComponent implements OnInit {
       data => {
         if (data == 0)
           alert("error in save data")
-        else { this.document.iDocumentId = 1; this.closeDialog(); }
+        else {this.document.iDocumentId = data; this.closeDialog(); }
       }
       , err => alert(err));
   }

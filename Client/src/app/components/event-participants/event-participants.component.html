@@ -1,16 +1,32 @@
 <div class="row first-row">
-  <div class="add-area"> 
-<button class="btn-circle btn-add" (click)="addParticipants()"> הוספת משתתפים +</button>
+  <div class="add-area">
+      <button (click)="flag=true" class="btn-add btn-circle"> הוספת משתתפים +</button>
+
+    <!-- <button class="btn-circle btn-add" (click)="addParticipants()"></button> -->
+  </div>
 </div>
-</div>
- <!-- <div  class="addParticipants">
-                <app-event-participants></app-event-participants> 
-             </div>  -->
+
+<div *ngIf="flag==true" class="addParticipants">
+
+    <span class="Student-affiliation">שיוך תלמידים</span>
+    <button (click)="cancelAdd()" class="btn-close">סגור x</button>
+    <button (click)="saveAdd()" class="btn-save"> v שמור</button>
+    <div class="col-sm-8 my-div">
+      <app-vy-multy-select #child [fullList]="listToSelect" [titleStr]="title" [inputTitle]="inputTitle" (onSave)="getFromChild($event)"></app-vy-multy-select>
+    </div>
+  </div>
+
+<!-- <div *ngIf="flag!=null" class="addParticipants">
+  <app->גכעכ</app-add-participant>
+
+</div> -->
 <div class="main-table">
   <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table>
 </div>
 
-<select > <option *ngFor="let s of sysTableRowList"  >{{s.nvValue}}</option></select>
+<select>
+  <option *ngFor="let s of sysTableRowList">{{s.nvValue}}</option>
+</select>
 
 <!-- <select value='+p.iArriveStatusType+'>
   <option *ngFor="let s of sysTableRowList1"></option>
