@@ -19,7 +19,7 @@ export class OpenPresenceComponent implements OnInit {
   closeMeNoSave = new EventEmitter();
   @Output()
   @Input()
-  protected presence: PresenceAvrech;
+  public presence: PresenceAvrech;
   ngOnInit() {
     this.presence['dtDate'] = new Date((this.presence.dtDatePresence).getTime());
   }

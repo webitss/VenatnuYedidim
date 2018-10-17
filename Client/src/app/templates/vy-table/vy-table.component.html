@@ -3,15 +3,14 @@
 
     <div *ngFor="let col of lstColumns" class="col cell cell-title" [ngStyle]="col.titleStyle">
       <div class="small-title">
-        <!-- <span class="glyphicon col-2">&#xe151;</span> -->
-        <!-- <div class=" col-10"> -->
+       
           {{col.title}}
-        <!-- </div> -->
-        <span class="glyphicons glyphicons-sort-by-alphabet-alt"></span>
-        <span class="glyphicon">&#xe406;</span>
-        <button  [ngStyle]="{'background-color':(lstSortColumns[col.name] && lstSortColumns[col.name]>0) ? 'yellow' : '' }" (click)='sortTable(1,col.name)'>V</button>
-        <button [ngStyle]="{'background-color':(lstSortColumns[col.name] && lstSortColumns[col.name]<0) ? 'yellow' : '' }" (click)='sortTable(-1,col.name)'>^</button>
-        <button  (click)='sortTable(0,col.name)'>X</button>
+      
+        <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(-1,col.name)'>&#xe010;</span>
+        <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(1,col.name)'>&#xe011;</span>
+        <!-- *ngIf="lstSortColumns[col.name] && lstSortColumns[col.name]>0"  -->
+        <!-- *ngIf="(lstSortColumns[col.name] && lstSortColumns[col.name]<0)" -->
+        <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(0,col.name)'>X</span>
       </div>
 
     </div>

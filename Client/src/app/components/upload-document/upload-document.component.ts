@@ -21,7 +21,7 @@ export class UploadDocumentComponent implements OnInit {
   closeMeNoSave = new EventEmitter();
   @Output()
   @Input()
-  protected document: Document;
+  public document: Document;
 
   sheetTypes: SysTableRow[];
   id: any;
@@ -44,7 +44,7 @@ export class UploadDocumentComponent implements OnInit {
     });
 
   }
-  protected save = { document: '', name: '', type: '' };
+  public save = { document: '', name: '', type: '' };
 
 
   loadDocument(event, callback) {

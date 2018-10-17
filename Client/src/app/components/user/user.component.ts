@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
   @Input()
   @Output()
   public user: User;
-  protected title: string;
+  public title: string;
 
   constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute) { }
 
@@ -35,7 +35,7 @@ export class UserComponent implements OnInit {
     });
   }
 
-  protected currentComponent: any;
+  public currentComponent: any;
 
   onRouterOutletActivate(event) {
     this.currentComponent = event;

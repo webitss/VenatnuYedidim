@@ -18,12 +18,12 @@ import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 export class SettingsYeshivotComponent implements OnInit {
 
-  protected yeshivaList: Array<Yeshiva> = new Array<Yeshiva>();
-  protected iYeshivaId: number;
-  protected lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
+  public yeshivaList: Array<Yeshiva> = new Array<Yeshiva>();
+  public iYeshivaId: number;
+  public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   protected yeshiva:Yeshiva;
   protected iLastModifyUserId:number;
-  protected flag;
+  public flag;
   @ViewChild('yeshivot') yeshivot:any;
   @ViewChild(VyTableComponent) vyTableComponent:VyTableComponent;
   @Output() 

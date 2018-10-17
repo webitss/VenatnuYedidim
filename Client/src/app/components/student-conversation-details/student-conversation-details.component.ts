@@ -20,10 +20,10 @@ export class StudentConversationDetailsComponent implements OnInit {
   Conversation = new EventEmitter();
   typeTask: Task;
   @Input()
-  protected conversation: Conversation;
-  protected currentConver: Conversation;
+  public conversation: Conversation;
+  public currentConver: Conversation;
   @Input()
-  protected sysTableList: SysTableRow[];
+  public sysTableList: SysTableRow[];
 
   @Output()
   protected UpdateConver = new EventEmitter();

@@ -11,17 +11,17 @@ import { Student } from '../../classes/student';
 })
 export class GraduatesComponent implements OnInit {
 
-  
-  constructor(private appProxy: AppProxy, private router: Router,private route: ActivatedRoute ) { }
-  param:any;
+
+  constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute) { }
+  param: any;
   id: number;
   studentList: Student[];
-  @ViewChild('graduates') graduates:any;
+  @ViewChild('graduates') graduates: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   ngOnInit() {
 
-    
-  
+
+
     this.id = 0;
 
     this.appProxy.post('GetGraduatesList', { iUserId: this.id }).then(data => {
@@ -29,12 +29,12 @@ export class GraduatesComponent implements OnInit {
 
       this.studentList.forEach(
         st => {
-           st['edit'] = '<div class="edit"></div>'; 
-          })
+          st['edit'] = '<div class="edit"></div>';
+        })
     }, err => { alert(err); });
 
 
-    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true,false));
+    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true, false));
     this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
     this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
     this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
@@ -42,12 +42,16 @@ export class GraduatesComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
     this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
 
-}
-downloadExcel(){
-  debugger;
-  this.graduates.downloadExcel();
-}
-tableToPdf(name:string){
-  this.graduates.downloadPdf(name,'pdf');
-    }
+  }
+  downloadExcel() {
+    debugger;
+    this.graduates.downloadExcel();
+  }
+  tableToPdf(name: string) {
+    this.graduates.downloadPdf(name, 'pdf');
+  }
+
+  editStudent(even) {
+    console.log(even);
+  }
 }
