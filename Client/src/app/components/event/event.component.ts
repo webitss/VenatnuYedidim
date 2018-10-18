@@ -15,7 +15,7 @@ import { Event1 } from '../../classes/event';
 })
 export class EventComponent implements OnInit {
 
-  protected currentComponent: any;
+  public currentComponent: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private appProxy: AppProxy,private cdr: ChangeDetectorRef) {
 

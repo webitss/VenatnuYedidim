@@ -12,7 +12,7 @@ import { Student } from '../../classes/student';
 export class StudentComponent implements OnInit, OnDestroy {
   private sub: any;
   flag: number;
-  protected currentComponent: any;
+  public currentComponent: any;
   student: Student;
   id: number;
 

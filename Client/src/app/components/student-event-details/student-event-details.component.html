@@ -9,8 +9,8 @@
         <option [value]="0">בחר</option>
         <option [value]="item.nvName" *ngFor="let item of eventsList" [selected]="item.nvNmae==event.nvName">{{item.nvName}}</option>
       </select>
-      <div *ngIf="eventName.invalid && (eventName.dirty || eventName.touched)">
-        <div class="text-danger" *ngIf="eventName.errors && (eventName.errors.required)">שדה זה חובה!</div>
+      <div *ngIf="place.invalid && (place.dirty || place.touched)">
+        <div class="text-danger" *ngIf="place.errors && (place.errors.required)">שדה זה חובה!</div>
       </div>
     </div>
     <div class="form-group col-sm-3">
@@ -30,11 +30,11 @@
     </div>
     <div class="form-group col-sm-3">
       <label for="status">סטטוס:</label>
-      <select [(ngModel)]="event.iArrivalStatusType" class="form-control" #status="ngModel" name="status" 
+      <select [(ngModel)]="event['iArrivalStatusType']" class="form-control" #status="ngModel" name="status" 
         required>
         <!-- [disabled]="isManeger == false" -->
         <option [value]="0">בחר</option>
-        <option [value]="item.iSysTableRowId" *ngFor="let item of lst" [selected]="item.iSysTableRowId==event.iArrivalStatusType">{{item.nvValue}}</option>
+        <option [value]="item.iSysTableRowId" *ngFor="let item of lst" [selected]="item.iSysTableRowId==event['iArrivalStatusType']">{{item.nvValue}}</option>
       </select>
       <div *ngIf="status.invalid && (status.dirty || status.touched)">
         <div class="text-danger" *ngIf="status.errors && (status.errors.required)">שדה זה חובה!</div>
