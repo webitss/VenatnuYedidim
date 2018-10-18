@@ -18,7 +18,6 @@ export class StudentEventDetailsComponent implements OnInit {
   @Output()
   event: Event1;
   @ViewChild(NgForm) form;
-  e;
   constructor(private route: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
 
   ngOnInit() {

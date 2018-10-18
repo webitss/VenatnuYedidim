@@ -11,7 +11,7 @@ export class MediaComponent implements OnInit {
 
   @Output()
   @Input()
-  public document: Document;
+  protected document: Document;
 
   constructor() { }
 

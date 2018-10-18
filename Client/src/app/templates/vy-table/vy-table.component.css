@@ -28,11 +28,7 @@
 }
 
 .vy-filter-search {
-  background:#eaecee url("./../../../assets/icons/search.png") left no-repeat;
-}
-span.glyphicons.glyphicons-sort-by-alphabet-alt {
-  color: #eaecee;
-  float: left;
+  background: white url("./../../../assets/icons/search.png") left no-repeat;
 }
 
 .vy-table{

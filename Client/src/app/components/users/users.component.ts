@@ -16,7 +16,7 @@ import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService, public globalService: GlobalService) { }
+  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService, private globalService: GlobalService) { }
   @ViewChild('users') users: any;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
 

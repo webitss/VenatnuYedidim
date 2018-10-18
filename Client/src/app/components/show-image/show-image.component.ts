@@ -17,11 +17,11 @@ export class ShowImageComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[]=new Array<NgxGalleryImage>();
 
-  constructor(private appProxy: AppProxy, public settingsFrontend:settingsFrontend) { }
+  constructor(private appProxy: AppProxy, private settingsFrontend:settingsFrontend) { }
  
 protected titaieName:string="ונתנו ידידים";
 ngxImageGallery: NgxImageGalleryComponent;
-public divModal:boolean;
+protected divModal:boolean;
 
 protected listImage:string[]=["http://localhost:14776/Files/red.jpg","assets/חוף ים.jpg",
 "assets/3-big.jpg","assets/IMG_5650.JPG",

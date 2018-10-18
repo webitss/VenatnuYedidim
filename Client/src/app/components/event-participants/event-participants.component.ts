@@ -18,9 +18,9 @@ export class EventParticipantsComponent implements OnInit {
   protected iEventId: number;
   private sub: any;
   protected participant: Array<any> = new Array<any>();
-  public sysTableRowList: SysTableRow[];
+  protected sysTableRowList: SysTableRow[];
   protected iPerson: number;
-  public flag:boolean;
+  protected flag:boolean;
   protected iLastModifyUserId: number;
   protected s: any;
   protected personsList: string[];

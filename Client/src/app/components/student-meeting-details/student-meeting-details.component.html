@@ -31,13 +31,13 @@
         </div>
         <div class="form-group col-sm-3">
           <label for="dtDate">תאריך</label>
-          <input class="form-control" [(ngModel)]="currentMeeting['dtDate']" ngui-datetime-picker date-only="true" close-on-select="false"
+          <input class="form-control" [(ngModel)]="currentMeeting.dtDate" ngui-datetime-picker date-only="true" close-on-select="false"
             id="dtDate" name="dtDate">
         </div>
 
         <div class="form-group col-sm-3">
           <label for="time">שעה</label>
-          <input type="time" class="form-control" id="time" name="time" [(ngModel)]="currentMeeting['dtHour'] " (ngModelChange)="meeting['dtHour'] = $event">
+          <input type="time" class="form-control" id="time" name="time" [(ngModel)]="currentMeeting.dtHour " (ngModelChange)="meeting.dtHour = $event">
         </div>
 
 

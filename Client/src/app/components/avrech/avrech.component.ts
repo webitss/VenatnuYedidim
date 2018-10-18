@@ -12,7 +12,7 @@ import{BehaviorSubject} from'rxjs/BehaviorSubject'
 })
 export class AvrechComponent implements OnInit {
 
-  public currentComponent: any;
+  protected currentComponent: any;
 
 
 

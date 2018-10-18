@@ -21,7 +21,7 @@ export class StudentMeetingsComponent implements OnInit {
   private sub: any;
   private alert: any;
   iPersonId:number;
-  public meetingList: Array<Meeting>;
+  protected meetingList: Array<Meeting>;
   id: number;
   meeting: Meeting;
   flag: number;

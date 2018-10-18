@@ -23,12 +23,12 @@ export class StudentConversationsComponent implements OnInit {
   protected iUserId: number;
   protected iPersonId: number;
   protected flag: number;
-  public conversationsList: Array<Conversation> = new Array<Conversation>();
-  public conversationSelect: Conversation;
+  protected conversationsList: Array<Conversation> = new Array<Conversation>();
+  protected conversationSelect: Conversation;
   @Output()
-  public sysTableList: SysTableRow[];
+  protected sysTableList: SysTableRow[];
   @Input()
-  public newConver: Conversation;
+  protected newConver: Conversation;
   @Input()
   public lstColumns = [
     {

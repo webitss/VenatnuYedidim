@@ -24,7 +24,7 @@ export class EventDetailsComponent implements OnInit {
   inputTitle: string = "עבור";
   touched = false;
 
-  public e: Event1;
+  protected e: Event1;
   to: Array<any>;
   participantsToSend: Array<Tint> = new Array<Tint>();
 

@@ -22,13 +22,13 @@ export class LogInComponent implements OnInit {
     this.router.navigate(['students']);
   }
 
-  public imgHeight: number;
+  protected imgHeight: number;
 
   @Input()
-  public nvUserName: string;
+  protected nvUserName: string;
 
   @Input()
-  public nvPassword: string;
+  protected nvPassword: string;
 
 
   logIn() {

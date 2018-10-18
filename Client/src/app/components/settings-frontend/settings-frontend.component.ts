@@ -13,11 +13,11 @@ import { SysTableService } from '../../services/sys-table.service';
   styleUrls: ['./settings-frontend.component.css']
 })
 export class SettingsFrontendComponent implements OnInit {
-  public GlobalHeader:TGlobalParameters=new TGlobalParameters();
+  private GlobalHeader:TGlobalParameters=new TGlobalParameters();
 
-  public  GlobalVerMarch:TGlobalParameters=new TGlobalParameters();
-  public GlobalMarchSF:TGlobalParameters=new TGlobalParameters();
-  public GlobalParameters: TGlobalParameters[] = new Array<
+  private  GlobalVerMarch:TGlobalParameters=new TGlobalParameters();
+  private GlobalMarchSF:TGlobalParameters=new TGlobalParameters();
+  private GlobalParameters: TGlobalParameters[] = new Array<
     TGlobalParameters
   >();
   belongSheetType:number;
@@ -111,7 +111,7 @@ export class SettingsFrontendComponent implements OnInit {
       );
   }
 
-saveGlobalParams(){
+private saveGlobalParams(){
 alert("saveGlobalParams")
 
   this.settingsFrontend.GlobalHeader.nvTitle=GLOBAL.title;

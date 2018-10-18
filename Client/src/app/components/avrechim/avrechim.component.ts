@@ -85,7 +85,7 @@ export class AvrechimComponent implements OnInit {
       });
   }
 
-  downloadExcel(t=null) {
+  downloadExcel(t) {
     debugger;
     this.avrechim.downloadExcel(t);
   }

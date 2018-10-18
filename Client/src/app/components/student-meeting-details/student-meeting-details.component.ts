@@ -22,11 +22,11 @@ export class StudentMeetingDetailsComponent implements OnInit {
 
   @Output()
   @Input()
-  public meeting: Meeting;
+  protected meeting: Meeting;
 
   @Output()
   @Input()
-  sysTableRowList: SysTableRow[];
+  protected sysTableRowList: SysTableRow[];
 
   minutes: string;
   hours: string;

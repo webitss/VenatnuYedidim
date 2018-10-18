@@ -24,7 +24,7 @@ export class VyTableComponent implements OnInit {
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   @Input()
   public lstDataRows: Array<any>;
-  lstCurrentDataRows: Array<any>;
+  protected lstCurrentDataRows: Array<any>;
   @Output()
   public clickCell: EventEmitter<any> = new EventEmitter<any>();
 

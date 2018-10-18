@@ -25,8 +25,8 @@ export class SettingYeshivaComponent implements OnInit {
   @Input()
   public iYeshivaId: number;
   @Input()
-  public sysTableList: SysTableRow[];
-  public yeshiva: Yeshiva = new Yeshiva();
+  protected sysTableList: SysTableRow[];
+  protected yeshiva: Yeshiva = new Yeshiva();
   @ViewChild(NgForm) form;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
   public setting: SettingsYeshivotComponent;

@@ -16,18 +16,18 @@ import {EventEmitter} from 'events'
 })
 export class SettingsCodeTableComponent implements OnInit {
 
-  public tableNames: Array<SysTables>;
-  public Values: Array<SysTableRow>;
+  protected tableNames: Array<SysTables>;
+  protected Values: Array<SysTableRow>;
 
-  public idSysTableRow: number;
-  public divNewValue: boolean;
-  public toEdit: boolean;
+  protected idSysTableRow: number;
+  protected divNewValue: boolean;
+  protected toEdit: boolean;
   protected row: SysTableRow;
   protected roeToadd: SysTableRow = new SysTableRow();
   protected roeToadd1: SysTableRow = new SysTableRow();
   protected Mykey: string;
-  public showOverlap: boolean;
-  public lstColumns = [{
+  protected showOverlap: boolean;
+  protected lstColumns = [{
     title: 'עריכה',
     type: 'html',
     bClickCell: true
