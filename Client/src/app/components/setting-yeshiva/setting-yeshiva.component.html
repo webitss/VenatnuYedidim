@@ -52,7 +52,8 @@
 
   <div class="form-control">
     <label for='yeshiva-mobile'>מייל:</label>
-    <input class=inputYeshiva type="email" name='yeshiva-mobile' [(ngModel)]="yeshiva.nvEmail" required #mobile="ngModel" />
+    <input class=inputYeshiva type="email" name='yeshiva-mobile' ngModel email="true">
+    <!-- <input class=inputYeshiva type="email" name='yeshiva-mobile' [(ngModel)]="yeshiva.nvEmail" required #mobile="ngModel" /> -->
     <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
       <div *ngIf="(mobile.errors.required)" class="text-danger text-right">
         <strong>! </strong>שדה נדרש</div>
