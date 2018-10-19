@@ -31,45 +31,47 @@ export class AvrechPresenceComponent implements OnInit {
     this.sub = this.router.parent.params.subscribe(params => {
       this.iPersonId = +params["iPersonId"];
       debugger;
-      this.appProxy.post('GetPresenceAvrechById', { iPersonId: this.iPersonId }).then(res => {
-        this.presences=res;
-        this.presences.forEach(p => {
-          this.lstDataRows.push({
-            iPersonId: p.iPersonId,
-            iPresenceAvrech: p.iPresenceAvrech,
-            ['nvDate']: p.dtDatePresence.toLocaleDateString(),
-            // dtDatePresence:p.dtDatePresence,
-            iHoursSum: p.iHoursSum,
-            edit: '<div class="edit"></div>',
-          })
-        })
-        // this.PA = data;
-        // alert(data.length);
-      })
+      this.loadPresences();
+      
     });
   }
-
+loadPresences(){
+  this.appProxy.post('GetPresenceAvrechById', { iPersonId: this.iPersonId }).then(res => {
+    this.presences=res;
+    this.presences.forEach(p => {
+      this.lstDataRows.push({
+        iPersonId: p.iPersonId,
+        iPresenceAvrech: p.iPresenceAvrech,
+        ['nvDate']: p.dtDatePresence.toLocaleDateString(),
+        dtDatePresence:p.dtDatePresence,
+        iHoursSum: p.iHoursSum,
+        edit: '<div class="edit"></div>',
+      })
+    })
+    // this.PA = data;
+    // alert(data.length);
+  })
+}
   @ViewChild(VyTableComponent) cc:VyTableComponent;
 
-  editPresence(e) {
-    debugger;
-     this.presence=new PresenceAvrech();
-     this.presence.iPresenceAvrech=e.iPresenceAvrech;
-     this.presence.iPersonId=e.iPersonId;
-     this.presence.dtDatePresence=e.nvDate;
-     this.presence.iHoursSum=e.iHoursSum;
+  editPresence(p:PresenceAvrech) {
+debugger;
+this.presence=p;
 
     // this.cc.refreshTable(this.presences)
 
 }
 addPresence() {
   this.presence = new PresenceAvrech();
+  this.presence.dtDatePresence=new Date();
   this.presence.iPersonId = this.iPersonId;
 }
-closeDocumentDialog() {
+closePresenceDialog(save) {
+  if (save == true) {
+    this.lstDataRows = new Array();
+    this.loadPresences();
+  }
   this.presence = null;
-  this.lstDataRows=new Array();
-  this.openPresence();
 }
 openPresence(){
   throw new Error("Method not implemented.");

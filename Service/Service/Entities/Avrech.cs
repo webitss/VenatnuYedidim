@@ -139,7 +139,7 @@ namespace Service.Entities
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
                 client.Credentials = new System.Net.NetworkCredential("", "");
-                MailMessage mm = new MailMessage("", mail);
+                MailMessage mm = new MailMessage("VenatnuYedidimSystem@gmail.com", mail);
                 mm.Subject = "ונתנו ידידים";
                 mm.Body = "אברך";
                 System.Net.Mail.Attachment attachment;

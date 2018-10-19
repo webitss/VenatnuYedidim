@@ -18,7 +18,7 @@ export class VyTableComponent implements OnInit {
   protected iEndNumRow = 0;
   protected countPagesDisplayed = 5;
   protected lstPagesNum: Array<number> = new Array<number>();
-  protected lstSortColumns:any={};
+  protected lstSortColumns: any = {};
 
   @Input()
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
@@ -58,21 +58,29 @@ export class VyTableComponent implements OnInit {
     this.lstCurrentDataRows = this.lstDataRows.filter(row => row[col.name].indexOf(col.filter) > -1);
     this.moveToPage(0);
   }
-  sortTable(sight,colName)
-  {
-    let dir=sight>0?'':'-';
-    this.lstSortColumns[colName]=sight;
-    
-    if(sight!=0)
-    {
-      let lst =Object.assign(this.lstDataRows);
-      this.lstCurrentDataRows = new VyTableOrderByPipe().transform(lst,[dir+colName]);
-     // this.moveToPage(this.currentPage,true);
+
+  sortTable(sight, colName) {
+    let dir = sight > 0 ? '' : '-';
+    this.lstSortColumns[colName] = sight;
+
+    if (sight != 0) {
+      let lst = Object.assign(this.lstDataRows);
+      this.lstCurrentDataRows = new VyTableOrderByPipe().transform(lst, [dir + colName]);
+      // this.moveToPage(this.currentPage,true);
     }
     else
-      this.moveToPage(this.currentPage,true);
+      this.moveToPage(this.currentPage, true);
   }
 
+  checkAllTable(colName) {
+    if (this.lstDataRows.find(r => r[colName])==null)
+      this.lstDataRows.forEach(r => r[colName] = true);
+    else if (this.lstDataRows.find(r => !r[colName])==null)
+      this.lstDataRows.forEach(r => r[colName] = false);
+    else
+      this.lstDataRows.forEach(r => r[colName] = this.lstDataRows[0][colName]);
+    this.moveToPage(this.currentPage, true);
+  }
   public moveToPage(pageNum: number, move = false) {
     if (move || !(pageNum == this.currentPage || pageNum < 0 || (this.iEndNumRow == this.lstDataRows.length && pageNum > this.currentPage))) {
       this.lstCurrentDataRows = this.lstDataRows.slice((pageNum) * this.iCountRows, (pageNum * this.iCountRows) + this.iCountRows);
