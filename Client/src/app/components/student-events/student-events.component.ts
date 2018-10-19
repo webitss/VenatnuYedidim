@@ -96,5 +96,12 @@ export class StudentEventsComponent implements OnInit {
     this.lstDataRows.splice(this.lstDataRows.indexOf(this.deleteEvent), 1);
     this.vyTableComponent.refreshTable(this.lstDataRows);
   }
+  eventFlag: boolean = false;
+  newEvent() {
+    this.eventFlag = true;
+  }
+  close(){
+    this.eventFlag = false;
+  }
 }
 

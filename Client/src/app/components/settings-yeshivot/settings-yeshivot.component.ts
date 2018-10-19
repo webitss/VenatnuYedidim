@@ -39,6 +39,13 @@ export class SettingsYeshivotComponent implements OnInit {
   
   constructor(private appProxy: AppProxy,private router:Router,private sysTableService:SysTableService,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
  
+  changeTable(y: Yeshiva) {
+    y['edit'] = '<div class="edit"></div>';
+    y['delete'] = '<div class="delete"></div>';
+    y['nvRoleType']=this.sysTableList.filter(x=>x.iSysTableRowId==y.iRoleType)[0].nvValue;
+  }
+
+
   ngOnInit() {
 
     this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true,false))
@@ -62,28 +69,23 @@ export class SettingsYeshivotComponent implements OnInit {
       });
     });
   }
-
-  public changeTable(y:Yeshiva)
-  {
-    y['edit'] = '<div class="edit"></div>';
-    y['delete'] = '<div class="delete"></div>';
-    y['nvRoleType']=this.sysTableList.filter(x=>x.iSysTableRowId==y.iRoleType)[0].nvValue;
-  }
+ 
 
   public setYeshiva(yeshiva){
    if(yeshiva.columnClickName=='edit')
-       this.editYeshiva(yeshiva);
+      this.editYeshiva(yeshiva);
    else 
        this.deleteYeshiva(yeshiva);
   }
 
   public editYeshiva(yeshiva) {
+    this.changeTable(yeshiva);
     this.iYeshivaId = yeshiva.iYeshivaId;
     this.flag=false;
-    this.changeTable(yeshiva);
   }
 
   public deleteYeshiva(yeshiva) {
+    this.changeTable(yeshiva);
     this.iYeshivaId=yeshiva.iYeshivaId;
     this.flag=true;
     this.flagDelete=true;
@@ -101,6 +103,8 @@ export class SettingsYeshivotComponent implements OnInit {
         this.yeshivaList.splice(this.yeshivaList.indexOf(this.yeshiva),1);
         this.vyTableComponent.refreshTable(this.yeshivaList);  
         this._parent.openMessagePopup('הישיבה נמחקה בהצלחה!');
+        //alert("הישיבה נמחקה בהצלחה");
+        this.changeTable(this.yeshiva);
         //alert("הישיבה נמחקה בהצלחה");
     });  
     
