@@ -119,6 +119,7 @@ export class StudentsComponent implements OnInit {
       this.flagDelete = true;
     }
   }
+  
 
   deleteStudent() {
     this.appProxy.post("DeleteStudent", { iStudent: this.studentId, iUserId: this.globalService.getUser() }).then(res => {
