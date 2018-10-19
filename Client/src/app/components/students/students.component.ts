@@ -41,8 +41,12 @@ export class StudentsComponent implements OnInit {
         student['delete'] = '<div class = "delete"></>';
 
         this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
+
           this.yeshivaListOfStudent = data;
-          student['nvYeshivaName'] = this.yeshivaListOfStudent[this.yeshivaListOfStudent.length - 1].nvYeshivaName;
+          if (this.yeshivaListOfStudent && this.yeshivaListOfStudent.length > 0)
+            student['nvYeshivaName'] = this.yeshivaListOfStudent[this.yeshivaListOfStudent.length - 1].nvYeshivaName;
+          else
+            student['nvYeshivaName'] = ''
         });
         this.appProxy.post("GetAvrechimByStudentId", { iPersonId: student.iPersonId }).then(data => {
           this.avrechimListOfStudent = data;
@@ -78,7 +82,7 @@ export class StudentsComponent implements OnInit {
     else {
       this.alert = confirm("האם אתה בטוח שברצונך למחוק תלמיד זה?");
       if (this.alert == true) {
-      this.appProxy.post("DeleteStudent",{iStudent:e.iPersonId,iUserId:this.globalService.getUser()});
+        this.appProxy.post("DeleteStudent", { iStudent: e.iPersonId, iUserId: this.globalService.getUser() });
 
       }
     }
