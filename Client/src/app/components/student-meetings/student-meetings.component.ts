@@ -20,7 +20,7 @@ export class StudentMeetingsComponent implements OnInit {
   iMeetingId: number;
   private sub: any;
   private alert: any;
-  iPersonId:number;
+  iPersonId: number;
   public meetingList: Array<Meeting>;
   id: number;
   meeting: Meeting;
@@ -39,7 +39,7 @@ export class StudentMeetingsComponent implements OnInit {
   {
     name: 'delete',
     bClickCell: true,
-    type:'html'
+    type: 'html'
   },
   {
     title: 'סוג פגישה',
@@ -66,20 +66,20 @@ export class StudentMeetingsComponent implements OnInit {
     this.flag = 1;
   }
 
-  deleteMeeting(meeting: Meeting){
-      this.alert = confirm("האם אתה בטוח שברצונך למחוק פגישה זו?");
-      if (this.alert == true){
-        this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId ,iUserId: this.globalService.getUser()['iUserId']}).then(data => {
-          this.meetingList.splice(this.meetingList.indexOf(meeting), 1);
-          this.cc.refreshTable(this.meetingList);
-        });
-      }
-   
+  deleteMeeting(meeting: Meeting) {
+    this.alert = confirm("האם אתה בטוח שברצונך למחוק פגישה זו?");
+    if (this.alert == true) {
+      this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
+        this.meetingList.splice(this.meetingList.indexOf(meeting), 1);
+        this.cc.refreshTable(this.meetingList);
+      });
+    }
+
   }
 
-  m:Meeting;
+  m: Meeting;
 
-  @ViewChild(VyTableComponent) cc:VyTableComponent;
+  @ViewChild(VyTableComponent) cc: VyTableComponent;
 
   click(e) {
     if (e.columnClickName == 'edit')
@@ -89,11 +89,11 @@ export class StudentMeetingsComponent implements OnInit {
 
   }
 
-updateMeeting(meeting:Meeting){
-  let l= this.meetingList.indexOf(this.meetingList.find(m1 => m1.iMeetingId == meeting.iMeetingId))
-  this.meetingList[l]=meeting;
- this.cc.refreshTable(this.meetingList)
-}
+  updateMeeting(meeting: Meeting) {
+    let l = this.meetingList.indexOf(this.meetingList.find(m1 => m1.iMeetingId == meeting.iMeetingId))
+    this.meetingList[l] = meeting;
+    this.cc.refreshTable(this.meetingList)
+  }
   addMeeting() {
     this.meeting = new Meeting();
     this.meeting.dtMeetingDate = new Date();
@@ -104,13 +104,12 @@ updateMeeting(meeting:Meeting){
   addNewMeeting(meeting: Meeting) {
     this.meetingList.push(meeting);
   }
-  newMeeting(newMeeting:Meeting){
+  newMeeting(newMeeting: Meeting) {
     this.changeTable(newMeeting);
     this.meetingList.push(newMeeting);
   }
 
-  changeTable(m:Meeting){
-    
+  changeTable(m: Meeting) {
     m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
     m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
     m['edit'] = '<div class="edit"></div>';
@@ -137,11 +136,11 @@ updateMeeting(meeting:Meeting){
   ngOnInit() {
     this.sub = this.route.parent.params.subscribe(params => {
       this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
-   });
- 
-this.GetMeetingsByStudentId(this.iPersonId);
+    });
+
+    this.GetMeetingsByStudentId(this.iPersonId);
   }
- ngOnDestroy() {
+  ngOnDestroy() {
     this.sub.unsubscribe();
   }
 }

@@ -26,9 +26,9 @@ export class StudentConversationDetailsComponent implements OnInit {
   public sysTableList: SysTableRow[];
 
   @Output()
-  protected UpdateConver = new EventEmitter();
+  protected updateConver = new EventEmitter();
   @Output()
-  protected newConver = new EventEmitter();
+  protected saveNewConver = new EventEmitter();
   // @Input()
   // protected newConver :Conversation;
   hours: string;
@@ -63,48 +63,22 @@ export class StudentConversationDetailsComponent implements OnInit {
         if (data != 0) {
           if (this.conver.iConversationId == null) {
             this.conver.iConversationId = data;
-            this.newConver.emit(this.conver);
+            this.saveNewConver.emit(this.conver);
 
           }
-        }
+       
         else
-          this.UpdateConver.emit(this.conver);
-
-        this.newConver.emit(this.conver);
+          this.updateConver.emit(this.conver);
+ }
+        //this.newConver.emit(this.conver);
         if (data) {
-          alert("good");
+          alert("השמירה בוצעה בהצלחה");
           this.Conversation.emit(null);
         }
         else
-          alert("no good");
+        alert("השמירה נכשלה");
       });
 
-    // alert(data);
-    // this.Conversation.emit(null);
-    // this.newConver.push({
-    //   iConversationId: this.conversation.iConversationId,
-    //   iPersonId: this.conversation.iPersonId,
-    //   iConversationType: this.sysTableList.filter(s => s.iSysTableRowId ==  this.conversation.iConversationType)[0],
-    //   dConversationDate:  this.conversation.dConversationDate,
-    //   dtConversationTime:  this.conversation.dtConversationTime,
-    //   nvConversationSummary:  this.conversation.nvConversationSummary,
-    //   dtNextConversationDate: this.conversation.dtNextConversationDate
-    // });
-    // this.conversation=this.newConver;
-    // }
-    // else {
-    //   this.conversation['nvConversationDate'] = this.conversation.dConversationDate.toLocaleDateString();
-    //   this.conversation['nvConversationTime'] = this.conversation.dtConversationTime.toLocaleTimeString();
-    //   this.conversation['nvNextConversationDate'] = this.conversation.dtNextConversationDate.toLocaleDateString();
-    //   this.conversation['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == this.conversation.iConversationType)[0].nvValue;
-    // }
-    // if (data) {
-    //   alert("good");
-    //   this.Conversation.emit(null);
-    // }
-    // else
-    //   alert("no good");
-    // });
   }
 
   //איפה למקם?
