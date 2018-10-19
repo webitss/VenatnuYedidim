@@ -30,6 +30,7 @@ export class SettingYeshivaComponent implements OnInit {
   @ViewChild(NgForm) form;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
   public setting: SettingsYeshivotComponent;
+  public listYeshivot:Yeshiva[];
 
 
   formValid = false;
@@ -42,13 +43,16 @@ export class SettingYeshivaComponent implements OnInit {
   constructor(private appProxy: AppProxy, private router: Router) { }
 
   ngOnInit() {
-    if (this.iYeshivaId == 0)
+    if (this.iYeshivaId == 0){
       this.yeshiva = new Yeshiva();
+      this.setting.changeTable(this.yeshiva);
+    }
     else
       this.appProxy.post('getYeshivaById', { iYeshivaId: this.iYeshivaId })
         .then(
           data => {
             this.yeshiva = data;
+            this.setting.changeTable(this.yeshiva);
           }
         );
   }
@@ -62,8 +66,7 @@ export class SettingYeshivaComponent implements OnInit {
                 this.isDisabled();
             else {
               this.closeYeshiva.emit(null);
-              alert("נשמר בהצלחה");
-              this.setting.changeTable(this.yeshiva);
+              alert("save!");
             }
           }
         )
@@ -74,16 +77,19 @@ export class SettingYeshivaComponent implements OnInit {
       }
     }
     else {
-      this.appProxy.post('EditYeshiva', { yeshiva: this.yeshiva, iYeshivaId: this.yeshiva.iYeshivaId })
+      if(this.appProxy.post('EditYeshiva', { yeshiva: this.yeshiva, iYeshivaId: this.yeshiva.iYeshivaId })
         .then(
           data => {
             this.yeshiva = data;
             this.closeYeshiva.emit(null);
-            alert("נשמר בהצלחה");
-            this.setting.changeTable(this.yeshiva);
+            alert("save!");
           }
         )
+      ){}
+      else{
+        alert("faild in save");
       this.vyTableComponent.refreshTable(this.yeshiva);
+      }
     }
   }
 
