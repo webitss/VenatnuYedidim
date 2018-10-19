@@ -81,7 +81,7 @@ export class StudentMeetingDetailsComponent implements OnInit {
 
     this.currentMeeting = new Meeting();
     this.currentMeeting = Object.assign({}, this.meeting);
-
+debugger;
     this.currentMeeting['dtDate'] = new Date((this.currentMeeting.dtMeetingDate).getTime());
 
 
