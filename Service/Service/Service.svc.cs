@@ -136,6 +136,11 @@ namespace Service
         {
             return Student.UnionCards(student, iStudent2);
         }
+     public bool DeleteStudent(int iPersonId,int iUserId)
+        {
+            return Student.DeleteStudent(iPersonId, iUserId);
+        }
+        
 
 
         public bool DeleteStudent(int istudent, int iUserId)
@@ -217,10 +222,19 @@ namespace Service
             return Avrech.GetAvrechimByStudentId(iPersonId);
         }
 
+        public bool MailToAvrechim(string[] mailList)
+        {
+            return Avrech.MailToAvrechim(mailList);
+        }
+        
+        #endregion
 
+<<<<<<< HEAD
+=======
 
         #endregion
 
+>>>>>>> fd3d149c1b37aff0bed44834cf1c2fb87cb55f76
         #region SysTableRow
         public List<SysTableRow> GetValues(int iSysTableId)
         {

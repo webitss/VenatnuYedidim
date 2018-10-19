@@ -68,6 +68,21 @@
                 <option *ngFor="let month of dateMonthArr">{{month}}</option>
             </select>
             <input type="text" class="form-control" id="nvBornDateYear" name="nvBornDateYear" [(ngModel)]="bornDateHebrewStudent.Year"
+                [ngModelOptions]="{standalone: true}" placeholder="שנה"> -->
+                <select class="form-control" id="nvBornDateDay" name="nvBornDateDay" [(ngModel)]="bornDateHebrewStudent.Day" [ngModelOptions]="{standalone: true}"
+                >
+
+              <option *ngFor="let day of days">
+{{day}}
+              </option>
+            </select>
+            <select class="form-control" id="nvBornDateMonth" name="nvBornDateMonth" [(ngModel)]="bornDateHebrewStudent.Month"
+                [ngModelOptions]="{standalone: true}" >
+                <option *ngFor="let month of monthes">
+                    {{month}}
+                                  </option>
+              </select>
+            <input type="text" class="form-control" id="nvBornDateYear" name="nvBornDateYear" [(ngModel)]="bornDateHebrewStudent.Year"
                 [ngModelOptions]="{standalone: true}" placeholder="שנה">
         </div>
 
