@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, Inject, forwardRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Meeting } from '../../classes/meeting';
@@ -9,6 +9,7 @@ import { Timeouts } from 'selenium-webdriver';
 import { TaskComponent } from '../task/task.component';
 import { NguiDatetime } from '@ngui/datetime-picker';
 import { GlobalService } from '../../services/global.service';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-student-meeting-details',
@@ -61,16 +62,20 @@ export class StudentMeetingDetailsComponent implements OnInit {
           else
             this.UpdateMeeting.emit(this.currentMeeting);
 
-          alert("השמירה בוצעה בהצלחה");
+         // alert("השמירה בוצעה בהצלחה");
+         this._parent.openMessagePopup('השמירה בוצעה בהצלחה!');
           this.Close.emit(null);
         }
         else
-          alert("השמירה נכשלה");
+          //alert("השמירה נכשלה");
+         this._parent.openMessagePopup('השמירה נכשלה!');
+          
       },
     );
   }
   currentMeeting: Meeting;
-  constructor(private route: ActivatedRoute, private appProxi: AppProxy, private globalService: GlobalService) { }
+  constructor(private route: ActivatedRoute, private appProxi: AppProxy, private globalService: GlobalService
+    ,@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
     this.taskSelect = false;

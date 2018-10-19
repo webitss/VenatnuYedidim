@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, Inject, forwardRef } from '@angular/core';
 import { Student } from '../../classes/student';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { GlobalService } from '../../services/global.service';
 import { Yeshiva } from '../../classes/Yeshiva';
+import { AppComponent } from '../app/app.component';
 
 
 @Component({
@@ -16,7 +17,8 @@ import { Yeshiva } from '../../classes/Yeshiva';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router, private globalService: GlobalService) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router, 
+    private globalService: GlobalService,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
 
 
   @Input() student: Student
@@ -42,7 +44,11 @@ export class StudentDetailsComponent implements OnInit {
   dateDayArr = new Array<string>();
   dateMonthArr = new Array<string>();
   addYeshiva = false;
+  yeshivaId: number;
   e;
+  message = 'dfds';
+  flagDelete = false;
+  header = 'מחיקת ישיבה';
 
   ngOnInit() {
     this.bornDateHebrewStudent = new HebrewDate();
@@ -145,13 +151,20 @@ export class StudentDetailsComponent implements OnInit {
 
     })
   }
+  deleteYeshiva(yeshiva) {
+    //alert(yeshiva.iYeshivaId);
+    this.yeshivaId = yeshiva.iYeshivaId;
+    this.message='האם אתה בטוח שברצונך למחוק את '+yeshiva.nvYeshivaName+'?';
+    this.flagDelete = true;
+  }
+
 
   //מחיקת ישיבה לתלמיד
   deleteYeshivaOfStudent(iYeshivaId: number) {
 
     this.appProxy.post("DeleteYeshivaOfStudent", {
       iPersonId: this.paramRout, iYeshivaId: iYeshivaId, iUserId: this.currentUser
-    }).then(data => { alert("הישיבה נמחקה בהצלחה"); }, err => { alert("שגיאה במחיקת ישיבהיד"); });
+    }).then(data => { this._parent.openMessagePopup('הישיבה נמחקה בהצלחה!') }, err => { alert("שגיאה במחיקת ישיבהיד"); });
     var i = 0;
     this.yeshivaListOfStudent.forEach(e => {
       debugger;
@@ -168,8 +181,9 @@ export class StudentDetailsComponent implements OnInit {
         this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser
     }).then(data => {
       if (data)
-        alert("הישיבה נוספה בהצלחה")
-      else ("שגיאה בהוספת ישיבה")
+        //alert("הישיבה נוספה בהצלחה")
+        this._parent.openMessagePopup('הישיבה נוספה בהצלחה!');
+      else this._parent.openMessagePopup('שגיאה בהוספת ישיבה');
     }
       , err => alert("שגיאה"))
 

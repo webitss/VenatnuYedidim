@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, Input, ViewChild, forwardRef, Inject } from '@angular/core';
 import { SettingYeshivaComponent } from '../setting-yeshiva/setting-yeshiva.component';
 import { Yeshiva } from '../../classes/Yeshiva';
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { EventEmitter } from 'events';
 import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-settings-yeshivot',
@@ -29,11 +30,14 @@ export class SettingsYeshivotComponent implements OnInit {
   @Output() 
   public closeYeshiva=new EventEmitter();
 
+  flagDelete=false;
+  message='';
+  header='מחיקת מוסד';
  
   @Output()
   protected sysTableList:SysTableRow[];
   
-  constructor(private appProxy: AppProxy,private router:Router,private sysTableService:SysTableService) { }
+  constructor(private appProxy: AppProxy,private router:Router,private sysTableService:SysTableService,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
  
   ngOnInit() {
 
@@ -82,6 +86,8 @@ export class SettingsYeshivotComponent implements OnInit {
   public deleteYeshiva(yeshiva) {
     this.iYeshivaId=yeshiva.iYeshivaId;
     this.flag=true;
+    this.flagDelete=true;
+    this.message='האם אתה בטוח שברצונך למחוק מוסד זה?';
     this.changeTable(yeshiva);
   }
 
@@ -94,7 +100,8 @@ export class SettingsYeshivotComponent implements OnInit {
         this.flag=null;
         this.yeshivaList.splice(this.yeshivaList.indexOf(this.yeshiva),1);
         this.vyTableComponent.refreshTable(this.yeshivaList);  
-        alert("הישיבה נמחקה בהצלחה");
+        this._parent.openMessagePopup('הישיבה נמחקה בהצלחה!');
+        //alert("הישיבה נמחקה בהצלחה");
     });  
     
   }

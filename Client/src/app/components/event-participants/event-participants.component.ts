@@ -28,6 +28,9 @@ export class EventParticipantsComponent implements OnInit {
   allPersons: Array<Person>;
   title:string="רשימת כולם";
   inputTitle:string="בחר משתתפים";
+  flagDelete=false;
+  message='האם אתה בטוח שברצונך למחוק משתתף זה?';
+  header='מחיקת משתתף';
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
 
   cancelAdd(event) {

@@ -36,6 +36,9 @@ export class CalendarComponent implements OnInit {
   openNewTask: boolean = false;
   task: Task
   id: number;
+  flagDelete = false;
+  message = '';
+  header = 'מחיקת משימה';
 
   taskList: Array<Task> = new Array<Task>();
   taskTypeList: Array<any>;
@@ -43,22 +46,23 @@ export class CalendarComponent implements OnInit {
 
   editTask1: boolean;
   editTask(taskId: number) {
-    debugger
-    this.flag = true; this.editTask1 = true;
+    this.flag = true;
+    // if (this.flagDelete == false)
+      this.editTask1 = true;
     this.task = this.taskList.find(t => t.iTaskId == taskId);
 
   }
   saveTask() {
-     this.child.saveTask();
-    
+    this.child.saveTask();
+
   }
   close() {
     this.editTask1 = false
   }
-closeMe(){
-  debugger
-  this.editTask1= false;
-}
+  closeMe() {
+    debugger
+    this.editTask1 = false;
+  }
   ngOnInit() {
     // this.task = new Task();
 
@@ -155,15 +159,26 @@ closeMe(){
   // @Input()
   // task: Task;
 
+  taskId;
+  taskI;
+  taskJ;
+  delTask(taskId: number, i: number, j: number) {
+    this.taskId = taskId;
+    this.taskI = i;
+    this.taskJ = j;
+    this.message = 'האם אתה בטוח שברצונך למחוק משימה זו?';
+    this.flagDelete = true;
+  }
 
-  deleteTask(taskId: number, i: number, j: number) {
-    this.appProxy.post("DeleteTask", { iTaskId: taskId, iPersonId: this.globalService.getUser().iPersonId }).then(
+
+  deleteTask() {
+    this.appProxy.post("DeleteTask", { iTaskId: this.taskId, iPersonId: this.globalService.getUser().iPersonId }).then(
       data => {
         if (data == true) {
           // alert("task remove");
           // this.task=this.taskList.find(t => t.iTaskId == taskId);
-          alert(this.daysMonthNameArr[i][j]['tasks'].indexOf(this.daysMonthNameArr[i][j]['tasks'].find(t => t.id == taskId)));
-          this.daysMonthNameArr[i][j]['tasks'].splice(this.daysMonthNameArr[i][j]['tasks'].indexOf(this.daysMonthNameArr[i][j]['tasks'].find(t => t.id == taskId)), 1);
+          alert(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].indexOf(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].find(t => t.id == this.taskId)));
+          this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].splice(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].indexOf(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].find(t => t.id == this.taskId)), 1);
           window.location.reload();
 
         }

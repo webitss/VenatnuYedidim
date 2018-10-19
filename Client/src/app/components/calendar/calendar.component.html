@@ -14,7 +14,7 @@
               {{d.number}}
               <div *ngFor="let t of d.tasks;trackBy: trackItem" class="task" (click)="editTask(t.id)" [class.scroll]="d.tasks.length > 2" >
                 <span class="label label-default">{{t.string}}</span>
-                <div class="x" (click)="deleteTask(t.id,t.i,t.j)"></div>
+                <div class="x" (click)="delTask(t.id,t.i,t.j)"></div>
               </div>
               <!-- </div> -->
               <!-- <div *ngFor="let t of d.tasks">{{t.iTaskType}}</div> -->
@@ -37,3 +37,7 @@
       </div>
       <app-task [task]="task" (close)="closeMe()"></app-task>
     </div>
+
+
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; deleteTask();"></app-vy-pop-up>
+    

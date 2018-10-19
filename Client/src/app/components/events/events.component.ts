@@ -1,10 +1,11 @@
-﻿import { Component, OnInit, ViewChild } from '@angular/core';
+﻿import { Component, OnInit, ViewChild, Inject, forwardRef } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Event1 } from '../../classes/event';
 import { Router } from '@angular/router';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { GlobalService } from '../../services/global.service';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-events',
@@ -17,12 +18,12 @@ export class EventsComponent implements OnInit {
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
   message:string;
   flag = false;
-  header = "אישור מחיקת אירוע";
+  header = "מחיקת אירוע";
   eventIdToDelete:number;
   myFunc() {
     alert('sadsa');
   }
-  constructor(private appProxy: AppProxy, private router: Router, private globalService: GlobalService) { }
+  constructor(private appProxy: AppProxy, private router: Router, private globalService: GlobalService,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
 
   edit(e) {
     this.router.navigate(['events/event/', e.iEventId]);
@@ -31,7 +32,7 @@ export class EventsComponent implements OnInit {
   deleteEvent(e) {
     this.appProxy.post('DeleteEvent', { iEventId: e, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
       if (res == true) {
-        //alert('נמחק בהצלחה!');
+        this._parent.openMessagePopup('נמחק בהצלחה!');
         const i=this.lstDataRows.find(x=>x.iEventId=e);
         this.lstDataRows.splice(this.lstDataRows.indexOf(i), 1);
         this.vyTableComponent.refreshTable(this.lstDataRows);
@@ -43,7 +44,7 @@ export class EventsComponent implements OnInit {
   }
 
   deleteE(e: Event1) {
-    this.message='האם ברצונך למחוק את '+e.nvName+'?';
+    this.message='האם אתה בטוח שברצונך למחוק את אירוע '+e.nvName+'?';
     this.eventIdToDelete=e.iEventId;
     this.flag=true;
   }
