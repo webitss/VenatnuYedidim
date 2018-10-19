@@ -170,7 +170,7 @@ namespace Service.Entities
             {
                 if (base64Image != "")
                 {
-                    student.nvImgStudent = Fileshandler.SaveFileByBase64(base64Image, student.nvImgStudent, "Students//");
+                    student.nvImgStudent = Fileshandler.SaveFileByBase64(base64Image, student.nvImgStudent);
                     DataRow dr = SqlDataAccess.ExecuteDatasetSP("TStudentGetStudentbyId_SLCT", new SqlParameter("iPersonId", student.iPersonId)).Tables[0].Rows[0];
                     string prevName = ObjectGenerator<Student>.GeneratFromDataRow(dr).nvImgStudent;
                     if (prevName != "")

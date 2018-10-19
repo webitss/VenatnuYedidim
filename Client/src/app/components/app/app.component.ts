@@ -11,6 +11,8 @@ import { GlobalService } from '../../services/global.service';
 })
 export class AppComponent implements OnInit {
 
+  static status:string;
+  component: string;
   protected currentComponent: any;
   protected PicUrl: any;
   protected nvBase64File: string;
@@ -18,13 +20,15 @@ export class AppComponent implements OnInit {
 
   public instance: AppComponent;
   public userName: string = this.globalService.getUser() !=  null ?  this.globalService.getUser().nvUserName : "משתמש";
-  constructor(private appProxy: AppProxy,public router: Router, private route: ActivatedRoute, private globalService: GlobalService) { }
+  constructor(private activatedRoute: ActivatedRoute,private appProxy: AppProxy,public router: Router, private route: ActivatedRoute, private globalService: GlobalService) { }
 
   ngOnInit() {
     this.instance = this;
     if (this.globalService.getUser() == null)
       this.router.navigate(['']);
 
+    
+  
     // this.appProxy.post('Login', { nvUserName: 'מערכת', nvPassword: '1234' })
     //   .then(user => {
     //     if (user) alert('שם משתמש: ' + user.nvUserName + ', סיסמה:' + user.nvPassword);
