@@ -26,7 +26,7 @@ export class Student implements Person {
     public nvImgStudent: string=null;
     public dtAddStudentDate: Date= new Date();
     public nvComment: string=null;
-
+    public iStatusType:number=null;
     constructor() {
        
     }

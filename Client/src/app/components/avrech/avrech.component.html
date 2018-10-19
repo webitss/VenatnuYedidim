@@ -28,7 +28,7 @@
 
 </nav>
 <div class="btn-area">
-<button class="btn-circle btn-save" (click)="save()">שמור v </button>
+<button *ngIf="currentComponent.constructor.name.indexOf('AvrechDetails') != -1" class="btn-circle btn-save" (click)="save()">שמור v </button>
 <button class="btn-circle btn-close" (click)="close()">סגור x </button>
 </div>
 </div>

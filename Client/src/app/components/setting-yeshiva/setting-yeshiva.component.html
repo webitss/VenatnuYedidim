@@ -25,7 +25,7 @@
 
   <div class="form-control">
     <label for='yeshiva-city'>עיר:</label>
-    <input class=inputYeshiva type="text" name='yeshiva-city' [(ngModel)]="yeshiva.nvCity" required #city="ngModel"/>
+    <input class=inputYeshiva type="text" name='yeshiva-city' [(ngModel)]="yeshiva.nvCity" required #city="ngModel" />
     <div *ngIf="city.invalid && (city.dirty || city.touched)">
       <div *ngIf="(city.errors.required)" class="text-danger text-right">
         <strong>! </strong>שדה נדרש</div>
@@ -34,7 +34,8 @@
 
   <div class="form-control">
     <label for='yeshiva-contact'>שם איש קשר:</label>
-    <input class=inputYeshiva type="text" name='yeshiva-contact' [(ngModel)]="yeshiva.nvContact" required #contact="ngModel"/>
+    <input class=inputYeshiva type="text" name='yeshiva-contact' [(ngModel)]="yeshiva.nvContact" required #contact="ngModel"
+    />
     <div *ngIf="contact.invalid && (contact.dirty || contact.touched)">
       <div *ngIf="(contact.errors.required)" class="text-danger text-right">
         <strong>! </strong>שדה נדרש</div>
@@ -50,12 +51,19 @@
     </div>
   </div>
 
+
   <div class="form-control">
     <label for='yeshiva-mobile'>מייל:</label>
-    <input class=inputYeshiva type="email" name='yeshiva-mobile' [(ngModel)]="yeshiva.nvEmail" required #mobile="ngModel" />
+    <input class=inputYeshiva type="email" name='yeshiva-mobile' [(ngModel)]="yeshiva.nvEmail" required #mobile="ngModel" 
+    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
     <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
       <div *ngIf="(mobile.errors.required)" class="text-danger text-right">
         <strong>! </strong>שדה נדרש</div>
+    </div>
+    <div *ngIf="mobile.errors &&(mobile.touched || mobile.dirty)" class="aler alert-danger">
+      <div [hidden]="!mobile.errors?.pattern">
+        Invalid pattern
+      </div>
     </div>
   </div>
 
@@ -74,3 +82,4 @@
     </div>
   </div>
 </form>
+
