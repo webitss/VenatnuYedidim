@@ -26,12 +26,12 @@
 
           <div class="form-group">
               <label for="date">תאריך</label>
-              <input  [(ngModel)]="presence['dtDate']"  ngui-datetime-picker date-only="true" id="date" class="form-control">
+              <input  [(ngModel)]="currentPresence['dtDate']"  ngui-datetime-picker date-only="true" id="date" class="form-control" id="dtDate" name="dtDate">
           </div>
           
           <div class="form-group">
             <label for="sumHours">סה"כ שעות</label>
-            <input type="number" [(ngModel)]="presence.iHoursSum" id="sumHours" class="form-control">
+            <input type="number" [(ngModel)]="currentPresence.iHoursSum" id="sumHours" class="form-control">
         </div>
       </div>
 

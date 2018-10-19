@@ -1,0 +1,9 @@
+.student-event-details{
+    width: 60%;
+    right: 20%;
+    background-color: white;
+    border: solid rgb(207, 37, 94);
+    top:35%;
+    z-index: 99999;
+    position: fixed;
+}
