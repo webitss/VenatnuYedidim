@@ -3,14 +3,22 @@
 
     <div *ngFor="let col of lstColumns" class="col cell cell-title" [ngStyle]="col.titleStyle">
       <div class="small-title">
-       
+        <label *ngIf="col.type == 'checkbox'" class="container" style='float: right;'>
           {{col.title}}
-      
-        <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(-1,col.name)'>&#xe010;</span>
-        <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(1,col.name)'>&#xe011;</span>
-        <!-- *ngIf="lstSortColumns[col.name] && lstSortColumns[col.name]>0"  -->
-        <!-- *ngIf="(lstSortColumns[col.name] && lstSortColumns[col.name]<0)" -->
-        <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(0,col.name)'>X</span>
+          <input type="checkbox" (change)='checkAllTable(col.name)'>
+          <span class="checkmark"></span>
+
+        </label>
+
+        <span *ngIf="col.type != 'checkbox'"> {{col.title}}
+          <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(-1,col.name)'>&#xe010;</span>
+          <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(1,col.name)'>&#xe011;</span>
+          <!-- *ngIf="lstSortColumns[col.name] && lstSortColumns[col.name]>0"  -->
+          <!-- *ngIf="(lstSortColumns[col.name] && lstSortColumns[col.name]<0)" -->
+          <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(0,col.name)'>X</span>
+        </span>
+
+
       </div>
 
     </div>
@@ -23,11 +31,19 @@
   </div>
 
   <div class="vy-tbody" *ngIf="lstCurrentDataRows">
-    <div name="rows" *ngFor="let row of lstCurrentDataRows | vyTableOrderBy : lstOrderByFields; let i = index"
-      [ngClass]="{'even': i%2 == 0}" class="row vy-row">
+    <div name="rows" *ngFor="let row of lstCurrentDataRows; let i = index" [ngClass]="{'even': i%2 == 0}" class="row vy-row">
       <div *ngFor="let col of lstColumns" class="col cell" [ngStyle]="col.cellStyle" (click)="col.bClickCell ? clickCellFunc(row, col.name): ''">
         <div *ngIf="col.type == 'html'" [innerHtml]="row[col.name]"></div>
-        <div *ngIf="col.type != 'html'"> {{row[col.name]}} </div>
+        <div *ngIf="col.type != 'html' && col.type != 'checkbox'"> {{row[col.name]}} </div>
+        <div *ngIf="col.type == 'checkbox'">
+          <label class="container" style='float: right;'>
+
+            <input type="checkbox" [(ngModel)]="row[col.name]">
+            <span class="checkmark"></span>
+
+          </label>
+
+        </div>
       </div>
     </div>
   </div>
