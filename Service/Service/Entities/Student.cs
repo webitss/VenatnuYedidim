@@ -244,7 +244,25 @@ namespace Service.Entities
 		}
 
 
+    //   public static  bool DeleteStudent(int iPersonId, int iUserId)
+    //    {
+    //        try
+    //        {
+    //            List<SqlParameter> parameters=new List<SqlParameter>();
+    //            parameters.Add(new SqlParameter("iStudent", iPersonId));
+    //            parameters.Add(new SqlParameter("iUserId", iUserId));
 
-	}
+    //            SqlDataAccess.ExecuteDatasetSP("TStudent_DEL", parameters);
+    //            return true;
+    //        }
+    //        catch (Exception ex)
+    //        {
+
+    //            Log.LogError("TStudent_DEL / TStudent_DEL", "ex" + ex);
+    //            return false;
+    //        }
+    //    }
+
+    }
 
 }

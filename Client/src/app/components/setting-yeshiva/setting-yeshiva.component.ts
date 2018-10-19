@@ -55,11 +55,11 @@ export class SettingYeshivaComponent implements OnInit {
 
   save() {
     if (this.iYeshivaId == 0) {
-      this.appProxy.post('AddYeshiva', { yeshiva: this.yeshiva })
+      if(this.appProxy.post('AddYeshiva', { yeshiva: this.yeshiva })
         .then(
           data => {
             if (this.yeshiva.iRoleType == null)
-              this.isDisabled();
+                this.isDisabled();
             else {
               this.closeYeshiva.emit(null);
               alert("נשמר בהצלחה");
@@ -67,6 +67,11 @@ export class SettingYeshivaComponent implements OnInit {
             }
           }
         )
+      )
+      {}
+      else{
+        alert("faild in save");
+      }
     }
     else {
       this.appProxy.post('EditYeshiva', { yeshiva: this.yeshiva, iYeshivaId: this.yeshiva.iYeshivaId })

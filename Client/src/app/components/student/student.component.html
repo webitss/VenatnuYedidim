@@ -38,7 +38,7 @@
 
     </nav>
     <div class="btn-area">
-      <button class="btn-circle btn-save" (click)="save()">שמור v </button>
+      <button *ngIf="currentComponent.constructor.name.indexOf('StudentDetails') != -1"  class="btn-circle btn-save" (click)="save()">שמור v </button>
       <button class="btn-circle btn-close" routerLink="/students">סגור x </button>
     </div>
   </div>

@@ -14,12 +14,12 @@
 </div>
 
 <div class="main-table">
- <app-vy-table #students [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editAndDeleteStudent($event)"></app-vy-table> 
+ <app-vy-table #students [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="click($event)"></app-vy-table>
 </div>
 
-<div *ngIf="flag==true"> 
+<div *ngIf="flag==true">
     <app-cards-union (onClose)="flag=false"></app-cards-union>
-</div> 
+</div>
 
 
 
