@@ -3,6 +3,7 @@ import { PresenceAvrech } from '../../classes/presenceAvrech';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { GlobalService } from '../../services/global.service';
+import { dashCaseToCamelCase } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-open-presence',
@@ -19,10 +20,17 @@ export class OpenPresenceComponent implements OnInit {
   closeMeNoSave = new EventEmitter();
   @Output()
   @Input()
-  public presence: PresenceAvrech;
+  presence: PresenceAvrech;
+  currentPresence:PresenceAvrech;
   ngOnInit() {
-    this.presence['dtDate'] = new Date((this.presence.dtDatePresence).getTime());
+    debugger;
+    this.currentPresence=new PresenceAvrech();
+    this.currentPresence=Object.assign({},this.presence);
+    this.currentPresence['dtDate']=new Date((this.currentPresence.dtDatePresence).getTime());
   }
+
+  
+
   closeDialog() {
     this.closeMe.emit(null);
   }
@@ -33,7 +41,7 @@ export class OpenPresenceComponent implements OnInit {
     // this.presence.dtDatePresence = this.save.name;
     // this.document.nvDocumentType = this.save.type;
 debugger;
-    this.appProxy.post('SetPresence', { presenceAvrech: this.presence,iUserId:this.globalService.getUser()['iUserId']}).then(
+    this.appProxy.post('SetPresence', { presenceAvrech: this.currentPresence,iUserId:this.globalService.getUser()['iUserId']}).then(
       data => {
         if (data == 0)
           alert("error in save data")

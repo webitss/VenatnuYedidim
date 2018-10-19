@@ -18,6 +18,8 @@ export class AvrechimComponent implements OnInit {
 
   avrech: Avrech
   avrechimList: Avrech[];
+  mailList: string[] = [];
+
   @ViewChild('avrechim') avrechim: any;
   protected currentComponent: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
@@ -48,6 +50,7 @@ export class AvrechimComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
     this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
+    this.lstColumns.push(new VyTableColumn('בחר', 'checked', 'checkbox'));
   }
   avrechId: number;
   flag = false;
@@ -85,7 +88,7 @@ export class AvrechimComponent implements OnInit {
       });
   }
 
-  downloadExcel(t=null) {
+  downloadExcel(t = null) {
     debugger;
     this.avrechim.downloadExcel(t);
   }
@@ -95,4 +98,28 @@ export class AvrechimComponent implements OnInit {
   tableToPdf(name: string) {
     this.avrechim.downloadPdf(name, 'pdf');
   }
+  mailToAvrechim() {
+    this.mailList = [];
+    this.avrechimList.filter(a => a['checked'] == true).forEach(avrech => {
+      this.mailList.push(avrech.nvEmail);
+    });
+
+    this.appProxy.post('MailToAvrechim', { mailList: this.mailList })
+      .then(result => {
+
+      }
+        , err => { }
+      );
+    // let s = ''
+    // let n = 777;
+    // let arr = [{ 400: 'ת' },{ 1: 'א' }]
+    // let n1=n;
+    // for (let i = 0; i < 22; i++) {
+    //   while (n1 - arr[i][] > 0) {
+    //     s += arr[i];
+    //     n1-=arr[i];
+    //   }
+    // }
+  }
+
 }
