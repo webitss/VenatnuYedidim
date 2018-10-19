@@ -22,13 +22,8 @@ export class AppComponent implements OnInit {
   protected header = '';
 
   public instance: AppComponent;
-<<<<<<< HEAD
-  public userName: string = this.globalService.getUser() != null ? this.globalService.getUser().nvUserName : "משתמש";
-  constructor(private appProxy: AppProxy, public router: Router, private route: ActivatedRoute, private globalService: GlobalService) { }
-=======
   public userName: string = this.globalService.getUser() !=  null ?  this.globalService.getUser().nvUserName : "משתמש";
   constructor(private activatedRoute: ActivatedRoute,private appProxy: AppProxy,public router: Router, private route: ActivatedRoute, private globalService: GlobalService) { }
->>>>>>> d3f50329a5d23110fc6d25c3d27a954487e9e10e
 
   ngOnInit() {
     this.instance = this;
