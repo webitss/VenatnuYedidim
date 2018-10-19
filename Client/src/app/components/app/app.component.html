@@ -30,7 +30,7 @@
 
         <span>ארועים</span>
       </li>
-      <li [ngClass]="{'appSelect': router.url.indexOf('graduates') != -1}" class="nav-item" routerLink='/graduates'>
+      <li  [ngClass]="{'appSelect': router.url.indexOf('graduates') != -1 || isGraduate==1}" class="nav-item" routerLink='/graduates'>
 
         <span>בוגרים</span>
       </li>
