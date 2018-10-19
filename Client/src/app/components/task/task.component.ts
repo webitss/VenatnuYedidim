@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { Task } from "../../classes/task"
 import { SysTableService } from '../../services/sys-table.service';
 import { AppProxy } from '../../services/app.proxy';
@@ -99,6 +99,9 @@ export class TaskComponent implements OnInit {
   
   }
   @Output() close:EventEmitter<any>= new EventEmitter<any>();
+  @Output() refresh: EventEmitter<Task> = new EventEmitter();
+
+  // @Output() refresh:EventEmitter<any>= new EventEmitter<any>();
 // addOrEdit:boolean=false;
   saveTask() {
     debugger
@@ -110,9 +113,12 @@ export class TaskComponent implements OnInit {
       
         alert("המשימה נוספה בהצלחה!");
         this.close.emit();
+        this.refresh.emit(this.task);
+
         //close
       }
     },err=>{
+      alert('dfds');
     });
     
   }

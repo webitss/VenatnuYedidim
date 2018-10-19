@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit, Output, Input, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { AppProxy } from "../../services/app.proxy"
 import { ActivatedRoute } from '@angular/router';
 import { Task } from '../../classes/task';
@@ -6,6 +6,7 @@ import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
 import { SysTableService } from '../../services/sys-table.service';
 import { GlobalService } from '../../services/global.service';
 import { TaskComponent } from '../task/task.component';
+import { SrvRecord } from 'dns';
 @Component({
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,22 +44,25 @@ export class CalendarComponent implements OnInit {
 
   editTask1: boolean;
   editTask(taskId: number) {
-    debugger
-    this.flag = true; this.editTask1 = true;
+    this.flag = true;
+    this.editTask1 = true;
     this.task = this.taskList.find(t => t.iTaskId == taskId);
 
   }
   saveTask() {
-     this.child.saveTask();
-    
+    this.child.saveTask();
+
   }
   close() {
     this.editTask1 = false
   }
-closeMe(){
-  debugger
-  this.editTask1= false;
-}
+  closeMe() {
+    this.editTask1 = false;
+  }
+  refreshMe(task: Task) {
+    this.taskList.push(task);
+    this.cdRef.detectChanges();
+  }
   ngOnInit() {
     // this.task = new Task();
 
@@ -88,12 +92,17 @@ closeMe(){
   @Output()
   @Input()
   t: any;
-
+  len: number = 0;
   typeText: string;
+  end: number;
   createCalendar() {
     this.oneOfMonth = new Date(this.year, this.month - 1, 1).getDay() + 1;
     this.lenOfMonth = new Date(this.year, this.month, 0).getDate();
-
+    debugger
+    this.end = (this.lenOfMonth + this.oneOfMonth) / 7;
+    if (this.end - Number.parseInt(((this.lenOfMonth + this.oneOfMonth) / 7).toString()) == 0)
+      this.end -= 1;
+    else this.end = Number.parseInt(((this.lenOfMonth + this.oneOfMonth) / 7).toString());
     this.d = 1;
 
     this.daysMonthNameArr = [];
@@ -123,14 +132,16 @@ closeMe(){
           });
           //  this.daysMonthNameArr[this.i][j] = {number:this.d};
 
-          this.daysMonthNameArr[this.i][j] = { tasks: tasks, number: this.d };
+          this.daysMonthNameArr[this.i][j] = { tasks: tasks, number: this.d, len: tasks.length };
           this.d++;
         }
       }
     }
+    this.cdRef.detectChanges();
+
   }
 
-  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
+  constructor(private cdRef: ChangeDetectorRef, private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
 
   prevMonth() {
     if (this.month == 1) {
@@ -164,8 +175,8 @@ closeMe(){
           // this.task=this.taskList.find(t => t.iTaskId == taskId);
           alert(this.daysMonthNameArr[i][j]['tasks'].indexOf(this.daysMonthNameArr[i][j]['tasks'].find(t => t.id == taskId)));
           this.daysMonthNameArr[i][j]['tasks'].splice(this.daysMonthNameArr[i][j]['tasks'].indexOf(this.daysMonthNameArr[i][j]['tasks'].find(t => t.id == taskId)), 1);
-          window.location.reload();
-
+          //  window.location.reload();
+          this.cdRef.detectChanges();
         }
       });
   }
@@ -173,4 +184,12 @@ closeMe(){
   public trackItem(index: number, item: any) {
     return item.trackId;
   }
+
+
+
+
+
+  message: string = "האם אתה בטוח שברצונך למחוק משימה זו?";
+  flagPopUp: boolean = false;
+  header: string = "מחיקת משימה"
 }
