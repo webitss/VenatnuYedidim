@@ -18,7 +18,7 @@
     </div>
     <!-- <div class="c"> -->
     <ul class="navbar-nav col-sm-8" *ngIf="currentComponent">
-      <li (click)="isGraduate=0" [ngClass]="{'appSelect': currentComponent.constructor.name.indexOf('Student') != -1  &&router.url != '/graduates' && isGraduate=0}" class="nav-item" routerLink='/students'>
+      <li (click)="isGraduate=0" [ngClass]="{'appSelect': currentComponent.constructor.name.indexOf('Student') != -1  &&router.url != '/graduates' && isGraduate==0}" class="nav-item" routerLink='/students'>
 
         <span>תלמידים</span>
       </li>
