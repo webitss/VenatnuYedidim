@@ -28,7 +28,7 @@
           </li>
           <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('SettingsReports') != -1}" class="nav-item" routerLink="settings-reports">
               <span class="fullTab">דוחו"ת
-  
+
               </span>
             </li>
             <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('SettingsYeshivot') != -1}" class="nav-item" routerLink="settings-yeshivot">
@@ -39,7 +39,7 @@
                   <span class="fullTab">
                     מסמכים
                   </span>
-                
+
               </li>
               <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentFrontend') != -1}" class="nav-item" routerLink="settings-frontend">
                 <span class="fullTab">
@@ -47,14 +47,13 @@
                 </span>
               </li>
           </ul>
-  
-  
-  
+
+
+
   </nav>
-  <div class="btn-area">
+  <!-- <div class="btn-area">
   <button class="btn-circle btn-save" (click)="save()">שמור v </button>
   <button class="btn-circle btn-close" (click)="close()">סגור x </button>
-  </div>
+  </div> -->
   </div>
 <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
-  
