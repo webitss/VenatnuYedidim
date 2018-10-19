@@ -5,5 +5,5 @@
   <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editPresence($event)"></app-vy-table>
 </div>
 <div class="openPresence" *ngIf="presence!=null">
-  <app-open-presence [presence]="presence" (closeMe)="closeDocumentDialog()" (closeMeNoSave)="closeDocumentDialog()"></app-open-presence>
+  <app-open-presence [presence]="presence" (closeMe)="closePresenceDialog(true)" (closeMeNoSave)="closePresenceDialog(false)"></app-open-presence>
 </div> 
