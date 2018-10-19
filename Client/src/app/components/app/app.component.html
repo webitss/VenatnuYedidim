@@ -3,7 +3,7 @@
         <ul class="navbar-nav navbar-list" *ngIf="currentComponent">
             <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentDetails') != -1}" class="nav-item" routerLink="student-details">
               <span class="fullTab">
-                 פרטים אישיים   
+                 פרטים אישיים
               </span>
             </li>
             </ul>
@@ -18,11 +18,11 @@
     </div>
     <!-- <div class="c"> -->
     <ul class="navbar-nav col-sm-8" *ngIf="currentComponent">
-      <li [ngClass]="{'appSelect': currentComponent.constructor.name.indexOf('Student') != -1}" class="nav-item" routerLink='/students'>
+      <li [ngClass]="{'appSelect': currentComponent.constructor.name.indexOf('Student') != -1  &&router.url != '/graduates'}" class="nav-item" routerLink='/students'>
 
         <span>תלמידים</span>
       </li>
-      <li [ngClass]="{'appSelect': router.url.indexOf('avrechim') != -1}" class="nav-item" routerLink='/avrechim'>
+      <li [ngClass]="{'appSelect': router.url.indexOf('avrechim') != -1 }" class="nav-item" routerLink='/avrechim'>
 
         <span>אברכים</span>
       </li>

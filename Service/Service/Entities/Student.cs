@@ -170,7 +170,7 @@ namespace Service.Entities
             {
                 if (base64Image != "")
                 {
-                    student.nvImgStudent = Fileshandler.SaveFileByBase64(base64Image, student.nvImgStudent, "Students//");
+                    student.nvImgStudent = Fileshandler.SaveFileByBase64(base64Image, student.nvImgStudent);
                     DataRow dr = SqlDataAccess.ExecuteDatasetSP("TStudentGetStudentbyId_SLCT", new SqlParameter("iPersonId", student.iPersonId)).Tables[0].Rows[0];
                     string prevName = ObjectGenerator<Student>.GeneratFromDataRow(dr).nvImgStudent;
                     if (prevName != "")
@@ -244,7 +244,25 @@ namespace Service.Entities
 		}
 
 
+    //   public static  bool DeleteStudent(int iPersonId, int iUserId)
+    //    {
+    //        try
+    //        {
+    //            List<SqlParameter> parameters=new List<SqlParameter>();
+    //            parameters.Add(new SqlParameter("iStudent", iPersonId));
+    //            parameters.Add(new SqlParameter("iUserId", iUserId));
 
-	}
+    //            SqlDataAccess.ExecuteDatasetSP("TStudent_DEL", parameters);
+    //            return true;
+    //        }
+    //        catch (Exception ex)
+    //        {
+
+    //            Log.LogError("TStudent_DEL / TStudent_DEL", "ex" + ex);
+    //            return false;
+    //        }
+    //    }
+
+    }
 
 }

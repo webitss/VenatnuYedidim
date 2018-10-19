@@ -3,7 +3,7 @@
     <div class="actions col-sm-8">
         <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
         <button class="btn btn-small" (click)="tableToPdf('אברכים')">pdf</button>
-        <button class="btn btn-circle1 btn-orange"> שליחת מייל</button>
+        <button class="btn btn-circle1 btn-orange" (click)="mailToAvrechim()"> שליחת מייל</button>
         <button class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">אברך חדש</button>
     </div>
 </div>
@@ -23,7 +23,7 @@
             <p>
                 האם אתה בטוח שברצונך למחוק אברך זה?
              </p>
-             
+
         </div>
         <div class="modal-footer">
                 <button type="button" class="btn-yesNo" (click)="delete()">כן</button>
@@ -32,7 +32,7 @@
       </div>
       </div>
 </div>
-    
+
 
 
 <!-- <div *ngIf="flag">

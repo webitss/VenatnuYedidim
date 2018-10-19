@@ -16,6 +16,7 @@ import { Yeshiva } from '../../classes/Yeshiva';
 })
 export class StudentDetailsComponent implements OnInit {
 
+  status: string;
   constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router, private globalService: GlobalService) { }
 
 
@@ -39,12 +40,15 @@ export class StudentDetailsComponent implements OnInit {
   yeshivaListOfStudent: Yeshiva[];
   yeshivaSelected: Yeshiva;
   currentUser: number;
+  days:string[]=["א","ב","ג","ד","ה","ו","ז","ח","ט","י","יא","יב","יג","יד","טו","טז","יז","יח","יט","כ","כא","כב","כג","כד","כה","כו","כז","כח","כט","ל"];
+  monthes:string[]=["תשרי","חשוון","כסלו","טבת","שבט","אדר","ניסן","אייר","סיוון","תמוז","אב","אלול"];
   dateDayArr = new Array<string>();
   dateMonthArr = new Array<string>();
   addYeshiva = false;
   e;
 
   ngOnInit() {
+
     this.bornDateHebrewStudent = new HebrewDate();
     this.diedDateHebrewFather = new HebrewDate();
     this.diedDateHebrewMother = new HebrewDate();
@@ -69,6 +73,9 @@ export class StudentDetailsComponent implements OnInit {
           this.student = data;
           // this.student.dtBirthdate.getTime();
           // this.student.dtAddStudentDate.getTime();
+          this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
+            this.status = data.filter(x => x.iSysTableRowId == this.student.iStatusType)[0].nvValue;
+          });
 
           this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
           this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];
@@ -244,7 +251,18 @@ export class StudentDetailsComponent implements OnInit {
       this.student.nvMotherDeathDate = null;
     }
     if (this.paramRout != '0') {
-      this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
+      this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => {
+        if (this.status == 'תלמיד')
+          alert("פרטי התלמיד עודכנו בהצלחה");
+        else
+          alert("פרטי הבוגר עודכנו בהצלחה");
+
+      }, err => {
+        if (this.status == 'תלמיד')
+          alert("שגיאה בעריכת תלמיד");
+        else
+          alert("שגיאה בעריכת בוגר");
+      });
     }
     else
 

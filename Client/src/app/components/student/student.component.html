@@ -1,4 +1,5 @@
-<div class="name-area"> תלמידים | {{student.nvFirstName+" "+student.nvLastName}} </div>
+<div class="name-area" *ngIf="status=='תלמיד'"> תלמידים | {{student.nvFirstName+" "+student.nvLastName}} </div>
+<div class="name-area" *ngIf="status=='בוגר'"> בוגרים | {{student.nvFirstName+" "+student.nvLastName}} </div>
 <div class="content-area">
   <div class="header row">
     <nav class="navbar navbar-expand-sm nav header-navbar">
@@ -20,13 +21,13 @@
             שיחות
           </span>
         </li>
-        <li *ngIf="flag!=0" [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentEvents') != -1}" class="nav-item">
-          <span class="fullTab" routerLink="student-events">
+        <li *ngIf="flag!=0" [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentEvents') != -1}" class="nav-item" routerLink="student-events">
+          <span class="fullTab" >
             ארועים שהשתתף
           </span>
         </li>
-        <li *ngIf="flag!=0" [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentDocuments') != -1}" class="nav-item">
-          <span class="fullTab" routerLink="student-documents">
+        <li *ngIf="flag!=0" [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentDocuments') != -1}" class="nav-item" routerLink="student-documents">
+          <span class="fullTab" >
 
             מסמכים
           </span>
@@ -37,7 +38,7 @@
 
     </nav>
     <div class="btn-area">
-      <button class="btn-circle btn-save" (click)="save()">שמור v </button>
+      <button *ngIf="currentComponent.constructor.name.indexOf('StudentDetails') != -1"  class="btn-circle btn-save" (click)="save()">שמור v </button>
       <button class="btn-circle btn-close" routerLink="/students">סגור x </button>
     </div>
   </div>

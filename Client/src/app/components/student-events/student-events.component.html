@@ -3,11 +3,15 @@
   <div class="actions col-sm-8">
     <!-- <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button> -->
     <!-- <button class="btn btn-small" (click)="tableToPdf('משתמשים')">s</button> -->
-    <button class="btn btn-circle1 btn-pink" routerLink="./student-events-details/0">אירוע חדש</button>
+    <button class="btn btn-circle1 btn-pink" (click)="newEvent()">אירוע חדש</button>
       <!-- [class.btn-disabled]="globalService.getUser().iPermittionId != 5 && globalService.getUser().iPermittionId != 6" [disabled]="globalService.getUser().iPermittionId != 5" -->
   </div>
 </div>
+<div class="student-event-details" *ngIf="eventFlag == true">
+  <app-student-event-details [event]="event" (Close)="close()"></app-student-event-details>
+</div>
 <router-outlet></router-outlet>
-<div class="main-table">
+
+<div class="main-table" >
   <app-vy-table #studentsEvents [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="click($event)"></app-vy-table>
 </div>

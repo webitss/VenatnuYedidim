@@ -2,22 +2,24 @@
 
 
 <div class=" row component-name-header">
-        <div class="col-sm-4 component-name">תלמידים</div>
+        <div *ngIf="component=='/students'" class="col-sm-4 component-name">תלמידים</div>
+        <div *ngIf="component=='/graduates'" class="col-sm-4 component-name">בוגרים</div>
         <div class="actions col-sm-8">
     <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
-    <button class="btn btn-small" (click)="tableToPdf('תלמידים')">s</button>
+    <button *ngIf="component=='/students'" class="btn btn-small" (click)="tableToPdf('תלמידים')">s</button>
+    <button *ngIf="component=='/graduates'" class="btn btn-small" (click)="tableToPdf('בוגרים')">s</button>
     <button class="btn btn-circle1 btn-orange" (click)="flag=true"> איחוד כרטיסים</button>
-    <button class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">תלמיד חדש</button>
+    <button *ngIf="component=='/students'" class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">תלמיד חדש</button>
 </div>
 </div>
 
 <div class="main-table">
- <app-vy-table #students [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editAndDeleteStudent($event)"></app-vy-table> 
+ <app-vy-table #students [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="click($event)"></app-vy-table>
 </div>
 
-<div *ngIf="flag==true"> 
+<div *ngIf="flag==true">
     <app-cards-union (onClose)="flag=false"></app-cards-union>
-</div> 
+</div>
 
 
 

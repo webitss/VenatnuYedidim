@@ -17,9 +17,10 @@ import { Avrech } from '../../classes/avrech';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
+  component: string;
   flag: boolean;
 
-  constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute, private globalService: GlobalService) { }
+  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private router: Router, private route: ActivatedRoute, private globalService: GlobalService) { }
   param: any;
   id: number;
   studentList: Student[];
@@ -30,30 +31,54 @@ export class StudentsComponent implements OnInit {
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   ngOnInit() {
 
+    this.component=this.router.url;
+    this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;   
+    if (this.component=='/students') {
+      this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
+        this.studentList = data;
+        // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
+        this.studentList.forEach(student => {
+          student['edit'] = '<div class="edit"></div>'
+          student['delete'] = '<div class = "delete"></>';
 
-
-    this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
-    this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
-      this.studentList = data;
-      // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
-      this.studentList.forEach(student => {
-        student['edit'] = '<div class="edit"></div>'
-        student['delete'] = '<div class = "delete"></>';
-
-        this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
-          this.yeshivaListOfStudent = data;
-          student['nvYeshivaName'] = this.yeshivaListOfStudent[this.yeshivaListOfStudent.length - 1].nvYeshivaName;
-        });
-        this.appProxy.post("GetAvrechimByStudentId", { iPersonId: student.iPersonId }).then(data => {
-          this.avrechimListOfStudent = data;
-          student['nvAvrechName'] = "";
-          this.avrechimListOfStudent.forEach(avrech => {
-            student['nvAvrechName'] += " " + avrech.nvFirstName + " " + avrech.nvLastName + '<br/>';
+          this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
+            this.yeshivaListOfStudent = data;
+            student['nvYeshivaName'] = this.yeshivaListOfStudent[this.yeshivaListOfStudent.length - 1].nvYeshivaName;
           });
+          this.appProxy.post("GetAvrechimByStudentId", { iPersonId: student.iPersonId }).then(data => {
+            this.avrechimListOfStudent = data;
+            student['nvAvrechName'] = "";
+            this.avrechimListOfStudent.forEach(avrech => {
+              student['nvAvrechName'] += " " + avrech.nvFirstName + " " + avrech.nvLastName + '<br/>';
+            });
 
+          });
         });
-      });
-    }, err => { alert(err); });
+      }, err => { alert(err); });
+    }
+    else {
+      this.appProxy.post('GetGraduatesList', { iUserId: this.id }).then(data => {
+        this.studentList = data;
+        // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
+        this.studentList.forEach(student => {
+          student['edit'] = '<div class="edit"></div>'
+          student['delete'] = '<div class = "delete"></>';
+
+          this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
+            this.yeshivaListOfStudent = data;
+            student['nvYeshivaName'] = this.yeshivaListOfStudent[this.yeshivaListOfStudent.length - 1].nvYeshivaName;
+          });
+          this.appProxy.post("GetAvrechimByStudentId", { iPersonId: student.iPersonId }).then(data => {
+            this.avrechimListOfStudent = data;
+            student['nvAvrechName'] = "";
+            this.avrechimListOfStudent.forEach(avrech => {
+              student['nvAvrechName'] += " " + avrech.nvFirstName + " " + avrech.nvLastName + '<br/>';
+            });
+
+          });
+        });
+      }, err => { alert(err); });
+    }
 
 
 
@@ -68,6 +93,8 @@ export class StudentsComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
     this.lstColumns.push(new VyTableColumn(' משויך לאברך', 'nvAvrechName', 'html'));
 
+
+
   }
 
 
@@ -78,7 +105,7 @@ export class StudentsComponent implements OnInit {
     else {
       this.alert = confirm("האם אתה בטוח שברצונך למחוק תלמיד זה?");
       if (this.alert == true) {
-      this.appProxy.post("DeleteStudent",{iStudent:e.iPersonId,iUserId:this.globalService.getUser()});
+        this.appProxy.post("DeleteStudent", { iStudent: e.iPersonId, iUserId: this.globalService.getUser() });
 
       }
     }
