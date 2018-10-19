@@ -29,7 +29,7 @@ export class SettingYeshivaComponent implements OnInit {
   public yeshiva: Yeshiva = new Yeshiva();
   @ViewChild(NgForm) form;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
-  public setting: SettingsYeshivotComponent;
+  public listYeshivot:Yeshiva[];
 
 
   formValid = false;
@@ -41,9 +41,16 @@ export class SettingYeshivaComponent implements OnInit {
 
   constructor(private appProxy: AppProxy, private router: Router) { }
 
+  changeTable(y: Yeshiva) {
+    y['edit'] = '<div class="edit"></div>';
+    y['delete'] = '<div class="delete"></div>';
+    y['nvRoleType']=this.sysTableList.filter(x=>x.iSysTableRowId==y.iRoleType)[0].nvValue;
+  }
+
   ngOnInit() {
-    if (this.iYeshivaId == 0)
+    if(this.iYeshivaId == 0){
       this.yeshiva = new Yeshiva();
+    }
     else
       this.appProxy.post('getYeshivaById', { iYeshivaId: this.iYeshivaId })
         .then(
@@ -51,6 +58,7 @@ export class SettingYeshivaComponent implements OnInit {
             this.yeshiva = data;
           }
         );
+        this.changeTable(this.yeshiva);
   }
 
   save() {
@@ -62,8 +70,7 @@ export class SettingYeshivaComponent implements OnInit {
                 this.isDisabled();
             else {
               this.closeYeshiva.emit(null);
-              alert("נשמר בהצלחה");
-              this.setting.changeTable(this.yeshiva);
+              alert("save!");
             }
           }
         )
@@ -74,17 +81,20 @@ export class SettingYeshivaComponent implements OnInit {
       }
     }
     else {
-      this.appProxy.post('EditYeshiva', { yeshiva: this.yeshiva, iYeshivaId: this.yeshiva.iYeshivaId })
+      if(this.appProxy.post('EditYeshiva', { yeshiva: this.yeshiva, iYeshivaId: this.yeshiva.iYeshivaId })
         .then(
           data => {
             this.yeshiva = data;
             this.closeYeshiva.emit(null);
-            alert("נשמר בהצלחה");
-            this.setting.changeTable(this.yeshiva);
+            alert("save!");
           }
         )
-      this.vyTableComponent.refreshTable(this.yeshiva);
+      ){}
+      else
+        alert("faild in save");
     }
+    this.vyTableComponent.refreshTable(this.yeshiva);
+    this.changeTable(this.yeshiva);
   }
 
   cancel() {

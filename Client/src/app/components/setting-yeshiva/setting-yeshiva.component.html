@@ -51,23 +51,19 @@
     </div>
   </div>
 
+
   <div class="form-control">
     <label for='yeshiva-mobile'>מייל:</label>
-    <!-- <input class=inputYeshiva type="email" name="email" ngModel email="true"> -->
-    <!-- <input class=inputYeshiva type="email" [(ngModel)]="model.email" #email="ngModel" email /> -->
-    <!-- <input class=inputYeshiva type="email" name='yeshiva-mobile' [(ngModel)]="yeshiva.nvEmail" required #mobile="ngModel" /> -->
-    <!-- <div *ngIf="email.untouched && email.invalid"></div> -->
-
-    <input type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email" name="email" ngModel
-      #emailref="ngModel">
-    <div *ngIf="emailref.errors &&(emailref.touched || emailref.dirty)" class="aler alert-danger">
-      <div [hidden]="!emailref.errors?.pattern">
-        Invalid pattern
-      </div>
-    </div>
+    <input class=inputYeshiva type="email" name='yeshiva-mobile' [(ngModel)]="yeshiva.nvEmail" required #mobile="ngModel" 
+    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
     <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
       <div *ngIf="(mobile.errors.required)" class="text-danger text-right">
         <strong>! </strong>שדה נדרש</div>
+    </div>
+    <div *ngIf="mobile.errors &&(mobile.touched || mobile.dirty)" class="aler alert-danger">
+      <div [hidden]="!mobile.errors?.pattern">
+        Invalid pattern
+      </div>
     </div>
   </div>
 
@@ -86,3 +82,4 @@
     </div>
   </div>
 </form>
+
