@@ -6,6 +6,7 @@
       <button class="btn-circle btn-close" (click)="cancel()">סגור x </button>
     </div>
   </div>
+
   <div class="content">
     <div class="row">
       <div class="col-sm-1"></div>
@@ -18,6 +19,7 @@
             <h2>הוספה</h2>
           </div>
         </div>
+        
         <div class="form-group col-sm-3">
           <label for="conversationType">סוג שיחה</label>
           <!-- <input type="text" name="conversationType" class="form-control"  [(ngModel)]="conversation.nvConversationType" [ngModelOptions]="{standalone: true}"/>-->
@@ -25,6 +27,7 @@
             <option *ngFor='let t of sysTableList' [value]="t.iSysTableRowId">{{t.nvValue}}</option>
           </select>
         </div>
+
         <br/>
         <div class="form-group col-sm-3">
           <label for="conversationDate">תאריך</label>
@@ -37,6 +40,7 @@
           <input id="conversationTime" type="time" class="form-control" name="conversationTime" [(ngModel)]="currentConver.dtConversationDate"
             [ngModelOptions]="{standalone: true}" />
         </div>
+
         <br/>
         <br/>
       </div>

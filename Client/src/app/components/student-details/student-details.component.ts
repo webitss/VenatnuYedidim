@@ -7,6 +7,7 @@ import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { GlobalService } from '../../services/global.service';
 import { Yeshiva } from '../../classes/Yeshiva';
+import { LetterEbrew } from '../../classes/LetterEbrew';
 
 
 @Component({
@@ -41,8 +42,11 @@ export class StudentDetailsComponent implements OnInit {
   currentUser: number;
   dateDayArr = new Array<string>();
   dateMonthArr = new Array<string>();
+  dateYearArr = new Array<any>();
   addYeshiva = false;
-  e;
+  currentYear: Date = new Date();
+letterArr=new Array<LetterEbrew>();
+
 
   ngOnInit() {
     this.bornDateHebrewStudent = new HebrewDate();
@@ -124,8 +128,37 @@ export class StudentDetailsComponent implements OnInit {
     this.dateDayArr.push('כ"א'); this.dateDayArr.push('כ"ב'); this.dateDayArr.push('כ"ג'); this.dateDayArr.push('כ"ד'); this.dateDayArr.push('כ"ה');
     this.dateDayArr.push('כ"ו'); this.dateDayArr.push('כ"ז'); this.dateDayArr.push('כ"ח'); this.dateDayArr.push('כ"ט'); this.dateDayArr.push('ל');
 
+  this.letterArr.push({nvChar:"א",iValue:1});this.letterArr.push({nvChar:"ב",iValue:2});this.letterArr.push({nvChar:"ג",iValue:3});
+  this.letterArr.push({nvChar:"ד",iValue:4});this.letterArr.push({nvChar:"ה",iValue:5});this.letterArr.push({nvChar:"ו",iValue:6});
+  this.letterArr.push({nvChar:"ז",iValue:7});this.letterArr.push({nvChar:"ח",iValue:8});this.letterArr.push({nvChar:"ט",iValue:9});
+  this.letterArr.push({nvChar:"י",iValue:10});this.letterArr.push({nvChar:"כ",iValue:20});this.letterArr.push({nvChar:"ל",iValue:30});
+  this.letterArr.push({nvChar:"מ",iValue:40});this.letterArr.push({nvChar:"נ",iValue:50});this.letterArr.push({nvChar:"ס",iValue:60});
+  this.letterArr.push({nvChar:"ע",iValue:70});this.letterArr.push({nvChar:"פ",iValue:80});this.letterArr.push({nvChar:"צ",iValue:90});
+  this.letterArr.push({nvChar:"ק",iValue:100});this.letterArr.push({nvChar:"ר",iValue:200});this.letterArr.push({nvChar:"ש",iValue:300});
+  this.letterArr.push({nvChar:"ת",iValue:400});
 
+    for (var i = 1990; i <= this.currentYear.getFullYear(); i++) {
+      this.dateYearArr.push(i);
+    }
+    for(var i=0;i<this.dateYearArr.length-1;i++)
+  {
+      const hebrewDate = require("hebrew-date");
+      this.dateYearArr[i] = hebrewDate(new Date(this.dateYearArr[i] , 0, 0)).year;
+      this.dateYearArr[i]=this.calcEbrewDatw(this.dateYearArr[i]);
+    }
+  }
 
+  calcEbrewDatw(year) {
+ 
+    year = year - 5000;
+    let yearString = "";
+    for (let i = this.letterArr.length-1; i > 0 ; i--) {
+      while (year -this.letterArr[i].iValue > 0) {
+       yearString += this.letterArr[i].nvChar;
+        year-= this.letterArr[i].iValue;
+      }
+    }
+    return yearString;
   }
 
 
@@ -154,15 +187,25 @@ export class StudentDetailsComponent implements OnInit {
     }).then(data => { alert("הישיבה נמחקה בהצלחה"); }, err => { alert("שגיאה במחיקת ישיבהיד"); });
     var i = 0;
     this.yeshivaListOfStudent.forEach(e => {
-      debugger;
       if (e.iYeshivaId == iYeshivaId)
         this.yeshivaListOfStudent.splice(i, 1);
       i++;
     });
   }
 
+
+
+  // When not providing a date object, the months are one-indexed
+
+  // { year: 5776, month: 13, date: 29, month_name: 'Elul' }
+
+
+
+
+
+
+
   addSelectYeshivaToStudent() {
-    debugger;
     this.appProxy.post("AddYeshivaToStudent", {
       iPersonId: this.paramRout, iYeshivaId:
         this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser
