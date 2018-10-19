@@ -52,6 +52,5 @@ namespace Service.Entities
                 return null;
             }
         }
-
     }
 }

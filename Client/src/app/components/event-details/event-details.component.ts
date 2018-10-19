@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, ViewChild, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, ViewChild, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Event1 } from '../../classes/event';
 import { Subject } from 'rxjs/Subject';
@@ -20,44 +20,30 @@ import { GlobalService } from '../../services/global.service';
 })
 export class EventDetailsComponent implements OnInit {
   list: Array<any> = new Array<any>();
-  title: string = "";
+  title: string = "בחר";
   inputTitle: string = "עבור";
   touched = false;
 
-  protected e: Event1;
+  public e: Event1;
   to: Array<any>;
   participantsToSend: Array<Tint> = new Array<Tint>();
 
   @ViewChild(NgForm) form;
 
-
-  ngAfterViewInit() {
-    if (this.isDetails)
-      this.isValid = this.form.valid;
-    else
-      this.isValid = this.form.valid && this.selectValid;
-
-  }
-
-  selectValid = false;
-  isValid = false;
-
-  checkIfSelectIsValid() {
-    if (this.to != undefined)
-      return this.to.length > 0;
-    return false;
-  }
-
   @ViewChild('child') VyMultySelect: VyMultySelectComponent;
 
 
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
   save() {
     if (!this.isDetails) {
       this.participantsToSend.splice(0, this.participantsToSend.length);
       this.e.dtEventDate = new Date(this.e.dtEventDate);
-      this.to.forEach(t => {
-        this.participantsToSend.push(new Tint(t.iSysTableRowId));
-      })
+      if (this.to != undefined && this.to.length > 0)
+        this.to.forEach(t => {
+          this.participantsToSend.push(new Tint(t.iSysTableRowId));
+        });
     }
 
     this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: this.globalService.getUser()['iUserId'], to: this.participantsToSend })
@@ -73,8 +59,6 @@ export class EventDetailsComponent implements OnInit {
 
   getFromChild(list: Array<any>) {
     this.to = list;
-    this.selectValid = this.checkIfSelectIsValid();
-    this.isValid = this.selectValid && this.form.valid;
   }
   private sub: any;
   private iEventId: number;
@@ -82,7 +66,7 @@ export class EventDetailsComponent implements OnInit {
   sysTableRowList: SysTableRow[];
 
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService,
-    private globalService: GlobalService, private route: Router) { }
+    private globalService: GlobalService, private route: Router,private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
 

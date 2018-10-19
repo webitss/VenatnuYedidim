@@ -1,0 +1,23 @@
+<div id="overlay"></div>
+<div class="content-modal">
+  <div class="modal-header">
+    <span class="text-header">{{header}}</span>
+    <div (click)="closeModal()" class="close">x</div>
+    
+  </div>
+
+  <div class="modal-body">
+    <div class="row col-sm-12 message">
+      <div>
+        <b>{{message}}</b>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="my-modal-footer col-sm-12">
+    <button class="btn btn-circle1 btn-pink col-sm-2 mrg-lft" (click)="okClicked()">אישור</button>
+    <button class="btn btn-orange btn-circle1 col-sm-2" *ngIf="isDouble" (click)="closeModal()">ביטול</button>
+  </div>
+</div>

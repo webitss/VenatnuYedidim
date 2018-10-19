@@ -15,11 +15,11 @@ namespace Service.Entities
     public class Conversation
     {
         #region Data Members
-
-        [DataMember]
-        public int iConversationId { get; set; }
         [DataMember]
         public int iPersonId { get; set; }
+        [DataMember]
+        public int iConversationId { get; set; }
+
         [DataMember]
         public int iConversationType { get; set; }
         [DataMember]
@@ -68,19 +68,20 @@ namespace Service.Entities
         }
 
 
-        public static int SetConversations(Conversation conversation, int iUserId)
+        public static int SetConversations(Conversation conversation,int iUserId)
         {
 
             try
-            {
+                {
                 List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
                 parameters.Add(new SqlParameter("iCreatedByUserId", iUserId));
-                SqlDataAccess.ExecuteDatasetSP("TConversation_INS/UPD", parameters);
-				int id = int.Parse(SqlDataAccess.ExecuteDatasetSP("SetConversations / TConversation_INS/UPD", parameters).Tables[0].Rows[0][0].ToString());
+				int id = int.Parse(SqlDataAccess.ExecuteDatasetSP("TConversation_INS/UPD", parameters).Tables[0].Rows[0][0].ToString());
+             
+                return id;
 
-				return id;
 
-			}
+
+            }
             catch (Exception ex)
             {
                 Log.LogError("SetConversations / TConversation_INS/UPD", "ex" + ex + ", conversation: " + JsonConvert.SerializeObject(conversation));

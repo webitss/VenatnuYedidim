@@ -1,10 +1,11 @@
-import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit, Output, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { AppProxy } from "../../services/app.proxy"
 import { ActivatedRoute } from '@angular/router';
 import { Task } from '../../classes/task';
 import { ArrayObservable } from 'rxjs/observable/ArrayObservable';
 import { SysTableService } from '../../services/sys-table.service';
 import { GlobalService } from '../../services/global.service';
+import { TaskComponent } from '../task/task.component';
 @Component({
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,7 +17,7 @@ import { GlobalService } from '../../services/global.service';
 export class CalendarComponent implements OnInit {
   @Output()
   daysNameArr: Array<string> = ["ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"];
-  daysMonthNameArr: any[][]=[];// = new Array();
+  daysMonthNameArr: any[][] = [];// = new Array();
   i: number;
   oneOfMonth: any;
   lenOfMonth: any;
@@ -27,19 +28,41 @@ export class CalendarComponent implements OnInit {
   month: number;
   day: number;
   d: number;
-
-
+  flag: boolean = false;
+  // @ViewChild('task') taskComponent: TaskComponent;
   @Output()
   @Input()
+  @ViewChild(TaskComponent) child: TaskComponent;
   openNewTask: boolean = false;
-
+  task: Task
   id: number;
 
   taskList: Array<Task> = new Array<Task>();
   taskTypeList: Array<any>;
 
+
+  editTask1: boolean;
+  editTask(taskId: number) {
+    debugger
+    this.flag = true; this.editTask1 = true;
+    this.task = this.taskList.find(t => t.iTaskId == taskId);
+
+  }
+  saveTask() {
+     this.child.saveTask();
+    
+  }
+  close() {
+    this.editTask1 = false
+  }
+closeMe(){
+  debugger
+  this.editTask1= false;
+}
   ngOnInit() {
-// alert(this.daysMonthNameArr);
+    // this.task = new Task();
+
+    // alert(this.daysMonthNameArr);
     this.month = new Date().getMonth() + 1;
     this.year = new Date().getFullYear();
 
@@ -93,7 +116,7 @@ export class CalendarComponent implements OnInit {
                 }
               });
               let t = this.typeText + " " + task.dtTaskdatetime.getHours() + ":" + task.dtTaskdatetime.getMinutes();
-              tasks.push({ string: t, id: task.iTaskId ,i:this.i,j:j});
+              tasks.push({ string: t, id: task.iTaskId, i: this.i, j: j });
               // tasks.push(task);
               //this.t = task;
             }
@@ -128,8 +151,12 @@ export class CalendarComponent implements OnInit {
       this.month += 1;
     this.createCalendar()
   }
-  task:Task;
-  deleteTask(taskId: number,i:number,j:number) {
+  // @Output()
+  // @Input()
+  // task: Task;
+
+
+  deleteTask(taskId: number, i: number, j: number) {
     this.appProxy.post("DeleteTask", { iTaskId: taskId, iPersonId: this.globalService.getUser().iPersonId }).then(
       data => {
         if (data == true) {
@@ -143,7 +170,7 @@ export class CalendarComponent implements OnInit {
       });
   }
 
-  public trackItem (index: number, item: any) {
+  public trackItem(index: number, item: any) {
     return item.trackId;
   }
 }

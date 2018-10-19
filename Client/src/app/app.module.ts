@@ -46,6 +46,8 @@ import { StudentConversationsComponent } from './components/student-conversation
 import { StudentDocumentsComponent } from './components/student-documents/student-documents.component';
 import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
 import { StudentMeetingDetailsComponent } from './components/student-meeting-details/student-meeting-details.component';
+import { StudentEventsComponent } from './components/student-events/student-events.component';
+import { StudentEventDetailsComponent } from './components/student-event-details/student-event-details.component';
 
 import { AvrechimComponent } from './components/avrechim/avrechim.component';
 import { AvrechComponent } from './components/avrech/avrech.component';
@@ -93,6 +95,12 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { settingsFrontend } from './services/settings-frontend.service';
 import { OpenPresenceComponent } from './components/open-presence/open-presence.component';
 
+import { AddParticipantComponent } from './components/add-participant/add-participant.component';
+
+import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
+
+
+
 
 
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -124,6 +132,8 @@ import { OpenPresenceComponent } from './components/open-presence/open-presence.
     StudentConversationDetailsComponent,
     StudentMeetingDetailsComponent,
     StudentDocumentsComponent,
+    StudentEventsComponent,
+    StudentEventDetailsComponent,
     CardsUnionComponent,
 
     AvrechimComponent,
@@ -179,6 +189,11 @@ import { OpenPresenceComponent } from './components/open-presence/open-presence.
 
 
     OpenPresenceComponent,
+
+
+
+    AddParticipantComponent,
+    VyPopUpComponent,
    
   ],
  //imports: [ 
@@ -231,7 +246,20 @@ import { OpenPresenceComponent } from './components/open-presence/open-presence.
           },
           {
             path: "student-documents", component: StudentDocumentsComponent
-          }
+          },
+          {
+            path: "student-events", component: StudentEventsComponent
+            //  children:[
+            //   {path: "student-event-details/:iEventId", component: StudentEventDetailsComponent}
+            // ]
+          },
+          {
+            path: "student-events-details/:iEventId", component: StudentEventDetailsComponent
+            // ,children: [
+            //   { path: "", component: UserDetailsComponent },
+            //   { path: "student-event-details", component: StudentEventDetailsComponent }
+            //]
+          },
 
         ]
       },

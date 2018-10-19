@@ -21,7 +21,7 @@ export class UploadDocumentComponent implements OnInit {
   closeMeNoSave = new EventEmitter();
   @Output()
   @Input()
-  protected document: Document;
+  public document: Document;
 
   sheetTypes: SysTableRow[];
   id: any;
@@ -44,7 +44,7 @@ export class UploadDocumentComponent implements OnInit {
     });
 
   }
-  protected save = { document: '', name: '', type: '' };
+  public save = { document: '', name: '', type: '' };
 
 
   loadDocument(event, callback) {
@@ -81,7 +81,7 @@ export class UploadDocumentComponent implements OnInit {
       data => {
         if (data == 0)
           alert("error in save data")
-        else { this.document.iDocumentId = data; this.closeDialog(); }
+        else {this.document.iDocumentId = data; this.closeDialog(); }
       }
       , err => alert(err));
   }

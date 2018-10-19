@@ -6,67 +6,64 @@
       <button class="btn-circle btn-close" (click)="close()">סגור x </button>
     </div>
   </div>
-  <div class="content">
-    <div class="row ">
-      <div *ngIf="meeting.iMeetingId">
-        <h3>עריכה </h3>
-      </div>
-      <div *ngIf="meeting.iMeetingId==null">
-        <h3>פגישה חדשה </h3>
-      </div>
-    </div>
-    <div class="row ">
 
-      <div class="form-group">
-        <label for="nvMeetingType">סוג פגישה</label>
-        <select [(ngModel)]="currentMeeting.iMeetingType">
-          <option *ngFor='let s of sysTableRowList' [value]="s.iSysTableRowId">
-            {{s.nvValue}}
-          </option>
-        </select>
+  <div class="row body">
+    <div class="col-sm-1"></div>
+    <div class="content col-sm-10">
+      <div class="row title">
+        <div *ngIf="meeting.iMeetingId">
+          <h3>עריכה </h3>
+        </div>
+        <div *ngIf="meeting.iMeetingId==null">
+          <h3>פגישה חדשה </h3>
+        </div>
       </div>
-<!-- {{meeting.dtDate }}date:
-{{meeting.dtHour}}hour: -->
-      <!-- <div class="form-group ">
-        <label for="date">תאריך:</label>
-        <input type="date" class="form-control" name="date" id="date" [(ngModel)]="meeting.dtDate" (ngModelChange)="meeting.dtDate = $event"  >
-      </div> -->
-      <!-- <div class="form-group ">
-        <label for="date">תאריך:</label>
-        <input type="date" class="form-control" name="date" id="date" [(ngModel)]="meeting.dtDate" (ngModelChange)="meeting.dtDate = $event" >
-      </div> -->
-<div class="form-group">
-    <label for="dtDate">תאריך:</label>
-      <input class="form-control" [(ngModel)]="currentMeeting.dtDate"  ngui-datetime-picker date-only="true" close-on-select="false" id="dtDate" name="dtDate">
-    </div>
-    
-      <div class="form-group ">
-        <label for="time">שעה:</label>
-        <input type="time" class="form-control" id="time" name="time" [(ngModel)]="currentMeeting.dtHour " (ngModelChange)="meeting.dtHour = $event"  >
-      </div>
+      <div class="row">
+        <div class="form-group col-sm-3">
+          <label for="nvMeetingType">סוג פגישה</label>
 
-    </div>
+          <select class="form-control" [(ngModel)]="currentMeeting.iMeetingType">
+            <option [ngValue]="undefined" disabled>בחר</option>
+            <option *ngFor='let s of sysTableRowList' [value]="s.iSysTableRowId">
+              {{s.nvValue}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group col-sm-3">
+          <label for="dtDate">תאריך</label>
+          <input class="form-control" [(ngModel)]="currentMeeting['dtDate']" ngui-datetime-picker date-only="true" close-on-select="false"
+            id="dtDate" name="dtDate">
+        </div>
 
-    <div class="row">
-      <div class="form-group col-sm-12">
-        <label for="nvSummary"> סיכום</label>
-        <input type="text" class="form-control" id="nvSummary" [(ngModel)]="currentMeeting.nvSummary" [ngModelOptions]="{standalone: true}">
+        <div class="form-group col-sm-3">
+          <label for="time">שעה</label>
+          <input type="time" class="form-control" id="time" name="time" [(ngModel)]="currentMeeting['dtHour'] " (ngModelChange)="meeting['dtHour'] = $event">
+        </div>
+
+
+        <div class="row col-sm-12">
+          <div class="form-group col-sm-10">
+            <label for="nvSummary"> סיכום</label>
+            <textarea name='nvSummary' class="form-control" id="nvSummary" [(ngModel)]="currentMeeting.nvSummary" [ngModelOptions]="{standalone: true} "></textarea>
+
+          </div>
+
+        </div>
+        <div class=" col-sm-12">
+          <div *ngIf="meeting.iMeetingId==null">
+            <div *ngIf="taskSelect==false" class="col-sm-8">
+              <button class="btn-circle btn-add " (click)="taskSelect=true">הוספת משימה +</button>
+            </div>
+            <div *ngIf="taskSelect==true">
+              <app-task #task></app-task>
+            </div>
+          </div>
+        </div>
+
+
       </div>
-      <app-task  #task></app-task>
+      <div class="col-sm-1"></div>
 
     </div>
   </div>
 </div>
-
-
-
-<!-- 
-import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
-
-
-<input [(ngModel)]="game.dtDate" ngui-datetime-picker date-only=true close-on-select="false" formControlName="dtDate" name="dtDate"
-  class="form-control" (valueChanged)="saveDate('dtDate',$event)">
-
-
-<input class="form-control" [(ngModel)]="game.tmpTime" type="time" (change)="saveDate('dtDate',$event)" formControlName="tmpTime"
-  name="tmpTime"> -->

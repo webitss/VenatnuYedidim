@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output } from '@angular/core';
 import { SysTableService } from '../../services/sys-table.service';
 import { error } from 'util';
 import { SysTableRow } from '../../classes/SysTableRow';
@@ -6,6 +6,8 @@ import { SysTables } from '../../classes/SysTables';
 import { AppProxy } from '../../services/app.proxy';
 import { forEach } from '@angular/router/src/utils/collection';
 import { t } from '@angular/core/src/render3';
+// import { EventEmitter } from 'protractor';
+import {EventEmitter} from 'events'
 
 @Component({
   selector: 'app-settings-code-tables',
@@ -14,18 +16,18 @@ import { t } from '@angular/core/src/render3';
 })
 export class SettingsCodeTableComponent implements OnInit {
 
-  protected tableNames: Array<SysTables>;
-  protected Values: Array<SysTableRow>;
+  public tableNames: Array<SysTables>;
+  public Values: Array<SysTableRow>;
 
-  protected idSysTableRow: number;
-  protected divNewValue: boolean;
-  protected toEdit: boolean;
+  public idSysTableRow: number;
+  public divNewValue: boolean;
+  public toEdit: boolean;
   protected row: SysTableRow;
   protected roeToadd: SysTableRow = new SysTableRow();
   protected roeToadd1: SysTableRow = new SysTableRow();
   protected Mykey: string;
-  protected showOverlap: boolean;
-  protected lstColumns = [{
+  public showOverlap: boolean;
+  public lstColumns = [{
     title: 'עריכה',
     type: 'html',
     bClickCell: true
@@ -33,9 +35,13 @@ export class SettingsCodeTableComponent implements OnInit {
   {
     title: 'ערך',
     name: 'nvValue'
+  },{
+    title: 'שם הטבלה',
+    name: 'nvName'
   }]
   private readonly newProperty = this;
   @ViewChild('CodeTables') CodeTables:any;
+
 
   constructor(private sysTableService: SysTableService, private appProxy: AppProxy) { }
 
@@ -119,7 +125,10 @@ export class SettingsCodeTableComponent implements OnInit {
   close() {
     this.divNewValue = false
     this.showOverlap = false
+    this.toEdit=false;
   }
+
+
   downloadExcel(){
     this.CodeTables.downloadExcel();
   }

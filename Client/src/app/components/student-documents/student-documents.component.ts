@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Document } from '../../classes/document';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { element } from 'protractor';
 import { SysTableService } from "../../services/sys-table.service";
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 @Component({
   selector: 'app-student-documents',
@@ -20,7 +21,10 @@ export class StudentDocumentsComponent implements OnInit {
   upload = false;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
 
-  constructor(private appProxy: AppProxy, private activatedRoute: ActivatedRoute, private router: Router, private sysTableService: SysTableService  ) { }
+
+  @ViewChild(VyTableComponent) cc: VyTableComponent;
+
+  constructor(private appProxy: AppProxy, private activatedRoute: ActivatedRoute, private router: Router, private sysTableService: SysTableService) { }
 
   ngOnInit() {
     this.activatedRoute.parent.params.subscribe(params => {
@@ -31,11 +35,11 @@ export class StudentDocumentsComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('תיאור', 'nvComment'));
     this.lstColumns.push(new VyTableColumn('קטגוריה למסמך', 'nvCategory'));
     this.lstColumns.push(new VyTableColumn('תאריך העלאה', 'dtCreatedate'));
-    
-   
 
-    this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType= data.filter(x => x.nvValue == 'תלמיד')[0].iSysTableRowId);
-    
+
+
+    this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType = data.filter(x => x.nvValue == 'תלמיד')[0].iSysTableRowId);
+
     this.loadDocuments();
 
   }
@@ -49,21 +53,23 @@ export class StudentDocumentsComponent implements OnInit {
           dtCreatedate: element.dtCreatedate.toLocaleDateString(),
           nvComment: element.nvComment,
           edit: '<div class="edit"></div>',
-          open: '<a href=' + AppProxy.getBaseUrl() + 'Files/' + element.nvDocumentName + ' target="_blank">'+element.nvDocumentName+'</a>',
+          open: '<a href=' + AppProxy.getBaseUrl() + 'Files/' + element.nvDocumentName + ' target="_blank">' + element.nvDocumentName + '</a>',
           iDocumentId: element.iDocumentId
-          
+
         });
       });
+      this.cc.refreshTable(this.lstDataRows);
     }
       , err => alert(err));
   }
   get staticBaseUrl() {
-    return AppProxy.getBaseUrl() ;
+    return AppProxy.getBaseUrl();
   }
   addDocument() {
     this.document = new Document();
     this.document.iItemId = this.id;
     this.document.iBelongingType = this.belongSheetType;
+    this.document.iCategoryType = 0;
   }
   editDocument(e) {
     //alert(e.iDocumentId);
@@ -77,13 +83,17 @@ export class StudentDocumentsComponent implements OnInit {
         this.document.iItemId = element.iItemId;
         this.document.nvComment = element.nvComment;
         this.document.nvDocumentName = element.nvDocumentName;
+        if (this.document.iCategoryType == undefined)
+          this.document.iCategoryType = 0;
       }
     });
 
   }
-  closeDocumentDialog() {
+  closeDocumentDialog(save) {
+    if (save == true) {
+      this.lstDataRows = new Array();
+      this.loadDocuments();
+    }
     this.document = null;
-    this.lstDataRows=new Array();
-    this.loadDocuments();
   }
 }

@@ -22,15 +22,15 @@ export class StudentMeetingDetailsComponent implements OnInit {
 
   @Output()
   @Input()
-  protected meeting: Meeting;
+  public meeting: Meeting;
 
   @Output()
   @Input()
-  protected sysTableRowList: SysTableRow[];
+  sysTableRowList: SysTableRow[];
 
   minutes: string;
   hours: string;
-
+  taskSelect: boolean;
   @ViewChild('task') TaskComponent: TaskComponent;
   sub: any;
   iPersonId: number;
@@ -58,30 +58,14 @@ export class StudentMeetingDetailsComponent implements OnInit {
             this.currentMeeting.iMeetingId = data;
             this.NewMeeting.emit(this.currentMeeting);
           }
-          // this.meeting =  Object.assign({},this.currentMeeting);
           else
             this.UpdateMeeting.emit(this.currentMeeting);
 
-          // if (this.meeting.iMeetingId == null) {          
-          //   this.meeting = data;          
-          //   this.NewMeeting.emit(this.meeting);
-          // }
-          // else{
-          //   this.meeting['nvDate'] = this.meeting.dtMeetingDate.toLocaleDateString();
-          //   this.meeting['nvHour'] = this.meeting.dtMeetingDate.toLocaleTimeString();
-          //   this.meeting['edit'] = '<div class="edit"></div>';
-          //   this.meeting['nvMeetingType'] = this.sysTableRowList.filter(s=> s.iSysTableRowId == this.meeting.iMeetingType)[0].nvValue;    
-          //     }
+          alert("השמירה בוצעה בהצלחה");
           this.Close.emit(null);
-
-          //  this.TaskComponent.saveTask();
-
         }
         else
-          alert("failed");
-
-
-        // debugger;
+          alert("השמירה נכשלה");
       },
     );
   }
@@ -89,7 +73,7 @@ export class StudentMeetingDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private appProxi: AppProxy, private globalService: GlobalService) { }
 
   ngOnInit() {
-
+    this.taskSelect = false;
 
     this.sub = this.route.parent.params.subscribe(params => {
       this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
@@ -101,7 +85,6 @@ export class StudentMeetingDetailsComponent implements OnInit {
     this.currentMeeting['dtDate'] = new Date((this.currentMeeting.dtMeetingDate).getTime());
 
 
-    // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
     if ((this.meeting.dtMeetingDate).getMinutes() < 10)
       this.minutes = '0' + (this.currentMeeting.dtMeetingDate).getMinutes().toString();
     else

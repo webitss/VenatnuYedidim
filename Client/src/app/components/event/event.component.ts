@@ -15,11 +15,14 @@ import { Event1 } from '../../classes/event';
 })
 export class EventComponent implements OnInit {
 
-  protected currentComponent: any;
+  public currentComponent: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private appProxy: AppProxy) {
+  constructor(private router: Router, private route: ActivatedRoute, private appProxy: AppProxy,private cdr: ChangeDetectorRef) {
 
 
+  }
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
   }
 
   onRouterOutletActivate(event) {
@@ -32,15 +35,10 @@ export class EventComponent implements OnInit {
 
   isDisabled():boolean {
     if(this.currentComponent.form!=undefined) {
-    if(this.isDetails){
       return this.currentComponent.form.valid;
-    }
-    else 
-    return this.currentComponent.form.valid && this.currentComponent.checkIfSelectIsValid();
-    // return this.currentComponent.isValid;
+   
   }
-  return true;
-  }
+}
 
 
  

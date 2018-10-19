@@ -21,7 +21,7 @@ export class StudentMeetingsComponent implements OnInit {
   private sub: any;
   private alert: any;
   iPersonId:number;
-  protected meetingList: Array<Meeting>;
+  public meetingList: Array<Meeting>;
   id: number;
   meeting: Meeting;
   flag: number;
@@ -31,14 +31,12 @@ export class StudentMeetingsComponent implements OnInit {
 
 
   public lstColumns = [{
-    title: 'עריכה',
     name: 'edit',
     bClickCell: true,
     type: 'html'
 
   },
   {
-    title: 'מחיקה',
     name: 'delete',
     bClickCell: true,
     type:'html'

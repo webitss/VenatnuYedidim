@@ -1,0 +1,72 @@
+.content-modal{
+    position: absolute;
+    border: 1px solid rgb(175, 175, 175);
+    width: 40%;
+    /* height: 80%; */
+    padding: .5% .5%;
+    background-color: white;
+    z-index: 999;
+    top:30%;
+    right: 30%;
+    border-radius: 5px;
+}
+
+.modal-header {
+border-bottom: 0px solid !important;
+/* justify-content: right; */
+}
+
+.text-header {
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1;
+    color: #000;
+    opacity: .5;
+
+}
+
+.message {
+justify-content: center;
+}
+
+.close {
+    font-size: 1.2rem !important;
+    font-weight: 500 !important;
+    float: left;
+}
+
+.modal-body {
+    padding: 4.5% 2.5%;
+    border-bottom: 0px solid #ddd;
+    justify-content: center;
+    
+}
+ .my-modal-footer {
+/* border-top: 1px solid #e9ecef; */
+padding: 2% 1%;
+justify-content: center;
+/* align-items: center; */
+display: flex;
+ }
+
+ .mrg-lft {
+    margin-left: 2%; 
+ }
+
+ .close {
+     margin-left: 0;
+ }
+
+ #overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: block; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+ }
