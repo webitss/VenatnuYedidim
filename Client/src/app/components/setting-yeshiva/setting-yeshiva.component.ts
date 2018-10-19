@@ -29,7 +29,6 @@ export class SettingYeshivaComponent implements OnInit {
   public yeshiva: Yeshiva = new Yeshiva();
   @ViewChild(NgForm) form;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
-  public setting: SettingsYeshivotComponent;
   public listYeshivot:Yeshiva[];
 
 
@@ -42,19 +41,24 @@ export class SettingYeshivaComponent implements OnInit {
 
   constructor(private appProxy: AppProxy, private router: Router) { }
 
+  changeTable(y: Yeshiva) {
+    y['edit'] = '<div class="edit"></div>';
+    y['delete'] = '<div class="delete"></div>';
+    y['nvRoleType']=this.sysTableList.filter(x=>x.iSysTableRowId==y.iRoleType)[0].nvValue;
+  }
+
   ngOnInit() {
-    if (this.iYeshivaId == 0){
+    if(this.iYeshivaId == 0){
       this.yeshiva = new Yeshiva();
-      this.setting.changeTable(this.yeshiva);
     }
     else
       this.appProxy.post('getYeshivaById', { iYeshivaId: this.iYeshivaId })
         .then(
           data => {
             this.yeshiva = data;
-            this.setting.changeTable(this.yeshiva);
           }
         );
+        this.changeTable(this.yeshiva);
   }
 
   save() {
@@ -86,11 +90,11 @@ export class SettingYeshivaComponent implements OnInit {
           }
         )
       ){}
-      else{
+      else
         alert("faild in save");
-      this.vyTableComponent.refreshTable(this.yeshiva);
-      }
     }
+    this.vyTableComponent.refreshTable(this.yeshiva);
+    this.changeTable(this.yeshiva);
   }
 
   cancel() {
