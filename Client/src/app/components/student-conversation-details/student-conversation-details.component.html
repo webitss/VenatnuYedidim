@@ -19,10 +19,6 @@
             <h2>הוספה</h2>
           </div>
         </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 536dc29d8e3ee6b609be78b697514fd4fd5cbb2b
         <div class="row">
           <div class="form-group col-sm-3">
             <label for="conversationType">סוג שיחה</label>
@@ -49,11 +45,7 @@
             </div>
           </div>
 
-<<<<<<< HEAD
         
-=======
-
->>>>>>> 536dc29d8e3ee6b609be78b697514fd4fd5cbb2b
         <div class="form-group col-sm-3">
           <label for="conversationTime">שעה</label>
           <input id="conversationTime" type="time" class="form-control" name="conversationTime" [(ngModel)]="currentConver['conversationTime']"
@@ -65,42 +57,16 @@
         </div>
 
         <br/>
-<<<<<<< HEAD
-        <div class="form-group col-sm-3">
-          <label for="conversationDate">תאריך</label>
-          <input id="conversationDate" name="conversationDate" class="form-control" [(ngModel)]="currentConver.dtConversationDate"
-            ngui-datetime-picker date-only="true" close-on-select="false" />
-        </div>
-
-
-          <div class="form-group col-sm-3">
-            <label for="conversationTime">שעה</label>
-            <input id="conversationTime" type="time" class="form-control" name="conversationTime" [(ngModel)]="currentConver['conversationTime']"
-              [ngModelOptions]="{standalone: true}" required #time="ngModel" />
-            <div *ngIf="time.invalid && (time.dirty || time.touched)">
-              <div *ngIf="(time.errors.required)" class="text-danger text-right">
-                <strong>! </strong>שדה נדרש</div>
-            </div>
-          </div>
-          <br/>
-          <br/>
-        </div>
-=======
         <br/>
       </div>
 
->>>>>>> 536dc29d8e3ee6b609be78b697514fd4fd5cbb2b
         <div class="row col-sm-12">
           <div class="form-group col-sm-10">
             <label for="conversationSummary">סיכום</label>
             <textarea id="conversationSummary" name="conversationSummary" class="form-control" [(ngModel)]="currentConver.nvConversationSummary"
               [ngModelOptions]="{standalone: true}"></textarea>
           </div>
-<<<<<<< HEAD
         </div>
-=======
-
->>>>>>> 536dc29d8e3ee6b609be78b697514fd4fd5cbb2b
 
 
     </div>

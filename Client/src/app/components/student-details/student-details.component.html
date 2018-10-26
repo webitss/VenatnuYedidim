@@ -210,14 +210,9 @@
         <button class="btn-circle btn-add col-sm-2" (click)="addSelectYeshivaToStudent()">הוסף</button>
     </div>
 
-<<<<<<< HEAD
-    <button class="col-sm-2 btn-circle btn-add" (click)="shiftToGraduates(student.iPersonId)">העבר לבוגרים</button>
-</div>
-=======
     <button *ngIf="student.iPersonId&&student.iStatusType==159" (click)="shift(statusType.boger)">העבר לבוגרים</button>
     <button *ngIf="student.iPersonId&&student.iStatusType==160" (click)="shift(statusType.student)">החזר לתלמידים</button>
 
->>>>>>> 4afcb69131e04f95febf44c97d8abfae95d63041
     <div class="row">
         <div class="form-group col-sm-12">
             <label for='comment'>הערות</label>
