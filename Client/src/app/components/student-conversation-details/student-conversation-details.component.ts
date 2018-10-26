@@ -73,13 +73,11 @@ export class StudentConversationDetailsComponent implements OnInit {
  }
         //this.newConver.emit(this.conver);
         if (data) {
-<<<<<<< HEAD
+
 
           //this._parent.openMessagePopup('')
 
-=======
-          //this._parent.openMessagePopup('')
->>>>>>> d78f980ae85c82c34b9f287d9e7fa8cacc02a733
+
           alert("השמירה בוצעה בהצלחה");
           this.Conversation.emit(null);
         }
