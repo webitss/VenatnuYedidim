@@ -58,8 +58,8 @@ export class EventParticipantsComponent implements OnInit {
     alert("func")
   }
 
-  getParticipantListByEvent(){
-    this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
+  getParticipantListByEvent(eventId:number){
+    this.appProxy.post("GetParticipantsList", { iEventId: eventId }).then(res => {
       if (res.length > 0) {
         this.participantList = res;
 
@@ -95,10 +95,12 @@ export class EventParticipantsComponent implements OnInit {
   close() {
     //  להוסיף את המשתתפים שנבחרו
   }
-  IsParticipantsExists(newParticipant: Person) {
-    this.getParticipantListByEvent();
+
+  //יש לקרוא לפונקציה זו מפונקציה SAVE
+  IsParticipantsExists(participantId: number , eventId:number) {
+    this.getParticipantListByEvent(eventId);
     this.participantList.forEach(p => {
-      if (p.iPersonId == newParticipant.iPersonId)
+      if (p.iPersonId == participantId)
         return true;
     });
     return false;
