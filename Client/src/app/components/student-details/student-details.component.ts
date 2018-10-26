@@ -49,17 +49,14 @@ export class StudentDetailsComponent implements OnInit {
   dateMonthArr = new Array<string>();
   dateYearArr = new Array<any>();
   addYeshiva = false;
-<<<<<<< HEAD
   yeshivaId: number;
   e;
   message = 'dfds';
   flagDelete = false;
   header = 'מחיקת ישיבה';
-=======
   currentYear: Date = new Date();
 letterArr=new Array<LetterEbrew>();
 
->>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
 
   ngOnInit() {
 
