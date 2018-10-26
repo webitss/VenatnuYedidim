@@ -112,7 +112,8 @@ export class StudentMeetingsComponent implements OnInit {
 
   updateMeeting(meeting: Meeting) {
     let l = this.meetingList.indexOf(this.meetingList.find(m1 => m1.iMeetingId == meeting.iMeetingId))
-    this.meetingList[l] = meeting;
+    this.changeTable(meeting);
+    this.meetingList[l] = this.meet;
     this.cc.refreshTable(this.meetingList)
   }
   addMeeting() {
@@ -125,9 +126,13 @@ export class StudentMeetingsComponent implements OnInit {
   addNewMeeting(meeting: Meeting) {
     this.meetingList.push(meeting);
   }
+  meet:Meeting;
   newMeeting(newMeeting: Meeting) {
     this.changeTable(newMeeting);
-    this.meetingList.push(newMeeting);
+    this.meetingList.push(this.meet);
+    this.cc.refreshTable(this.meetingList);
+
+    
   }
 
   changeTable(m: Meeting) {
@@ -136,6 +141,7 @@ export class StudentMeetingsComponent implements OnInit {
     m['edit'] = '<div class="edit"></div>';
     m['delete'] = '<div class="delete"></div>';
     m['nvMeetingType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0].nvValue;
+    this.meet = m;
   }
   GetMeetingsByStudentId(id: number) {
     this.appProxy.post("GetMeetingsByStudentId", { iPersonId: id }).then(

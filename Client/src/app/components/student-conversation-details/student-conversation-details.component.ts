@@ -74,11 +74,8 @@ export class StudentConversationDetailsComponent implements OnInit {
  }
         //this.newConver.emit(this.conver);
         if (data) {
-<<<<<<< HEAD
           //this._parent.openMessagePopup('')
-=======
           alert("השמירה בוצעה בהצלחה");
->>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
           this.Conversation.emit(null);
         }
         else

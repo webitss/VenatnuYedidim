@@ -7,11 +7,8 @@ import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { GlobalService } from '../../services/global.service';
 import { Yeshiva } from '../../classes/Yeshiva';
-<<<<<<< HEAD
 import { AppComponent } from '../app/app.component';
-=======
 import { LetterEbrew } from '../../classes/LetterEbrew';
->>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
 
 
 @Component({
@@ -52,17 +49,14 @@ export class StudentDetailsComponent implements OnInit {
   dateMonthArr = new Array<string>();
   dateYearArr = new Array<any>();
   addYeshiva = false;
-<<<<<<< HEAD
   yeshivaId: number;
   e;
   message = 'dfds';
   flagDelete = false;
   header = 'מחיקת ישיבה';
-=======
   currentYear: Date = new Date();
 letterArr=new Array<LetterEbrew>();
 
->>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
 
   ngOnInit() {
 
