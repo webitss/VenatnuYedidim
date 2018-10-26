@@ -68,6 +68,7 @@ export class StudentMeetingsComponent implements OnInit {
   ]
 
   editMeeting(meeting: Meeting) {
+    debugger;
     this.meeting = meeting;
     this.flag = 1;
   }
@@ -87,6 +88,14 @@ export class StudentMeetingsComponent implements OnInit {
     this.deleMeeting = m;
     this.message = 'האם אתה בטוח שברצונך למחוק פגישה זו?';
     this.flagDelete = true;
+    //this.alert = confirm("האם אתה בטוח שברצונך למחוק פגישה זו?");
+    //if (this.alert == true) {
+    //   this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
+    //     this.meetingList.splice(this.meetingList.indexOf(meeting), 1);
+    //     this.cc.refreshTable(this.meetingList);
+    //  // });
+    // }
+
   }
 
   m: Meeting;
@@ -122,7 +131,6 @@ export class StudentMeetingsComponent implements OnInit {
   }
 
   changeTable(m: Meeting) {
-
     m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
     m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
     m['edit'] = '<div class="edit"></div>';

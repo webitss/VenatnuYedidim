@@ -11,10 +11,10 @@
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
       <div class="row title">
-        <div *ngIf="event.iEventId">
+        <div *ngIf="from != 1">
           <h3>עריכה </h3>
         </div>
-        <div *ngIf="event.iEventId==null">
+        <div *ngIf="from ==1">
           <h3>אירוע חדש</h3>
         </div>
       </div>
@@ -52,7 +52,7 @@
           <label for="status">סטטוס:</label>
           <select [(ngModel)]="event['iArrivalStatusType']" class="form-control" #status="ngModel" name="status" required>
             <!-- [disabled]="isManeger == false" -->
-            <option [value]="0">בחר</option>
+            <option [value]="0" selected>בחר</option>
             <option [value]="item.iSysTableRowId" *ngFor="let item of lst" [selected]="item.iSysTableRowId==event['iArrivalStatusType']">{{item.nvValue}}</option>
           </select>
           <div *ngIf="status.invalid && (status.dirty || status.touched)">

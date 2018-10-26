@@ -11,6 +11,9 @@ export class Event1 {
     // bSysRowStatus:boolean;
 
     constructor(){
-        this.nvName = undefined;
+        this.iEventId = 0;
+        this.nvName = '';
+        this.dtEventDate = new Date();
+        this.nvPlace = '';
     }
 }

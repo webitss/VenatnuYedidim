@@ -11,7 +11,7 @@ import { GlobalService } from '../../services/global.service';
 })
 export class AppComponent implements OnInit {
 
-  static status:string;
+  protected isGraduate:number=0;
   component: string;
   protected currentComponent: any;
   protected PicUrl: any;
@@ -89,7 +89,6 @@ export class AppComponent implements OnInit {
   //   }
 
   // }
-
 
 
 }

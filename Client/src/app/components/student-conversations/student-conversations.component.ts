@@ -104,13 +104,13 @@ export class StudentConversationsComponent implements OnInit {
   }
 
 
-  addConversation() {
-    this.conversationSelect = new Conversation();
-    this.conversationSelect.dtConversationDate = null;
-    //this.conversationSelect.dtConversationTime = null;
-    //this.conversationSelect.dtNextConversationDate = null;
+  // addConversation() {
+  //   this.conversationSelect = new Conversation();
+  //   this.conversationSelect.dtConversationDate = null;
+  //   //this.conversationSelect.dtConversationTime = null;
+  //   //this.conversationSelect.dtNextConversationDate = null;
 
-  }
+  // }
   // add(newConver)
   // {
   //   this.conversationsList.push(this.newConver);
@@ -118,13 +118,13 @@ export class StudentConversationsComponent implements OnInit {
   // }
 
   private alert: any;
-  deleteConversation() {
-    this.appProxy.post('DeleteConversations', { iConversationId: this.con.iConversationId, iUserId: this.iUserId }).then(data => {
-      this._parent.openMessagePopup('המחיקה בוצעה בהצלחה!');
-      this.lstDataRows.splice(this.lstDataRows.indexOf(this.con), 1);
-      this.vyTableComponent.refreshTable(this.lstDataRows);
-    });
-  }
+  // deleteConversation() {
+  //   this.appProxy.post('DeleteConversations', { iConversationId: this.con.iConversationId, iUserId: this.iUserId }).then(data => {
+  //     this._parent.openMessagePopup('המחיקה בוצעה בהצלחה!');
+  //     this.lstDataRows.splice(this.lstDataRows.indexOf(this.con), 1);
+  //     this.vyTableComponent.refreshTable(this.lstDataRows);
+  //   });
+  // }
 
 
   //   ngOnInit() {
@@ -162,52 +162,52 @@ export class StudentConversationsComponent implements OnInit {
   // }}
 
 
-  saveNewConver(event) {
-    //debugger;
-    //this.conversationsList.push(event);
-    this.changeTable(event);
+  // saveNewConver(event) {
+  //   //debugger;
+  //   //this.conversationsList.push(event);
+  //   this.changeTable(event);
+  // }
+
+  deleteConversation(c: Conversation, iUserId: number) {
+
+    this.alert = confirm("האם אתה בטוח שברצונך למחוק משתמש זה?");
+    if (this.alert == true) {
+      this.appProxy.post('DeleteConversations', { iConversationId: c.iConversationId, iUserId: this.iUserId }).then(data => { });
+      this.lstDataRows.splice(this.lstDataRows.indexOf(c), 1);
+      this.vyTableComponent.refreshTable(this.lstDataRows);
+    }
   }
 
-  ngOnInit() {
-    debugger;
-    this.iUserId = this.globalService.getUser()['iUserId'];
-    this.route.parent.params.subscribe(params => {
-      this.iPersonId = +params['iPersonId'];
-      //this.iPersonId.toString();
 
-    });
-
-    this.iUserId = this.globalService.getUser()['iUserId'];
-
-    this.selecList(this.iPersonId);
-  }
-  updateConver() {
-    //debugger;
-    this.conversationsList.slice(this.conversationsList.indexOf(this.conversationsList.find(m => m.iConversationId == this.conversationSelect.iConversationId), 0), 1);
-    this.conversationsList.push(this.conversationSelect);
-    //this.conversationsList.push(event);
-    this.selecList(this.iPersonId);
-  }
-  addNewMeeting(conver: Conversation) {
+  saveNewConver(conver: Conversation) {
     this.conversationsList.push(conver);
+    this.changeTable(conver);
+    //this.vyTableComponent.refreshTable(this.lstDataRows);
   }
-  newMeeting(newConver: Conversation) {
-    this.changeTable(newConver);
-    this.conversationsList.push(newConver);
 
-    //  this.GetMeetingsByStudentId(this.iPersonId);
+  @ViewChild(VyTableComponent) cc: VyTableComponent;
+
+  // updateConver(conver: Conversation) {
+  //   this.lstDataRows.splice(this.lstDataRows.indexOf(conver), 1);
+  //   this.vyTableComponent.refreshTable(this.lstDataRows);
+  // }
+  updateConver(conver: Conversation) {
+    let l = this.conversationsList.indexOf(this.conversationsList.find(m1 => m1.iConversationId == this.conversationSelect.iConversationId))
+    this.conversationsList[l] = conver;
+    this.lstDataRows = this.conversationsList;
+    //this.changeTable(conver);
+    this.vyTableComponent.refreshTable(this.conversationsList);
+    //this.cc.refreshTable(this.conversationsList)
   }
+
   changeTable(c: Conversation) {
     c['edit'] = '<div class="edit"></div>';
     c['delete'] = '<div class="delete"></div>';
-
-
-    c['nvLastName'] = c['lstObject'].nvFirstName + " " + c['lstObject'].nvLastName;
-    c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
     c['nvConversationDate'] = c.dtConversationDate.toLocaleDateString();
     c['nvConversationTime'] = c.dtConversationDate.toLocaleTimeString();
-    //c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
-  }//??
+    c['nvLastName'] = c['lstObject'].nvFirstName + " " + c['lstObject'].nvLastName;
+    c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
+  }
   selecList(id) {
     this.appProxy.post("GetConversations", { iPersonId: id })
       .then(data => {
@@ -221,11 +221,65 @@ export class StudentConversationsComponent implements OnInit {
           });
         });
       })
+
   }
+  ngOnInit() {
+    debugger;
+    this.iUserId = this.globalService.getUser()['iUserId'];
+    this.route.parent.params.subscribe(params => {
+      this.iPersonId = +params['iPersonId'];
+      //this.iPersonId.toString();
+
+    });
+
+    this.iUserId = this.globalService.getUser()['iUserId'];
+
+    this.selecList(this.iPersonId);
+  }
+  // updateConver() {
+  //   //debugger;
+  //   this.conversationsList.slice(this.conversationsList.indexOf(this.conversationsList.find(m => m.iConversationId == this.conversationSelect.iConversationId), 0), 1);
+  //   this.conversationsList.push(this.conversationSelect);
+  //   //this.conversationsList.push(event);
+  //   this.selecList(this.iPersonId);
+  // }
+  addNewMeeting(conver: Conversation) {
+    this.conversationsList.push(conver);
+  }
+  newMeeting(newConver: Conversation) {
+    this.changeTable(newConver);
+    this.conversationsList.push(newConver);
+
+    //  this.GetMeetingsByStudentId(this.iPersonId);
+  }
+  // changeTable(c: Conversation) {
+  //   c['edit'] = '<div class="edit"></div>';
+  //   c['delete'] = '<div class="delete"></div>';
+
+
+  //   c['nvLastName'] = c['lstObject'].nvFirstName + " " + c['lstObject'].nvLastName;
+  //   c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
+  //   c['nvConversationDate'] = c.dtConversationDate.toLocaleDateString();
+  //   c['nvConversationTime'] = c.dtConversationDate.toLocaleTimeString();
+  //   //c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
+  // }//??
+  // selecList(id) {
+  //   this.appProxy.post("GetConversations", { iPersonId: id })
+  //     .then(data => {
+  //       this.conversationsList = data;
+  //       this.lstDataRows = data;
+  //       this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
+  //         this.sysTableList = val;
+  //         this.conversationsList.forEach(c => {
+  //           this.changeTable(c);
+
+  //         });
+  //       });
+  //     })
+  // }
 
 
   // ngOnDestroy() {
   //           this.sub.unsubscribe();
   //         }
 }
-
