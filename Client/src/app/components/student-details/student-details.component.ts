@@ -22,7 +22,7 @@ export class StudentDetailsComponent implements OnInit {
 
 
   @Input() student: Student
-
+statusTypeGraduate:number=160;
   paramRout: any;
   fatherDead: boolean;
   motherDead: boolean;
@@ -155,6 +155,13 @@ letterArr=new Array<LetterEbrew>();
     }
   }
 
+  shiftToGraduates(iPersonId){
+    this.appProxy.post("UpdateStatusStudent",{iPersonId:iPersonId,iStatusType:this.statusTypeGraduate}).then(
+      data=>{
+alert(data);
+        }
+        );
+  }
   calcEbrewDatw(year) {
  
     year = year - 5000;
