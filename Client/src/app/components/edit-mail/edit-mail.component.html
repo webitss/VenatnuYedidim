@@ -1,0 +1,32 @@
+<div id="overlay"></div>
+
+<div class="cont">
+  <div class="col-sm-8"></div>
+  <div class="col-sm-4">
+    <button class="btn-circle btn-save" (click)="save()">שלח v </button>
+    <button class="btn-circle btn-close" (click)="clos()">סגור x </button>
+  </div>
+
+
+  <h3>הודעת מייל</h3>
+  <div class="col-sm-1"></div>
+  <div class="row col-sm-12 to">
+
+    <label class="lbl">אל: </label>
+    <div class="col-sm-12"></div>
+    <div *ngFor="let m of mails;let i=index" class="mail">
+      <div  class="x"(click)="remove(i)"> X</div>
+      <div style="float: right;">{{m}}</div>
+    </div>
+  </div>
+  <div class="row col-sm-12">
+      <div class="form-group col-sm-10">
+    <label for="subject" class="lbl">נושא: </label>
+    <input class="form-control" type="text" id="subject" name="subject" [(ngModel)]="subject">
+  </div></div>
+  <div class="row col-sm-12">
+      <div class="form-group col-sm-10">
+    <label for="body" class="lbl">גוף ההודעה: </label>
+    <textarea class="form-control" type="text" id="body" name="body" [(ngModel)]="body"></textarea>
+  </div>
+</div>

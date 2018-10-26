@@ -56,7 +56,7 @@ export class CalendarComponent implements OnInit {
   close() {
     this.editTask1 = false
   }
-  closeMe() {
+  closeMe(task: Task) {
     this.editTask1 = false;
   }
   refreshMe(task: Task) {
@@ -98,7 +98,6 @@ export class CalendarComponent implements OnInit {
   createCalendar() {
     this.oneOfMonth = new Date(this.year, this.month - 1, 1).getDay() + 1;
     this.lenOfMonth = new Date(this.year, this.month, 0).getDate();
-    debugger
     this.end = (this.lenOfMonth + this.oneOfMonth) / 7;
     if (this.end - Number.parseInt(((this.lenOfMonth + this.oneOfMonth) / 7).toString()) == 0)
       this.end -= 1;

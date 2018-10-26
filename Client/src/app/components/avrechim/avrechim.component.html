@@ -9,32 +9,32 @@
 </div>
 
 <div class="main-table">
-<app-vy-table #avrechim [lstColumns]="lstColumns" [lstDataRows]="avrechimList" (clickCell)="click($event)"></app-vy-table>
+    <app-vy-table #avrechim [lstColumns]="lstColumns" [lstDataRows]="avrechimList" (clickCell)="click($event)"></app-vy-table>
 </div>
 
-<div  class="modal fade" >
+<div class="modal fade">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">מחיקת אברך</h4>
-        </div>
-        <div class="modal-body">
-            <p>
-                האם אתה בטוח שברצונך למחוק אברך זה?
-             </p>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">מחיקת אברך</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    האם אתה בטוח שברצונך למחוק אברך זה?
+                </p>
 
-        </div>
-        <div class="modal-footer">
+            </div>
+            <div class="modal-footer">
                 <button type="button" class="btn-yesNo" (click)="delete()">כן</button>
                 <button type="button" class="btn-yesNo" (click)="flag=false">לא</button>
+            </div>
         </div>
-      </div>
-      </div>
+    </div>
 </div>
 
 
-
+    <app-edit-mail *ngIf="mail" [mails]="mailList" (close)="closeMe()"></app-edit-mail>
 <!-- <div *ngIf="flag">
     <div  class="content-modal">
         <div class="close" (click)="flag=false">x</div>

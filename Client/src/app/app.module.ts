@@ -98,6 +98,7 @@ import { OpenPresenceComponent } from './components/open-presence/open-presence.
 import { AddParticipantComponent } from './components/add-participant/add-participant.component';
 
 import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
+import { EditMailComponent } from './components/edit-mail/edit-mail.component';
 
 
 
@@ -194,6 +195,7 @@ import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
 
     AddParticipantComponent,
     VyPopUpComponent,
+    EditMailComponent,
    
   ],
  //imports: [ 
