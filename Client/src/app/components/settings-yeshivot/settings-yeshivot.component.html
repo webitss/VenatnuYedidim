@@ -16,11 +16,16 @@
     <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="setYeshiva($event)"></app-vy-table>
 </div>
 
-
+<!-- 
 <div class="deleteYeshiva" *ngIf="flag">
     <p>
         האם אתה בטוח שברצונך למחוק מוסד זה?
     </p>
     <button class="btn-yesNo" (click)="delete()">כן</button>
     <button class="btn-yesNo" (click)="close()">לא</button>
-</div>
+</div> -->
+
+
+
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; delete();"></app-vy-pop-up>
+

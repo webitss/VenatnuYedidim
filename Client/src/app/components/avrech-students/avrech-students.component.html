@@ -16,5 +16,8 @@
 </div>
 
 <div class="main-table">
-  <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="allStudents" (clickCell)="deleteStudent($event)"></app-vy-table>
+  <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="allStudents" (clickCell)="del($event)"></app-vy-table>
 </div>
+
+
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="delFlag" [header]="header" (close)="delFlag=false" (ok)="delFlag=false; deleteStudent(studentToDel);"></app-vy-pop-up>

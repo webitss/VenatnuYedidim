@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, OnDestroy, ViewChild, forwardRef, Inject } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
 import { SysTableService } from '../../services/sys-table.service';
@@ -11,6 +11,7 @@ import { Title } from '@angular/platform-browser';
 import { SelectorListContext } from '@angular/compiler';
 import { GlobalService } from '../../services/global.service'
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-student-conversations',
@@ -25,6 +26,11 @@ export class StudentConversationsComponent implements OnInit {
   protected flag: number;
   public conversationsList: Array<Conversation> = new Array<Conversation>();
   public conversationSelect: Conversation;
+
+  con;
+  flagDelete = false;
+  header = 'מחיקת שיחה';
+  message = 'האם אתה בטוח שברצונך למחוק שיחה זו?';
   @Output()
   public sysTableList: SysTableRow[];
   @Input()
@@ -63,16 +69,12 @@ export class StudentConversationsComponent implements OnInit {
       title: 'סיכום שיחה',
       name: 'nvConversationSummary'
     },
-    // {
-    //   title: 'תאריך שיחה הבאה',
-    //   name: 'nvNextConversationDate'
-    // },
-
 
   ];
   public lstDataRows = [];
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private route: ActivatedRoute) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private route: ActivatedRoute
+    , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
 
   // newConversation() {
@@ -84,17 +86,23 @@ export class StudentConversationsComponent implements OnInit {
   }
   click(conver) {
     if (conver.columnClickName == 'delete')
-      this.deleteConversation(conver, this.iUserId)
+      this.delCon(conver);
     else
       this.conversationSelect = conver;
     this.flag = 1;
 
   }
 
+  delCon(conver) {
+    this.con = conver;
+    this.flagDelete = true;
+  }
+
 
   addConversation() {
     this.conversationSelect = new Conversation();
     this.conversationSelect.dtConversationDate = null;
+
   }
   // add(newConver)
   // {
@@ -103,6 +111,56 @@ export class StudentConversationsComponent implements OnInit {
   // }
 
   private alert: any;
+  // deleteConversation() {
+  //   this.appProxy.post('DeleteConversations', { iConversationId: this.con.iConversationId, iUserId: this.iUserId }).then(data => {
+  //     this._parent.openMessagePopup('המחיקה בוצעה בהצלחה!');
+  //     this.lstDataRows.splice(this.lstDataRows.indexOf(this.con), 1);
+  //     this.vyTableComponent.refreshTable(this.lstDataRows);
+  //   });
+  // }
+
+
+  //   ngOnInit() {
+  //     this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
+  //       .then(data => {
+  //          this.conversationsList = data;
+  //         data.forEach(conv => {
+  //           this.lstDataRows.push({
+  //             iConversationType: this.sysTableList.filter(s => s.iSysTableRowId == conv.iConversationType)[0],
+  //             dConversationDate: conv.dConversationDate,
+  //             dtConversationTime: conv.dtConversationTime,
+  //             dtNextConversationDate: conv.dtNextConversationDate
+
+  //           });
+
+  //         });
+  //        this.selectList();
+  //       });
+  //     }
+
+  // selectList()
+  // {
+
+  //   this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
+  //     this.sysTableList = val;
+  //     this.conversationsList.forEach(c => {
+  //       c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
+  //       c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
+  //       c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
+  //       c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleDateString();
+  //       c['edit'] = '<div class="edit"></div>';
+  //       c['delete'] = '<div class="delete"></div>';
+  //     });
+  //   });
+  // }}
+
+
+  // saveNewConver(event) {
+  //   //debugger;
+  //   //this.conversationsList.push(event);
+  //   this.changeTable(event);
+  // }
+
   deleteConversation(c: Conversation, iUserId: number) {
 
     this.alert = confirm("האם אתה בטוח שברצונך למחוק משתמש זה?");
@@ -115,9 +173,11 @@ export class StudentConversationsComponent implements OnInit {
 
 
   saveNewConver(conver: Conversation) {
-    this.conversationsList.push(conver);
-    this.changeTable(conver);
-    //this.vyTableComponent.refreshTable(this.lstDataRows);
+    //this.changeTable(conver);
+    this.lstDataRows.push(conver);
+    
+    this.vyTableComponent.refreshTable(this.lstDataRows);
+  
   }
 
   @ViewChild(VyTableComponent) cc: VyTableComponent;
@@ -129,19 +189,17 @@ export class StudentConversationsComponent implements OnInit {
   updateConver(conver: Conversation) {
     let l = this.conversationsList.indexOf(this.conversationsList.find(m1 => m1.iConversationId == this.conversationSelect.iConversationId))
     this.conversationsList[l] = conver;
-    this.lstDataRows = this.conversationsList;
-    //this.changeTable(conver);
+    //this.lstDataRows = this.conversationsList;
     this.vyTableComponent.refreshTable(this.conversationsList);
-    //this.cc.refreshTable(this.conversationsList)
   }
 
   changeTable(c: Conversation) {
-    c['edit'] = '<div class="edit"></div>';
-    c['delete'] = '<div class="delete"></div>';
     c['nvConversationDate'] = c.dtConversationDate.toLocaleDateString();
     c['nvConversationTime'] = c.dtConversationDate.toLocaleTimeString();
     c['nvLastName'] = c['lstObject'].nvFirstName + " " + c['lstObject'].nvLastName;
     c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
+    c['edit'] = '<div class="edit"></div>';
+    c['delete'] = '<div class="delete"></div>';
   }
   selecList(id) {
     this.appProxy.post("GetConversations", { iPersonId: id })
@@ -171,4 +229,45 @@ export class StudentConversationsComponent implements OnInit {
 
     this.selecList(this.iPersonId);
   }
-}
+  // updateConver() {
+  //   
+  //   this.conversationsList.slice(this.conversationsList.indexOf(this.conversationsList.find(m => m.iConversationId == this.conversationSelect.iConversationId), 0), 1);
+  //   this.conversationsList.push(this.conversationSelect);
+  //   //this.conversationsList.push(event);
+  //   this.selecList(this.iPersonId);
+  // }
+
+
+    //  this.GetMeetingsByStudentId(this.iPersonId);
+  }
+  // changeTable(c: Conversation) {
+  //   c['edit'] = '<div class="edit"></div>';
+  //   c['delete'] = '<div class="delete"></div>';
+
+
+  //   c['nvLastName'] = c['lstObject'].nvFirstName + " " + c['lstObject'].nvLastName;
+  //   c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
+  //   c['nvConversationDate'] = c.dtConversationDate.toLocaleDateString();
+  //   c['nvConversationTime'] = c.dtConversationDate.toLocaleTimeString();
+  //   //c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
+  // }//??
+  // selecList(id) {
+  //   this.appProxy.post("GetConversations", { iPersonId: id })
+  //     .then(data => {
+  //       this.conversationsList = data;
+  //       this.lstDataRows = data;
+  //       this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
+  //         this.sysTableList = val;
+  //         this.conversationsList.forEach(c => {
+  //           this.changeTable(c);
+
+  //         });
+  //       });
+  //     })
+  // }
+
+
+  // ngOnDestroy() {
+  //           this.sub.unsubscribe();
+  //         }
+

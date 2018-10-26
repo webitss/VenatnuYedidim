@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, Inject, forwardRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
@@ -6,6 +6,7 @@ import { SysTableRow } from '../../classes/SysTableRow';
 import { Task } from '../../classes/task';
 import { TaskComponent } from '../task/task.component';
 import { GlobalService } from '../../services/global.service';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-student-conversation-details',
@@ -41,7 +42,8 @@ export class StudentConversationDetailsComponent implements OnInit {
 
   //protected iPersonId: number = 1;
 
-  constructor(private route: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService) { }
+  constructor(private route: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService
+    ,@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   cancel() {
     this.Conversation.emit(null);
@@ -64,7 +66,6 @@ export class StudentConversationDetailsComponent implements OnInit {
           if (this.conver.iConversationId == null) {
             this.conver.iConversationId = data;
             this.saveNewConver.emit(this.conver);
-
           }
        
         else
@@ -72,6 +73,10 @@ export class StudentConversationDetailsComponent implements OnInit {
  }
         //this.newConver.emit(this.conver);
         if (data) {
+<<<<<<< HEAD
+=======
+          //this._parent.openMessagePopup('')
+>>>>>>> 8393bad98f4d80ceb0be5ba73754b330cdb6a9c5
           alert("השמירה בוצעה בהצלחה");
           this.Conversation.emit(null);
         }

@@ -7,6 +7,10 @@ import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { GlobalService } from '../../services/global.service';
 import { Yeshiva } from '../../classes/Yeshiva';
+<<<<<<< HEAD
+=======
+import { AppComponent } from '../app/app.component';
+>>>>>>> 8393bad98f4d80ceb0be5ba73754b330cdb6a9c5
 import { LetterEbrew } from '../../classes/LetterEbrew';
 
 
@@ -47,6 +51,11 @@ statusTypeGraduate:number=160;
   dateMonthArr = new Array<string>();
   dateYearArr = new Array<any>();
   addYeshiva = false;
+  yeshivaId: number;
+  e;
+  message = 'dfds';
+  flagDelete = false;
+  header = 'מחיקת ישיבה';
   currentYear: Date = new Date();
 letterArr=new Array<LetterEbrew>();
 

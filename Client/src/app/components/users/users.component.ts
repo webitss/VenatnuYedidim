@@ -37,7 +37,7 @@ export class UsersComponent implements OnInit {
           user["nvPermittion"] = data.filter(s => s.iSysTableRowId == user["iPermissionId"])[0].nvValue;
         });
       });
-    }).catch(err=>{
+    }).catch(err => {
       alert(err);
     });
   }
@@ -62,7 +62,7 @@ export class UsersComponent implements OnInit {
     if (e.columnClickName == 'edit')
       this.editUser(e);
     else
-      this.deleteUser(e);
+      this.delUser(e);
 
   }
 
@@ -70,21 +70,29 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['users/user/', u.iPersonId]);
   }
 
+  flagDelete = false;
+  message = '';
+  header = 'מחיקת משתמש';
+  userToDelete;
+
+
+  delUser(u: User) {
+    this.userToDelete = u;
+    if (u.iPermissionId == 5)
+      this.message = 'יתכן ולאחר המחיקה לא יהיה מנהל למערכת, האם אתה בטוח שברצונך למחוק את ' + u.nvFirstName + ' ' + u.nvLastName + '?';
+    else
+      this.message = 'האם אתה בטוח שברצונך למחוק את ' + u.nvFirstName + ' ' + u.nvLastName + '?';
+    this.flagDelete = true;
+
+  }
   private alert: any;
   private flag: boolean = false;
   deleteUser(u: User) {
-    if (u.iPermissionId == 5) //מנהל
-      this.alert = confirm("יתכן ולאחר המחיקה לא יהיה מנהל למערכת ,האם אתה בטוח שברצונך למחוק מנהל?");
-    else
-      this.alert = confirm("האם אתה בטוח שברצונך למחוק משתמש זה?");
-
-    if (this.alert == true) {
-      this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId, iUserId: this.globalService.getUser().iPersonId }).then(data => { }).catch(err => {
-        alert(err);
-      });
-      this.lstDataRows.splice(this.lstDataRows.indexOf(u), 1);
-      this.vyTableComponent.refreshTable(this.lstDataRows);
-    }
+    this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId, iUserId: this.globalService.getUser().iPersonId }).then(data => { }).catch(err => {
+      alert(err);
+    });
+    this.lstDataRows.splice(this.lstDataRows.indexOf(u), 1);
+    this.vyTableComponent.refreshTable(this.lstDataRows);
   }
 
   downloadExcel() {
