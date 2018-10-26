@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, Inject, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { Student } from '../../classes/student';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,13 +18,12 @@ import { LetterEbrew } from '../../classes/LetterEbrew';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router, 
-    private globalService: GlobalService,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
   status: string;
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router, private globalService: GlobalService) { }
 
 
   @Input() student: Student
-
+statusTypeGraduate:number=160;
   paramRout: any;
   fatherDead: boolean;
   motherDead: boolean;
@@ -162,6 +161,13 @@ letterArr=new Array<LetterEbrew>();
     }
   }
 
+  shiftToGraduates(iPersonId){
+    this.appProxy.post("UpdateStatusStudent",{iPersonId:iPersonId,iStatusType:this.statusTypeGraduate}).then(
+      data=>{
+alert(data);
+        }
+        );
+  }
   calcEbrewDatw(year) {
  
     year = year - 5000;
@@ -192,20 +198,13 @@ letterArr=new Array<LetterEbrew>();
 
     })
   }
-  deleteYeshiva(yeshiva) {
-    //alert(yeshiva.iYeshivaId);
-    this.yeshivaId = yeshiva.iYeshivaId;
-    this.message='האם אתה בטוח שברצונך למחוק את '+yeshiva.nvYeshivaName+'?';
-    this.flagDelete = true;
-  }
-
 
   //מחיקת ישיבה לתלמיד
   deleteYeshivaOfStudent(iYeshivaId: number) {
 
     this.appProxy.post("DeleteYeshivaOfStudent", {
       iPersonId: this.paramRout, iYeshivaId: iYeshivaId, iUserId: this.currentUser
-    }).then(data => { this._parent.openMessagePopup('הישיבה נמחקה בהצלחה!') }, err => { alert("שגיאה במחיקת ישיבהיד"); });
+    }).then(data => { alert("הישיבה נמחקה בהצלחה"); }, err => { alert("שגיאה במחיקת ישיבהיד"); });
     var i = 0;
     this.yeshivaListOfStudent.forEach(e => {
       if (e.iYeshivaId == iYeshivaId)
@@ -232,9 +231,8 @@ letterArr=new Array<LetterEbrew>();
         this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser
     }).then(data => {
       if (data)
-        //alert("הישיבה נוספה בהצלחה")
-        this._parent.openMessagePopup('הישיבה נוספה בהצלחה!');
-      else this._parent.openMessagePopup('שגיאה בהוספת ישיבה');
+        alert("הישיבה נוספה בהצלחה")
+      else ("שגיאה בהוספת ישיבה")
     }
       , err => alert("שגיאה"))
 

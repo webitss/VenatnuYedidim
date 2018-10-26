@@ -66,7 +66,6 @@ export class StudentConversationDetailsComponent implements OnInit {
           if (this.conver.iConversationId == null) {
             this.conver.iConversationId = data;
             this.saveNewConver.emit(this.conver);
-
           }
        
         else

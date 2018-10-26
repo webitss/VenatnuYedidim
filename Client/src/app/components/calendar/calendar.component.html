@@ -3,6 +3,8 @@
     <</div>
       <p class="prev-next">{{month}}/{{year}}</p>
       <div (click)="nextMonth()" class="prev-next" title="חודש הבא">></div>
+
+
       <table *ngIf="daysMonthNameArr[0][0]!=null">
         <thead class="row col-sm-12">
           <th *ngFor="let d of daysNameArr">{{d}}</th>
@@ -12,9 +14,10 @@
             <td *ngFor="let d of i;let j=index;trackBy: trackItem" [class.dark]="ii%2 == 0" [class.first]="j == 0">
               <!-- <div class="td"> -->
               {{d.number}}
-              <div *ngFor="let t of d.tasks;trackBy: trackItem" class="task" (click)="editTask(t.id)" [class.scroll]="d.tasks.length > 2" >
-                <span class="label label-default">{{t.string}}</span>
+              <div *ngFor="let t of d.tasks;trackBy: trackItem" class="task" [class.scroll]="d.tasks.length > 2">
+                <div (click)="editTask(t.id)">{{t.string}}</div>
                 <div class="x" (click)="delTask(t.id,t.i,t.j)"></div>
+
               </div>
               <!-- </div> -->
               <!-- <div *ngFor="let t of d.tasks">{{t.iTaskType}}</div> -->
@@ -24,11 +27,11 @@
       </table>
   </div>
   <div *ngIf="editTask1==true">
-    <div class="newTask" >
+    <div class="newTask">
       <div class="row ">
         <div class="col-sm-8"></div>
         <div class="col-sm-4">
-          <button class="btn-circle btn-save" (click)="saveTask()" >שמור v </button>
+          <button class="btn-circle btn-save" (click)="saveTask()">שמור v </button>
           <button class="btn-circle btn-close" (click)="close()">סגור x </button>
         </div>
       </div>
@@ -39,5 +42,4 @@
     </div>
 
 
-<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; deleteTask();"></app-vy-pop-up>
-    
+    <app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; deleteTask();"></app-vy-pop-up>

@@ -5,6 +5,7 @@ import { Student } from '../../classes/student';
 import { T2Int } from '../../classes/T2Int';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { VyMultySelectComponent } from '../../templates/vy-multy-select/vy-multy-select.component';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 @Component({
   selector: 'app-avrech-students',
@@ -22,6 +23,9 @@ export class AvrechStudentsComponent implements OnInit {
   student: Student;
   title:string="רשימת תלמידים";
   inputTitle:string="בחר תלמידים";
+
+  header='מחיקת תלמיד';
+  message='האם אתה בטוח שברצונך למחוק תלמיד זה?';
 
 @ViewChild('child')VyMultySelect:VyMultySelectComponent;
 
@@ -103,15 +107,25 @@ listToSelect:Array<any>;
    
   }
 
-  deleteStudent(e) {
+  studentToDel;
+  delFlag;
+  del(e) {
+    this.delFlag=true;
+    this.studentToDel=e;
+  }
+  @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
+  deleteStudent(e:Student) {
 
     this.appProxy.post('DeleteAvrechStudent', { iAvrechId: this.id, iStudentId: e.iPersonId }, ).then(data => {
       if (data == true) {
-        for (let i = 0; i < this.allStudents.length; i++) {
-          if (this.allStudents[i].iPersonId == e.iPersonId)
-            this.allStudents.splice(i, 1);
-          break;
-        }
+        // for (let i = 0; i < this.allStudents.length; i++) {
+        //   if (this.allStudents[i].iPersonId == e.iPersonId)
+        //     this.allStudents.splice(i, 1);
+        //   break;
+        // }
+        const i=this.allStudents.find(x=>x.iStudentId==e.iStudentId);
+        this.allStudents.splice(this.allStudents.indexOf(i), 1);
+        this.vyTableComponent.refreshTable(this.allStudents);
       }
     }
       , err => alert(err));

@@ -4,7 +4,7 @@
         <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
         <button class="btn btn-small" (click)="tableToPdf('אברכים')">pdf</button>
         <button class="btn btn-circle1 btn-orange" (click)="mailToAvrechim()"> שליחת מייל</button>
-        <button class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">אברך חדש</button>
+        <button class="btn btn-circle1 btn-pink" routerLink="avrech/0">אברך חדש</button>
     </div>
 </div>
 
@@ -47,3 +47,6 @@
      </div>
     </div>      -->
 <!-- </div> -->
+
+
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flag" [header]="header" (close)="flag=false" (ok)="flag=false; delete();"></app-vy-pop-up>
