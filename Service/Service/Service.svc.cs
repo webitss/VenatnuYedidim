@@ -221,8 +221,6 @@ namespace Service
         
         #endregion
 
-        
-
 
         #region SysTableRow
         public List<SysTableRow> GetValues(int iSysTableId)
