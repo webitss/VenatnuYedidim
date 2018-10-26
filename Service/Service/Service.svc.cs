@@ -209,7 +209,10 @@ namespace Service
             return Avrech.DeleteAvrech(iPersonId);
         }
 
-        
+        public List<Avrech> GetAvrechimByStudentId(int iPersonId)
+        {
+            return Avrech.GetAvrechimByStudentId(iPersonId);
+        }
 
         public  bool MailToAvrechim(string[] mailList, string subject, string body)
 

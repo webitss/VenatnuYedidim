@@ -228,14 +228,14 @@ namespace Service
         bool DeleteAvrech(int iPersonId);
 
 
-        //[OperationContract]
-        //[WebInvoke(
-        //Method = "POST",
-        //UriTemplate = "GetAvrechimByStudentId",
-        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        //ResponseFormat = WebMessageFormat.Json,
-        //RequestFormat = WebMessageFormat.Json)]
-        //List<Avrech> GetAvrechimByStudentId(int iPersonId);
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetAvrechimByStudentId",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Avrech> GetAvrechimByStudentId(int iPersonId);
 
         [OperationContract]
         [WebInvoke(
