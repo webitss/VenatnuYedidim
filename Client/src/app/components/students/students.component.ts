@@ -31,9 +31,9 @@ export class StudentsComponent implements OnInit {
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   ngOnInit() {
 
-    this.component=this.router.url;
-    this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;   
-    if (this.component=='/students') {
+    this.component = this.router.url;
+    this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
+    if (this.component == '/students') {
       this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
         this.studentList = data;
         // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
@@ -52,22 +52,7 @@ export class StudentsComponent implements OnInit {
               student['nvAvrechName'] += " " + avrech.nvFirstName + " " + avrech.nvLastName + '<br/>';
             });
 
-<<<<<<< HEAD
-
-    this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
-    this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
-      this.studentList = data;
-      // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
-      this.studentList.forEach(student => {
-        student['edit'] = '<div class="edit"></div>'
-        student['delete'] = '<div class = "delete"></>';
-
-        this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
-          this.yeshivaListOfStudent = data;
-          student['nvYeshivaName'] = this.yeshivaListOfStudent[this.yeshivaListOfStudent.length - 1].nvYeshivaName;
-=======
           });
->>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
         });
       }, err => { alert(err); });
     }
@@ -108,41 +93,10 @@ export class StudentsComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
     this.lstColumns.push(new VyTableColumn(' משויך לאברך', 'nvAvrechName', 'html'));
 
-<<<<<<< HEAD
-  }
-
-  lstDataRows
-  vyTableComponent
-  
-editStudent(e) {
-  this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);
-}
-
-deleteStudent(e) {
-  this.appProxy.post('DeleteStudent', { iPersonId: e.iPersonId, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
-    if (res == true) {
-      alert('נמחק בהצלחה!');
-       this.lstDataRows.splice(this.lstDataRows.indexOf(e),1);
-      this.vyTableComponent.refreshTable(this.lstDataRows);
-    }
-    else {
-      alert('לא נמחק!');
-    }
-  });
-}
-
-click(e) {
-  // this.avrechId = e.iPersonId;
-  if (e.columnClickName == "edit")
-    this.editStudent(e);
-  else
-    this.deleteStudent(e);
-=======
 
 
   }
 
->>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
 
   editAndDeleteStudent(e) {
     debugger;
@@ -153,8 +107,10 @@ click(e) {
       if (this.alert == true) {
         this.appProxy.post("DeleteStudent", { iStudent: e.iPersonId, iUserId: this.globalService.getUser() });
 
- 
- 
+      }
+    }
+  }
+
 
 
   downloadExcel() {
