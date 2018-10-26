@@ -24,7 +24,10 @@ export class StudentDetailsComponent implements OnInit {
 
 
   @Input() student: Student
+<<<<<<< HEAD
   statusTypeGraduate: number = 160;
+=======
+>>>>>>> 94d7dc89c2de802a49a37fb8a2e45840ed6b9300
 statusType:any={boger:160,student:159};
   paramRout: any;
   fatherDead: boolean;
@@ -64,7 +67,10 @@ statusType:any={boger:160,student:159};
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 94d7dc89c2de802a49a37fb8a2e45840ed6b9300
   ngOnInit() {
     if(!this.student.iPersonId)
     this.change=true;
@@ -169,6 +175,7 @@ statusType:any={boger:160,student:159};
     }
   }
 
+<<<<<<< HEAD
   shiftToGraduates(iPersonId) {
     this.appProxy.post("UpdateStatusStudent", { iPersonId: iPersonId, iStatusType: this.statusTypeGraduate }).then(
       data => {
@@ -182,6 +189,15 @@ statusType:any={boger:160,student:159};
 // this.student.iStatusType=newStatus;
 //         }
 //         );
+=======
+  shift(newStatus){
+    this.appProxy.post("UpdateStatusStudent",{iPersonId:this.student.iPersonId,iStatusType:newStatus}).then(
+      data=>{
+alert(data);
+this.student.iStatusType=newStatus;
+        }
+        );
+>>>>>>> 94d7dc89c2de802a49a37fb8a2e45840ed6b9300
         
   }
   calcEbrewDatw(year) {
