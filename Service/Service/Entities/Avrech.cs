@@ -127,12 +127,12 @@ namespace Service.Entities
 			}
 		}
 
-        public static bool MailToAvrechim(string[] mailList)
+        public static bool MailToAvrechim(string[] mailList,string subject, string body)
         {
             foreach (var mail in mailList)
             {
 
-                SendMessagesHandler.SendEmailOrFax("VenatnuYedidimSystem@gmail.com", "avigail3353@gmail.com", "ניסיון ונתנו ידידים", "המייל הגיע בהצלחה", null);
+                SendMessagesHandler.SendEmailOrFax(ConfigSettings.ReadSetting("Email"), mail, subject,body, null);
 
 
                 //SmtpClient client = new SmtpClient();
