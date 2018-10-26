@@ -153,13 +153,6 @@ namespace Service.Entities
 			}
 		}
 
-
-
-
-
-
-
-
 		#endregion
 	}
 }

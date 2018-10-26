@@ -4,7 +4,7 @@
 
       </button>
   <nav class="navbar navbar-expand-sm nav"> <span class="header">{{settingsFrontend.GlobalHeader.nvValue}}</span>
-    <button type="button" mdbBtn color="primary"  class="relative waves-light glyphicon glyphicon-user" (click)="divModal=true" mdbWavesEffect>login</button>
+    <button type="button" mdbBtn color="primary"  class="relative waves-light glyphicon glyphicon-user" (click)="goToLogin()" mdbWavesEffect>login</button>
 <a *ngIf="isManager" href="#" >לאתר הניהול</a>
     <div id="vmdbModal" *ngIf="divModal">
       <div class="modal-dialog" role="document">
@@ -35,11 +35,13 @@
         </div>
       </div>
     </div>
+    
   </nav>
 
+
     </header>
-    <div id="VerMarch" class="VerMarch">{{settingsFrontend.GlobalMarchSF.nvValue}}</div>
-    <div id="MarchSF" class="MarchSF">{{settingsFrontend.GlobalVerMarch.nvValue}}</div>
+    <div id="VerMarch" class="VerMarch">{{settingsFrontend.GlobalVerMarch.nvValue}}</div>
+    <div id="MarchSF" class="MarchSF">{{settingsFrontend.GlobalMarchSF.nvValue}}</div>
     <div id="img" class="image">
       <!-- <table *ngFor="let img of listImage">
         <div class="row ">
@@ -55,4 +57,4 @@
     <input type="button" value="הבא" (click)="nextImage()"/>
     </div>
 
-
+ 
