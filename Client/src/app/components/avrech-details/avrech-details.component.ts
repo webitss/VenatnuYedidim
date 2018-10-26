@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Avrech } from '../../classes/avrech';
 import { BehaviorSubject } from'rxjs/BehaviorSubject'
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+// import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 
 @Component({
   selector: 'app-avrech-details',
