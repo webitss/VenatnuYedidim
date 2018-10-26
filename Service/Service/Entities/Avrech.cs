@@ -133,7 +133,7 @@ namespace Service.Entities
             foreach (var mail in mailList)
             {
 
-<<<<<<< HEAD
+
                 string body =
                      "<br> עמותת ונתנו ידידים";           
                    string from = ConfigSettings.ReadSetting("Email");   
@@ -144,7 +144,7 @@ namespace Service.Entities
                     flag = false;
                     break;
                 }
-=======
+
                 SendMessagesHandler.SendEmailOrFax("VenatnuYedidimSystem@gmail.com", "avigail3353@gmail.com", "ניסיון ונתנו ידידים", "המייל הגיע בהצלחה", null);
 
 
@@ -166,7 +166,7 @@ namespace Service.Entities
                 //mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
 
                 //client.Send(mm);
->>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
+
             }
             if (flag)
                 return true;

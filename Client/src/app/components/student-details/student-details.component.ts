@@ -43,8 +43,6 @@ export class StudentDetailsComponent implements OnInit {
   currentUser: number;
   days:string[]=["א","ב","ג","ד","ה","ו","ז","ח","ט","י","יא","יב","יג","יד","טו","טז","יז","יח","יט","כ","כא","כב","כג","כד","כה","כו","כז","כח","כט","ל"];
   monthes:string[]=["תשרי","חשוון","כסלו","טבת","שבט","אדר","ניסן","אייר","סיוון","תמוז","אב","אלול"];
-<<<<<<< HEAD
-=======
   dateDayArr = new Array<string>();
   dateMonthArr = new Array<string>();
   dateYearArr = new Array<any>();
@@ -52,7 +50,6 @@ export class StudentDetailsComponent implements OnInit {
   currentYear: Date = new Date();
 letterArr=new Array<LetterEbrew>();
 
->>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
 
   ngOnInit() {
 
@@ -218,18 +215,6 @@ letterArr=new Array<LetterEbrew>();
   addSelectYeshivaToStudent() {
     this.appProxy.post("AddYeshivaToStudent", {
       iPersonId: this.paramRout, iYeshivaId:
-<<<<<<< HEAD
-        this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser}).then(data =>{
-    if(data)
-           alert("הישיבה נוספה בהצלחה")
-           else("שגיאה בהוספת ישיבה")
-          }
-           , err => alert("שגיאה"))
-
-    var newYeshiva: Yeshiva=new Yeshiva();
-    debugger;
-    newYeshiva.nvYeshivaName = this.yeshivaSelected.nvYeshivaName;
-=======
         this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser
     }).then(data => {
       if (data)
@@ -239,7 +224,6 @@ letterArr=new Array<LetterEbrew>();
       , err => alert("שגיאה"))
 
     var newYeshiva: Yeshiva = new Yeshiva();
->>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
     newYeshiva.nvCity = this.yeshivaSelected.nvCity;
     newYeshiva.nvAddress = this.yeshivaSelected.nvAddress;
     this.yeshivaListOfStudent.push(newYeshiva);

@@ -140,13 +140,7 @@ namespace Service
         {
             return Student.DeleteStudent(iPersonId, iUserId);
         }
-<<<<<<< HEAD
-        
 
-
-      
-=======
->>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
 
         #endregion
 
@@ -221,23 +215,15 @@ namespace Service
             return Avrech.GetAvrechimByStudentId(iPersonId);
         }
 
-        public bool MailToAvrechim(string[] mailList, string subject, string body)
+        public bool MailToAvrechim(string[] mailList)
         {
-            return Avrech.MailToAvrechim(mailList,subject,body);
+            return Avrech.MailToAvrechim(mailList);
         }
-        
+        //,subject,body, 
+        //string subject, string body
         #endregion
 
-<<<<<<< HEAD
 
-
-
-
-=======
-        
-
-
->>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
         #region SysTableRow
         public List<SysTableRow> GetValues(int iSysTableId)
         {
