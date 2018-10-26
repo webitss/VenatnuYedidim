@@ -9,6 +9,5 @@ public dtLastModifyDate:Date;
 public iLastModifyUserId:number
 public dtCreateDate:Date;
 public iCreateUserId:number;    
-public iCreateUserId:number;  
 public nvShowText:string;  
    }

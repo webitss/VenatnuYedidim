@@ -14,16 +14,18 @@
     <div class="row">
         <div class="form-group ">
             <label for="lastName">שם משפחה:</label>
-            <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="student.nvLastName" [ngModelOptions]="{standalone: true}">
+            <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="student.nvLastName"
+                [ngModelOptions]="{standalone: true}">
         </div>
         <div class="form-group ">
             <label for="firstName">שם פרטי:</label>
-            <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="student.nvFirstName" [ngModelOptions]="{standalone: true}">
+            <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="student.nvFirstName"
+                [ngModelOptions]="{standalone: true}">
         </div>
         <div class="form-group ">
             <label for="identity">תעודת זהות :</label>
-            <input type="text" class="form-control" id="identity" name="identity" [(ngModel)]="student.nvIdentityCard" [ngModelOptions]="{standalone: true}"
-                minlength="9" maxlength="9" #identity="ngModel">
+            <input type="text" class="form-control" id="identity" name="identity" [(ngModel)]="student.nvIdentityCard"
+                [ngModelOptions]="{standalone: true}" minlength="9" maxlength="9" #identity="ngModel">
             <div *ngIf="identity.invalid && (identity.dirty || identity.touched)" class="alert alert-danger">
                 <div *ngIf="(identity.errors.minlength || identity.errors.maxlength)">
                     <p>תעודת זהות חייבת להכיל 9 ספרות </p>
@@ -33,8 +35,8 @@
 
         <div class="form-group ">
             <label for="phone"> טלפון :</label>
-            <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="student.nvPhone" [ngModelOptions]="{standalone: true}"
-                minlength="9" maxlength="9" #phone="ngModel">
+            <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="student.nvPhone"
+                [ngModelOptions]="{standalone: true}" minlength="9" maxlength="9" #phone="ngModel">
             <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
                 <div *ngIf="(phone.errors.minlength||phone.errors.maxlength)">
                     <p>מספר טלפון אינו תקין </p>
@@ -59,7 +61,7 @@
     <div class="row">
         <div class="form-group ">
             <label for="nvBornDateDay"> תאריך לידה עברי:</label>
-            <select  class="form-control" id="nvBornDateDay" name="nvBornDateDay" [(ngModel)]="bornDateHebrewStudent.Day">
+            <select class="form-control" id="nvBornDateDay" name="nvBornDateDay" [(ngModel)]="bornDateHebrewStudent.Day">
                 <option>בחר יום</option>
                 <option *ngFor="let day of dateDayArr">{{day}}</option>
             </select>
@@ -68,19 +70,20 @@
                 <option *ngFor="let year of dateYearhArr">{{month}}</option>
             </select>
             <input type="text" class="form-control" id="nvBornDateYear" name="nvBornDateYear" [(ngModel)]="bornDateHebrewStudent.Year"
-                [ngModelOptions]="{standalone: true}" placeholder="שנה"> 
-                <select class="form-control" id="nvBornDateDay" name="nvBornDateDay" [(ngModel)]="bornDateHebrewStudent.Day" [ngModelOptions]="{standalone: true}">
+                [ngModelOptions]="{standalone: true}" placeholder="שנה">
+            <select class="form-control" id="nvBornDateDay" name="nvBornDateDay" [(ngModel)]="bornDateHebrewStudent.Day"
+                [ngModelOptions]="{standalone: true}">
 
-              <option *ngFor="let day of days">
-{{day}}
-              </option>
+                <option *ngFor="let day of days">
+                    {{day}}
+                </option>
             </select>
             <select class="form-control" id="nvBornDateMonth" name="nvBornDateMonth" [(ngModel)]="bornDateHebrewStudent.Month"
-                [ngModelOptions]="{standalone: true}" >
+                [ngModelOptions]="{standalone: true}">
                 <option *ngFor="let month of monthes">
                     {{month}}
-                                  </option>
-              </select>
+                </option>
+            </select>
             <input type="text" class="form-control" id="nvBornDateYear" name="nvBornDateYear" [(ngModel)]="bornDateHebrewStudent.Year"
                 [ngModelOptions]="{standalone: true}" placeholder="שנה">
         </div>
@@ -102,7 +105,8 @@
 
         <div class="form-group ">
             <label for="street"> כתובת :</label>
-            <input type="text" class="form-control" id="street" name="street" [(ngModel)]="student.nvAddress" [ngModelOptions]="{standalone: true}">
+            <input type="text" class="form-control" id="street" name="street" [(ngModel)]="student.nvAddress"
+                [ngModelOptions]="{standalone: true}">
         </div>
 
 
@@ -117,14 +121,15 @@
         <div class="form-group ">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="fatherDead" (click)="changeStatusParent(1)" [checked]="isCheckedFather"> יתום מאב</label>
+                    <input type="checkbox" name="fatherDead" (click)="changeStatusParent(1)" [checked]="isCheckedFather">
+                    יתום מאב</label>
             </div>
             <div *ngIf="(fatherDead||fatherDeadDetails)">
 
                 <div class="form-group" style="width: 100%">
                     <label for="dtBornDateDay"> תאריך פטירה עברי:</label>
-                    <input type="text" class="form-control " id="dtBornDateDay" name="dtBornDateDay" [(ngModel)]="diedDateHebrewFather.Day" [ngModelOptions]="{standalone: true} "
-                        placeholder="יום">
+                    <input type="text" class="form-control " id="dtBornDateDay" name="dtBornDateDay" [(ngModel)]="diedDateHebrewFather.Day"
+                        [ngModelOptions]="{standalone: true} " placeholder="יום">
                     <input type="text" class="form-control " id="dtBornDateMonth" name="dtBornDateMonth" [(ngModel)]="diedDateHebrewFather.Month"
                         [ngModelOptions]="{standalone: true}" placeholder="חודש">
                     <input type="text" class="form-control " id="dtBornDateYear" name="dtBornDateYear" [(ngModel)]="diedDateHebrewFather.Year"
@@ -143,7 +148,8 @@
         <div class="form-group">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="motherDead" (change)="changeStatusParent(2)" [checked]="isCheckedMother"> יתום מאם</label>
+                    <input type="checkbox" name="motherDead" (change)="changeStatusParent(2)" [checked]="isCheckedMother">
+                    יתום מאם</label>
             </div>
 
             <div *ngIf="(motherDead||motherDeadDetails)">
@@ -186,54 +192,54 @@
                 <div>{{yeshiva.nvCity}}</div>
             </div>
         </div>
-        <button class="btn-circle btn-add col-sm-2"  (click)="deleteYeshiva(yeshiva)">מחק מוסד לימודים</button>
+        <button class="btn-circle btn-add col-sm-2" (click)="deleteYeshiva(yeshiva)">מחק מוסד לימודים</button>
     </div>
     <div class="col-sm-12">
-    <button  class="col-sm-2 btn-circle btn-add" (click)="addYeshiva=true">הוסף מוסד</button>
-    <div class="row" *ngIf="addYeshiva">
-        <div class="form-group col-sm-2">
-            <label for="yeshivaName">מוסד לימודים :</label>
-            <select class="form-control" id="yesivaStreet" name="yesivaName" (change)="selectYesh($event)">
-                <option> בחר מוסד </option>
-                <option *ngFor="let yesh of yeshivaList">{{yesh.nvYeshivaName}}</option>
-            </select>
-        </div>
-        <div class="form-group ">
-            <label for="yesivaStreet">כתובת מוסד :</label>
-            <input type="text" class="form-control" id="yesivaStreet" name="yesivaStreet" [(ngModel)]="yeshivaSelected.nvAddress">
+        <button class="col-sm-2 btn-circle btn-add" (click)="addYeshiva=true">הוסף מוסד</button>
+        <div class="row" *ngIf="addYeshiva">
+            <div class="form-group col-sm-2">
+                <label for="yeshivaName">מוסד לימודים :</label>
+                <select class="form-control" id="yesivaStreet" name="yesivaName" (change)="selectYesh($event)">
+                    <option> בחר מוסד </option>
+                    <option *ngFor="let yesh of yeshivaList">{{yesh.nvYeshivaName}}</option>
+                </select>
+            </div>
+            <div class="form-group ">
+                <label for="yesivaStreet">כתובת מוסד :</label>
+                <input type="text" class="form-control" id="yesivaStreet" name="yesivaStreet" [(ngModel)]="yeshivaSelected.nvAddress">
+            </div>
+
+            <div class="form-group ">
+                <label for="yeshivaCity">עיר מוסד :</label>
+                <input type="text" class="form-control" id="yeshivaCity" name="yeshivaCity" [(ngModel)]="yeshivaSelected.nvCity">
+            </div>
+            <button class="btn-circle btn-add col-sm-2" (click)="addSelectYeshivaToStudent()">הוסף</button>
         </div>
 
-        <div class="form-group ">
-            <label for="yeshivaCity">עיר מוסד :</label>
-            <input type="text" class="form-control" id="yeshivaCity" name="yeshivaCity" [(ngModel)]="yeshivaSelected.nvCity">
-        </div>
-<<<<<<< HEAD
-        <button class="btn-circle btn-add col-sm-2" (click)="addSelectYeshivaToStudent()">הוסף</button>
-    </div>
+        <button class="col-sm-2 btn-circle btn-add" *ngIf="student.iPersonId&&student.iStatusType==159" (click)="shift(statusType.boger)">העבר
+            לבוגרים</button>
+        <button class="col-sm-2 btn-circle btn-add" *ngIf="student.iPersonId&&student.iStatusType==160" (click)="shift(statusType.student)">החזר
+            לתלמידים</button>
 
-    <button *ngIf="student.iPersonId&&student.iStatusType==159" (click)="shift(statusType.boger)">העבר לבוגרים</button>
-    <button *ngIf="student.iPersonId&&student.iStatusType==160" (click)="shift(statusType.student)">החזר לתלמידים</button>
-
-=======
         <button class="btn-circle btn-add" (click)="addSelectYeshivaToStudent()">הוסף</button>
     </div>
 
-    <button class="col-sm-2 btn-circle btn-add" (click)="shiftToGraduates(student.iPersonId)">העבר לבוגרים</button>
-</div>
->>>>>>> 94d7dc89c2de802a49a37fb8a2e45840ed6b9300
-    <div class="row">
-        <div class="form-group col-sm-12">
-            <label for='comment'>הערות</label>
-            <textarea name='comment' class="form-control" id="comment" name="comment" [(ngModel)]="student.nvComment" [ngModelOptions]="{standalone: true}"></textarea>
-        </div>
-    </div>
-    <app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flag" [header]="header" (close)="flag=false" (ok)="flag=false; deleteEvent(eventIdToDelete);"></app-vy-pop-up>
 
 </div>
+<div class="row">
+    <div class="form-group col-sm-12">
+        <label for='comment'>הערות</label>
+        <textarea name='comment' class="form-control" id="comment" name="comment" [(ngModel)]="student.nvComment"
+            [ngModelOptions]="{standalone: true}"></textarea>
+    </div>
+</div>
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flag" [header]="header" (close)="flag=false" (ok)="flag=false; deleteEvent(eventIdToDelete);"></app-vy-pop-up>
+
+
 
 <!-- </div> -->
 
 
 
-<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; deleteYeshivaOfStudent(yeshivaId);"></app-vy-pop-up>
-
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false"
+    (ok)="flagDelete=false; deleteYeshivaOfStudent(yeshivaId);"></app-vy-pop-up>
