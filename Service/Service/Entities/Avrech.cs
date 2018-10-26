@@ -127,7 +127,7 @@ namespace Service.Entities
 			}
 		}
 
-        public static bool MailToAvrechim(string[] mailList)
+        public static bool MailToAvrechim(string[] mailList, string subject, string body)
         {
             foreach (var mail in mailList)
             {
