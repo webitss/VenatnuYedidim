@@ -69,11 +69,6 @@ export class StudentConversationsComponent implements OnInit {
       title: 'סיכום שיחה',
       name: 'nvConversationSummary'
     },
-    // {
-    //   title: 'תאריך שיחה הבאה',
-    //   name: 'nvNextConversationDate'
-    // },
-
 
   ];
   public lstDataRows = [];
@@ -104,13 +99,11 @@ export class StudentConversationsComponent implements OnInit {
   }
 
 
-  // addConversation() {
-  //   this.conversationSelect = new Conversation();
-  //   this.conversationSelect.dtConversationDate = null;
-  //   //this.conversationSelect.dtConversationTime = null;
-  //   //this.conversationSelect.dtNextConversationDate = null;
+  addConversation() {
+    this.conversationSelect = new Conversation();
+    this.conversationSelect.dtConversationDate = null;
 
-  // }
+  }
   // add(newConver)
   // {
   //   this.conversationsList.push(this.newConver);
@@ -180,9 +173,11 @@ export class StudentConversationsComponent implements OnInit {
 
 
   saveNewConver(conver: Conversation) {
-    this.conversationsList.push(conver);
-    this.changeTable(conver);
-    //this.vyTableComponent.refreshTable(this.lstDataRows);
+    //this.changeTable(conver);
+    this.lstDataRows.push(conver);
+    
+    this.vyTableComponent.refreshTable(this.lstDataRows);
+  
   }
 
   @ViewChild(VyTableComponent) cc: VyTableComponent;
@@ -194,19 +189,17 @@ export class StudentConversationsComponent implements OnInit {
   updateConver(conver: Conversation) {
     let l = this.conversationsList.indexOf(this.conversationsList.find(m1 => m1.iConversationId == this.conversationSelect.iConversationId))
     this.conversationsList[l] = conver;
-    this.lstDataRows = this.conversationsList;
-    //this.changeTable(conver);
+    //this.lstDataRows = this.conversationsList;
     this.vyTableComponent.refreshTable(this.conversationsList);
-    //this.cc.refreshTable(this.conversationsList)
   }
 
   changeTable(c: Conversation) {
-    c['edit'] = '<div class="edit"></div>';
-    c['delete'] = '<div class="delete"></div>';
     c['nvConversationDate'] = c.dtConversationDate.toLocaleDateString();
     c['nvConversationTime'] = c.dtConversationDate.toLocaleTimeString();
     c['nvLastName'] = c['lstObject'].nvFirstName + " " + c['lstObject'].nvLastName;
     c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
+    c['edit'] = '<div class="edit"></div>';
+    c['delete'] = '<div class="delete"></div>';
   }
   selecList(id) {
     this.appProxy.post("GetConversations", { iPersonId: id })
@@ -237,18 +230,13 @@ export class StudentConversationsComponent implements OnInit {
     this.selecList(this.iPersonId);
   }
   // updateConver() {
-  //   //debugger;
+  //   
   //   this.conversationsList.slice(this.conversationsList.indexOf(this.conversationsList.find(m => m.iConversationId == this.conversationSelect.iConversationId), 0), 1);
   //   this.conversationsList.push(this.conversationSelect);
   //   //this.conversationsList.push(event);
   //   this.selecList(this.iPersonId);
   // }
-  addNewMeeting(conver: Conversation) {
-    this.conversationsList.push(conver);
-  }
-  newMeeting(newConver: Conversation) {
-    this.changeTable(newConver);
-    this.conversationsList.push(newConver);
+
 
     //  this.GetMeetingsByStudentId(this.iPersonId);
   }
@@ -282,4 +270,4 @@ export class StudentConversationsComponent implements OnInit {
   // ngOnDestroy() {
   //           this.sub.unsubscribe();
   //         }
-}
+
