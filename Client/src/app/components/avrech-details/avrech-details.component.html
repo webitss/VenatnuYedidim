@@ -1,4 +1,4 @@
-<div class="form" *ngIf='avrech'>
+<div class="form" *ngIf='avrech!=undefined'>
   <div class="form-group">
     <label for="firstName">שם פרטי</label>
     <input type="text" id="firstName" [(ngModel)]="avrech.nvFirstName" class="form-control" />
@@ -12,6 +12,11 @@
     <label for="firstName">ת.ז</label>
     <input type="text" id="firstName" [(ngModel)]="avrech.nvIdentityCard" class="form-control" />
   </div>
+
+  <div class="form-group  ">
+      <label for="firstName">טלפון</label>
+      <input type="text" id="firstName" [(ngModel)]="avrech.nvPhone" class="form-control" />
+    </div>
 
   <div class="form-group  ">
     <label for="firstName">טלפון נייד</label>
@@ -33,7 +38,7 @@
     <input type="text" id="firstName" [(ngModel)]="avrech.nvCity" class="form-control" />
   </div>
 
-  <div class="form-group  ">
+  <!-- <div class="form-group  ">
     <label for="firstName">שם משתמש</label>
     <input type="text" id="firstName" [(ngModel)]="userName" class="form-control" />
   </div>
@@ -41,5 +46,5 @@
   <div class="form-group  ">
     <label for="firstName"> סיסמה</label>
     <input type="text" id="firstName" [(ngModel)]="password" class="form-control" />
-  </div>
+  </div> -->
 </div>
