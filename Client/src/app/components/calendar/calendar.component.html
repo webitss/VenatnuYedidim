@@ -15,7 +15,7 @@
               <!-- <div class="td"> -->
               {{d.number}}
               <div *ngFor="let t of d.tasks;trackBy: trackItem" class="task" [class.scroll]="d.tasks.length > 2">
-                <span (click)="editTask(t.id)">{{t.string}}</span>
+                <div (click)="editTask(t.id)">{{t.string}}</div>
                 <div class="x" (click)="delTask(t.id,t.i,t.j)"></div>
 
               </div>
