@@ -66,7 +66,6 @@ export class StudentConversationDetailsComponent implements OnInit {
           if (this.conver.iConversationId == null) {
             this.conver.iConversationId = data;
             this.saveNewConver.emit(this.conver);
-
           }
        
         else
@@ -74,7 +73,10 @@ export class StudentConversationDetailsComponent implements OnInit {
  }
         //this.newConver.emit(this.conver);
         if (data) {
+<<<<<<< HEAD
+=======
           //this._parent.openMessagePopup('')
+>>>>>>> 8393bad98f4d80ceb0be5ba73754b330cdb6a9c5
           alert("השמירה בוצעה בהצלחה");
           this.Conversation.emit(null);
         }
