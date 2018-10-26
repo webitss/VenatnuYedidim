@@ -36,9 +36,9 @@ export class StudentsComponent implements OnInit {
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   ngOnInit() {
 
-    this.component=this.router.url;
-    this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;   
-    if (this.component=='/students') {
+    this.component = this.router.url;
+    this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
+    if (this.component == '/students') {
       this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
         this.studentList = data;
         // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})

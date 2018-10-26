@@ -106,7 +106,7 @@ export class AvrechimComponent implements OnInit {
 
     this.appProxy.post('MailToAvrechim', { mailList: this.mailList })
       .then(result => {
-
+        alert("המסר נשלח בהצלחה");
       }
         , err => { }
       );
