@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { Task } from "../../classes/task"
 import { SysTableService } from '../../services/sys-table.service';
 import { AppProxy } from '../../services/app.proxy';
@@ -37,13 +37,13 @@ export class TaskComponent implements OnInit {
   isNew: boolean = false;
   ngOnInit() {
     this.currentTask = Object.assign({}, this.task);
-      if (this.task == undefined) {
-        this.task = new Task();
-        this.isNew = true;
-      }
+    if (this.task == undefined) {
+      this.task = new Task();
+      this.isNew = true;
+    }
     this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
       this.taskTypeList = data;
-      
+
 
       this.currentTask['dtDate'] = this.task.dtTaskdatetime;//.getTime();
 
@@ -64,7 +64,6 @@ export class TaskComponent implements OnInit {
     this.route.parent.params.subscribe(params => {
       this.personId = +params['iPersonId'];
     });
-    debugger
     if (this.isNew == true) {
       if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
       {
@@ -92,29 +91,31 @@ export class TaskComponent implements OnInit {
           }
           else
             alert("error!");
-                     
+
         });
       }
     }
-  
+
   }
-  @Output() close:EventEmitter<any>= new EventEmitter<any>();
-// addOrEdit:boolean=false;
+  @Output() close: EventEmitter<any> = new EventEmitter<any>();
+  @Output() refresh = new EventEmitter();
+
+  // @Output() refresh:EventEmitter<any>= new EventEmitter<any>();
+  // addOrEdit:boolean=false;
   saveTask() {
-    debugger
     this.task.dtTaskdatetime = new Date(this.currentTask['dtDate'] + ' ' + this.currentTask['dtHour']);
     //    if (this.currentTask.iTaskId == 0)
     this.appProxy.post('SetTask', { task: this.task, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
       if (data) {
-      
-      
         alert("המשימה נוספה בהצלחה!");
+        this.refresh.emit(this.task);
         this.close.emit();
         //close
       }
-    },err=>{
+    }, err => {
+      alert('dfds');
     });
-    
+
   }
 
 }

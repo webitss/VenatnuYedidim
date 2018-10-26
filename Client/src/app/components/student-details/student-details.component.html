@@ -10,7 +10,7 @@
         <input type="file" (change)="loadDocument($event,save)" name="LoadDocument" id="LoadDocument" />
     </div>
 </div>
-<div class="form">
+<div class="form" #details>
     <div class="row">
         <div class="form-group ">
             <label for="lastName">שם משפחה:</label>
@@ -68,9 +68,8 @@
                 <option *ngFor="let year of dateYearhArr">{{month}}</option>
             </select>
             <input type="text" class="form-control" id="nvBornDateYear" name="nvBornDateYear" [(ngModel)]="bornDateHebrewStudent.Year"
-                [ngModelOptions]="{standalone: true}" placeholder="שנה"> -->
-                <select class="form-control" id="nvBornDateDay" name="nvBornDateDay" [(ngModel)]="bornDateHebrewStudent.Day" [ngModelOptions]="{standalone: true}"
-                >
+                [ngModelOptions]="{standalone: true}" placeholder="שנה"> 
+                <select class="form-control" id="nvBornDateDay" name="nvBornDateDay" [(ngModel)]="bornDateHebrewStudent.Day" [ngModelOptions]="{standalone: true}">
 
               <option *ngFor="let day of days">
 {{day}}
@@ -187,11 +186,12 @@
                 <div>{{yeshiva.nvCity}}</div>
             </div>
         </div>
-        <button (click)="deleteYeshiva(yeshiva)">מחק מוסד לימודים</button>
+        <button class="btn-circle btn-add col-sm-2"  (click)="deleteYeshiva(yeshiva)">מחק מוסד לימודים</button>
     </div>
-    <button (click)="addYeshiva=true">הוסף מוסד</button>
+    <div class="col-sm-12">
+    <button  class="col-sm-2 btn-circle btn-add" (click)="addYeshiva=true">הוסף מוסד</button>
     <div class="row" *ngIf="addYeshiva">
-        <div class="form-group">
+        <div class="form-group col-sm-2">
             <label for="yeshivaName">מוסד לימודים :</label>
             <select class="form-control" id="yesivaStreet" name="yesivaName" (change)="selectYesh($event)">
                 <option> בחר מוסד </option>
@@ -207,10 +207,11 @@
             <label for="yeshivaCity">עיר מוסד :</label>
             <input type="text" class="form-control" id="yeshivaCity" name="yeshivaCity" [(ngModel)]="yeshivaSelected.nvCity">
         </div>
-        <button (click)="addSelectYeshivaToStudent()">הוסף</button>
+        <button class="btn-circle btn-add col-sm-2" (click)="addSelectYeshivaToStudent()">הוסף</button>
     </div>
 
-    <button (click)="shiftToGraduates(student.iPersonId)">העבר לבוגרים</button>
+    <button *ngIf="student.iPersonId&&student.iStatusType==159" (click)="shift(statusType.boger)">העבר לבוגרים</button>
+    <button *ngIf="student.iPersonId&&student.iStatusType==160" (click)="shift(statusType.student)">החזר לתלמידים</button>
 
     <div class="row">
         <div class="form-group col-sm-12">
@@ -218,6 +219,8 @@
             <textarea name='comment' class="form-control" id="comment" name="comment" [(ngModel)]="student.nvComment" [ngModelOptions]="{standalone: true}"></textarea>
         </div>
     </div>
+    <app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flag" [header]="header" (close)="flag=false" (ok)="flag=false; deleteEvent(eventIdToDelete);"></app-vy-pop-up>
+
 </div>
 
 <!-- </div> -->

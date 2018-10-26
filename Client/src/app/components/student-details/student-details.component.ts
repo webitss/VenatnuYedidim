@@ -25,6 +25,7 @@ export class StudentDetailsComponent implements OnInit {
 
   @Input() student: Student
   statusTypeGraduate: number = 160;
+statusType:any={boger:160,student:159};
   paramRout: any;
   fatherDead: boolean;
   motherDead: boolean;
@@ -50,8 +51,12 @@ export class StudentDetailsComponent implements OnInit {
   dateYearArr = new Array<any>();
   addYeshiva = false;
   yeshivaId: number;
+  change:boolean;
+  flag:boolean=false;
+  message:string;
+  
   e;
-  message = 'dfds';
+  // message = 'dfds';
   flagDelete = false;
   header = 'מחיקת ישיבה';
   currentYear: Date = new Date();
@@ -61,7 +66,8 @@ export class StudentDetailsComponent implements OnInit {
 
 
   ngOnInit() {
-
+    if(!this.student.iPersonId)
+    this.change=true;
     this.bornDateHebrewStudent = new HebrewDate();
     this.diedDateHebrewFather = new HebrewDate();
     this.diedDateHebrewMother = new HebrewDate();
@@ -169,6 +175,14 @@ export class StudentDetailsComponent implements OnInit {
         this._parent.openMessagePopup('ההעברה בוצעה בהצלחה!');
       }
     );
+//   shift(newStatus){
+//     this.appProxy.post("UpdateStatusStudent",{iPersonId:this.student.iPersonId,iStatusType:newStatus}).then(
+//       data=>{
+// alert(data);
+// this.student.iStatusType=newStatus;
+//         }
+//         );
+        
   }
   calcEbrewDatw(year) {
 
@@ -354,6 +368,15 @@ export class StudentDetailsComponent implements OnInit {
 
       }
     }
+
+  }
+  ngOnDestroy(){
+if(this.change=true)
+  {
+  this.message="האם ברצונך לשמור?"
+  this.flag=true;
+
+  }
 
   }
 }

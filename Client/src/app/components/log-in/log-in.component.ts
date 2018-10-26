@@ -18,8 +18,13 @@ export class LogInComponent implements OnInit {
 
   ngOnInit() {
     this.imgHeight = window.innerHeight;
-    if (JSON.parse(localStorage.getItem("user")) != null)
-    this.router.navigate(['students']);
+    
+    // if (JSON.parse(localStorage.getItem("user")) != null)
+    // this.router.navigate(['students']);
+    // else if ()
+    // {
+    //   this.router.navigate(['students']);
+    // }
   }
 
   public imgHeight: number;
@@ -44,7 +49,11 @@ export class LogInComponent implements OnInit {
           this.router.navigate(['students']);
         }
         else {
-          alert("שם משתמש או סיסמה שגויים!");
+          debugger;
+          
+         this.router.navigate(['ShowImage',{nvUserName:this.nvUserName,nvPassword:this.nvPassword}]);
+        //  this.router.navigate(['MyCompB', {id: "someId", id2: "another ID"}]);
+        
         }
       })
   };
