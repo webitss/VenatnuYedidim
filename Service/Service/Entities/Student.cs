@@ -244,6 +244,9 @@ namespace Service.Entities
 		}
 
 
+<<<<<<< HEAD
+     
+=======
     //   public static  bool DeleteStudent(int iPersonId, int iUserId)
     //    {
     //        try
@@ -262,6 +265,7 @@ namespace Service.Entities
     //            return false;
     //        }
     //    }
+>>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
 
     }
 

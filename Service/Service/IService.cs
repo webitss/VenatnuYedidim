@@ -152,7 +152,12 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Yeshivot> GetYeshivotOfStudent(int iPersonId);
 
+<<<<<<< HEAD
+     
+
+=======
        
+>>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
         #endregion Student
 
 

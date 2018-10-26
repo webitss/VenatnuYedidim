@@ -140,6 +140,13 @@ namespace Service
         {
             return Student.DeleteStudent(iPersonId, iUserId);
         }
+<<<<<<< HEAD
+        
+
+
+      
+=======
+>>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
 
         #endregion
 
@@ -221,9 +228,16 @@ namespace Service
         
         #endregion
 
+<<<<<<< HEAD
+
+
+
+
+=======
         
 
 
+>>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
         #region SysTableRow
         public List<SysTableRow> GetValues(int iSysTableId)
         {
