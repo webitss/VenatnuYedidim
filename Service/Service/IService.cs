@@ -244,7 +244,8 @@ namespace Service
        BodyStyle = WebMessageBodyStyle.WrappedRequest,
        ResponseFormat = WebMessageFormat.Json,
        RequestFormat = WebMessageFormat.Json)]
-       bool MailToAvrechim(string[] mailList);
+        bool MailToAvrechim(string[] mailList, string subject, string body);
+
 
         
         #endregion

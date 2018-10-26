@@ -7,6 +7,7 @@ import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { GlobalService } from '../../services/global.service';
 import { Yeshiva } from '../../classes/Yeshiva';
+import { AppComponent } from '../app/app.component';
 import { LetterEbrew } from '../../classes/LetterEbrew';
 
 
@@ -22,7 +23,7 @@ export class StudentDetailsComponent implements OnInit {
 
 
   @Input() student: Student
-
+statusTypeGraduate:number=160;
   paramRout: any;
   fatherDead: boolean;
   motherDead: boolean;
@@ -47,6 +48,11 @@ export class StudentDetailsComponent implements OnInit {
   dateMonthArr = new Array<string>();
   dateYearArr = new Array<any>();
   addYeshiva = false;
+  yeshivaId: number;
+  e;
+  message = 'dfds';
+  flagDelete = false;
+  header = 'מחיקת ישיבה';
   currentYear: Date = new Date();
 letterArr=new Array<LetterEbrew>();
 
@@ -155,6 +161,13 @@ letterArr=new Array<LetterEbrew>();
     }
   }
 
+  shiftToGraduates(iPersonId){
+    this.appProxy.post("UpdateStatusStudent",{iPersonId:iPersonId,iStatusType:this.statusTypeGraduate}).then(
+      data=>{
+alert(data);
+        }
+        );
+  }
   calcEbrewDatw(year) {
  
     year = year - 5000;

@@ -11,10 +11,12 @@ using System.Text;
 
 namespace Service.Entities
 {
+
     [DataContract]
     public class Avrech : Person
     {
         public static List<Avrech> GetAllAvrechim(int? iPersonId)
+
         {
             try
             {
@@ -127,13 +129,14 @@ namespace Service.Entities
             }
         }
 
-        public static bool MailToAvrechim(string[] mailList)
+        public static bool MailToAvrechim(string[] mailList, string subject, string body)
         {
             bool flag = false;
             foreach (var mail in mailList)
             {
 
 
+<<<<<<< HEAD
                 string body =
                      "<br> עמותת ונתנו ידידים";           
                    string from = ConfigSettings.ReadSetting("Email");   
@@ -146,6 +149,10 @@ namespace Service.Entities
                 }
 
                 SendMessagesHandler.SendEmailOrFax("VenatnuYedidimSystem@gmail.com", "avigail3353@gmail.com", "ניסיון ונתנו ידידים", "המייל הגיע בהצלחה", null);
+=======
+                SendMessagesHandler.SendEmailOrFax(ConfigSettings.ReadSetting("Email"), mail, subject,body, null);
+
+>>>>>>> 536dc29d8e3ee6b609be78b697514fd4fd5cbb2b
 
 
                 //SmtpClient client = new SmtpClient();
