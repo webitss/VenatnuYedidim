@@ -32,6 +32,8 @@ color: gray;
 border-radius: 25px;
 padding: 0 5%;
 margin: 2%;
+overflow: auto;
+
 }
 
 thead{
