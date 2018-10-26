@@ -136,8 +136,23 @@ namespace Service.Entities
             {
 
 
+<<<<<<< HEAD
+                string body =
+                     "<br> עמותת ונתנו ידידים";           
+                   string from = ConfigSettings.ReadSetting("Email");   
+                if (SendMessagesHandler.SendEmailOrFax(from, mail, "שליחת מייל מונתנו ידידים", body, null) == true)
+                    flag = true;
+                else
+                {
+                    flag = false;
+                    break;
+                }
+
+                SendMessagesHandler.SendEmailOrFax("VenatnuYedidimSystem@gmail.com", "avigail3353@gmail.com", "ניסיון ונתנו ידידים", "המייל הגיע בהצלחה", null);
+=======
                 SendMessagesHandler.SendEmailOrFax(ConfigSettings.ReadSetting("Email"), mail, subject,body, null);
 
+>>>>>>> 536dc29d8e3ee6b609be78b697514fd4fd5cbb2b
 
 
                 //SmtpClient client = new SmtpClient();
