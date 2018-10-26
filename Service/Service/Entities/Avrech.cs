@@ -133,6 +133,7 @@ namespace Service.Entities
             foreach (var mail in mailList)
             {
 
+<<<<<<< HEAD
                 string body =
                      "<br> עמותת ונתנו ידידים";           
                    string from = ConfigSettings.ReadSetting("Email");   
@@ -143,6 +144,29 @@ namespace Service.Entities
                     flag = false;
                     break;
                 }
+=======
+                SendMessagesHandler.SendEmailOrFax("VenatnuYedidimSystem@gmail.com", "avigail3353@gmail.com", "ניסיון ונתנו ידידים", "המייל הגיע בהצלחה", null);
+
+
+                //SmtpClient client = new SmtpClient();
+                //client.Port = 587;
+                //client.Host = "smtp.gmail.com";
+                //client.EnableSsl = true;
+                //client.Timeout = 10000;
+                //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                //client.UseDefaultCredentials = false;
+                //client.Credentials = new System.Net.NetworkCredential("", "");
+                //MailMessage mm = new MailMessage("VenatnuYedidimSystem@gmail.com", mail);
+                //mm.Subject = "ונתנו ידידים";
+                //mm.Body = "אברך";
+                //System.Net.Mail.Attachment attachment;
+                //// attachment = new System.Net.Mail.Attachment("");
+                ////  mm.Attachments.Add(attachment);
+                //mm.BodyEncoding = UTF8Encoding.UTF8;
+                //mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+                //client.Send(mm);
+>>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
             }
             if (flag)
                 return true;

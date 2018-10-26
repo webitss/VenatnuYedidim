@@ -7,6 +7,7 @@ import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { GlobalService } from '../../services/global.service';
 import { Yeshiva } from '../../classes/Yeshiva';
+import { LetterEbrew } from '../../classes/LetterEbrew';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { Yeshiva } from '../../classes/Yeshiva';
 })
 export class StudentDetailsComponent implements OnInit {
 
+  status: string;
   constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router, private globalService: GlobalService) { }
 
 
@@ -41,6 +43,16 @@ export class StudentDetailsComponent implements OnInit {
   currentUser: number;
   days:string[]=["א","ב","ג","ד","ה","ו","ז","ח","ט","י","יא","יב","יג","יד","טו","טז","יז","יח","יט","כ","כא","כב","כג","כד","כה","כו","כז","כח","כט","ל"];
   monthes:string[]=["תשרי","חשוון","כסלו","טבת","שבט","אדר","ניסן","אייר","סיוון","תמוז","אב","אלול"];
+<<<<<<< HEAD
+=======
+  dateDayArr = new Array<string>();
+  dateMonthArr = new Array<string>();
+  dateYearArr = new Array<any>();
+  addYeshiva = false;
+  currentYear: Date = new Date();
+letterArr=new Array<LetterEbrew>();
+
+>>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
 
   ngOnInit() {
 
@@ -68,6 +80,9 @@ export class StudentDetailsComponent implements OnInit {
           this.student = data;
           // this.student.dtBirthdate.getTime();
           // this.student.dtAddStudentDate.getTime();
+          this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
+            this.status = data.filter(x => x.iSysTableRowId == this.student.iStatusType)[0].nvValue;
+          });
 
           this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
           this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];
@@ -123,8 +138,37 @@ export class StudentDetailsComponent implements OnInit {
     // this.dateDayArr.push('כ"א'); this.dateDayArr.push('כ"ב'); this.dateDayArr.push('כ"ג'); this.dateDayArr.push('כ"ד'); this.dateDayArr.push('כ"ה');
     // this.dateDayArr.push('כ"ו'); this.dateDayArr.push('כ"ז'); this.dateDayArr.push('כ"ח'); this.dateDayArr.push('כ"ט'); this.dateDayArr.push('ל');
 
+  this.letterArr.push({nvChar:"א",iValue:1});this.letterArr.push({nvChar:"ב",iValue:2});this.letterArr.push({nvChar:"ג",iValue:3});
+  this.letterArr.push({nvChar:"ד",iValue:4});this.letterArr.push({nvChar:"ה",iValue:5});this.letterArr.push({nvChar:"ו",iValue:6});
+  this.letterArr.push({nvChar:"ז",iValue:7});this.letterArr.push({nvChar:"ח",iValue:8});this.letterArr.push({nvChar:"ט",iValue:9});
+  this.letterArr.push({nvChar:"י",iValue:10});this.letterArr.push({nvChar:"כ",iValue:20});this.letterArr.push({nvChar:"ל",iValue:30});
+  this.letterArr.push({nvChar:"מ",iValue:40});this.letterArr.push({nvChar:"נ",iValue:50});this.letterArr.push({nvChar:"ס",iValue:60});
+  this.letterArr.push({nvChar:"ע",iValue:70});this.letterArr.push({nvChar:"פ",iValue:80});this.letterArr.push({nvChar:"צ",iValue:90});
+  this.letterArr.push({nvChar:"ק",iValue:100});this.letterArr.push({nvChar:"ר",iValue:200});this.letterArr.push({nvChar:"ש",iValue:300});
+  this.letterArr.push({nvChar:"ת",iValue:400});
 
+    for (var i = 1990; i <= this.currentYear.getFullYear(); i++) {
+      this.dateYearArr.push(i);
+    }
+    for(var i=0;i<this.dateYearArr.length-1;i++)
+  {
+      const hebrewDate = require("hebrew-date");
+      this.dateYearArr[i] = hebrewDate(new Date(this.dateYearArr[i] , 0, 0)).year;
+      this.dateYearArr[i]=this.calcEbrewDatw(this.dateYearArr[i]);
+    }
+  }
 
+  calcEbrewDatw(year) {
+ 
+    year = year - 5000;
+    let yearString = "";
+    for (let i = this.letterArr.length-1; i > 0 ; i--) {
+      while (year -this.letterArr[i].iValue > 0) {
+       yearString += this.letterArr[i].nvChar;
+        year-= this.letterArr[i].iValue;
+      }
+    }
+    return yearString;
   }
 
 
@@ -153,17 +197,28 @@ export class StudentDetailsComponent implements OnInit {
     }).then(data => { alert("הישיבה נמחקה בהצלחה"); }, err => { alert("שגיאה במחיקת ישיבהיד"); });
     var i = 0;
     this.yeshivaListOfStudent.forEach(e => {
-      debugger;
       if (e.iYeshivaId == iYeshivaId)
         this.yeshivaListOfStudent.splice(i, 1);
       i++;
     });
   }
 
+
+
+  // When not providing a date object, the months are one-indexed
+
+  // { year: 5776, month: 13, date: 29, month_name: 'Elul' }
+
+
+
+
+
+
+
   addSelectYeshivaToStudent() {
-    debugger;
     this.appProxy.post("AddYeshivaToStudent", {
       iPersonId: this.paramRout, iYeshivaId:
+<<<<<<< HEAD
         this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser}).then(data =>{
     if(data)
            alert("הישיבה נוספה בהצלחה")
@@ -174,6 +229,17 @@ export class StudentDetailsComponent implements OnInit {
     var newYeshiva: Yeshiva=new Yeshiva();
     debugger;
     newYeshiva.nvYeshivaName = this.yeshivaSelected.nvYeshivaName;
+=======
+        this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser
+    }).then(data => {
+      if (data)
+        alert("הישיבה נוספה בהצלחה")
+      else ("שגיאה בהוספת ישיבה")
+    }
+      , err => alert("שגיאה"))
+
+    var newYeshiva: Yeshiva = new Yeshiva();
+>>>>>>> 8c757ad7d55d48b7f449cc8db6037d391f157618
     newYeshiva.nvCity = this.yeshivaSelected.nvCity;
     newYeshiva.nvAddress = this.yeshivaSelected.nvAddress;
     this.yeshivaListOfStudent.push(newYeshiva);
@@ -244,7 +310,18 @@ export class StudentDetailsComponent implements OnInit {
       this.student.nvMotherDeathDate = null;
     }
     if (this.paramRout != '0') {
-      this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => { alert("פרטי התלמיד עודכנו בהצלחה"); }, err => { alert("שגיאה בעריכת תלמיד"); });
+      this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => {
+        if (this.status == 'תלמיד')
+          alert("פרטי התלמיד עודכנו בהצלחה");
+        else
+          alert("פרטי הבוגר עודכנו בהצלחה");
+
+      }, err => {
+        if (this.status == 'תלמיד')
+          alert("שגיאה בעריכת תלמיד");
+        else
+          alert("שגיאה בעריכת בוגר");
+      });
     }
     else
 

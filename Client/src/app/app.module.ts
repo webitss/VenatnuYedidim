@@ -225,6 +225,8 @@ import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
 
      { path: "", component: LogInComponent, canDeactivate: [CanDeactivateGuard] },
       { path: "students", component: StudentsComponent },
+      { path: "graduates", component: StudentsComponent },
+      
       {
 
         path: "students/student/:iPersonId", component: StudentComponent,

@@ -65,7 +65,7 @@
             </select>
             <select type="text" class="form-control" id="nvBornDateMonth" name="nvBornDateMonth" [(ngModel)]="bornDateHebrewStudent.Month">
                 <option>בחר חודש</option>
-                <option *ngFor="let month of dateMonthArr">{{month}}</option>
+                <option *ngFor="let year of dateYearhArr">{{month}}</option>
             </select>
             <input type="text" class="form-control" id="nvBornDateYear" name="nvBornDateYear" [(ngModel)]="bornDateHebrewStudent.Year"
                 [ngModelOptions]="{standalone: true}" placeholder="שנה"> -->
@@ -86,8 +86,11 @@
                 [ngModelOptions]="{standalone: true}" placeholder="שנה">
         </div>
 
-      
-        
+        <select type="text" class="form-control" id="nvBornDateMonth" name="nvBornDateMonth" [(ngModel)]="bornDateHebrewStudent.Month">
+            <option>בחר חודש</option>
+            <option *ngFor="let month of dateYearArr">{{month}}</option>
+        </select>
+        {{yearString}}
 
 
         <div class="form-group ">
