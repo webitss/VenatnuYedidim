@@ -98,7 +98,7 @@ export class TaskComponent implements OnInit {
 
   }
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
-  @Output() refresh = new EventEmitter<Task>();
+  @Output() refresh = new EventEmitter();
 
   // @Output() refresh:EventEmitter<any>= new EventEmitter<any>();
   // addOrEdit:boolean=false;
