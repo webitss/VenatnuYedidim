@@ -37,13 +37,8 @@ export class StudentsComponent implements OnInit {
       this.studentList = data;
       // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
       this.studentList.forEach(student => {
-<<<<<<< HEAD
-        student['edit'] = '<div class="edit"></div>';
-        student['delete'] = '<div class="delete"></div>';
-=======
         student['edit'] = '<div class="edit"></div>'
         student['delete'] = '<div class = "delete"></>';
->>>>>>> 528a9a8ec385438ba8912a7de1d44474366875c6
 
         this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
           this.yeshivaListOfStudent = data;
@@ -84,12 +79,14 @@ export class StudentsComponent implements OnInit {
 
   }
 
-
+  lstDataRows
+  vyTableComponent
+  
 editStudent(e) {
   this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);
 }
 
-deleteEvent(e) {
+deleteStudent(e) {
   this.appProxy.post('DeleteStudent', { iPersonId: e.iPersonId, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
     if (res == true) {
       alert('נמחק בהצלחה!');
@@ -107,7 +104,7 @@ click(e) {
   if (e.columnClickName == "edit")
     this.editStudent(e);
   else
-    this.deleteEvent(e);
+    this.deleteStudent(e);
 
 }
 cardsUnion() {
@@ -123,25 +120,8 @@ cardsUnion() {
 // clickCell:true,
 // type: 'html'
 
-      }
-    }
-  }
-
-
-
-
-  cardsUnion() {
-    this.flag == true
-    // const modalRef = this.modalService.open(CardsUnionComponent);
-
-    // modalRef.result.then((result) => {
-    //   console.log(result);
-    // }).catch((error) => {
-    //   console.log(error);
-    // });
-  }
-  // clickCell:true,
-  // type: 'html'
+ 
+ 
 
 
   downloadExcel() {

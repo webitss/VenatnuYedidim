@@ -39,15 +39,8 @@ export class StudentDetailsComponent implements OnInit {
   yeshivaListOfStudent: Yeshiva[];
   yeshivaSelected: Yeshiva;
   currentUser: number;
-<<<<<<< HEAD
   days:string[]=["א","ב","ג","ד","ה","ו","ז","ח","ט","י","יא","יב","יג","יד","טו","טז","יז","יח","יט","כ","כא","כב","כג","כד","כה","כו","כז","כח","כט","ל"];
   monthes:string[]=["תשרי","חשוון","כסלו","טבת","שבט","אדר","ניסן","אייר","סיוון","תמוז","אב","אלול"];
-=======
-  dateDayArr = new Array<string>();
-  dateMonthArr = new Array<string>();
-  addYeshiva = false;
-  e;
->>>>>>> fd3d149c1b37aff0bed44834cf1c2fb87cb55f76
 
   ngOnInit() {
 
@@ -119,16 +112,16 @@ export class StudentDetailsComponent implements OnInit {
     this.appProxy.post("GetYeshivotOfStudent", { iPersonId: this.paramRout }).then(data => this.yeshivaListOfStudent = data);
 
 
-    this.dateMonthArr.push("תשרי"); this.dateMonthArr.push("חשון"); this.dateMonthArr.push("כסלו"); this.dateMonthArr.push("טבת");
-    this.dateMonthArr.push("שבט"); this.dateMonthArr.push("אדר"); this.dateMonthArr.push("ניסן"); this.dateMonthArr.push("אייר");
-    this.dateMonthArr.push("סיון"); this.dateMonthArr.push("תמוז"); this.dateMonthArr.push("אב"); this.dateMonthArr.push("אלול");
+    // this.dateMonthArr.push("תשרי"); this.dateMonthArr.push("חשון"); this.dateMonthArr.push("כסלו"); this.dateMonthArr.push("טבת");
+    // this.dateMonthArr.push("שבט"); this.dateMonthArr.push("אדר"); this.dateMonthArr.push("ניסן"); this.dateMonthArr.push("אייר");
+    // this.dateMonthArr.push("סיון"); this.dateMonthArr.push("תמוז"); this.dateMonthArr.push("אב"); this.dateMonthArr.push("אלול");
 
-    this.dateDayArr.push("א"); this.dateDayArr.push("ב"); this.dateDayArr.push("ג"); this.dateDayArr.push("ד"); this.dateDayArr.push("ה");
-    this.dateDayArr.push("ו"); this.dateDayArr.push("ז"); this.dateDayArr.push("ח"); this.dateDayArr.push("ט"); this.dateDayArr.push("י");
-    this.dateDayArr.push('י"א'); this.dateDayArr.push('י"ב'); this.dateDayArr.push('י"ג'); this.dateDayArr.push('י"ד'); this.dateDayArr.push('ט"ו');
-    this.dateDayArr.push('ט"ז'); this.dateDayArr.push('י"ז'); this.dateDayArr.push('י"ח'); this.dateDayArr.push('י"ט'); this.dateDayArr.push('כ');
-    this.dateDayArr.push('כ"א'); this.dateDayArr.push('כ"ב'); this.dateDayArr.push('כ"ג'); this.dateDayArr.push('כ"ד'); this.dateDayArr.push('כ"ה');
-    this.dateDayArr.push('כ"ו'); this.dateDayArr.push('כ"ז'); this.dateDayArr.push('כ"ח'); this.dateDayArr.push('כ"ט'); this.dateDayArr.push('ל');
+    // this.dateDayArr.push("א"); this.dateDayArr.push("ב"); this.dateDayArr.push("ג"); this.dateDayArr.push("ד"); this.dateDayArr.push("ה");
+    // this.dateDayArr.push("ו"); this.dateDayArr.push("ז"); this.dateDayArr.push("ח"); this.dateDayArr.push("ט"); this.dateDayArr.push("י");
+    // this.dateDayArr.push('י"א'); this.dateDayArr.push('י"ב'); this.dateDayArr.push('י"ג'); this.dateDayArr.push('י"ד'); this.dateDayArr.push('ט"ו');
+    // this.dateDayArr.push('ט"ז'); this.dateDayArr.push('י"ז'); this.dateDayArr.push('י"ח'); this.dateDayArr.push('י"ט'); this.dateDayArr.push('כ');
+    // this.dateDayArr.push('כ"א'); this.dateDayArr.push('כ"ב'); this.dateDayArr.push('כ"ג'); this.dateDayArr.push('כ"ד'); this.dateDayArr.push('כ"ה');
+    // this.dateDayArr.push('כ"ו'); this.dateDayArr.push('כ"ז'); this.dateDayArr.push('כ"ח'); this.dateDayArr.push('כ"ט'); this.dateDayArr.push('ל');
 
 
 
@@ -171,7 +164,6 @@ export class StudentDetailsComponent implements OnInit {
     debugger;
     this.appProxy.post("AddYeshivaToStudent", {
       iPersonId: this.paramRout, iYeshivaId:
-<<<<<<< HEAD
         this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser}).then(data =>{
     if(data)
            alert("הישיבה נוספה בהצלחה")
@@ -182,17 +174,6 @@ export class StudentDetailsComponent implements OnInit {
     var newYeshiva: Yeshiva=new Yeshiva();
     debugger;
     newYeshiva.nvYeshivaName = this.yeshivaSelected.nvYeshivaName;
-=======
-        this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser
-    }).then(data => {
-      if (data)
-        alert("הישיבה נוספה בהצלחה")
-      else ("שגיאה בהוספת ישיבה")
-    }
-      , err => alert("שגיאה"))
-
-    var newYeshiva: Yeshiva = new Yeshiva();
->>>>>>> 528a9a8ec385438ba8912a7de1d44474366875c6
     newYeshiva.nvCity = this.yeshivaSelected.nvCity;
     newYeshiva.nvAddress = this.yeshivaSelected.nvAddress;
     this.yeshivaListOfStudent.push(newYeshiva);
