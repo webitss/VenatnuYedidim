@@ -46,6 +46,8 @@ export class CalendarComponent implements OnInit {
 
   editTask1: boolean;
   editTask(taskId: number) {
+    alert('edit');
+    
     this.flag = true;
     // if (this.flagDelete == false)
       this.editTask1 = true;
@@ -162,12 +164,14 @@ export class CalendarComponent implements OnInit {
   taskId;
   taskI;
   taskJ;
+
   delTask(taskId: number, i: number, j: number) {
+    alert('delete');
+    this.flagDelete = true;
     this.taskId = taskId;
     this.taskI = i;
     this.taskJ = j;
     this.message = 'האם אתה בטוח שברצונך למחוק משימה זו?';
-    this.flagDelete = true;
   }
 
 

@@ -47,3 +47,6 @@
      </div>
     </div>      -->
 <!-- </div> -->
+
+
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flag" [header]="header" (close)="flag=false" (ok)="flag=false; delete();"></app-vy-pop-up>
