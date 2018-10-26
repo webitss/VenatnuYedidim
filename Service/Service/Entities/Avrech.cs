@@ -11,6 +11,7 @@ using System.Text;
 
 namespace Service.Entities
 {
+
 	[DataContract]
 	public class Avrech : Person
 	{
@@ -129,9 +130,11 @@ namespace Service.Entities
 
         public static bool MailToAvrechim(string[] mailList, string subject, string body)
         {
+
             bool flag = false;
             foreach (var mail in mailList)
             {
+
 
 
                 SendMessagesHandler.SendEmailOrFax(ConfigSettings.ReadSetting("Email"), mail, subject, body, null);
@@ -164,21 +167,25 @@ namespace Service.Entities
                 return false;
         }
         public static List<Avrech> GetAvrechimByStudentId(int iPersonId)
-		{
-			try
-			{
-				DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrech_GetAvrechimOfStudent_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
-				List<Avrech> avrech = ObjectGenerator<Avrech>.GeneratListFromDataRowCollection(drc);
-				return avrech;
-			}
-			catch (Exception ex)
-			{
-				Log.LogError("GetAvrechimByStudentId / TAvrech_GetAvrechimOfStudent_SLCT", ", ex " + ex);
-				return null;
-			}
+        {
+            try
+            {
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrech_GetAvrechimOfStudent_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
+                List<Avrech> avrech = ObjectGenerator<Avrech>.GeneratListFromDataRowCollection(drc);
+                return avrech;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetAvrechimByStudentId / TAvrech_GetAvrechimOfStudent_SLCT", ", ex " + ex);
+                return null;
+            }
 
 
-		}
-       
+        }
     }
+
+
+
+       
+      
 }

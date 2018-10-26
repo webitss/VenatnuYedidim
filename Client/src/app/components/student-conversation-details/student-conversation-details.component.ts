@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, Inject, forwardRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
@@ -6,6 +6,7 @@ import { SysTableRow } from '../../classes/SysTableRow';
 import { Task } from '../../classes/task';
 import { TaskComponent } from '../task/task.component';
 import { GlobalService } from '../../services/global.service';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-student-conversation-details',
@@ -26,9 +27,9 @@ export class StudentConversationDetailsComponent implements OnInit {
   public sysTableList: SysTableRow[];
 
   @Output()
-  protected UpdateConver = new EventEmitter();
+  protected updateConver = new EventEmitter();
   @Output()
-  protected newConver = new EventEmitter();
+  protected saveNewConver = new EventEmitter();
   // @Input()
   // protected newConver :Conversation;
   hours: string;
@@ -41,7 +42,8 @@ export class StudentConversationDetailsComponent implements OnInit {
 
   //protected iPersonId: number = 1;
 
-  constructor(private route: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService) { }
+  constructor(private route: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService
+    ,@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   cancel() {
     this.Conversation.emit(null);
@@ -63,48 +65,25 @@ export class StudentConversationDetailsComponent implements OnInit {
         if (data != 0) {
           if (this.conver.iConversationId == null) {
             this.conver.iConversationId = data;
-            this.newConver.emit(this.conver);
-
+            this.saveNewConver.emit(this.conver);
           }
-        }
+       
         else
-          this.UpdateConver.emit(this.conver);
-
-        this.newConver.emit(this.conver);
+          this.updateConver.emit(this.conver);
+ }
+        //this.newConver.emit(this.conver);
         if (data) {
-          alert("good");
+<<<<<<< HEAD
+=======
+          //this._parent.openMessagePopup('')
+>>>>>>> 8393bad98f4d80ceb0be5ba73754b330cdb6a9c5
+          alert("השמירה בוצעה בהצלחה");
           this.Conversation.emit(null);
         }
         else
-          alert("no good");
+        alert("השמירה נכשלה");
       });
 
-    // alert(data);
-    // this.Conversation.emit(null);
-    // this.newConver.push({
-    //   iConversationId: this.conversation.iConversationId,
-    //   iPersonId: this.conversation.iPersonId,
-    //   iConversationType: this.sysTableList.filter(s => s.iSysTableRowId ==  this.conversation.iConversationType)[0],
-    //   dConversationDate:  this.conversation.dConversationDate,
-    //   dtConversationTime:  this.conversation.dtConversationTime,
-    //   nvConversationSummary:  this.conversation.nvConversationSummary,
-    //   dtNextConversationDate: this.conversation.dtNextConversationDate
-    // });
-    // this.conversation=this.newConver;
-    // }
-    // else {
-    //   this.conversation['nvConversationDate'] = this.conversation.dConversationDate.toLocaleDateString();
-    //   this.conversation['nvConversationTime'] = this.conversation.dtConversationTime.toLocaleTimeString();
-    //   this.conversation['nvNextConversationDate'] = this.conversation.dtNextConversationDate.toLocaleDateString();
-    //   this.conversation['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == this.conversation.iConversationType)[0].nvValue;
-    // }
-    // if (data) {
-    //   alert("good");
-    //   this.Conversation.emit(null);
-    // }
-    // else
-    //   alert("no good");
-    // });
   }
 
   //איפה למקם?

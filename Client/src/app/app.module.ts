@@ -99,6 +99,7 @@ import { AddParticipantComponent } from './components/add-participant/add-partic
 
 import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
 import { EditMailComponent } from './components/edit-mail/edit-mail.component';
+import { NgxEditorModule } from 'ngx-editor';
 
 
 
@@ -221,6 +222,7 @@ import { EditMailComponent } from './components/edit-mail/edit-mail.component';
     HttpClientModule,
     NguiDatetimePickerModule,
     NgxImageGalleryModule,
+    NgxEditorModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
     { path: "ShowImage", component: ShowImageComponent },

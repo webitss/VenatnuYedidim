@@ -20,6 +20,9 @@ export class AvrechimComponent implements OnInit {
   avrechimList: Avrech[];
   mailList: string[] = [];
 
+  header='מחיקת אברך';
+  message='האם אתה בטוח שברצונך למחוק אברך זה?';
+
   @ViewChild('avrechim') avrechim: any;
   protected currentComponent: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
@@ -75,7 +78,6 @@ export class AvrechimComponent implements OnInit {
         if (result) {
           let i = 0;
           this.avrechimList.forEach(e => {
-
             if (e.iPersonId == this.avrechId)
               this.avrechimList.splice(i, 1);
             i++;
@@ -107,6 +109,12 @@ export class AvrechimComponent implements OnInit {
     });
 
   
+    this.appProxy.post('MailToAvrechim', { mailList: this.mailList })
+      .then(result => {
+        alert("המסר נשלח בהצלחה");
+      }
+        , err => { }
+      );
     // let s = ''
     // let n = 777;
     // let arr = [{ 400: 'ת' },{ 1: 'א' }]

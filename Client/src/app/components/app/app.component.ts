@@ -17,6 +17,9 @@ export class AppComponent implements OnInit {
   protected PicUrl: any;
   protected nvBase64File: string;
   protected name: string;
+  protected flag = false;
+  protected message = '';
+  protected header = '';
 
   public instance: AppComponent;
   public userName: string = this.globalService.getUser() !=  null ?  this.globalService.getUser().nvUserName : "משתמש";
@@ -73,8 +76,14 @@ export class AppComponent implements OnInit {
   }
   private id: number;
   goToUserDetails() {
-     this.id = JSON.parse(localStorage.getItem("user")).iPersonId;
-     this.router.navigate(['users/user/',this.id]);
+    this.id = JSON.parse(localStorage.getItem("user")).iPersonId;
+    this.router.navigate(['users/user/', this.id]);
+  }
+
+
+  openMessagePopup(message: string) {
+    this.message = message;
+    this.flag = true;
   }
   //     }
   //   }

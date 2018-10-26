@@ -37,6 +37,9 @@ export class CalendarComponent implements OnInit {
   openNewTask: boolean = false;
   task: Task
   id: number;
+  flagDelete = false;
+  message = '';
+  header = 'מחיקת משימה';
 
   taskList: Array<Task> = new Array<Task>();
   taskTypeList: Array<any>;
@@ -165,17 +168,31 @@ export class CalendarComponent implements OnInit {
   // @Input()
   // task: Task;
 
+  taskId;
+  taskI;
+  taskJ;
 
-  deleteTask(taskId: number, i: number, j: number) {
-    this.appProxy.post("DeleteTask", { iTaskId: taskId, iPersonId: this.globalService.getUser().iPersonId }).then(
+  delTask(taskId: number, i: number, j: number) {
+    alert('delete');
+    this.flagDelete = true;
+    this.taskId = taskId;
+    this.taskI = i;
+    this.taskJ = j;
+    this.message = 'האם אתה בטוח שברצונך למחוק משימה זו?';
+  }
+
+
+  deleteTask() {
+    this.appProxy.post("DeleteTask", { iTaskId: this.taskId, iPersonId: this.globalService.getUser().iPersonId }).then(
       data => {
         if (data == true) {
           // alert("task remove");
           // this.task=this.taskList.find(t => t.iTaskId == taskId);
-          alert(this.daysMonthNameArr[i][j]['tasks'].indexOf(this.daysMonthNameArr[i][j]['tasks'].find(t => t.id == taskId)));
-          this.daysMonthNameArr[i][j]['tasks'].splice(this.daysMonthNameArr[i][j]['tasks'].indexOf(this.daysMonthNameArr[i][j]['tasks'].find(t => t.id == taskId)), 1);
-          //  window.location.reload();
+       
+          alert(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].indexOf(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].find(t => t.id == this.taskId)));
+          this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].splice(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].indexOf(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].find(t => t.id == this.taskId)), 1);
           this.cdRef.detectChanges();
+
         }
       });
   }
@@ -184,11 +201,7 @@ export class CalendarComponent implements OnInit {
     return item.trackId;
   }
 
-
-
-
-
-  message: string = "האם אתה בטוח שברצונך למחוק משימה זו?";
-  flagPopUp: boolean = false;
-  header: string = "מחיקת משימה"
+  // message: string = "האם אתה בטוח שברצונך למחוק משימה זו?";
+  // flagPopUp: boolean = false;
+  // header: string = "מחיקת משימה"
 }

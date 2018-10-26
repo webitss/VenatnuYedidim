@@ -1,11 +1,11 @@
 
 <header id="header">
     <button type="button" class="btn btn-default btn-sm">
-   
+
       </button>
   <nav class="navbar navbar-expand-sm nav"> <span class="header">{{settingsFrontend.GlobalHeader.nvValue}}</span>
     <button type="button" mdbBtn color="primary"  class="relative waves-light glyphicon glyphicon-user" (click)="divModal=true" mdbWavesEffect>login</button>
-    
+<a *ngIf="isManager" href="#" >לאתר הניהול</a>
     <div id="vmdbModal" *ngIf="divModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -14,22 +14,22 @@
               <span aria-hidden="true">×</span>
             </button>
             <h4 class="modal-title w-100" id="myModalLabel">מנהל</h4>
-           
+
           </div>
           <div class="modal-body">
-             
+
                   <form>
                       <div class="md-form">
-                          <input type="text"  [(ngModel)]="name" class="form-control" id="recipient-name" placeholder="שם משתמש"  >
+                          <input type="text"  [(ngModel)]="nvUserName" class="form-control" id="recipient-name" placeholder="שם משתמש"  [ngModelOptions]="{standalone: true}">
                       </div>
                       <div class="md-form">
-                          <input type="text" [(ngModel)]="password" class="form-control" id="recipient-name" placeholder="שם סיסמא"   >
+                          <input type="text"  [(ngModel)]="nvPassword" class="form-control" id="recipient-name" placeholder="שם סיסמא"  [ngModelOptions]="{standalone: true}" >
                       </div>
                   </form>
-            
+
           </div>
           <div class="modal-footer">
-          
+
             <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="saveLogin()">login</button>
           </div>
         </div>
@@ -40,20 +40,19 @@
     </header>
     <div id="VerMarch" class="VerMarch">{{settingsFrontend.GlobalMarchSF.nvValue}}</div>
     <div id="MarchSF" class="MarchSF">{{settingsFrontend.GlobalVerMarch.nvValue}}</div>
-    <div id="img" class="image"> 
+    <div id="img" class="image">
       <!-- <table *ngFor="let img of listImage">
         <div class="row ">
 <img class="Image col-sm-12" [src]="baseFileUrl+img"/>
 </div>
       </table>  -->
       <ngx-gallery [options]="galleryOptions" [images]="galleryImages"(onOpen)="galleryOpened($event)"
-      
+
       (onClose)="galleryClosed()"
       (onImageClicked)="galleryImageClicked($event)"
       (onImageChange)="galleryImageChanged($event)"
-      (onDelete)="deleteImage($event)"></ngx-gallery> 
-    <input type="button" value="הבא" ()="nextImage()"/>
+      (onDelete)="deleteImage($event)"></ngx-gallery>
+    <input type="button" value="הבא" (click)="nextImage()"/>
     </div>
-    
-  
-   
+
+

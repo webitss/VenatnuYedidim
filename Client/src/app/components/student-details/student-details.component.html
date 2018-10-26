@@ -65,7 +65,7 @@
             </select>
             <select type="text" class="form-control" id="nvBornDateMonth" name="nvBornDateMonth" [(ngModel)]="bornDateHebrewStudent.Month">
                 <option>בחר חודש</option>
-                <option *ngFor="let month of dateMonthArr">{{month}}</option>
+                <option *ngFor="let year of dateYearhArr">{{month}}</option>
             </select>
             <input type="text" class="form-control" id="nvBornDateYear" name="nvBornDateYear" [(ngModel)]="bornDateHebrewStudent.Year"
                 [ngModelOptions]="{standalone: true}" placeholder="שנה"> -->
@@ -86,8 +86,11 @@
                 [ngModelOptions]="{standalone: true}" placeholder="שנה">
         </div>
 
-      
-        
+        <select type="text" class="form-control" id="nvBornDateMonth" name="nvBornDateMonth" [(ngModel)]="bornDateHebrewStudent.Month">
+            <option>בחר חודש</option>
+            <option *ngFor="let month of dateYearArr">{{month}}</option>
+        </select>
+        {{yearString}}
 
 
         <div class="form-group ">
@@ -184,7 +187,7 @@
                 <div>{{yeshiva.nvCity}}</div>
             </div>
         </div>
-        <button (click)="deleteYeshivaOfStudent(yeshiva.iYeshivaId)">מחק מוסד לימודים</button>
+        <button (click)="deleteYeshiva(yeshiva)">מחק מוסד לימודים</button>
     </div>
     <button (click)="addYeshiva=true">הוסף מוסד</button>
     <div class="row" *ngIf="addYeshiva">
@@ -207,6 +210,8 @@
         <button (click)="addSelectYeshivaToStudent()">הוסף</button>
     </div>
 
+    <button (click)="shiftToGraduates(student.iPersonId)">העבר לבוגרים</button>
+
     <div class="row">
         <div class="form-group col-sm-12">
             <label for='comment'>הערות</label>
@@ -216,3 +221,7 @@
 </div>
 
 <!-- </div> -->
+
+
+
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; deleteYeshivaOfStudent(yeshivaId);"></app-vy-pop-up>

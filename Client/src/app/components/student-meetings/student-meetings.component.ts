@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, forwardRef, Inject } from '@angular/core';
 import { Meeting } from '../../classes/meeting';
 import { AppProxy } from '../../services/app.proxy';
 import { StudentMeetingDetailsComponent } from '../student-meeting-details/student-meeting-details.component';
@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { element } from 'protractor';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { GlobalService } from '../../services/global.service';
+import { AppComponent } from '../app/app.component';
 
 
 
@@ -20,14 +21,19 @@ export class StudentMeetingsComponent implements OnInit {
   iMeetingId: number;
   private sub: any;
   private alert: any;
-  iPersonId:number;
+  iPersonId: number;
   public meetingList: Array<Meeting>;
   id: number;
   meeting: Meeting;
   flag: number;
   sysTableRowList: SysTableRow[];
+  flagDelete = false;
+  header = 'מחיקת פגישה';
+  message = '';
+  deleMeeting: Meeting;
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private globalService: GlobalService) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private globalService: GlobalService,
+    @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
 
   public lstColumns = [{
@@ -39,7 +45,7 @@ export class StudentMeetingsComponent implements OnInit {
   {
     name: 'delete',
     bClickCell: true,
-    type:'html'
+    type: 'html'
   },
   {
     title: 'סוג פגישה',
@@ -67,34 +73,48 @@ export class StudentMeetingsComponent implements OnInit {
     this.flag = 1;
   }
 
-  deleteMeeting(meeting: Meeting){
-      this.alert = confirm("האם אתה בטוח שברצונך למחוק פגישה זו?");
-      if (this.alert == true){
-        this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId ,iUserId: this.globalService.getUser()['iUserId']}).then(data => {
-          this.meetingList.splice(this.meetingList.indexOf(meeting), 1);
-          this.cc.refreshTable(this.meetingList);
-        });
-      }
-   
+  deleteMeeting(meeting: Meeting) {
+    this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
+      this._parent.openMessagePopup('נמחק בהצלחה!');
+      this.meetingList.splice(this.meetingList.indexOf(meeting), 1);
+      this.cc.refreshTable(this.meetingList);
+    });
+
+
   }
 
-  m:Meeting;
 
-  @ViewChild(VyTableComponent) cc:VyTableComponent;
+  delMeeting(m: Meeting) {
+    this.deleMeeting = m;
+    this.message = 'האם אתה בטוח שברצונך למחוק פגישה זו?';
+    this.flagDelete = true;
+    //this.alert = confirm("האם אתה בטוח שברצונך למחוק פגישה זו?");
+    //if (this.alert == true) {
+    //   this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
+    //     this.meetingList.splice(this.meetingList.indexOf(meeting), 1);
+    //     this.cc.refreshTable(this.meetingList);
+    //  // });
+    // }
+
+  }
+
+  m: Meeting;
+
+  @ViewChild(VyTableComponent) cc: VyTableComponent;
 
   click(e) {
     if (e.columnClickName == 'edit')
       this.editMeeting(e);
     else
-      this.deleteMeeting(e);
+      this.delMeeting(e);
 
   }
 
-updateMeeting(meeting:Meeting){
-  let l= this.meetingList.indexOf(this.meetingList.find(m1 => m1.iMeetingId == meeting.iMeetingId))
-  this.meetingList[l]=meeting;
- this.cc.refreshTable(this.meetingList)
-}
+  updateMeeting(meeting: Meeting) {
+    let l = this.meetingList.indexOf(this.meetingList.find(m1 => m1.iMeetingId == meeting.iMeetingId))
+    this.meetingList[l] = meeting;
+    this.cc.refreshTable(this.meetingList)
+  }
   addMeeting() {
     this.meeting = new Meeting();
     this.meeting.dtMeetingDate = new Date();
@@ -105,13 +125,12 @@ updateMeeting(meeting:Meeting){
   addNewMeeting(meeting: Meeting) {
     this.meetingList.push(meeting);
   }
-  newMeeting(newMeeting:Meeting){
+  newMeeting(newMeeting: Meeting) {
     this.changeTable(newMeeting);
     this.meetingList.push(newMeeting);
   }
 
-  changeTable(m:Meeting){
-    
+  changeTable(m: Meeting) {
     m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
     m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
     m['edit'] = '<div class="edit"></div>';
@@ -138,11 +157,11 @@ updateMeeting(meeting:Meeting){
   ngOnInit() {
     this.sub = this.route.parent.params.subscribe(params => {
       this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
-   });
- 
-this.GetMeetingsByStudentId(this.iPersonId);
+    });
+
+    this.GetMeetingsByStudentId(this.iPersonId);
   }
- ngOnDestroy() {
+  ngOnDestroy() {
     this.sub.unsubscribe();
   }
 }

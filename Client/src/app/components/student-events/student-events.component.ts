@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, forwardRef } from '@angular/core';
 import { GlobalService } from '../../services/global.service';
 import { AppProxy } from '../../services/app.proxy';
 import { SysTableService } from '../../services/sys-table.service';
@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../classes/user';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { Event1 } from '../../classes/event';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-student-events',
@@ -16,13 +17,19 @@ import { Event1 } from '../../classes/event';
 })
 export class StudentEventsComponent implements OnInit {
 
+  flagDelete=false;
+  message='';
+  header='מחיקת אירוע לתלמיד';
+  deleteEvent:Event1;
+
   lstValues: SysTableRow[];
   lstDataRows = [];
   private iPersonId: number;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
 
 
-  constructor(private globalService: GlobalService, private appProxy: AppProxy, private route: ActivatedRoute, private sysTableService: SysTableService, private router: Router) { }
+  constructor(private globalService: GlobalService, private appProxy: AppProxy, private route: ActivatedRoute, private sysTableService: SysTableService, 
+    private router: Router,@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
     // this.iPersonId = this.globalService.getUser()['iUserId'];
@@ -60,7 +67,7 @@ export class StudentEventsComponent implements OnInit {
     if (e.columnClickName == 'edit')
       this.edit(e);
     else
-      this.delete(e);
+      this.delEvent(e);
 
   }
 
@@ -71,18 +78,29 @@ export class StudentEventsComponent implements OnInit {
   private alert: any;
   private flag: boolean = false;
 
-  delete(e: Event1) {
-    this.alert = confirm("האם אתה בטוח שברצונך למחוק ארוע זה?");
+  delEvent(e:Event1) {
+    this.message='האם אתה בטוח שברצונך למחוק את '+e.nvName+'?';
+    this.deleteEvent=e;
+    this.flagDelete=true;
+  }
+
+  delete() {
+   // this.alert = confirm("האם אתה בטוח שברצונך למחוק ארוע זה?");
     // if (this.alert == true) {
     //   // this.appProxy.post('לעשות פרוצדורה', { iPersonId: u.iPersonId, iUserId: this.globalService.getUser().iPersonId }).then(data => { }).catch(err => {
     //   //   alert(err);
     //   });
-    this.lstDataRows.splice(this.lstDataRows.indexOf(e), 1);
+
+    //כשהמחיקה מתבצעת בהצלחה שימי את השורה הבאה-
+    //this._parent.openMessagePopup('המחיקה בוצעה בהצלחה!');
+    this.lstDataRows.splice(this.lstDataRows.indexOf(this.deleteEvent), 1);
     this.vyTableComponent.refreshTable(this.lstDataRows);
   }
+  from: number = 0;
   eventFlag: boolean = false;
-  newEvent() {
+  newEvent(from) {
     this.eventFlag = true;
+    this.from = from;
   }
   close(){
     this.eventFlag = false;

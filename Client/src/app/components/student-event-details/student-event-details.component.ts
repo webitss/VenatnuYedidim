@@ -59,6 +59,8 @@ export class StudentEventDetailsComponent implements OnInit {
 
   eventsList: Array<Event1> = new Array<Event1>();
 
+  @Input()
+  from: number = 0;
 
   getEvents() {
     this.appProxy.post("GetEventsList", { iUserId: this.globalService.getUser().iPersonId })
@@ -72,6 +74,11 @@ export class StudentEventDetailsComponent implements OnInit {
     this.Close.emit();
   }
   chooseEvent(e) {
-    this.event = this.eventsList.find(x=>x.nvName == e);
+    if (e == '0')
+      this.event = new Event1();
+    else {
+      this.event = this.eventsList.find(x => x.nvName == e);
+      event['iArrivalStatusType'] = 0;
+    }
   }
 }
