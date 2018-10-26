@@ -39,7 +39,7 @@ export class StudentConversationDetailsComponent implements OnInit {
 
   @ViewChild('task') TaskComponent: TaskComponent;
 
-
+ // this.currentMeeting.dtMeetingDate = new Date(this.currentMeeting['dtDate']this.currentMeeting['dtHour']);
   //protected iPersonId: number = 1;
 
   constructor(private route: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService
@@ -55,8 +55,8 @@ export class StudentConversationDetailsComponent implements OnInit {
     this.conver.iConversationId = this.conversation.iConversationId;
     this.conver.iConversationType = this.conversation.iConversationType;
     this.conver.nvConversationSummary = this.currentConver.nvConversationSummary;
-    if(this.conver.iConversationId)
-    this.conver.dtConversationDate = new Date(this.currentConver['dtDate']);
+    //if(this.conver.iConversationId)
+    this.conver.dtConversationDate = new Date(this.currentConver['dtDate'] + ' ' + this.currentConver['conversationTime']);
     if (this.currentConver.iConversationId == null) {
       this.conver.iPersonId = this.iPersonId;
     }
@@ -73,7 +73,11 @@ export class StudentConversationDetailsComponent implements OnInit {
  }
         //this.newConver.emit(this.conver);
         if (data) {
+
+
           //this._parent.openMessagePopup('')
+
+
           alert("השמירה בוצעה בהצלחה");
           this.Conversation.emit(null);
         }
@@ -108,7 +112,7 @@ export class StudentConversationDetailsComponent implements OnInit {
       //   this.iconversationId=+params['conversationId'];
       // });
       if (this.currentConver.iConversationId != null) {
-        this.currentConver['dtDate'] = new Date((this.currentConver.dtConversationDate));
+        this.currentConver['dtDate'] = new Date(this.currentConver.dtConversationDate);
         this.date = this.currentConver.dtConversationDate.toLocaleString();
 
         this.currentConver['conversationDate'] = this.date;

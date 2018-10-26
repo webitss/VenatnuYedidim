@@ -21,21 +21,8 @@
         </div>
 <<<<<<< HEAD
 
-        <div class="form-group col-sm-3">
-          <label for="conversationType">סוג שיחה</label>
-          <!-- <input type="text" name="conversationType" class="form-control"  [(ngModel)]="conversation.nvConversationType" [ngModelOptions]="{standalone: true}"/>-->
-          <select id="conversationType" class="form-control" [(ngModel)]="conversation.iConversationType">
-            <option *ngFor='let t of sysTableList' [value]="t.iSysTableRowId">{{t.nvValue}}</option>
-          </select>
-        </div>
-
-        <br/>
-        <div class="form-group col-sm-3">
-          <label for="conversationDate">תאריך</label>
-          <input id="conversationDate" name="conversationDate" class="form-control" [(ngModel)]="currentConver.dtConversationDate"
-            ngui-datetime-picker date-only="true" close-on-select="false" />
-        </div>
 =======
+>>>>>>> 536dc29d8e3ee6b609be78b697514fd4fd5cbb2b
         <div class="row">
           <div class="form-group col-sm-3">
             <label for="conversationType">סוג שיחה</label>
@@ -52,7 +39,7 @@
           <br/>
           <div class="form-group col-sm-3">
             <label for="conversationDate">תאריך</label>
-            <input id="conversationDate" name="conversationDate" class="form-control" [(ngModel)]="currentConver.dtConversationDate"
+            <input id="conversationDate" name="conversationDate" class="form-control" [(ngModel)]="currentConver['dtDate']"
               ngui-datetime-picker date-only="true" close-on-select="false" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" #date="ngModel"/>
 
             <span class="text-danger text-right" *ngIf="date.invalid&& (date.dirty || date.touched)">תאריך לא חוקי</span>
@@ -61,8 +48,12 @@
                 <strong>! </strong>שדה נדרש</div>
             </div>
           </div>
->>>>>>> 8b72fa61235a2975a997303a0bbe0df60a5a8cf0
 
+<<<<<<< HEAD
+        
+=======
+
+>>>>>>> 536dc29d8e3ee6b609be78b697514fd4fd5cbb2b
         <div class="form-group col-sm-3">
           <label for="conversationTime">שעה</label>
           <input id="conversationTime" type="time" class="form-control" name="conversationTime" [(ngModel)]="currentConver['conversationTime']"
@@ -72,17 +63,33 @@
               <strong>! </strong>שדה נדרש</div>
           </div>
         </div>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
         <br/>
+<<<<<<< HEAD
+        <div class="form-group col-sm-3">
+          <label for="conversationDate">תאריך</label>
+          <input id="conversationDate" name="conversationDate" class="form-control" [(ngModel)]="currentConver.dtConversationDate"
+            ngui-datetime-picker date-only="true" close-on-select="false" />
+        </div>
+
+
+          <div class="form-group col-sm-3">
+            <label for="conversationTime">שעה</label>
+            <input id="conversationTime" type="time" class="form-control" name="conversationTime" [(ngModel)]="currentConver['conversationTime']"
+              [ngModelOptions]="{standalone: true}" required #time="ngModel" />
+            <div *ngIf="time.invalid && (time.dirty || time.touched)">
+              <div *ngIf="(time.errors.required)" class="text-danger text-right">
+                <strong>! </strong>שדה נדרש</div>
+            </div>
+          </div>
+          <br/>
+          <br/>
+        </div>
+=======
         <br/>
       </div>
-=======
-<<<<<<< HEAD
 
-=======
->>>>>>> 73a388010bb33d4e48d4774371650bd207055fd2
+>>>>>>> 536dc29d8e3ee6b609be78b697514fd4fd5cbb2b
         <div class="row col-sm-12">
           <div class="form-group col-sm-10">
             <label for="conversationSummary">סיכום</label>
@@ -90,38 +97,10 @@
               [ngModelOptions]="{standalone: true}"></textarea>
           </div>
 <<<<<<< HEAD
-=======
->>>>>>> 8393bad98f4d80ceb0be5ba73754b330cdb6a9c5
->>>>>>> 73a388010bb33d4e48d4774371650bd207055fd2
-
-        <br/>
-        <br/>
-      </div>
-      <div class="row col-sm-12">
-        <div class="form-group col-sm-10">
-          <label for="conversationSummary">סיכום</label>
-          <textarea id="conversationSummary" name="conversationSummary" class="form-control" [(ngModel)]="currentConver.nvConversationSummary"
-            [ngModelOptions]="{standalone: true}"></textarea>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> 8393bad98f4d80ceb0be5ba73754b330cdb6a9c5
->>>>>>> 73a388010bb33d4e48d4774371650bd207055fd2
         </div>
+=======
 
->>>>>>> 8b72fa61235a2975a997303a0bbe0df60a5a8cf0
-
-      <br/>
-      <br/>
-    </div>
-    <div class="row col-sm-12">
-      <div class="form-group col-sm-10">
-        <label for="conversationSummary">סיכום</label>
-        <textarea id="conversationSummary" name="conversationSummary" class="form-control" [(ngModel)]="currentConver.nvConversationSummary"
-          [ngModelOptions]="{standalone: true}"></textarea>
-      </div>
+>>>>>>> 536dc29d8e3ee6b609be78b697514fd4fd5cbb2b
 
 
     </div>

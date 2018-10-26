@@ -152,6 +152,7 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Yeshivot> GetYeshivotOfStudent(int iPersonId);
 
+       
         #endregion Student
 
 
@@ -239,13 +240,12 @@ namespace Service
 
         [OperationContract]
         [WebInvoke(
-        Method = "POST",
-        UriTemplate = "MailToAvrechim",
-        BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        ResponseFormat = WebMessageFormat.Json,
-        RequestFormat = WebMessageFormat.Json)]
+       Method = "POST",
+       UriTemplate = "MailToAvrechim",
+       BodyStyle = WebMessageBodyStyle.WrappedRequest,
+       ResponseFormat = WebMessageFormat.Json,
+       RequestFormat = WebMessageFormat.Json)]
        bool MailToAvrechim(string[] mailList, string subject, string body);
-
 
 
         
