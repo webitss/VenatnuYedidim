@@ -26,6 +26,8 @@ export class StudentConversationsComponent implements OnInit {
   protected flag: number;
   public conversationsList: Array<Conversation> = new Array<Conversation>();
   public conversationSelect: Conversation;
+  protected conv:Conversation;
+  protected name:string; 
 
   con;
   flagDelete = false;
@@ -104,62 +106,10 @@ export class StudentConversationsComponent implements OnInit {
     this.conversationSelect.dtConversationDate = null;
 
   }
-  // add(newConver)
-  // {
-  //   this.conversationsList.push(this.newConver);
-
-  // }
 
   private alert: any;
-  // deleteConversation() {
-  //   this.appProxy.post('DeleteConversations', { iConversationId: this.con.iConversationId, iUserId: this.iUserId }).then(data => {
-  //     this._parent.openMessagePopup('המחיקה בוצעה בהצלחה!');
-  //     this.lstDataRows.splice(this.lstDataRows.indexOf(this.con), 1);
-  //     this.vyTableComponent.refreshTable(this.lstDataRows);
-  //   });
-  // }
+ 
 
-
-  //   ngOnInit() {
-  //     this.appProxy.post("GetConversations", { iPersonId: this.iPersonId })
-  //       .then(data => {
-  //          this.conversationsList = data;
-  //         data.forEach(conv => {
-  //           this.lstDataRows.push({
-  //             iConversationType: this.sysTableList.filter(s => s.iSysTableRowId == conv.iConversationType)[0],
-  //             dConversationDate: conv.dConversationDate,
-  //             dtConversationTime: conv.dtConversationTime,
-  //             dtNextConversationDate: conv.dtNextConversationDate
-
-  //           });
-
-  //         });
-  //        this.selectList();
-  //       });
-  //     }
-
-  // selectList()
-  // {
-
-  //   this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
-  //     this.sysTableList = val;
-  //     this.conversationsList.forEach(c => {
-  //       c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
-  //       c['nvConversationDate'] = c.dConversationDate.toLocaleDateString();
-  //       c['nvConversationTime'] = c.dtConversationTime.toLocaleTimeString();
-  //       c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleDateString();
-  //       c['edit'] = '<div class="edit"></div>';
-  //       c['delete'] = '<div class="delete"></div>';
-  //     });
-  //   });
-  // }}
-
-
-  // saveNewConver(event) {
-  //   //debugger;
-  //   //this.conversationsList.push(event);
-  //   this.changeTable(event);
-  // }
 
   deleteConversation(c: Conversation, iUserId: number) {
 
@@ -173,33 +123,29 @@ export class StudentConversationsComponent implements OnInit {
 
 
   saveNewConver(conver: Conversation) {
-    //this.changeTable(conver);
-    this.lstDataRows.push(conver);
-    
+    this.changeTable(conver);
+    this.lstDataRows.push(this.conv);
     this.vyTableComponent.refreshTable(this.lstDataRows);
   
   }
 
   @ViewChild(VyTableComponent) cc: VyTableComponent;
 
-  // updateConver(conver: Conversation) {
-  //   this.lstDataRows.splice(this.lstDataRows.indexOf(conver), 1);
-  //   this.vyTableComponent.refreshTable(this.lstDataRows);
-  // }
   updateConver(conver: Conversation) {
     let l = this.conversationsList.indexOf(this.conversationsList.find(m1 => m1.iConversationId == this.conversationSelect.iConversationId))
-    this.conversationsList[l] = conver;
-    //this.lstDataRows = this.conversationsList;
+    this.changeTable(conver);
+    this.conversationsList[l] = this.conv;
     this.vyTableComponent.refreshTable(this.conversationsList);
   }
 
   changeTable(c: Conversation) {
     c['nvConversationDate'] = c.dtConversationDate.toLocaleDateString();
     c['nvConversationTime'] = c.dtConversationDate.toLocaleTimeString();
-    c['nvLastName'] = c['lstObject'].nvFirstName + " " + c['lstObject'].nvLastName;
+    c['nvLastName']=this.name;
     c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
     c['edit'] = '<div class="edit"></div>';
     c['delete'] = '<div class="delete"></div>';
+    this.conv=c;
   }
   selecList(id) {
     this.appProxy.post("GetConversations", { iPersonId: id })
@@ -209,6 +155,8 @@ export class StudentConversationsComponent implements OnInit {
         this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
           this.sysTableList = val;
           this.conversationsList.forEach(c => {
+            c['nvLastName'] = c['lstObject'].nvFirstName + " " + c['lstObject'].nvLastName;
+            this.name=c['nvLastName'];
             this.changeTable(c);
 
           });
@@ -229,45 +177,5 @@ export class StudentConversationsComponent implements OnInit {
 
     this.selecList(this.iPersonId);
   }
-  // updateConver() {
-  //   
-  //   this.conversationsList.slice(this.conversationsList.indexOf(this.conversationsList.find(m => m.iConversationId == this.conversationSelect.iConversationId), 0), 1);
-  //   this.conversationsList.push(this.conversationSelect);
-  //   //this.conversationsList.push(event);
-  //   this.selecList(this.iPersonId);
-  // }
-
-
-    //  this.GetMeetingsByStudentId(this.iPersonId);
-  }
-  // changeTable(c: Conversation) {
-  //   c['edit'] = '<div class="edit"></div>';
-  //   c['delete'] = '<div class="delete"></div>';
-
-
-  //   c['nvLastName'] = c['lstObject'].nvFirstName + " " + c['lstObject'].nvLastName;
-  //   c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
-  //   c['nvConversationDate'] = c.dtConversationDate.toLocaleDateString();
-  //   c['nvConversationTime'] = c.dtConversationDate.toLocaleTimeString();
-  //   //c['nvNextConversationDate'] = c.dtNextConversationDate.toLocaleString();
-  // }//??
-  // selecList(id) {
-  //   this.appProxy.post("GetConversations", { iPersonId: id })
-  //     .then(data => {
-  //       this.conversationsList = data;
-  //       this.lstDataRows = data;
-  //       this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
-  //         this.sysTableList = val;
-  //         this.conversationsList.forEach(c => {
-  //           this.changeTable(c);
-
-  //         });
-  //       });
-  //     })
-  // }
-
-
-  // ngOnDestroy() {
-  //           this.sub.unsubscribe();
-  //         }
+}
 
