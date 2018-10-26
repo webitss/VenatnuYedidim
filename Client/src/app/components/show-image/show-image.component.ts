@@ -1,6 +1,9 @@
 import { debug } from 'util';
 
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+
+
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { NgxGalleryImage, NgxGalleryOptions, NgxGalleryAnimation } from 'ngx-gallery';
 import { settingsFrontend } from '../../services/settings-frontend.service';
@@ -8,6 +11,8 @@ import { Alert } from 'selenium-webdriver';
 import { NgxImageGalleryComponent } from '../../../../node_modules/ngx-image-gallery';
 import { NgModule } from '@angular/core';
 import { User } from '../../classes/user';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 // import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 const GLOBAL = { title: 'כותרת', GlobalVerMarch: 'טקסט_ראשי', GlobalMarchSF: 'טקסט_משני' };
@@ -25,7 +30,7 @@ protected isManager: boolean;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[] = new Array<NgxGalleryImage>();
 
-  constructor(private appProxy: AppProxy, public settingsFrontend: settingsFrontend) { }
+  constructor(private activatedRoute: ActivatedRoute,private rout:Router, private appProxy: AppProxy, public settingsFrontend: settingsFrontend,private cdRef:ChangeDetectorRef,private http:HttpClient) { }
 
 protected titaieName = 'ונתנו ידידים' ;
 ngxImageGallery: NgxImageGalleryComponent;
@@ -56,7 +61,48 @@ protected lstColumns = [{
 
 
 ngOnInit(): void {
-
+  this.activatedRoute.parent.params.subscribe(params => {
+    
+    
+     this.appProxy.post("Login", { nvUserName:  params['nvUserName'], nvPassword:  params['nvPassword'] }).then(
+      data => {
+       if(data){
+       this.isManager=true;
+  
+  
+       }
+       else{
+  
+  this.appProxy.get('GetMoreDocumentsOfTadmit').then(data1 => {
+  
+    this.documents = data1;
+    this.documents.forEach(element => {
+   debugger;
+   
+   if ( AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName) {
+    let head = AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName;
+     this.http.head(AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName)
+        .toPromise()
+        .then(data => {
+          this.galleryImages.push({
+  
+            small: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
+            medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+            big: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
+        });
+          })
+        .catch(error => {  });
+     
+    }
+  
+    });
+  
+  }
+    , err => alert(err));
+  
+  }
+       })
+      })
   this.galleryOptions = [
       {
           width: '600px',
@@ -105,7 +151,7 @@ ngOnInit(): void {
 // })
 // }
 
-
+ 
 this.appProxy.get('GetDocumentsOfTadmit').then(data => {
     this.documents = data;
     this.documents.forEach(element => {
@@ -123,7 +169,15 @@ this.appProxy.get('GetDocumentsOfTadmit').then(data => {
     , err => alert(err));
 
 }
+goToLogin(){
+  this.divModal=true;
+  this.rout.navigate(["log-in"])
+debugger;
+}
+
+
 saveLogin() {
+
 
   this.appProxy.post("Login", { nvUserName: this.nvUserName, nvPassword: this.nvPassword }).then(
     data => {
@@ -138,16 +192,22 @@ this.appProxy.get('GetMoreDocumentsOfTadmit').then(data1 => {
 
   this.documents = data1;
   this.documents.forEach(element => {
+ debugger;
+ 
+ if ( AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName) {
+  let head = AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName;
+   this.http.head(AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName)
+      .toPromise()
+      .then(data => {
+        this.galleryImages.push({
 
-
-    if ( AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName) {
-
-    this.galleryImages.push({
-
-      small: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
-      medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
-      big: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
-  });
+          small: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
+          medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+          big: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
+      });
+        })
+      .catch(error => {  });
+   
   }
 
   });
@@ -159,6 +219,8 @@ this.appProxy.get('GetMoreDocumentsOfTadmit').then(data1 => {
      }
 
       )
+      
+      this.cdRef.detectChanges();
  }
 openGallery(index: number = 0) {
   this.ngxImageGallery.open(index);

@@ -12,7 +12,7 @@
     <div class="form-group col-sm-3 ">
         <label> טבלה</label>
         <select (change)="getValues()" [(ngModel)]="idSysTableRow">
-            <option *ngFor="let name of tableNames" value={{name.iSysTableId}}>{{name.nvSysTableName}}</option>
+            <option *ngFor="let name of tableNames" value={{name.iSysTableId}}>{{name.nvShowText}}</option>
         </select>
 
     </div>

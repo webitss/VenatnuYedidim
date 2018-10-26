@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output, Inject, forwardRef } from '@angular/core';
 
 import { User } from '../../classes/user';
 import { AppProxy } from '../../services/app.proxy';
@@ -8,6 +8,7 @@ import { SysTableRow } from '../../classes/SysTableRow';
 import { SysTableService } from '../../services/sys-table.service';
 import { GlobalService } from '../../services/global.service';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-users',
@@ -16,7 +17,13 @@ import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService, public globalService: GlobalService) { }
+  constructor(private appProxy: AppProxy, 
+    private router: Router, 
+    private sysTableService: SysTableService, 
+    public globalService: GlobalService,
+    @Inject(forwardRef(() => AppComponent)) private _parent:AppComponent
+    
+  ) { }
   @ViewChild('users') users: any;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
 
@@ -88,7 +95,9 @@ export class UsersComponent implements OnInit {
   private alert: any;
   private flag: boolean = false;
   deleteUser(u: User) {
-    this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId, iUserId: this.globalService.getUser().iPersonId }).then(data => { }).catch(err => {
+    this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId, iUserId: this.globalService.getUser().iPersonId }).then(data => {
+this._parent.openMessagePopup('נמחק בהצלחה!');
+     }).catch(err => {
       alert(err);
     });
     this.lstDataRows.splice(this.lstDataRows.indexOf(u), 1);
