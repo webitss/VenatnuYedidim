@@ -140,6 +140,10 @@ namespace Service
         {
             return Student.DeleteStudent(iPersonId, iUserId);
         }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 536dc29d8e3ee6b609be78b697514fd4fd5cbb2b
 
         #endregion
 
@@ -214,11 +218,18 @@ namespace Service
             return Avrech.GetAvrechimByStudentId(iPersonId);
         }
 
+<<<<<<< HEAD
         
         
+=======
+        public bool MailToAvrechim(string[] mailList)
+        {
+            return Avrech.MailToAvrechim(mailList);
+        }
+        //,subject,body, 
+        //string subject, string body
+>>>>>>> caaa8008ab9048e50aaf50160900e804b27833ba
         #endregion
-
-        
 
 
         #region SysTableRow

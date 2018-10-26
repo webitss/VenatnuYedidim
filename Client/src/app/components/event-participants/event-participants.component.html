@@ -40,3 +40,6 @@
        <button (click)="close()">לא</button>
    </div>
 </div> -->
+
+
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; deleteTask();"></app-vy-pop-up>

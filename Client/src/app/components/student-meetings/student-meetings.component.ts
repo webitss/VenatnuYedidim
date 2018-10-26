@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, forwardRef, Inject } from '@angular/core';
 import { Meeting } from '../../classes/meeting';
 import { AppProxy } from '../../services/app.proxy';
 import { StudentMeetingDetailsComponent } from '../student-meeting-details/student-meeting-details.component';
@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { element } from 'protractor';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { GlobalService } from '../../services/global.service';
+import { AppComponent } from '../app/app.component';
 
 
 
@@ -26,8 +27,13 @@ export class StudentMeetingsComponent implements OnInit {
   meeting: Meeting;
   flag: number;
   sysTableRowList: SysTableRow[];
+  flagDelete = false;
+  header = 'מחיקת פגישה';
+  message = '';
+  deleMeeting: Meeting;
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private globalService: GlobalService) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private globalService: GlobalService,
+    @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
 
   public lstColumns = [{
@@ -68,13 +74,27 @@ export class StudentMeetingsComponent implements OnInit {
   }
 
   deleteMeeting(meeting: Meeting) {
-    this.alert = confirm("האם אתה בטוח שברצונך למחוק פגישה זו?");
-    if (this.alert == true) {
-      this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
-        this.meetingList.splice(this.meetingList.indexOf(meeting), 1);
-        this.cc.refreshTable(this.meetingList);
-      });
-    }
+    this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
+      this._parent.openMessagePopup('נמחק בהצלחה!');
+      this.meetingList.splice(this.meetingList.indexOf(meeting), 1);
+      this.cc.refreshTable(this.meetingList);
+    });
+
+
+  }
+
+
+  delMeeting(m: Meeting) {
+    this.deleMeeting = m;
+    this.message = 'האם אתה בטוח שברצונך למחוק פגישה זו?';
+    this.flagDelete = true;
+    //this.alert = confirm("האם אתה בטוח שברצונך למחוק פגישה זו?");
+    //if (this.alert == true) {
+    //   this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
+    //     this.meetingList.splice(this.meetingList.indexOf(meeting), 1);
+    //     this.cc.refreshTable(this.meetingList);
+    //  // });
+    // }
 
   }
 
@@ -86,13 +106,14 @@ export class StudentMeetingsComponent implements OnInit {
     if (e.columnClickName == 'edit')
       this.editMeeting(e);
     else
-      this.deleteMeeting(e);
+      this.delMeeting(e);
 
   }
 
   updateMeeting(meeting: Meeting) {
     let l = this.meetingList.indexOf(this.meetingList.find(m1 => m1.iMeetingId == meeting.iMeetingId))
-    this.meetingList[l] = meeting;
+    this.changeTable(meeting);
+    this.meetingList[l] = this.meet;
     this.cc.refreshTable(this.meetingList)
   }
   addMeeting() {
@@ -105,9 +126,13 @@ export class StudentMeetingsComponent implements OnInit {
   addNewMeeting(meeting: Meeting) {
     this.meetingList.push(meeting);
   }
+  meet:Meeting;
   newMeeting(newMeeting: Meeting) {
     this.changeTable(newMeeting);
-    this.meetingList.push(newMeeting);
+    this.meetingList.push(this.meet);
+    this.cc.refreshTable(this.meetingList);
+
+    
   }
 
   changeTable(m: Meeting) {
@@ -116,6 +141,7 @@ export class StudentMeetingsComponent implements OnInit {
     m['edit'] = '<div class="edit"></div>';
     m['delete'] = '<div class="delete"></div>';
     m['nvMeetingType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0].nvValue;
+    this.meet = m;
   }
   GetMeetingsByStudentId(id: number) {
     this.appProxy.post("GetMeetingsByStudentId", { iPersonId: id }).then(

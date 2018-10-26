@@ -19,6 +19,7 @@ export class AvrechPresenceComponent implements OnInit {
   protected PA: PresenceAvrech;
   presences: any;
   presence:PresenceAvrech;
+  @ViewChild(VyTableComponent) cc:VyTableComponent;
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
 
   public lstColumns = [
@@ -36,6 +37,7 @@ export class AvrechPresenceComponent implements OnInit {
     });
   }
 loadPresences(){
+  debugger;
   this.appProxy.post('GetPresenceAvrechById', { iPersonId: this.iPersonId }).then(res => {
     this.presences=res;
     this.presences.forEach(p => {
@@ -50,15 +52,15 @@ loadPresences(){
     })
     // this.PA = data;
     // alert(data.length);
+this.cc.refreshTable(this.lstDataRows);
   })
+
 }
-  @ViewChild(VyTableComponent) cc:VyTableComponent;
+  
 
   editPresence(p:PresenceAvrech) {
 debugger;
 this.presence=p;
-
-    // this.cc.refreshTable(this.presences)
 
 }
 addPresence() {

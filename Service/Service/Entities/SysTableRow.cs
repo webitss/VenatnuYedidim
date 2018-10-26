@@ -30,6 +30,8 @@ namespace Service.Entities
         public DateTime dtCreateDate { get; set; }
         [DataMember]
         public int iCreateUserId { get; set; }
+        [DataMember]
+        public int nvShowText { get; set; }
         #endregion
 
         #region Methods

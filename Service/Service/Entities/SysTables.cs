@@ -15,6 +15,8 @@ namespace Service.Entities
         public int iSysTableId { get; set; }
         [DataMember]
         public string nvSysTableName { get; set; }
+        [DataMember]
+        public string nvShowText { get; set; }
         #region Methods
         public static List<SysTables> GetAllNames()
         {

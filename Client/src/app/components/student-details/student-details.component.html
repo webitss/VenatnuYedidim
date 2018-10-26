@@ -10,7 +10,7 @@
         <input type="file" (change)="loadDocument($event,save)" name="LoadDocument" id="LoadDocument" />
     </div>
 </div>
-<div class="form">
+<div class="form" #details>
     <div class="row">
         <div class="form-group ">
             <label for="lastName">שם משפחה:</label>
@@ -187,7 +187,7 @@
                 <div>{{yeshiva.nvCity}}</div>
             </div>
         </div>
-        <button (click)="deleteYeshivaOfStudent(yeshiva.iYeshivaId)">מחק מוסד לימודים</button>
+        <button (click)="deleteYeshiva(yeshiva)">מחק מוסד לימודים</button>
     </div>
     <button (click)="addYeshiva=true">הוסף מוסד</button>
     <div class="row" *ngIf="addYeshiva">
@@ -210,12 +210,21 @@
         <button (click)="addSelectYeshivaToStudent()">הוסף</button>
     </div>
 
+    <button *ngIf="student.iPersonId&&student.iStatusType==159" (click)="shift(statusType.boger)">העבר לבוגרים</button>
+    <button *ngIf="student.iPersonId&&student.iStatusType==160" (click)="shift(statusType.student)">החזר לתלמידים</button>
+
     <div class="row">
         <div class="form-group col-sm-12">
             <label for='comment'>הערות</label>
             <textarea name='comment' class="form-control" id="comment" name="comment" [(ngModel)]="student.nvComment" [ngModelOptions]="{standalone: true}"></textarea>
         </div>
     </div>
+    <app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flag" [header]="header" (close)="flag=false" (ok)="flag=false; deleteEvent(eventIdToDelete);"></app-vy-pop-up>
+
 </div>
 
 <!-- </div> -->
+
+
+
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; deleteYeshivaOfStudent(yeshivaId);"></app-vy-pop-up>

@@ -98,6 +98,7 @@ import { OpenPresenceComponent } from './components/open-presence/open-presence.
 import { AddParticipantComponent } from './components/add-participant/add-participant.component';
 
 import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
+import { NgxEditorModule } from 'ngx-editor';
 
 
 
@@ -219,6 +220,7 @@ import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
     HttpClientModule,
     NguiDatetimePickerModule,
     NgxImageGalleryModule,
+    NgxEditorModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
     { path: "", component: ShowImageComponent },
