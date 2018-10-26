@@ -2,10 +2,10 @@
 <div class="form ">
   <div class="row ">
       <div class="col-sm-8">
-          <div *ngIf="presence.iPersonId">
+          <div *ngIf="currentPresence.iPresenceAvrech">
               <h3>עריכת נוכחות</h3>
           </div>
-          <div *ngIf="presence.iPersonId==null">
+          <div *ngIf="currentPresence.iPresenceAvrech==null">
               <h3>הוספת נוכחות</h3>
           </div>
       </div>
