@@ -16,13 +16,6 @@ namespace Service.Entities
 	public class Avrech : Person
 	{
 		public static List<Avrech> GetAllAvrechim(int? iPersonId)
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> dea04bf7d5ba807c807bf6c4bd738c13fc742726
-=======
->>>>>>> 94d7dc89c2de802a49a37fb8a2e45840ed6b9300
 		{
 			try
 			{
@@ -89,8 +82,7 @@ namespace Service.Entities
 		{
 			try
 			{
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 				if (avrech.iPersonId == 0)
 				{
 					List<SqlParameter> parameters = ObjectGenerator<Avrech>.GetSqlParametersFromObject(avrech);
@@ -112,16 +104,7 @@ namespace Service.Entities
 					SqlDataAccess.ExecuteDatasetSP("TPerson_UPD", parameters);
 				}
 
-=======
-				List<SqlParameter> parameters = ObjectGenerator<Avrech>.GetSqlParametersFromObject(avrech);
-				parameters.Add(new SqlParameter("iUserId", iUserId));
-				SqlDataAccess.ExecuteDatasetSP("TPerson_UPD", parameters);
->>>>>>> dea04bf7d5ba807c807bf6c4bd738c13fc742726
-=======
-				List<SqlParameter> parameters = ObjectGenerator<Avrech>.GetSqlParametersFromObject(avrech);
-				parameters.Add(new SqlParameter("iUserId", iUserId));
-				SqlDataAccess.ExecuteDatasetSP("TPerson_UPD", parameters);
->>>>>>> 94d7dc89c2de802a49a37fb8a2e45840ed6b9300
+
 				return true;
 			}
 			catch (Exception ex)
@@ -164,74 +147,10 @@ namespace Service.Entities
 				return false;
 			}
 		}
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-		public static bool MailToAvrechim(string[] mailList, string subject, string body)
-		{
-			bool flag = false;
-			foreach (var mail in mailList)
-			{
-
-=======
->>>>>>> 94d7dc89c2de802a49a37fb8a2e45840ed6b9300
-
-				SendMessagesHandler.SendEmailOrFax(ConfigSettings.ReadSetting("Email"), mail, subject, body, null);
 
 
 
-				//SmtpClient client = new SmtpClient();
-				//client.Port = 587;
-				//client.Host = "smtp.gmail.com";
-				//client.EnableSsl = true;
-				//client.Timeout = 10000;
-				//client.DeliveryMethod = SmtpDeliveryMethod.Network;
-				//client.UseDefaultCredentials = false;
-				//client.Credentials = new System.Net.NetworkCredential("", "");
-				//MailMessage mm = new MailMessage("VenatnuYedidimSystem@gmail.com", mail);
-				//mm.Subject = "ונתנו ידידים";
-				//mm.Body = "אברך";
-				//System.Net.Mail.Attachment attachment;
-				//// attachment = new System.Net.Mail.Attachment("");
-				////  mm.Attachments.Add(attachment);
-				//mm.BodyEncoding = UTF8Encoding.UTF8;
-				//mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-
-				//client.Send(mm);
-
-			}
-			if (flag)
-				return true;
-			else
-				return false;
-		}
-
-		//foreach (var mail in mailList)
-		//{
-		//    SmtpClient client = new SmtpClient();
-		//    client.Port = 587;
-		//    client.Host = "smtp.gmail.com";
-		//    client.EnableSsl = true;
-		//    client.Timeout = 10000;
-		//    client.DeliveryMethod = SmtpDeliveryMethod.Network;
-		//    client.UseDefaultCredentials = false;
-		//    client.Credentials = new System.Net.NetworkCredential("", "");
-		//    MailMessage mm = new MailMessage("", mail);
-		//    mm.Subject = "ונתנו ידידים";
-		//    mm.Body = "אברך";
-		//    System.Net.Mail.Attachment attachment;
-		//    // attachment = new System.Net.Mail.Attachment("");
-		//    //  mm.Attachments.Add(attachment);
-		//    mm.BodyEncoding = UTF8Encoding.UTF8;
-		//    mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-
-		//    client.Send(mm);
-		//}
-
-		//return true;
-		// }
-		public static List<Avrech> GetAvrechimByStudentId(int iPersonId)
-=======
+	
         public static bool MailToAvrechim(string[] mailList, string subject, string body)
         {
 
@@ -266,10 +185,7 @@ namespace Service.Entities
             return true;
         }
         public static List<Avrech> GetAvrechimByStudentId(int iPersonId)
-<<<<<<< HEAD
->>>>>>> dea04bf7d5ba807c807bf6c4bd738c13fc742726
-=======
->>>>>>> 94d7dc89c2de802a49a37fb8a2e45840ed6b9300
+
 		{
 			try
 			{
@@ -286,17 +202,10 @@ namespace Service.Entities
 
 		}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	}
 }
-=======
+
        
       
-}}
->>>>>>> dea04bf7d5ba807c807bf6c4bd738c13fc742726
-=======
-       
-      
-}}
->>>>>>> 94d7dc89c2de802a49a37fb8a2e45840ed6b9300
+
