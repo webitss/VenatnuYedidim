@@ -24,7 +24,7 @@ export class StudentDetailsComponent implements OnInit {
 
 
   @Input() student: Student
-statusType:any={boger:160,student:159};
+  statusType: any = { boger: 160, student: 159 };
   paramRout: any;
   fatherDead: boolean;
   motherDead: boolean;
@@ -50,10 +50,10 @@ statusType:any={boger:160,student:159};
   dateYearArr = new Array<any>();
   addYeshiva = false;
   yeshivaId: number;
-  change:boolean;
-  flag:boolean=false;
-  message:string;
-  
+  change: boolean;
+  flag: boolean = false;
+  message: string;
+
   e;
   // message = 'dfds';
   flagDelete = false;
@@ -64,8 +64,7 @@ statusType:any={boger:160,student:159};
 
 
   ngOnInit() {
-    if(!this.student.iPersonId)
-    this.change=true;
+
     this.bornDateHebrewStudent = new HebrewDate();
     this.diedDateHebrewFather = new HebrewDate();
     this.diedDateHebrewMother = new HebrewDate();
@@ -88,6 +87,8 @@ statusType:any={boger:160,student:159};
         this.appProxy.post("GetStudentById", { iPersonId: this.paramRout }).then(data => {
 
           this.student = data;
+          if (!this.student || !this.student.iPersonId)
+            this.change = true;
           // this.student.dtBirthdate.getTime();
           // this.student.dtAddStudentDate.getTime();
           this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
@@ -167,14 +168,14 @@ statusType:any={boger:160,student:159};
     }
   }
 
-  shift(newStatus){
-    this.appProxy.post("UpdateStatusStudent",{iPersonId:this.student.iPersonId,iStatusType:newStatus}).then(
-      data=>{
-alert(data);
-this.student.iStatusType=newStatus;
-        }
-        );
-        
+  shift(newStatus) {
+    this.appProxy.post("UpdateStatusStudent", { iPersonId: this.student.iPersonId, iStatusType: newStatus }).then(
+      data => {
+        alert(data);
+        this.student.iStatusType = newStatus;
+      }
+    );
+
   }
   calcEbrewDatw(year) {
 
@@ -362,13 +363,12 @@ this.student.iStatusType=newStatus;
     }
 
   }
-  ngOnDestroy(){
-if(this.change=true)
-  {
-  this.message="האם ברצונך לשמור?"
-  this.flag=true;
+  ngOnDestroy() {
+    if (this.change = true) {
+      this.message = "האם ברצונך לשמור?"
+      this.flag = true;
 
-  }
+    }
 
   }
 }

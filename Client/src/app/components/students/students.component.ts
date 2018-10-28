@@ -23,7 +23,7 @@ export class StudentsComponent implements OnInit {
   flagDelete = false;
   header = 'מחיקת תלמיד';
   studentId: number;
-
+  component;
   constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute, private globalService: GlobalService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
   param: any;
   id: number;
@@ -36,7 +36,7 @@ export class StudentsComponent implements OnInit {
   ngOnInit() {
 
 
-
+    this.component = this.router.url;
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
     this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
       this.studentList = data;
@@ -63,15 +63,15 @@ export class StudentsComponent implements OnInit {
 
 
 
-// this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true, false));
-// this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true, false));
-// this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
-// this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
-// this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
-// this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
-// this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
-// this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
-// this.lstColumns.push(new VyTableColumn(' משויך לאברך','nvAvrechName','html'));
+    // this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true, false));
+    // this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true, false));
+    // this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
+    // this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
+    // this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
+    // this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
+    // this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
+    // this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
+    // this.lstColumns.push(new VyTableColumn(' משויך לאברך','nvAvrechName','html'));
     this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true, false));
     this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true, false));
     this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
@@ -87,45 +87,60 @@ export class StudentsComponent implements OnInit {
 
   lstDataRows
   vyTableComponent
-  
-editStudent(e) {
-  this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);
-}
 
-deleteStudent(e) {
-  this.appProxy.post('DeleteStudent', { iPersonId: e.iPersonId, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
-    if (res == true) {
-      alert('נמחק בהצלחה!');
-       this.lstDataRows.splice(this.lstDataRows.indexOf(e),1);
-      this.vyTableComponent.refreshTable(this.lstDataRows);
-    }
-    else {
-      alert('לא נמחק!');
-    }
-  });
-}
+  editStudent(e) {
+    this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);
+  }
 
-click(e) {
-  // this.avrechId = e.iPersonId;
-  if (e.columnClickName == "edit")
-    this.editStudent(e);
-  else
-    this.deleteStudent(e);
+  deleteStudent(e) {
+    this.appProxy.post('DeleteStudent', { iPersonId: e.iPersonId, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
+      if (res == true) {
+        alert('נמחק בהצלחה!');
+        this.lstDataRows.splice(this.lstDataRows.indexOf(e), 1);
+        this.vyTableComponent.refreshTable(this.lstDataRows);
+      }
+      else {
+        alert('לא נמחק!');
+      }
+    });
+  }
 
-}
-cardsUnion() {
-  this.flag == true
-  // const modalRef = this.modalService.open(CardsUnionComponent);
-
-  // modalRef.result.then((result) => {
-  //   console.log(result);
-  // }).catch((error) => {
-  //   console.log(error);
-  // });
-}
-// clickCell:true,
-// type: 'html'
+  click(e) {
+    // this.avrechId = e.iPersonId;
+    if (e.columnClickName == "edit")
+      this.editStudent(e);
+    else
+      this.deleteStudent(e);
 
   }
+  cardsUnion() {
+    this.flag == true
+    // const modalRef = this.modalService.open(CardsUnionComponent);
+
+    // modalRef.result.then((result) => {
+    //   console.log(result);
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
+  }
+  // clickCell:true,
+  // type: 'html'
+  editAndDeleteStudent(e) {
+
+    if (e.columnClickName == 'edit')
+      this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);
+    else {
+      // this.alert = confirm("האם אתה בטוח שברצונך למחוק תלמיד זה?");
+      // if (this.alert == true) {
+      //   this.appProxy.post("DeleteStudent", { iStudent: e.iPersonId, iUserId: this.globalService.getUser() });
+
+      // }
+      this.message = 'האם אתה בטוח שברצונך למחוק את ' + e.nvFirstName + ' ' + e.nvLastName + '?';
+      //alert(e.nvFirstName);
+      this.studentId = e.iPersonId;
+      this.flagDelete = true;
+    }
+  }
+}
 
 

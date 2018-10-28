@@ -229,7 +229,7 @@ import { NgxEditorModule } from 'ngx-editor';
      { path: "ShowImage/:nvUserName/:nvPassword",  component: ShowImageComponent },
      { path: "log-in", component: LogInComponent, canDeactivate: [CanDeactivateGuard] },
       { path: "students", component: StudentsComponent },
-      { path: "graduates", component: StudentsComponent },
+      // { path: "graduates", component: StudentsComponent },
       
       {
 
