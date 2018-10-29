@@ -21,6 +21,8 @@ export class OpenPresenceComponent implements OnInit {
   @Output()
   @Input()
   presence: PresenceAvrech;
+  @Output()
+  @Input()
   currentPresence:PresenceAvrech;
   ngOnInit() {
     debugger;

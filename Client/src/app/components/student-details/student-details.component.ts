@@ -229,9 +229,9 @@ export class StudentDetailsComponent implements OnInit {
   // { year: 5776, month: 13, date: 29, month_name: 'Elul' }
 
 
-changeForm(){
-  this.change=true;
-}
+// changeForm(){
+//   this.change=true;
+// }
 
 
 
