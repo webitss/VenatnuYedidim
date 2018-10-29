@@ -5,6 +5,7 @@ import { AppComponent } from '../app/app.component';
 import { GlobalService } from '../../services/global.service';
 import { DialogService } from '../../services/dialog.service';
 import { Observable } from 'rxjs/Observable';
+import { User } from '../../classes/user';
 // import {GoogleCity} from '../../directives/googleCity';
 
 @Component({
@@ -37,9 +38,16 @@ export class LogInComponent implements OnInit {
 
 
   logIn() {
+    
     this.appProxy.post("Login", { nvUserName: this.nvUserName, nvPassword: this.nvPassword }).then(
       data => {
-        if (data != null) {
+       
+        if (data!=null) {
+         
+         
+          if((data as User).iPermissionId!=7){
+            
+           
           // this.user = data;
           data["iUserId"] = data.iPersonId;
           this.appComponent.instance.userName = data.nvUserName;
@@ -48,15 +56,27 @@ export class LogInComponent implements OnInit {
 
           this.router.navigate(['students']);
         }
-        else {
-          debugger;
+        if((data as User).iPermissionId==7) 
+        {
+         
+         
           
-         this.router.navigate(['ShowImage',{nvUserName:this.nvUserName,nvPassword:this.nvPassword}]);
-        //  this.router.navigate(['MyCompB', {id: "someId", id2: "another ID"}]);
+          this.globalService.UserPermition=7;
+        
+          this.router.navigate(['/']);
         
         }
+      }
+        else
+        {
+          this.globalService.UserPermition=0
+          this.router.navigate(['/']);
+        }
+      
+        
       })
-  };
+  }
+;
 
   canDeactivate() {
     if (this.globalService.getUser() != null)

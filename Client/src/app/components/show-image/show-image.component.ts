@@ -3,7 +3,7 @@ import { debug } from 'util';
 import { HttpClient } from "@angular/common/http";
 
 
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { NgxGalleryImage, NgxGalleryOptions, NgxGalleryAnimation } from 'ngx-gallery';
 import { settingsFrontend } from '../../services/settings-frontend.service';
@@ -13,6 +13,7 @@ import { NgModule } from '@angular/core';
 import { User } from '../../classes/user';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { GlobalService } from '../../services/global.service';
 
 // import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 const GLOBAL = { title: 'כותרת', GlobalVerMarch: 'טקסט_ראשי', GlobalMarchSF: 'טקסט_משני' };
@@ -30,7 +31,7 @@ protected isManager: boolean;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[] = new Array<NgxGalleryImage>();
 
-  constructor(private activatedRoute: ActivatedRoute,private rout:Router, private appProxy: AppProxy, public settingsFrontend: settingsFrontend,private cdRef:ChangeDetectorRef,private http:HttpClient) { }
+  constructor( private globalService: GlobalService,private activatedRoute: ActivatedRoute,private rout:Router, private appProxy: AppProxy, public settingsFrontend: settingsFrontend,private cdRef:ChangeDetectorRef,private http:HttpClient) { }
 
 protected titaieName = 'ונתנו ידידים' ;
 ngxImageGallery: NgxImageGalleryComponent;
@@ -40,8 +41,8 @@ protected listImage: string[] = ['http://localhost:14776/Files/red.jpg','assets/
 "assets/3-big.jpg","assets/IMG_5650.JPG",
 "assets/IMG_5650.JPG","assets/IMG_5650.JPG",]
 protected documents: any;
-protected password:string;
-
+protected password:any;
+protected name:any
 
 protected lstColumns = [{
 
@@ -58,21 +59,13 @@ protected lstColumns = [{
   type: 'html',
 },
 ]
-
-
+@Input()
+public id:number;
+ 
 ngOnInit(): void {
-  this.activatedRoute.parent.params.subscribe(params => {
-    
-    
-     this.appProxy.post("Login", { nvUserName:  params['nvUserName'], nvPassword:  params['nvPassword'] }).then(
-      data => {
-       if(data){
-       this.isManager=true;
   
   
-       }
-       else{
-  
+  if(this.globalService.UserPermition==7){
   this.appProxy.get('GetMoreDocumentsOfTadmit').then(data1 => {
   
     this.documents = data1;
@@ -97,12 +90,9 @@ ngOnInit(): void {
   
     });
   
-  }
-    , err => alert(err));
-  
-  }
-       })
-      })
+ })
+       
+      }
   this.galleryOptions = [
       {
           width: '600px',
@@ -172,7 +162,7 @@ this.appProxy.get('GetDocumentsOfTadmit').then(data => {
 goToLogin(){
   this.divModal=true;
   this.rout.navigate(["log-in"])
-debugger;
+
 }
 
 
@@ -192,7 +182,7 @@ this.appProxy.get('GetMoreDocumentsOfTadmit').then(data1 => {
 
   this.documents = data1;
   this.documents.forEach(element => {
- debugger;
+
  
  if ( AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName) {
   let head = AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName;
