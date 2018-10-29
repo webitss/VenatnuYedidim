@@ -381,7 +381,10 @@ namespace Service
             //throw new NotImplementedException();
             return Student.GetGraduatesList(iUserId);
         }
-
+        //public List<Person> GetPersonList()
+        //{
+        //    return Participant.GetPersonList();
+        //}
         #endregion
 
         #region Fileshandler

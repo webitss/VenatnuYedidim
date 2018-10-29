@@ -533,6 +533,15 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Person> GetParticipantsList(int iEventId);
 
+       // [OperationContract]
+       // [WebInvoke(
+       //Method = "POST",
+       //UriTemplate = "GetPersonList",
+       //BodyStyle = WebMessageBodyStyle.WrappedRequest,
+       //ResponseFormat = WebMessageFormat.Json,
+       //RequestFormat = WebMessageFormat.Json)]
+       // List<Person> GetPersonList();
+
         #endregion
 
         #region Documents
