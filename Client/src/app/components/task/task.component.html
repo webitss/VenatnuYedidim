@@ -1,4 +1,4 @@
-<div class="row  body" *ngIf="currentTask && task">
+<div class="row  body" *ngIf="currentTask">
   <div class="form-group col-sm-3">
     <label for="taskType">סוג משימה</label>
     <select name="taskType" class="form-control" name="taskType"  *ngIf="taskTypeList" [(ngModel)]="task.iTaskType">
