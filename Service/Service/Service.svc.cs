@@ -141,6 +141,7 @@ namespace Service
             return Student.DeleteStudent(iPersonId, iUserId);
         }
 
+
         #endregion
 
         #region Event
@@ -214,11 +215,13 @@ namespace Service
             return Avrech.GetAvrechimByStudentId(iPersonId);
         }
 
-        public bool MailToAvrechim(string[] mailList, string subject, string body)
+
+        public  bool MailToAvrechim(string[] mailList, string subject, string body)
+
         {
             return Avrech.MailToAvrechim(mailList,subject,body);
         }
-        
+
         #endregion
 
 
@@ -450,6 +453,8 @@ namespace Service
         {
             return PresenceAvrech.DeletePresenceAvrech(ipresenceAvrech, iLastModifyUserId);
         }
+
+       
 
 
 

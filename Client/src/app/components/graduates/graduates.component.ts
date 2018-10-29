@@ -19,11 +19,8 @@ export class GraduatesComponent implements OnInit {
   @ViewChild('graduates') graduates: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   ngOnInit() {
-
-
-
     this.id = 0;
-
+    console.log("refresh...");
     this.appProxy.post('GetGraduatesList', { iUserId: this.id }).then(data => {
       this.studentList = data;
 

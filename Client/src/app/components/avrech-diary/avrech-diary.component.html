@@ -7,7 +7,7 @@
   </div>
 </div>
 <div class="newTask" *ngIf="flag==true">
-  <div class="row ">
+  <div class="row">
     <div class="col-sm-8"></div>
     <div class="col-sm-4">
       <button class="btn-circle btn-save" (click)="saveTask()">שמור v </button>
@@ -20,6 +20,6 @@
   <app-task #task (close)="closeMe()"></app-task>
   <!--[(task)]="task"
 </div>
-<!-- *ngIf="task != null"  -->
+ *ngIf="task != null"  -->
 
   <!--(activate)="onRouterOutletActivate($event)"-->

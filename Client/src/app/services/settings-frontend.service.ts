@@ -27,7 +27,8 @@ export class settingsFrontend {
         });
 }
 updateGlobalParameters(GlobalParameters:Array<TGlobalParameters> ) : Promise<boolean>{
-  alert(GlobalParameters.length);
+
+  
   debugger;
   return  this.appProxy.post("UpdGlobalParameters", { GlobalParameters: GlobalParameters }).
       then(l => {
@@ -45,11 +46,11 @@ GetGlobalParameters():Promise<TGlobalParameters>{
 }
 setGlobalParameters(){
   this.GetGlobalParameters().then(res=>{
-    alert((<any>res)[GLOBAL.title])
+    
        this.GlobalHeader=(<any>res).filter(r=>r.nvTitle==[GLOBAL.title])[0]
-       debugger;
-       this.GlobalMarchSF=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalVerMarch])[0]
-       debugger;
-     this.GlobalVerMarch=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalMarchSF])[0]
-     debugger;
+      
+       this.GlobalVerMarch     =(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalVerMarch])[0]
+       
+       this.GlobalMarchSF=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalMarchSF])[0]
+    debugger;
 })}}

@@ -6,6 +6,8 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { element } from 'protractor';
 import { SysTableService } from "../../services/sys-table.service";
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { getDate, getTime } from 'ngx-bootstrap/chronos/utils/date-getters';
+import { SysTableRow } from '../../classes/SysTableRow';
 
 @Component({
   selector: 'app-student-documents',
@@ -23,10 +25,12 @@ export class StudentDocumentsComponent implements OnInit {
 
 
   @ViewChild(VyTableComponent) cc: VyTableComponent;
+  categoryTypes: SysTableRow[];
 
   constructor(private appProxy: AppProxy, private activatedRoute: ActivatedRoute, private router: Router, private sysTableService: SysTableService) { }
 
   ngOnInit() {
+
     this.activatedRoute.parent.params.subscribe(params => {
       this.id = params['iPersonId'];
     });
@@ -42,6 +46,7 @@ export class StudentDocumentsComponent implements OnInit {
 
     this.loadDocuments();
 
+    this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => { this.categoryTypes = data })
   }
 
   loadDocuments() {
@@ -90,10 +95,42 @@ export class StudentDocumentsComponent implements OnInit {
 
   }
   closeDocumentDialog(save) {
+    let category, index;
     if (save == true) {
-      this.lstDataRows = new Array();
-      this.loadDocuments();
+      for (let i = 0; i < this.lstDataRows.length; i++) {
+        if (this.lstDataRows[i].iDocumentId == this.document.iDocumentId) {
+          index = i;
+          break;
+        }
+        if (index == undefined) {
+          if (this.document.iCategoryType != undefined)
+            category = this.categoryTypes.filter(x => x.iSysTableRowId == this.document.iCategoryType)[0].nvValue;
+          this.lstDataRows.push({
+            nvCategory: category,
+            dtCreatedate: new Date().toLocaleDateString(),
+            nvComment: this.document.nvComment,
+            edit: '<div class="edit"></div>',
+            open: '<a href=' + AppProxy.getBaseUrl() + 'Files/' + this.document.nvDocumentName + ' target="_blank">' + this.document.nvDocumentName + '</a>',
+            iDocumentId: this.document.iDocumentId
+          });
+        }
+        else{
+          
+        }
+      }
+
+
+
+      this.cc.refreshTable(this.lstDataRows);
+      this.document = null;
+
+
+
+
+      // this.lstDataRows = new Array();
+      // this.loadDocuments();
     }
-    this.document = null;
   }
+
+
 }

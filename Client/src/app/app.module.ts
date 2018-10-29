@@ -98,6 +98,7 @@ import { OpenPresenceComponent } from './components/open-presence/open-presence.
 import { AddParticipantComponent } from './components/add-participant/add-participant.component';
 
 import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
+import { EditMailComponent } from './components/edit-mail/edit-mail.component';
 import { NgxEditorModule } from 'ngx-editor';
 
 
@@ -195,6 +196,7 @@ import { NgxEditorModule } from 'ngx-editor';
 
     AddParticipantComponent,
     VyPopUpComponent,
+    EditMailComponent,
    
   ],
  //imports: [ 
@@ -223,11 +225,11 @@ import { NgxEditorModule } from 'ngx-editor';
     NgxEditorModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
-    { path: "ShowImage", component: ShowImageComponent },
-
-     { path: "", component: LogInComponent, canDeactivate: [CanDeactivateGuard] },
+    { path: "", component: ShowImageComponent },
+     { path: "ShowImage/:nvUserName/:nvPassword",  component: ShowImageComponent },
+     { path: "log-in", component: LogInComponent, canDeactivate: [CanDeactivateGuard] },
       { path: "students", component: StudentsComponent },
-      { path: "graduates", component: StudentsComponent },
+      // { path: "graduates", component: StudentsComponent },
       
       {
 

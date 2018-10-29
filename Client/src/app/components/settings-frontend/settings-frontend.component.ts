@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TGlobalParameters } from '../../classes/TGlobalParameters';
 import { settingsFrontend, GLOBAL } from '../../services/settings-frontend.service';
 import { AppProxy } from '../../services/app.proxy';
@@ -24,6 +24,7 @@ export class SettingsFrontendComponent implements OnInit {
   document: Document;
   documents: any[] = new Array();
   constructor(
+    private cdRef:ChangeDetectorRef,
     public settingsFrontend: settingsFrontend,
     private appProxy: AppProxy,
     private globalService: GlobalService,
@@ -34,10 +35,17 @@ export class SettingsFrontendComponent implements OnInit {
   ngOnInit() {   
     this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType= data.filter(x => x.nvValue == 'תדמית')[0].iSysTableRowId);
     this.loadDocuments();
-  this.settingsFrontend.setGlobalParameters();
-  this.GlobalHeader=this.settingsFrontend.GlobalHeader;
-  this.GlobalMarchSF=this.settingsFrontend.GlobalMarchSF;
-  this.GlobalVerMarch=this.settingsFrontend.GlobalVerMarch;
+    this.settingsFrontend.GetGlobalParameters().then(res=>{
+         this.settingsFrontend.GlobalHeader=(<any>res).filter(r=>r.nvTitle==[GLOBAL.title])[0]
+         this.settingsFrontend.GlobalVerMarch=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalVerMarch])[0]
+        this.settingsFrontend.GlobalMarchSF=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalMarchSF])[0]
+        debugger;
+        this.GlobalHeader=this.settingsFrontend.GlobalHeader;
+        this.GlobalMarchSF=this.settingsFrontend.GlobalMarchSF;
+        this.GlobalVerMarch=this.settingsFrontend.GlobalVerMarch;
+        this.cdRef.detectChanges();
+  })
+ 
   }
 
 
@@ -112,7 +120,8 @@ export class SettingsFrontendComponent implements OnInit {
   }
 
 saveGlobalParams(){
-alert("saveGlobalParams")
+
+  
 
   this.settingsFrontend.GlobalHeader.nvTitle=GLOBAL.title;
   this.settingsFrontend.GlobalHeader.nvValue=this.GlobalHeader.nvValue;
@@ -131,13 +140,14 @@ alert("saveGlobalParams")
 
       this.settingsFrontend.updateGlobalParameters(this.GlobalParameters).then(
 
-        l=>alert("udp"));
+        l=>console.log("kkkkk")
+      );
      
     }
     else{
       this.settingsFrontend.SaveGlobalParameters(this.GlobalParameters).then(
       
-        l=>alert("ins"));
+        l=>console.log("kkkkk"));
       }
   });
  

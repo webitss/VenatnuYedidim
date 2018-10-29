@@ -7,8 +7,8 @@ import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { GlobalService } from '../../services/global.service';
 import { Yeshiva } from '../../classes/Yeshiva';
-import { LetterEbrew } from '../../classes/LetterEbrew';
 import { AppComponent } from '../app/app.component';
+import { LetterEbrew } from '../../classes/LetterEbrew';
 
 
 @Component({
@@ -18,13 +18,13 @@ import { AppComponent } from '../app/app.component';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router, 
-    private globalService: GlobalService,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
   status: string;
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router,
+    private globalService: GlobalService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
 
   @Input() student: Student
-
+  statusType: any = { boger: 160, student: 159 };
   paramRout: any;
   fatherDead: boolean;
   motherDead: boolean;
@@ -43,19 +43,24 @@ export class StudentDetailsComponent implements OnInit {
   yeshivaListOfStudent: Yeshiva[];
   yeshivaSelected: Yeshiva;
   currentUser: number;
-  days:string[]=["א","ב","ג","ד","ה","ו","ז","ח","ט","י","יא","יב","יג","יד","טו","טז","יז","יח","יט","כ","כא","כב","כג","כד","כה","כו","כז","כח","כט","ל"];
-  monthes:string[]=["תשרי","חשוון","כסלו","טבת","שבט","אדר","ניסן","אייר","סיוון","תמוז","אב","אלול"];
+  days: string[] = ["א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב", "יג", "יד", "טו", "טז", "יז", "יח", "יט", "כ", "כא", "כב", "כג", "כד", "כה", "כו", "כז", "כח", "כט", "ל"];
+  monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
   dateDayArr = new Array<string>();
   dateMonthArr = new Array<string>();
   dateYearArr = new Array<any>();
   addYeshiva = false;
   yeshivaId: number;
+  change: boolean;
+  flag: boolean = false;
+  message: string;
+
   e;
-  message = 'dfds';
+  // message = 'dfds';
   flagDelete = false;
   header = 'מחיקת ישיבה';
   currentYear: Date = new Date();
-letterArr=new Array<LetterEbrew>();
+  letterArr = new Array<LetterEbrew>();
+
 
 
   ngOnInit() {
@@ -82,6 +87,8 @@ letterArr=new Array<LetterEbrew>();
         this.appProxy.post("GetStudentById", { iPersonId: this.paramRout }).then(data => {
 
           this.student = data;
+          if (!this.student || !this.student.iPersonId)
+            this.change = true;
           // this.student.dtBirthdate.getTime();
           // this.student.dtAddStudentDate.getTime();
           this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
@@ -142,34 +149,42 @@ letterArr=new Array<LetterEbrew>();
     // this.dateDayArr.push('כ"א'); this.dateDayArr.push('כ"ב'); this.dateDayArr.push('כ"ג'); this.dateDayArr.push('כ"ד'); this.dateDayArr.push('כ"ה');
     // this.dateDayArr.push('כ"ו'); this.dateDayArr.push('כ"ז'); this.dateDayArr.push('כ"ח'); this.dateDayArr.push('כ"ט'); this.dateDayArr.push('ל');
 
-  this.letterArr.push({nvChar:"א",iValue:1});this.letterArr.push({nvChar:"ב",iValue:2});this.letterArr.push({nvChar:"ג",iValue:3});
-  this.letterArr.push({nvChar:"ד",iValue:4});this.letterArr.push({nvChar:"ה",iValue:5});this.letterArr.push({nvChar:"ו",iValue:6});
-  this.letterArr.push({nvChar:"ז",iValue:7});this.letterArr.push({nvChar:"ח",iValue:8});this.letterArr.push({nvChar:"ט",iValue:9});
-  this.letterArr.push({nvChar:"י",iValue:10});this.letterArr.push({nvChar:"כ",iValue:20});this.letterArr.push({nvChar:"ל",iValue:30});
-  this.letterArr.push({nvChar:"מ",iValue:40});this.letterArr.push({nvChar:"נ",iValue:50});this.letterArr.push({nvChar:"ס",iValue:60});
-  this.letterArr.push({nvChar:"ע",iValue:70});this.letterArr.push({nvChar:"פ",iValue:80});this.letterArr.push({nvChar:"צ",iValue:90});
-  this.letterArr.push({nvChar:"ק",iValue:100});this.letterArr.push({nvChar:"ר",iValue:200});this.letterArr.push({nvChar:"ש",iValue:300});
-  this.letterArr.push({nvChar:"ת",iValue:400});
+    this.letterArr.push({ nvChar: "א", iValue: 1 }); this.letterArr.push({ nvChar: "ב", iValue: 2 }); this.letterArr.push({ nvChar: "ג", iValue: 3 });
+    this.letterArr.push({ nvChar: "ד", iValue: 4 }); this.letterArr.push({ nvChar: "ה", iValue: 5 }); this.letterArr.push({ nvChar: "ו", iValue: 6 });
+    this.letterArr.push({ nvChar: "ז", iValue: 7 }); this.letterArr.push({ nvChar: "ח", iValue: 8 }); this.letterArr.push({ nvChar: "ט", iValue: 9 });
+    this.letterArr.push({ nvChar: "י", iValue: 10 }); this.letterArr.push({ nvChar: "כ", iValue: 20 }); this.letterArr.push({ nvChar: "ל", iValue: 30 });
+    this.letterArr.push({ nvChar: "מ", iValue: 40 }); this.letterArr.push({ nvChar: "נ", iValue: 50 }); this.letterArr.push({ nvChar: "ס", iValue: 60 });
+    this.letterArr.push({ nvChar: "ע", iValue: 70 }); this.letterArr.push({ nvChar: "פ", iValue: 80 }); this.letterArr.push({ nvChar: "צ", iValue: 90 });
+    this.letterArr.push({ nvChar: "ק", iValue: 100 }); this.letterArr.push({ nvChar: "ר", iValue: 200 }); this.letterArr.push({ nvChar: "ש", iValue: 300 });
+    this.letterArr.push({ nvChar: "ת", iValue: 400 });
 
     for (var i = 1990; i <= this.currentYear.getFullYear(); i++) {
       this.dateYearArr.push(i);
     }
-    for(var i=0;i<this.dateYearArr.length-1;i++)
-  {
+    for (var i = 0; i < this.dateYearArr.length - 1; i++) {
       const hebrewDate = require("hebrew-date");
-      this.dateYearArr[i] = hebrewDate(new Date(this.dateYearArr[i] , 0, 0)).year;
-      this.dateYearArr[i]=this.calcEbrewDatw(this.dateYearArr[i]);
+      this.dateYearArr[i] = hebrewDate(new Date(this.dateYearArr[i], 0, 0)).year;
+      this.dateYearArr[i] = this.calcEbrewDatw(this.dateYearArr[i]);
     }
   }
 
+  shift(newStatus) {
+    this.appProxy.post("UpdateStatusStudent", { iPersonId: this.student.iPersonId, iStatusType: newStatus }).then(
+      data => {
+        alert(data);
+        this.student.iStatusType = newStatus;
+      }
+    );
+
+  }
   calcEbrewDatw(year) {
- 
+
     year = year - 5000;
     let yearString = "";
-    for (let i = this.letterArr.length-1; i > 0 ; i--) {
-      while (year -this.letterArr[i].iValue > 0) {
-       yearString += this.letterArr[i].nvChar;
-        year-= this.letterArr[i].iValue;
+    for (let i = this.letterArr.length - 1; i > 0; i--) {
+      while (year - this.letterArr[i].iValue > 0) {
+        yearString += this.letterArr[i].nvChar;
+        year -= this.letterArr[i].iValue;
       }
     }
     return yearString;
@@ -192,20 +207,13 @@ letterArr=new Array<LetterEbrew>();
 
     })
   }
-  deleteYeshiva(yeshiva) {
-    //alert(yeshiva.iYeshivaId);
-    this.yeshivaId = yeshiva.iYeshivaId;
-    this.message='האם אתה בטוח שברצונך למחוק את '+yeshiva.nvYeshivaName+'?';
-    this.flagDelete = true;
-  }
-
 
   //מחיקת ישיבה לתלמיד
   deleteYeshivaOfStudent(iYeshivaId: number) {
 
     this.appProxy.post("DeleteYeshivaOfStudent", {
       iPersonId: this.paramRout, iYeshivaId: iYeshivaId, iUserId: this.currentUser
-    }).then(data => { this._parent.openMessagePopup('הישיבה נמחקה בהצלחה!') }, err => { alert("שגיאה במחיקת ישיבהיד"); });
+    }).then(data => { alert("הישיבה נמחקה בהצלחה"); }, err => { alert("שגיאה במחיקת ישיבהיד"); });
     var i = 0;
     this.yeshivaListOfStudent.forEach(e => {
       if (e.iYeshivaId == iYeshivaId)
@@ -232,9 +240,8 @@ letterArr=new Array<LetterEbrew>();
         this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser
     }).then(data => {
       if (data)
-        //alert("הישיבה נוספה בהצלחה")
-        this._parent.openMessagePopup('הישיבה נוספה בהצלחה!');
-      else this._parent.openMessagePopup('שגיאה בהוספת ישיבה');
+        alert("הישיבה נוספה בהצלחה")
+      else ("שגיאה בהוספת ישיבה")
     }
       , err => alert("שגיאה"))
 
@@ -353,6 +360,14 @@ letterArr=new Array<LetterEbrew>();
         fileReader.readAsDataURL(file);
 
       }
+    }
+
+  }
+  ngOnDestroy() {
+    if (this.change = true) {
+      this.message = "האם ברצונך לשמור?"
+      this.flag = true;
+
     }
 
   }
