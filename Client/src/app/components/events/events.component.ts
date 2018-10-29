@@ -71,7 +71,7 @@ export class EventsComponent implements OnInit {
 
 
 
-    this.appProxy.post('GetEventsList', { iUserId: 0 }).then(res => {
+    this.appProxy.post('GetEventsList').then(res => {
       res.forEach(e => {
         this.lstDataRows.push({
           iEventId: e.iEventId,

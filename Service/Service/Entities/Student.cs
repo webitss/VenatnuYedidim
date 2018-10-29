@@ -143,12 +143,12 @@ namespace Service.Entities
                 return false;
             }
         }
-        public static bool DeleteStudent(int iStudent, int iUserId)
+        public static bool DeleteStudent(int iPersonId, int iUserId)
         {
             try
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("iStudent", iStudent));
+                parameters.Add(new SqlParameter("iStudent", iPersonId));
                 parameters.Add(new SqlParameter("iUserId", iUserId));
                 SqlDataAccess.ExecuteDatasetSP("TStudent_DEL", parameters);
 

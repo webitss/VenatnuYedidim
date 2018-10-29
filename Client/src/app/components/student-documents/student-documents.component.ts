@@ -113,6 +113,16 @@ export class StudentDocumentsComponent implements OnInit {
           open: '<a href=' + AppProxy.getBaseUrl() + 'Files/' + this.document.nvDocumentName + ' target="_blank">' + this.document.nvDocumentName + '</a>',
           iDocumentId: this.document.iDocumentId
         });
+
+        let d = new Document();
+        d.iDocumentId = this.document.iDocumentId;
+        d.nvComment = this.document.nvComment;
+        d.nvDocumentName = this.document.nvDocumentName;
+        d.iCategoryType = this.document.iCategoryType;
+        d.iItemId = this.document.iItemId;
+        d.iBelongingType = this.document.iBelongingType;
+        d.nvDocumentType=this.document.nvDocumentType;
+        this.documents.push(d);
       }
       else {
         if (this.document.iCategoryType != undefined)
@@ -124,7 +134,7 @@ export class StudentDocumentsComponent implements OnInit {
       }
       this.cc.refreshTable(this.lstDataRows);
       this.document = null;
-      
+
     }
     else
       this.document = null;

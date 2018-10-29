@@ -227,7 +227,8 @@ import { NgxPasswordToggleModule } from 'ngx-password-toggle';
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
     { path: "", component: ShowImageComponent },
-     { path: "ShowImage/:nvUserName/:nvPassword",  component: ShowImageComponent },
+   
+     { path: "ShowImage",  component: ShowImageComponent },
      { path: "log-in", component: LogInComponent, canDeactivate: [CanDeactivateGuard] },
       { path: "students", component: StudentsComponent },
       // { path: "graduates", component: StudentsComponent },
