@@ -173,12 +173,13 @@ export class CalendarComponent implements OnInit {
   taskJ;
 
   delTask(taskId: number, i: number, j: number) {
-    alert('delete');
+    //alert('delete');
     this.flagDelete = true;
     this.taskId = taskId;
     this.taskI = i;
     this.taskJ = j;
     this.message = 'האם אתה בטוח שברצונך למחוק משימה זו?';
+    this.cdRef.detectChanges();
   }
 
 

@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Student } from '../../classes/student';
 import { AvrechDiaryComponent } from "../../components/avrech-diary/avrech-diary.component"
 import { CalendarComponent } from '../calendar/calendar.component';
+import { moment } from '../../../../node_modules/ngx-bootstrap/chronos/test/chain';
 
 @Component({
   selector: 'app-task',
@@ -27,7 +28,10 @@ export class TaskComponent implements OnInit {
   iuserid: number;
 
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private router: Router,  private cdRef: ChangeDetectorRef, private route: ActivatedRoute) { 
+
+
+  }
 
   minutes: string;
   hours: string;
@@ -36,7 +40,7 @@ export class TaskComponent implements OnInit {
   student: Student;
   isNew: boolean = false;
   ngOnInit() {
-    this.currentTask = Object.assign({}, this.task);
+    this.currentTask = JSON.parse(JSON.stringify(this.task));//Object.assign({}, this.task);
     if (this.task == undefined) {
       this.task = new Task();
       this.isNew = true;
@@ -58,7 +62,8 @@ export class TaskComponent implements OnInit {
       else
         this.hours = (this.task.dtTaskdatetime).getHours().toString();
 
-      this.currentTask['dtHour'] = this.hours + ':' + this.minutes;
+      this.currentTask['dtHour'] =moment(this.task.dtTaskdatetime).format('HH:mm'); //this.hours + ':' + this.minutes;
+      this.cdRef.detectChanges();
     });
 
     this.route.parent.params.subscribe(params => {

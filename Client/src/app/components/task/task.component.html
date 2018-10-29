@@ -1,8 +1,8 @@
-<div class="row  body" *ngIf="currentTask">
+<div class="row  body" *ngIf="currentTask && task">
   <div class="form-group col-sm-3">
     <label for="taskType">סוג משימה</label>
-    <select name="taskType" class="form-control" name="taskType" [(ngModel)]="task.iTaskType">
-        <option [ngValue]="undefined" disabled>בחר</option>
+    <select name="taskType" class="form-control" name="taskType"  *ngIf="taskTypeList" [(ngModel)]="task.iTaskType">
+      <option value=null disabled>בחר</option>
       <option *ngFor="let type of taskTypeList" [value]="type['iSysTableRowId']">{{type['nvValue']}}</option>
     </select>
   </div>
@@ -17,9 +17,9 @@
 
     <!-- [ngModel]="conversation.dConversationDate| date:'d/M/yy'  -->
   </div>
-  <div class="form-group col-sm-3">
+  <div *ngIf="currentTask && currentTask['dtHour']" class="form-group col-sm-3">
     <label for="taskTime">שעה</label>
-    <input type="time" class="form-control" id="time" name="taskTime" [(ngModel)]="currentTask.dtHour"   >
+    <input type="time" class="form-control" id="time" name="taskTime" [(ngModel)]="currentTask.dtHour" [ngModelOptions]="{standalone: true}" />
     <!-- (ngModelChange)="task.dtHour = $event" -->
     <!-- <input type="time" name="taskTime" class="form-control" [(ngModel)]="task.tTaskTime" /> -->
     <!-- [ngModel]="con versation.dtConversationTime| date:'shortTime'" -->
