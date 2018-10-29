@@ -135,7 +135,7 @@ export class StudentDetailsComponent implements OnInit {
         this.student.iStudentId=0;
         this.student.bDeathFather = false;
         this.student.bDeathMother = false;
-
+        this.change = true;
       }
       this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data; });
 
@@ -234,7 +234,9 @@ export class StudentDetailsComponent implements OnInit {
   // { year: 5776, month: 13, date: 29, month_name: 'Elul' }
 
 
-
+changeForm(){
+  this.change=true;
+}
 
 
 
@@ -368,11 +370,23 @@ export class StudentDetailsComponent implements OnInit {
     }
 
   }
-  ngOnDestroy() {
-    if (this.change = true) {
-      this.message = "האם ברצונך לשמור?"
-      this.flag = true;
 
+  message2;
+  header2;
+  s() {
+
+  }
+  ngOnDestroy() {
+    // alert(this.change);
+    if (this.change) {
+      let v = confirm("האם ברצונך לשמור?");
+      if (v)
+        this.saveStudent();
+      debugger;
+      // this.message2 = "האם ברצונך לשמור?"
+      // this.flag = true;
+      // alert(this.flag);
+      //this._parent.openMessagePopup("kljk");
     }
 
   }

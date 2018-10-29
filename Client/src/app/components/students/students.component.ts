@@ -38,28 +38,53 @@ export class StudentsComponent implements OnInit {
 
     this.component = this.router.url;
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
-    this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
-      this.studentList = data;
-      // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
-      this.studentList.forEach(student => {
-        student['edit'] = '<div class="edit"></div>'
-        student['delete'] = '<div class = "delete"></>';
+    if (this.component == '/students') {
+      this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
+        this.studentList = data;
+        // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
+        this.studentList.forEach(student => {
+          student['edit'] = '<div class="edit"></div>'
+          student['delete'] = '<div class = "delete"></>';
 
-        this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
-          this.yeshivaListOfStudent = data;
-          student['nvYeshivaName'] = this.yeshivaListOfStudent[this.yeshivaListOfStudent.length - 1].nvYeshivaName;
-        });
-        this.appProxy.post("GetAvrechimByStudentId", { iPersonId: student.iPersonId }).then(data => {
-          this.avrechimListOfStudent = data;
-          student['nvAvrechName'] = "";
-          this.avrechimListOfStudent.forEach(avrech => {
-            student['nvAvrechName'] += " " + avrech.nvFirstName + " " + avrech.nvLastName + '<br/>';
+          this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
+            this.yeshivaListOfStudent = data;
+            student['nvYeshivaName'] = this.yeshivaListOfStudent[this.yeshivaListOfStudent.length - 1].nvYeshivaName;
           });
+          this.appProxy.post("GetAvrechimByStudentId", { iPersonId: student.iPersonId }).then(data => {
+            this.avrechimListOfStudent = data;
+            student['nvAvrechName'] = "";
+            this.avrechimListOfStudent.forEach(avrech => {
+              student['nvAvrechName'] += " " + avrech.nvFirstName + " " + avrech.nvLastName + '<br/>';
+            });
 
+          });
         });
-      });
-    }, err => { alert(err); });
+      }, err => { alert(err); });
+    }
 
+    else {
+      this.appProxy.post('GetGraduatesList', { iUserId: this.id }).then(data => {
+        this.studentList = data;
+        // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
+        this.studentList.forEach(student => {
+          student['edit'] = '<div class="edit"></div>'
+          student['delete'] = '<div class = "delete"></>';
+
+          this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
+            this.yeshivaListOfStudent = data;
+            student['nvYeshivaName'] = this.yeshivaListOfStudent[this.yeshivaListOfStudent.length - 1].nvYeshivaName;
+          });
+          this.appProxy.post("GetAvrechimByStudentId", { iPersonId: student.iPersonId }).then(data => {
+            this.avrechimListOfStudent = data;
+            student['nvAvrechName'] = "";
+            this.avrechimListOfStudent.forEach(avrech => {
+              student['nvAvrechName'] += " " + avrech.nvFirstName + " " + avrech.nvLastName + '<br/>';
+            });
+
+          });
+        });
+      }, err => { alert(err); });
+    }
 
 
 
