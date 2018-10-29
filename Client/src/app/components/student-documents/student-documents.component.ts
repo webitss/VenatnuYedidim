@@ -114,8 +114,12 @@ export class StudentDocumentsComponent implements OnInit {
             iDocumentId: this.document.iDocumentId
           });
         }
-        else{
-          
+        else {
+          if (this.document.iCategoryType != undefined)
+            category = this.categoryTypes.filter(x => x.iSysTableRowId == this.document.iCategoryType)[0].nvValue;
+          this.lstDataRows[index].nvCategory = category;
+          this.lstDataRows[index].nvComment = this.document.nvComment;
+          this.lstDataRows[index].open= '<a href=' + AppProxy.getBaseUrl() + 'Files/' + this.document.nvDocumentName + ' target="_blank">' + this.document.nvDocumentName + '</a>';
         }
       }
 
