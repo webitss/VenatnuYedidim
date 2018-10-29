@@ -61,7 +61,6 @@ import { EventComponent } from './components/event/event.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { EventParticipantsComponent } from './components/event-participants/event-participants.component';
 
-import { GraduatesComponent } from './components/graduates/graduates.component';
 
 import { UsersComponent } from './components/users/users.component';
 import { UserComponent } from './components/user/user.component';
@@ -100,7 +99,8 @@ import { AddParticipantComponent } from './components/add-participant/add-partic
 import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
 import { EditMailComponent } from './components/edit-mail/edit-mail.component';
 import { NgxEditorModule } from 'ngx-editor';
-
+// import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+import { NgxPasswordToggleModule } from 'ngx-password-toggle';
 
 
 
@@ -150,7 +150,6 @@ import { NgxEditorModule } from 'ngx-editor';
     EventDetailsComponent,
     EventParticipantsComponent,
 
-    GraduatesComponent,
 
     UsersComponent,
     UserComponent,
@@ -223,6 +222,8 @@ import { NgxEditorModule } from 'ngx-editor';
     NguiDatetimePickerModule,
     NgxImageGalleryModule,
     NgxEditorModule,
+    // ShowHidePasswordModule.forRoot(),
+    NgxPasswordToggleModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
     { path: "", component: ShowImageComponent },
@@ -291,7 +292,7 @@ import { NgxEditorModule } from 'ngx-editor';
 
         ]
       },
-      { path: "graduates", component: GraduatesComponent },
+      { path: "graduates", component: StudentsComponent },
 
       { path: "users", component: UsersComponent },
       {

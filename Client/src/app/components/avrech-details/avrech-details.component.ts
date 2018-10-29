@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Avrech } from '../../classes/avrech';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { GlobalService } from '../../services/global.service';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 @Component({
   selector: 'app-avrech-details',
@@ -18,7 +19,7 @@ export class AvrechDetailsComponent implements OnInit {
   userName: string;
   password: string;
   isDetails: boolean;
-  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService) { }
+  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService, private router: Router) { }
 
   ngOnInit() {
     this.activatedRoute.parent.params.subscribe(params => {
@@ -47,8 +48,8 @@ export class AvrechDetailsComponent implements OnInit {
 
 
   save() {
-    this.appProxy.post("UpdateAvrech", { avrech: this.avrech, iUserId: this.globalService.getUser()['iUserId'] }).then(
-    );
+    this.appProxy.post("UpdateAvrech", { avrech: this.avrech, iUserId: this.globalService.getUser()['iUserId'] }).then();
+    this.router.navigate(['avrechim']);
   }
 
 }
