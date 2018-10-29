@@ -140,10 +140,7 @@ namespace Service
         {
             return Student.DeleteStudent(iPersonId, iUserId);
         }
-<<<<<<< HEAD
-=======
 
->>>>>>> c09e7f14de628064afa60bf391b8164375cc4fb3
 
         #endregion
 
