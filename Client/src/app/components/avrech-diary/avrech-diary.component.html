@@ -3,7 +3,7 @@
     <button class="btn-circle btn-add" (click)="addTask()"> הוספת משימה +</button>
   </div>
   <div class="table">
-    <app-calendar></app-calendar>
+    <app-calendar #calendar></app-calendar>
   </div>
 </div>
 <div class="newTask" *ngIf="flag==true">
@@ -17,7 +17,8 @@
   <div class="row">
     <h3>משימה חדשה</h3>
   </div>
-  <app-task #task (close)="closeMe()"></app-task>
+  <app-task #task  (close)="closeMe()" ></app-task>
+  <!-- (refresh)='refresh($event)' -->
   <!--[(task)]="task"
 </div>
  *ngIf="task != null"  -->

@@ -62,9 +62,24 @@ export class CalendarComponent implements OnInit {
   closeMe(task: Task) {
     this.editTask1 = false;
   }
-  refreshMe(task: Task) {
-    this.taskList.push(task);
-    this.cdRef.detectChanges();
+  // public refreshMe(task: Task) {
+  //   this.taskList.push(task);
+  //   this.cdRef.detectChanges();
+  // }
+  public refreshMe() {
+    this.appProxy.post("GetTasksByPersonId", { iPersonId: this.id }).then(
+      data1 => {
+        //if (data != null) {
+        this.taskList = data1;
+
+        this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
+          this.taskTypeList = data;
+          this.createCalendar();
+
+          //}
+        });
+      });
+    this.createCalendar();
   }
   ngOnInit() {
     // this.task = new Task();
@@ -189,7 +204,7 @@ export class CalendarComponent implements OnInit {
         if (data == true) {
           // alert("task remove");
           // this.task=this.taskList.find(t => t.iTaskId == taskId);
-       
+
           alert(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].indexOf(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].find(t => t.id == this.taskId)));
           this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].splice(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].indexOf(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].find(t => t.id == this.taskId)), 1);
           this.cdRef.detectChanges();
@@ -198,9 +213,9 @@ export class CalendarComponent implements OnInit {
       });
   }
 
-  public trackItem(index: number, item: any) {
-    return item.trackId;
-  }
+  // public trackItem(index: number, item: any) {
+  //   return item.trackId;
+  // }
 
   // message: string = "האם אתה בטוח שברצונך למחוק משימה זו?";
   // flagPopUp: boolean = false;
