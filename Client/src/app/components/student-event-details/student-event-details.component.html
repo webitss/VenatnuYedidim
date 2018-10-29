@@ -24,7 +24,7 @@
           <!-- <input type="text" name="event-name" class="form-control" required #eventName="ngModel" [(ngModel)]="event.nvName" /> -->
           <select [(ngModel)]="event.nvPlace" class="form-control" #place="ngModel" name="place" required (ngModelChange)="chooseEvent($event)">
             <!-- [disabled]="isManeger == false" -->
-            <option [value]="0" >בחר</option>
+            <option [value]="" selected>בחר</option>
             <!-- [selected]="item.nvName==undefined" -->
             <option [value]="item.nvName" *ngFor="let item of eventsList" [selected]="item.nvName==event.nvName">{{item.nvName}}</option>
           </select>
@@ -53,7 +53,7 @@
           <select [(ngModel)]="event['iArrivalStatusType']" class="form-control" #status="ngModel" name="status" required>
             <!-- [disabled]="isManeger == false" -->
             <option [value]="0" selected>בחר</option>
-            <option [value]="item.iSysTableRowId" *ngFor="let item of lst" [selected]="item.iSysTableRowId==event['iArrivalStatusType']">{{item.nvValue}}</option>
+            <option [value]="item.iSysTableRowId" *ngFor="let item of lst" [selected]="item.nvValue==iArrivalStatusType">{{item.nvValue}}</option>
           </select>
           <div *ngIf="status.invalid && (status.dirty || status.touched)">
             <div class="text-danger" *ngIf="status.errors && (status.errors.required)">שדה זה חובה!</div>

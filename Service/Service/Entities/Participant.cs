@@ -48,8 +48,26 @@ namespace Service.Entities
             }
             catch (Exception ex)
             {
-                Log.LogError("GetParticipantsList / TParticipant_SLCT", "ex" + ex +", iEventId : "+ iEventId);
+                Log.LogError("GetParticipantsList / TParticipant_SLCT", "ex " + ex +", iEventId : "+ iEventId);
                 return null;
+            }
+        }
+
+        public static bool DeleteParticipant(int iEventId, int iPersonId, int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iEventId", iEventId));
+                parameters.Add(new SqlParameter("iPersonId", iPersonId));
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_DEL", parameters).Tables[0];
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Log.LogError("DeleteParticipant / TParticipant_DEL", "ex " + ex);
+                return false;
             }
         }
         //public static List<Person> GetPersonList()
