@@ -9,7 +9,7 @@
             </ul>
             </nav>
             </div> -->
-<div class="box" *ngIf="router.url != '/log-in'">
+<div class="box" *ngIf="router.url != '/log-in'&& router.url != '/'">
   <nav class="navbar navbar-expand-sm nav">
     <div class="col-sm-1">
       <a class="navbar-brand title" href="#">
@@ -42,9 +42,9 @@
 
         <span>הגדרות</span>
       </li>
-      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('settings') != -1}" class="nav-item" routerLink=''>
-
-        <span>תדמית</span>
+      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('settings') != -1}" class="nav-item" routerLink='/ShowImage'>
+        
+        <span>תדמית תצוגה מקדימה</span>
       </li>
     </ul>
     <!-- </div> -->
@@ -79,3 +79,5 @@
 
 
 <app-vy-pop-up [isDouble]="false" [message]="message" *ngIf="flag" [header]="header" (close)="flag=false" (ok)="flag=false;"></app-vy-pop-up>
+
+

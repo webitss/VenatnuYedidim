@@ -11,7 +11,7 @@ import { GlobalService } from '../../services/global.service';
 })
 export class AppComponent implements OnInit {
 
-  protected isGraduate:number=0;
+  protected isGraduate: number = 0;
   component: string;
   protected currentComponent: any;
   protected PicUrl: any;
@@ -22,8 +22,8 @@ export class AppComponent implements OnInit {
   protected header = '';
 
   public instance: AppComponent;
-  public userName: string = this.globalService.getUser() !=  null ?  this.globalService.getUser().nvUserName : "משתמש";
-  constructor(private activatedRoute: ActivatedRoute,private appProxy: AppProxy,public router: Router, private route: ActivatedRoute, private globalService: GlobalService) { }
+  public userName: string = this.globalService.getUser() != null ? this.globalService.getUser().nvUserName : "משתמש";
+  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, public router: Router, private route: ActivatedRoute, private globalService: GlobalService) { }
 
   ngOnInit() {
     this.instance = this;
@@ -31,7 +31,8 @@ export class AppComponent implements OnInit {
       this.router.navigate(['']);
 
     
-  
+
+
     // this.appProxy.post('Login', { nvUserName: 'מערכת', nvPassword: '1234' })
     //   .then(user => {
     //     if (user) alert('שם משתמש: ' + user.nvUserName + ', סיסמה:' + user.nvPassword);
@@ -85,6 +86,7 @@ export class AppComponent implements OnInit {
     this.message = message;
     this.flag = true;
   }
+
   //     }
   //   }
 

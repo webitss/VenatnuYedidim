@@ -25,13 +25,16 @@ export class SettingYeshivaComponent implements OnInit {
   public closeYeshiva = new EventEmitter();
   @Input()
   public iYeshivaId: number;
+
   @Input()
   public sysTableList: SysTableRow[];
   public yeshiva: Yeshiva = new Yeshiva();
+  protected yeshivaList = new Array();
+
   @ViewChild(NgForm) form;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
-  public listYeshivot: Yeshiva[];
-  public settingsYeshivot: SettingsYeshivotComponent;
+
+  protected settingsYeshivot: SettingsYeshivotComponent;
 
 
   formValid = false;
@@ -41,35 +44,8 @@ export class SettingYeshivaComponent implements OnInit {
       return this.form.valid;
   }
 
-
-  
-
   constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService) { }
 
-  changeTable(y: Yeshiva) {
-    y['edit'] = '<div class="edit"></div>';
-    y['delete'] = '<div class="delete"></div>';
-    y['nvRoleType'] = this.sysTableList.filter(x => x.iSysTableRowId == y.iRoleType)[0].nvValue;
-  }
-
-  // selecList(id) {
-  //   if (this.iYeshivaId == 0) {
-  //     this.yeshiva = new Yeshiva();
-  //   }
-  //   else {
-  //     this.appProxy.post("getYeshivaById", { iYeshivaId: id })
-  //       .then(data => {
-  //         this.yeshiva = data;
-  //         this.settingsYeshivot.yeshivaList = data;
-  //         this.sysTableService.getValues(SysTableService.dataTables.roleType.iSysTableId).then(val => {
-  //           this.sysTableList = val;
-  //           this.listYeshivot.forEach(y => {
-  //             this.changeTable(y);
-  //           });
-  //         });
-  //       })
-  //   }
-  // }
 
   ngOnInit() {
     if (this.iYeshivaId == 0) {
@@ -78,15 +54,13 @@ export class SettingYeshivaComponent implements OnInit {
     else {
       this.appProxy.post("getYeshivaById", { iYeshivaId: this.iYeshivaId })
         .then(data => {
-           this.yeshiva = data;
-          //this.settingsYeshivot.yeshivaList = data;
-          //this.selecList(this.iYeshivaId);
+          this.yeshiva = data;
         }
-      )
+        )
     };
   }
 
-  save(y: Yeshiva) {
+  save() {
     if (this.iYeshivaId == 0) {
       if (this.appProxy.post('AddYeshiva', { yeshiva: this.yeshiva })
         .then(
@@ -96,8 +70,9 @@ export class SettingYeshivaComponent implements OnInit {
             else {
               alert("save!");
               this.closeYeshiva.emit(null);
-              this.changeTable(y);
-              this.listYeshivot.push(y);
+              this.settingsYeshivot.changeTable(this.yeshiva);
+              this.addYeshiva(this.yeshiva);
+              this.vyTableComponent.refreshTable(this.yeshivaList);
             }
           }
         )
@@ -113,7 +88,7 @@ export class SettingYeshivaComponent implements OnInit {
             this.yeshiva = data;
             alert("save!");
             this.closeYeshiva.emit(null);
-            //this.updateYeshiva(y);
+            this.updateYeshiva(this.yeshiva);
           }
         )
       ) { }
@@ -122,7 +97,17 @@ export class SettingYeshivaComponent implements OnInit {
     }
   }
 
- 
+  addYeshiva(yeshiva:Yeshiva){
+    this.yeshivaList.push(yeshiva);
+  }
+
+
+  updateYeshiva(y: Yeshiva) {
+    let l = this.yeshivaList.indexOf(this.yeshivaList.find(y1 => y1.iYeshivaId == y.iYeshivaId))
+    this.settingsYeshivot.changeTable(y);
+    this.yeshivaList[l] = this.yeshiva;
+    this.vyTableComponent.refreshTable(this.yeshivaList);
+  }
 
 
   cancel() {

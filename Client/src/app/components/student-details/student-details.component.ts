@@ -128,6 +128,11 @@ export class StudentDetailsComponent implements OnInit {
       }
       else {
         this.student = new Student();
+        this.student.iPersonId=0;
+        this.student.iStatusType=159;
+        // this.student.iCauseOfDeathFather=0;
+        // this.student.iCauseOfDeathMother=0;
+        this.student.iStudentId=0;
         this.student.bDeathFather = false;
         this.student.bDeathMother = false;
         this.change = true;
