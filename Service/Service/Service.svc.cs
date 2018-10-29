@@ -218,12 +218,12 @@ namespace Service
 
         public bool MailToAvrechim(string[] mailList, string subject, string body)
         {
-            return Avrech.MailToAvrechim(mailList,subject,body);
+            return Avrech.MailToAvrechim(mailList, subject, body);
         }
 
         #endregion
 
-        
+
 
 
         #region SysTableRow
@@ -369,7 +369,7 @@ namespace Service
         {
             return Document.GetBase64StringForDocument(documentName);
         }
-        
+
 
         #endregion
 
@@ -390,10 +390,10 @@ namespace Service
             //throw new NotImplementedException();
             return Student.GetGraduatesList(iUserId);
         }
-        //public List<Person> GetPersonList()
-        //{
-        //    return Participant.GetPersonList();
-        //}
+        public List<Person> GetPersonList()
+        {
+            return Participant.GetPersonList();
+        }
         #endregion
 
         #region Fileshandler
@@ -452,7 +452,7 @@ namespace Service
 
         public bool SetPresence(PresenceAvrech presenceAvrech, int iUserId)
         {
-            return PresenceAvrech.SetPresence(presenceAvrech,  iUserId);
+            return PresenceAvrech.SetPresence(presenceAvrech, iUserId);
         }
 
         public bool DeletePresenceAvrech(int ipresenceAvrech, int iLastModifyUserId)
@@ -460,7 +460,7 @@ namespace Service
             return PresenceAvrech.DeletePresenceAvrech(ipresenceAvrech, iLastModifyUserId);
         }
 
-       
+
 
 
 
