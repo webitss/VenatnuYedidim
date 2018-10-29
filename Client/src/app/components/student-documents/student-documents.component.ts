@@ -63,7 +63,6 @@ export class StudentDocumentsComponent implements OnInit {
 
         });
       });
-      this.cc.refreshTable(this.lstDataRows);
     }
       , err => alert(err));
   }
@@ -102,35 +101,32 @@ export class StudentDocumentsComponent implements OnInit {
           index = i;
           break;
         }
-        if (index == undefined) {
-          if (this.document.iCategoryType != undefined)
-            category = this.categoryTypes.filter(x => x.iSysTableRowId == this.document.iCategoryType)[0].nvValue;
-          this.lstDataRows.push({
-            nvCategory: category,
-            dtCreatedate: new Date().toLocaleDateString(),
-            nvComment: this.document.nvComment,
-            edit: '<div class="edit"></div>',
-            open: '<a href=' + AppProxy.getBaseUrl() + 'Files/' + this.document.nvDocumentName + ' target="_blank">' + this.document.nvDocumentName + '</a>',
-            iDocumentId: this.document.iDocumentId
-          });
-        }
-        else{
-          
-        }
       }
+      if (index == undefined) {
+        if (this.document.iCategoryType != undefined)
+          category = this.categoryTypes.filter(x => x.iSysTableRowId == this.document.iCategoryType)[0].nvValue;
+        this.lstDataRows.push({
+          nvCategory: category,
+          dtCreatedate: new Date().toLocaleDateString(),
+          nvComment: this.document.nvComment,
+          edit: '<div class="edit"></div>',
+          open: '<a href=' + AppProxy.getBaseUrl() + 'Files/' + this.document.nvDocumentName + ' target="_blank">' + this.document.nvDocumentName + '</a>',
+          iDocumentId: this.document.iDocumentId
+        });
+      }
+      else {
+        if (this.document.iCategoryType != undefined)
+          category = this.categoryTypes.filter(x => x.iSysTableRowId == this.document.iCategoryType)[0].nvValue;
+        this.lstDataRows[index].nvCategory = category;
+        this.lstDataRows[index].nvComment = this.document.nvComment;
+        this.lstDataRows[index].open = '<a href=' + AppProxy.getBaseUrl() + 'Files/' + this.document.nvDocumentName + ' target="_blank">' + this.document.nvDocumentName + '</a>';
 
-
-
+      }
       this.cc.refreshTable(this.lstDataRows);
       this.document = null;
-
-
-
-
-      // this.lstDataRows = new Array();
-      // this.loadDocuments();
+      
     }
+    else
+      this.document = null;
   }
-
-
 }

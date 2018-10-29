@@ -32,7 +32,6 @@ export class UploadDocumentComponent implements OnInit {
     // this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => this.sheetTypes = data
     //   , err => alert('error'));
     // this.save.name = this.document.nvDocumentName;
-
     this.activatedRoute.url.subscribe(url => {
       this.component = url.toString();
       if (this.component == "student-documents") {
@@ -79,8 +78,10 @@ export class UploadDocumentComponent implements OnInit {
 
     this.appProxy.post('SetDocument', { document: this.document, nvBase64File: this.save.document, iUserId: this.globalService.getUser()['iUserId'] }).then(
       data => {
-        if (data == 0)
-          alert("error in save data")
+        if (data == 0){
+          alert("error in save data");
+          this.closeAndNoSave();
+        }
         else {this.document.iDocumentId = data; this.closeDialog(); }
       }
       , err => alert(err));
