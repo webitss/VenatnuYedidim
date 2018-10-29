@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject, forwardRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, forwardRef, Output } from '@angular/core';
 import { GlobalService } from '../../services/global.service';
 import { AppProxy } from '../../services/app.proxy';
 import { SysTableService } from '../../services/sys-table.service';
@@ -17,10 +17,10 @@ import { AppComponent } from '../app/app.component';
 })
 export class StudentEventsComponent implements OnInit {
 
-  flagDelete=false;
-  message='';
-  header='מחיקת אירוע לתלמיד';
-  deleteEvent:Event1;
+  flagDelete = false;
+  message = '';
+  header = 'מחיקת אירוע לתלמיד';
+  deleteEvent: Event1;
 
   lstValues: SysTableRow[];
   lstDataRows = [];
@@ -28,8 +28,8 @@ export class StudentEventsComponent implements OnInit {
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
 
 
-  constructor(private globalService: GlobalService, private appProxy: AppProxy, private route: ActivatedRoute, private sysTableService: SysTableService, 
-    private router: Router,@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
+  constructor(private globalService: GlobalService, private appProxy: AppProxy, private route: ActivatedRoute, private sysTableService: SysTableService,
+    private router: Router, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
     // this.iPersonId = this.globalService.getUser()['iUserId'];
@@ -72,37 +72,39 @@ export class StudentEventsComponent implements OnInit {
   }
 
   edit(e: Event1) {
-    this.router.navigate(['./student-events-details/',e.iEventId]);
+    // this.router.navigate(['./student-events-details/',e.iEventId]);
+    this.editEvent(2, e);
   }
 
   private alert: any;
   private flag: boolean = false;
 
-  delEvent(e:Event1) {
-    this.message='האם אתה בטוח שברצונך למחוק את '+e.nvName+'?';
-    this.deleteEvent=e;
-    this.flagDelete=true;
+  delEvent(e: Event1) {
+    this.message = 'האם אתה בטוח שברצונך למחוק את ' + e.nvName + '?';
+    this.deleteEvent = e;
+    this.flagDelete = true;
   }
 
   delete() {
-   // this.alert = confirm("האם אתה בטוח שברצונך למחוק ארוע זה?");
-    // if (this.alert == true) {
-    //   // this.appProxy.post('לעשות פרוצדורה', { iPersonId: u.iPersonId, iUserId: this.globalService.getUser().iPersonId }).then(data => { }).catch(err => {
-    //   //   alert(err);
-    //   });
-
-    //כשהמחיקה מתבצעת בהצלחה שימי את השורה הבאה-
-    //this._parent.openMessagePopup('המחיקה בוצעה בהצלחה!');
-    this.lstDataRows.splice(this.lstDataRows.indexOf(this.deleteEvent), 1);
-    this.vyTableComponent.refreshTable(this.lstDataRows);
+    this.appProxy.post('DeleteParticipant', { iEventId: this.deleteEvent.iEventId, iPersonId: this.iPersonId, iUserId: this.globalService.getUser().iPersonId })
+      .then(data => {
+        this._parent.openMessagePopup('המחיקה בוצעה בהצלחה!');
+        this.lstDataRows.splice(this.lstDataRows.indexOf(this.deleteEvent), 1);
+        this.vyTableComponent.refreshTable(this.lstDataRows);
+      }).catch(err => {
+        alert(err)
+      });
   }
+  @Output()
+  event: Event1;
   from: number = 0;
   eventFlag: boolean = false;
-  newEvent(from) {
+  editEvent(from, event) {
     this.eventFlag = true;
     this.from = from;
+    this.event = event;
   }
-  close(){
+  close() {
     this.eventFlag = false;
   }
 }

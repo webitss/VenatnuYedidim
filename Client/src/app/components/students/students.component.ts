@@ -11,6 +11,7 @@ import { SysTableService } from '../../services/sys-table.service';
 import { Yeshiva } from '../../classes/Yeshiva';
 import { Avrech } from '../../classes/avrech';
 import { AppComponent } from '../app/app.component';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 @Component({
   selector: 'app-students',
@@ -22,6 +23,7 @@ export class StudentsComponent implements OnInit {
   message = 'האם אתה בטוח שברצונך למחוק תלמיד זה?';
   flagDelete = false;
   header = 'מחיקת תלמיד';
+  @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
   studentId: number;
   component;
   constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute, private globalService: GlobalService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
@@ -112,19 +114,21 @@ export class StudentsComponent implements OnInit {
 
   }
 
-  lstDataRows
-  vyTableComponent
+ 
 
   editStudent(e) {
     this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);
   }
 
-  deleteStudent(e) {
-    this.appProxy.post('DeleteStudent', { iPersonId: e.iPersonId, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
+  deleteStudent() {
+    //alert(this.studentId);
+    this.appProxy.post('DeleteStudent', { iPersonId: this.studentId, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
       if (res == true) {
-        alert('נמחק בהצלחה!');
-        this.lstDataRows.splice(this.lstDataRows.indexOf(e), 1);
-        this.vyTableComponent.refreshTable(this.lstDataRows);
+    //alert('נמחק בהצלחה!');
+    this._parent.openMessagePopup("התלמיד נמחק בהצלחה!");
+    const s=this.studentList.find(x=>x.iPersonId==this.studentId);
+        this.studentList.splice(this.studentList.indexOf(s), 1);
+        this.vyTableComponent.refreshTable(this.studentList);
       }
       else {
         alert('לא נמחק!');
@@ -137,7 +141,7 @@ export class StudentsComponent implements OnInit {
     if (e.columnClickName == "edit")
       this.editStudent(e);
     else
-      this.deleteStudent(e);
+      this.deleteStudent();
 
   }
   cardsUnion() {
@@ -164,6 +168,7 @@ export class StudentsComponent implements OnInit {
       // }
       this.message = 'האם אתה בטוח שברצונך למחוק את ' + e.nvFirstName + ' ' + e.nvLastName + '?';
       //alert(e.nvFirstName);
+      //alert(e.iPersonId);
       this.studentId = e.iPersonId;
       this.flagDelete = true;
     }

@@ -380,6 +380,11 @@ namespace Service
             return Participant.GetParticipantsList(iEventId);
         }
 
+        public bool DeleteParticipant(int iEventId, int iPsersonId, int iUserId)
+        {
+            return Participant.DeleteParticipant(iEventId, iPsersonId, iUserId);
+        }
+
         public List<Student> GetGraduatesList(int iUserId)
         {
             //throw new NotImplementedException();
