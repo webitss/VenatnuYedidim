@@ -141,7 +141,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool DeleteStudent(int  istudent, int iUserId);
+        bool DeleteStudent(int  iPersonId, int iUserId);
 
         [OperationContract]
         [WebInvoke(
@@ -533,6 +533,24 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         List<Person> GetParticipantsList(int iEventId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "DeleteParticipant",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool DeleteParticipant(int iEventId, int iPersonId, int iUserId);
+
+        // [OperationContract]
+        // [WebInvoke(
+        //Method = "POST",
+        //UriTemplate = "GetPersonList",
+        //BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        //ResponseFormat = WebMessageFormat.Json,
+        //RequestFormat = WebMessageFormat.Json)]
+        // List<Person> GetPersonList();
 
         #endregion
 
