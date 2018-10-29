@@ -1,4 +1,4 @@
-<app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="htmlContent"></app-ngx-editor>
+<!-- <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="htmlContent"></app-ngx-editor> -->
 
 <div name="table" class="vy-table">
   <div name="columns" class="row">
@@ -58,7 +58,7 @@
   <div class="pagination" *ngIf="lstPagesNum.length > 1">
     <span (click)="currentPage != 0 ? moveToPage(0) : ''" class="pagination-page" [ngStyle]="{'color': (currentPage == 0 ? 'gray' : 'black')}"
       title="להתחלה">
-      </span>
+      <<</span>
         <span (click)="currentPage != 0 ? moveToPage(currentPage - 1) : ''" class="pagination-page" [ngStyle]="{'color': (currentPage == 0 ? 'gray' : 'black')}"
           title="הקודם">
           <</span>

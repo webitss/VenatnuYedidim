@@ -100,12 +100,15 @@ export class AvrechimComponent implements OnInit {
   tableToPdf(name: string) {
     this.avrechim.downloadPdf(name, 'pdf');
   }
+  mail: boolean = false;
   mailToAvrechim() {
+    this.mail = true;
     this.mailList = [];
     this.avrechimList.filter(a => a['checked'] == true).forEach(avrech => {
       this.mailList.push(avrech.nvEmail);
     });
 
+  
     this.appProxy.post('MailToAvrechim', { mailList: this.mailList })
       .then(result => {
         alert("המסר נשלח בהצלחה");
@@ -123,5 +126,7 @@ export class AvrechimComponent implements OnInit {
     //   }
     // }
   }
-
+  closeMe(){
+    this.mail=false;
+  }
 }

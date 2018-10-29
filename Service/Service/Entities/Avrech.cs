@@ -11,6 +11,7 @@ using System.Text;
 
 namespace Service.Entities
 {
+
 	[DataContract]
 	public class Avrech : Person
 	{
@@ -81,9 +82,29 @@ namespace Service.Entities
 		{
 			try
 			{
-				List<SqlParameter> parameters = ObjectGenerator<Avrech>.GetSqlParametersFromObject(avrech);
-				parameters.Add(new SqlParameter("iUserId", iUserId));
-				SqlDataAccess.ExecuteDatasetSP("TPerson_UPD", parameters);
+
+				if (avrech.iPersonId == 0)
+				{
+					List<SqlParameter> parameters = ObjectGenerator<Avrech>.GetSqlParametersFromObject(avrech);
+					parameters.Remove(parameters.Find(x => x.ParameterName == "iPersonId"));
+					parameters.Add(new SqlParameter("iUserId", iUserId));
+					var id=SqlDataAccess.ExecuteDatasetSP("TPerson_INS", parameters).Tables[0].Rows[0].ItemArray[0];
+
+
+					List<SqlParameter> param = new List<SqlParameter>();
+					param.Add(new SqlParameter("iUserId", iUserId));
+					param.Add(new SqlParameter("iPersonId", id));
+					SqlDataAccess.ExecuteDatasetSP("TAvrech_INS", param);
+
+				}
+				else
+				{
+					List<SqlParameter> parameters = ObjectGenerator<Avrech>.GetSqlParametersFromObject(avrech);
+					parameters.Add(new SqlParameter("iUserId", iUserId));
+					SqlDataAccess.ExecuteDatasetSP("TPerson_UPD", parameters);
+				}
+
+
 				return true;
 			}
 			catch (Exception ex)
@@ -127,12 +148,17 @@ namespace Service.Entities
 			}
 		}
 
+
+
+	
         public static bool MailToAvrechim(string[] mailList, string subject, string body)
         {
+
+            bool flag = false;
             foreach (var mail in mailList)
             {
+                SendMessagesHandler.SendEmailOrFax(ConfigSettings.ReadSetting("Email"), mail, subject, body, null);
 
-                SendMessagesHandler.SendEmailOrFax("VenatnuYedidimSystem@gmail.com", "avigail3353@gmail.com", "ניסיון ונתנו ידידים", "המייל הגיע בהצלחה", null);
 
 
                 //SmtpClient client = new SmtpClient();
@@ -154,10 +180,12 @@ namespace Service.Entities
 
                 //client.Send(mm);
             }
+
            
             return true;
         }
         public static List<Avrech> GetAvrechimByStudentId(int iPersonId)
+
 		{
 			try
 			{
@@ -173,6 +201,11 @@ namespace Service.Entities
 
 
 		}
-       
-    }
+
+
+	}
 }
+
+       
+      
+

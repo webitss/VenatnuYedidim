@@ -128,7 +128,7 @@ export class EventParticipantsComponent implements OnInit {
 
     this.sub = this.router.parent.params.subscribe(params => {
       this.iEventId = +params['iEventId'];
-this.getParticipantListByEvent();
+      this.getParticipantListByEvent(this.iEventId);
       // alert("x");
     })
   };

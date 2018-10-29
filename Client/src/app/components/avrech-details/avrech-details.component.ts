@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Avrech } from '../../classes/avrech';
-// import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-avrech-details',
@@ -16,13 +17,15 @@ export class AvrechDetailsComponent implements OnInit {
   avrech: Avrech;
   userName: string;
   password: string;
-  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy) { }
+  isDetails: boolean;
+  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService) { }
 
   ngOnInit() {
     this.activatedRoute.parent.params.subscribe(params => {
       this.id = params['iPersonId'];
-
+      //alert(this.id);
       if (this.id != 0) {
+        this.isDetails = true;
         this.appProxy.post("GetAvrechById", { iPersonId: this.id }).then(
           data => {
             this.avrech = data;
@@ -35,6 +38,7 @@ export class AvrechDetailsComponent implements OnInit {
 
       }
       else {
+        this.isDetails = false;
         this.avrech = new Avrech();
       }
     });
@@ -43,13 +47,8 @@ export class AvrechDetailsComponent implements OnInit {
 
 
   save() {
-    this.appProxy.post("UpdateUserNameAndPassword", { iPersonId: this.avrech.iPersonId, nvUserName: this.userName, nvPassword: this.password, iUserId: 1 }).then(
-      data => {
-        this.appProxy.post("UpdateAvrech", { avrech: this.avrech, iUserId: 1 }).then(
-        );
-      }
+    this.appProxy.post("UpdateAvrech", { avrech: this.avrech, iUserId: this.globalService.getUser()['iUserId'] }).then(
     );
-
   }
 
 }

@@ -247,6 +247,7 @@ namespace Service
        RequestFormat = WebMessageFormat.Json)]
        bool MailToAvrechim(string[] mailList, string subject, string body);
 
+
         
         #endregion
 

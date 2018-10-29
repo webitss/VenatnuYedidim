@@ -8,11 +8,10 @@ import { EventEmitter } from 'events';
 import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
-<<<<<<< HEAD
+
 import { GlobalService } from '../../services/global.service'
-=======
 import { AppComponent } from '../app/app.component';
->>>>>>> 536dc29d8e3ee6b609be78b697514fd4fd5cbb2b
+
 
 @Component({
   selector: 'app-settings-yeshivot',
@@ -37,7 +36,7 @@ export class SettingsYeshivotComponent implements OnInit {
   public settingYeshivot: SettingYeshivaComponent;
 
 
-<<<<<<< HEAD
+
   @Output()
   protected sysTableList: SysTableRow[];
 
@@ -87,24 +86,16 @@ export class SettingsYeshivotComponent implements OnInit {
   // public lstDataRows = [];
 
 
-  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService,
-    private globalService: GlobalService) { }
-=======
+  
+
   flagDelete=false;
   message='';
   header='מחיקת מוסד';
  
-  @Output()
-  protected sysTableList:SysTableRow[];
+
   
   constructor(private appProxy: AppProxy,private router:Router,private sysTableService:SysTableService,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
- 
-  changeTable(y: Yeshiva) {
-    y['edit'] = '<div class="edit"></div>';
-    y['delete'] = '<div class="delete"></div>';
-    y['nvRoleType']=this.sysTableList.filter(x=>x.iSysTableRowId==y.iRoleType)[0].nvValue;
-  }
->>>>>>> 536dc29d8e3ee6b609be78b697514fd4fd5cbb2b
+
 
 
   ngOnInit() {
@@ -176,25 +167,6 @@ export class SettingsYeshivotComponent implements OnInit {
   }
 
   public deleteYeshiva(yeshiva) {
-<<<<<<< HEAD
-    this.iYeshivaId = yeshiva.iYeshivaId;
-    this.flag = true;
-  }
-
-  delete(y: Yeshiva) {
-    this.appProxy.post('DeleteYeshiva', { iYeshivaId: this.iYeshivaId, iLastModifyUserId: this.iLastModifyUserId })
-      .then(
-        data => {
-          this.yeshiva = data;
-          this.iYeshivaId = null;
-          this.flag = null;
-          this.yeshivaList.splice(this.yeshivaList.indexOf(y), 1);
-          this.vyTableComponent.refreshTable(this.yeshivaList);
-          this.changeTable(this.yeshiva);
-          alert("הישיבה נמחקה בהצלחה");
-        });
-
-=======
     this.changeTable(yeshiva);
     this.iYeshivaId=yeshiva.iYeshivaId;
     this.flag=true;
@@ -218,7 +190,6 @@ export class SettingsYeshivotComponent implements OnInit {
         //alert("הישיבה נמחקה בהצלחה");
     });  
     
->>>>>>> 536dc29d8e3ee6b609be78b697514fd4fd5cbb2b
   }
 
   close() {

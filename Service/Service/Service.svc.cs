@@ -140,6 +140,10 @@ namespace Service
         {
             return Student.DeleteStudent(iPersonId, iUserId);
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> c09e7f14de628064afa60bf391b8164375cc4fb3
 
         #endregion
 
@@ -214,11 +218,12 @@ namespace Service
             return Avrech.GetAvrechimByStudentId(iPersonId);
         }
 
+
         public bool MailToAvrechim(string[] mailList, string subject, string body)
         {
             return Avrech.MailToAvrechim(mailList,subject,body);
         }
-        
+
         #endregion
 
         
@@ -450,10 +455,7 @@ namespace Service
             return PresenceAvrech.DeletePresenceAvrech(ipresenceAvrech, iLastModifyUserId);
         }
 
-        public bool MailToAvrechim(string[] mailList, string subject, string body)
-        {
-            throw new NotImplementedException();
-        }
+       
 
 
 
