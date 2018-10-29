@@ -216,13 +216,14 @@ namespace Service
         }
 
 
-        public  bool MailToAvrechim(string[] mailList, string subject, string body)
-
+        public bool MailToAvrechim(string[] mailList, string subject, string body)
         {
             return Avrech.MailToAvrechim(mailList,subject,body);
         }
 
         #endregion
+
+        
 
 
         #region SysTableRow
