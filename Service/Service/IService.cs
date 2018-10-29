@@ -141,7 +141,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool DeleteStudent(int  istudent, int iUserId);
+        bool DeleteStudent(int  iPersonId, int iUserId);
 
         [OperationContract]
         [WebInvoke(
