@@ -49,13 +49,20 @@ export class EventParticipantsComponent implements OnInit {
       public lstDataRows = [];
      
       addParticipants(){
-     this.appProxy.post( "GetPersonList").then(data => {
-        this.personsList = data;
+     this.appProxy.post( "GetPersonList").then(
+       data => {
+        this.allPersons = data;
         this.flag=true
+        this.allPersons.forEach(
+          person=>{
+            this.listToSelect.push({value:person.nvFirstName+' '+person.lstObject['nvParticipantType']});
+          }
+        );
+        
+       }
+       , err => alert(err));
        
-       });
        
-        alert("func")
       }
       close() {
       //  להוסיף את המשתתפים שנבחרו
