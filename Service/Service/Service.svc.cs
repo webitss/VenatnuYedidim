@@ -150,9 +150,9 @@ namespace Service
             return Event1.SetEvent(oEvent, iUserId, to);
         }
 
-        public List<Event1> GetEventsList(int iUserId)
+        public List<Event1> GetEventsList()
         {
-            return Event1.GetEventsList(iUserId);
+            return Event1.GetEventsList();
         }
 
         public Event1 GetEvent(int? iEventId)

@@ -7,6 +7,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Student } from '../../classes/student';
 import { AvrechDiaryComponent } from "../../components/avrech-diary/avrech-diary.component"
 import { CalendarComponent } from '../calendar/calendar.component';
+import { moment } from '../../../../node_modules/ngx-bootstrap/chronos/test/chain';
+import { promise } from '../../../../node_modules/protractor';
 
 @Component({
   selector: 'app-task',
@@ -27,7 +29,9 @@ export class TaskComponent implements OnInit {
   iuserid: number;
 
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private router: Router,  private cdRef: ChangeDetectorRef, private route: ActivatedRoute) { 
+
+  }
 
   minutes: string;
   hours: string;
@@ -48,17 +52,19 @@ export class TaskComponent implements OnInit {
       this.currentTask['dtDate'] = this.task.dtTaskdatetime;//.getTime();
 
       // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
-      if ((this.task.dtTaskdatetime).getMinutes() < 10)
-        this.minutes = '0' + (this.task.dtTaskdatetime).getMinutes().toString();
-      else
-        this.minutes = (this.task.dtTaskdatetime).getMinutes().toString();
+    
+      // if ((this.task.dtTaskdatetime).getMinutes() < 10)
+      //   this.minutes = '0' + (this.task.dtTaskdatetime).getMinutes().toString();
+      // else
+      //   this.minutes = (this.task.dtTaskdatetime).getMinutes().toString();
 
-      if ((this.task.dtTaskdatetime).getHours() < 10)
-        this.hours = '0' + (this.task.dtTaskdatetime).getHours().toString();
-      else
-        this.hours = (this.task.dtTaskdatetime).getHours().toString();
+      // if ((this.task.dtTaskdatetime).getHours() < 10)
+      //   this.hours = '0' + (this.task.dtTaskdatetime).getHours().toString();
+      // else
+      //   this.hours = (this.task.dtTaskdatetime).getHours().toString();
 
-      this.currentTask['dtHour'] = this.hours + ':' + this.minutes;
+      this.currentTask['dtHour'] =moment(this.task.dtTaskdatetime).format('HH:mm'); //this.hours + ':' + this.minutes;
+      this.cdRef.detectChanges();
     });
 
     this.route.parent.params.subscribe(params => {
@@ -102,18 +108,20 @@ export class TaskComponent implements OnInit {
 
   // @Output() refresh:EventEmitter<any>= new EventEmitter<any>();
   // addOrEdit:boolean=false;
-  saveTask() {
+  saveTask():Promise<boolean> {
     this.task.dtTaskdatetime = new Date(this.currentTask['dtDate'] + ' ' + this.currentTask['dtHour']);
     //    if (this.currentTask.iTaskId == 0)
-    this.appProxy.post('SetTask', { task: this.task, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
+    return this.appProxy.post('SetTask', { task: this.task, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
       if (data) {
         alert("המשימה נוספה בהצלחה!");
         this.refresh.emit(this.task);
         this.close.emit();
+        return Promise.resolve(true);
         //close
       }
     }, err => {
-      alert('dfds');
+      return Promise.resolve(false);
+      
     });
 
   }
