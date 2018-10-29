@@ -52,5 +52,32 @@ namespace Service.Entities
                 return null;
             }
         }
+        //public static List<Person> GetPersonList()
+        //{
+        //    try
+        //    {
+
+        //        DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TPerson_GetAllPerson_SLCT").Tables[0].Rows;
+        //        List<Person> Persons = ObjectGenerator<Person>.GeneratListFromDataRowCollection(drc);
+
+        //        for (int i = 0; i < drc.Count; i++)
+        //        {
+        //            Person p = new Person();
+        //            Persons[i].lstObject.Add(drc);
+        //            p.nvFirstName = drc[i]["nvFirstName"].ToString();
+        //            p.lstObject.Add("nvParticipantType", drc[i]["nvParticipantType"].ToString());
+        //            Persons.Add(p);
+        //        }
+
+
+        //        return Persons;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.LogError("GetPersonList / TPerson_GetAllPerson_SLCT", ": , ex " + ex);
+        //        return null;
+        //    }
+        //}
     }
+
 }
