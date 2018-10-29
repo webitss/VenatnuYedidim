@@ -48,9 +48,54 @@ namespace Service.Entities
             }
             catch (Exception ex)
             {
-                Log.LogError("GetParticipantsList / TParticipant_SLCT", "ex" + ex +", iEventId : "+ iEventId);
+                Log.LogError("GetParticipantsList / TParticipant_SLCT", "ex " + ex +", iEventId : "+ iEventId);
                 return null;
             }
         }
+
+        public static bool DeleteParticipant(int iEventId, int iPersonId, int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iEventId", iEventId));
+                parameters.Add(new SqlParameter("iPersonId", iPersonId));
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_DEL", parameters).Tables[0];
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Log.LogError("DeleteParticipant / TParticipant_DEL", "ex " + ex);
+                return false;
+            }
+        }
+        //public static List<Person> GetPersonList()
+        //{
+        //    try
+        //    {
+
+        //        DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TPerson_GetAllPerson_SLCT").Tables[0].Rows;
+        //        List<Person> Persons = ObjectGenerator<Person>.GeneratListFromDataRowCollection(drc);
+
+        //        for (int i = 0; i < drc.Count; i++)
+        //        {
+        //            Person p = new Person();
+        //            Persons[i].lstObject.Add(drc);
+        //            p.nvFirstName = drc[i]["nvFirstName"].ToString();
+        //            p.lstObject.Add("nvParticipantType", drc[i]["nvParticipantType"].ToString());
+        //            Persons.Add(p);
+        //        }
+
+
+        //        return Persons;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.LogError("GetPersonList / TPerson_GetAllPerson_SLCT", ": , ex " + ex);
+        //        return null;
+        //    }
+        //}
     }
+
 }

@@ -48,8 +48,10 @@
 
     <div class="form-group col-sm-3">
       <label for="password">סיסמה:</label>
-      <input type="password" name="password" class="form-control" required [(ngModel)]="user.nvPassword" minlength="4" #password="ngModel"
+      <!-- <show-hide-password size="lg" icon="entypo" btnStyle="primary" [btnOutline]="false"> -->
+      <input type="password" passwordToggle name="password" class="form-control" required [(ngModel)]="user.nvPassword" minlength="4" #password="ngModel"
         (focus)="notFocused = false" (focusout)="notFocused = true" />
+        <!-- </show-hide-password> -->
       <div *ngIf="password.invalid && (password.dirty || password.touched) && notFocused">
         <div class="text-danger" *ngIf="password.errors && (password.errors.required)">שדה זה חובה!</div>
       </div>
