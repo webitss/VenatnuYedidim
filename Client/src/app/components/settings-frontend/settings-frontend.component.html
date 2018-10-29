@@ -4,7 +4,7 @@
     <input  id="header" type="text" [(ngModel)]="GlobalHeader.nvValue" />
     <br/>
     <label for="VerMarch">טקסט ראשי</label>
-    <textarea  id="VerMarch" rows="4" cols="50"[(ngModel)]="GlobalVerMarch.nvValue">
+    <textarea  id="VerMarch" rows="4" cols="50" [(ngModel)]="GlobalVerMarch.nvValue">
     </textarea>
     <br/>
     <label for="MarchSF">טקסט משני</label>
@@ -16,7 +16,7 @@
   </div>
 <div class="col col-sm-2"></div>
 <div class="col col-sm-2">
-  <input class="change" type="button" value="שנה תצוגה" (click)="saveGlobalParams()">
+  <input class="btn-add btn-circle" type="button" value="שנה תצוגה" (click)="saveGlobalParams()">
 </div>
   <div class="col col-sm-2">
     <button (click)="addDocument()" class="btn-add btn-circle">הוספת מדיה</button>

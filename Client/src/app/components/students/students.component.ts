@@ -65,6 +65,8 @@ export class StudentsComponent implements OnInit {
     }
 
     else {
+      this.message = 'האם אתה בטוח שברצונך למחוק בוגר זה?';
+      this.header = 'מחיקת בוגר';
       this.appProxy.post('GetGraduatesList', { iUserId: this.id }).then(data => {
         this.studentList = data;
         // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})

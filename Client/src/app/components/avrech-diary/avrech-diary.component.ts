@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, Input, ViewChild } from '@angular/core';
 import { Task } from '../../classes/task';
 import { TaskComponent } from '../../components/task/task.component'
+import { CalendarComponent } from '../calendar/calendar.component';
+import { calendar } from '../../../../node_modules/ngx-bootstrap/chronos/moment/calendar';
 
 @Component({
   selector: 'app-avrech-diary',
@@ -12,6 +14,7 @@ export class AvrechDiaryComponent implements OnInit {
   constructor() { }
 
   @ViewChild('task') TaskComponent: TaskComponent;
+  @ViewChild('calendar') CalendarComponent: CalendarComponent;
 
   @Output()
   flag: boolean = false;
@@ -38,8 +41,9 @@ export class AvrechDiaryComponent implements OnInit {
     // this.task = new Task()
   }
   saveTask() {
-    debugger;
-    this.TaskComponent.saveTask();
+    this.TaskComponent.saveTask().then(res=>{
+    this.CalendarComponent.refreshMe()});
+
     // alert("type: "+this.task.iTaskType);
     // alert("dtTaskdate: "+this.task.dtTaskdate);
     // alert("tTaskTime: "+this.task.tTaskTime);
@@ -51,4 +55,5 @@ export class AvrechDiaryComponent implements OnInit {
     // this.task = null;
     this.flag = false
   }
+  
 }

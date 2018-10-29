@@ -28,7 +28,7 @@ export class UploadDocumentComponent implements OnInit {
   component: string;
   constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
 
-  ngOnInit() {
+  ngOnInit() {  
     // this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => this.sheetTypes = data
     //   , err => alert('error'));
     // this.save.name = this.document.nvDocumentName;
@@ -54,6 +54,21 @@ export class UploadDocumentComponent implements OnInit {
       const file: File = fileList[0];
 
       if ((window as any).FileReader) {
+      if (this.component == "student-documents") {
+        if(file.type.indexOf('image') == -1 && file.type.indexOf('pdf') == -1)
+        {
+          alert("לא ניתן להעלות קבצים מסוג זה");
+          return;
+        }
+      }
+      else{
+        if(file.type.indexOf('image') == -1 && file.type.indexOf('pdf') == -1 && file.type.indexOf('audio') == -1 && file.type.indexOf('video') == -1)
+        {
+          alert("לא ניתן להעלות קבצים מסוג זה");
+          return;
+        }
+      }
+
         var fileReader = new FileReader();
         name = file.name;
         type = file.type;

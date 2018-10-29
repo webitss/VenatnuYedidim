@@ -27,10 +27,13 @@ export class SettingsCodeTableComponent implements OnInit {
   protected roeToadd1: SysTableRow = new SysTableRow();
   protected Mykey: string;
   public showOverlap: boolean;
+  
   public lstColumns = [{
-    title: 'עריכה',
-    type: 'html',
-    bClickCell: true
+   
+    title: '',
+    name: 'edit',
+    bClickCell: true,
+    type: 'html'
   },
   {
     title: 'ערך',
@@ -50,8 +53,10 @@ export class SettingsCodeTableComponent implements OnInit {
   ngOnInit() {
 
     this.sysTableService.getTableNames().then(data => 
-    
+     
       this.tableNames = data,
+     
+     
     error => alert(error));
 
   }
@@ -61,6 +66,9 @@ export class SettingsCodeTableComponent implements OnInit {
 
       if (data) {
         this.Values = data as Array<SysTableRow>;
+        this.Values.forEach(v => {
+          v['edit'] = '<div class="edit"></div>';
+        });
       }
 
       else alert(error)
@@ -87,8 +95,8 @@ export class SettingsCodeTableComponent implements OnInit {
 
       .then(l => {
         if (l) {
-          SysTableService.dataTables[this.Mykey].SysTableRow = l
-
+          SysTableService.dataTables[this.Mykey].SysTableRow = l;
+         
         }
         else
           console.log("err");
@@ -105,6 +113,7 @@ export class SettingsCodeTableComponent implements OnInit {
     Object.keys(SysTableService.dataTables).forEach(key => {
       if (SysTableService.dataTables[key].iSysTableId == this.idSysTableRow) {
         this.Mykey = key;
+      
       }
     })
 
@@ -114,8 +123,9 @@ export class SettingsCodeTableComponent implements OnInit {
     return this.sysTableService.addValue(this.roeToadd)
       .then(res => {
         SysTableService.dataTables[this.Mykey].SysTableRow.push(Object.assign({}, this.roeToadd));
+        
         this.roeToadd = new SysTableRow();
-
+      
       });
       
 

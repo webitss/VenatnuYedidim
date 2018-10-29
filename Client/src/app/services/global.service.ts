@@ -12,7 +12,7 @@ export class GlobalService {
   getUser(){
     return this.user;
   }
-
+ public UserPermition:number=0;
   // setUser(usr: User){
   //   this.user.dtBirthdate = usr.dtBirthdate;
   //   this.user.dtCreatedate = usr.dtCreatedate;

@@ -105,7 +105,6 @@
                 <input type="text" class="form-control" id="city" name="city" [(ngModel)]="student.nvCity" [ngModelOptions]="{standalone: true}">
             </div>
         </div>
-
         <div class="row">
 
             <div class="form-group">
@@ -158,18 +157,18 @@
                 <div *ngIf="(motherDead||motherDeadDetails)">
 
                     <div class="form-group">
-                        <label for="dtBornDateDayM"> יום פטירה עברי:</label>
+                        <label for="dtBornDateDayM"> תאריך פטירה עברי:</label>
                         <input type="text" class="form-control" id="dtBornDateDayM" name="dtBornDateDayM" [(ngModel)]="diedDateHebrewMother.Day"
                             [ngModelOptions]="{standalone: true}" placeholder="יום">
                     </div>
 
                     <div class="form-group">
-                        <label for="dtBornDateDayM"> חודש פטירה עברי:</label>
+                        <label for="dtBornDateDayM">חודש:</label>
                         <input type="text" class="form-control" id="dtBornDateMonthM" name="dtBornDateMonthM" [(ngModel)]="diedDateHebrewMother.Month"
                             [ngModelOptions]="{standalone: true}" placeholder="חודש">
                     </div>
                     <div class="form-group">
-                        <label for="dtBornDateDayM"> שנת פטירה עברי:</label>
+                        <label for="dtBornDateDayM">שנה:</label>
                         <input type="text" class="form-control" id="dtBornDateYearM" name="dtBornDateYearM" [(ngModel)]="diedDateHebrewMother.Year"
                             [ngModelOptions]="{standalone: true}" placeholder="שנה">
                     </div>
