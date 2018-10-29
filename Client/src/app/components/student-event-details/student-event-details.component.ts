@@ -19,11 +19,20 @@ export class StudentEventDetailsComponent implements OnInit {
   @Output()
   event: Event1;
   @ViewChild(NgForm) form;
+  @Input()
+  iArrivalStatusType: number;
 
   constructor(private route: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
 
   ngOnInit() {
-    this.event = new Event1();
+    if (this.event == null){
+      this.event = new Event1();
+      this.event['iArrivalStatusType'] = 0;
+      this.event.nvName = '';
+    }
+    else{
+      this.event['iArrivalStatusType'] = this.iArrivalStatusType;
+    }
     this.appProxy.post("GetEventsList", { iUserId: this.globalService.getUser().iPersonId })
       .then(data => {
         this.eventsList = data;

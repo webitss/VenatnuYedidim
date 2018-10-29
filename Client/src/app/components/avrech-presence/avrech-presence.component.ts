@@ -52,7 +52,7 @@ loadPresences(){
     })
     // this.PA = data;
     // alert(data.length);
-this.cc.refreshTable(this.lstDataRows);
+
   })
 
 }
@@ -75,7 +75,5 @@ closePresenceDialog(save) {
   }
   this.presence = null;
 }
-openPresence(){
-  throw new Error("Method not implemented.");
-}
+
 }

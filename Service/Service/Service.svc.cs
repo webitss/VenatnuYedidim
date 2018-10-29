@@ -216,13 +216,14 @@ namespace Service
         }
 
 
-        public  bool MailToAvrechim(string[] mailList, string subject, string body)
-
+        public bool MailToAvrechim(string[] mailList, string subject, string body)
         {
             return Avrech.MailToAvrechim(mailList,subject,body);
         }
 
         #endregion
+
+        
 
 
         #region SysTableRow
@@ -377,6 +378,11 @@ namespace Service
         public List<Person> GetParticipantsList(int iEventId)
         {
             return Participant.GetParticipantsList(iEventId);
+        }
+
+        public bool DeleteParticipant(int iEventId, int iPsersonId, int iUserId)
+        {
+            return Participant.DeleteParticipant(iEventId, iPsersonId, iUserId);
         }
 
         public List<Student> GetGraduatesList(int iUserId)
