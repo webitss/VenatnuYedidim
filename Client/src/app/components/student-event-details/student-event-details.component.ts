@@ -13,7 +13,8 @@ import { SysTableService } from '../../services/sys-table.service';
 })
 export class StudentEventDetailsComponent implements OnInit {
 
-  Close: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  Close: EventEmitter<any>  = new EventEmitter<any>();
   lst: Array<any>;
   @Input()
   @Output()
@@ -33,7 +34,7 @@ export class StudentEventDetailsComponent implements OnInit {
     else{
       this.event['iArrivalStatusType'] = this.iArrivalStatusType;
     }
-    this.appProxy.post("GetEventsList", { iUserId: this.globalService.getUser().iPersonId })
+    this.appProxy.post("GetEventsList")
       .then(data => {
         this.eventsList = data;
       }).catch(err => {
@@ -72,7 +73,7 @@ export class StudentEventDetailsComponent implements OnInit {
   from: number = 0;
 
   getEvents() {
-    this.appProxy.post("GetEventsList", { iUserId: this.globalService.getUser().iPersonId })
+    this.appProxy.post("GetEventsList")
       .then(data => {
         this.eventsList = data;
       }).catch(err => {

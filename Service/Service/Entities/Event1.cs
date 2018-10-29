@@ -43,11 +43,11 @@ namespace Service.Entities
 
         #endregion
 
-        public static List<Event1> GetEventsList(int? iUserId)
+        public static List<Event1> GetEventsList()
         {
             try
             {
-                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_SLCT", new SqlParameter("iUserId", iUserId)).Tables[0].Rows;
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_SLCT").Tables[0].Rows;
                 List<Event1> events = ObjectGenerator<Event1>.GeneratListFromDataRowCollection(drc);
                 return events;
             }
