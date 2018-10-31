@@ -107,5 +107,6 @@ export class StudentEventsComponent implements OnInit {
   close() {
     this.eventFlag = false;
   }
+  
 }
 
