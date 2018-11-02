@@ -33,6 +33,11 @@
     margin-right: 18%;
     margin-top: 28%;
 }
+
+/* .upload {
+    position: relative;
+    top:-10%;
+} */
 .no{
     background-image: url("../../../assets/icons/noImage.png");
 }
@@ -52,9 +57,9 @@ button{
     margin-right: 5%;
 
 }
-label{
+/* label{
     margin-right: 10%;
-}
+} */
 .btn-del{
     background-image: url("../../../assets/icons/trash.png");
 }
@@ -67,6 +72,7 @@ label{
     cursor: pointer;
     background-image: url("../../../assets/icons/garbage.png");   
     padding-right: 0px;
+    background-color: transparent;
 }
 .row{
     padding-right: 15px;
@@ -84,8 +90,20 @@ label{
     color: rgb(207, 37, 94);
     text-decoration: none;
     padding-top: 5px;
+    margin-top:2%; 
+    background-color: white;
 } 
+caption {
+    caption-side: top;
+}
 .save:hover, .close1:hover{
     background-color: rgb(207, 37, 94);
     color: white;
+}
+
+
+.table td, .table th {
+    padding: 0; 
+    vertical-align: middle;
+    border-top: 0; 
 }
