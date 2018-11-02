@@ -30,6 +30,8 @@ export class SettingYeshivaComponent implements OnInit {
   public sysTableList: SysTableRow[];
   public yeshiva: Yeshiva = new Yeshiva();
   protected yeshivaList = new Array();
+  protected isNew = false;
+  protected header="";
 
   @ViewChild(NgForm) form;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
@@ -50,11 +52,16 @@ export class SettingYeshivaComponent implements OnInit {
   ngOnInit() {
     if (this.iYeshivaId == 0) {
       this.yeshiva = new Yeshiva();
+      this.isNew = true;
+      this.header="מוסד חדש";
     }
     else {
+      this.isNew = false;
       this.appProxy.post("getYeshivaById", { iYeshivaId: this.iYeshivaId })
         .then(data => {
           this.yeshiva = data;
+          this.header=this.yeshiva.nvYeshivaName
+          ;
         }
         )
     };
@@ -97,7 +104,7 @@ export class SettingYeshivaComponent implements OnInit {
     }
   }
 
-  addYeshiva(yeshiva:Yeshiva){
+  addYeshiva(yeshiva: Yeshiva) {
     this.yeshivaList.push(yeshiva);
   }
 
