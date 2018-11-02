@@ -336,7 +336,7 @@ export class StudentDetailsComponent implements OnInit {
           alert("פרטי התלמיד עודכנו בהצלחה");
         else
           alert("פרטי הבוגר עודכנו בהצלחה");
-
+          this.change=false;
       }, err => {
         if (this.status == 'תלמיד')
           alert("שגיאה בעריכת תלמיד");
@@ -344,6 +344,7 @@ export class StudentDetailsComponent implements OnInit {
           alert("שגיאה בעריכת בוגר");
       });
     }
+    
     else
 
       this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
