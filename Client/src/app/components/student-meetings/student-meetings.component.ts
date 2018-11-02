@@ -79,8 +79,6 @@ export class StudentMeetingsComponent implements OnInit {
       this.meetingList.splice(this.meetingList.indexOf(meeting), 1);
       this.cc.refreshTable(this.meetingList);
     });
-
-
   }
 
 
