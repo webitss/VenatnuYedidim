@@ -116,10 +116,12 @@ export class StudentDetailsComponent implements OnInit {
           if (this.student.bDeathFather == true) {
             this.fatherDeadDetails = true;
             this.isCheckedFather = true;
+            this.fatherDead = true;
           }
           if (this.student.bDeathMother == true) {
             this.motherDeadDetails = true;
             this.isCheckedMother = true;
+            this.motherDead = true;
           }
 
 
@@ -274,6 +276,7 @@ export class StudentDetailsComponent implements OnInit {
 
     switch (parentType) {
       case 1:
+
         if (this.student.bDeathFather == true) {
           if (this.isCheckedFather == false) {
             this.fatherDead = true;
@@ -310,7 +313,6 @@ export class StudentDetailsComponent implements OnInit {
 
 
   saveStudent() {
-    debugger;
     if (this.save.name != '')
       this.student.nvImgStudent = this.save.name;
     this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;
