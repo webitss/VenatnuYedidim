@@ -2,12 +2,20 @@
 
 <div class="form" style="z-index: 9999999">
     <div class="row ">
-        <div class="col-sm-8">
+        <div class="col-sm-8" *ngIf="component == 'student-documents'">
             <div *ngIf="document.iDocumentId">
-                <h3>עריכה </h3>
+                <h3>עריכת מסמך</h3>
             </div>
             <div *ngIf="document.iDocumentId==null">
                 <h3>העלאת מסמך</h3>
+            </div>
+        </div>
+        <div class="col-sm-8" *ngIf="component != 'student-documents'">
+            <div *ngIf="document.iDocumentId">
+                <h3>עריכת מדיה</h3>
+            </div>
+            <div *ngIf="document.iDocumentId==null">
+                <h3>העלאת מדיה</h3>
             </div>
         </div>
         <div class="col-sm-4">
@@ -40,12 +48,12 @@
 
             <div class="form-group documentName">
                 <!-- <label for="documentName">שם הקובץ</label> -->
-                <div  id="documentName">{{save.name}}</div>
+                <div id="documentName">{{save.name}}</div>
             </div>
         </div>
         <div class="row" *ngIf="component=='event-media'">
-          <input class="checkbox" type="checkbox" [(ngModel)]="document.bShowInTadmit">
-          <div>הצג באתר תדמית</div>
+            <input class="checkbox" type="checkbox" [(ngModel)]="document.bShowInTadmit">
+            <div>הצג באתר תדמית</div>
         </div>
     </div>
 </div>

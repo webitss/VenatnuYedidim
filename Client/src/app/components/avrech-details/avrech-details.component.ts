@@ -53,3 +53,4 @@ export class AvrechDetailsComponent implements OnInit {
   }
 
 }
+    
