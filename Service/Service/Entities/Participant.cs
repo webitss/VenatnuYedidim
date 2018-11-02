@@ -97,7 +97,7 @@ namespace Service.Entities
             }
         }
 
-        public static bool SetEvent(int iStatusType, int iPersonId, int iEventId, int iUserId)
+        public static bool SetEventParticipant(int iStatusType, int iPersonId, int iEventId, int iUserId)
         {
             try
             {
@@ -112,7 +112,7 @@ namespace Service.Entities
             }
             catch (Exception ex)
             {
-                Log.LogError("SetEvent / TParticipant_INS_UPD", ": , ex " + ex);
+                Log.LogError("SetEventParticipant / TParticipant_INS_UPD", ": , ex " + ex);
                 return false;
             }
         }

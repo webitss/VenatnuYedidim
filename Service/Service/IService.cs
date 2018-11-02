@@ -555,11 +555,11 @@ namespace Service
         [OperationContract]
         [WebInvoke(
         Method = "POST",
-        UriTemplate = "SetEvent",
+        UriTemplate = "SetEventParticipant",
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Person> SetEvent(int iStatusType,int iPersonId, int iEventId, int iUserId );
+        bool SetEventParticipant(int iStatusType,int iPersonId, int iEventId, int iUserId );
 
         #endregion
 

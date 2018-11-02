@@ -5,7 +5,6 @@ import { AppProxy } from '../../services/app.proxy';
 import { NgForm } from '@angular/forms';
 import { GlobalService } from '../../services/global.service';
 import { SysTableService } from '../../services/sys-table.service';
-import { EventParticipantsComponent } from '../event-participants/event-participants.component'
 
 @Component({
   selector: 'app-student-event-details',
