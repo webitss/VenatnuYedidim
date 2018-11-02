@@ -12,7 +12,7 @@
 
         </label>
 
-        <span *ngIf="col.type != 'checkbox'"> {{col.title}}
+        <span *ngIf="col.type != 'html' && col.type != 'checkbox'"> {{col.title}}
           <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(-1,col.name)'>&#xe010;</span>
           <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(1,col.name)'>&#xe011;</span>
           <!-- *ngIf="lstSortColumns[col.name] && lstSortColumns[col.name]>0"  -->
