@@ -336,7 +336,7 @@ export class StudentDetailsComponent implements OnInit {
           alert("פרטי התלמיד עודכנו בהצלחה");
         else
           alert("פרטי הבוגר עודכנו בהצלחה");
-
+          this.change=false;
       }, err => {
         if (this.status == 'תלמיד')
           alert("שגיאה בעריכת תלמיד");
