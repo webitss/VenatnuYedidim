@@ -83,6 +83,7 @@ namespace Service.Entities
                    // Person p = new Person();
                     Persons[i].lstObject=new Dictionary<string,string>();
                     Persons[i].nvFirstName = drc[i]["nvFirstName"].ToString();
+                    //Persons[i].iPersonId = drc[i]["iPersonId"].ToString();
                     Persons[i].lstObject.Add("nvParticipantType", drc[i]["nvParticipantType"].ToString());
                   
                 }

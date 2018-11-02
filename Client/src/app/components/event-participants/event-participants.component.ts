@@ -4,7 +4,7 @@ import { Participants } from '../../classes/participants';
 import { ActivatedRoute } from '@angular/router';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { Person } from '../../classes/person';
-
+import { GlobalService } from '../../services/global.service';
 import { SysTableService } from '../../services/sys-table.service';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { NgIf } from '@angular/common';
@@ -34,15 +34,9 @@ export class EventParticipantsComponent implements OnInit {
   flagDelete = false;
   message = 'האם אתה בטוח שברצונך למחוק משתתף זה?';
   header = 'מחיקת משתתף';
-  constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
-
- 
-
-
-
-
-
-  cancelAdd(event) {
+  iPersonId: number;
+  constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService,private globalService: GlobalService) { }
+  cancel(event) {
     this.flag = false;
   }
   public lstColumns = [
@@ -65,6 +59,7 @@ export class EventParticipantsComponent implements OnInit {
         this.allPersons.forEach(
           person => {
             this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] });
+            this.iPersonId=person.iPersonId;
           }
         );
 
@@ -76,10 +71,47 @@ export class EventParticipantsComponent implements OnInit {
   close() {
     //  להוסיף את המשתתפים שנבחרו
   }
+  save() {
+    this.globalService.IsParticipantsExists(this.iPersonId, this.iEventId).then(data => {
+      if (data)
+        alert("תלמיד זה קיים כבר באירוע זה");
+      else {
+        // this.appProxy.post("SetEvent", { iStatusType: this.event['iArrivalStatusType'], iPersonId: this.id, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
+        //   .then(data => {
+        //     if (data == true) {
+        //       alert("התלמיד נוסף בהצלחה בהצלחה!");
+        //       close();
+        //     }
+        //   }).catch(err => {
+        //     alert(err);
+        //   });
+        alert('אמור לשמור')
+      }
+    }).catch(err => {
+      alert(err);
+    })
+  }
   ngOnInit() {
 
     this.listToSelect = new Array<any>();
 
+<<<<<<< HEAD
+    this.appProxy.post('GetPersonList').then(
+      data =>{
+
+       this.allPersons = data
+      //  this.allPersons.forEach(
+      //   st => {
+      //      st['delete'] = '<button class="btn delete" >מחק</button>'; 
+      //     });
+      this.allPersons.forEach(
+        person=>{
+          this.listToSelect.push({value:person.nvFirstName+' '+person.lstObject['nvParticipantType']});
+        }
+      );
+         
+    }
+=======
     this.appProxy.post('GetPersonList', { iPersonId: 0 }).then(
       data => {
 
@@ -95,6 +127,7 @@ export class EventParticipantsComponent implements OnInit {
         );
 
       }
+>>>>>>> 07c2efd61adcd0a81e045fd96f978cd6061d5064
       , err => alert(err));
 
     this.sub = this.router.parent.params.subscribe(params => {
