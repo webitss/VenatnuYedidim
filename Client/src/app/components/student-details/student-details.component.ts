@@ -130,11 +130,11 @@ export class StudentDetailsComponent implements OnInit {
       }
       else {
         this.student = new Student();
-        this.student.iPersonId=0;
-        this.student.iStatusType=159;
+        this.student.iPersonId = 0;
+        this.student.iStatusType = 159;
         // this.student.iCauseOfDeathFather=0;
         // this.student.iCauseOfDeathMother=0;
-        this.student.iStudentId=0;
+        this.student.iStudentId = 0;
         this.student.bDeathFather = false;
         this.student.bDeathMother = false;
         this.change = true;
@@ -215,18 +215,18 @@ export class StudentDetailsComponent implements OnInit {
     })
   }
 
-  deleteYeshiva(yeshiva:Yeshiva){
-    this.flagDelete=true;
-    this.yeshivaId=yeshiva.iYeshivaId;
-    this.message='האם אתה בטוח שברצונך למחוק את הישיבה '+yeshiva.nvYeshivaName+'?';
-    
+  deleteYeshiva(yeshiva: Yeshiva) {
+    this.flagDelete = true;
+    this.yeshivaId = yeshiva.iYeshivaId;
+    this.message = 'האם אתה בטוח שברצונך למחוק את הישיבה ' + yeshiva.nvYeshivaName + '?';
+
   }
 
   //מחיקת ישיבה לתלמיד
   deleteYeshivaOfStudent() {
 
     this.appProxy.post("DeleteYeshivaOfStudent", {
-      iPersonId: this.paramRout, iYeshivaId:this.yeshivaId, iUserId: this.currentUser
+      iPersonId: this.paramRout, iYeshivaId: this.yeshivaId, iUserId: this.currentUser
     }).then(data => { this._parent.openMessagePopup("הישיבה נמחקה בהצלחה!") }, err => { alert("שגיאה במחיקת ישיבהיד"); });
     var i = 0;
     this.yeshivaListOfStudent.forEach(e => {
@@ -243,9 +243,9 @@ export class StudentDetailsComponent implements OnInit {
   // { year: 5776, month: 13, date: 29, month_name: 'Elul' }
 
 
-// changeForm(){
-//   this.change=true;
-// }
+  // changeForm(){
+  //   this.change=true;
+  // }
 
 
 
@@ -256,7 +256,7 @@ export class StudentDetailsComponent implements OnInit {
         this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser
     }).then(data => {
       if (data)
-       this._parent.openMessagePopup("הישיבה נוספה בהצלחה!");
+        this._parent.openMessagePopup("הישיבה נוספה בהצלחה!");
       else ("שגיאה בהוספת ישיבה")
     }
       , err => alert("שגיאה"))
@@ -264,7 +264,7 @@ export class StudentDetailsComponent implements OnInit {
     var newYeshiva: Yeshiva = new Yeshiva();
     newYeshiva.nvCity = this.yeshivaSelected.nvCity;
     newYeshiva.nvAddress = this.yeshivaSelected.nvAddress;
-    newYeshiva.nvYeshivaName=this.yeshivaSelected.nvYeshivaName;
+    newYeshiva.nvYeshivaName = this.yeshivaSelected.nvYeshivaName;
     this.yeshivaListOfStudent.push(newYeshiva);
 
   }
@@ -338,7 +338,7 @@ export class StudentDetailsComponent implements OnInit {
           alert("פרטי התלמיד עודכנו בהצלחה");
         else
           alert("פרטי הבוגר עודכנו בהצלחה");
-          this.change=false;
+        this.change = false;
       }, err => {
         if (this.status == 'תלמיד')
           alert("שגיאה בעריכת תלמיד");
@@ -346,11 +346,10 @@ export class StudentDetailsComponent implements OnInit {
           alert("שגיאה בעריכת בוגר");
       });
     }
-    
+
     else
-
       this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
-
+    this.router.navigate(['students']);
   }
 
   get baseFileUrl() {
@@ -388,17 +387,17 @@ export class StudentDetailsComponent implements OnInit {
 
   }
   ngOnDestroy() {
-    // alert(this.change);
-    if (this.change) {
-      let v = confirm("האם ברצונך לשמור?");
-      if (v)
-        this.saveStudent();
-      debugger;
-      // this.message2 = "האם ברצונך לשמור?"
-      // this.flag = true;
-      // alert(this.flag);
-      //this._parent.openMessagePopup("kljk");
-    }
+    // // alert(this.change);
+    // if (this.change) {
+    //   let v = confirm("האם ברצונך לשמור?");
+    //   if (v)
+    //     this.saveStudent();
+    //   debugger;
+    //   // this.message2 = "האם ברצונך לשמור?"
+    //   // this.flag = true;
+    //   // alert(this.flag);
+    //   //this._parent.openMessagePopup("kljk");
+    // }
 
   }
 }

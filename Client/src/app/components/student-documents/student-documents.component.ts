@@ -103,7 +103,7 @@ export class StudentDocumentsComponent implements OnInit {
         }
       }
       if (index == undefined) {
-        if (this.document.iCategoryType != undefined)
+        if (this.document.iCategoryType != 0)
           category = this.categoryTypes.filter(x => x.iSysTableRowId == this.document.iCategoryType)[0].nvValue;
         this.lstDataRows.push({
           nvCategory: category,
@@ -121,16 +121,27 @@ export class StudentDocumentsComponent implements OnInit {
         d.iCategoryType = this.document.iCategoryType;
         d.iItemId = this.document.iItemId;
         d.iBelongingType = this.document.iBelongingType;
-        d.nvDocumentType=this.document.nvDocumentType;
+        d.nvDocumentType = this.document.nvDocumentType;
         this.documents.push(d);
       }
       else {
-        if (this.document.iCategoryType != undefined)
+        if (this.document.iCategoryType != 0)
           category = this.categoryTypes.filter(x => x.iSysTableRowId == this.document.iCategoryType)[0].nvValue;
         this.lstDataRows[index].nvCategory = category;
         this.lstDataRows[index].nvComment = this.document.nvComment;
         this.lstDataRows[index].open = '<a href=' + AppProxy.getBaseUrl() + 'Files/' + this.document.nvDocumentName + ' target="_blank">' + this.document.nvDocumentName + '</a>';
 
+        for (let i = 0; i < this.documents.length; i++) {
+          if (this.documents[i].iDocumentId == this.document.iDocumentId) {
+            if (this.document.iCategoryType != 0)
+              category = this.categoryTypes.filter(x => x.iSysTableRowId == this.document.iCategoryType)[0].nvValue;
+            this.documents[i].iCategoryType = this.document.iCategoryType;
+            this.documents[i].nvComment = this.document.nvComment;
+            this.documents[i].nvDocumentName = this.document.nvDocumentName;
+            this.documents[i].nvDocumentType = this.document.nvDocumentType;
+            break;
+          }
+        }
       }
       this.cc.refreshTable(this.lstDataRows);
       this.document = null;

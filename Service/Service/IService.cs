@@ -559,7 +559,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool SetEventParticipant(int iStatusType,int iPersonId, int iEventId, int iUserId );
+        bool SetEventParticipant(bool isNew, int iStatusType,int iPersonId, int iEventId, int iUserId );
 
         #endregion
 
@@ -795,7 +795,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool SetPresence(PresenceAvrech presenceAvrech, int iUserId);
+        int SetPresence(PresenceAvrech presenceAvrech, int iUserId);
 
         #endregion
 

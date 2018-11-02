@@ -20,8 +20,8 @@ export class AvrechPresenceComponent implements OnInit {
   presences: any;
   @Output()
   @Input()
-  presence: PresenceAvrech;
-  @ViewChild(VyTableComponent) cc: VyTableComponent;
+  presence:PresenceAvrech;
+  @ViewChild(VyTableComponent) cc:VyTableComponent;
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
 
   public lstColumns = [
@@ -77,7 +77,7 @@ export class AvrechPresenceComponent implements OnInit {
     this.presence.dtDatePresence = new Date();
     this.presence.iPersonId = this.iPersonId;
   }
-  closePresenceDialog(save) {
+  closePresenceDialog(event,save) {
     debugger;
     let index;
     if (save == true) {
@@ -89,17 +89,17 @@ export class AvrechPresenceComponent implements OnInit {
       }
       if (index == undefined) {
         this.lstDataRows.push({
-          iPersonId: this.presence.iPersonId,
-          iPresenceAvrech: this.presence.iPresenceAvrech,
+          iPersonId: event.iPersonId,
+          iPresenceAvrech: event.iPresenceAvrech,
           ['nvDate']: new Date().toLocaleDateString(),
           // dtDatePresence:this.presence.dtDatePresence,
-          iHoursSum: this.presence.iHoursSum,
+          iHoursSum: event.iHoursSum,
           edit: '<div class="edit"></div>',
         });
       }
       else {
-        this.lstDataRows[index].iHoursSum = this.presence.iHoursSum;
-        this.lstDataRows[index].dtDatePresence = this.presence.dtDatePresence;
+        this.lstDataRows[index].iHoursSum = event.iHoursSum;
+        this.lstDataRows[index].nvDate = event.dtDate.toLocaleDateString();
       }
       debugger;
       this.cc.refreshTable(this.lstDataRows);

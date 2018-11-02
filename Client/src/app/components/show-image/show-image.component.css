@@ -5,13 +5,13 @@
     padding: 0%;
     background-color:lightgray;
 }
-/* .header{
+.header1{
     font-family: tahoma;
-    font-size: 40px;
-    text-align:left;
+    
+    text-align:right;
     color: deeppink
 
-} */
+}
 .MarchSF{
     width:100%;
     height:150px ;
@@ -59,4 +59,10 @@ ngx-gallery /deep/ ngx-gallery-thumbnails .ngx-gallery-arrow {
 }
 ngx-gallery /deep/ ngx-gallery-preview .ngx-gallery-arrow {
     background-color: beige
+}
+.div-text{
+   background-color: blueviolet;height:1000px;
+}
+div-image{
+    background-color:aquamarine;height: 1000px;
 }

@@ -50,6 +50,14 @@ export class AvrechComponent implements OnInit {
     this.currentComponent = event;
   }
 
+  
+  isDisabled():boolean {
+    if(this.currentComponent.form!=undefined) {
+      return this.currentComponent.form.valid;
+   
+  }
+}
+
   save() {
 
     if (this.currentComponent.save) {
