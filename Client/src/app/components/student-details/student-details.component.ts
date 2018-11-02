@@ -310,7 +310,7 @@ export class StudentDetailsComponent implements OnInit {
 
 
   saveStudent() {
-    //debugger;
+    debugger;
     if (this.save.name != '')
       this.student.nvImgStudent = this.save.name;
     this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;

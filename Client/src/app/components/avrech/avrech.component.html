@@ -28,7 +28,7 @@
 
 </nav>
 <div class="btn-area">
-<button *ngIf="currentComponent.constructor.name.indexOf('AvrechDetails') != -1" class="btn-circle btn-save" (click)="save()">שמור</button>
+<button *ngIf="currentComponent.constructor.name.indexOf('AvrechDetails') != -1" class="btn-circle btn-save" [ngClass]="{'disabled': !isDisabled() }" [disabled]="!isDisabled()" (click)="save()">שמור</button>
 <button class="btn-circle btn-close" (click)="close()">סגור</button>
 </div>
 </div>

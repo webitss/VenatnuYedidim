@@ -1,4 +1,4 @@
-import { Output, EventEmitter, Component, OnInit, ViewChild } from '@angular/core';
+import { Output, EventEmitter, Component, OnInit, ViewChild, Inject, forwardRef } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { AvrechComponent } from '../avrech/avrech.component';
 
@@ -6,6 +6,8 @@ import { Avrech } from '../../classes/avrech';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { Router } from '@angular/router';
 import { viewClassName } from '../../../../node_modules/@angular/compiler';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { AppComponent } from '../app/app.component';
 
 
 
@@ -24,10 +26,11 @@ export class AvrechimComponent implements OnInit {
   message='האם אתה בטוח שברצונך למחוק אברך זה?';
 
   @ViewChild('avrechim') avrechim: any;
+  @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
   protected currentComponent: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
 
-  constructor(private router: Router, private appProxy: AppProxy) { }
+  constructor(private router: Router, private appProxy: AppProxy,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
 
   ngOnInit() {
 
@@ -76,13 +79,11 @@ export class AvrechimComponent implements OnInit {
     this.appProxy.post('DeleteAvrech', { iPersonId: this.avrechId })
       .then(result => {
         if (result) {
-          let i = 0;
-          this.avrechimList.forEach(e => {
-            if (e.iPersonId == this.avrechId)
-              this.avrechimList.splice(i, 1);
-            i++;
+      this._parent.openMessagePopup("האברך נמחק בהצלחה!");
+          const i=this.avrechimList.findIndex(x=>x.iPersonId==this.avrechId);
+        this.avrechimList.splice(i, 1);
+        this.vyTableComponent.refreshTable(this.avrechimList);
 
-          });
 
 
         } else { alert(' המחיקה נכשלה'); }

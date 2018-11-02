@@ -5,6 +5,7 @@ import { Avrech } from '../../classes/avrech';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { GlobalService } from '../../services/global.service';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { NgForm } from '../../../../node_modules/@angular/forms';
 
 @Component({
   selector: 'app-avrech-details',
@@ -19,6 +20,7 @@ export class AvrechDetailsComponent implements OnInit {
   userName: string;
   password: string;
   isDetails: boolean;
+  @ViewChild(NgForm) form;
   constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService, private router: Router) { }
 
   ngOnInit() {

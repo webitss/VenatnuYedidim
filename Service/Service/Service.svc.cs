@@ -394,6 +394,11 @@ namespace Service
         {
             return Participant.GetPersonList();
         }
+
+        public bool SetEventParticipant(bool isNew, int iStatusType, int iPersonId, int iEventId, int iUserId)
+        {
+            return Participant.SetEventParticipant(isNew, iStatusType, iPersonId, iEventId, iUserId);
+        }
         #endregion
 
         #region Fileshandler
@@ -450,7 +455,7 @@ namespace Service
             return PresenceAvrech.GetPresenceAvrechById(iPersonId);
         }
 
-        public bool SetPresence(PresenceAvrech presenceAvrech, int iUserId)
+        public int SetPresence(PresenceAvrech presenceAvrech, int iUserId)
         {
             return PresenceAvrech.SetPresence(presenceAvrech, iUserId);
         }
