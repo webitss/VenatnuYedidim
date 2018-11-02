@@ -14,17 +14,45 @@
 }
 
 .form-group {
-    margin:5px;
+    /* margin:5px; */
+    width: 100%;
 }
 
 .btn-yesNo{
     float: left;
     border-radius:30px;
-    width:75px;
-    margin-left:10px;
+    width:120px;
+    margin-right:10px;
     border: none;
     cursor: pointer;
     background-color: white;
     border: 1px rgb(207, 37, 94) solid;
     color: rgb(207, 37, 94);
+    padding: 3px;
+}
+
+.content{
+    position: fixed;
+    border: 1px solid rgb(207, 37, 94);
+    width: 40%;
+    /* height: 80%; */
+    padding: 2% 2%;
+    background-color: white;
+    z-index: 999;
+    top:20%;
+    right: 30%;
+    border-radius: 5px;
+}
+
+.disabled {
+    cursor: not-allowed;
+}
+
+.disabled:hover {
+    background-color: #D9D9D9;
+    color: rgb(207, 37, 94);
+}
+
+.top {
+    margin-bottom: 5%;
 }

@@ -16,12 +16,12 @@
     <div class="form" #details>
         <div class="row">
             <div class="form-group col-sm-4">
-                <label for="lastName">שם משפחה:</label>
+                <label for="lastName">שם פרטי:</label>
                 <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="student.nvLastName"
                     (change)="change=true" [ngModelOptions]="{standalone: true}">
             </div>
             <div class="form-group col-sm-4">
-                <label for="firstName">שם פרטי:</label>
+                <label for="firstName">שם משפחה:</label>
                 <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="student.nvFirstName"
                     (change)="change=true" [ngModelOptions]="{standalone: true}">
             </div>
@@ -142,7 +142,7 @@
         <div class="form-group">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="fatherDead" (click)="changeStatusParent(1)" (change)="change=true"
+                    <input type="checkbox"  name="fatherDead" (click)="changeStatusParent(1)" (change)="change=true "
                         [checked]="isCheckedFather"> יתום מאב
                 </label>
             </div>
@@ -185,34 +185,13 @@
                         [(ngModel)]="diedDateHebrewFather.Year" [ngModelOptions]="{standalone: true}" placeholder="שנה">
                 </div>
 
+
+
 <<<<<<< HEAD
 
 
-
-
-                    
-                    <div class="form-group">
-                        <label for="dtBornDateDay"> תאריך פטירה עברי:</label>
-                        <input type="text" class="form-control " id="dtBornDateDay" name="dtBornDateDay" (change)="change=true" [(ngModel)]="diedDateHebrewFather.Day" [ngModelOptions]="{standalone: true} "
-                            placeholder="יום">
-                        <input type="text" class="form-control " id="dtBornDateMonth" name="dtBornDateMonth" (change)="change=true" [(ngModel)]="diedDateHebrewFather.Month"
-                            [ngModelOptions]="{standalone: true}" placeholder="חודש">
-                        <input type="text" class="form-control " id="dtBornDateYear" name="dtBornDateYear" (change)="change=true" [(ngModel)]="diedDateHebrewFather.Year"
-                    </div>
-                    <div class="form-group">
-                        <label for="dtBornDateMonth">חודש:</label>
-                        <input type="text" class="form-control " id="dtBornDateMonth" name="dtBornDateMonth" [(ngModel)]="diedDateHebrewFather.Month"
-                            [ngModelOptions]="{standalone: true}" placeholder="חודש">
-                    </div>
-                    <div class="form-group">
-                        <label for="dtBornDateYear"> שנה:</label>
-                        <input type="text" class="form-control " id="dtBornDateYear" name="dtBornDateYear" [(ngModel)]="diedDateHebrewFather.Year"
-                            [ngModelOptions]="{standalone: true}" placeholder="שנה">
-                    </div>
 =======
->>>>>>> 1bf5a5dc26730c6d05ab026078459e888fa4466e
-
-
+>>>>>>> b0d6bd453bf1d128143d1edbcef6abb0f9529389
                 <!-- <div class="form-group">
                     <label for="dtBornDateDay"> תאריך פטירה עברי:</label>
                     <input type="text" class="form-control " id="dtBornDateDay" name="dtBornDateDay" (change)="change=true" [(ngModel)]="diedDateHebrewFather.Day"

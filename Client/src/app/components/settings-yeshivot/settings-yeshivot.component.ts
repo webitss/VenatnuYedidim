@@ -38,7 +38,7 @@ export class SettingsYeshivotComponent implements OnInit {
   @Output()
   protected sysTableList: SysTableRow[];
 
-  
+
   flagDelete = false;
   message = '';
   header = 'מחיקת מוסד';
@@ -71,11 +71,12 @@ export class SettingsYeshivotComponent implements OnInit {
       })
   }
 
-  changeTable(y:Yeshiva) {
+
+  changeTable(y: Yeshiva) {
     y['edit'] = '<div class="edit"></div>';
     y['delete'] = '<div class="delete"></div>';
     y['nvRoleType'] = this.sysTableList.filter(x => x.iSysTableRowId == y.iRoleType)[0].nvValue;
-    this.yeshiva=y;
+    this.yeshiva = y;
   }
 
   public setYeshiva(yeshiva) {
@@ -86,12 +87,12 @@ export class SettingsYeshivotComponent implements OnInit {
   }
 
   public editYeshiva(yeshiva) {
+    this.changeTable(yeshiva);
     this.iYeshivaId = yeshiva.iYeshivaId;
     this.flag = false;
   }
 
   public deleteYeshiva(yeshiva) {
-    this.changeTable(yeshiva);
     this.iYeshivaId = yeshiva.iYeshivaId;
     this.flag = true;
     this.flagDelete = true;
@@ -99,18 +100,50 @@ export class SettingsYeshivotComponent implements OnInit {
     this.changeTable(yeshiva);
   }
 
-  delete() {
+  delete(yeshiva: Yeshiva) {
     this.appProxy.post('DeleteYeshiva', { iYeshivaId: this.iYeshivaId, iLastModifyUserId: this.iLastModifyUserId })
       .then(
         data => {
-          this.yeshiva = data;
+          yeshiva = data;
           this.iYeshivaId = null;
           this.flag = null;
-          this.yeshivaList.splice(this.yeshivaList.indexOf(this.yeshiva), 1);
-          this.vyTableComponent.refreshTable(this.yeshivaList);
           this._parent.openMessagePopup('הישיבה נמחקה בהצלחה!');
+          this.yeshivaList.splice(this.yeshivaList.indexOf(yeshiva), 1);
+          this.vyTableComponent.refreshTable(this.yeshivaList);
         });
   }
+
+  updateYeshiva(y: Yeshiva) {
+    let l = this.yeshivaList.indexOf(this.yeshivaList.find(y1 => y1.iYeshivaId == y.iYeshivaId))
+    this.changeTable(y);
+    this.yeshivaList[l] =y;
+    this.vyTableComponent.refreshTable(this.yeshivaList);
+  }
+
+  addNewYeshiva(y: Yeshiva) {
+    this.yeshivaList.push(y);
+    // this.selecList(y.iYeshivaId);
+  }
+
+  addYeshiva(yeshiva: Yeshiva) {
+    this.changeTable(yeshiva);
+    this.yeshivaList.push(this.yeshiva);
+    this.vyTableComponent.refreshTable(this.yeshivaList);
+  }
+
+  // selecList(id) {
+  //   this.appProxy.post("getYeshivaById", {id:this.iYeshivaId} )
+  //     .then(data => {
+  //       this.yeshivaList = data;
+  //       this.sysTableService.getValues(SysTableService.dataTables.roleType.iSysTableId).then(val => {
+  //         this.sysTableList = val;
+  //         this.yeshivaList.forEach(y => {
+  //           this.changeTable(y);
+  //         });
+  //       });
+  //       this.vyTableComponent.refreshTable(this.yeshivaList);
+  //     })
+  // }
 
   close() {
     this.iYeshivaId = null;
@@ -121,3 +154,5 @@ export class SettingsYeshivotComponent implements OnInit {
     this.yeshivot.downloadExcel();
   }
 }
+
+
