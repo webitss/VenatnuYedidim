@@ -17,7 +17,7 @@ export class GlobalService {
 
   IsParticipantsExists(participantId: number, eventId: number) {
     // this.getParticipantListByEvent(eventId);
-    this.appProxy.post("GetParticipantsList", { iEventId: eventId }).then(res => {
+   return this.appProxy.post("GetParticipantsList", { iEventId: eventId }).then(res => {
       if (res.length > 0) {
         res.forEach(p => {
           if (p.iPersonId == participantId)
