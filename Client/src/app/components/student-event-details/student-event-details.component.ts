@@ -23,6 +23,7 @@ export class StudentEventDetailsComponent implements OnInit {
   @ViewChild(NgForm) form;
   @Input()
   iArrivalStatusType: number;
+  isNew: boolean;
 
   constructor(private route: ActivatedRoute, private router: Router, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
 
@@ -36,9 +37,11 @@ export class StudentEventDetailsComponent implements OnInit {
       this.event = new Event1();
       this.event['iArrivalStatusType'] = 0;
       this.event.nvName = '';
+      this.isNew = true;
     }
     else {
       this.event['iArrivalStatusType'] = this.iArrivalStatusType;
+      this.isNew = false;
     }
     this.appProxy.post("GetEventsList")
       .then(data => {
@@ -71,11 +74,11 @@ export class StudentEventDetailsComponent implements OnInit {
       if (data)
         alert("תלמיד זה קיים כבר באירוע זה");
       else {
-        this.appProxy.post("SetEvent", { iStatusType: this.event['iArrivalStatusType'], iPersonId: this.id, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
+        this.appProxy.post("SetEventParticipant", {isNew: this.isNew, iStatusType: this.event['iArrivalStatusType'], iPersonId: this.id, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
           .then(data => {
             if (data == true) {
               alert("האירוע נשמר בהצלחה!");
-              close();
+              this.close();
             }
           }).catch(err => {
             alert(err);
