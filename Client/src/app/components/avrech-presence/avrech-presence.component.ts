@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, Input } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute } from '@angular/router';
 import { SysTableService } from '../../services/sys-table.service';
@@ -18,6 +18,8 @@ export class AvrechPresenceComponent implements OnInit {
   private iPersonId: number;
   protected PA: PresenceAvrech;
   presences: any;
+  @Output()
+  @Input()
   presence:PresenceAvrech;
   @ViewChild(VyTableComponent) cc:VyTableComponent;
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
