@@ -1,62 +1,97 @@
-<div class="form" *ngIf='avrech!=undefined'>
-  <div class="form-group">
-    <label for="firstName">שם פרטי</label>
-    <input type="text" id="firstName" [(ngModel)]="avrech.nvFirstName" class="form-control" />
-  </div>
-  <div class="form-group  ">
-    <label for="lastName">שם משפחה</label>
-    <input type="text" id="lastName" [(ngModel)]="avrech.nvLastName" class="form-control" />
-  </div>
-
-  <div class="form-group  ">
-    <label for="identity">ת.ז</label>
-    <input type="text" id="identity" [(ngModel)]="avrech.nvIdentityCard" class="form-control" maxlength="9" minlength="9" #identity="ngModel"
-    />
-    <div *ngIf="identity.invalid && (identity.dirty || identity.touched)" >
-      <div class="text-danger" *ngIf="(identity.errors.minlength || identity.errors.maxlength)">
-        תעודת זהות חייבת להכיל 9 ספרות 
-      </div>
+<!-- <div class="form-group col-sm-3">
+    <label for='event-place'>מקום הארוע</label>
+    <input type="text" name='event-place' class="form-control" [(ngModel)]="e.nvPlace" #place="ngModel" required/>
+    <div *ngIf="place.invalid && (place.dirty || place.touched)">
+      <div *ngIf="(place.errors.required)" class="text-danger text-right">
+        <strong>! </strong>שדה נדרש</div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="form-group">
-    <label for="phone">טלפון</label>
-    <input type="text" id="phone" [(ngModel)]="avrech.nvPhone" class="form-control" minlength="9" maxlength="9" #phone="ngModel"
-    />
-    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
-      <div *ngIf="(phone.errors.minlength||phone.errors.maxlength)" class="text-danger">
-       מספר טלפון אינו תקין 
-      </div>
-    </div>
-  </div>
 
-    <div class="form-group">
-      <label for="mobile">טלפון נייד</label>
-      <input type="text" id="mobile" [(ngModel)]="avrech.nvMobile" class="form-control" pattern="^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$" #mobile="ngModel" />
-      <div class="text-danger" *ngIf="mobile.errors && (mobile.errors.pattern)">נייד לא תקין!</div>
 
-    </div>
 
-    <div class="form-group">
-      <label for="email">מייל</label>
-      <input type="text" id="email" [(ngModel)]="avrech.nvEmail" class="form-control" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+
+<form class="form" *ngIf='avrech!=undefined' #form="ngForm">
+  <div class="row">
+    <div class="form-group col-sm-4">
+      <label for="firstName">שם פרטי</label>
+      <input type="text" id="firstName" [(ngModel)]="avrech.nvFirstName" name="firstName" class="form-control" required #firstName="ngModel"
       />
-      <div *ngIf="email.errors && email.errors.pattern" class="text-danger" class="text-danger">
-        מייל לא תקין
+      <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+        <div *ngIf="(firstName.errors.required)" class="text-danger text-right">
+          <strong>! </strong>שדה נדרש</div>
+      </div>
+    </div>
+    <div class="form-group col-sm-4">
+      <label for="lastName">שם משפחה</label>
+      <input type="text" id="lastName" [(ngModel)]="avrech.nvLastName" name="lastName" class="form-control" required #lastName="ngModel"
+      />
+      <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+        <div *ngIf="(lastName.errors.required)" class="text-danger text-right">
+          <strong>! </strong>שדה נדרש</div>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group col-sm-4 ">
+      <label for="identity">ת.ז</label>
+      <input type="text" id="identity" [(ngModel)]="avrech.nvIdentityCard" name="identity" class="form-control" maxlength="9" minlength="9"
+        #identity="ngModel" />
+      <div *ngIf="identity.invalid && (identity.dirty || identity.touched)">
+        <div class="text-danger text-right" *ngIf="(identity.errors.minlength || identity.errors.maxlength)">
+         <strong>! </strong>תעודת זהות חייבת להכיל 9 ספרות
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-4">
+      <label for="phone">טלפון</label>
+      <input type="text" id="phone" [(ngModel)]="avrech.nvPhone" name="phone" class="form-control" minlength="9" maxlength="9"
+        #phone="ngModel" />
+      <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+        <div *ngIf="(phone.errors.minlength||phone.errors.maxlength)" class="text-danger text-right">
+       <strong>! </strong>   מספר טלפון אינו תקין
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="form-group col-sm-4">
+      <label for="mobile">טלפון נייד</label>
+      <input type="text" id="mobile" [(ngModel)]="avrech.nvMobile" name="mobile" class="form-control" pattern="^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$"
+        #mobile="ngModel" />
+      <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
+        <div class="text-danger text-right" *ngIf="mobile.errors && (mobile.errors.pattern)">
+          <strong>! </strong>נייד לא תקין
+
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-4">
+      <label for="email">מייל</label>
+      <input type="text" id="email" [(ngModel)]="avrech.nvEmail" name="email" class="form-control" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+      />
+      <div *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div *ngIf="email.errors && email.errors.pattern" class="text-danger" class="text-danger text-right">
+        <strong>! </strong>  מייל לא תקין
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-4">
       <label for="address"> כתובת</label>
-      <input type="text" id="address" [(ngModel)]="avrech.nvAddress" class="form-control" />
+      <input type="text" id="address" [(ngModel)]="avrech.nvAddress" name="address" class="form-control" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group col-sm-4">
       <label for="city">עיר</label>
-      <input type="text" id="city" [(ngModel)]="avrech.nvCity" class="form-control" />
+      <input type="text" id="city" [(ngModel)]="avrech.nvCity" name="city" class="form-control" />
     </div>
+  </div>
 
-    <!-- <div class="form-group  ">
+  <!-- <div class="form-group  ">
     <label for="firstName">שם משתמש</label>
     <input type="text" id="firstName" [(ngModel)]="userName" class="form-control" />
   </div>
@@ -65,4 +100,4 @@
     <label for="firstName"> סיסמה</label>
     <input type="text" id="firstName" [(ngModel)]="password" class="form-control" />
   </div> -->
-  </div>
+</form>

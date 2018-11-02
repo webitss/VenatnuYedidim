@@ -96,6 +96,27 @@ namespace Service.Entities
                 return null;
             }
         }
+
+        public static bool SetEventParticipant(bool isNew, int iStatusType, int iPersonId, int iEventId, int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("isNew", isNew));
+                parameters.Add(new SqlParameter("iStatusType", iStatusType));
+                parameters.Add(new SqlParameter("iPersonId", iPersonId));
+                parameters.Add(new SqlParameter("iEventId", iEventId));
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TParticipant_INS_UPD", parameters);
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("SetEventParticipant / TParticipant_INS_UPD", ": , ex " + ex);
+                return false;
+            }
+        }
     }
 
 }
