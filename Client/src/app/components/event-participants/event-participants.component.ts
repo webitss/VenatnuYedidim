@@ -25,7 +25,7 @@ export class EventParticipantsComponent implements OnInit {
   protected s: any;
   protected personsList: string[];
   listToSelect: any[];
-  allPersons: Array<Participants>;
+  allPersons: Array<any>;
   title:string="רשימת כולם";
   inputTitle:string="בחר משתתפים";
   flagDelete=false;
@@ -49,12 +49,20 @@ export class EventParticipantsComponent implements OnInit {
       public lstDataRows = [];
      
       addParticipants(){
-     this.appProxy.post( "GetPersonList").then(data => {
-        this.personsList = data;
+     this.appProxy.post( "GetPersonList").then(
+       data => {
+        this.allPersons = data;
         this.flag=true
-       });
+        this.allPersons.forEach(
+          person=>{
+            this.listToSelect.push({value:person.nvFirstName+' '+person.lstObject['nvParticipantType']});
+          }
+        );
+        
+       }
+       , err => alert(err));
        
-        alert("func")
+       
       }
       close() {
       //  להוסיף את המשתתפים שנבחרו
@@ -71,12 +79,12 @@ export class EventParticipantsComponent implements OnInit {
       //   st => {
       //      st['delete'] = '<button class="btn delete" >מחק</button>'; 
       //     });
-
-          this.allPersons.forEach(
-            person=>{
-              this.listToSelect.push({value:person['nvFirstName']+' '+person['nvParticipantType']+" "});
-            }
-          );
+      this.allPersons.forEach(
+        person=>{
+          this.listToSelect.push({value:person.nvFirstName+' '+person.lstObject['nvParticipantType']});
+        }
+      );
+         
     }
       , err => alert(err));
     

@@ -26,20 +26,21 @@ namespace Service.Entities
         #endregion
 
         #region Methods
-        public static bool SetPresence(PresenceAvrech presence, int iUserId)
+        public static int SetPresence(PresenceAvrech presence, int iUserId)
         {
 
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<PresenceAvrech>.GetSqlParametersFromObject(presence);
 				parameters.Add(new SqlParameter("iUserId", iUserId));
-				SqlDataAccess.ExecuteDatasetSP("TPresenceAvrech_INS/UPD", parameters);
-                return true;
+				int id=int.Parse(SqlDataAccess.ExecuteDatasetSP("TPresenceAvrech_INS/UPD", parameters).Tables[0].Rows[0][0].ToString());
+                id += 1;
+                return id;
             }
             catch (Exception ex)
             {
                 Log.LogError("SetPresence / TPresenceAvrech_INS/UPD", "ex" + ex + ", presence: " + JsonConvert.SerializeObject(presence));
-                return false;
+                return 0;
             }
         }
         public static List<PresenceAvrech> GetPresenceAvrechById(int iPersonId)

@@ -21,6 +21,8 @@ export class OpenPresenceComponent implements OnInit {
   @Output()
   @Input()
   presence: PresenceAvrech;
+  @Output()
+  @Input()
   currentPresence:PresenceAvrech;
   ngOnInit() {
     debugger;
@@ -31,8 +33,8 @@ export class OpenPresenceComponent implements OnInit {
 
   
 
-  closeDialog() {
-    this.closeMe.emit(null);
+  closeDialog(p) {
+    this.closeMe.emit(p);
   }
   closeAndNoSave() {
     this.closeMeNoSave.emit();
@@ -41,11 +43,12 @@ export class OpenPresenceComponent implements OnInit {
     // this.presence.dtDatePresence = this.save.name;
     // this.document.nvDocumentType = this.save.type;
 debugger;
+this.currentPresence.dtDatePresence=this.currentPresence['dtDate'];
     this.appProxy.post('SetPresence', { presenceAvrech: this.currentPresence,iUserId:this.globalService.getUser()['iUserId']}).then(
       data => {
         if (data == 0)
           alert("error in save data")
-        else { this.presence.iPresenceAvrech = 1; this.closeDialog(); }
+        else { this.currentPresence.iPresenceAvrech = data; this.closeDialog(this.currentPresence); }
       }
       , err => alert("err"));
 

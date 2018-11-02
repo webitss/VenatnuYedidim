@@ -213,15 +213,22 @@ export class StudentDetailsComponent implements OnInit {
     })
   }
 
+  deleteYeshiva(yeshiva:Yeshiva){
+    this.flagDelete=true;
+    this.yeshivaId=yeshiva.iYeshivaId;
+    this.message='האם אתה בטוח שברצונך למחוק את הישיבה '+yeshiva.nvYeshivaName+'?';
+    
+  }
+
   //מחיקת ישיבה לתלמיד
-  deleteYeshivaOfStudent(iYeshivaId: number) {
+  deleteYeshivaOfStudent() {
 
     this.appProxy.post("DeleteYeshivaOfStudent", {
-      iPersonId: this.paramRout, iYeshivaId: iYeshivaId, iUserId: this.currentUser
-    }).then(data => { alert("הישיבה נמחקה בהצלחה"); }, err => { alert("שגיאה במחיקת ישיבהיד"); });
+      iPersonId: this.paramRout, iYeshivaId:this.yeshivaId, iUserId: this.currentUser
+    }).then(data => { this._parent.openMessagePopup("הישיבה נמחקה בהצלחה!") }, err => { alert("שגיאה במחיקת ישיבהיד"); });
     var i = 0;
     this.yeshivaListOfStudent.forEach(e => {
-      if (e.iYeshivaId == iYeshivaId)
+      if (e.iYeshivaId == this.yeshivaId)
         this.yeshivaListOfStudent.splice(i, 1);
       i++;
     });
@@ -234,9 +241,9 @@ export class StudentDetailsComponent implements OnInit {
   // { year: 5776, month: 13, date: 29, month_name: 'Elul' }
 
 
-changeForm(){
-  this.change=true;
-}
+// changeForm(){
+//   this.change=true;
+// }
 
 
 
@@ -247,7 +254,7 @@ changeForm(){
         this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser
     }).then(data => {
       if (data)
-        alert("הישיבה נוספה בהצלחה")
+       this._parent.openMessagePopup("הישיבה נוספה בהצלחה!");
       else ("שגיאה בהוספת ישיבה")
     }
       , err => alert("שגיאה"))
@@ -255,6 +262,7 @@ changeForm(){
     var newYeshiva: Yeshiva = new Yeshiva();
     newYeshiva.nvCity = this.yeshivaSelected.nvCity;
     newYeshiva.nvAddress = this.yeshivaSelected.nvAddress;
+    newYeshiva.nvYeshivaName=this.yeshivaSelected.nvYeshivaName;
     this.yeshivaListOfStudent.push(newYeshiva);
 
   }
@@ -328,7 +336,7 @@ changeForm(){
           alert("פרטי התלמיד עודכנו בהצלחה");
         else
           alert("פרטי הבוגר עודכנו בהצלחה");
-
+          this.change=false;
       }, err => {
         if (this.status == 'תלמיד')
           alert("שגיאה בעריכת תלמיד");
