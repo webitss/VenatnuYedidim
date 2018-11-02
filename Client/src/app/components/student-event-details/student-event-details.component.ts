@@ -25,7 +25,7 @@ export class StudentEventDetailsComponent implements OnInit {
   @Input()
   iArrivalStatusType: number;
 
-  constructor(private route: ActivatedRoute, private router: Router, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private eventParticipant: EventParticipantsComponent) { }
+  constructor(private route: ActivatedRoute, private router: Router, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
 
   ngOnInit() {
 
@@ -68,18 +68,23 @@ export class StudentEventDetailsComponent implements OnInit {
 
 
   save() {
-    if (this.eventParticipant.IsParticipantsExists(this.id, this.event.iEventId) == true)
-      alert("תלמיד זה קיים כבר באירוע זה");
-    else {
-      this.appProxy.post("SetEvent", { iStatusType: this.event['iArrivalStatusType'], iPersonId: this.id, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId }).then(data => {
-        if (data == true) {
-          alert("האירוע נשמר בהצלחה!");
-          close();
-        }
-      }).catch(err => {
-        alert(err);
-      });
-    }
+    this.globalService.IsParticipantsExists(this.id, this.event.iEventId).then(data => {
+      if (data)
+        alert("תלמיד זה קיים כבר באירוע זה");
+      else {
+        this.appProxy.post("SetEvent", { iStatusType: this.event['iArrivalStatusType'], iPersonId: this.id, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
+          .then(data => {
+            if (data == true) {
+              alert("האירוע נשמר בהצלחה!");
+              close();
+            }
+          }).catch(err => {
+            alert(err);
+          });
+      }
+    }).catch(err => {
+      alert(err);
+    })
   }
 
   eventsList: Array<Event1> = new Array<Event1>();
