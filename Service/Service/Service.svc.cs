@@ -395,9 +395,9 @@ namespace Service
             return Participant.GetPersonList();
         }
 
-        public bool SetEvent(int iStatusType, int iPersonId, int iEventId, int iUserId)
+        public bool SetEventParticipant(bool isNew, int iStatusType, int iPersonId, int iEventId, int iUserId)
         {
-            return Participant.SetEvent(iStatusType, iPersonId, iEventId, iUserId);
+            return Participant.SetEventParticipant(isNew, iStatusType, iPersonId, iEventId, iUserId);
         }
         #endregion
 

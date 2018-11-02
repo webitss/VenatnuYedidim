@@ -36,18 +36,9 @@ export class EventParticipantsComponent implements OnInit {
   header = 'מחיקת משתתף';
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
 
-  // getParticipantListByEvent(iEventId: number) {
+ 
 
-  // }
 
-  // IsParticipantsExists(participantId: number, eventId: number) {
-  //   this.getParticipantListByEvent(eventId);
-  //   this.participantList.forEach(p => {
-  //     if (p.iPersonId == participantId)
-  //       return true;
-  //   });
-  //   return false;
-  // }
 
 
 
