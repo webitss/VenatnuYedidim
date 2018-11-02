@@ -71,7 +71,7 @@ export class EventParticipantsComponent implements OnInit {
     
     this.listToSelect=new Array<any>();
 
-    this.appProxy.post('GetPersonList', { iPersonId: 0 }).then(
+    this.appProxy.post('GetPersonList').then(
       data =>{
 
        this.allPersons = data
