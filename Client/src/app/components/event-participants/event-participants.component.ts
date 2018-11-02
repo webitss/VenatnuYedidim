@@ -36,18 +36,9 @@ export class EventParticipantsComponent implements OnInit {
   header = 'מחיקת משתתף';
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
 
-  // getParticipantListByEvent(iEventId: number) {
+ 
 
-  // }
 
-  // IsParticipantsExists(participantId: number, eventId: number) {
-  //   this.getParticipantListByEvent(eventId);
-  //   this.participantList.forEach(p => {
-  //     if (p.iPersonId == participantId)
-  //       return true;
-  //   });
-  //   return false;
-  // }
 
 
 
@@ -89,6 +80,23 @@ export class EventParticipantsComponent implements OnInit {
 
     this.listToSelect = new Array<any>();
 
+<<<<<<< HEAD
+    this.appProxy.post('GetPersonList').then(
+      data =>{
+
+       this.allPersons = data
+      //  this.allPersons.forEach(
+      //   st => {
+      //      st['delete'] = '<button class="btn delete" >מחק</button>'; 
+      //     });
+      this.allPersons.forEach(
+        person=>{
+          this.listToSelect.push({value:person.nvFirstName+' '+person.lstObject['nvParticipantType']});
+        }
+      );
+         
+    }
+=======
     this.appProxy.post('GetPersonList', { iPersonId: 0 }).then(
       data => {
 
@@ -104,6 +112,7 @@ export class EventParticipantsComponent implements OnInit {
         );
 
       }
+>>>>>>> e0b2262973b9abcff18c895b372754564eba72d2
       , err => alert(err));
 
     this.sub = this.router.parent.params.subscribe(params => {
