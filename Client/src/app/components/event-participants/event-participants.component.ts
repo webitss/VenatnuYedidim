@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Participants } from '../../classes/participants';
 import { ActivatedRoute } from '@angular/router';
@@ -36,47 +36,18 @@ export class EventParticipantsComponent implements OnInit {
   header = 'מחיקת משתתף';
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
 
-  getParticipantListByEvent(iEventId: number) {
-    this.appProxy.post("GetParticipantsList", { iEventId: iEventId }).then(res => {
-      if (res.length > 0) {
-      this.participantList = res;
-        this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
-          this.sysTableRowList = data;
-        });
-        res.forEach(p => {
-          // this.participant.forEach(p => {
-          this.lstDataRows.push({
-            delete: p.delete,
-            iEventId: p.iEventId,
-            nvFirstName: p.nvFirstName,
-            nvLastName: p.nvLastName,
-            nvPhone: p.nvPhone,
-            nvMobile: p.nvMobile,
-            nvEmail: p.nvEmail,
-            nvParticipantType: p.lstObject.nvParticipantType,
-            // iArriveStatusType: p.iArriveStatusType,
-            iArriveStatusType: '<select> <option>j,k</option><option>ughjk</option></select>'
-            // iArriveStatusType:'<button>fgd</button>'
-            // iArriveStatusType: this.sysTableRowList.filter(s => s.iSysTableRowId ==parseInt (p.lstObject.iArrivalStatusType))[0].nvValue;
-          });
-        });
-        // });
-        this.lstDataRows.forEach(p => {
-          p['delete'] = '<div class="delete"></div>';
-        });
-      }
+  // getParticipantListByEvent(iEventId: number) {
 
-    });
-  }
+  // }
 
-  IsParticipantsExists(participantId: number, eventId: number) {
-    this.getParticipantListByEvent(eventId);
-    this.participantList.forEach(p => {
-      if (p.iPersonId == participantId)
-        return true;
-    });
-    return false;
-  }
+  // IsParticipantsExists(participantId: number, eventId: number) {
+  //   this.getParticipantListByEvent(eventId);
+  //   this.participantList.forEach(p => {
+  //     if (p.iPersonId == participantId)
+  //       return true;
+  //   });
+  //   return false;
+  // }
 
 
 
@@ -137,7 +108,36 @@ export class EventParticipantsComponent implements OnInit {
 
     this.sub = this.router.parent.params.subscribe(params => {
       this.iEventId = +params['iEventId'];
-      this.getParticipantListByEvent(this.iEventId);
+      this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
+        if (res.length > 0) {
+          this.participantList = res;
+          this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
+            this.sysTableRowList = data;
+          });
+          res.forEach(p => {
+            // this.participant.forEach(p => {
+            this.lstDataRows.push({
+              delete: p.delete,
+              iEventId: p.iEventId,
+              nvFirstName: p.nvFirstName,
+              nvLastName: p.nvLastName,
+              nvPhone: p.nvPhone,
+              nvMobile: p.nvMobile,
+              nvEmail: p.nvEmail,
+              nvParticipantType: p.lstObject.nvParticipantType,
+              // iArriveStatusType: p.iArriveStatusType,
+              iArriveStatusType: '<select> <option>j,k</option><option>ughjk</option></select>'
+              // iArriveStatusType:'<button>fgd</button>'
+              // iArriveStatusType: this.sysTableRowList.filter(s => s.iSysTableRowId ==parseInt (p.lstObject.iArrivalStatusType))[0].nvValue;
+            });
+          });
+          // });
+          this.lstDataRows.forEach(p => {
+            p['delete'] = '<div class="delete"></div>';
+          });
+        }
+
+      });
     });
   }
 }

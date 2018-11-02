@@ -552,6 +552,15 @@ namespace Service
        RequestFormat = WebMessageFormat.Json)]
         List<Person> GetPersonList();
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "SetEvent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Person> SetEvent(int iStatusType,int iPersonId, int iEventId, int iUserId );
+
         #endregion
 
         #region Documents
