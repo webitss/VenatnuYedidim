@@ -70,3 +70,20 @@ li>button{
   margin-left: 16%;
   width: 70%;
 }
+.textarea{
+  width:650px;
+ height: 200px;
+ float: right
+}
+.lable{
+  width:650px;
+  
+}
+img{
+ border-color: blue;
+border-block-end-width:thick;
+width: 200PX
+}
+.text{
+  text-align: right
+}
