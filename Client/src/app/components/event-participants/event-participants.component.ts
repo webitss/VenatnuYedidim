@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Participants } from '../../classes/participants';
 import { ActivatedRoute } from '@angular/router';
@@ -15,23 +15,41 @@ import { NgIf } from '@angular/common';
   styleUrls: ['./event-participants.component.css']
 })
 export class EventParticipantsComponent implements OnInit {
+
+
+  participantList: Person[] = [];
   protected iEventId: number;
   private sub: any;
   protected participant: Array<any> = new Array<any>();
   public sysTableRowList: SysTableRow[];
   protected iPerson: number;
-  public flag:boolean;
+  public flag: boolean;
   protected iLastModifyUserId: number;
   protected s: any;
   protected personsList: string[];
   listToSelect: any[];
   allPersons: Array<any>;
-  title:string="רשימת כולם";
-  inputTitle:string="בחר משתתפים";
-  flagDelete=false;
-  message='האם אתה בטוח שברצונך למחוק משתתף זה?';
-  header='מחיקת משתתף';
+  title: string = "רשימת כולם";
+  inputTitle: string = "בחר משתתפים";
+  flagDelete = false;
+  message = 'האם אתה בטוח שברצונך למחוק משתתף זה?';
+  header = 'מחיקת משתתף';
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
+
+  // getParticipantListByEvent(iEventId: number) {
+
+  // }
+
+  // IsParticipantsExists(participantId: number, eventId: number) {
+  //   this.getParticipantListByEvent(eventId);
+  //   this.participantList.forEach(p => {
+  //     if (p.iPersonId == participantId)
+  //       return true;
+  //   });
+  //   return false;
+  // }
+
+
 
   cancelAdd(event) {
     this.flag = false;
@@ -46,81 +64,83 @@ export class EventParticipantsComponent implements OnInit {
     new VyTableColumn('סוג משתמש', 'nvParticipantType'),
     new VyTableColumn('סטטוס הגעה', 'iArriveStatusType', 'html', true, false)
   ];
-      public lstDataRows = [];
-     
-      addParticipants(){
-     this.appProxy.post( "GetPersonList").then(
-       data => {
+  public lstDataRows = [];
+
+  addParticipants() {
+    this.appProxy.post("GetPersonList").then(
+      data => {
         this.allPersons = data;
-        this.flag=true
+        this.flag = true
         this.allPersons.forEach(
-          person=>{
-            this.listToSelect.push({value:person.nvFirstName+' '+person.lstObject['nvParticipantType']});
+          person => {
+            this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] });
           }
         );
-        
-       }
-       , err => alert(err));
-       
-       
+
       }
-      close() {
-      //  להוסיף את המשתתפים שנבחרו
-      }
+      , err => alert(err));
+
+
+  }
+  close() {
+    //  להוסיף את המשתתפים שנבחרו
+  }
   ngOnInit() {
-    
-    this.listToSelect=new Array<any>();
+
+    this.listToSelect = new Array<any>();
 
     this.appProxy.post('GetPersonList', { iPersonId: 0 }).then(
-      data =>{
+      data => {
 
-       this.allPersons = data
-      //  this.allPersons.forEach(
-      //   st => {
-      //      st['delete'] = '<button class="btn delete" >מחק</button>'; 
-      //     });
-      this.allPersons.forEach(
-        person=>{
-          this.listToSelect.push({value:person.nvFirstName+' '+person.lstObject['nvParticipantType']});
-        }
-      );
-         
-    }
+        this.allPersons = data
+        //  this.allPersons.forEach(
+        //   st => {
+        //      st['delete'] = '<button class="btn delete" >מחק</button>'; 
+        //     });
+        this.allPersons.forEach(
+          person => {
+            this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] });
+          }
+        );
+
+      }
       , err => alert(err));
-    
+
     this.sub = this.router.parent.params.subscribe(params => {
       this.iEventId = +params['iEventId'];
-      this.appProxy.post( "GetParticipantsList" , { iEventId: this.iEventId }).then(res => {
-
-        this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
-          this.sysTableRowList = data;
-              });
+      this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
+        if (res.length > 0) {
+          this.participantList = res;
+          this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
+            this.sysTableRowList = data;
+          });
           res.forEach(p => {
             // this.participant.forEach(p => {
-              this.lstDataRows.push({
-                delete: p.delete,
-                iEventId: p.iEventId,
-                nvFirstName: p.nvFirstName,
-                nvLastName: p.nvLastName,
-                nvPhone: p.nvPhone,
-                nvMobile: p.nvMobile,
-                nvEmail: p.nvEmail,
-                nvParticipantType: p.lstObject.nvParticipantType,
-               // iArriveStatusType: p.iArriveStatusType,
-               iArriveStatusType: '<select> <option>j,k</option><option>ughjk</option></select>'
-                // iArriveStatusType:'<button>fgd</button>'
-                // iArriveStatusType: this.sysTableRowList.filter(s => s.iSysTableRowId ==parseInt (p.lstObject.iArrivalStatusType))[0].nvValue;
-              });
+            this.lstDataRows.push({
+              delete: p.delete,
+              iEventId: p.iEventId,
+              nvFirstName: p.nvFirstName,
+              nvLastName: p.nvLastName,
+              nvPhone: p.nvPhone,
+              nvMobile: p.nvMobile,
+              nvEmail: p.nvEmail,
+              nvParticipantType: p.lstObject.nvParticipantType,
+              // iArriveStatusType: p.iArriveStatusType,
+              iArriveStatusType: '<select> <option>j,k</option><option>ughjk</option></select>'
+              // iArriveStatusType:'<button>fgd</button>'
+              // iArriveStatusType: this.sysTableRowList.filter(s => s.iSysTableRowId ==parseInt (p.lstObject.iArrivalStatusType))[0].nvValue;
             });
+          });
           // });
-           this.lstDataRows.forEach( p => {
-             p['delete'] = '<div class="delete"></div>';
-           });
-        });
-        // alert("x");
-      })
-    };
+          this.lstDataRows.forEach(p => {
+            p['delete'] = '<div class="delete"></div>';
+          });
+        }
+
+      });
+    });
   }
+}
   // public deleteYeshiva(yeshiva) {
   //   this.iPerson=yeshiva.iYeshivaId;
   //   this.flag=true;

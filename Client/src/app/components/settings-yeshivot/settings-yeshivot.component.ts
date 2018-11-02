@@ -64,8 +64,8 @@ export class SettingsYeshivotComponent implements OnInit {
         this.yeshivaList = data;
         this.sysTableService.getValues(SysTableService.dataTables.roleType.iSysTableId).then(val => {
           this.sysTableList = val;
-          this.lstColumns.forEach(y => {
-            this.changeTable(data);
+          this.yeshivaList.forEach(y => {
+            this.changeTable(y);
           })
         })
       })

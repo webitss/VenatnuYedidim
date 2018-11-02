@@ -96,6 +96,26 @@ namespace Service.Entities
                 return null;
             }
         }
+
+        public static bool SetEvent(int iStatusType, int iPersonId, int iEventId, int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iStatusType", iStatusType));
+                parameters.Add(new SqlParameter("iPersonId", iPersonId));
+                parameters.Add(new SqlParameter("iEventId", iEventId));
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_INS_UPD", parameters).Tables[0];
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("SetEvent / TParticipant_INS_UPD", ": , ex " + ex);
+                return false;
+            }
+        }
     }
 
 }
