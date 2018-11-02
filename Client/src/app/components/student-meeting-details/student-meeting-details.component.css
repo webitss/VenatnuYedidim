@@ -4,6 +4,9 @@
     margin-top: 5%; */
   
 }
+.form{
+z-index: 999999;
+}
 .title{
     padding-bottom: 2%;
 padding-right: 2%;

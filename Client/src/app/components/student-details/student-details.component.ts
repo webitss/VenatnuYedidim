@@ -310,7 +310,7 @@ export class StudentDetailsComponent implements OnInit {
 
 
   saveStudent() {
-    //debugger;
+    debugger;
     if (this.save.name != '')
       this.student.nvImgStudent = this.save.name;
     this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;
@@ -336,7 +336,7 @@ export class StudentDetailsComponent implements OnInit {
           alert("פרטי התלמיד עודכנו בהצלחה");
         else
           alert("פרטי הבוגר עודכנו בהצלחה");
-
+          this.change=false;
       }, err => {
         if (this.status == 'תלמיד')
           alert("שגיאה בעריכת תלמיד");
@@ -344,6 +344,7 @@ export class StudentDetailsComponent implements OnInit {
           alert("שגיאה בעריכת בוגר");
       });
     }
+    
     else
 
       this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
