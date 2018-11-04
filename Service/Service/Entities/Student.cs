@@ -128,7 +128,7 @@ namespace Service.Entities
         public static bool AddStudent(Student student, string base64Image, int iUserId)
         {
             try
-            {
+			{
                 if (base64Image != "")
                     student.nvImgStudent = Fileshandler.SaveFileByBase64(base64Image, student.nvImgStudent, "Students//");
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
