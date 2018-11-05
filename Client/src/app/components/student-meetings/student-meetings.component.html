@@ -7,7 +7,7 @@
 
 
         <div *ngIf="meeting != null" class="meetingDetails">
-<div id="overlay"></div>
+<!-- <div id="overlay"></div> -->
                
                 <app-student-meeting-details [sysTableRowList]="sysTableRowList" [meeting]="meeting" (UpdateMeeting)="updateMeeting($event)" (NewMeeting)="newMeeting($event)" (Close)="close()"></app-student-meeting-details> 
              </div> 
