@@ -101,10 +101,10 @@ export class SettingYeshivaComponent implements OnInit {
       if (this.appProxy.post('EditYeshiva', { yeshiva: this.yeshiva, iYeshivaId: this.yeshiva.iYeshivaId })
         .then(
           data => {
-            this.yeshiva = data;
+            //this.yeshiva = data;
             alert("save!");
             this.closeYeshiva.emit(null);
-            this.update.emit(this.yeshiva);
+             this.update.emit(this.yeshiva);
           }
         )
       ) { }
