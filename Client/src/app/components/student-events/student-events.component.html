@@ -8,7 +8,7 @@
   </div>
 </div>
 <div class="student-event-details" *ngIf="eventFlag == true">
-  <app-student-event-details [event]="event" [iArrivalStatusType]="event != null? event['iArrivalStatusType']: 0" [from]="from" (Close)="close()"></app-student-event-details>
+  <app-student-event-details [event]="event" [iArrivalStatusType]="event != null? event['iArrivalStatusType']: 0" [from]="from" (Close)="close($event)"></app-student-event-details>
 </div>
 <router-outlet></router-outlet>
 
