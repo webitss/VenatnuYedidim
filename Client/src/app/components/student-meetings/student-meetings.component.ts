@@ -93,7 +93,6 @@ export class StudentMeetingsComponent implements OnInit {
     //     this.cc.refreshTable(this.meetingList);
     //  // });
     // }
-
   }
 
   m: Meeting;
