@@ -20,8 +20,8 @@
     <div class="form-group col-sm-3">
       <label for="mobile">נייד:</label>
       <input type="tel" name="mobile" class="form-control" pattern="^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$" [(ngModel)]="user.nvMobile"
-        #mobile="ngModel" (focus)="notFocused = false" (focusout)="notFocused = true" />
-      <div *ngIf="mobile.invalid && notFocused">
+        #mobile="ngModel" (focus)="notFocused1 = false" (focusout)="notFocused1 = true" />
+      <div *ngIf="mobile.invalid && notFocused1">
         <!-- *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" -->
         <div class="text-danger" *ngIf="mobile.errors && (mobile.errors.pattern)">נייד לא תקין!</div>
       </div>
@@ -30,8 +30,8 @@
     <div class="form-group col-sm-3">
       <label for="email">מייל:</label>
       <input type="email" name="email" class="form-control" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" #email="ngModel"
-        [(ngModel)]="user.nvEmail" (focus)="notFocused = false" (focusout)="notFocused = true" />
-      <div *ngIf="email.invalid && notFocused">
+        [(ngModel)]="user.nvEmail" (focus)="notFocused2 = false" (focusout)="notFocused2 = true" />
+      <div *ngIf="email.invalid && notFocused2">
         <!--[hidden]="email.valid || email.untouched"  -->
         <div class="text-danger" *ngIf="email.errors && (email.errors.pattern)">מייל לא תקין!</div>
       </div>
@@ -50,9 +50,9 @@
       <label for="password">סיסמה:</label>
       <!-- <show-hide-password size="lg" icon="entypo" btnStyle="primary" [btnOutline]="false"> -->
       <input type="password" passwordToggle name="password" class="form-control" required [(ngModel)]="user.nvPassword" minlength="4" #password="ngModel"
-        (focus)="notFocused = false" (focusout)="notFocused = true" />
+        (focus)="notFocused3 = false" (focusout)="notFocused3 = true" />
         <!-- </show-hide-password> -->
-      <div *ngIf="password.invalid && (password.dirty || password.touched) && notFocused">
+      <div *ngIf="password.invalid && (password.dirty || password.touched) && notFocused3">
         <div class="text-danger" *ngIf="password.errors && (password.errors.required)">שדה זה חובה!</div>
       </div>
       <div class="text-danger" *ngIf="password.errors && (password.errors.minlength)">הסיסמה קצרה!</div>
@@ -65,8 +65,8 @@
         <option [value]="0">בחר</option>
         <option [value]="item.iSysTableRowId" *ngFor="let item of lst" [selected]="item.iSysTableRowId==user.iPermissionId">{{item.nvValue}}</option>
       </select>
-      <div *ngIf="permittion.invalid && (permittion.dirty || permittion.touched)">
-        <div class="text-danger" *ngIf="permittion.errors && (permittion.errors.required)">שדה זה חובה!</div>
+      <div *ngIf="permittion.dirty || permittion.touched">
+        <div class="text-danger" *ngIf="permittion == 0">שדה זה חובה!</div>
       </div>
     </div>
   </div>

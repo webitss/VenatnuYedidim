@@ -7,7 +7,7 @@ import { SettingsYeshivotComponent } from '../settings-yeshivot/settings-yeshivo
 import { SysTableService } from '../../services/sys-table.service'
 import { SysTableRow } from '../../classes/SysTableRow';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
-import { } from '../../components/settings-yeshivot/settings-yeshivot.component';
+// import { } from '../../components/settings-yeshivot/settings-yeshivot.component';
 import { GlobalService } from '../../services/global.service';
 
 
@@ -23,18 +23,21 @@ export class SettingYeshivaComponent implements OnInit {
   public closeYeshiva = new EventEmitter();
   @Input()
   public iYeshivaId: number;
-
+  @Output() 
+  update = new EventEmitter<Yeshiva>();
+  @Output() 
+  add = new EventEmitter<Yeshiva>();
   @Input()
   public sysTableList: SysTableRow[];
   public yeshiva: Yeshiva = new Yeshiva();
   protected yeshivaList = new Array();
   protected isNew = false;
-  protected header="";
+  protected header = "";
 
   @ViewChild(NgForm) form;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
 
-  //@Output() updateYeshiva = new EventEmitter<Yeshiva>();
+  @Output() updYeshiva = new EventEmitter<Yeshiva>();
   //@Output() addYeshiva = new EventEmitter<Yeshiva>();
 
   protected settingsYeshivot: SettingsYeshivotComponent;
@@ -56,15 +59,15 @@ export class SettingYeshivaComponent implements OnInit {
     if (this.iYeshivaId == 0) {
       this.yeshiva = new Yeshiva();
       this.isNew = true;
-      this.header="מוסד חדש";
+      this.header = "מוסד חדש";
     }
     else {
       this.isNew = false;
       this.appProxy.post("getYeshivaById", { iYeshivaId: this.iYeshivaId })
         .then(data => {
           this.yeshiva = data;
-          this.header=this.yeshiva.nvYeshivaName
-          ;
+          this.header = this.yeshiva.nvYeshivaName
+            ;
         }
         )
     };
@@ -74,7 +77,7 @@ export class SettingYeshivaComponent implements OnInit {
     //   this.yeshiva = new Yeshiva();
     //   this.yeshiva = Object.assign({}, this.yeshiva);
     // })
-}
+  }
 
   save() {
     if (this.iYeshivaId == 0) {
@@ -86,7 +89,7 @@ export class SettingYeshivaComponent implements OnInit {
             else {
               alert("save!");
               this.closeYeshiva.emit(null);
-              //this.addYeshiva.emit(this.yeshiva);
+              this.add.emit(this.yeshiva);
             }
           }
         )
@@ -102,7 +105,7 @@ export class SettingYeshivaComponent implements OnInit {
             this.yeshiva = data;
             alert("save!");
             this.closeYeshiva.emit(null);
-           // this.updateYeshiva.emit(this.yeshiva);
+            this.updYeshiva.emit(this.yeshiva);
           }
         )
       ) { }
