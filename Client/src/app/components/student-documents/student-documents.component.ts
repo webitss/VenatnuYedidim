@@ -26,6 +26,10 @@ export class StudentDocumentsComponent implements OnInit {
 
   @ViewChild(VyTableComponent) cc: VyTableComponent;
   categoryTypes: SysTableRow[];
+  documentToDelete: Document;
+  message: string;
+  flagDelete: boolean;
+  header = 'מחיקת מסמך';
 
   constructor(private appProxy: AppProxy, private activatedRoute: ActivatedRoute, private router: Router, private sysTableService: SysTableService) { }
 
@@ -35,6 +39,7 @@ export class StudentDocumentsComponent implements OnInit {
       this.id = params['iPersonId'];
     });
     this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true));
+    this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true));
     this.lstColumns.push(new VyTableColumn('מסמך', 'open', 'html'));
     this.lstColumns.push(new VyTableColumn('תיאור', 'nvComment'));
     this.lstColumns.push(new VyTableColumn('קטגוריה למסמך', 'nvCategory'));
@@ -43,7 +48,7 @@ export class StudentDocumentsComponent implements OnInit {
 
 
     this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => {
-    this.belongSheetType = data.filter(x => x.nvValue == 'תלמיד')[0].iSysTableRowId;
+      this.belongSheetType = data.filter(x => x.nvValue == 'תלמיד')[0].iSysTableRowId;
       this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => { this.categoryTypes = data })
     });
 
@@ -60,6 +65,7 @@ export class StudentDocumentsComponent implements OnInit {
           dtCreatedate: element.dtCreatedate.toLocaleDateString(),
           nvComment: element.nvComment,
           edit: '<div class="edit"></div>',
+          delete: '<div class="delete"></div>',
           open: '<a href=' + AppProxy.getBaseUrl() + 'Files/' + element.nvDocumentName + ' target="_blank">' + element.nvDocumentName + '</a>',
           iDocumentId: element.iDocumentId
 
@@ -78,6 +84,17 @@ export class StudentDocumentsComponent implements OnInit {
     this.document.iBelongingType = this.belongSheetType;
     this.document.iCategoryType = 0;
   }
+  click(e) {
+    if (e.columnClickName == 'edit')
+      this.editDocument(e);
+    else
+      this.delDocument(e);
+  }
+  delDocument(d: Document) {
+    this.documentToDelete = d;
+    this.message = 'האם אתה בטוח שברצונך למחוק את ' + this.documents.filter(x=>x.iDocumentId==d.iDocumentId)[0].nvDocumentName + '?';
+    this.flagDelete = true;
+  }
   editDocument(e) {
     //alert(e.iDocumentId);
     //console.log(e);
@@ -95,6 +112,9 @@ export class StudentDocumentsComponent implements OnInit {
       }
     });
 
+  }
+  deleteDocument(d: Document) {
+    this.appProxy.post('DeleteDocument', { iDocumentId: this.documentToDelete.iDocumentId }).then(data => {});
   }
   closeDocumentDialog(save) {
     let category, index;

@@ -74,11 +74,27 @@ export class EventParticipantsComponent implements OnInit {
   close() {
     //  להוסיף את המשתתפים שנבחרו
   }
+  event:any;
   save() {
-    this.globalService.IsParticipantsExists(this.iPersonId, this.iEventId).then(data => {
-      if (data)
-        alert("תלמיד זה קיים כבר באירוע זה");
-      else {
+
+this.listToSelect.forEach(item => {
+  if(item['bMultySelectChecked']== true)
+            this.appProxy.post("SetEventParticipant", { isNew: true, iStatusType: 34,iPersonId:item.iPersonId, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
+          .then(data => {
+            if(data == true)
+            alert(item.iPersonId +"נוסף בהצלחה לארוע")
+            else
+            alert(item.iPersonId +"השמירה נכשלה")
+
+
+          });
+         
+
+});
+    // this.globalService.IsParticipantsExists(this.iPersonId, this.iEventId).then(data => {
+    //   if (data)
+    //     alert("תלמיד זה קיים כבר באירוע זה");
+    //   else {
         // this.appProxy.post("SetEvent", { iStatusType: this.event['iArrivalStatusType'], iPersonId: this.iPersonId, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
         //   .then(data => {
         //     if (data == true) {
@@ -88,11 +104,11 @@ export class EventParticipantsComponent implements OnInit {
         //   }).catch(err => {
         //     alert(err);
         //   });
-        // alert('אמור לשמור')
-      }
-    }).catch(err => {
-     
-    })
+    //     alert('אמור לשמור')
+    //   }
+    // }).catch(err => {
+    //   alert(err);
+    // })
   }
   ngOnInit() {
 

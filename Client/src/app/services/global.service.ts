@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../classes/user';
 import { Person } from '../classes/person';
 import { AppProxy } from '../services/app.proxy';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class GlobalService {
@@ -15,16 +16,18 @@ export class GlobalService {
     return this.user;
   }
 
+  flag: boolean = false;
+
   IsParticipantsExists(participantId: number, eventId: number) {
-    // this.getParticipantListByEvent(eventId);
-  return  this.appProxy.post("GetParticipantsList", { iEventId: eventId }).then(res => {
+    this.appProxy.post("GetParticipantsList", { iEventId: eventId }).then(res => {
       if (res.length > 0) {
         res.forEach(p => {
           if (p.iPersonId == participantId)
-            return true;
+            this.flag = true;
         });
-      } return false;
+      } 
     });
+    return <boolean>this.flag;
   }
 
  public UserPermition: number = 0;
