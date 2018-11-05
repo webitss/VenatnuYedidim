@@ -102,7 +102,7 @@ export class SettingYeshivaComponent implements OnInit {
             this.yeshiva = data;
             alert("save!");
             this.closeYeshiva.emit(null);
-            this.updateYeshiva.emit(this.yeshiva);
+            // this.updateYeshiva.emit(this.yeshiva);
           }
         )
       ) { }
