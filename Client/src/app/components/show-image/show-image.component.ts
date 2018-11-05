@@ -97,8 +97,8 @@ ngOnInit(): void {
       }
   this.galleryOptions = [
       {
-          width: '600px',
-          height: '600px',
+          width: '1000px',
+          height: '1000px',
           thumbnailsColumns: 10,
           imageAnimation: NgxGalleryAnimation.Slide
       },
