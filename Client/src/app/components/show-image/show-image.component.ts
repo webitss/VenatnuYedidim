@@ -84,6 +84,7 @@ ngOnInit(): void {
             medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
             big: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
         });
+         
           })
         .catch(error => {  });
      
@@ -92,13 +93,13 @@ ngOnInit(): void {
     });
   
  })
-       
+      
       }
   this.galleryOptions = [
       {
           width: '600px',
-          height: '400px',
-          thumbnailsColumns: 4,
+          height: '600px',
+          thumbnailsColumns: 10,
           imageAnimation: NgxGalleryAnimation.Slide
       },
       // max-width 800
@@ -158,14 +159,19 @@ this.appProxy.get('GetDocumentsOfTadmit').then(data => {
                small: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
                medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
                big: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
-           });
-             })
+           }); 
+             } 
+
+             )
+            
            .catch(error => {  });
         
        
      
        });
-    })}
+    })
+  
+  }
    
 
   
