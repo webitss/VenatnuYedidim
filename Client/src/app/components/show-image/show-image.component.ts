@@ -90,6 +90,28 @@ export class ShowImageComponent implements OnInit {
 
 
 
+<<<<<<< HEAD
+=======
+    
+  
+  if(this.globalService.UserPermition==7){
+  this.appProxy.get('GetMoreDocumentsOfTadmit').then(data1 => {
+  
+    this.documents = data1;
+    this.documents.forEach(element => {
+   debugger;
+   
+  
+    let head = AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName;
+     this.http.head(AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName)
+        .toPromise()
+        .then(data => {
+          this.galleryImages.push({
+  
+            small: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
+            medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+            big: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
+>>>>>>> dcbb18928d2bd22b1de20b041e69d0494cf2a113
         });
 
       })
@@ -188,6 +210,11 @@ export class ShowImageComponent implements OnInit {
   }
 
 
+<<<<<<< HEAD
+=======
+}
+  );
+>>>>>>> dcbb18928d2bd22b1de20b041e69d0494cf2a113
 
 
 

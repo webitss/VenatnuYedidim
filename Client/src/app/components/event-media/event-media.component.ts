@@ -46,7 +46,7 @@ export class EventMediaComponent implements OnInit {
         this.documents = data;
         console.log(this.documents);
       },
-      err => alert(err)
+     
     );
   }
 
@@ -116,7 +116,7 @@ export class EventMediaComponent implements OnInit {
           }
 
         },
-        err => alert(err)
+       
       );
   }
 
@@ -134,7 +134,7 @@ export class EventMediaComponent implements OnInit {
           }
         }
       },
-      err => alert(err)
+      
     );
   }
 }

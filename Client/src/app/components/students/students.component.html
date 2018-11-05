@@ -2,9 +2,9 @@
         <div *ngIf="component=='/students'" class="col-sm-4 component-name">תלמידים</div>
         <div *ngIf="component=='/graduates'" class="col-sm-4 component-name">בוגרים</div>
         <div class="actions col-sm-8">
-    <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
-    <button *ngIf="component=='/students'" class="btn btn-small pdf" (click)="tableToPdf('תלמידים')"></button>
-    <button *ngIf="component=='/graduates'" class="btn btn-small pdf" (click)="tableToPdf('בוגרים')"></button>
+    <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
+    <button *ngIf="component=='/students'" class="btn btn-small pdf" title="הורד pdf" (click)="tableToPdf('תלמידים')"></button>
+    <button *ngIf="component=='/graduates'" class="btn btn-small pdf" title="הורד pdf" (click)="tableToPdf('בוגרים')"></button>
     <button class="btn btn-circle1 btn-orange" (click)="flag=true"> איחוד כרטיסים</button>
     <button *ngIf="component=='/students'" class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">תלמיד חדש</button>
 </div>

@@ -50,7 +50,7 @@ this.currentPresence.dtDatePresence=this.currentPresence['dtDate'];
           alert("error in save data")
         else { this.currentPresence.iPresenceAvrech = data; this.closeDialog(this.currentPresence); }
       }
-      , err => alert("err"));
+      );
 
   }
 

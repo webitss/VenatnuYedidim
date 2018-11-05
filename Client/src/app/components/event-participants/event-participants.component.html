@@ -1,6 +1,7 @@
+<!-- <div id="overlay"></div> -->
 <div class="row first-row">
   <div class="add-area">
-    <button (click)="addParticipants()" class="btn-add btn-circle">הוסף משתתפים+</button>
+    <button (click)="addParticipants()" class="btn-add btn-circle">הוסף משתתפים</button>
 
     <!-- <button class="btn-circle btn-add" (click)="addParticipants()"></button> -->
   </div>
@@ -13,15 +14,21 @@
     <button (click)="save()" class="btn-save"> שמור</button>
   </div>
   <div class="row">
-     <span class="Student-affiliation">שיוך תלמידים</span>
+    <span class="Student-affiliation">שיוך תלמידים</span>
   </div>
-  <div class="row my-div">
+  <div class=" my-div ">
     <!-- <app-vy-multy-select #child [fullList]="listToSelect" [titleStr]="title" [inputTitle]="inputTitle" (onSave)="getFromChild($event)"></app-vy-multy-select> -->
 
-    <div *ngFor="let item of listToSelect |filter:search">
-      <div class="item-to-select"> <input type="checkbox" [(ngModel)]="item['bMultySelectChecked']">
-        <span>{{item.value}}</span>
-      </div>
+    <div *ngFor="let item of listToSelect |filter:search" class="row">
+    
+        <div class="item-to-select col-sm-12"> <input type="checkbox"  [(ngModel)]="item['bMultySelectChecked']">
+          <span >{{item.value}}
+
+          </span>
+        </div>
+     
+
+
     </div>
   </div>
 </div>
