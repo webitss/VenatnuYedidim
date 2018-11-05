@@ -83,6 +83,7 @@ namespace Service.Entities
                    // Person p = new Person();
                     Persons[i].lstObject=new Dictionary<string,string>();
                     Persons[i].nvFirstName = drc[i]["nvFirstName"].ToString();
+                    //Persons[i].iPersonId = drc[i]["iPersonId"].ToString();
                     Persons[i].lstObject.Add("nvParticipantType", drc[i]["nvParticipantType"].ToString());
                   
                 }
@@ -97,16 +98,17 @@ namespace Service.Entities
             }
         }
 
-        public static bool SetEventParticipant(int iStatusType, int iPersonId, int iEventId, int iUserId)
+        public static bool SetEventParticipant(bool isNew, int iStatusType, int iPersonId, int iEventId, int iUserId)
         {
             try
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("isNew", isNew));
                 parameters.Add(new SqlParameter("iStatusType", iStatusType));
                 parameters.Add(new SqlParameter("iPersonId", iPersonId));
                 parameters.Add(new SqlParameter("iEventId", iEventId));
                 parameters.Add(new SqlParameter("iUserId", iUserId));
-                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_INS_UPD", parameters).Tables[0];
+                SqlDataAccess.ExecuteDatasetSP("TParticipant_INS_UPD", parameters);
                 return true;
 
             }

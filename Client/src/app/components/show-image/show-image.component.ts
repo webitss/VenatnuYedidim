@@ -2,7 +2,6 @@ import { debug } from 'util';
 
 import { HttpClient } from "@angular/common/http";
 
-
 import { Component, OnInit, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { NgxGalleryImage, NgxGalleryOptions, NgxGalleryAnimation } from 'ngx-gallery';
@@ -61,18 +60,20 @@ protected lstColumns = [{
 ]
 @Input()
 public id:number;
- 
+
 ngOnInit(): void {
-  
+
+    
   
   if(this.globalService.UserPermition==7){
+    alert("7777777")
   this.appProxy.get('GetMoreDocumentsOfTadmit').then(data1 => {
   
     this.documents = data1;
     this.documents.forEach(element => {
    debugger;
    
-   if ( AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName) {
+  
     let head = AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName;
      this.http.head(AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName)
         .toPromise()
@@ -86,7 +87,7 @@ ngOnInit(): void {
           })
         .catch(error => {  });
      
-    }
+    
   
     });
   
@@ -145,20 +146,31 @@ ngOnInit(): void {
 this.appProxy.get('GetDocumentsOfTadmit').then(data => {
     this.documents = data;
     this.documents.forEach(element => {
+      debugger;
+      
+     
+       let head = AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName;
+        this.http.head(AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName)
+           .toPromise()
+           .then(data => {
+             this.galleryImages.push({
+     
+               small: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
+               medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+               big: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
+           });
+             })
+           .catch(error => {  });
+        
+       
+     
+       });
+    })}
+   
 
-      if ( AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName) {
-      this.galleryImages.push({
-        small: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
-        medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
-        big: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
-    });
-    }
-    });
+  
 
-  }
-    , err => alert(err));
 
-}
 goToLogin(){
   this.divModal=true;
   this.rout.navigate(["log-in"])
