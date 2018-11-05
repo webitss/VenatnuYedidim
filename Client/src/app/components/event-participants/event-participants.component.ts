@@ -117,6 +117,7 @@ this.listToSelect.forEach(item => {
     this.appProxy.post('GetPersonList', { iPersonId: 0 }).then(
       data => {
 
+        
         this.allPersons = data
         //  this.allPersons.forEach(
         //   st => {
