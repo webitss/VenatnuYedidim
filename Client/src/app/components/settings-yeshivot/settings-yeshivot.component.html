@@ -3,13 +3,13 @@
         <div class="col-sm-4 component-name"> מוסדות</div>
         <div class="actions col-sm-8">
             <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
-            <button class="btn btn-small">s</button>
+            <button class="btn btn-small pdf"></button>
             <button (click)="iYeshivaId = 0">מוסד חדש</button>
         </div>
     </div>
 
 <div *ngIf="(iYeshivaId != null && !flag)">
-    <app-setting-yeshiva #yeshivot [sysTableList]="sysTableList" [iYeshivaId]="iYeshivaId" (addYeshiva)="add($event)" (updateYeshiva)="update($event)" (closeYeshiva)="close()"></app-setting-yeshiva>
+    <app-setting-yeshiva #yeshivot [sysTableList]="sysTableList" [iYeshivaId]="iYeshivaId" (add)="addYeshiva($event)" (update)="updateYeshiva($event)" (closeYeshiva)="close()"></app-setting-yeshiva>
 </div>
  
     
@@ -29,5 +29,5 @@
 
 
 
-<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; delete();"></app-vy-pop-up>
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; delete(deleteYeshiva);"></app-vy-pop-up>
 

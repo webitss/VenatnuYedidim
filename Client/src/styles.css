@@ -277,3 +277,6 @@ height: 650px;
 .text-danger {
     position: absolute;
 }
+.pdf{
+    background-image: url(assets/icons/pdf.png);
+}
