@@ -19,12 +19,12 @@ padding: 2%;
     position: fixed;
     z-index: 100;
     top: 40%;
-    right: 25%;
+    right: 35%;
     background:white;
     border: 2px;
-    width: 40%;
+    width: 30%;
     border: solid rgb(207, 37, 94);
-    height: 40%;
+    height: 30%;
 }
 .btn{
 
@@ -81,4 +81,7 @@ h3{
     background-color: rgb(207, 37, 94);
     color: white;
 
+}
+.btn-close{
+    margin-left: 1%;
 }
