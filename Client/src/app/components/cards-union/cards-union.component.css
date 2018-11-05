@@ -3,7 +3,8 @@
 }
 .content-modal{
     position: absolute;
-    border: 1px solid rgb(175, 175, 175);
+    border: 1px solid rgb(207, 37, 94);
+    border-radius: 4px;
     width: 80%;
     height: 80%;
     padding: 0.5% 1.5%;
@@ -91,6 +92,7 @@ label,span{
  .close{
 
 margin-bottom: 2%;
+float: left;
 }
 .imgStudent{
     width: 10%;

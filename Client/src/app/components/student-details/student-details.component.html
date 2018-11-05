@@ -39,10 +39,10 @@
             <div class="form-group col-sm-4">
                 <label for="phone"> טלפון :</label>
                 <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="student.nvPhone" (change)="change=true"
-                    [ngModelOptions]="{standalone: true}" minlength="9" maxlength="9" #phone="ngModel">
+                    [ngModelOptions]="{standalone: true}"  pattern="^\(?([0-9]{2})\)?[0-9]??[-. ]?([0-9]{3})[-. ]?([0-9]{4})$" #phone="ngModel">
                 <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
-                    <div *ngIf="(phone.errors.minlength||phone.errors.maxlength)">
-                        <p>מספר טלפון אינו תקין </p>
+                    <div *ngIf="phone.errors && (phone.errors.pattern)">
+                        <p class="text-danger">מספר טלפון אינו תקין </p>
                     </div>
                 </div>
             </div>
