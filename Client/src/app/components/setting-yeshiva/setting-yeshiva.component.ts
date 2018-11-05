@@ -7,7 +7,7 @@ import { SettingsYeshivotComponent } from '../settings-yeshivot/settings-yeshivo
 import { SysTableService } from '../../services/sys-table.service'
 import { SysTableRow } from '../../classes/SysTableRow';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
-import { } from '../../components/settings-yeshivot/settings-yeshivot.component';
+// import { } from '../../components/settings-yeshivot/settings-yeshivot.component';
 import { GlobalService } from '../../services/global.service';
 
 

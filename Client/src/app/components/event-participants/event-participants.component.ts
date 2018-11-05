@@ -35,7 +35,7 @@ export class EventParticipantsComponent implements OnInit {
   message = 'האם אתה בטוח שברצונך למחוק משתתף זה?';
   header = 'מחיקת משתתף';
   iPersonId: number;
-  constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService,private globalService: GlobalService) { }
+  constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService, private globalService: GlobalService) { }
   cancel(event) {
     this.flag = false;
   }
@@ -52,14 +52,17 @@ export class EventParticipantsComponent implements OnInit {
   public lstDataRows = [];
 
   addParticipants() {
+    this.listToSelect = [];
     this.appProxy.post("GetPersonList").then(
       data => {
         this.allPersons = data;
         this.flag = true
         this.allPersons.forEach(
           person => {
-            this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] });
-            this.iPersonId=person.iPersonId;
+            if (this.participantList.find(p => p.iPersonId == person.iPersonId) == null) {
+              this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] });
+              this.iPersonId = person.iPersonId;
+            }
           }
         );
 
@@ -76,7 +79,7 @@ export class EventParticipantsComponent implements OnInit {
       if (data)
         alert("תלמיד זה קיים כבר באירוע זה");
       else {
-        // this.appProxy.post("SetEvent", { iStatusType: this.event['iArrivalStatusType'], iPersonId: this.id, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
+        // this.appProxy.post("SetEvent", { iStatusType: this.event['iArrivalStatusType'], iPersonId: this.iPersonId, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
         //   .then(data => {
         //     if (data == true) {
         //       alert("התלמיד נוסף בהצלחה בהצלחה!");
@@ -95,22 +98,22 @@ export class EventParticipantsComponent implements OnInit {
 
     this.listToSelect = new Array<any>();
 
-    this.appProxy.post('GetPersonList', { iPersonId: 0 }).then(
-      data => {
+    // this.appProxy.post('GetPersonList', { iPersonId: this.globalService.getUser().iPersonId }).then(
+    //   data => {
 
-        this.allPersons = data
-        //  this.allPersons.forEach(
-        //   st => {
-        //      st['delete'] = '<button class="btn delete" >מחק</button>'; 
-        //     });
-        this.allPersons.forEach(
-          person => {
-            this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] });
-          }
-        );
+    //     this.allPersons = data
+    //     //  this.allPersons.forEach(
+    //     //   st => {
+    //     //      st['delete'] = '<button class="btn delete" >מחק</button>'; 
+    //     //     });
+    //     this.allPersons.forEach(
+    //       person => {
+    //         this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] });
+    //       }
+    //     );
 
-      }
-      , err => alert(err));
+    //   }
+    //   , err => alert(err));
 
     this.sub = this.router.parent.params.subscribe(params => {
       this.iEventId = +params['iEventId'];
