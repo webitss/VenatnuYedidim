@@ -1,7 +1,7 @@
 
 .uploadDocumentComponent{
     position: fixed;
-    z-index: 100;
+    z-index: 1000;
     top: 40%;
     right: 30%;
     background: white;
@@ -16,3 +16,4 @@ button{
 .row{
     margin-bottom: 1%;
 }
+

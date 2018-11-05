@@ -61,3 +61,11 @@ button[disabled]
     background-color: rgb(228, 147, 174);
     cursor: not-allowed;
 }
+.form{
+    z-index: 100;
+    background-color: white;
+}
+#overlay{
+    z-index: -5;
+    cursor: default;
+}

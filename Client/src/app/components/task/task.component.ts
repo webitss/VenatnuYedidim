@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Student } from '../../classes/student';
 import { AvrechDiaryComponent } from "../../components/avrech-diary/avrech-diary.component"
 import { CalendarComponent } from '../calendar/calendar.component';
-import { moment } from '../../../../node_modules/ngx-bootstrap/chronos/test/chain';
+// import { moment } from '../../../../node_modules/ngx-bootstrap/chronos/test/chain';
 import { promise } from '../../../../node_modules/protractor';
 
 @Component({
@@ -53,17 +53,17 @@ export class TaskComponent implements OnInit {
 
       // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
     
-      // if ((this.task.dtTaskdatetime).getMinutes() < 10)
-      //   this.minutes = '0' + (this.task.dtTaskdatetime).getMinutes().toString();
-      // else
-      //   this.minutes = (this.task.dtTaskdatetime).getMinutes().toString();
+      if ((this.task.dtTaskdatetime).getMinutes() < 10)
+        this.minutes = '0' + (this.task.dtTaskdatetime).getMinutes().toString();
+      else
+        this.minutes = (this.task.dtTaskdatetime).getMinutes().toString();
 
-      // if ((this.task.dtTaskdatetime).getHours() < 10)
-      //   this.hours = '0' + (this.task.dtTaskdatetime).getHours().toString();
-      // else
-      //   this.hours = (this.task.dtTaskdatetime).getHours().toString();
+      if ((this.task.dtTaskdatetime).getHours() < 10)
+        this.hours = '0' + (this.task.dtTaskdatetime).getHours().toString();
+      else
+        this.hours = (this.task.dtTaskdatetime).getHours().toString();
 
-      this.currentTask['dtHour'] =moment(this.task.dtTaskdatetime).format('HH:mm'); //this.hours + ':' + this.minutes;
+      // this.currentTask['dtHour'] =moment(this.task.dtTaskdatetime).format('HH:mm'); //this.hours + ':' + this.minutes;
       this.cdRef.detectChanges();
     });
 

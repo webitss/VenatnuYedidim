@@ -33,4 +33,9 @@ button{
     margin-right: 12%;
 } */
 
-
+#overlay{
+    z-index: -5;
+}
+.form{
+    background: white;
+}
