@@ -1,14 +1,17 @@
-<div class="row">
-    <div class="col col-sm-8"></div>
-    <div class="col col-sm-4">
-        <button (click)="addDocument()" class="btn-add btn-circle">העלאת מסמך</button>
+<div class="container">
+    <div class="row">
+        <div class="col col-sm-8"></div>
+        <div class="col col-sm-4">
+            <button (click)="addDocument()" class="btn-add btn-circle">העלאת מסמך</button>
+        </div>
+    </div>
+    <div class="main-table">
+        <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editDocument($event)"></app-vy-table>
+
+    </div>
+
+    <div class="uploadDocumentComponent" *ngIf="document!=null">
+        <app-upload-document [document]="document" (closeMe)="closeDocumentDialog(true)" (closeMeNoSave)="closeDocumentDialog(false)"
+            #VyTableComponent></app-upload-document>
     </div>
 </div>
-<div class="main-table">
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editDocument($event)"></app-vy-table>
-
-</div>
-
-<div class="uploadDocumentComponent" *ngIf="document!=null">
-    <app-upload-document [document]="document" (closeMe)="closeDocumentDialog(true)" (closeMeNoSave)="closeDocumentDialog(false)" #VyTableComponent></app-upload-document>
-</div> 
