@@ -51,7 +51,7 @@ export class EventDetailsComponent implements OnInit {
         data => {
           this.route.navigate(['events/']);
         }).catch(err => {
-          alert("error:" + err);
+         
         });
   }
 

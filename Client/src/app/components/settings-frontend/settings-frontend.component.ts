@@ -54,8 +54,7 @@ export class SettingsFrontendComponent implements OnInit {
       data => {
         this.documents = data;
         console.log(this.documents);
-      },
-      err => alert(err)
+      }
     );
   }
 
@@ -115,7 +114,7 @@ export class SettingsFrontendComponent implements OnInit {
             }
           }
         },
-        err => alert(err)
+      
       );
   }
 

@@ -59,8 +59,7 @@ listToSelect:Array<any>;
     });
     this.VyMultySelect.save();
 
-    this.appProxy.post('AddStudentsToAvrech', { studentAndAvrechArr: this.studentAndAvrechArr, iUserId: this.userId }).then(data => { alert(data); }
-      , err => alert(err));
+    this.appProxy.post('AddStudentsToAvrech', { studentAndAvrechArr: this.studentAndAvrechArr, iUserId: this.userId }).then(data => {  });
     this.flag = false
   }
   item:string;
@@ -73,7 +72,7 @@ listToSelect:Array<any>;
       this.id = params['iPersonId'];
     })
     this.appProxy.post('GetAvrechStudents', { iPersonId: this.id }).then(data => this.allStudents = data
-      , err => alert(err));
+       );
 
     this.appProxy.post('GetStudentList', { iPersonId: 0 }).then(
       data =>{
@@ -81,7 +80,7 @@ listToSelect:Array<any>;
        this.allStudents = data
        this.allStudents.forEach(
         st => {
-           st['delete'] = '<button class="btn delete" >מחק</button>'; 
+           st['delete'] = '<div class="delete"></div>'; 
           });
 
           this.allStudents.forEach(
@@ -90,9 +89,9 @@ listToSelect:Array<any>;
             }
           );
     }
-      , err => alert(err));
+      );
 
-   this.lstColumns.push(new VyTableColumn('הסרה', 'delete', 'html', true));
+   this.lstColumns.push(new VyTableColumn('', 'delete', 'html', true));
       this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
       this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));      
       this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
@@ -128,7 +127,7 @@ listToSelect:Array<any>;
         this.vyTableComponent.refreshTable(this.allStudents);
       }
     }
-      , err => alert(err));
+      );
   }
 
 }

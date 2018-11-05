@@ -99,8 +99,16 @@ namespace Service
         {
             return Student.GetStudentList(iUserId);
         }
+		public List<int> GetStudentsAssociatedToAvrechim()
+		{
+			return Student.GetStudentsAssociatedToAvrechim();
+		}
+		public List<Dictionary<int, string>> GetCurrentYeshivaOfStudent()
+		{
+			return Student.GetCurrentYeshivaOfStudent();
+		}
 
-        public List<Yeshivot> GetYeshivotOfStudent(int iPersonId)
+		public List<Yeshivot> GetYeshivotOfStudent(int iPersonId)
         {
             return Student.GetYeshivotOfStudent(iPersonId);
         }

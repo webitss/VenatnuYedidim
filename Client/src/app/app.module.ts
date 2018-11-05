@@ -98,7 +98,7 @@ import { AddParticipantComponent } from './components/add-participant/add-partic
 
 import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
 import { EditMailComponent } from './components/edit-mail/edit-mail.component';
-import { NgxEditorModule } from 'ngx-editor';
+// import { NgxEditorModule } from 'ngx-editor';
 // import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { NgxPasswordToggleModule } from 'ngx-password-toggle';
 
@@ -221,7 +221,7 @@ import { NgxPasswordToggleModule } from 'ngx-password-toggle';
     HttpClientModule,
     NguiDatetimePickerModule,
     NgxImageGalleryModule,
-    NgxEditorModule,
+    // NgxEditorModule,
     // ShowHidePasswordModule.forRoot(),
     NgxPasswordToggleModule,
     RouterModule.forRoot([

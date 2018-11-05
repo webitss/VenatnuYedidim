@@ -28,13 +28,15 @@ namespace Service.Entities
         {
             try
             {
+                int id;
                 DataTable dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_GetParticipantByEventId_SLCT", new SqlParameter("iEventId", iEventId)).Tables[0];                
                 List<Person> participants = new List<Person>();
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Person p = new Person();
                     
-                    p.iPersonId =int.Parse(dt.Rows[i]["iPersonId"].ToString());
+                    
+                    p.iPersonId = int.Parse(dt.Rows[i]["iPersonId"].ToString());
                     p.nvLastName = dt.Rows[i]["nvLastName"].ToString();
                     p.nvFirstName = dt.Rows[i]["nvFirstName"].ToString();
                     p.nvPhone = dt.Rows[i]["nvPhone"].ToString();

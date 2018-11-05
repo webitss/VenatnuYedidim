@@ -1,4 +1,4 @@
-<!-- <div id="overlay"></div> -->
+<div id="overlay"></div>
 <div class="form ">
   <div class="row ">
     <div class="col-sm-8"></div>
@@ -13,7 +13,7 @@
     <div class="content col-sm-10">
       <div class="row title">
         <div *ngIf="meeting.iMeetingId">
-          <h3>עריכה </h3>
+          <h3>עריכת פגישה </h3>
         </div>
         <div *ngIf="meeting.iMeetingId==null">
           <h3>פגישה חדשה </h3>
@@ -53,7 +53,7 @@
         <div class=" col-sm-12">
           <div *ngIf="meeting.iMeetingId==null">
             <div *ngIf="taskSelect==false" class="col-sm-8">
-              <button class="btn-circle btn-add " (click)="taskSelect=true">הוספת משימה +</button>
+              <button class="btn-circle btn-add " (click)="taskSelect=true">הוספת משימה</button>
             </div>
             <div *ngIf="taskSelect==true">
               <app-task #task></app-task>

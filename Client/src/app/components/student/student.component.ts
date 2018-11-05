@@ -64,7 +64,17 @@ export class StudentComponent implements OnInit, OnDestroy {
   }
 
   close() {
-    this.router.navigate(["students"]);
+    if (this.student == undefined)
+      this.router.navigate(["students"]);
+    else {
+      this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
+        if (this.student.iStatusType == data.filter(d => d.nvValue == 'תלמיד')[0].iSysTableRowId)
+          this.router.navigate(["students"]);
+        else
+          this.router.navigate(["graduates"]);
+      }
+      )
+    }
   }
   ngOnDestroy() {
     this.sub.unsubscribe();

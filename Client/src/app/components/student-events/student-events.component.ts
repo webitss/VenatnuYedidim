@@ -50,7 +50,7 @@ export class StudentEventsComponent implements OnInit {
         });
       });
     }).catch(err => {
-      alert(err);
+      //alert(err);
     });
   }
 
@@ -89,7 +89,7 @@ export class StudentEventsComponent implements OnInit {
         this.lstDataRows.splice(this.lstDataRows.indexOf(this.deleteEvent), 1);
         this.vyTableComponent.refreshTable(this.lstDataRows);
       }).catch(err => {
-        alert(err)
+       // alert(err)
       });
   }
   @Output()

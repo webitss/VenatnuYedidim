@@ -57,7 +57,7 @@ export class SettingsCodeTableComponent implements OnInit {
       this.tableNames = data,
      
      
-    error => alert(error));
+    );
 
   }
   public getValues() {

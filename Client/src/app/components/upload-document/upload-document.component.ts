@@ -29,9 +29,6 @@ export class UploadDocumentComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
 
   ngOnInit() {  
-    // this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => this.sheetTypes = data
-    //   , err => alert('error'));
-    // this.save.name = this.document.nvDocumentName;
     this.activatedRoute.url.subscribe(url => {
       this.component = url.toString();
       if (this.component == "student-documents") {
@@ -99,7 +96,8 @@ export class UploadDocumentComponent implements OnInit {
         }
         else {this.document.iDocumentId = data; this.closeDialog(); }
       }
-      , err => alert(err));
+     // , err => alert(err)/
+    );
   }
 
 

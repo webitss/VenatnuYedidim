@@ -71,6 +71,7 @@ namespace Service.Entities
 
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TStudentGetStudentByUser_SLCT", new SqlParameter("iUserId", iUserId)).Tables[0].Rows;
                 List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
+				
                 return students;
             }
 
@@ -83,7 +84,38 @@ namespace Service.Entities
             }
         }
 
-        public static List<Student> GetGraduatesList(int iUserId)
+		public static List<int> GetStudentsAssociatedToAvrechim()
+		{
+			try
+			{
+				DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_SLCT").Tables[0].Rows;
+				List<int> studentsId = ObjectGenerator<int>.GeneratListFromDataRowCollection(drc);
+				return studentsId;
+			}
+
+
+
+			catch (Exception ex)
+			{
+				Log.LogError("GetStudentList / TAvrechStudents_SLCT", "ex" + ex);
+				return null;
+			}
+		}
+		public static List<Dictionary<int,string>> GetCurrentYeshivaOfStudent()
+		{
+			try
+			{
+				DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_SLCT").Tables[0].Rows;
+				List<Dictionary<int, string>> studentsId = ObjectGenerator<Dictionary<int, string>>.GeneratListFromDataRowCollection(drc);
+				return studentsId;
+			}
+			catch (Exception ex)
+			{
+				Log.LogError("GetStudentList / TAvrechStudents_SLCT", "ex" + ex);
+				return null;
+			}
+		}
+		public static List<Student> GetGraduatesList(int iUserId)
         {
             try
             {

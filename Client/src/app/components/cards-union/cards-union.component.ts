@@ -42,7 +42,7 @@ export class CardsUnionComponent implements OnInit {
         this.studentList = data;
         debugger;
       }
-      , err => alert(err));
+    );
   }
   student1Change(event: any) {
     this.studentList.forEach(e => {
