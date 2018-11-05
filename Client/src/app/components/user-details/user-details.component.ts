@@ -45,7 +45,9 @@ export class UserDetailsComponent implements OnInit {
 
   @Output()
   isManeger: boolean = false;
-  notFocused: boolean = true;
+  notFocused1: boolean = true;
+  notFocused2: boolean = true;
+  notFocused3: boolean = true;
 
   
   @ViewChild(NgForm) form;

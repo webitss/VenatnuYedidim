@@ -35,8 +35,8 @@ export class StudentEventDetailsComponent implements OnInit {
 
     if (this.event == null) {
       this.event = new Event1();
-      this.event['iArrivalStatusType'] = 0;
-      this.event.nvName = '';
+      this.event['iArrivalStatusType'] = null;
+      this.event.nvName = null;
       this.isNew = true;
     }
     else {
@@ -74,9 +74,11 @@ export class StudentEventDetailsComponent implements OnInit {
       if (data)
         alert("תלמיד זה קיים כבר באירוע זה");
       else {
-        this.appProxy.post("SetEventParticipant", {isNew: this.isNew, iStatusType: this.event['iArrivalStatusType'], iPersonId: this.id, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
+        this.iArrivalStatusType = this.lst.find(x=>x.nvValue == this.event['iArrivalStatusType']).iSysTableRowId;
+        this.appProxy.post("SetEventParticipant", {isNew: this.isNew, iStatusType: this.iArrivalStatusType, iPersonId: this.id, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
           .then(data => {
             if (data == true) {
+              this.lst.push(this.event);
               alert("האירוע נשמר בהצלחה!");
               this.close();
             }
@@ -103,7 +105,7 @@ export class StudentEventDetailsComponent implements OnInit {
       })
   }
   close() {
-    this.Close.emit();
+    this.Close.emit(this.event);
   }
   chooseEvent(e) {
     if (e == '0')
