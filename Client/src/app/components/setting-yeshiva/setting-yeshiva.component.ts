@@ -34,7 +34,7 @@ export class SettingYeshivaComponent implements OnInit {
   @ViewChild(NgForm) form;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
 
-  //@Output() updateYeshiva = new EventEmitter<Yeshiva>();
+  @Output() updYeshiva = new EventEmitter<Yeshiva>();
   //@Output() addYeshiva = new EventEmitter<Yeshiva>();
 
   protected settingsYeshivot: SettingsYeshivotComponent;
@@ -102,7 +102,7 @@ export class SettingYeshivaComponent implements OnInit {
             this.yeshiva = data;
             alert("save!");
             this.closeYeshiva.emit(null);
-            this.updateYeshiva.emit(this.yeshiva);
+            this.updYeshiva.emit(this.yeshiva);
           }
         )
       ) { }
