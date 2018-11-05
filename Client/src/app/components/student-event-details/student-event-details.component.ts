@@ -68,10 +68,12 @@ export class StudentEventDetailsComponent implements OnInit {
   save() {
     this.appProxy.post("GetParticipantsList", { iEventId: this.event.iEventId }).then(res => {
       if (res.length > 0) {
+        if(this.isNew == true){
         res.forEach(p => {
           if (p.iPersonId == this.id)
             this.flag = true;
         });
+      }
         if (this.flag == true) {
           this._parent.openMessagePopup('לא ניתן לקבוע אירוע זה פעם נוספת!')
           this.close();
