@@ -66,7 +66,6 @@ ngOnInit(): void {
     
   
   if(this.globalService.UserPermition==7){
-    alert("7777777")
   this.appProxy.get('GetMoreDocumentsOfTadmit').then(data1 => {
   
     this.documents = data1;
@@ -226,7 +225,7 @@ this.appProxy.get('GetMoreDocumentsOfTadmit').then(data1 => {
   });
 
 }
-  , err => alert(err));
+  );
 
 }
      }

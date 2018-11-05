@@ -61,7 +61,8 @@ export class StudentsComponent implements OnInit {
 
           });
         });
-      }, err => { alert(err); });
+      }, //err => { alert(err); }
+    );
     }
 
     else {
@@ -87,7 +88,8 @@ export class StudentsComponent implements OnInit {
 
           });
         });
-      }, err => { alert(err); });
+      }//, err => { alert(err); }
+    );
     }
 
 

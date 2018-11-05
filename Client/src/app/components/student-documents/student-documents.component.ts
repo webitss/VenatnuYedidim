@@ -66,7 +66,8 @@ export class StudentDocumentsComponent implements OnInit {
         });
       });
     }
-      , err => alert(err));
+     // , err => alert(err)
+    );
   }
   get staticBaseUrl() {
     return AppProxy.getBaseUrl();

@@ -67,7 +67,7 @@ export class EventParticipantsComponent implements OnInit {
         );
 
       }
-      , err => alert(err));
+    );
 
 
   }
@@ -88,10 +88,10 @@ export class EventParticipantsComponent implements OnInit {
         //   }).catch(err => {
         //     alert(err);
         //   });
-        alert('אמור לשמור')
+        // alert('אמור לשמור')
       }
     }).catch(err => {
-      alert(err);
+     
     })
   }
   ngOnInit() {

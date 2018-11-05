@@ -47,7 +47,7 @@ export class StudentEventDetailsComponent implements OnInit {
       .then(data => {
         this.eventsList = data;
       }).catch(err => {
-        alert(err);
+       // alert(err);
       })
     // this.route.parent.params.subscribe(params => {
     //   if (params['iEventId'] != '0') {
@@ -83,11 +83,11 @@ export class StudentEventDetailsComponent implements OnInit {
               this.close();
             }
           }).catch(err => {
-            alert(err);
+            //alert(err);
           });
       }
     }).catch(err => {
-      alert(err);
+      //alert(err);
     })
   }
 
@@ -101,7 +101,7 @@ export class StudentEventDetailsComponent implements OnInit {
       .then(data => {
         this.eventsList = data;
       }).catch(err => {
-        alert(err);
+        //alert(err);
       })
   }
   close() {
