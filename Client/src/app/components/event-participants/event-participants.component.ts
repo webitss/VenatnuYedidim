@@ -67,7 +67,7 @@ export class EventParticipantsComponent implements OnInit {
         );
 
       }
-      , err => alert(err));
+    );
 
 
   }

@@ -59,8 +59,13 @@ this.currentYeshivaOfStudent=new Map<number,string>();
             });
           });
         });
+<<<<<<< HEAD
 
       }, err => { alert(err); });
+=======
+      }, //err => { alert(err); }
+    );
+>>>>>>> d95c86cf5bb180f3cba3edf0890b89b206c85376
     }
 
     else {
@@ -86,7 +91,8 @@ this.currentYeshivaOfStudent=new Map<number,string>();
 
           });
         });
-      }, err => { alert(err); });
+      }//, err => { alert(err); }
+    );
     }
 
 

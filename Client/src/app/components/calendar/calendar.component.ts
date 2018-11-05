@@ -205,7 +205,6 @@ export class CalendarComponent implements OnInit {
           // alert("task remove");
           // this.task=this.taskList.find(t => t.iTaskId == taskId);
 
-          alert(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].indexOf(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].find(t => t.id == this.taskId)));
           this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].splice(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].indexOf(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].find(t => t.id == this.taskId)), 1);
           this.cdRef.detectChanges();
 

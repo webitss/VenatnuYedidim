@@ -45,7 +45,7 @@ export class UsersComponent implements OnInit {
         });
       });
     }).catch(err => {
-      alert(err);
+      //alert(err);
     });
   }
 
@@ -98,7 +98,7 @@ export class UsersComponent implements OnInit {
     this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId, iUserId: this.globalService.getUser().iPersonId }).then(data => {
 this._parent.openMessagePopup('נמחק בהצלחה!');
      }).catch(err => {
-      alert(err);
+     // alert(err);
     });
     this.lstDataRows.splice(this.lstDataRows.indexOf(u), 1);
     this.vyTableComponent.refreshTable(this.lstDataRows);

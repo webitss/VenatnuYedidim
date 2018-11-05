@@ -96,7 +96,8 @@ export class UploadDocumentComponent implements OnInit {
         }
         else {this.document.iDocumentId = data; this.closeDialog(); }
       }
-      , err => alert(err));
+     // , err => alert(err)/
+    );
   }
 
 

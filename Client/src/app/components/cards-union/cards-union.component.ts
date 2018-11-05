@@ -43,7 +43,7 @@ sameNameStudents:boolean=true;
         this.studentList = data;
 debugger;
       }
-      , err => alert(err));
+    );
   }
   student1Change(event:any){
     this.studentList.forEach(e=>{

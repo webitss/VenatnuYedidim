@@ -49,7 +49,7 @@ export class StudentEventDetailsComponent implements OnInit {
       .then(data => {
         this.eventsList = data;
       }).catch(err => {
-        alert(err);
+       // alert(err);
       })
 
 
@@ -107,7 +107,7 @@ export class StudentEventDetailsComponent implements OnInit {
       .then(data => {
         this.eventsList = data;
       }).catch(err => {
-        alert(err);
+        //alert(err);
       })
   }
   close() {

@@ -38,7 +38,7 @@ export class SettingsDocumentsComponent implements OnInit {
         });
       });
     }
-      , err => alert(err));
+      );
 
   }
   downloadExcel() {

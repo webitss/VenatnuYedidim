@@ -20,9 +20,9 @@ export class EventsComponent implements OnInit {
   flag = false;
   header = "מחיקת אירוע";
   eventIdToDelete:number;
-  myFunc() {
-    alert('sadsa');
-  }
+  // myFunc() {
+  //   alert('sadsa');
+  // }
   constructor(private appProxy: AppProxy, private router: Router, private globalService: GlobalService,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
 
   edit(e) {
