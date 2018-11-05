@@ -33,6 +33,8 @@ namespace Service.Entities
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Person p = new Person();
+                    
+                    p.iPersonId =int.Parse(dt.Rows[i]["iPersonId"].ToString());
                     p.nvLastName = dt.Rows[i]["nvLastName"].ToString();
                     p.nvFirstName = dt.Rows[i]["nvFirstName"].ToString();
                     p.nvPhone = dt.Rows[i]["nvPhone"].ToString();

@@ -75,10 +75,7 @@ export class StudentEventsComponent implements OnInit {
     // this.router.navigate(['./student-events-details/',e.iEventId]);
     this.editEvent(2, e);
   }
-
-  private alert: any;
-  private flag: boolean = false;
-
+  
   delEvent(e: Event1) {
     this.message = 'האם אתה בטוח שברצונך למחוק את ' + e.nvName + '?';
     this.deleteEvent = e;
@@ -104,9 +101,18 @@ export class StudentEventsComponent implements OnInit {
     this.from = from;
     this.event = event;
   }
-  close() {
+  close(e) {
+    if (e.iEventId > 0) {
+      if (this.lstDataRows.find(x => x.iEventId == e.iEventId) == null) {
+        e["dtEventDate"] = e.dtEventDate.toLocaleDateString();
+        e["edit"] = "<div class='edit'></div>";
+        e["delete"] = "<div class='delete'></div>";
+        this.lstDataRows.push(e);
+      }
+      this.vyTableComponent.refreshTable(this.lstDataRows);
+    }
     this.eventFlag = false;
   }
-  
+
 }
 

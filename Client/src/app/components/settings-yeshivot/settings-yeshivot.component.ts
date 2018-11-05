@@ -1,10 +1,10 @@
-import { Component, OnInit, Output, Input, ViewChild, forwardRef, Inject } from '@angular/core';
+import { Component, OnInit, Output, Input, ViewChild, forwardRef, Inject ,EventEmitter} from '@angular/core';
 import { SettingYeshivaComponent } from '../setting-yeshiva/setting-yeshiva.component';
 import { Yeshiva } from '../../classes/Yeshiva';
 import { Router } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
-import { EventEmitter } from 'events';
+// import {  } from 'events';
 import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
@@ -31,8 +31,8 @@ export class SettingsYeshivotComponent implements OnInit {
   @ViewChild('yeshivot') yeshivot: any;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
 
-  @Output()
-  public closeYeshiva = new EventEmitter();
+  // @Output()
+  // public closeYeshiva = new EventEmitter();
   protected yeshivaList = new Array();
 
   @Output()

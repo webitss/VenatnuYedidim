@@ -152,7 +152,7 @@ ngOnInit(): void {
 this.appProxy.get('GetDocumentsOfTadmit').then(data => {
     this.documents = data;
     this.documents.forEach(element => {
-      debugger;
+      //debugger;
       
      
        let head = AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName;

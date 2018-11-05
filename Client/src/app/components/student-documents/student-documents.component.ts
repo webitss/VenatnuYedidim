@@ -42,11 +42,13 @@ export class StudentDocumentsComponent implements OnInit {
 
 
 
-    this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType = data.filter(x => x.nvValue == 'תלמיד')[0].iSysTableRowId);
+    this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => {
+    this.belongSheetType = data.filter(x => x.nvValue == 'תלמיד')[0].iSysTableRowId;
+      this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => { this.categoryTypes = data })
+    });
 
     this.loadDocuments();
 
-    this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => { this.categoryTypes = data })
   }
 
   loadDocuments() {
