@@ -24,269 +24,278 @@ const GLOBAL = { title: 'כותרת', GlobalVerMarch: 'טקסט_ראשי', Globa
 export class ShowImageComponent implements OnInit {
 
   b: number;
-protected  nvPassword: any = '';
-protected nvUserName: any = '';
-protected isManager: boolean;
+  protected nvPassword: any = '';
+  protected nvUserName: any = '';
+  protected isManager: boolean;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[] = new Array<NgxGalleryImage>();
 
-  constructor( private globalService: GlobalService,private activatedRoute: ActivatedRoute,private rout:Router, private appProxy: AppProxy, public settingsFrontend: settingsFrontend,private cdRef:ChangeDetectorRef,private http:HttpClient) { }
+  constructor(private globalService: GlobalService, private activatedRoute: ActivatedRoute, private rout: Router, private appProxy: AppProxy, public settingsFrontend: settingsFrontend, private cdRef: ChangeDetectorRef, private http: HttpClient) { }
 
-protected titaieName = 'ונתנו ידידים' ;
-ngxImageGallery: NgxImageGalleryComponent;
-public divModal: boolean;
+  protected titaieName = 'ונתנו ידידים';
+  ngxImageGallery: NgxImageGalleryComponent;
+  public divModal: boolean;
 
-protected listImage: string[] = ['http://localhost:14776/Files/red.jpg','assets/חוף ים.jpg',
-"assets/3-big.jpg","assets/IMG_5650.JPG",
-"assets/IMG_5650.JPG","assets/IMG_5650.JPG",]
-protected documents: any;
-protected password:any;
-protected name:any
+  protected listImage: string[] = ['http://localhost:14776/Files/red.jpg', 'assets/חוף ים.jpg',
+    "assets/3-big.jpg", "assets/IMG_5650.JPG",
+    "assets/IMG_5650.JPG", "assets/IMG_5650.JPG",]
+  protected documents: any;
+  protected password: any;
+  protected name: any
 
-protected lstColumns = [{
+  protected lstColumns = [{
 
-  title: 'ערך',
-  type: 'html',
+    title: 'ערך',
+    type: 'html',
 
-},
-{
-  title: 'ערך',
-  type: 'html',
-},
-{
-  title: 'ערך',
-  type: 'html',
-},
-]
-@Input()
-public id:number;
+  },
+  {
+    title: 'ערך',
+    type: 'html',
+  },
+  {
+    title: 'ערך',
+    type: 'html',
+  },
+  ]
+  @Input()
+  public id: number;
 
-ngOnInit(): void {
+  ngOnInit(): void {
 
-    
-  
-  if(this.globalService.UserPermition==7){
-    alert("7777777")
-  this.appProxy.get('GetMoreDocumentsOfTadmit').then(data1 => {
-  
-    this.documents = data1;
-    this.documents.forEach(element => {
-   debugger;
-   
-  
-    let head = AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName;
-     this.http.head(AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName)
-        .toPromise()
-        .then(data => {
-          this.galleryImages.push({
-  
-            small: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
-            medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
-            big: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
+
+
+    if (this.globalService.UserPermition == 7) {
+      alert("7777777")
+      this.appProxy.get('GetMoreDocumentsOfTadmit').then(data1 => {
+
+        this.documents = data1;
+        this.documents.forEach(element => {
+          debugger;
+
+
+          let head = AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName;
+          this.http.head(AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName)
+            .toPromise()
+            .then(data => {
+              this.galleryImages.push({
+
+                small: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+                medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+                big: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+              });
+
+            })
+            .catch(error => { });
+
+
+
         });
-         
-          })
-        .catch(error => {  });
-     
-    
-  
-    });
-  
- })
-      
-      }
-  this.galleryOptions = [
+
+      })
+
+    }
+    this.galleryOptions = [
       {
-          width: '100%',
-          height: '100%',
-          thumbnailsColumns: 10,
-          imageAnimation: NgxGalleryAnimation.Slide,
-           imageInfinityMove:true,
-           
+        width: '100%',
+        height: '100%',
+        thumbnailsColumns: 4,
+        imageAnimation: NgxGalleryAnimation.Slide,
+        imageInfinityMove: true,
+        previewCloseOnClick: true,
+        imageAutoPlay: true,
+        imageArrows: true,
+        imageArrowsAutoHide: false,
+        imageAutoPlayInterval :10000,
+
+
       },
       // max-width 800
       {
-          breakpoint: 800,
-          width: '100%',
-          height: '600px',
-          imagePercent: 80,
-          thumbnailsPercent: 20,
-          thumbnailsMargin: 20,
-          thumbnailMargin: 20,
-      
-         
+        breakpoint: 800,
+        width: '100%',
+        height: '600px',
+        imagePercent: 80,
+        thumbnailsPercent: 20,
+        thumbnailsMargin: 20,
+        thumbnailMargin: 20,
+        imageArrows: true, 
+        imageArrowsAutoHide: false,
+        thumbnailsArrows: true
+
       },
       // max-width 400
       {
-          breakpoint: 400,
-          preview: true,
-         
+        breakpoint: 400,
+        preview: true,
+  
+
       }
-  ];
-  this.settingsFrontend.setGlobalParameters();
-//   this.settingsFrontend.GetGlobalParameters().then(res=>{
-// alert((<any>res)[GLOBAL.title])
-//    this.settingsFrontend.GlobalHeader=(<any>res).filter(r=>r.nvTitle==[GLOBAL.title])[0],
+    ];
+    this.settingsFrontend.setGlobalParameters();
+    //   this.settingsFrontend.GetGlobalParameters().then(res=>{
+    // alert((<any>res)[GLOBAL.title])
+    //    this.settingsFrontend.GlobalHeader=(<any>res).filter(r=>r.nvTitle==[GLOBAL.title])[0],
 
-//    this.settingsFrontend.GlobalMarchSF=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalVerMarch])[0],
+    //    this.settingsFrontend.GlobalMarchSF=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalVerMarch])[0],
 
-//  this.settingsFrontend.GlobalVerMarch=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalMarchSF])[0]
-//  debugger;
-// alert(GLOBAL.title+"   "+this.settingsFrontend.GlobalHeader.nvValue)
-// alert(GLOBAL.GlobalVerMarch+"   "+this.settingsFrontend.GlobalVerMarch.nvValue)
-//  alert(GLOBAL.GlobalMarchSF+"   "+this.settingsFrontend.GlobalMarchSF.nvValue)
-// })
-
-
-
-// for(var i=0;i<this.listImage.length;i++)
-// {
-// this.galleryImages.push( {
-//   small: this.listImage[i],
-//   medium: this.listImage[i],
-//   big: this.listImage[i]
-// })
-// }
-
- 
-this.appProxy.get('GetDocumentsOfTadmit').then(data => {
-    this.documents = data;
-    this.documents.forEach(element => {
-      //debugger;
-      
-     
-       let head = AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName;
-        this.http.head(AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName)
-           .toPromise()
-           .then(data => {
-             this.galleryImages.push({
-     
-               small: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
-               medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
-               big: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
-           }); 
-             } 
-
-             )
-            
-           .catch(error => {  });
-        
-       
-     
-       });
-    })
-  
-  }
-   
-
-  
+    //  this.settingsFrontend.GlobalVerMarch=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalMarchSF])[0]
+    //  debugger;
+    // alert(GLOBAL.title+"   "+this.settingsFrontend.GlobalHeader.nvValue)
+    // alert(GLOBAL.GlobalVerMarch+"   "+this.settingsFrontend.GlobalVerMarch.nvValue)
+    //  alert(GLOBAL.GlobalMarchSF+"   "+this.settingsFrontend.GlobalMarchSF.nvValue)
+    // })
 
 
-goToLogin(){
-  this.divModal=true;
-  this.rout.navigate(["log-in"])
 
-}
-
-
-saveLogin() {
-
-
-  this.appProxy.post("Login", { nvUserName: this.nvUserName, nvPassword: this.nvPassword }).then(
-    data => {
-     if(data){
-     this.isManager=true;
+    // for(var i=0;i<this.listImage.length;i++)
+    // {
+    // this.galleryImages.push( {
+    //   small: this.listImage[i],
+    //   medium: this.listImage[i],
+    //   big: this.listImage[i]
+    // })
+    // }
 
 
-     }
-     else{
+    this.appProxy.get('GetDocumentsOfTadmit').then(data => {
+      this.documents = data;
+      this.documents.forEach(element => {
+        //debugger;
 
-this.appProxy.get('GetMoreDocumentsOfTadmit').then(data1 => {
 
-  this.documents = data1;
-  this.documents.forEach(element => {
+        let head = AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName;
+        this.http.head(AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName)
+          .toPromise()
+          .then(data => {
+            this.galleryImages.push({
 
- 
- if ( AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName) {
-  let head = AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName;
-   this.http.head(AppProxy.baseDevUrl+'/Files/'+ element.nvDocumentName)
-      .toPromise()
-      .then(data => {
-        this.galleryImages.push({
+              small: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+              medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+              big: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+            });
+          }
 
-          small: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
-          medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
-          big: AppProxy.baseDevUrl + '/Files/'  + element.nvDocumentName,
+          )
+
+          .catch(error => { });
+
+
+
       });
-        })
-      .catch(error => {  });
-   
+    })
+
   }
 
-  });
 
-}
-  , err => alert(err));
 
-}
-     }
 
-      )
-      
-      this.cdRef.detectChanges();
- }
-openGallery(index: number = 0) {
-  this.ngxImageGallery.open(index);
-}
 
-// close gallery
-closeGallery() {
-  this.ngxImageGallery.close();
-}
+  goToLogin() {
+    this.divModal = true;
+    this.rout.navigate(["log-in"])
 
-// set new active(visible) image in gallery
-newImage(index: number = 0) {
-  this.ngxImageGallery.setActiveImage(index);
-}
+  }
 
-// // next image in gallery
-// nextImage(index: number = 0) {
-//   this.ngxImageGallery.next();
-//   alert('nextImage')
-// }
 
-// prev image in gallery
-prevImage(index: number = 0) {
-  this.ngxImageGallery.prev();
-}
+  saveLogin() {
 
-/**************************************************/
 
-// EVENTS
-// callback on gallery opened
-galleryOpened(index) {
-  console.log('Gallery opened at index ', index);
-}
+    this.appProxy.post("Login", { nvUserName: this.nvUserName, nvPassword: this.nvPassword }).then(
+      data => {
+        if (data) {
+          this.isManager = true;
 
-// callback on gallery closed
-galleryClosed() {
-  console.log('Gallery closed.');
-}
 
-// callback on gallery image clicked
-galleryImageClicked(index) {
-  console.log('Gallery image clicked with index ', index);
-}
+        }
+        else {
 
-// callback on gallery image changed
-galleryImageChanged(index) {
-  console.log('Gallery image changed to index ', index);
-}
+          this.appProxy.get('GetMoreDocumentsOfTadmit').then(data1 => {
 
-// callback on user clicked delete button
-deleteImage(index) {
-  console.log('Delete image at index ', index);
-}
+            this.documents = data1;
+            this.documents.forEach(element => {
+
+
+              if (AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName) {
+                let head = AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName;
+                this.http.head(AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName)
+                  .toPromise()
+                  .then(data => {
+                    this.galleryImages.push({
+
+                      small: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+                      medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+                      big: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+                    });
+                  })
+                  .catch(error => { });
+
+              }
+
+            });
+
+          }
+            , err => alert(err));
+
+        }
+      }
+
+    )
+
+    this.cdRef.detectChanges();
+  }
+  openGallery(index: number = 0) {
+    this.ngxImageGallery.open(index);
+  }
+
+  // close gallery
+  closeGallery() {
+    this.ngxImageGallery.close();
+  }
+
+  // set new active(visible) image in gallery
+  newImage(index: number = 0) {
+    this.ngxImageGallery.setActiveImage(index);
+  }
+
+  // // next image in gallery
+  // nextImage(index: number = 0) {
+  //   this.ngxImageGallery.next();
+  //   alert('nextImage')
+  // }
+
+  // prev image in gallery
+  prevImage(index: number = 0) {
+    this.ngxImageGallery.prev();
+  }
+
+  /**************************************************/
+
+  // EVENTS
+  // callback on gallery opened
+  galleryOpened(index) {
+    console.log('Gallery opened at index ', index);
+  }
+
+  // callback on gallery closed
+  galleryClosed() {
+    console.log('Gallery closed.');
+  }
+
+  // callback on gallery image clicked
+  galleryImageClicked(index) {
+    console.log('Gallery image clicked with index ', index);
+  }
+
+  // callback on gallery image changed
+  galleryImageChanged(index) {
+    console.log('Gallery image changed to index ', index);
+  }
+
+  // callback on user clicked delete button
+  deleteImage(index) {
+    console.log('Delete image at index ', index);
+  }
 }
 
 
