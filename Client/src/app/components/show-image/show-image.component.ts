@@ -97,10 +97,12 @@ ngOnInit(): void {
       }
   this.galleryOptions = [
       {
-          width: '1000px',
-          height: '1000px',
+          width: '100%',
+          height: '100%',
           thumbnailsColumns: 10,
-          imageAnimation: NgxGalleryAnimation.Slide
+          imageAnimation: NgxGalleryAnimation.Slide,
+           imageInfinityMove:true,
+           
       },
       // max-width 800
       {
@@ -110,12 +112,15 @@ ngOnInit(): void {
           imagePercent: 80,
           thumbnailsPercent: 20,
           thumbnailsMargin: 20,
-          thumbnailMargin: 20
+          thumbnailMargin: 20,
+      
+         
       },
       // max-width 400
       {
           breakpoint: 400,
-          preview: false
+          preview: true,
+         
       }
   ];
   this.settingsFrontend.setGlobalParameters();
