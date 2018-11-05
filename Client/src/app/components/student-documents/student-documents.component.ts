@@ -113,7 +113,7 @@ export class StudentDocumentsComponent implements OnInit {
 
   }
   deleteDocument(d: Document) {
-    alert(d.iDocumentId);
+    this.appProxy.post('DeleteDocument', { iDocumentId: this.documentToDelete.iDocumentId }).then(data => {});
   }
   closeDocumentDialog(save) {
     let category, index;
