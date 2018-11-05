@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild, Output, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, Input, Inject, forwardRef } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute } from '@angular/router';
 import { SysTableService } from '../../services/sys-table.service';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { PresenceAvrech } from '../../classes/presenceAvrech';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { GlobalService } from '../../services/global.service';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-avrech-presence',
@@ -18,14 +20,20 @@ export class AvrechPresenceComponent implements OnInit {
   private iPersonId: number;
   protected PA: PresenceAvrech;
   presences: any;
+  flag:number;
   @Output()
   @Input()
   presence:PresenceAvrech;
   @ViewChild(VyTableComponent) cc:VyTableComponent;
-  constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService) { }
+  flagDelete = false;
+  header = 'מחיקת פגישה';
+  message = '';
+  delePres: PresenceAvrech;
+  constructor(private appProxy: AppProxy, private router: ActivatedRoute, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent, private sysTableService: SysTableService,private globalService: GlobalService) { }
 
   public lstColumns = [
-    new VyTableColumn('עריכה', 'edit', 'html', true, false),
+    new VyTableColumn('', 'edit', 'html', true, false),
+    new VyTableColumn('', 'delete', 'html', true, false),
     new VyTableColumn('תאריך', 'nvDate'),
     new VyTableColumn('סך שעות', 'iHoursSum')
   ];
@@ -50,7 +58,8 @@ export class AvrechPresenceComponent implements OnInit {
           dtDatePresence: p.dtDatePresence,
           iHoursSum: p.iHoursSum,
           edit: '<div class="edit"></div>',
-        })
+          delete: '<div class="delete"></div>',
+        });
       })
       // this.PA = data;
       // alert(data.length);
@@ -59,18 +68,33 @@ export class AvrechPresenceComponent implements OnInit {
 
   }
 
+  click(p) {
+    if (p.columnClickName == 'delete')
+      this.delPres(p);
+    else
+      this.presence = p;
+    this.flag = 1;
+
+  }
+
+  deletePres(p: PresenceAvrech) {
+    this.appProxy.post('DeletePresenceAvrech', { iPresenceAvrech: p.iPresenceAvrech, iLastModifyUserId: this.globalService.getUser()['iUserId'] }).then(data => {
+      this._parent.openMessagePopup('נמחק בהצלחה!');
+      this.presences.splice(this.presences.indexOf(p), 1);
+      this.cc.refreshTable(this.presences);
+    });
+  }
+
+
+  delPres(p: PresenceAvrech) {
+    this.delePres = p;
+    this.message = 'האם אתה בטוח שברצונך למחוק פגישה זו?';
+    this.flagDelete = true;
+  }
 
   editPresence(p: PresenceAvrech) {
     debugger;
      this.presence = p;
-    // this.presences.forEach(element => {
-    //   if (element.iPresenceAvrech == p.iPresenceAvrech) {
-    //     this.presence = new PresenceAvrech();
-    //     this.presence.iPersonId = element.iPersonId;
-    //     this.presence.iHoursSum = element.iHoursSum;
-    //     this.presence.dtDatePresence=element.dtDatePresence;
-    //   }
-    // })
   }
   addPresence() {
     this.presence = new PresenceAvrech();
