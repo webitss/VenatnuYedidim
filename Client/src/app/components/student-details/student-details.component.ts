@@ -93,6 +93,7 @@ export class StudentDetailsComponent implements OnInit {
           // this.student.dtAddStudentDate.getTime();
           this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
             this.status = data.filter(x => x.iSysTableRowId == this.student.iStatusType)[0].nvValue;
+            this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data; });
           });
 
           this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
@@ -139,7 +140,6 @@ export class StudentDetailsComponent implements OnInit {
         this.student.bDeathMother = false;
         this.change = true;
       }
-      this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data; });
 
     });
     this.appProxy.post("GetYeshivotOfStudent", { iPersonId: this.paramRout }).then(data => this.yeshivaListOfStudent = data);
@@ -349,7 +349,17 @@ export class StudentDetailsComponent implements OnInit {
 
     else
       this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
-    this.router.navigate(['students']);
+    if (this.student == undefined)
+      this.router.navigate(["students"]);
+    else {
+      this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
+        if (this.student.iStatusType == data.filter(d => d.nvValue == 'תלמיד')[0].iSysTableRowId)
+          this.router.navigate(["students"]);
+        else
+          this.router.navigate(["graduates"]);
+      }
+      )
+    }
   }
 
   get baseFileUrl() {

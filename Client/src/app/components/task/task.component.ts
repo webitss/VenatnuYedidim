@@ -7,9 +7,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Student } from '../../classes/student';
 import { AvrechDiaryComponent } from "../../components/avrech-diary/avrech-diary.component"
 import { CalendarComponent } from '../calendar/calendar.component';
-import { moment } from '../../../../node_modules/ngx-bootstrap/chronos/test/chain';
+// import { moment } from '../../../../node_modules/ngx-bootstrap/chronos/test/chain';
 import { promise } from '../../../../node_modules/protractor';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -52,6 +52,7 @@ export class TaskComponent implements OnInit {
       this.currentTask['dtDate'] = this.task.dtTaskdatetime;//.getTime();
 
       // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
+     
     
       // if ((this.task.dtTaskdatetime).getMinutes() < 10)
       //   this.minutes = '0' + (this.task.dtTaskdatetime).getMinutes().toString();

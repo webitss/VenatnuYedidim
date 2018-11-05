@@ -35,7 +35,7 @@ export class EventParticipantsComponent implements OnInit {
   message = 'האם אתה בטוח שברצונך למחוק משתתף זה?';
   header = 'מחיקת משתתף';
   iPersonId: number;
-  constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService,private globalService: GlobalService) { }
+  constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService, private globalService: GlobalService) { }
   cancel(event) {
     this.flag = false;
   }
@@ -52,14 +52,17 @@ export class EventParticipantsComponent implements OnInit {
   public lstDataRows = [];
 
   addParticipants() {
+    this.listToSelect = [];
     this.appProxy.post("GetPersonList").then(
       data => {
         this.allPersons = data;
         this.flag = true
         this.allPersons.forEach(
           person => {
-            this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] });
-            this.iPersonId=person.iPersonId;
+            if (this.participantList.find(p => p.iPersonId == person.iPersonId) == null) {
+              this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] });
+              this.iPersonId = person.iPersonId;
+            }
           }
         );
 
@@ -71,12 +74,28 @@ export class EventParticipantsComponent implements OnInit {
   close() {
     //  להוסיף את המשתתפים שנבחרו
   }
+  event:any;
   save() {
-    this.globalService.IsParticipantsExists(this.iPersonId, this.iEventId).then(data => {
-      if (data)
-        alert("תלמיד זה קיים כבר באירוע זה");
-      else {
-        // this.appProxy.post("SetEvent", { iStatusType: this.event['iArrivalStatusType'], iPersonId: this.id, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
+
+this.listToSelect.forEach(item => {
+  if(item['bMultySelectChecked']== true)
+            this.appProxy.post("SetEventParticipant", { isNew: true, iStatusType: 34,iPersonId:item.iPersonId, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
+          .then(data => {
+            if(data == true)
+            alert(item.iPersonId +"נוסף בהצלחה לארוע")
+            else
+            alert(item.iPersonId +"השמירה נכשלה")
+
+
+          });
+         
+
+});
+    // this.globalService.IsParticipantsExists(this.iPersonId, this.iEventId).then(data => {
+    //   if (data)
+    //     alert("תלמיד זה קיים כבר באירוע זה");
+    //   else {
+        // this.appProxy.post("SetEvent", { iStatusType: this.event['iArrivalStatusType'], iPersonId: this.iPersonId, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
         //   .then(data => {
         //     if (data == true) {
         //       alert("התלמיד נוסף בהצלחה בהצלחה!");
@@ -85,11 +104,11 @@ export class EventParticipantsComponent implements OnInit {
         //   }).catch(err => {
         //     alert(err);
         //   });
-        alert('אמור לשמור')
-      }
-    }).catch(err => {
-      alert(err);
-    })
+    //     alert('אמור לשמור')
+    //   }
+    // }).catch(err => {
+    //   alert(err);
+    // })
   }
   ngOnInit() {
 

@@ -81,7 +81,7 @@ listToSelect:Array<any>;
        this.allStudents = data
        this.allStudents.forEach(
         st => {
-           st['delete'] = '<button class="btn delete" >מחק</button>'; 
+           st['delete'] = '<div class="delete"></div>'; 
           });
 
           this.allStudents.forEach(
@@ -92,7 +92,7 @@ listToSelect:Array<any>;
     }
       , err => alert(err));
 
-   this.lstColumns.push(new VyTableColumn('הסרה', 'delete', 'html', true));
+   this.lstColumns.push(new VyTableColumn('', 'delete', 'html', true));
       this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
       this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));      
       this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
