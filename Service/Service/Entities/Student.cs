@@ -88,9 +88,18 @@ namespace Service.Entities
 		{
 			try
 			{
-				DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_SLCT").Tables[0].Rows;
-				List<int> studentsId = ObjectGenerator<int>.GeneratListFromDataRowCollection(drc);
-				return studentsId;
+
+                List<int> studentsId = new List<int>();
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_SLCT").Tables[0].Rows;
+                foreach (DataRow row in drc)
+                {
+                    studentsId.Add(int.Parse(row["iStudentId"].ToString()));
+                }
+                return studentsId;
+
+
+
+                
 			}
 
 
@@ -101,12 +110,18 @@ namespace Service.Entities
 				return null;
 			}
 		}
-		public static List<Dictionary<int,string>> GetCurrentYeshivaOfStudent()
+		public static Dictionary<int,string> GetCurrentYeshivaOfStudent()
 		{
 			try
 			{
-				DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_SLCT").Tables[0].Rows;
-				List<Dictionary<int, string>> studentsId = ObjectGenerator<Dictionary<int, string>>.GeneratListFromDataRowCollection(drc);
+                Dictionary<int, string> studentsId = new Dictionary<int, string>();
+
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TYeshivot_Last_SLCT").Tables[0].Rows;
+                foreach (DataRow r in drc)
+                {
+                    studentsId.Add(int.Parse(r["iPersonId"].ToString()), r["nvYeshivaName"].ToString());
+                }
+				
 				return studentsId;
 			}
 			catch (Exception ex)

@@ -19,6 +19,7 @@ export class VyTableComponent implements OnInit {
   protected countPagesDisplayed = 5;
   protected lstPagesNum: Array<number> = new Array<number>();
   protected lstSortColumns: any = {};
+  protected lstFilterColumns: any = {};
 
   @Input()
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
@@ -32,12 +33,17 @@ export class VyTableComponent implements OnInit {
 
   constructor(private appProxy: AppProxy) {
     this.lstOrderByFields = new Array<any>();
+    this.lstFilterColumns = {}
+
     // this.lstOrderByFields.push({'aa': 'number'})
     // this.lstOrderByFields.push('-bb')
     // this.lstPagesNum = new Array<number>();
   }
 
   public ngOnInit() {
+    this.lstColumns.forEach(c=>{
+      this.lstFilterColumns[c.name]=null
+    })
 
   }
 
@@ -55,7 +61,16 @@ export class VyTableComponent implements OnInit {
   }
 
   filterChange(col) {
-    this.lstCurrentDataRows = this.lstDataRows.filter(row => row[col.name].indexOf(col.filter) > -1);
+    let lst=JSON.parse(JSON.stringify(this.lstDataRows)) ;
+    for(let key of Object.keys(this.lstFilterColumns))
+    {
+      if(this.lstFilterColumns[key])
+      {
+         lst=lst.filter(row => row[key].indexOf(this.lstFilterColumns[key]) > -1)
+      }
+    }
+    this.lstCurrentDataRows=lst;
+    // this.lstCurrentDataRows = this.lstDataRows.filter(row => row[col.name].indexOf(col.filter) > -1);
     this.moveToPage(0);
   }
 

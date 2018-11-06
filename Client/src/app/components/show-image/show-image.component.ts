@@ -74,15 +74,15 @@ export class ShowImageComponent implements OnInit {
           debugger;
 
 
-          let head = AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName;
-          this.http.head(AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName)
+          let head = AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName;
+          this.http.head(AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName)
             .toPromise()
             .then(data => {
               this.galleryImages.push({
 
-                small: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
-                medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
-                big: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+                small: AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName,
+                medium: AppProxy.getBaseUrl()+ '/Files/' + element.nvDocumentName,
+                big: AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName,
               });
 
             })
@@ -164,15 +164,15 @@ export class ShowImageComponent implements OnInit {
         //debugger;
 
 
-        let head = AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName;
-        this.http.head(AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName)
+        let head = AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName;
+        this.http.head(AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName)
           .toPromise()
           .then(data => {
             this.galleryImages.push({
 
-              small: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
-              medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
-              big: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+              small: AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName,
+              medium: AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName,
+              big: AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName,
             });
           }
 
@@ -216,16 +216,16 @@ export class ShowImageComponent implements OnInit {
             this.documents.forEach(element => {
 
 
-              if (AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName) {
-                let head = AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName;
-                this.http.head(AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName)
+              if (AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName) {
+                let head = AppProxy.getBaseUrl()+ '/Files/' + element.nvDocumentName;
+                this.http.head(AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName)
                   .toPromise()
                   .then(data => {
                     this.galleryImages.push({
 
-                      small: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
-                      medium: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
-                      big: AppProxy.baseDevUrl + '/Files/' + element.nvDocumentName,
+                      small: AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName,
+                      medium: AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName,
+                      big: AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName,
                     });
                   })
                   .catch(error => { });

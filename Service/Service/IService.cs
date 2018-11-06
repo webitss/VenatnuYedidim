@@ -93,7 +93,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-		List<Dictionary<int,string>> GetCurrentYeshivaOfStudent();
+        Dictionary<int, string> GetCurrentYeshivaOfStudent();
 
 		[OperationContract]
 		[WebInvoke(

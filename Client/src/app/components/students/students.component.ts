@@ -46,14 +46,14 @@ this.currentYeshivaOfStudent=new Map<number,string>();
         this.studentList = data;
         this.appProxy.get("GetStudentsAssociatedToAvrechim").then(data => {
           this.studentsAssociatedToAvrech = data;
-          this.appProxy.post("GetCurrentYeshivaOfStudent").then(data => {
+          this.appProxy.get("GetCurrentYeshivaOfStudent").then(data => {
             this.currentYeshivaOfStudent = data;
             this.studentList.forEach(student => {
               debugger;
               if (this.studentsAssociatedToAvrech.filter(x => x == student.iPersonId).length > 0)
-                student['nvAssociated'] = '<div class="checkMark"></div>';
+                student['nvAssociated'] = '<span>כן</span>';
 
-              student['nvYeshivaName'] = this.currentYeshivaOfStudent.get(student.iPersonId);
+              student['nvYeshivaName'] = this.currentYeshivaOfStudent[student.iPersonId];
               student['edit'] = '<div class="edit"></div>'
               student['delete'] = '<div class = "delete"></>';
             });

@@ -49,7 +49,7 @@ export class StudentEventDetailsComponent implements OnInit {
       .then(data => {
         this.eventsList = data;
       }).catch(err => {
-       // alert(err);
+        // alert(err);
       })
 
 
@@ -66,59 +66,61 @@ export class StudentEventDetailsComponent implements OnInit {
   id: number;
   flag: boolean = false;
   save() {
+    this.flag == false
     this.appProxy.post("GetParticipantsList", { iEventId: this.event.iEventId }).then(res => {
       if (res.length > 0) {
-        if(this.isNew == true){
-        res.forEach(p => {
-          if (p.iPersonId == this.id)
-            this.flag = true;
-        });
-      }
-        if (this.flag == true) {
-          this._parent.openMessagePopup('לא ניתן לקבוע אירוע זה פעם נוספת!')
-          this.close();
-        }
-        else {
-          this.iArrivalStatusType = this.lst.find(x => x.nvValue == this.event['iArrivalStatusType']).iSysTableRowId;
-          this.appProxy.post("SetEventParticipant", { isNew: this.isNew, iStatusType: this.iArrivalStatusType, iPersonId: this.id, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
-            .then(data => {
-              if (data == true) {
-                this.lst.push(this.event);
-                this._parent.openMessagePopup('האירוע נשמר בהצלחה!')
-                this.close();
-              }
-            }).catch(err => {
-              alert(err);
-            });
+        if (this.isNew == true) {
+          res.forEach(p => {
+            if (p.iPersonId == this.id)
+              this.flag = true;
+          });
         }
       }
+      if (this.flag == true) {
+        this._parent.openMessagePopup('לא ניתן לקבוע אירוע זה פעם נוספת!')
+        this.close();
+      }
+      else {
+        this.iArrivalStatusType = this.lst.find(x => x.nvValue == this.event['iArrivalStatusType']).iSysTableRowId;
+        this.appProxy.post("SetEventParticipant", { isNew: this.isNew, iStatusType: this.iArrivalStatusType, iPersonId: this.id, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
+          .then(data => {
+            if (data == true) {
+              this.lst.push(this.event);
+              this._parent.openMessagePopup('האירוע נשמר בהצלחה!')
+              this.close();
+            }
+          }).catch(err => {
+            alert(err);
+          });
+      
+    }
     });
 
 
-  }
+}
 
-  eventsList: Array<Event1> = new Array<Event1>();
+eventsList: Array < Event1 > = new Array<Event1>();
 
-  @Input()
-  from: number = 0;
+@Input()
+from: number = 0;
 
-  getEvents() {
-    this.appProxy.post("GetEventsList")
-      .then(data => {
-        this.eventsList = data;
-      }).catch(err => {
-        //alert(err);
-      })
+getEvents() {
+  this.appProxy.post("GetEventsList")
+    .then(data => {
+      this.eventsList = data;
+    }).catch(err => {
+      //alert(err);
+    })
+}
+close() {
+  this.Close.emit(this.event);
+}
+chooseEvent(e) {
+  if (e == '0')
+    this.event = new Event1();
+  else {
+    this.event = this.eventsList.find(x => x.nvName == e);
+    event['iArrivalStatusType'] = 0;
   }
-  close() {
-    this.Close.emit(this.event);
-  }
-  chooseEvent(e) {
-    if (e == '0')
-      this.event = new Event1();
-    else {
-      this.event = this.eventsList.find(x => x.nvName == e);
-      event['iArrivalStatusType'] = 0;
-    }
-  }
+}
 }

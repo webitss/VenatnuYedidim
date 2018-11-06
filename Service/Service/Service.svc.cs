@@ -103,7 +103,7 @@ namespace Service
 		{
 			return Student.GetStudentsAssociatedToAvrechim();
 		}
-		public List<Dictionary<int, string>> GetCurrentYeshivaOfStudent()
+		public Dictionary<int, string> GetCurrentYeshivaOfStudent()
 		{
 			return Student.GetCurrentYeshivaOfStudent();
 		}
