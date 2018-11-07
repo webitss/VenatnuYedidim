@@ -12,7 +12,7 @@
 
         </label>
 
-        <span *ngIf="col.type != 'html' && col.type != 'checkbox'"> {{col.title}}
+        <span *ngIf="col.type != 'checkbox'"> {{col.title}}
           <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(-1,col.name)'>&#xe010;</span>
           <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(1,col.name)'>&#xe011;</span>
           <!-- *ngIf="lstSortColumns[col.name] && lstSortColumns[col.name]>0"  -->
@@ -28,7 +28,7 @@
 
   <div name="filters" class="row vy-filter-row">
     <div *ngFor="let col of lstColumns" class="col cell cell-filter" [ngStyle]="col.filterStyle">
-      <input type="text" [(ngModel)]="col.filter" (keyup)="filterChange(col)" class="form-control vy-filter-search">
+      <input type="text" [(ngModel)]="lstFilterColumns[col.name]" (keyup)="filterChange(col)" class="form-control vy-filter-search">
     </div>
   </div>
 

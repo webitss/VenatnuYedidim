@@ -397,17 +397,11 @@ export class StudentDetailsComponent implements OnInit {
 
   }
   ngOnDestroy() {
-    // // alert(this.change);
-    // if (this.change) {
-    //   let v = confirm("האם ברצונך לשמור?");
-    //   if (v)
-    //     this.saveStudent();
-    //   debugger;
-    //   // this.message2 = "האם ברצונך לשמור?"
-    //   // this.flag = true;
-    //   // alert(this.flag);
-    //   //this._parent.openMessagePopup("kljk");
-    // }
+    if (this.change) {
+      let v = confirm("האם ברצונך לשמור?");
+      if (v)
+        this.saveStudent();
+    }
 
   }
 }

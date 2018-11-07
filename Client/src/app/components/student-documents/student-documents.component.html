@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="main-table">
-        <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editDocument($event)"></app-vy-table>
+        <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="click($event)"></app-vy-table>
 
     </div>
 
@@ -15,3 +15,4 @@
             #VyTableComponent></app-upload-document>
     </div>
 </div>
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; deleteDocument(documentToDelete);"></app-vy-pop-up>

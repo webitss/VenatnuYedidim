@@ -60,11 +60,11 @@ export class SysTableService {
   ////#region מקבל ID של טבלה מחזיר ערכים מאותה טבלה 
   getValues(iSysTableId: number, col?:any): Promise<Array<SysTableRow>> {
 
-    console.log(iSysTableId + "arived");
+    // console.log(iSysTableId + "arived");
     for (let key in SysTableService.dataTables) {
 
-      console.log(key)
-      console.log("log" + SysTableService.dataTables[key].iSysTableId)
+      // console.log(key)
+      // console.log("log" + SysTableService.dataTables[key].iSysTableId)
 
       if (SysTableService.dataTables[key].iSysTableId == iSysTableId) {
         this.Mykey = key;

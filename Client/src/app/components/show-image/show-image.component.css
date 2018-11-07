@@ -113,3 +113,47 @@ div-image{
 .login {
     text-align: center;
 }
+
+
+
+
+
+
+
+/* .ngx-gallery-arrow-wrapper.ngx-gallery-arrow-right{
+    width: 50px;
+    height: 50px;
+    background-image: url('../../../assets/icons/back.png');
+    background-color: aqua;
+} */
+
+
+ngx-gallery /deep/.ngx-gallery-arrow-right .ngx-gallery-arrow {
+    width: 30px;
+    height: 30px;
+    background-image: url('../../../assets/icons/right-arrow\ \(1\).png');
+    background-color: transparent !important;
+}
+
+ngx-gallery /deep/.ngx-gallery-arrow-left .ngx-gallery-arrow {
+    width: 30px;
+    height: 30px;
+    background-image: url('../../../assets/icons/left-arrow.png');
+    background-color: transparent !important;
+}
+
+/* ngx-gallery /deep/ ngx-gallery-image .ngx-gallery-arrow {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+}
+ngx-gallery /deep/ ngx-gallery-thumbnails .ngx-gallery-arrow {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+}
+ngx-gallery /deep/ ngx-gallery-preview .ngx-gallery-arrow {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+} */

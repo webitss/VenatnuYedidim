@@ -25,7 +25,7 @@ export class UserComponent implements OnInit {
             this.user = data;
             this.title = this.user.nvUserName;
           }).catch(err=>{
-              alert(err);
+              //alert(err);
           });
       }
       else {

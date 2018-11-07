@@ -24,7 +24,7 @@ export class UserDetailsComponent implements OnInit {
           .then(data => {
             this.user = data;
           }).catch(err=>{
-            alert(err);
+           // alert(err);
           });
       }
     });
@@ -63,7 +63,7 @@ export class UserDetailsComponent implements OnInit {
       else
         alert("error!");
     }).catch(err=>{
-      alert(err);
+     // alert(err);
     });
   }
 

@@ -57,7 +57,7 @@ export class SettingsCodeTableComponent implements OnInit {
       this.tableNames = data,
      
      
-    error => alert(error));
+    );
 
   }
   public getValues() {
@@ -81,7 +81,7 @@ export class SettingsCodeTableComponent implements OnInit {
     this.toEdit = true;
   }
   saveEditValue() {
-
+  
     this.toEdit = false;
     this.showOverlap = false;
     this.sysTableService.editValue(this.row);

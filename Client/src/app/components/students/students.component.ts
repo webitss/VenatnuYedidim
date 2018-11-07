@@ -30,37 +30,36 @@ export class StudentsComponent implements OnInit {
   param: any;
   id: number;
   studentList: Student[];
-  yeshivaListOfStudent: Yeshiva[];
-  avrechimListOfStudent: Avrech[]
+  yeshivaList: Yeshiva[];
+  studentsAssociatedToAvrech: number[];
+  avrechimListOfStudent:Avrech[];
+  currentYeshivaOfStudent:Map<number, string>;
   private alert: any;
   @ViewChild('students') students: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   ngOnInit() {
-
-
+this.currentYeshivaOfStudent=new Map<number,string>();
     this.component = this.router.url;
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
     if (this.component == '/students') {
       this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
         this.studentList = data;
-        // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
-        this.studentList.forEach(student => {
-          student['edit'] = '<div class="edit"></div>'
-          student['delete'] = '<div class = "delete"></>';
+        this.appProxy.get("GetStudentsAssociatedToAvrechim").then(data => {
+          this.studentsAssociatedToAvrech = data;
+          this.appProxy.get("GetCurrentYeshivaOfStudent").then(data => {
+            this.currentYeshivaOfStudent = data;
+            this.studentList.forEach(student => {
+              debugger;
+              if (this.studentsAssociatedToAvrech.filter(x => x == student.iPersonId).length > 0)
+                student['nvAssociated'] = '<span>כן</span>';
 
-          this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
-            this.yeshivaListOfStudent = data;
-            student['nvYeshivaName'] = this.yeshivaListOfStudent[this.yeshivaListOfStudent.length - 1].nvYeshivaName;
-          });
-          this.appProxy.post("GetAvrechimByStudentId", { iPersonId: student.iPersonId }).then(data => {
-            this.avrechimListOfStudent = data;
-            student['nvAvrechName'] = "";
-            this.avrechimListOfStudent.forEach(avrech => {
-              student['nvAvrechName'] += " " + avrech.nvFirstName + " " + avrech.nvLastName + '<br/>';
+              student['nvYeshivaName'] = this.currentYeshivaOfStudent[student.iPersonId];
+              student['edit'] = '<div class="edit"></div>'
+              student['delete'] = '<div class = "delete"></>';
             });
-
           });
         });
+
       }, err => { alert(err); });
     }
 
@@ -75,8 +74,8 @@ export class StudentsComponent implements OnInit {
           student['delete'] = '<div class = "delete"></>';
 
           this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
-            this.yeshivaListOfStudent = data;
-            student['nvYeshivaName'] = this.yeshivaListOfStudent[this.yeshivaListOfStudent.length - 1].nvYeshivaName;
+            this.yeshivaList = data;
+            student['nvYeshivaName'] = this.yeshivaList[this.yeshivaList.length - 1].nvYeshivaName;
           });
           this.appProxy.post("GetAvrechimByStudentId", { iPersonId: student.iPersonId }).then(data => {
             this.avrechimListOfStudent = data;
@@ -87,7 +86,8 @@ export class StudentsComponent implements OnInit {
 
           });
         });
-      }, err => { alert(err); });
+      }//, err => { alert(err); }
+    );
     }
 
 
@@ -109,12 +109,12 @@ export class StudentsComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
     this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
     this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
-    this.lstColumns.push(new VyTableColumn(' משויך לאברך', 'nvAvrechName', 'html'));
+    this.lstColumns.push(new VyTableColumn('משויך לאברך', 'nvAssociated', 'html'));
 
 
   }
 
- 
+
 
   editStudent(e) {
     this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);
@@ -124,9 +124,9 @@ export class StudentsComponent implements OnInit {
     //alert(this.studentId);
     this.appProxy.post('DeleteStudent', { iPersonId: this.studentId, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
       if (res == true) {
-    //alert('נמחק בהצלחה!');
-    this._parent.openMessagePopup("התלמיד נמחק בהצלחה!");
-    const s=this.studentList.find(x=>x.iPersonId==this.studentId);
+        //alert('נמחק בהצלחה!');
+        this._parent.openMessagePopup("התלמיד נמחק בהצלחה!");
+        const s = this.studentList.find(x => x.iPersonId == this.studentId);
         this.studentList.splice(this.studentList.indexOf(s), 1);
         this.vyTableComponent.refreshTable(this.studentList);
       }

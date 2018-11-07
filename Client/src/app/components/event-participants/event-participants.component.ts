@@ -68,7 +68,7 @@ export class EventParticipantsComponent implements OnInit {
         );
 
       }
-      , err => alert(err));
+    );
 
 
   }
@@ -116,22 +116,23 @@ this.listToSelect.forEach(item => {
 
     this.listToSelect = new Array<any>();
 
-    // this.appProxy.post('GetPersonList', { iPersonId: this.globalService.getUser().iPersonId }).then(
-    //   data => {
+    this.appProxy.post('GetPersonList', { iPersonId: 0 }).then(
+      data => {
 
-    //     this.allPersons = data
-    //     //  this.allPersons.forEach(
-    //     //   st => {
-    //     //      st['delete'] = '<button class="btn delete" >מחק</button>'; 
-    //     //     });
-    //     this.allPersons.forEach(
-    //       person => {
-    //         this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] });
-    //       }
-    //     );
+        
+        this.allPersons = data
+        //  this.allPersons.forEach(
+        //   st => {
+        //      st['delete'] = '<button class="btn delete" >מחק</button>'; 
+        //     });
+        this.allPersons.forEach(
+          person => {
+            this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] });
+          }
+        );
 
-    //   }
-    //   , err => alert(err));
+      }
+      , err => alert(err));
 
     this.sub = this.router.parent.params.subscribe(params => {
       this.iEventId = +params['iEventId'];

@@ -20,6 +20,7 @@ export class AvrechDetailsComponent implements OnInit {
   userName: string;
   password: string;
   isDetails: boolean;
+  change: boolean;
   @ViewChild(NgForm) form;
   constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService, private router: Router) { }
 
@@ -53,6 +54,13 @@ export class AvrechDetailsComponent implements OnInit {
     this.appProxy.post("UpdateAvrech", { avrech: this.avrech, iUserId: this.globalService.getUser()['iUserId'] }).then();
     this.router.navigate(['avrechim']);
   }
+  ngOnDestroy() {
+    if (this.change) {
+      let v = confirm("האם ברצונך לשמור?");
+      if (v)
+        this.save();
+    }
 
+  }
 }
     
