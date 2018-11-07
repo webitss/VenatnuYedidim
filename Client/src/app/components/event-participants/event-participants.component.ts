@@ -27,7 +27,8 @@ export class EventParticipantsComponent implements OnInit {
   protected iLastModifyUserId: number;
   protected s: any;
   protected personsList: string[];
-  listToSelect: any[];
+  // protected listToSelect: person[];
+  listToSelect:Array<any>;
   allPersons: Array<any>;
   title: string = "רשימת כולם";
   inputTitle: string = "בחר משתתפים";
@@ -60,7 +61,7 @@ export class EventParticipantsComponent implements OnInit {
         this.allPersons.forEach(
           person => {
             if (this.participantList.find(p => p.iPersonId == person.iPersonId) == null) {
-              this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] });
+              this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] ,iPersonId:person.iPersonId});
               this.iPersonId = person.iPersonId;
             }
           }
@@ -71,15 +72,16 @@ export class EventParticipantsComponent implements OnInit {
 
 
   }
-  close() {
+  
     //  להוסיף את המשתתפים שנבחרו
-  }
+  
   event:any;
   save() {
 
 this.listToSelect.forEach(item => {
   if(item['bMultySelectChecked']== true)
-            this.appProxy.post("SetEventParticipant", { isNew: true, iStatusType: 34,iPersonId:item.iPersonId, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
+            this.appProxy.post("SetEventParticipant", { isNew: true, iStatusType: 34,iPersonId:item.iPersonId, iEventId: this.iEventId,
+               iUserId: this.globalService.getUser().iPersonId })
           .then(data => {
             if(data == true)
             alert(item.iPersonId +"נוסף בהצלחה לארוע")
