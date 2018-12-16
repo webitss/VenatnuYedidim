@@ -5,13 +5,27 @@
     text-align: right;
 }
 .imageStudent{
-    height: 600px;
+   
     background-color: #e6e4e4;
     float: right;
-    width: 25%;
+    height: 230px;
+    width: 223px;
+    /* overflow: hidden; */
 }
 .image>img{
-    width: 100%;
+    /* width: 100%;
+    height: 230px; */
+    display: inline-block;
+    background-color: #f4f4f4;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #606060;
+    padding: 5px 4px;
+    /* width: 100%; */
+    height: 100%;
+    overflow: hidden;
+    vertical-align: middle;
+    width: inherit;
 }
 #LoadDocument{
     visibility: hidden;
@@ -26,7 +40,9 @@
 }
 .image{
     width: 100%;
-    height: 85%;
+    height: 100%;
+    /* height: auto; */
+  
 }
 .chooseFile>img{
     width: 60%;
@@ -34,12 +50,17 @@
     margin-top: 28%;
 }
 
-/* .upload {
+.upload {
     position: relative;
-    top:-10%;
-} */
+    top: -10%;
+    left: 0%;
+    width: 10%;
+}
 .no{
     background-image: url("../../../assets/icons/noImage.png");
+    height: 230px;
+    width: 223px;
+    /* overflow: hidden; */
 }
 #date{
     width: 0%;
