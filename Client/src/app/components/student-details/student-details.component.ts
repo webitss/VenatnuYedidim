@@ -338,30 +338,43 @@ export class StudentDetailsComponent implements OnInit {
           alert("פרטי התלמיד עודכנו בהצלחה");
         else
           alert("פרטי הבוגר עודכנו בהצלחה");
-        this.change = false;
+          this.change = false;
+          this.backToGridStudent();
+        
       }, err => {
         if (this.status == 'תלמיד')
           alert("שגיאה בעריכת תלמיד");
         else
           alert("שגיאה בעריכת בוגר");
+          //this.change = false;
       });
+     
     }
 
     else
-      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => { alert("התלמיד נוסף בהצלחה"); }, err => { alert("שגיאה בהוספת תלמיד"); });
-    if (this.student == undefined)
-      this.router.navigate(["students"]);
-    else {
-      this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
-        if (this.student.iStatusType == data.filter(d => d.nvValue == 'תלמיד')[0].iSysTableRowId)
-          this.router.navigate(["students"]);
-        else
-          this.router.navigate(["graduates"]);
-      }
-      )
-    }
+      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => { 
+        alert("התלמיד נוסף בהצלחה"); 
+        this.change = false;
+        this.backToGridStudent();
+      }, err => { 
+        alert("שגיאה בהוספת תלמיד"); 
+      });
+    
   }
-
+  backToGridStudent()
+  {
+    if (this.student == undefined)
+    this.router.navigate(["students"]);
+  else {
+    this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
+      if (this.student.iStatusType == data.filter(d => d.nvValue == 'תלמיד')[0].iSysTableRowId)
+        this.router.navigate(["students"]);
+      else
+        this.router.navigate(["graduates"]);
+    }
+    )
+  }
+  }
   get baseFileUrl() {
     return AppProxy.getBaseUrl() + 'Files/';
   }

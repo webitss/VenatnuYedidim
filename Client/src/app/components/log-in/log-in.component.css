@@ -1,10 +1,13 @@
 
 .background-logo { 
-   background-image:  url("../../../assets/images/logo.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+   /* background-image:  url("../../../assets/images/logo.jpg"); */
+   background-color: rgba(220, 53, 69, 0.28);
+   position: absolute;
+    /* background-position: center; */
+    /* background-repeat: no-repeat; */
+    /* background-size: cover; */
     width:100%;
+    height: 100%;
 }
 .my-div{
     position: relative;
@@ -67,7 +70,10 @@
     padding: 10%;
     
 }
-
+.hide-password {
+    background-repeat: no-repeat;
+     background-size: unset !important;
+}
 .my-btn{
     margin-left:30%;
     margin-top:10%;

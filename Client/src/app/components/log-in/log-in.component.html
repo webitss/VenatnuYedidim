@@ -1,23 +1,24 @@
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmcJWztCYo2xInukOD2bnFp-lPK-IFuCA&libraries=places" asyncdefer></script> -->
 
 
-<div class="background-logo" [style.height.px]="imgHeight">
+<div class="background-logo">
   <div class="col-sm-1"></div>
   <div class="row col-sm-10 with-shadow">
     <div class="col-sm-4"></div>
     <div class="my-div col-sm-4">
-      <!-- <div class="small-logo"> -->
-        <img src="../../../assets/images/logo.jpg" height="15%" class="img" />
-      <!-- </div> -->
-      <h1>ונתנו ידידים</h1>
-      <h5>כולנו משפחה אחת</h5>
+      <div class="small-logo">
+        <img src="./assets/icons/logo.jpg" style='height: 239px;'>
+      </div>
+      <!-- <h1>ונתנו ידידים</h1>
+      <h5>כולנו משפחה אחת</h5> -->
       <div class="col-sm-1"></div>
       <div class="row">
         <input type="text" name="user-name" [(ngModel)]="nvUserName" class="form-control usr-input" placeholder="שם משתמש">
       </div>
       <div class="col-sm-1"></div>
       <div class="row">
-        <input type="password" name="password" [(ngModel)]="nvPassword" class="form-control lock-input" passwordToggle placeholder="סיסמה">
+        <input type="password" name="password" [(ngModel)]="nvPassword" class="form-control lock-input hide-password" passwordToggle
+          placeholder="סיסמה">
       </div>
       <button class="btn btn-circle1 btn-pink my-btn" (click)="logIn()">כניסה</button>
     </div>
