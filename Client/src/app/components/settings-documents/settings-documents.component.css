@@ -6,7 +6,8 @@
   background-image: url("../../../assets/icons/pdf.png");    
 }
 .excel{
-    margin-left: -30%;
+    background-image: url("../../../assets/icons/file-excel.svg");    
+    /* margin-left: -30%; */
 }
 .row{
     margin-bottom: 10px;

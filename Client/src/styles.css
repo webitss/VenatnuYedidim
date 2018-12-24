@@ -235,7 +235,7 @@ margin-top: 30px;
     
 }
 .excel{
-    background-image: url("./../src/assets/icons/list.png");
+    background-image: url("../src/assets/icons/file-excel.svg");    
     background-repeat: no repeat;
     background-size: contain;
 }

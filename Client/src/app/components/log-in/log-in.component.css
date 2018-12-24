@@ -43,7 +43,7 @@
     background-image: url("../../../assets/icons/usr.png");
 }
 .lock-input{
-    background-image: url("../../../assets/icons/lock.png");
+    /* background-image: url("../../../assets/icons/lock.png"); */
 }
 .usr-icon{
     width: 5%;
