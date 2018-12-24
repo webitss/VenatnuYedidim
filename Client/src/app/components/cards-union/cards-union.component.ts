@@ -47,9 +47,11 @@ export class CardsUnionComponent implements OnInit {
   student1Change(event: any) {
     this.studentList.forEach(e => {
       if (e.iPersonId == event.currentTarget.value) {
-        this.student1 = e;
-        if (this.student2 && this.student2.iPersonId == e.iPersonId)
+        this.student1 = e; 
+        if (this.student2 && this.student2.iPersonId == e.iPersonId) {
           this.sameNameStudents = false;
+         
+        }
         else
           this.sameNameStudents = true;
 
@@ -60,6 +62,7 @@ export class CardsUnionComponent implements OnInit {
     this.studentList.forEach(e => {
       if (e.iPersonId == event.currentTarget.value) {
         this.student2 = e;
+
         if (this.student1 && this.student1.iPersonId == e.iPersonId)
           this.sameNameStudents = false;
         else
