@@ -61,7 +61,7 @@
       <div class="form-group col-sm-5">
         <label for='yeshiva-phone'>טלפון:</label>
         <input class=inputYeshiva type="tel" name='yeshiva-phone' class="form-control" [(ngModel)]="yeshiva.nvMobile" required #phone="ngModel"
-        pattern="^\(?([0-9]{2})\)?[0-9]??[-. ]?([0-9]{3})[-. ]?([0-9]{4})$" />
+        pattern="^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$" />
         <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
           <div *ngIf="(phone.errors.required)" class="text-danger text-right">
             <strong>! </strong>שדה נדרש</div>

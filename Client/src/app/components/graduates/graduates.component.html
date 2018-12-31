@@ -1,0 +1,10 @@
+<div class=" row component-name-header">
+    <div class="col-sm-4 component-name">בוגרים</div>
+    <div class="actions col-sm-8">
+        <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
+        <button class="btn btn-small" (click)="tableToPdf('בוגרים')">s</button>
+    </div>
+</div>
+<div class="main-table">
+    <app-vy-table #graduates [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editStudent($event)"></app-vy-table>
+</div>
