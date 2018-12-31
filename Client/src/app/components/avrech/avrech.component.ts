@@ -54,21 +54,17 @@ export class AvrechComponent implements OnInit {
   isDisabled():boolean {
     if(this.currentComponent.form!=undefined) {
       return this.currentComponent.form.valid;
-   
   }
 }
 
   save() {
-
     if (this.currentComponent.save) {
       this.currentComponent.save();
-
     }
   }
 
   close() {
     this.router.navigate(["avrechim"]);
   }
-
 }
 

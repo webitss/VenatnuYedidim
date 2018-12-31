@@ -33,6 +33,11 @@ button{
 } */
 .form{
     background-color: white;
+    top:35%;
+    left: 30%;
+    right: 30%;
+    z-index: 99999;
+    position: fixed;
 }
 
 

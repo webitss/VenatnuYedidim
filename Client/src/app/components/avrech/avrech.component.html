@@ -1,40 +1,38 @@
 <div class="name-area">{{name}}</div>
 <div class="content-area">
-<div class="header row">
-<nav class="navbar navbar-expand-sm nav header-navbar">
-    <ul class="navbar-nav navbar-list" *ngIf="currentComponent">
-        <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDetails') != -1}" class="nav-item" routerLink="avrech-details">
+  <div class="header row">
+    <nav class="navbar navbar-expand-sm nav header-navbar">
+      <ul class="navbar-nav navbar-list" *ngIf="currentComponent">
+        <li [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDetails') != -1}" class="nav-item" routerLink="avrech-details">
           <span class="fullTab">
-             פרטים אישיים
+            פרטים אישיים
           </span>
         </li>
-        <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechStudents') != -1}" class="nav-item" routerLink="avrech-students">
-            <span class="fullTab">תלמידים
+        <li [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechStudents') != -1}" class="nav-item" routerLink="avrech-students">
+          <span class="fullTab">תלמידים
 
-            </span>
-          </li>
-          <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDiary') != -1}" class="nav-item" routerLink="avrech-diary">
-              <span class="fullTab">
-                יומן
-              </span>
-            </li><li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechPresence') != -1}" class="nav-item" routerLink="avrech-presence">
-                <span class="fullTab">
-                  נוכחות
-                </span>
-              </li>
-        </ul>
-
-
-
-</nav>
-<div class="btn-area">
-<button *ngIf="currentComponent.constructor.name.indexOf('AvrechDetails') != -1" class="btn-circle btn-save" [ngClass]="{'disabled': !isDisabled() }" [disabled]="!isDisabled()" (click)="save()">שמור</button>
-<button class="btn-circle btn-close" (click)="close()">סגור</button>
-</div>
-</div>
+          </span>
+        </li>
+        <li [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechDiary') != -1}" class="nav-item" routerLink="avrech-diary">
+          <span class="fullTab">
+            יומן
+          </span>
+        </li>
+        <li [ngClass]="{'select': currentComponent.constructor.name.indexOf('AvrechPresence') != -1}" class="nav-item" routerLink="avrech-presence">
+          <span class="fullTab">
+            נוכחות
+          </span>
+        </li>
+      </ul>
 
 
-<router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
 
-
+    </nav>
+    <div class="btn-area">
+      <button *ngIf="currentComponent.constructor.name.indexOf('AvrechDetails') != -1" class="btn-circle btn-save" [ngClass]="{'disabled': !isDisabled() }"
+        [disabled]="!isDisabled()" (click)="save()">שמור</button>
+      <button class="btn-circle btn-close" (click)="close()">סגור</button>
+    </div>
+  </div>
+  <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
 </div>
