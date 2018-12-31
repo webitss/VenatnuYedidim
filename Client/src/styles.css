@@ -11,6 +11,10 @@ body{
     color: white !important;
 }
 
+button:focus, input:focus, li:focus {
+outline: none;
+}
+
 
 
 /* .navbar-collapse{
@@ -105,7 +109,7 @@ body{
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-    z-index: -5; /* Specify a stack order in case you're using a different order for other elements */
+    z-index: 0; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
  }
 
@@ -133,7 +137,7 @@ body{
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-    z-index: -5; /* Specify a stack order in case you're using a different order for other elements */
+    z-index: 0; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
  }
 .header{

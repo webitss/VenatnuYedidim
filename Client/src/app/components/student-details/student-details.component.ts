@@ -169,8 +169,8 @@ export class StudentDetailsComponent implements OnInit {
       this.dateYearArr.push(i);
     }
     for (var i = 0; i < this.dateYearArr.length - 1; i++) {
-      const hebrewDate = require("hebrew-date");
-      this.dateYearArr[i] = hebrewDate(new Date(this.dateYearArr[i], 0, 0)).year;
+      // const hebrewDate = require("hebrew-date");
+      // this.dateYearArr[i] = hebrewDate(new Date(this.dateYearArr[i], 0, 0)).year;
       this.dateYearArr[i] = this.calcEbrewDatw(this.dateYearArr[i]);
     }
   }
@@ -335,9 +335,9 @@ export class StudentDetailsComponent implements OnInit {
     if (this.paramRout != '0') {
       this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => {
         if (this.status == 'תלמיד')
-          alert("פרטי התלמיד עודכנו בהצלחה");
+          this._parent.openMessagePopup("פרטי התלמיד עודכנו בהצלחה!");
         else
-          alert("פרטי הבוגר עודכנו בהצלחה");
+        this._parent.openMessagePopup("פרטי הבוגר עודכנו בהצלחה!");
           this.change = false;
           this.backToGridStudent();
         
@@ -353,11 +353,12 @@ export class StudentDetailsComponent implements OnInit {
 
     else
       this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => { 
-        alert("התלמיד נוסף בהצלחה"); 
+        //alert("התלמיד נוסף בהצלחה"); 
+        this._parent.openMessagePopup("התלמיד נוסף בהצלחה!");
         this.change = false;
         this.backToGridStudent();
       }, err => { 
-        alert("שגיאה בהוספת תלמיד"); 
+        this._parent.openMessagePopup("שגיאה בהוספת תלמיד!");
       });
     
   }

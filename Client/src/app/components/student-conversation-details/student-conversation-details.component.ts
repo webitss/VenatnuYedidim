@@ -78,7 +78,8 @@ export class StudentConversationDetailsComponent implements OnInit {
           //this._parent.openMessagePopup('')
 
 
-          alert("השמירה בוצעה בהצלחה");
+         // alert("השמירה בוצעה בהצלחה");
+         this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
           this.Conversation.emit(null);
         }
         else

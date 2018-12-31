@@ -9,3 +9,7 @@ button{
 form{
     background-color: white;
 }
+
+#overlay {
+    z-index: -5 !important;
+}

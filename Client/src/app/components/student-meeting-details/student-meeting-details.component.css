@@ -34,7 +34,7 @@ button{
 } */
 
 #overlay{
-    z-index: -5;
+    z-index:-5;
 }
 .form{
     background: white;

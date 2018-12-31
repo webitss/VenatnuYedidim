@@ -36,16 +36,18 @@ export class EventDetailsComponent implements OnInit {
   ngAfterViewInit() {
     this.cdr.detectChanges();
   }
+
+
   save() {
     if (!this.isDetails) {
       this.participantsToSend.splice(0, this.participantsToSend.length);
-      this.e.dtEventDate = new Date(this.e.dtEventDate);
+     
       if (this.to != undefined && this.to.length > 0)
         this.to.forEach(t => {
           this.participantsToSend.push(new Tint(t.iSysTableRowId));
         });
     }
-
+ this.e.dtEventDate = new Date(this.e.dtEventDate);
     this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: this.globalService.getUser()['iUserId'], to: this.participantsToSend })
       .then(
         data => {

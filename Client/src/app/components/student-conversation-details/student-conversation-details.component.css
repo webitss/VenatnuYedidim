@@ -40,4 +40,8 @@ button{
     position: fixed;
 }
 
+#overlay {
+    z-index: -5 !important;
+}
+
 
