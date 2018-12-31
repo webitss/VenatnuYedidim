@@ -169,8 +169,8 @@ export class StudentDetailsComponent implements OnInit {
       this.dateYearArr.push(i);
     }
     for (var i = 0; i < this.dateYearArr.length - 1; i++) {
-      const hebrewDate = require("hebrew-date");
-      this.dateYearArr[i] = hebrewDate(new Date(this.dateYearArr[i], 0, 0)).year;
+      // const hebrewDate = require("hebrew-date");
+      // this.dateYearArr[i] = hebrewDate(new Date(this.dateYearArr[i], 0, 0)).year;
       this.dateYearArr[i] = this.calcEbrewDatw(this.dateYearArr[i]);
     }
   }

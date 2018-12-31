@@ -131,14 +131,14 @@ div-image{
 ngx-gallery /deep/.ngx-gallery-arrow-right .ngx-gallery-arrow {
     width: 30px;
     height: 30px;
-    background-image: url('../../../assets/icons/right-arrow\ \(1\).png');
+    background-image: url('/../../assets/icons/right-arrow\ \(1\).png');
     background-color: transparent !important;
 }
 
 ngx-gallery /deep/.ngx-gallery-arrow-left .ngx-gallery-arrow {
     width: 30px;
     height: 30px;
-    background-image: url('../../../assets/icons/left-arrow.png');
+    background-image: url('/../../assets/icons/left-arrow.png');
     background-color: transparent !important;
 }
 
