@@ -28,6 +28,7 @@
 
         <!-- SysTableService -->
         <app-vy-table #CodeTables [lstColumns]="lstColumns" [lstDataRows]="Values" (clickCell)="editSysTableRow($event)"></app-vy-table>
+    
     </div>
 </div>
 
@@ -56,7 +57,7 @@
     <form>
         <div _ngcontent-c10="" class="form-group col-sm-3 ">
             <label _ngcontent-c10="" class="pad-close pad-close">ערך:</label>
-            <input type="text" [(ngModel)]="row.nvValue" value={{row.nvValue}} class="form-control inp" [ngModelOptions]="{standalone: true}"
+            <input type="text" [(ngModel)]="row.nvValue" value={{row.nvValue}} class="form-control inp" [ngModelOptions]="{standalone: true}"   />
             />
         </div>
 

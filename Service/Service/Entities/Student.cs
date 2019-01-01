@@ -84,7 +84,27 @@ namespace Service.Entities
             }
         }
 
-		public static List<int> GetStudentsAssociatedToAvrechim()
+
+        public static List<Student> GetBugrimList(int iUserId)
+        {
+            try
+            {
+
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TStudentGetBugrimByUser_SLCT", new SqlParameter("iUserId", iUserId)).Tables[0].Rows;
+                List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
+
+                return students;
+            }
+
+
+
+            catch (Exception ex)
+            {
+                Log.LogError("GetBugrimList / TStudentGetBugrimByUser_SLCT", "ex" + ex);
+                return null;
+            }
+        }
+        public static List<int> GetStudentsAssociatedToAvrechim()
 		{
 			try
 			{

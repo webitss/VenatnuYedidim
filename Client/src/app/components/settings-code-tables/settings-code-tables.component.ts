@@ -8,6 +8,8 @@ import { forEach } from '@angular/router/src/utils/collection';
 import { t } from '@angular/core/src/render3';
 // import { EventEmitter } from 'protractor';
 import {EventEmitter} from 'events'
+import { DataSharingService } from '../../services/dataSharing.Service';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 @Component({
   selector: 'app-settings-code-tables',
@@ -15,7 +17,7 @@ import {EventEmitter} from 'events'
   styleUrls: ['./settings-code-tables.component.css']
 })
 export class SettingsCodeTableComponent implements OnInit {
-
+  @ViewChild(VyTableComponent) Vytable:VyTableComponent;
   public tableNames: Array<SysTables>;
   public Values: Array<SysTableRow>;
 
@@ -46,9 +48,12 @@ export class SettingsCodeTableComponent implements OnInit {
 ]
   private readonly newProperty = this;
   @ViewChild('CodeTables') CodeTables:any;
+ @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
+   
+  constructor(private sysTableService: SysTableService, private appProxy: AppProxy) { 
+   
 
-
-  constructor(private sysTableService: SysTableService, private appProxy: AppProxy) { }
+  }
 
   ngOnInit() {
 
@@ -65,10 +70,12 @@ export class SettingsCodeTableComponent implements OnInit {
     this.sysTableService.getValues(this.idSysTableRow).then(data => {
 
       if (data) {
+        debugger;
         this.Values = data as Array<SysTableRow>;
         this.Values.forEach(v => {
           v['edit'] = '<div class="edit"></div>';
         });
+        this.vyTableComponent.refreshTable(this.Values);
       }
 
       else alert(error)
@@ -95,8 +102,9 @@ export class SettingsCodeTableComponent implements OnInit {
 
       .then(l => {
         if (l) {
+          debugger;
           SysTableService.dataTables[this.Mykey].SysTableRow = l;
-         
+  
         }
         else
           console.log("err");
@@ -110,22 +118,28 @@ export class SettingsCodeTableComponent implements OnInit {
     this.roeToadd.dtLastModifyDate = new Date();
     this.roeToadd.dtCreateDate = new Date();
     this.roeToadd.iSysTableId = this.idSysTableRow;
+   
+  debugger;
     Object.keys(SysTableService.dataTables).forEach(key => {
       if (SysTableService.dataTables[key].iSysTableId == this.idSysTableRow) {
         this.Mykey = key;
       
       }
     })
-
-    this.divNewValue = false
-    this.showOverlap = false
+ 
+debugger;
    
     return this.sysTableService.addValue(this.roeToadd)
       .then(res => {
+   
         SysTableService.dataTables[this.Mykey].SysTableRow.push(Object.assign({}, this.roeToadd));
-        
+        debugger;
+        let g=  this.Vytable.refreshTable(SysTableService.dataTables[this.Mykey].SysTableRow)
+        this.Vytable.refreshTable(SysTableService.dataTables[this.Mykey].SysTableRow)
+
         this.roeToadd = new SysTableRow();
-      
+       
+        
       });
       
 
@@ -138,6 +152,8 @@ export class SettingsCodeTableComponent implements OnInit {
     this.divNewValue = false
     this.showOverlap = false
     this.toEdit=false;
+
+  
   }
 
 

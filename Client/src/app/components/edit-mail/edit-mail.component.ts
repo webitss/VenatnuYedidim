@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-edit-mail',
@@ -8,13 +9,16 @@ import { AppProxy } from '../../services/app.proxy';
 })
 export class EditMailComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy) { }
+  constructor(private appProxy: AppProxy, private _parent:AppComponent) { }
   @Input()
   mails: string[] = [];
 
   @Output()
   subject: string;
   body: string;
+
+  mail:string="";
+  add:boolean=false;
   to: string = "";
   ngOnInit() {
     // this.mails.forEach(mail => {
@@ -24,10 +28,15 @@ export class EditMailComponent implements OnInit {
     // });
   }
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
+  addMail()
+  {
+    this.mails.push(this.mail);
+  }
   save() {
     this.appProxy.post('MailToAvrechim', { mailList: this.mails, subject: this.subject, body: this.body })
       .then(result => {
-        if (result != null)
+        if (result)
+        this._parent.openMessagePopup("המסר נשלח בהצלחה!");
           this.close.emit();
       }
         , err => { }
