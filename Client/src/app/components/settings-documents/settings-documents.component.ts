@@ -31,7 +31,7 @@ export class SettingsDocumentsComponent implements OnInit {
           nvIdentityCard: element.lstObject['nvIdentityCard'],
           nvCategory: element.lstObject['nvCategory'],
           nvComment: element.nvComment,
-          open: '<a href=' + AppProxy.getBaseUrl() + 'Files/' + element.nvDocumentName + ' target="_blank">' + element.nvDocumentName + '</a>',
+          open: '<a href="' + AppProxy.getBaseUrl() + 'Files/' + element.nvDocumentName + '" target="_blank">' + element.nvDocumentName + '</a>',
           download: '<div class="download"></div>',
           iDocumentId: element.iDocumentId
 
