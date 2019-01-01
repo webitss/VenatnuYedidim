@@ -78,7 +78,12 @@ namespace Service.Entities
         {
             try
             {
-                SqlDataAccess.ExecuteDatasetSP("TPresenceAvrech_DEL", new SqlParameter("iPersonId", iPresenceAvrech));
+                List<SqlParameter> lstParameters = new List<SqlParameter>();
+                SqlParameter param1 = new SqlParameter("iPresenceAvrech", iPresenceAvrech);
+                SqlParameter param2 = new SqlParameter("iLastModifyUserId", iLastModifyUserId);
+                lstParameters.Add(param1);
+                lstParameters.Add(param2);
+                SqlDataAccess.ExecuteDatasetSP("TPresenceAvrech_DEL", lstParameters);
                 return true;
             }
             catch
