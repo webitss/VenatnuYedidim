@@ -30,7 +30,7 @@ export class StudentDocumentsComponent implements OnInit {
   message: string;
   flagDelete: boolean;
   header = 'מחיקת מסמך';
-
+  
   constructor(private appProxy: AppProxy, private activatedRoute: ActivatedRoute, private router: Router, private sysTableService: SysTableService) { }
 
   ngOnInit() {
@@ -114,7 +114,11 @@ export class StudentDocumentsComponent implements OnInit {
 
   }
   deleteDocument(d: Document) {
-    this.appProxy.post('DeleteDocument', { iDocumentId: this.documentToDelete.iDocumentId }).then(data => {});
+    this.appProxy.post('DeleteDocument', { iDocumentId: this.documentToDelete.iDocumentId }).then(data => {
+      const i=this.lstDataRows.findIndex(x=>x.iDocumentId==this.documentToDelete.iDocumentId);
+      this.lstDataRows.splice(i, 1);
+      this.cc.refreshTable(this.lstDataRows);
+    });
   }
   closeDocumentDialog(save) {
     let category, index;

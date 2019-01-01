@@ -101,6 +101,8 @@ import { EditMailComponent } from './components/edit-mail/edit-mail.component';
 // import { NgxEditorModule } from 'ngx-editor';
 // import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { NgxPasswordToggleModule } from 'ngx-password-toggle';
+import { DataSharingService } from './services/dataSharing.Service';
+
 
 
 
@@ -324,7 +326,7 @@ import { NgxPasswordToggleModule } from 'ngx-password-toggle';
 
     ], { useHash: true })
   ],
-  providers: [AppProxy, SysTableService, GlobalService, CanDeactivateGuard, DialogService,settingsFrontend],
+  providers: [AppProxy, SysTableService, GlobalService, CanDeactivateGuard, DialogService,settingsFrontend,DataSharingService],
   bootstrap: [AppComponent],
 
   // exports: [CalendarComponent]
