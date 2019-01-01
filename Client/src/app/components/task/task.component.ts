@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, Inject, forwardRef } from '@angular/core';
 import { Task } from "../../classes/task"
 import { SysTableService } from '../../services/sys-table.service';
 import { AppProxy } from '../../services/app.proxy';
@@ -10,6 +10,7 @@ import { CalendarComponent } from '../calendar/calendar.component';
 // import { moment } from '../../../../node_modules/ngx-bootstrap/chronos/test/chain';
 import { promise } from '../../../../node_modules/protractor';
 import * as moment from 'moment';
+import { AppComponent } from '../app/app.component';
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -29,7 +30,7 @@ export class TaskComponent implements OnInit {
   iuserid: number;
 
 
-  constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private router: Router,  private cdRef: ChangeDetectorRef, private route: ActivatedRoute) { 
+  constructor(@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent,private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private router: Router,  private cdRef: ChangeDetectorRef, private route: ActivatedRoute) { 
 
   }
 
@@ -114,7 +115,7 @@ export class TaskComponent implements OnInit {
     //    if (this.currentTask.iTaskId == 0)
     return this.appProxy.post('SetTask', { task: this.task, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
       if (data) {
-        alert("המשימה נוספה בהצלחה!");
+        this._parent.openMessagePopup("המשימה נוספה בהצלחה!");
         this.refresh.emit(this.task);
         this.close.emit();
         return Promise.resolve(true);
