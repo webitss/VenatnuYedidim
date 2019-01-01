@@ -90,7 +90,7 @@ namespace Service.Entities
             try
             {
 
-                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TStudentGetStudentBugrimByUser_SLCT", new SqlParameter("iUserId", iUserId)).Tables[0].Rows;
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TStudentGetBugrimByUser_SLCT", new SqlParameter("iUserId", iUserId)).Tables[0].Rows;
                 List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
 
                 return students;
