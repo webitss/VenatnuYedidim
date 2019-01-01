@@ -99,7 +99,11 @@ namespace Service
         {
             return Student.GetStudentList(iUserId);
         }
-		public List<int> GetStudentsAssociatedToAvrechim()
+        public List<Student> GetBugrimList(int iUserId)
+        {
+            return Student.GetBugrimList(iUserId);
+        }
+        public List<int> GetStudentsAssociatedToAvrechim()
 		{
 			return Student.GetStudentsAssociatedToAvrechim();
 		}

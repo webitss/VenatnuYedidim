@@ -22,7 +22,7 @@ export class CardsUnionComponent implements OnInit {
 
   studentList: Student[];
   students: boolean = false;
-
+  functionName:string ='';
   id: number;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
 
@@ -30,6 +30,7 @@ export class CardsUnionComponent implements OnInit {
 
   ngOnInit() {
 
+    
 
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
     this.student.dtAddStudentDate = null;
@@ -37,10 +38,13 @@ export class CardsUnionComponent implements OnInit {
     //  this.activatedRoute.parent.params.subscribe(params => {
     //     this.id = params['iPersonId'];
     //   });
-    this.appProxy.post('GetStudentList', { iUserId: this.id }).then(
+    if(window.location.hash == '#/graduates')
+      this.functionName = 'GetBugrimList';
+    else this.functionName = 'GetStudentList';
+
+    this.appProxy.post(this.functionName, { iUserId: this.id }).then(
       data => {
         this.studentList = data;
-        debugger;
       }
     );
   }

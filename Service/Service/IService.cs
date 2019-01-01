@@ -71,13 +71,22 @@ namespace Service
 		[OperationContract]
 		[WebInvoke(
 		Method = "POST",
-		UriTemplate = "GetStudentList",
+		UriTemplate = "GetBugrimList",
 		BodyStyle = WebMessageBodyStyle.WrappedRequest,
 		ResponseFormat = WebMessageFormat.Json,
 		RequestFormat = WebMessageFormat.Json)]
-		List<Student> GetStudentList(int iUserId);
+		List<Student> GetBugrimList(int iUserId);
 
-		[OperationContract]
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetStudentList",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Student> GetStudentList(int iUserId);
+
+        [OperationContract]
 		[WebInvoke(
         Method = "GET",
         UriTemplate = "GetStudentsAssociatedToAvrechim",
