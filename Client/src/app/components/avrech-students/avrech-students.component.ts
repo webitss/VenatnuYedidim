@@ -71,20 +71,22 @@ export class AvrechStudentsComponent implements OnInit {
 
       this.id = params['iPersonId'];
     })
-    this.appProxy.post('GetAvrechStudents', { iPersonId: this.id }).then(data =>
-      this.allStudents = data
+    this.appProxy.post('GetAvrechStudents', { iPersonId: this.id }).then(data => {
+    this.allStudents = data;
+      this.allStudents.forEach(
+        st => {
+          st['delete'] = '<div class="delete"></div>';
+        });
+    }
     );
 
     this.appProxy.post('GetStudentList', { iPersonId: 0 }).then(
       data => {
 
-        this.allStudents = data
-        this.allStudents.forEach(
-          st => {
-            st['delete'] = '<div class="delete"></div>';
-          });
+        let allStudents = data
 
-        this.allStudents.forEach(
+
+        allStudents.forEach(
           student => {
             this.listToSelect.push({ value: student.nvFirstName + ' ' + student.nvLastName + " " + student.nvIdentityCard });
           }
