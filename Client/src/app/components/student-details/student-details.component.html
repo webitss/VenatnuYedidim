@@ -10,7 +10,7 @@
             <label for="LoadDocument" class="browse" class="chooseFile">
                 <img src="../../../assets/icons/picture.png">
             </label>
-            <input type="file" (change)="loadDocument($event,save)" name="LoadDocument" id="LoadDocument" />
+            <input type="file" accept="image/*" (change)="loadDocument($event,save)" name="LoadDocument" id="LoadDocument" />
         </div>
     </div>
     <div class="form" #details>
