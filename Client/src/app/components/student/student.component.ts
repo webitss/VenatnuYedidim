@@ -59,6 +59,7 @@ export class StudentComponent implements OnInit, OnDestroy {
 
 
   save() {
+   
     if (this.currentComponent.saveStudent)
       this.currentComponent.saveStudent();
   }

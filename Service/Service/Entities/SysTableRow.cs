@@ -61,7 +61,8 @@ namespace Service.Entities
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<SysTableRow>.GetSqlParametersFromObject(sysTableRow);
-
+                parameters.Remove(parameters.Find(x => x.ParameterName == "nvShowText"));
+          
 
 
                 SqlDataAccess.ExecuteDatasetSP("TSysTableRow_INS", parameters);
@@ -82,11 +83,11 @@ namespace Service.Entities
         public static bool UpdateValue(SysTableRow sysTableRow)
         {
 
-
+ 
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<SysTableRow>.GetSqlParametersFromObject(sysTableRow);
-
+                parameters.Remove(parameters.Find(x => x.ParameterName == "nvShowText"));
 
 
                 SqlDataAccess.ExecuteDatasetSP("TSysTableRow_UPD", parameters);
