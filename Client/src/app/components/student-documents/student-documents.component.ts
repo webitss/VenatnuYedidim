@@ -66,7 +66,7 @@ export class StudentDocumentsComponent implements OnInit {
           nvComment: element.nvComment,
           edit: '<div class="edit"></div>',
           delete: '<div class="delete"></div>',
-          open: '<a href=' + AppProxy.getBaseUrl() + 'Files/' + element.nvDocumentName + ' target="_blank">' + element.nvDocumentName + '</a>',
+          open: '<a href="' + AppProxy.getBaseUrl() + 'Files/' + element.nvDocumentName + '" target="_blank">' + element.nvDocumentName + '</a>',
           iDocumentId: element.iDocumentId
 
         });
@@ -137,7 +137,7 @@ export class StudentDocumentsComponent implements OnInit {
           dtCreatedate: new Date().toLocaleDateString(),
           nvComment: this.document.nvComment,
           edit: '<div class="edit"></div>',
-          open: '<a href=' + AppProxy.getBaseUrl() + 'Files/' + this.document.nvDocumentName + ' target="_blank">' + this.document.nvDocumentName + '</a>',
+          open: '<a href="' + AppProxy.getBaseUrl() + 'Files/' + this.document.nvDocumentName + '" target="_blank">' + this.document.nvDocumentName + '</a>',
           iDocumentId: this.document.iDocumentId
         });
 
@@ -156,7 +156,7 @@ export class StudentDocumentsComponent implements OnInit {
           category = this.categoryTypes.filter(x => x.iSysTableRowId == this.document.iCategoryType)[0].nvValue;
         this.lstDataRows[index].nvCategory = category;
         this.lstDataRows[index].nvComment = this.document.nvComment;
-        this.lstDataRows[index].open = '<a href=' + AppProxy.getBaseUrl() + 'Files/' + this.document.nvDocumentName + ' target="_blank">' + this.document.nvDocumentName + '</a>';
+        this.lstDataRows[index].open = '<a href="' + AppProxy.getBaseUrl() + 'Files/' + this.document.nvDocumentName + '" target="_blank">' + this.document.nvDocumentName + '</a>';
 
         for (let i = 0; i < this.documents.length; i++) {
           if (this.documents[i].iDocumentId == this.document.iDocumentId) {

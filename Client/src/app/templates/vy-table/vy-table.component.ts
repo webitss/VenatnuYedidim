@@ -156,6 +156,7 @@ export class VyTableComponent implements OnInit {
     debugger;
     window.location.href = uri + base64(format(template, ctx))
   }
+  
   public current_date = new Date();
   downloadPdf(componentName: string, type: string) {
     debugger;

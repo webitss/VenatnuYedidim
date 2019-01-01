@@ -19,56 +19,54 @@ export class AvrechComponent implements OnInit {
 
 
 
-  constructor(private activatedRoute: ActivatedRoute,private router: Router, private appProxy: AppProxy) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private appProxy: AppProxy) {
   }
 
   name: string;
-  id:number;
-  avrech:Avrech;
+  id: number;
+  avrech: Avrech;
   ngOnInit() {
-     this.id = this.activatedRoute.snapshot.params["iPersonId"];
-    
-      //alert(this.id);
-      if (this.id != 0) {
-       
-        this.appProxy.post("GetAvrechById", { iPersonId: this.id }).then(
-          data => {
-            this.avrech = data;
-            this.name = this.avrech['lstObject']['nvUserName'];
-           
-          },
-          err => ("err")
-        );
+    this.id = this.activatedRoute.snapshot.params["iPersonId"];
 
-      }
-      else {
-        this.name="";
-      }
+    //alert(this.id);
+    if (this.id != 0) {
+
+      this.appProxy.post("GetAvrechById", { iPersonId: this.id }).then(
+        data => {
+          this.avrech = data;
+          this.name = this.avrech['lstObject']['nvUserName'];
+
+        },
+        err => ("err")
+      );
+
+    }
+    else {
+      this.name = "";
+    }
 
   }
   onRouterOutletActivate(event) {
     this.currentComponent = event;
   }
 
-  
-  isDisabled():boolean {
-    if(this.currentComponent.form!=undefined) {
+
+  isDisabled(): boolean {
+    if (this.currentComponent.form != undefined) {
       return this.currentComponent.form.valid;
-   
+    }
+    else
+      return false;
   }
-}
 
   save() {
-
     if (this.currentComponent.save) {
-      this.currentComponent.save();
-
+      this.currentComponent.save()
     }
   }
 
   close() {
     this.router.navigate(["avrechim"]);
   }
-
 }
 

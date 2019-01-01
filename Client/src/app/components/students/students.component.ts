@@ -156,6 +156,15 @@ this.currentYeshivaOfStudent=new Map<number,string>();
   }
   // clickCell:true,
   // type: 'html'
+
+  downloadExcel()
+  {
+    this.vyTableComponent.downloadExcel();
+  }
+  tableToPdf(name)
+  {
+    this.vyTableComponent.downloadPdf(name,'pdf');
+  }
   editAndDeleteStudent(e) {
 
     if (e.columnClickName == 'edit')

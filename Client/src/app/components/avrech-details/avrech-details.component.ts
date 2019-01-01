@@ -53,7 +53,9 @@ export class AvrechDetailsComponent implements OnInit {
 
   save() {
     this.appProxy.post("UpdateAvrech", { avrech: this.avrech, iUserId: this.globalService.getUser()['iUserId'] }).then(res=>
-      this._parent.openMessagePopup("הפעולה נקלטה במערכת!"));
+      {this._parent.openMessagePopup("הפעולה נקלטה!")
+    this.change=false;
+  });
  
   }
   ngOnDestroy() {

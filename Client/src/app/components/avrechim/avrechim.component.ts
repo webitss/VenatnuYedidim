@@ -108,11 +108,13 @@ export class AvrechimComponent implements OnInit {
     this.avrechimList.filter(a => a['checked'] == true).forEach(avrech => {
       this.mailList.push(avrech.nvEmail);
     });
-
-  
-    this.appProxy.post('MailToAvrechim', { mailList: this.mailList })
+    if(this.mailList.length == 0){
+      this._parent.openMessagePopup("לא נבחרו אברכים");
+      this.mail=false;
+    }
+    else
+      this.appProxy.post('MailToAvrechim', { mailList: this.mailList })
       .then(result => {
-        alert("המסר נשלח בהצלחה");
       }
         , err => { }
       );
