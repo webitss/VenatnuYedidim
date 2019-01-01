@@ -10,6 +10,7 @@
 <div class="student-event-details" *ngIf="eventFlag == true">
   <app-student-event-details [event]="event" [iArrivalStatusType]="event != null? event['iArrivalStatusType']: 0" [from]="from" (Close)="close($event)"></app-student-event-details>
 </div>
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; delete();"></app-vy-pop-up>
 <router-outlet></router-outlet>
 
 <div class="main-table" >
