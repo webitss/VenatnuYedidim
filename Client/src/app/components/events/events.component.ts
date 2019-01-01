@@ -33,7 +33,7 @@ export class EventsComponent implements OnInit {
     this.appProxy.post('DeleteEvent', { iEventId: e, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
       if (res == true) {
         this._parent.openMessagePopup('נמחק בהצלחה!');
-        const i=this.lstDataRows.findIndex(x=>x.iEventId=e);
+        const i=this.lstDataRows.findIndex(x=>x.iEventId==e);
         this.lstDataRows.splice(i, 1);
         this.vyTableComponent.refreshTable(this.lstDataRows);
       }
