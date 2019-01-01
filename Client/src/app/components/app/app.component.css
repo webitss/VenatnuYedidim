@@ -61,7 +61,7 @@ li{
 .log-out{
     background-color: #cf255e;
     color: #ffffff;
-    padding-left: 0px;
-    margin-right: auto;
-    padding-right: 9px;
+    padding-left: 19px;
+    /* margin-right: auto; */
+    padding-right: 37px;
 }
