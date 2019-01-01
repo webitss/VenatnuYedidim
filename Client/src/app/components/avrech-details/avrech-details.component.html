@@ -35,10 +35,15 @@
     <div class="form-group col-sm-4 ">
       <label for="identity">ת.ז</label>
       <input type="text" id="identity" [(ngModel)]="avrech.nvIdentityCard" name="identity" (change)="change=true" class="form-control" maxlength="9" minlength="9"
-        #identity="ngModel" />
+        #identity="ngModel" pattern="^[0-9]*$"/>
       <div *ngIf="identity.invalid && (identity.dirty || identity.touched)">
         <div class="text-danger text-right" *ngIf="(identity.errors.minlength || identity.errors.maxlength)">
          <strong>! </strong>תעודת זהות חייבת להכיל 9 ספרות
+         <br>
+        </div>
+
+        <div class="text-danger text-right" *ngIf="(identity.errors.pattern)">
+         <strong>! </strong>תעודת זהות חייבת להכיל רק ספרות
         </div>
       </div>
     </div>

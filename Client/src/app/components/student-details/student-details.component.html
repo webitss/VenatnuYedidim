@@ -10,7 +10,7 @@
             <label for="LoadDocument" class="browse" class="chooseFile">
                 <img src="../../../assets/icons/picture.png">
             </label>
-            <input type="file" (change)="loadDocument($event,save)" name="LoadDocument" id="LoadDocument" />
+            <input type="file" accept="image/*" (change)="loadDocument($event,save)" name="LoadDocument" id="LoadDocument" />
         </div>
     </div>
     <div class="form" #details>
@@ -28,11 +28,15 @@
             <div class="form-group col-sm-3">
                 <label for="identity">תעודת זהות :</label>
                 <input type="text" class="form-control" id="identity" name="identity" [(ngModel)]="student.nvIdentityCard"
-                    (change)="change=true" [ngModelOptions]="{standalone: true}" minlength="9" maxlength="9" pattern="^\(?([0-9]{9})\)$"
+                    (change)="change=true" [ngModelOptions]="{standalone: true}" minlength="9" maxlength="9" pattern="^[0-9]*$"
                     #identity="ngModel">
                 <div *ngIf="identity.invalid && (identity.dirty || identity.touched)" class="alert alert-danger">
-                    <div *ngIf="(identity.errors.minlength || identity.errors.maxlength) && (identity.errors.pattern)">
+                    <div *ngIf="(identity.errors.minlength || identity.errors.maxlength)">
                         <p>תעודת זהות חייבת להכיל 9 ספרות </p>
+                       
+                    </div>
+                    <div *ngIf="(identity.errors.pattern)">
+                        
                         <p>תעודת זהות חייבת להכיל רק מספרים</p>
                     </div>
                 </div>
