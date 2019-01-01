@@ -55,11 +55,12 @@ export class AvrechComponent implements OnInit {
     if(this.currentComponent.form!=undefined) {
       return this.currentComponent.form.valid;
   }
+  return false;
 }
 
   save() {
     if (this.currentComponent.save) {
-      this.currentComponent.save();
+      this.currentComponent.save()
     }
   }
 
