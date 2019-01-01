@@ -15,6 +15,9 @@ export class EditMailComponent implements OnInit {
   @Output()
   subject: string;
   body: string;
+
+  mail:string="";
+  add:boolean=false;
   to: string = "";
   ngOnInit() {
     // this.mails.forEach(mail => {
@@ -24,6 +27,10 @@ export class EditMailComponent implements OnInit {
     // });
   }
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
+  addMail()
+  {
+    this.mails.push(this.mail);
+  }
   save() {
     this.appProxy.post('MailToAvrechim', { mailList: this.mails, subject: this.subject, body: this.body })
       .then(result => {
