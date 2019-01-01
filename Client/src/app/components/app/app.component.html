@@ -11,34 +11,42 @@
             </div> -->
 <div class="box" *ngIf="router.url != '/log-in'&& router.url != '/'">
   <nav class="navbar navbar-expand-sm nav">
-    <div class="col-sm-1">
-      <a class="navbar-brand title" href="#">
+    <div class="col-sm-2">
+      <a class="navbar-brand title log-out" href="#">
+        צא מהמשתמש
         <img src="./assets/icons/logo.jpg">
+
       </a>
     </div>
     <!-- <div class="c"> -->
     <ul class="navbar-nav col-sm-8" *ngIf="currentComponent">
-      <li (click)="isGraduate=0" [ngClass]="{'appSelect': currentComponent.constructor.name.indexOf('Student') != -1  &&router.url != '/graduates' && isGraduate==0}" class="nav-item" routerLink='/students'>
+      <li (click)="isGraduate=0" [ngClass]="{'appSelect': currentComponent.constructor.name.indexOf('Student') != -1  &&router.url != '/graduates' && isGraduate==0}"
+        class="nav-item" routerLink='/students'>
 
         <span>תלמידים</span>
       </li>
-      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('avrechim') != -1 }" class="nav-item" routerLink='/avrechim'>
+      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('avrechim') != -1 }" class="nav-item"
+        routerLink='/avrechim'>
 
         <span>אברכים</span>
       </li>
-      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('events') != -1}" class="nav-item" routerLink='/events'>
+      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('events') != -1}" class="nav-item"
+        routerLink='/events'>
 
         <span>ארועים</span>
       </li>
-      <li (click)="isGraduate=1" [ngClass]="{'appSelect': router.url.indexOf('graduates') != -1 || isGraduate==1}" class="nav-item" routerLink='/graduates'>
+      <li (click)="isGraduate=1" [ngClass]="{'appSelect': router.url.indexOf('graduates') != -1 || isGraduate==1}"
+        class="nav-item" routerLink='/graduates'>
 
         <span>בוגרים</span>
       </li>
-      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('users') != -1}" class="nav-item" routerLink='/users'>
+      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('users') != -1}" class="nav-item"
+        routerLink='/users'>
 
         <span>משתמשים</span>
       </li>
-      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('settings') != -1}" class="nav-item" routerLink='/settings'>
+      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('settings') != -1}" class="nav-item"
+        routerLink='/settings'>
 
         <span>הגדרות</span>
       </li>
@@ -48,7 +56,7 @@
       </li> -->
     </ul>
     <!-- </div> -->
-    <div class="col-sm-3">
+    <div class="col-sm-2">
       <div id="t-Text_2" (click)="goToUserDetails()" class="n pie label singleline autofit firer click ie-background commentable user"
         style="float: left">
         <div class="backgroundLayer"></div>
@@ -79,5 +87,3 @@
 
 
 <app-vy-pop-up [isDouble]="false" [message]="message" *ngIf="flag" [header]="header" (close)="flag=false" (ok)="flag=false;"></app-vy-pop-up>
-
-

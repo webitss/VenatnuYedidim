@@ -51,9 +51,13 @@ export class AvrechDetailsComponent implements OnInit {
 
 
   save() {
-    this.appProxy.post("UpdateAvrech", { avrech: this.avrech, iUserId: this.globalService.getUser()['iUserId'] }).then();
-    this.router.navigate(['avrechim']);
+    this.appProxy.post("UpdateAvrech", { avrech: this.avrech, iUserId: this.globalService.getUser()['iUserId'] }).then(res=>{
+      this.change=false;
+      this.router.navigate(['avrechim']);
+    });
+   
   }
+
   ngOnDestroy() {
     if (this.change) {
       let v = confirm("האם ברצונך לשמור?");

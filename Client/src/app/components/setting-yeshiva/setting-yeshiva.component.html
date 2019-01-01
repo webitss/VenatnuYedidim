@@ -15,20 +15,43 @@
       <div class="form-group col-sm-5">
         <label for='yeshiva-name'>שם מוסד:</label>
         <input class=inputYeshiva type="text" name='yeshiva-name' class="form-control" [(ngModel)]="yeshiva.nvYeshivaName" required
-          #name="ngModel" />
+          #name="ngModel" minlength="3" maxlength="25" pattern='^[a-zA-Z]+$'/>
         <div *ngIf="name.invalid && (name.dirty || name.touched)">
           <div *ngIf="(name.errors.required)" class="text-danger text-right">
             <strong>! </strong>שדה נדרש</div>
+        </div>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+          <div class="text-danger text-right" *ngIf="(name.errors.minlength)">
+            <strong>! </strong> שם מוסד קצר מדי
+          </div>
+        </div>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+          <div class="text-danger text-right" *ngIf="(name.errors.maxlength)">
+            <strong>! </strong> שם מוסד ארוך מדי
+          </div>
+        </div>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+          <div class="text-danger text-right" *ngIf="(name.errors.pattern)">
+            <strong>! </strong> שם מוסד אינו תקין
+          </div>
         </div>
       </div>
 
       <div class="form-group col-sm-5">
         <label for='yeshiva-address'>כתובת:</label>
         <input class=inputYeshiva type="text" name='yeshiva-address' class="form-control" [(ngModel)]="yeshiva.nvAddress" required
-          #address="ngModel" />
+          minlength="3" maxlength="20" #address="ngModel" />
         <div *ngIf="address.invalid && (address.dirty || address.touched)">
           <div *ngIf="(address.errors.required)" class="text-danger text-right">
             <strong>! </strong>שדה נדרש</div>
+        </div>
+        <div *ngIf="address.invalid && (address.dirty || address.touched)">
+          <div *ngIf="(address.errors.minlength)" class="text-danger text-right">
+            <strong>! </strong>כתובת קצרה מדי</div>
+        </div>
+        <div *ngIf="address.invalid && (address.dirty || address.touched)">
+          <div *ngIf="(address.errors.maxlength)" class="text-danger text-right">
+            <strong>! </strong>כתובת ארוכה מדי</div>
         </div>
       </div>
     </div>
@@ -37,21 +60,38 @@
 
       <div class="form-group col-sm-5">
         <label for='yeshiva-city'>עיר:</label>
-        <input class=inputYeshiva type="text" name='yeshiva-city' class="form-control" [(ngModel)]="yeshiva.nvCity" required #city="ngModel"
+        <input class=inputYeshiva type="text" name='yeshiva-city' class="form-control" [(ngModel)]="yeshiva.nvCity"
+        maxlength="15" minlength="3" required #city="ngModel"
         />
         <div *ngIf="city.invalid && (city.dirty || city.touched)">
           <div *ngIf="(city.errors.required)" class="text-danger text-right">
             <strong>! </strong>שדה נדרש</div>
+        </div>
+        <div *ngIf="city.invalid && (address.dirty || address.touched)">
+          <div *ngIf="(city.errors.minlength)" class="text-danger text-right">
+            <strong>! </strong>שם עיר קצר מדי</div>
+        </div>
+        <div *ngIf="city.invalid && (address.dirty || address.touched)">
+          <div *ngIf="(city.errors.maxlength)" class="text-danger text-right">
+            <strong>! </strong>שם עיר ארוך מדי</div>
         </div>
       </div>
 
       <div class="form-group col-sm-5">
         <label for='yeshiva-contact'>שם איש קשר:</label>
         <input class=inputYeshiva type="text" name='yeshiva-contact' class="form-control" [(ngModel)]="yeshiva.nvContact" required
-          #contact="ngModel" />
+         maxlength="10" minlength="2" #contact="ngModel" />
         <div *ngIf="contact.invalid && (contact.dirty || contact.touched)">
           <div *ngIf="(contact.errors.required)" class="text-danger text-right">
             <strong>! </strong>שדה נדרש</div>
+        </div>
+        <div *ngIf="contact.invalid && (contact.dirty || contact.touched)">
+          <div *ngIf="(contact.errors.maxlength)" class="text-danger text-right">
+            <strong>! </strong>שם איש קשר ארוך מדי</div>
+        </div>
+        <div *ngIf="contact.invalid && (contact.dirty || contact.touched)">
+          <div *ngIf="(contact.errors.minlength)" class="text-danger text-right">
+            <strong>! </strong>שם איש קשר קצר מדי</div>
         </div>
       </div>
     </div>

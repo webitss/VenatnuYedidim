@@ -58,3 +58,10 @@ li{
 .user :hover{
     background-color: #b4b3b3;
 }
+.log-out{
+    background-color: #cf255e;
+    color: #ffffff;
+    padding-left: 19px;
+    /* margin-right: auto; */
+    padding-right: 37px;
+}
