@@ -62,8 +62,7 @@ export class AvrechPresenceComponent implements OnInit {
         });
       })
       // this.PA = data;
-      // alert(data.length);
-
+     
     })
 
   }

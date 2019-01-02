@@ -85,3 +85,16 @@ h3{
 .btn-close{
     margin-left: 1%;
 }
+.lbl{
+    float: right;
+    color: #d8d8d8;
+    font-size: 15px;
+}
+.form-group{
+    width: 0%;
+    float: right;
+   
+    /* margin: auto; */
+     margin-left: 0%;
+    
+}

@@ -39,11 +39,11 @@ export class StudentConversationDetailsComponent implements OnInit {
 
   @ViewChild('task') TaskComponent: TaskComponent;
 
- // this.currentMeeting.dtMeetingDate = new Date(this.currentMeeting['dtDate']this.currentMeeting['dtHour']);
+  // this.currentMeeting.dtMeetingDate = new Date(this.currentMeeting['dtDate']this.currentMeeting['dtHour']);
   //protected iPersonId: number = 1;
 
   constructor(private route: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService
-    ,@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
+    , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   cancel() {
     this.Conversation.emit(null);
@@ -67,10 +67,10 @@ export class StudentConversationDetailsComponent implements OnInit {
             this.conver.iConversationId = data;
             this.saveNewConver.emit(this.conver);
           }
-       
-        else
-          this.updateConver.emit(this.conver);
- }
+
+          else
+            this.updateConver.emit(this.conver);
+        }
         //this.newConver.emit(this.conver);
         if (data) {
 
@@ -78,12 +78,12 @@ export class StudentConversationDetailsComponent implements OnInit {
           //this._parent.openMessagePopup('')
 
 
-         // alert("השמירה בוצעה בהצלחה");
-         this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
+        ;
+          this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
           this.Conversation.emit(null);
         }
         else
-        alert("השמירה נכשלה");
+          this._parent.openMessagePopup("השמירה נכשלה");
       });
 
   }

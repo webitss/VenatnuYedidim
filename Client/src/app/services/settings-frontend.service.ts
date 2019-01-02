@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { User } from '../classes/user';
 import { TGlobalParameters } from '../classes/TGlobalParameters';
 import { AppProxy } from './app.proxy';
-import { Alert, promise } from 'selenium-webdriver';
+
 export const GLOBAL={title:"כותרת",GlobalVerMarch:"טקסט_ראשי",GlobalMarchSF:"טקסט_משני"}
 @Injectable()
 export class settingsFrontend {

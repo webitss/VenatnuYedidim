@@ -1,9 +1,10 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Inject, forwardRef } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Student } from '../../classes/student';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../services/global.service';
 import { SysTableService } from '../../services/sys-table.service';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-cards-union',
@@ -26,7 +27,7 @@ export class CardsUnionComponent implements OnInit {
   id: number;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
 
-  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService) { }
+  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
 
   ngOnInit() {
 
@@ -101,14 +102,14 @@ export class CardsUnionComponent implements OnInit {
     this.appProxy.post('UnionCards', { student: this.student, iStudent2: this.student2.iPersonId }).then(
       data => {
         if (data == true) {
-          alert("האיחוד התבצע בבהצלחה");
+          this._parent.openMessagePopup("האיחוד התבצע בבהצלחה");
           this.onClose.emit();
 
         }
         else
-          alert("שגיאה באיחוד הכרטיסים")
+        this._parent.openMessagePopup("שגיאה באיחוד הכרטיסים")
       }
-      , err => alert("שגיאה בגישה לשרת"));
+      , err => this._parent.openMessagePopup("שגיאה בגישה לשרת"));
   }
 
   checkDisabled(field) {

@@ -98,7 +98,7 @@ export class TaskComponent implements OnInit {
 
           }
           else
-            alert("error!");
+            this._parent.openMessagePopup("error!");
 
         });
       }

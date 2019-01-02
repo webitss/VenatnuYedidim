@@ -2,7 +2,7 @@
   <!-- <div class="row"> -->
     <div class="form-group multy-select" >
       <label> {{inputTitle}}</label>
-      <div class="form-control" (click)="flag=!flag; openOrClose(); clicked=!clicked;" [ngClass]="{'click': clicked==true }" (mouseover)="onOverFlag=true" (mouseleave)="onOverFlag=false"><span style="color: gainsboro">{{titleStr}}</span>
+      <div class="form-control" (click)="flag=!flag;  clicked=!clicked;" [ngClass]="{'click': clicked==true }" (mouseover)="onOverFlag=true" (mouseleave)="onOverFlag=false"><span style="color: gainsboro">{{titleStr}}</span>
       <img src="../../../assets/icons/play-button.png" >
       </div>
     </div>
@@ -29,7 +29,7 @@
 
 <div *ngFor="let item of fullList|filter:search" class="col-sm-12">
         <div>
-          <input type="checkbox" [(ngModel)]="item['bMultySelectChecked']">
+          <input (change)='changeSelect()' type="checkbox" [(ngModel)]="item['bMultySelectChecked']">
           <span>{{item.value}}</span>
 
         </div>

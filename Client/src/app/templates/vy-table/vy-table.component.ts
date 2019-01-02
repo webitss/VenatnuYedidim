@@ -202,6 +202,6 @@ export class VyTableComponent implements OnInit {
   // }
   public refreshTable(newList) {
     this.lstDataRows = newList;
-    this.moveToPage(this.currentPage, true);
+    this.moveToPage(this.currentPage>0?this.currentPage:0, true);
   }
 }

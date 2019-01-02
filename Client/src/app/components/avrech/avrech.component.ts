@@ -28,7 +28,7 @@ export class AvrechComponent implements OnInit {
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params["iPersonId"];
 
-    //alert(this.id);
+    
     if (this.id != 0) {
 
       this.appProxy.post("GetAvrechById", { iPersonId: this.id }).then(
@@ -51,7 +51,7 @@ export class AvrechComponent implements OnInit {
   }
 
 
-  isDisabled(): boolean {
+  get isDisabled(): boolean {
     if (this.currentComponent.form != undefined) {
       return this.currentComponent.form.valid;
     }

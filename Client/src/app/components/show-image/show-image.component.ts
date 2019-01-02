@@ -2,7 +2,7 @@ import { debug } from 'util';
 
 import { HttpClient } from "@angular/common/http";
 
-import { Component, OnInit, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, Input, Inject, forwardRef } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { NgxGalleryImage, NgxGalleryOptions, NgxGalleryAnimation } from 'ngx-gallery';
 import { settingsFrontend } from '../../services/settings-frontend.service';
@@ -13,6 +13,7 @@ import { User } from '../../classes/user';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../services/global.service';
+import { AppComponent } from '../app/app.component';
 
 // import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 const GLOBAL = { title: 'כותרת', GlobalVerMarch: 'טקסט_ראשי', GlobalMarchSF: 'טקסט_משני' };
@@ -30,7 +31,7 @@ export class ShowImageComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[] = new Array<NgxGalleryImage>();
 
-  constructor(private globalService: GlobalService, private activatedRoute: ActivatedRoute, private rout: Router, private appProxy: AppProxy, public settingsFrontend: settingsFrontend, private cdRef: ChangeDetectorRef, private http: HttpClient) { }
+  constructor(@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent,private globalService: GlobalService, private activatedRoute: ActivatedRoute, private rout: Router, private appProxy: AppProxy, public settingsFrontend: settingsFrontend, private cdRef: ChangeDetectorRef, private http: HttpClient) { }
 
   protected titaieName = 'ונתנו ידידים';
   ngxImageGallery: NgxImageGalleryComponent;
@@ -66,7 +67,7 @@ export class ShowImageComponent implements OnInit {
 
 
     if (this.globalService.UserPermition == 7) {
-      alert("7777777")
+     
       this.appProxy.get('GetMoreDocumentsOfTadmit').then(data1 => {
 
         this.documents = data1;
@@ -134,16 +135,14 @@ export class ShowImageComponent implements OnInit {
     ];
     this.settingsFrontend.setGlobalParameters();
     //   this.settingsFrontend.GetGlobalParameters().then(res=>{
-    // alert((<any>res)[GLOBAL.title])
+   
     //    this.settingsFrontend.GlobalHeader=(<any>res).filter(r=>r.nvTitle==[GLOBAL.title])[0],
 
     //    this.settingsFrontend.GlobalMarchSF=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalVerMarch])[0],
 
     //  this.settingsFrontend.GlobalVerMarch=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalMarchSF])[0]
     //  debugger;
-    // alert(GLOBAL.title+"   "+this.settingsFrontend.GlobalHeader.nvValue)
-    // alert(GLOBAL.GlobalVerMarch+"   "+this.settingsFrontend.GlobalVerMarch.nvValue)
-    //  alert(GLOBAL.GlobalMarchSF+"   "+this.settingsFrontend.GlobalMarchSF.nvValue)
+   
     // })
 
 
@@ -235,7 +234,7 @@ export class ShowImageComponent implements OnInit {
             });
 
           }
-            , err => alert(err));
+            , err => this._parent.openMessagePopup("שגיאה"));
 
         }
       }

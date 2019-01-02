@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, forwardRef } from '@angular/core';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { AppProxy } from '../../services/app.proxy';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Student } from '../../classes/student';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-graduates',
@@ -12,7 +13,7 @@ import { Student } from '../../classes/student';
 export class GraduatesComponent implements OnInit {
 
 
-  constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute) { }
+  constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
   param: any;
   id: number;
   studentList: Student[];
@@ -28,7 +29,7 @@ export class GraduatesComponent implements OnInit {
         st => {
           st['edit'] = '<div class="edit"></div>';
         })
-    }, err => { alert(err); });
+    }, err => { this._parent.openMessagePopup(err); });
 
 
     this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true, false));

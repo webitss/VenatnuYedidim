@@ -14,53 +14,53 @@ export class VyMultySelectComponent implements OnInit {
   fullList: Array<any>;
   flag = false;
   checkboxValueSelectAll: boolean;
-  clicked=false;
+  clicked = false;
 
   id: string;
 
   @Input()
-  @Output()
-  selectedList: Array<any>;
-  onOverFlag:boolean=false;
+  // @Output()
+  public selectedList: Array<any>;
+  onOverFlag: boolean = false;
   @Input()
-  titleStr:string;
+  titleStr: string;
 
   @Input()
-  inputTitle:string;
-  
+  inputTitle: string;
+
   @Output()
   onSave: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
 
 
-  openOrClose() {
-    
-  if (this.flag == false) {
+  changeSelect() {
+
+    // if (this.flag == false) {
       // if(this.selectedList!=null)
-      this.selectedList.splice(0, this.selectedList.length);
+      this.selectedList=[];
       this.fullList.forEach(element => {
         if (element['bMultySelectChecked'] == true) {
           this.selectedList.push(element);
         }
       });
-      this.onSave.emit(this.selectedList);
-    }
+     /// this.onSave.emit(this.selectedList);
+    // }
   }
 
-save(){
-  this.fullList.forEach(element => {
-    if (element['bMultySelectChecked'] == true) {
-      element['bMultySelectChecked']=false;
-    }
-  });
-}
+  save() {
+    this.fullList.forEach(element => {
+      if (element['bMultySelectChecked'] == true) {
+        element['bMultySelectChecked'] = false;
+      }
+    });
+  }
 
-@HostListener('document:click', ['$event'])
+  @HostListener('document:click', ['$event'])
   clickout(event) {
-    if(this.eRef.nativeElement.contains(event.target)) {
+    if (this.eRef.nativeElement.contains(event.target)) {
       //alert("clicked inside");
     } else {
-      this.flag=false;
-      this.clicked=false;
+      this.flag = false;
+      this.clicked = false;
     }
   }
 
@@ -84,10 +84,10 @@ save(){
   ngOnInit() {
     this.selectedList = new Array<any>();
     //this.fullList.forEach(element => {
-      //element['bMultySelectChecked'] = false;
-      //שיהיה דינאמי
+    //element['bMultySelectChecked'] = false;
+    //שיהיה דינאמי
     //  element['toString'] = element['nvFirstName'] + element['nvLastName'] + element['nvIdentityCard'];
-  //  });
+    //  });
   }
 
 }

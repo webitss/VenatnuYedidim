@@ -86,7 +86,7 @@ export class AvrechimComponent implements OnInit {
 
 
 
-        } else { alert(' המחיקה נכשלה'); }
+        } else { this._parent.openMessagePopup(' המחיקה נכשלה'); }
         this.flag = false;
       });
   }
@@ -102,22 +102,27 @@ export class AvrechimComponent implements OnInit {
     this.avrechim.downloadPdf(name, 'pdf');
   }
   mail: boolean = false;
+  
   mailToAvrechim() {
     this.mail = true;
     this.mailList = [];
     this.avrechimList.filter(a => a['checked'] == true).forEach(avrech => {
       this.mailList.push(avrech.nvEmail);
     });
-    if(this.mailList.length == 0){
-      this._parent.openMessagePopup("לא נבחרו אברכים");
-      this.mail=false;
-    }
-    else
-      this.appProxy.post('MailToAvrechim', { mailList: this.mailList })
-      .then(result => {
-      }
-        , err => { }
-      );
+    this.mail=true;
+    // if(this.mailList.length == 0){
+    //   this._parent.openMessagePopup("לא נבחרו אברכים");
+    //   this.mail=false;
+    // }
+    // else
+    // {
+
+    // }
+      // this.appProxy.post('MailToAvrechim', { mailList: this.mailList })
+      // .then(result => {
+      // }
+      //   , err => { }
+      // );
     // let s = ''
     // let n = 777;
     // let arr = [{ 400: 'ת' },{ 1: 'א' }]

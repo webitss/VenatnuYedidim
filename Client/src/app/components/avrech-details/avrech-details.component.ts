@@ -28,7 +28,7 @@ export class AvrechDetailsComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.parent.params.subscribe(params => {
       this.id = params['iPersonId'];
-      //alert(this.id);
+     
       if (this.id != 0) {
         this.isDetails = true;
         this.appProxy.post("GetAvrechById", { iPersonId: this.id }).then(

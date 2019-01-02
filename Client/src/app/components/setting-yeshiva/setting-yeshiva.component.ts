@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, ViewChild, Inject, forwardRef } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Yeshiva } from '../../classes/Yeshiva';
 import { ActivatedRoute, Router, ROUTER_CONFIGURATION } from '@angular/router'
@@ -9,6 +9,7 @@ import { SysTableRow } from '../../classes/SysTableRow';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { } from '../../components/settings-yeshivot/settings-yeshivot.component';
 import { GlobalService } from '../../services/global.service';
+import { AppComponent } from '../app/app.component';
 
 
 @Component({
@@ -48,7 +49,7 @@ export class SettingYeshivaComponent implements OnInit {
       return this.form.valid;
   }
 
-  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService,
+  constructor(@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent,private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService,
     private globalService: GlobalService, private route: ActivatedRoute) { }
 
 
@@ -84,7 +85,7 @@ export class SettingYeshivaComponent implements OnInit {
             if (this.yeshiva.iRoleType == null)
               this.isDisabled();
             else {
-              alert("save!");
+              this._parent.openMessagePopup("save!");
               this.closeYeshiva.emit(null);
               this.add.emit(this.yeshiva);
             }
@@ -92,7 +93,7 @@ export class SettingYeshivaComponent implements OnInit {
         )
       ) { }
       else {
-        alert("faild in save");
+        this._parent.openMessagePopup("faild in save");
       }
     }
     else {
@@ -100,7 +101,7 @@ export class SettingYeshivaComponent implements OnInit {
         .then(
           data => {
             //this.yeshiva = data;
-            alert("save!");
+            this._parent.openMessagePopup("save!");
             this.closeYeshiva.emit(null);
 
              this.update.emit(this.yeshiva);
@@ -109,7 +110,7 @@ export class SettingYeshivaComponent implements OnInit {
         )
       ) { }
       else
-        alert("faild in save");
+      this._parent.openMessagePopup("faild in save");
     }
   }
 

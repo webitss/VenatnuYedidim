@@ -82,7 +82,7 @@ export class EventMediaComponent implements OnInit {
   }
 
   closeDocumentDialog(save) {
-    // alert(save);
+   
     if (save === true) {
       let len = this.documents.length;
       let i;

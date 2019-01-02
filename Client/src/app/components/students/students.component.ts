@@ -131,7 +131,7 @@ this.currentYeshivaOfStudent=new Map<number,string>();
         this.vyTableComponent.refreshTable(this.studentList);
       }
       else {
-        alert('לא נמחק!');
+        this._parent.openMessagePopup('לא נמחק!');
       }
     });
   }

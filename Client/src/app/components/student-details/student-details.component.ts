@@ -178,7 +178,7 @@ export class StudentDetailsComponent implements OnInit {
   shift(newStatus) {
     this.appProxy.post("UpdateStatusStudent", { iPersonId: this.student.iPersonId, iStatusType: newStatus }).then(
       data => {
-        alert(data);
+        this._parent.openMessagePopup("השמירה בוצעה בהצלחה");
         this.student.iStatusType = newStatus;
       }
     );
@@ -227,7 +227,7 @@ export class StudentDetailsComponent implements OnInit {
 
     this.appProxy.post("DeleteYeshivaOfStudent", {
       iPersonId: this.paramRout, iYeshivaId: this.yeshivaId, iUserId: this.currentUser
-    }).then(data => { this._parent.openMessagePopup("הישיבה נמחקה בהצלחה!") }, err => { alert("שגיאה במחיקת ישיבהיד"); });
+    }).then(data => { this._parent.openMessagePopup("הישיבה נמחקה בהצלחה!") }, err => { this._parent.openMessagePopup("שגיאה במחיקת ישיבהיד"); });
     var i = 0;
     this.yeshivaListOfStudent.forEach(e => {
       if (e.iYeshivaId == this.yeshivaId)
@@ -257,9 +257,9 @@ export class StudentDetailsComponent implements OnInit {
     }).then(data => {
       if (data)
         this._parent.openMessagePopup("הישיבה נוספה בהצלחה!");
-      else ("שגיאה בהוספת ישיבה")
+      else this._parent.openMessagePopup("שגיאה בהוספת ישיבה")
     }
-      , err => alert("שגיאה"))
+      , err => this._parent.openMessagePopup("שגיאה"))
 
     var newYeshiva: Yeshiva = new Yeshiva();
     newYeshiva.nvCity = this.yeshivaSelected.nvCity;
@@ -353,7 +353,7 @@ export class StudentDetailsComponent implements OnInit {
 
     else
       this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => { 
-        //alert("התלמיד נוסף בהצלחה"); 
+        
         this._parent.openMessagePopup("התלמיד נוסף בהצלחה!");
         this.change = false;
         this.backToGridStudent();

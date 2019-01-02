@@ -1,41 +1,44 @@
 <div class="row component-name-header">
-    <div class="actions col-sm-12" style="position: absolute;left: 10%;">
+    <div class="actions col-5" style="position: absolute;left: 10%;">
         <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
         <button class="btn btn-small pdf" title="הורד pdf"></button>
-    <input type="button" value="ערך חדש" (click)="addNewValue()" class="btn btn-circle1 btn-pink" *ngIf="idSysTableRow!=null" />
-        
+        <input type="button" value="ערך חדש" (click)="addNewValue()" class="btn btn-circle1 btn-pink" *ngIf="idSysTableRow!=null" />
+
+    </div>
+    <div class="col-7" style="float: right; padding: 2%;" [ngClass]="{'bottom': showOverlap}">
+        <div class='row'>
+            <label class="lbl col-6">בחר טבלה לעריכה</label>
+            <div class="form-group col-6 ">
+                <select class="form-control" (change)="getValues()" [(ngModel)]="idSysTableRow">
+                    <option [ngValue]="undefined" disabled>בחר</option>
+                    <option *ngFor="let name of tableNames" value={{name.iSysTableId}}>{{name.nvShowText}}</option>
+                </select>
+            </div>
+
+        </div>
+
+
+        <!-- [(ngModel)]="Id" -->
+
     </div>
 </div>
 
 
-<div class=" col-sm-3 " style="float: right; padding: 2%;" [ngClass]="{'bottom': showOverlap}">
-    <div class="form-group col-sm-3 ">
-        <label> טבלה</label>
-        <select (change)="getValues()" [(ngModel)]="idSysTableRow">
-            <option [ngValue]="undefined" disabled>בחר</option>
-            <option *ngFor="let name of tableNames" value={{name.iSysTableId}}>{{name.nvShowText}}</option>
 
-        </select>
 
-    </div>
-
-    <!-- [(ngModel)]="Id" -->
-
-</div>
-
-<div class="row">
-    <div class="col-sm-8 myTable">
+<div class="row" >
+    <div class="col-sm-10 myTable" style="vertical-align: middle;">
 
         <!-- SysTableService -->
-        <app-vy-table #CodeTables [lstColumns]="lstColumns" [lstDataRows]="Values" (clickCell)="editSysTableRow($event)"></app-vy-table>
-    
+        <app-vy-table style="vertical-align: middle;" #CodeTables [lstColumns]="lstColumns" [lstDataRows]="Values" (clickCell)="editSysTableRow($event)"></app-vy-table>
+
     </div>
 </div>
 
 <div class="edit" *ngIf="divNewValue">
     <div class="row col-sm-12">
         <div class="col-sm-8"></div>
-        <button (click)="saveNeeValue()" class="btn-circle btn-save ">שמור</button>
+        <button (click)="saveNewValue()" class="btn-circle btn-save ">שמור</button>
         <button (click)="close()" class="btn-circle btn-close">סגור</button>
     </div>
 
@@ -57,7 +60,8 @@
     <form>
         <div _ngcontent-c10="" class="form-group col-sm-3 ">
             <label _ngcontent-c10="" class="pad-close pad-close">ערך:</label>
-            <input type="text" [(ngModel)]="row.nvValue" value={{row.nvValue}} class="form-control inp" [ngModelOptions]="{standalone: true}"   />
+            <input type="text" [(ngModel)]="row.nvValue" value={{row.nvValue}} class="form-control inp"
+                [ngModelOptions]="{standalone: true}" />
             />
         </div>
 

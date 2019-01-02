@@ -113,15 +113,15 @@ export class StudentConversationsComponent implements OnInit {
 
   deleteConversation(c: Conversation) {
 
-    //this.alert = confirm("האם אתה בטוח שברצונך למחוק משתמש זה?");
-    //if (this.alert == true) {
+   
+    
       this.appProxy.post('DeleteConversations', { iConversationId:this.con.iConversationId, iUserId: this.iUserId }).then(data => {
         this._parent.openMessagePopup('נמחק בהצלחה!');
          this.lstDataRows.splice(this.lstDataRows.indexOf(this.con), 1);
       this.vyTableComponent.refreshTable(this.lstDataRows);
        });
      
-    //}
+    
   }
 
 

@@ -84,7 +84,7 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
     // this.task = new Task();
 
-    // alert(this.daysMonthNameArr);
+   
     this.month = new Date().getMonth() + 1;
     this.year = new Date().getFullYear();
 
@@ -105,7 +105,7 @@ export class CalendarComponent implements OnInit {
         });
       });
 
-    //  alert(new Date().getDay());
+   
   }
   @Output()
   @Input()
@@ -188,7 +188,7 @@ export class CalendarComponent implements OnInit {
   taskJ;
 
   delTask(taskId: number, i: number, j: number) {
-    //alert('delete');
+   
     this.flagDelete = true;
     this.taskId = taskId;
     this.taskI = i;
@@ -202,7 +202,7 @@ export class CalendarComponent implements OnInit {
     this.appProxy.post("DeleteTask", { iTaskId: this.taskId, iPersonId: this.globalService.getUser().iPersonId }).then(
       data => {
         if (data == true) {
-          // alert("task remove");
+         
           // this.task=this.taskList.find(t => t.iTaskId == taskId);
 
           this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].splice(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].indexOf(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].find(t => t.id == this.taskId)), 1);

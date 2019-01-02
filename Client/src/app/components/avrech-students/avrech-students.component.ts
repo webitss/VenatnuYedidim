@@ -39,7 +39,20 @@ export class AvrechStudentsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy) {
 
   }
-
+  openAdd() {
+    this.appProxy.post('GetStudentList', { iPersonId: 0 }).then(
+      data => {
+        let allStudents = data
+        allStudents.forEach(
+          student => {
+            if (this.allStudents.findIndex(s => s.iPersonId == student.iPersonId) == -1) {
+              student['value'] = student.nvFirstName + ' ' + student.nvLastName + " " + student.nvIdentityCard;
+              this.listToSelect.push(student);
+            }
+            this.flag = true;
+          });
+      });
+  }
   cancelAdd(event) {
     this.flag = false;
   }
@@ -53,14 +66,35 @@ export class AvrechStudentsComponent implements OnInit {
   // t2int:T2Int=new T2Int();
 
   saveAdd() {
+    this.studentsToAdd = this.VyMultySelect.selectedList;
+    this.VyMultySelect.save();
     this.studentAndAvrechArr = new Array<T2Int>();
     this.studentsToAdd.forEach(element => {
       this.studentAndAvrechArr.push(new T2Int(this.id, element.iPersonId));
     });
-    this.VyMultySelect.save();
 
-    this.appProxy.post('AddStudentsToAvrech', { studentAndAvrechArr: this.studentAndAvrechArr, iUserId: this.userId }).then(data => { });
-    this.flag = false
+
+    this.appProxy.post('AddStudentsToAvrech', { studentAndAvrechArr: this.studentAndAvrechArr, iUserId: this.userId }).then(data => {
+      if (data) {
+
+        this.studentsToAdd.forEach(s => {
+          this.allStudents.push(s);
+        })
+        this.allStudents
+        this.allStudents.forEach(
+          st => {
+            st['delete'] = '<div class="delete"></div>';
+          });
+        this.vyTableComponent.refreshTable(this.allStudents);
+        this.flag = false
+
+
+
+        // "הוספת התלמידים התבצעה בהצלחה!"
+      }
+
+    });
+
   }
   item: string;
   ngOnInit() {
@@ -72,27 +106,15 @@ export class AvrechStudentsComponent implements OnInit {
       this.id = params['iPersonId'];
     })
     this.appProxy.post('GetAvrechStudents', { iPersonId: this.id }).then(data => {
-    this.allStudents = data;
+      this.allStudents = data;
       this.allStudents.forEach(
         st => {
           st['delete'] = '<div class="delete"></div>';
         });
-    }
-    );
 
-    this.appProxy.post('GetStudentList', { iPersonId: 0 }).then(
-      data => {
-
-        let allStudents = data
+    });
 
 
-        allStudents.forEach(
-          student => {
-            this.listToSelect.push({ value: student.nvFirstName + ' ' + student.nvLastName + " " + student.nvIdentityCard });
-          }
-        );
-      }
-    );
 
     this.lstColumns.push(new VyTableColumn('', 'delete', 'html', true));
     this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
@@ -120,11 +142,7 @@ export class AvrechStudentsComponent implements OnInit {
 
     this.appProxy.post('DeleteAvrechStudent', { iAvrechId: this.id, iStudentId: e.iPersonId }).then(data => {
       if (data == true) {
-        // for (let i = 0; i < this.allStudents.length; i++) {
-        //   if (this.allStudents[i].iPersonId == e.iPersonId)
-        //     this.allStudents.splice(i, 1);
-        //   break;
-        // }
+
         const i = this.allStudents.find(x => x.iStudentId == e.iStudentId);
         this.allStudents.splice(this.allStudents.indexOf(i), 1);
         this.vyTableComponent.refreshTable(this.allStudents);

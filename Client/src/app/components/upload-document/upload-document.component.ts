@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, Inject, forwardRef } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute } from '@angular/router';
 import { SysTableService } from '../../services/sys-table.service';
@@ -6,6 +6,7 @@ import { SysTableRow } from '../../classes/SysTableRow';
 // import { EventEmitter } from 'events';
 import { Document } from '../../classes/document';
 import { GlobalService } from '../../services/global.service';
+import { AppComponent } from '../app/app.component';
 
 
 @Component({
@@ -26,14 +27,14 @@ export class UploadDocumentComponent implements OnInit {
   sheetTypes: SysTableRow[];
   id: any;
   component: string;
-  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
+  constructor(@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent,private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
 
   ngOnInit() {  
     this.activatedRoute.url.subscribe(url => {
       this.component = url.toString();
       if (this.component == "student-documents") {
         this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => this.sheetTypes = data
-          , err => alert('error'));
+          , err => this._parent.openMessagePopup('error'));
       }
       this.save.name = this.document.nvDocumentName; 
       this.save.type=this.document.nvDocumentType;    
@@ -54,14 +55,14 @@ export class UploadDocumentComponent implements OnInit {
       if (this.component == "student-documents") {
         if(file.type.indexOf('image') == -1 && file.type.indexOf('pdf') == -1)
         {
-          alert("לא ניתן להעלות קבצים מסוג זה");
+          this._parent.openMessagePopup("לא ניתן להעלות קבצים מסוג זה");
           return;
         }
       }
       else{
         if(file.type.indexOf('image') == -1 && file.type.indexOf('pdf') == -1 && file.type.indexOf('audio') == -1 && file.type.indexOf('video') == -1)
         {
-          alert("לא ניתן להעלות קבצים מסוג זה");
+          this._parent.openMessagePopup("לא ניתן להעלות קבצים מסוג זה");
           return;
         }
       }
@@ -91,7 +92,7 @@ export class UploadDocumentComponent implements OnInit {
     this.appProxy.post('SetDocument', { document: this.document, nvBase64File: this.save.document, iUserId: this.globalService.getUser()['iUserId'] }).then(
       data => {
         if (data == 0){
-          alert("error in save data");
+          this._parent.openMessagePopup("error in save data");
           this.closeAndNoSave();
         }
         else {this.document.iDocumentId = data; this.closeDialog(); }
