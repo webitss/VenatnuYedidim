@@ -74,7 +74,7 @@ namespace Service.Entities
 		//	}
 		//}
 
-		public static bool DeletePresenceAvrech(int iPresenceAvrech,int iLastModifyUserId)
+		public static bool DeletePresenceAvrech(int iPresenceAvrech, int iLastModifyUserId)
         {
             try
             {

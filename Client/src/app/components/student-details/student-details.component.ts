@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, Inject, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, Output, Inject, forwardRef, ViewChild } from '@angular/core';
 import { Student } from '../../classes/student';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { GlobalService } from '../../services/global.service';
 import { Yeshiva } from '../../classes/Yeshiva';
 import { AppComponent } from '../app/app.component';
 import { LetterEbrew } from '../../classes/LetterEbrew';
-
+import { NgForm } from '../../../../node_modules/@angular/forms';
 
 @Component({
   selector: 'app-student-details',
@@ -22,7 +22,7 @@ export class StudentDetailsComponent implements OnInit {
   constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router,
     private globalService: GlobalService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
-
+  @ViewChild(NgForm) form;
   @Input() student: Student
   statusType: any = { boger: 160, student: 159 };
   paramRout: any;

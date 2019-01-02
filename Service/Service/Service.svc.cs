@@ -472,9 +472,9 @@ namespace Service
             return PresenceAvrech.SetPresence(presenceAvrech, iUserId);
         }
 
-        public bool DeletePresenceAvrech(int ipresenceAvrech, int iLastModifyUserId)
+        public bool DeletePresenceAvrech(int iPresenceAvrech, int iLastModifyUserId)
         {
-            return PresenceAvrech.DeletePresenceAvrech(ipresenceAvrech, iLastModifyUserId);
+            return PresenceAvrech.DeletePresenceAvrech(iPresenceAvrech, iLastModifyUserId);
         }
 
 

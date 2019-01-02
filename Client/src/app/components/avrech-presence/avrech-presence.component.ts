@@ -28,7 +28,7 @@ export class AvrechPresenceComponent implements OnInit {
   flagDelete = false;
   header = 'מחיקת פגישה';
   message = '';
-  delePres: PresenceAvrech;
+  deletPresence: PresenceAvrech;
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent, private sysTableService: SysTableService,private globalService: GlobalService) { }
 
   public lstColumns = [
@@ -77,19 +77,29 @@ export class AvrechPresenceComponent implements OnInit {
 
   }
 
-  deletePres(p: PresenceAvrech) {
-    this.appProxy.post('DeletePresenceAvrech', { iPresenceAvrech: p.iPresenceAvrech, iLastModifyUserId: this.globalService.getUser()['iUserId'] }).then(data => {
-      this._parent.openMessagePopup('נמחק בהצלחה!');
-      this.presences.splice(this.presences.indexOf(p), 1);
-      this.cc.refreshTable(this.presences);
-    });
-  }
+  
 
 
   delPres(p: PresenceAvrech) {
-    this.delePres = p;
+    this.deletPresence = p;
     this.message = 'האם אתה בטוח שברצונך למחוק פגישה זו?';
     this.flagDelete = true;
+  }
+
+  deletePres(p: PresenceAvrech) {
+    this.appProxy.post('DeletePresenceAvrech', { iPresenceAvrech: p.iPresenceAvrech, iLastModifyUserId: this.globalService.getUser()['iUserId'] }).then(data => {
+      if(data)
+      {
+        this._parent.openMessagePopup('נמחק בהצלחה!');
+        this.lstDataRows.splice(this.presences.indexOf(p), 1);
+        this.cc.refreshTable(this.lstDataRows);
+      }
+      else
+      {
+        this._parent.openMessagePopup('ארעה שגיאה במחיקה!');
+      }
+      
+    });
   }
 
   editPresence(p: PresenceAvrech) {
@@ -115,10 +125,11 @@ export class AvrechPresenceComponent implements OnInit {
         this.lstDataRows.push({
           iPersonId: event.iPersonId,
           iPresenceAvrech: event.iPresenceAvrech,
-          ['nvDate']: new Date().toLocaleDateString(),
+          ['nvDate']:event.dtDatePresence?event.dtDatePresence: new Date().toLocaleDateString(),
           // dtDatePresence:this.presence.dtDatePresence,
           iHoursSum: event.iHoursSum,
           edit: '<div class="edit"></div>',
+          delete: '<div class="delete"></div>',
         });
       }
       else {

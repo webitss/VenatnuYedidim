@@ -15,7 +15,14 @@
     background-color: rgb(207, 37, 94);
     color: white;
 }
+.disabled {
+    cursor: not-allowed;
+}
 
+.disabled:hover {
+    background-color: #D9D9D9;
+    color: rgb(207, 37, 94);
+}
 /* .nav-link{
     color: rgb(207, 37, 94) !important;
 } */

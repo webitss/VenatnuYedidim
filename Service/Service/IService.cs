@@ -812,7 +812,7 @@ namespace Service
 		BodyStyle = WebMessageBodyStyle.WrappedRequest,
 		ResponseFormat = WebMessageFormat.Json,
 		RequestFormat = WebMessageFormat.Json)]
-		bool DeletePresenceAvrech(int ipresenceAvrech, int iLastModifyUserId);
+		bool DeletePresenceAvrech(int iPresenceAvrech, int iLastModifyUserId);
 
 
 		[OperationContract]

@@ -38,8 +38,9 @@
 
     </nav>
     <div class="btn-area">
-      <button *ngIf="currentComponent.constructor.name.indexOf('StudentDetails') != -1"  class="btn-circle btn-save" (click)="save()">שמור </button>
-      <button class="btn-circle btn-close" (click)="close()">סגור</button>
+      <button type='button' [disabled]="!isDisabled" *ngIf="currentComponent.constructor.name.indexOf('StudentDetails') != -1"  
+      class="btn-circle btn-save" (click)="save()" [ngClass]="{'disabled': !isDisabled }">שמור </button>
+      <button type='button' class="btn-circle btn-close" (click)="close()">סגור</button>
     </div>
   </div>
 

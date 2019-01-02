@@ -8,5 +8,5 @@
   <app-open-presence [presence]="presence" (closeMe)="closePresenceDialog($event,true)" (closeMeNoSave)="closePresenceDialog($event,false)"></app-open-presence>
 </div> 
 
-<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; deletePres(delPres);"></app-vy-pop-up>
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; deletePres(deletPresence);"></app-vy-pop-up>
 
