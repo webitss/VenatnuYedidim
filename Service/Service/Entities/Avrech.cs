@@ -92,7 +92,9 @@ namespace Service.Entities
 					List<SqlParameter> parameters = ObjectGenerator<Avrech>.GetSqlParametersFromObject(avrech);
 					parameters.Remove(parameters.Find(x => x.ParameterName == "iPersonId"));
 					parameters.Add(new SqlParameter("iUserId", iUserId));
-					var id=SqlDataAccess.ExecuteDatasetSP("TPerson_INS", parameters).Tables[0].Rows[0].ItemArray[0];
+                    parameters.Add(new SqlParameter("iPersonId", null));
+
+                    var id =SqlDataAccess.ExecuteDatasetSP("TPerson_INS", parameters).Tables[0].Rows[0].ItemArray[0];
 
 
 					List<SqlParameter> param = new List<SqlParameter>();
