@@ -29,7 +29,7 @@ export class SettingsYeshivotComponent implements OnInit {
   public flag;
 
   @ViewChild('yeshivot') yeshivot: any;
-  @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
+  @ViewChild("AppVyTable") vyTableComponent: VyTableComponent;
 
   // @Output()
   // public closeYeshiva = new EventEmitter();
@@ -157,7 +157,7 @@ export class SettingsYeshivotComponent implements OnInit {
   }
 
   downloadExcel() {
-    this.yeshivot.downloadExcel();
+    this.vyTableComponent.downloadExcel();
   }
 }
 

@@ -15,7 +15,7 @@
       <div class="form-group col-sm-5">
         <label for='yeshiva-name'>שם מוסד:</label>
         <input class=inputYeshiva type="text" name='yeshiva-name' class="form-control" [(ngModel)]="yeshiva.nvYeshivaName" required
-          #name="ngModel" minlength="3" maxlength="25" pattern='^[a-zA-Z]+$'/>
+          #name="ngModel" minlength="3" maxlength="25" />
         <div *ngIf="name.invalid && (name.dirty || name.touched)">
           <div *ngIf="(name.errors.required)" class="text-danger text-right">
             <strong>! </strong>שדה נדרש</div>

@@ -12,7 +12,7 @@
 
     <div class="form-group col-sm-3">
       <label for='event-place'>מקום הארוע</label>
-      <input type="text" name='event-place' class="form-control" [(ngModel)]="e.nvPlace" #place="ngModel" pattern="[A-Za-z]" title="לא ניתן להזין ספרות"
+      <input type="text" id='place' name='event-place' class="form-control" [(ngModel)]="e.nvPlace" #place="ngModel" title="לא ניתן להזין ספרות"
         required/>
       <div *ngIf="place.invalid && (place.dirty || place.touched)">
         <div *ngIf="(place.errors.required)" class="text-danger text-right">

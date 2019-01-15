@@ -45,7 +45,7 @@ export class SettingYeshivaComponent implements OnInit {
   formValid = false;
 
   isDisabled(): boolean {
-    if (this.isDisabled)
+    //if (this.isDisabled)
       return this.form.valid;
   }
 
@@ -85,7 +85,7 @@ export class SettingYeshivaComponent implements OnInit {
             if (this.yeshiva.iRoleType == null)
               this.isDisabled();
             else {
-              this._parent.openMessagePopup("save!");
+              this._parent.openMessagePopup("המוסד התעדכן בהצלחה");
               this.closeYeshiva.emit(null);
               this.add.emit(this.yeshiva);
             }
@@ -93,7 +93,7 @@ export class SettingYeshivaComponent implements OnInit {
         )
       ) { }
       else {
-        this._parent.openMessagePopup("faild in save");
+        this._parent.openMessagePopup("שגיאה בשמירת המוסד");
       }
     }
     else {
@@ -101,7 +101,7 @@ export class SettingYeshivaComponent implements OnInit {
         .then(
           data => {
             //this.yeshiva = data;
-            this._parent.openMessagePopup("save!");
+            this._parent.openMessagePopup("המוסד התעדכן בהצלחה!");
             this.closeYeshiva.emit(null);
 
              this.update.emit(this.yeshiva);
