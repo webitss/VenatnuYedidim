@@ -95,9 +95,6 @@ namespace Service.Entities
 
                 return students;
             }
-
-
-
             catch (Exception ex)
             {
                 Log.LogError("GetBugrimList / TStudentGetBugrimByUser_SLCT", "ex" + ex);
@@ -116,14 +113,8 @@ namespace Service.Entities
                     studentsId.Add(int.Parse(row["iStudentId"].ToString()));
                 }
                 return studentsId;
-
-
-
                 
 			}
-
-
-
 			catch (Exception ex)
 			{
 				Log.LogError("GetStudentList / TAvrechStudents_SLCT", "ex" + ex);
@@ -135,7 +126,6 @@ namespace Service.Entities
 			try
 			{
                 Dictionary<int, string> studentsId = new Dictionary<int, string>();
-
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TYeshivot_Last_SLCT").Tables[0].Rows;
                 foreach (DataRow r in drc)
                 {
@@ -160,9 +150,6 @@ namespace Service.Entities
                 List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
                 return students;
             }
-
-
-
             catch (Exception ex)
             {
                 Log.LogError("GetGraduatesList / TStudentGetGraduateByUser_SLCT", "ex" + ex);
@@ -178,8 +165,6 @@ namespace Service.Entities
 
                 return student;
             }
-
-
             catch (Exception ex)
             {
                 Log.LogError("GetStudentList / TStudentGetStudentbyId_SLCT", "ex" + ex);
@@ -188,11 +173,7 @@ namespace Service.Entities
         }
 
 
-
-
-
-
-        public static bool AddStudent(Student student, string base64Image, int iUserId)
+       public static bool AddStudent(Student student, string base64Image, int iUserId)
         {
             try
 			{
@@ -285,7 +266,7 @@ namespace Service.Entities
             catch (Exception ex)
             {
 
-                Log.LogError("TStudentUnionCards_UPD / TStudentUnionCards_UPD", "ex" + ex);
+                Log.LogError("UnionCards / TStudentUnionCards_UPD", "ex" + ex);
                 return false;
             }
         }
@@ -305,7 +286,7 @@ namespace Service.Entities
 
 			catch (Exception ex)
 			{
-				Log.LogError("GetStudentList / TStudentGetStudentByUser_SLCT", "ex" + ex);
+				Log.LogError("GetYeshivotOfStudent / TYeshivotGetYeshivotOfStudent_SLCT", "ex" + ex);
 				return null;
 			}
 		}

@@ -92,7 +92,9 @@ namespace Service.Entities
 					List<SqlParameter> parameters = ObjectGenerator<Avrech>.GetSqlParametersFromObject(avrech);
 					parameters.Remove(parameters.Find(x => x.ParameterName == "iPersonId"));
 					parameters.Add(new SqlParameter("iUserId", iUserId));
-					var id=SqlDataAccess.ExecuteDatasetSP("TPerson_INS", parameters).Tables[0].Rows[0].ItemArray[0];
+                    parameters.Add(new SqlParameter("iPersonId", null));
+
+                    var id =SqlDataAccess.ExecuteDatasetSP("TPerson_INS", parameters).Tables[0].Rows[0].ItemArray[0];
 
 
 					List<SqlParameter> param = new List<SqlParameter>();
@@ -125,9 +127,11 @@ namespace Service.Entities
 				SqlDataAccess.ExecuteDatasetSP("TAvrech_DEL", new SqlParameter("iPersonId", iPersonId));
 				return true;
 			}
-			catch
+			catch(Exception ex)
 			{
-				return false;
+                Log.LogError("DeleteAvrech/TAvrech_DEL ", "ex" + ex);
+               
+                return false;
 			}
 		}
 
@@ -147,7 +151,7 @@ namespace Service.Entities
 			}
 			catch (Exception ex)
 			{
-				Log.LogError("UpdateAvrech / TPerson_UPD", "ex" + ex);
+				Log.LogError("UpdateUserNameAndPassword / TUser_userNameAndPassword_UPD", "ex" + ex);
 				return false;
 			}
 		}
@@ -158,35 +162,14 @@ namespace Service.Entities
         public static bool MailToAvrechim(string[] mailList, string subject, string body)
         {
 
-            bool flag = false;
+            bool flag = true;
             foreach (var mail in mailList)
             {
-                SendMessagesHandler.SendEmailOrFax(ConfigSettings.ReadSetting("Email"), mail, subject, body, null);
-
-
-
-                //SmtpClient client = new SmtpClient();
-                //client.Port = 587;
-                //client.Host = "smtp.gmail.com";
-                //client.EnableSsl = true;
-                //client.Timeout = 10000;
-                //client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                //client.UseDefaultCredentials = false;
-                //client.Credentials = new System.Net.NetworkCredential("", "");
-                //MailMessage mm = new MailMessage("VenatnuYedidimSystem@gmail.com", mail);
-                //mm.Subject = "ונתנו ידידים";
-                //mm.Body = "אברך";
-                //System.Net.Mail.Attachment attachment;
-                //// attachment = new System.Net.Mail.Attachment("");
-                ////  mm.Attachments.Add(attachment);
-                //mm.BodyEncoding = UTF8Encoding.UTF8;
-                //mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-
-                //client.Send(mm);
+                flag= (flag==true)? SendMessagesHandler.SendEmailOrFax(ConfigSettings.ReadSetting("Email"), mail, subject, body, null):false;
+                
             }
 
-           
-            return true;
+           return flag;
         }
         public static List<Avrech> GetAvrechimByStudentId(int iPersonId)
 

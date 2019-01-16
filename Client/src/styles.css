@@ -92,8 +92,9 @@ outline: none;
 .form-group>label
 {
     float: right;
-    color: #d8d8d8;
+    color: #c87895;
     font-size: 12px;
+    font-weight: bold;
 }
 
 

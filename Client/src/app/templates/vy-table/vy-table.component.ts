@@ -2,8 +2,8 @@ import { Component, OnInit, Output, Input, EventEmitter, OnChanges } from '@angu
 import { VyTableColumn } from './vy-table.classes';
 import { VyTableOrderByPipe, OrderByPipe } from './vy-table-order-by.pipe';
 import { AppProxy } from '../../services/app.proxy';
-
-
+import * as XLSX from 'xlsx';
+const EXCEL_EXTENSION = '.xlsx';
 @Component({
   selector: 'app-vy-table',
   templateUrl: './vy-table.component.html',
@@ -156,7 +156,12 @@ export class VyTableComponent implements OnInit {
     debugger;
     window.location.href = uri + base64(format(template, ctx))
   }
-  
+ 
+ public downloadExcel1(excelFileName: string): void {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.lstDataRows);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    XLSX.writeFile(workbook, excelFileName + EXCEL_EXTENSION);
+}
   public current_date = new Date();
   downloadPdf(componentName: string, type: string) {
     debugger;
@@ -204,4 +209,6 @@ export class VyTableComponent implements OnInit {
     this.lstDataRows = newList;
     this.moveToPage(this.currentPage>0?this.currentPage:0, true);
   }
+
+
 }

@@ -124,8 +124,7 @@
                 <div class="form-group col-sm-3">
                     <label for="dateAdd"> תאריך הצטרפות :</label>
                     <input type="date" class="form-control" id="dateAdd" name="dateAdd" [ngModel]="student.dtAddStudentDate | date:'yyyy-MM-dd' "
-                        (ngModelChange)="e.dtAddStudentDate = $event" (change)="change=true" [ngModelOptions]="{standalone: true}"
-                        style='width: 210px'>
+                        (ngModelChange)="e.dtAddStudentDate = $event" (change)="change=true" [ngModelOptions]="{standalone: true}" style='width: 210px'>
                 </div>
             </div>
             <div class="row">
@@ -183,7 +182,7 @@
             <!-- ngui-datetime-picker date-only="true" close-on-select="false" -->
             <!-- | date:'yyyy-MM-dd' -->
 
-            
+
             <div class="form-group  col-sm-3">
                 <label for="street"> כתובת :</label>
                 <input type="text" class="form-control" id="street" name="street" (change)="change=true" [(ngModel)]="student.nvAddress"
