@@ -297,7 +297,7 @@ namespace Service
             return Yeshivot.GetAllYeshivot();
         }
 
-        public bool AddYeshiva(Yeshivot yeshiva)
+        public int AddYeshiva(Yeshivot yeshiva)
         {
             return Yeshivot.AddYeshiva(yeshiva);
         }

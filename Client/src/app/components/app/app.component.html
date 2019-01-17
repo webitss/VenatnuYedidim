@@ -20,7 +20,7 @@
     </div>
     <!-- <div class="c"> -->
     <ul class="navbar-nav col-sm-8" *ngIf="currentComponent">
-      <li (click)="isGraduate=0" [ngClass]="{'appSelect': currentComponent.constructor.name.indexOf('Student') != -1  &&router.url != '/graduates' && isGraduate==0}"
+      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('students') != -1  && router.url != '/graduates' && isGraduate==0}"
         class="nav-item" routerLink='/students'>
 
         <span>תלמידים</span>
@@ -30,7 +30,7 @@
 
         <span>אברכים</span>
       </li>
-      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('events') != -1}" class="nav-item"
+      <li (click)="isGraduate=0" [ngClass]="{'appSelect': (router.url.indexOf('events') != -1 && router.url.indexOf('students') == -1) &&  router.url.indexOf('graduates') == -1}" class="nav-item"
         routerLink='/events'>
 
         <span>ארועים</span>

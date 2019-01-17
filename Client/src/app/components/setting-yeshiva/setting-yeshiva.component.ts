@@ -76,41 +76,49 @@ export class SettingYeshivaComponent implements OnInit {
     //   this.yeshiva = Object.assign({}, this.yeshiva);
     // })
 }
-
+f()
+{
+  console.log(this.yeshiva);
+}
   save() {
     if (this.iYeshivaId == 0) {
-      if (this.appProxy.post('AddYeshiva', { yeshiva: this.yeshiva })
+      this.appProxy.post('AddYeshiva', { yeshiva: this.yeshiva })
         .then(
           data => {
-            if (this.yeshiva.iRoleType == null)
-              this.isDisabled();
-            else {
-              this._parent.openMessagePopup("השמירה התבצעה בהצלחה");
-              this.closeYeshiva.emit(null);
-              this.add.emit(this.yeshiva);
+            if(data>0)
+            {
+              
+                this._parent.openMessagePopup("השמירה התבצעה בהצלחה");
+                this.yeshiva.iYeshivaId=data;
+                this.closeYeshiva.emit(null);
+                this.add.emit(this.yeshiva);
             }
-          }
-        )
-      ) { }
-      else {
-        this._parent.openMessagePopup("השמירה נכשלה!");
-      }
+            else {
+              this._parent.openMessagePopup("השמירה נכשלה!");
+            }
+          });
+      
+     
     }
     else {
-      if (this.appProxy.post('EditYeshiva', { yeshiva: this.yeshiva, iYeshivaId: this.yeshiva.iYeshivaId })
+      this.appProxy.post('EditYeshiva', { yeshiva: this.yeshiva, iYeshivaId: this.yeshiva.iYeshivaId })
         .then(
           data => {
             //this.yeshiva = data;
-            this._parent.openMessagePopup("השמירה התבצעה בהצלחה!");
-            this.closeYeshiva.emit(null);
-
-             this.update.emit(this.yeshiva);
+            if(data)
+            {
+              this._parent.openMessagePopup("השמירה התבצעה בהצלחה!");
+              this.closeYeshiva.emit(null);
+  
+               this.update.emit(this.yeshiva);
+            }
+            else
+            this._parent.openMessagePopup("השמירה נכשלה!");
 
           }
         )
-      ) { }
-      else
-      this._parent.openMessagePopup("faild in save");
+       
+     
     }
   }
 

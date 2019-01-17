@@ -52,18 +52,18 @@ namespace Service.Entities
 			}
 		}
 
-		public static bool AddYeshiva(Yeshivot yeshiva)
+		public static int AddYeshiva(Yeshivot yeshiva)
 		{
 			try
 			{
 				List<SqlParameter> parameters = ObjectGenerator<Yeshivot>.GetSqlParametersFromObject(yeshiva);
 				DataRow dr = SqlDataAccess.ExecuteDatasetSP("TYeshivot_INS", parameters).Tables[0].Rows[0];
-				return true;
+				return int.Parse(dr[0].ToString());
 			}
 			catch (Exception ex)
 			{
 				Log.LogError("AddYeshiva / TYeshivot_INS", "ex" + ex + ", yeshiva: " + JsonConvert.SerializeObject(yeshiva));
-				return false;
+				return 0;
 			}
 		}
 

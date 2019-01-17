@@ -435,7 +435,7 @@ namespace Service
 		BodyStyle = WebMessageBodyStyle.WrappedRequest,
 		ResponseFormat = WebMessageFormat.Json,
 		RequestFormat = WebMessageFormat.Json)]
-		bool AddYeshiva(Yeshivot yeshiva);
+        int AddYeshiva(Yeshivot yeshiva);
 
 		[OperationContract]
 		[WebInvoke(

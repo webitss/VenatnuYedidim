@@ -116,13 +116,11 @@
 
       <div class="form-group col-sm-5">
         <label for='yeshiva-mobile'>מייל:</label>
-        <input class=inputYeshiva type="email" name='yeshiva-mobile' class="form-control" [(ngModel)]="yeshiva.nvEmail" required
-          #mobile="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
-        <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
-          <div *ngIf="(mobile.errors.required)" class="text-danger text-right">
-            <strong>! </strong>שדה נדרש</div>
+        <input class=inputYeshiva type="email" name='yeshiva-mobile' class="form-control" [(ngModel)]="yeshiva.nvEmail" #mobile="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
+        <div *ngIf="mobile.invalid">
+          
         </div>
-        <div *ngIf="mobile.errors &&(mobile.touched || mobile.dirty)" class="text-danger">
+        <div *ngIf="mobile.errors" class="text-danger">
           <div [hidden]="!mobile.errors?.pattern">
             מייל לא חוקי!
           </div>
@@ -132,9 +130,9 @@
 
     <div class="form-group col-sm-5">
       <label for='yeshiva-roleType'>תפקיד:</label>
-      <select id='roleType' name='yeshiva-roleType' class="form-control" [(ngModel)]="yeshiva.iRoleType" [ngModelOptions]="{standalone: true}"
-        required #roleType="ngModel">
-        <option [ngValue]="undefined" disabled>בחר</option>
+      <select id='roleType' name='yeshiva-roleType' class="form-control" [(ngModel)]="yeshiva.iRoleType" 
+        required #roleType="ngModel" (change)='f()'>
+        <option [ngValue]=null disabled>בחר</option>
         <option *ngFor='let y of sysTableList' [value]="y.iSysTableRowId">
           {{y.nvValue}}
         </option>
