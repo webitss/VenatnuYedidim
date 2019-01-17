@@ -3,6 +3,7 @@ import { AppProxy } from './app.proxy';
 import { promise } from 'protractor';
 import { SysTables } from '../classes/SysTables';
 import { SysTableRow } from '../classes/SysTableRow';
+import { GlobalService } from './global.service';
 
 @Injectable()
 export class SysTableService {
@@ -56,7 +57,7 @@ export class SysTableService {
 
   public static permissionType = { Management: 5 }
 
-  constructor(private appProxy: AppProxy) { }
+  constructor(private appProxy: AppProxy,private globalService:GlobalService) { }
   ////#region מקבל ID של טבלה מחזיר ערכים מאותה טבלה 
   getValues(iSysTableId: number, col?:any): Promise<Array<SysTableRow>> {
 
@@ -100,9 +101,9 @@ export class SysTableService {
   //#endregion
   editValue(row: SysTableRow): any {
 
-    this.appProxy.post("UpdateValue", { sysTableRow: row }).
+   return this.appProxy.post("UpdateValue", { sysTableRow: row,iUserId:this.globalService.getUser()["iUserId"] }).
       then(l => {
-        if (l === "true") {
+        if (l ) {
           return true;
         }
         return false;
@@ -112,7 +113,7 @@ export class SysTableService {
   }
 
   addValue(row: SysTableRow): Promise<boolean> {
-    return this.appProxy.post("AddValue", { sysTableRow: row }).
+    return this.appProxy.post("AddValue", { sysTableRow: row,iUserId:this.globalService.getUser()["iUserId"] }).
       then(l => {
         if (l) {
 

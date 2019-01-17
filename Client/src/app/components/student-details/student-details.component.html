@@ -8,7 +8,7 @@
         </div>
         <div class="upload">
             <label for="LoadDocument" class="browse" class="chooseFile">
-                <img src="../../../assets/icons/picture.png">
+                <img src="./assets/icons/picture.png">
             </label>
             <input type="file" accept="image/*" (change)="loadDocument($event,save)" name="LoadDocument" id="LoadDocument" />
         </div>
@@ -56,7 +56,7 @@
                           </div> -->
             <div class="row">
                 <div class="form-group col-sm-4">
-                    <label for="lastName">שם משפחה:</label>
+                    <label for="lastName">שם משפחה : *</label>
                     <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="student.nvLastName" required #lastName="ngModel"
                         (keypress)="keyPress($event)" (change)="change=true" >
                     <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
@@ -65,7 +65,7 @@
                     </div>
                 </div> 
                 <div class="form-group col-sm-4">
-                        <label for="lastName">שם פרטי:</label>
+                        <label for="lastName">שם פרטי : *</label>
                         <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="student.nvFirstName" required #firstName="ngModel"
                             (keypress)="keyPress($event)" (change)="change=true" >
                         <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
@@ -334,6 +334,7 @@
             </div>
 
         </div>
+        <label class='required-fields'>* שדות חובה</label>
     </form>
 
     <div class="col-sm-12">

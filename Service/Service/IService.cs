@@ -402,7 +402,7 @@ namespace Service
 		BodyStyle = WebMessageBodyStyle.WrappedRequest,
 		ResponseFormat = WebMessageFormat.Json,
 		RequestFormat = WebMessageFormat.Json)]
-		bool UpdateValue(SysTableRow sysTableRow);
+		bool UpdateValue(SysTableRow sysTableRow, int iUserId);
 
 		[OperationContract]
 		[WebInvoke(
@@ -411,7 +411,7 @@ namespace Service
 		BodyStyle = WebMessageBodyStyle.WrappedRequest,
 		ResponseFormat = WebMessageFormat.Json,
 		RequestFormat = WebMessageFormat.Json)]
-		bool AddValue(SysTableRow sysTableRow);
+		bool AddValue(SysTableRow sysTableRow,int iUserId);
 		#endregion
 
 

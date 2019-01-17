@@ -79,8 +79,6 @@ export class SettingsYeshivotComponent implements OnInit {
     y['edit'] = '<div class="edit"></div>';
     y['delete'] = '<div class="delete"></div>';
     y['nvRoleType'] = this.sysTableList.filter(x => x.iSysTableRowId == y.iRoleType)?this.sysTableList.filter(x => x.iSysTableRowId == y.iRoleType)[0]?this.sysTableList.filter(x => x.iSysTableRowId == y.iRoleType)[0].nvValue:'':'';
-     y['edit'] = '<div class="edit"></div>';
-    y['delete'] = '<div class="delete"></div>';
     //this.yeshiva = y;
   }
 

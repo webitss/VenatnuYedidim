@@ -42,67 +42,58 @@ export class TaskComponent implements OnInit {
   isNew: boolean = false;
   ngOnInit() {
     this.currentTask = Object.assign({}, this.task);
-    if (this.task == undefined) {
+    if (!this.task ) {
       this.task = new Task();
       this.isNew = true;
     }
-    this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
-      this.taskTypeList = data;
-
-
-      this.currentTask['dtDate'] = this.task.dtTaskdatetime;//.getTime();
-
-      // this.meeting['dtHour'] = new Date((this.meeting.dtMeetingDate).getHours()) + ':'+new Date((this.meeting.dtMeetingDate).getMinutes());
-     
-    
-      // if ((this.task.dtTaskdatetime).getMinutes() < 10)
-      //   this.minutes = '0' + (this.task.dtTaskdatetime).getMinutes().toString();
-      // else
-      //   this.minutes = (this.task.dtTaskdatetime).getMinutes().toString();
-
-      // if ((this.task.dtTaskdatetime).getHours() < 10)
-      //   this.hours = '0' + (this.task.dtTaskdatetime).getHours().toString();
-      // else
-      //   this.hours = (this.task.dtTaskdatetime).getHours().toString();
-
-      this.currentTask['dtHour'] =moment(this.task.dtTaskdatetime).format('HH:mm'); //this.hours + ':' + this.minutes;
-      this.cdRef.detectChanges();
-    });
+   
 
     this.route.parent.params.subscribe(params => {
       this.personId = +params['iPersonId'];
-    });
-    if (this.isNew == true) {
-      if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
-      {
-        this.task.nvComments = " עם התלמיד: "
-        this.task.iPersonId = this.personId;//מי שלחצו עליו
-      }
-      else {
-        // alert(this.personId);
-        this.appProxy.post('GetStudentById', { iUserId: this.personId }).then(data => {
-          if (data) {
-            this.student = data;
-            if (this.router.url == "/students/student/" + this.personId + "/student-meetings")//תלמידים ->פגישות
-            {
-              this.task.nvComments = " פגישה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
-              this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
 
-            }
-            else
-              if (this.router.url == "/students/student/" + this.personId + "/student-conversations")//תלמידים ->שיחות
-              {
-                this.task.nvComments = " שיחה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
-                this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
-              }
+      this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
+        this.taskTypeList = data;
+        this.currentTask['dtDate'] = this.task.dtTaskdatetime;
+        this.currentTask['dtHour'] =moment(this.task.dtTaskdatetime).format('HH:mm'); //this.hours + ':' + this.minutes;
+        
+       
 
+        if (this.isNew == true) {
+          this.task.iTaskType =this.taskTypeList[0].iSysTableRowId;
+          if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
+          {
+            this.task.nvComments = " עם התלמיד: "
+            this.task.iPersonId = this.personId;//מי שלחצו עליו
           }
-          else
-            this._parent.openMessagePopup("שגיאה בשליפת הנתונים");
-
-        });
-      }
-    }
+          else {
+            // alert(this.personId);
+            this.appProxy.post('GetStudentById', { iUserId: this.personId }).then(data => {
+              if (data) {
+                this.student = data;
+                if (this.router.url == "/students/student/" + this.personId + "/student-meetings")//תלמידים ->פגישות
+                {
+                  this.task.nvComments = " פגישה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
+                  this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
+    
+                }
+                else
+                  if (this.router.url == "/students/student/" + this.personId + "/student-conversations")//תלמידים ->שיחות
+                  {
+                    this.task.nvComments = " שיחה עם התלמיד: " + this.student.nvFirstName + " " + this.student.nvLastName;//מי שלחצו עליו
+                    this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
+                  }
+    
+              }
+              else
+                this._parent.openMessagePopup("שגיאה בשליפת הנתונים");
+    
+            });
+          }
+        }
+        this.cdRef.detectChanges();
+      });
+    });
+    
 
   }
   @Output() close: EventEmitter<any> = new EventEmitter<any>();

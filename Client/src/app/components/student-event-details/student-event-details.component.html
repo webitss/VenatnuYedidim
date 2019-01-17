@@ -1,5 +1,5 @@
 <div id="overlay"></div>
-<form class="form" #form="ngForm">
+<form *ngIf='event' class="form" #form="ngForm">
   <div class="row">
     <div class="col-sm-8"></div>
     <div class="col-sm-4">
@@ -20,7 +20,7 @@
       </div>
       <div class="row">
         <div class="form-group col-sm-3">
-          <label for="event-name">שם אירוע:</label>
+          <label for="event-name">שם אירוע: *</label>
           <select [(ngModel)]="event.nvName" class="form-control"  name="event-name" #name="ngModel" required  (ngModelChange)="chooseEvent($event)" [value]="aa" [disabled]="from != 1">
             <option [ngValue]=null >בחר</option>
             <!-- selected -->
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="form-group col-sm-3">
-          <label for="event-date">תאריך:</label>
+          <label for="event-date">תאריך: *</label>
           <input type="date" name="event-date" class="form-control" disabled required #date="ngModel" [ngModel]="event.dtEventDate | date:'yyyy-MM-dd'"
             (ngModelChange)="e.dtEventDate = $event" />
           <div *ngIf="date.invalid && (date.dirty || date.touched)">
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="form-group col-sm-3">
-          <label for="event-place">מקום:</label>
+          <label for="event-place">מקום: *</label>
           <input type="text" name="event-place" class="form-control" disabled required #place="ngModel" [(ngModel)]="event.nvPlace"
           />
           <div *ngIf="place.invalid && (place.dirty || place.touched)">
@@ -47,10 +47,10 @@
           </div>
         </div>
         <div class="form-group col-sm-3">
-          <label for="status">סטטוס:</label>
-          <select [(ngModel)]="event['iArrivalStatusType']" class="form-control" #status="ngModel" name="status" required>
-            <option [ngValue]=null>בחר</option>
-            <option [value]="item.nvValue" *ngFor="let item of lst" [selected]="item.nvValue==event['iArrivalStatusType']">{{item.nvValue}}</option>
+          <label for="status">סטטוס: *</label>
+          <select [(ngModel)]="iArrivalStatusType" class="form-control" #status="ngModel" name="status" required>
+            <!-- <option [ngValue]=null>בחר</option> -->
+            <option [value]="item.iSysTableRowId" *ngFor="let item of lst" >{{item.nvValue}}</option>
           </select>
           <div *ngIf="status.invalid && (status.dirty || status.touched)">
             <div class="text-danger" *ngIf="status.errors && (status.errors.required)">שדה זה חובה!</div>

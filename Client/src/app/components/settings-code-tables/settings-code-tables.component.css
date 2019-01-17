@@ -22,9 +22,9 @@ padding: 2%;
     right: 35%;
     background:white;
     border: 2px;
-    width: 30%;
+    width:  max-content;
     border: solid rgb(207, 37, 94);
-    height: 30%;
+    height: max-content;
 }
 .btn{
 
@@ -39,7 +39,7 @@ padding: 2%;
 }
 
 .bottom {
-    position: absolute;
+    /* position: absolute; */
    
    
    
@@ -87,7 +87,7 @@ h3{
 }
 .lbl{
     float: right;
-    color: #d8d8d8;
+    color: rgb(207, 37, 94);
     font-size: 15px;
 }
 .form-group{

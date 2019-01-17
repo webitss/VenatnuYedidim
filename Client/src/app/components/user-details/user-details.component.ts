@@ -25,13 +25,17 @@ export class UserDetailsComponent implements OnInit {
         this.appProxy.post("GetUser", { iPersonId: params['iPersonId'] })
           .then(data => {
             this.user = data;
-          }).catch(err=>{
+          }).catch(err => {
             this._parent.openMessagePopup("שגיאה בשליפת הנתונים!");
           });
       }
     });
     this.sysTableService.getValues(4).then(data => {
+
       this.lst = data;
+      if (this.user.iPersonId == 0) {
+        this.user.iPermissionId = this.lst[0].iSysTableRowId;
+      }
     });
     if (this.globalService.getUser().iPermissionId == 5)
       this.isManeger = true;
@@ -51,7 +55,7 @@ export class UserDetailsComponent implements OnInit {
   notFocused2: boolean = true;
   notFocused3: boolean = true;
 
-  
+
   @ViewChild(NgForm) form;
 
   public lst: Array<any>;
@@ -64,8 +68,8 @@ export class UserDetailsComponent implements OnInit {
       }
       else
         this._parent.openMessagePopup("השמירה נכשלה!");
-    }).catch(err=>{
-     
+    }).catch(err => {
+
     });
   }
 

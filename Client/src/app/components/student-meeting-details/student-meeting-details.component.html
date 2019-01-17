@@ -24,7 +24,7 @@
           <label for="nvMeetingType">סוג פגישה</label>
 
           <select class="form-control" [(ngModel)]="currentMeeting.iMeetingType">
-            <option [ngValue]="undefined" disabled>בחר</option>
+            <option [ngValue]=null disabled>בחר</option>
             <option *ngFor='let s of sysTableRowList' [value]="s.iSysTableRowId">
               {{s.nvValue}}
             </option>

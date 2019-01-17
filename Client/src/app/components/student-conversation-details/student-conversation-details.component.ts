@@ -7,7 +7,7 @@ import { Task } from '../../classes/task';
 import { TaskComponent } from '../task/task.component';
 import { GlobalService } from '../../services/global.service';
 import { AppComponent } from '../app/app.component';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-student-conversation-details',
   templateUrl: './student-conversation-details.component.html',
@@ -32,9 +32,7 @@ export class StudentConversationDetailsComponent implements OnInit {
   protected saveNewConver = new EventEmitter();
   // @Input()
   // protected newConver :Conversation;
-  hours: string;
-  minutes: string;
-  date: string;
+ 
   taskSelect: boolean = false;
 
   @ViewChild('task') TaskComponent: TaskComponent;
@@ -45,6 +43,19 @@ export class StudentConversationDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService
     , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
+  ngOnInit() {
+    this.iUserId = this.globalService.getUser()['iUserId'];
+    this.sub = this.route.parent.params.subscribe(params => {
+      this.iPersonId = +params['iPersonId']
+      this.currentConver = Object.assign({}, this.conversation);
+      if (this.currentConver.iConversationId == null) {
+        this.conversation.iConversationType = this.sysTableList && this.sysTableList[0] ? this.sysTableList[0].iSysTableRowId : null;
+        this.currentConver = new Conversation();
+      }
+      this.currentConver['dtDate'] = new Date(this.currentConver.dtConversationDate);
+      this.currentConver['conversationTime'] =moment(this.currentConver.dtConversationDate).format('HH:mm');
+    })
+  }
   cancel() {
     this.Conversation.emit(null);
   }
@@ -71,14 +82,7 @@ export class StudentConversationDetailsComponent implements OnInit {
           else
             this.updateConver.emit(this.conver);
         }
-        //this.newConver.emit(this.conver);
         if (data) {
-
-
-          //this._parent.openMessagePopup('')
-
-
-        ;
           this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
           this.Conversation.emit(null);
         }
@@ -103,50 +107,7 @@ export class StudentConversationDetailsComponent implements OnInit {
 
 
 
-  ngOnInit() {
-    this.iUserId = this.globalService.getUser()['iUserId'];
-    this.sub = this.route.parent.params.subscribe(params => {
-      this.iPersonId = +params['iPersonId']
-      this.currentConver = new Conversation();
-      this.currentConver = Object.assign({}, this.conversation);
-      // this.sub=this.route.params.subscribe(params=>{
-      //   this.iconversationId=+params['conversationId'];
-      // });
-      if (this.currentConver.iConversationId != null) {
-        this.currentConver['dtDate'] = new Date(this.currentConver.dtConversationDate);
-        this.date = this.currentConver.dtConversationDate.toLocaleString();
 
-        this.currentConver['conversationDate'] = this.date;
-
-        //this.currentConver['dtHour'] = new Date((this.currentConver.dtConversationTime).getHours()) + ':'+new Date((this.currentConver.dtConversationTime).getMinutes());
-        if ((this.currentConver.dtConversationDate).getMinutes() < 10)
-          this.minutes = '0' + (this.currentConver.dtConversationDate).getMinutes().toString();
-        else
-          this.minutes = (this.currentConver.dtConversationDate).getMinutes().toString();
-
-        if ((this.currentConver.dtConversationDate).getHours() < 10)
-          this.hours = '0' + (this.currentConver.dtConversationDate).getHours().toString();
-        else
-          this.hours = (this.currentConver.dtConversationDate).getHours().toString();
-
-        //this.currentConver['nextConversationDate'] = new Date((this.currentConver.dtNextConversationDate).getTime());
-        // if ((this.currentConver.dtNextConversationDate).getMinutes() < 10)
-        //   this.minutes = '0' + (this.currentConver.dtNextConversationDate).getMinutes().toString();
-        // else
-        //   this.minutes = (this.currentConver.dtNextConversationDate).getMinutes().toString();
-
-        // if ((this.currentConver.dtNextConversationDate).getHours() < 10)
-        //   this.hours = '0' + (this.currentConver.dtNextConversationDate).getHours().toString();
-        // else
-        //   this.hours = (this.currentConver.dtNextConversationDate).getHours().toString();
-        // this.currentConver['nextConversationDate'] = new Date((this.currentConver.dtNextConversationDate).getTime()) + this.hours + ':' + this.minutes;
-        this.currentConver['conversationTime'] = this.hours + ':' + this.minutes;
-        //  ngOnDestroy() {
-        //    this.sub.unsubscribe();
-        //    }
-      }
-    })
-  }
 
 
 }

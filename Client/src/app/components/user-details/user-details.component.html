@@ -1,7 +1,7 @@
 <form class="form" #form="ngForm">
   <div class="row">
     <div class="form-group col-sm-3">
-      <label for="last-name">שם משפחה:</label>
+      <label for="last-name">שם משפחה *</label>
       <input type="text" name="last-name" class="form-control" maxlength="15" required #lastName="ngModel" [(ngModel)]="user.nvLastName" 
       />
       <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
@@ -12,7 +12,7 @@
       
     </div>
     <div class="form-group col-sm-3">
-      <label for="first-name">שם פרטי:</label>
+      <label for="first-name">שם פרטי *</label>
       <input type="text" name="first-name" class="form-control" maxlength="15" required="user.nvFirstName" #firstName="ngModel"
         [(ngModel)]="user.nvFirstName" />
       <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
@@ -43,7 +43,7 @@
     </div>
 
     <div class="form-group col-sm-3">
-      <label for="user-name">שם משתמש:</label>
+      <label for="user-name">שם משתמש *</label>
       <input type="text" name="user-name" class="form-control" maxlength="15" required [(ngModel)]="user.nvUserName" #userName="ngModel" 
       />
       <div *ngIf="userName.invalid && (userName.dirty || userName.touched)">
@@ -54,7 +54,7 @@
     </div>
 
     <div class="form-group col-sm-3">
-      <label for="password">סיסמה:</label>
+      <label for="password">סיסמה *</label>
       <!-- <show-hide-password size="lg" icon="entypo" btnStyle="primary" [btnOutline]="false"> -->
       <input type="password" passwordToggle name="password" class="form-control" required [(ngModel)]="user.nvPassword" minlength="4" #password="ngModel"
         (focus)="notFocused3 = false" (focusout)="notFocused3 = true" />
@@ -66,10 +66,10 @@
 
     </div>
     <div class="form-group col-sm-3">
-      <label for="permittion">הרשאה:</label>
+      <label for="permittion">הרשאה *</label>
       <select [(ngModel)]="user.iPermissionId" class="form-control" #permittion="ngModel" name="iPermissionId" [disabled]="isManeger == false"
         required>
-        <option [value]="0">בחר</option>
+        <!-- <option [value]="0">בחר</option> -->
         <option [value]="item.iSysTableRowId" *ngFor="let item of lst" [selected]="item.iSysTableRowId==user.iPermissionId">{{item.nvValue}}</option>
       </select>
       <div *ngIf="permittion.dirty || permittion.touched">
@@ -77,4 +77,5 @@
       </div>
     </div>
   </div>
+  <label class='required-fields'>* שדות חובה</label>
 </form>

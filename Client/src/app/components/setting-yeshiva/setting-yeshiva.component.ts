@@ -56,6 +56,7 @@ export class SettingYeshivaComponent implements OnInit {
   ngOnInit() {
     if (this.iYeshivaId == 0) {
       this.yeshiva = new Yeshiva();
+      this.yeshiva.iRoleType=this.sysTableList && this.sysTableList[0]?this.sysTableList[0].iSysTableRowId:null;
       this.isNew = true;
       this.header="מוסד חדש";
     }
@@ -76,10 +77,7 @@ export class SettingYeshivaComponent implements OnInit {
     //   this.yeshiva = Object.assign({}, this.yeshiva);
     // })
 }
-f()
-{
-  console.log(this.yeshiva);
-}
+
   save() {
     if (this.iYeshivaId == 0) {
       this.appProxy.post('AddYeshiva', { yeshiva: this.yeshiva })

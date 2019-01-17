@@ -27,17 +27,21 @@ export class UploadDocumentComponent implements OnInit {
   sheetTypes: SysTableRow[];
   id: any;
   component: string;
-  constructor(@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent,private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
+  constructor(@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent, private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService) { }
 
-  ngOnInit() {  
+  ngOnInit() {
     this.activatedRoute.url.subscribe(url => {
       this.component = url.toString();
       if (this.component == "student-documents") {
-        this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => this.sheetTypes = data
+        this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => {
+
+          this.sheetTypes = data;
+          this.document.iCategoryType = this.sheetTypes[0].iSysTableRowId;
+        }
           , err => this._parent.openMessagePopup('שגיאה בשליפת הנתונים'));
       }
-      this.save.name = this.document.nvDocumentName; 
-      this.save.type=this.document.nvDocumentType;    
+      this.save.name = this.document.nvDocumentName;
+      this.save.type = this.document.nvDocumentType;
     });
 
   }
@@ -52,20 +56,18 @@ export class UploadDocumentComponent implements OnInit {
       const file: File = fileList[0];
 
       if ((window as any).FileReader) {
-      if (this.component == "student-documents") {
-        if(file.type.indexOf('image') == -1 && file.type.indexOf('pdf') == -1)
-        {
-          this._parent.openMessagePopup("לא ניתן להעלות קבצים מסוג זה");
-          return;
+        if (this.component == "student-documents") {
+          if (file.type.indexOf('image') == -1 && file.type.indexOf('pdf') == -1) {
+            this._parent.openMessagePopup("לא ניתן להעלות קבצים מסוג זה");
+            return;
+          }
         }
-      }
-      else{
-        if(file.type.indexOf('image') == -1 && file.type.indexOf('pdf') == -1 && file.type.indexOf('audio') == -1 && file.type.indexOf('video') == -1)
-        {
-          this._parent.openMessagePopup("לא ניתן להעלות קבצים מסוג זה");
-          return;
+        else {
+          if (file.type.indexOf('image') == -1 && file.type.indexOf('pdf') == -1 && file.type.indexOf('audio') == -1 && file.type.indexOf('video') == -1) {
+            this._parent.openMessagePopup("לא ניתן להעלות קבצים מסוג זה");
+            return;
+          }
         }
-      }
 
         var fileReader = new FileReader();
         name = file.name;
@@ -91,13 +93,13 @@ export class UploadDocumentComponent implements OnInit {
 
     this.appProxy.post('SetDocument', { document: this.document, nvBase64File: this.save.document, iUserId: this.globalService.getUser()['iUserId'] }).then(
       data => {
-        if (data == 0){
+        if (data == 0) {
           this._parent.openMessagePopup("error in save data");
           this.closeAndNoSave();
         }
-        else {this.document.iDocumentId = data; this.closeDialog(); }
+        else { this.document.iDocumentId = data; this.closeDialog(); }
       }
-     // , err => alert(err)/
+      // , err => alert(err)/
     );
   }
 

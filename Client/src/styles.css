@@ -96,7 +96,13 @@ outline: none;
     font-size: 12px;
     font-weight: bold;
 }
-
+.required-fields
+{
+    float: right;
+    color: #fa005a;
+    font-size: 16px;
+    font-weight: bolder;
+}
 
 
 

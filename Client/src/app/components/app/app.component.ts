@@ -20,7 +20,8 @@ export class AppComponent implements OnInit {
   protected flag = false;
   protected message = '';
   protected header = '';
-
+  protected tubsName = { student: 1, avrechim: 2, events: 3, graduates: 4, users: 5, settings: 6 };
+  protected cuurentTub=this.tubsName.student;
   public instance: AppComponent;
   public userName: string = this.globalService.getUser() != null ? this.globalService.getUser().nvUserName : "משתמש";
   constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, public router: Router, private route: ActivatedRoute
@@ -79,7 +80,7 @@ export class AppComponent implements OnInit {
     this.message = message;
     this.flag = true;
   }
-
+  
   //     }
   //   }
 
