@@ -29,7 +29,7 @@ export class GraduatesComponent implements OnInit {
         st => {
           st['edit'] = '<div class="edit"></div>';
         })
-    }, err => { this._parent.openMessagePopup(err); });
+    }, err => { this._parent.openMessagePopup("שגיאה בשליפת הנתונים!"); });
 
 
     this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true, false));

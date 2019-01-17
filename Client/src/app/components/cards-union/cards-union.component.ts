@@ -102,7 +102,7 @@ export class CardsUnionComponent implements OnInit {
     this.appProxy.post('UnionCards', { student: this.student, iStudent2: this.student2.iPersonId }).then(
       data => {
         if (data == true) {
-          this._parent.openMessagePopup("האיחוד התבצע בבהצלחה");
+          this._parent.openMessagePopup("השמירה התבצעה בהצלחה");
           this.onClose.emit();
 
         }

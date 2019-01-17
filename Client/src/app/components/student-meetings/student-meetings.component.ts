@@ -75,7 +75,7 @@ export class StudentMeetingsComponent implements OnInit {
 
   deleteMeeting(meeting: Meeting) {
     this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
-      this._parent.openMessagePopup('נמחק בהצלחה!');
+      this._parent.openMessagePopup('המחיקה בוצעה בהצלחה!');
       this.meetingList.splice(this.meetingList.indexOf(meeting), 1);
       this.cc.refreshTable(this.meetingList);
     });

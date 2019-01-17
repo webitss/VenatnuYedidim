@@ -86,7 +86,7 @@ export class StudentEventDetailsComponent implements OnInit {
           .then(data => {
             if (data == true) {
               this.lst.push(this.event);
-              this._parent.openMessagePopup('האירוע נשמר בהצלחה!')
+              this._parent.openMessagePopup('השמירה התבצעה בהצלחה!')
               this.close();
             }
           }).catch(err => {

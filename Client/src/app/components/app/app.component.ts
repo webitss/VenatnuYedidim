@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   saveFile() {
     this.appProxy.post('SaveFileByBase64', this.nvBase64File)
       .then(result => {
-        if (result) { this.openMessagePopup('שמירת הקובץ התבצעה בהצלחה'); } else { this.openMessagePopup('שמירת הקובץ נכשלה'); }
+        if (result) { this.openMessagePopup('השמירה התבצעה בהצלחה'); } else { this.openMessagePopup('שמירת הקובץ נכשלה'); }
       });
   }
 

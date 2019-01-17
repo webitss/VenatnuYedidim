@@ -98,7 +98,7 @@ export class TaskComponent implements OnInit {
 
           }
           else
-            this._parent.openMessagePopup("error!");
+            this._parent.openMessagePopup("שגיאה בשליפת הנתונים");
 
         });
       }
@@ -115,7 +115,7 @@ export class TaskComponent implements OnInit {
     //    if (this.currentTask.iTaskId == 0)
     return this.appProxy.post('SetTask', { task: this.task, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
       if (data) {
-        this._parent.openMessagePopup("המשימה נוספה בהצלחה!");
+        this._parent.openMessagePopup("השמירה התבצעה בהצלחה!");
         this.refresh.emit(this.task);
         this.close.emit();
         return Promise.resolve(true);

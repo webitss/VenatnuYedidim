@@ -89,7 +89,7 @@ export class AvrechPresenceComponent implements OnInit {
     this.appProxy.post('DeletePresenceAvrech', { iPresenceAvrech: p.iPresenceAvrech, iLastModifyUserId: this.globalService.getUser()['iUserId'] }).then(data => {
       if(data)
       {
-        this._parent.openMessagePopup('נמחק בהצלחה!');
+        this._parent.openMessagePopup('המחיקה התבצעה בהצלחה!');
         this.lstDataRows.splice(this.presences.indexOf(p), 1);
         this.cc.refreshTable(this.lstDataRows);
       }

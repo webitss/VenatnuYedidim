@@ -1,17 +1,18 @@
 <div class=" row component-name-header">
-        <div *ngIf="component=='/students'" class="col-sm-4 component-name">תלמידים</div>
-        <div *ngIf="component=='/graduates'" class="col-sm-4 component-name">בוגרים</div>
-        <div class="actions col-sm-8">
-    <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
-    <button *ngIf="component=='/students'" class="btn btn-small pdf" title="הורד pdf" (click)="tableToPdf('תלמידים')"></button>
-    <button *ngIf="component=='/graduates'" class="btn btn-small pdf" title="הורד pdf" (click)="tableToPdf('בוגרים')"></button>
-    <button class="btn btn-circle1 btn-orange" (click)="flag=true"> איחוד כרטיסים</button>
-    <button *ngIf="component=='/students'" class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">תלמיד חדש</button>
-</div>
+    <div *ngIf="component=='/students'" class="col-sm-4 component-name">תלמידים</div>
+    <div *ngIf="component=='/graduates'" class="col-sm-4 component-name">בוגרים</div>
+    <div class="actions col-sm-8">
+        <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
+        <button *ngIf="component=='/students'" class="btn btn-small pdf" title="הורד pdf" (click)="tableToPdf('תלמידים')"></button>
+        <button *ngIf="component=='/graduates'" class="btn btn-small pdf" title="הורד pdf" (click)="tableToPdf('בוגרים')"></button>
+        <button class="btn btn-circle1 btn-orange" (click)="flag=true"> איחוד כרטיסים</button>
+        <button *ngIf="component=='/students'" class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">תלמיד
+            חדש</button>
+    </div>
 </div>
 
 <div class="main-table">
- <app-vy-table #students [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editAndDeleteStudent($event)"></app-vy-table>
+    <app-vy-table #students [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editAndDeleteStudent($event)"></app-vy-table>
 </div>
 
 <div *ngIf="flag==true">
@@ -20,7 +21,12 @@
 
 
 
-<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; deleteStudent();"></app-vy-pop-up>
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false"
+    (ok)="flagDelete=false; deleteStudent();"></app-vy-pop-up>
+
+
+
+
 
 
 

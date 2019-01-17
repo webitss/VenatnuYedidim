@@ -26,7 +26,7 @@ export class UserDetailsComponent implements OnInit {
           .then(data => {
             this.user = data;
           }).catch(err=>{
-            this._parent.openMessagePopup("error!");
+            this._parent.openMessagePopup("שגיאה בשליפת הנתונים!");
           });
       }
     });
@@ -59,11 +59,11 @@ export class UserDetailsComponent implements OnInit {
   saveUser() {
     this.appProxy.post("SetUser", { user: this.user, iUserId: this.globalService.getUser().iPersonId }).then(data => {
       if (data == true) {
-        this._parent.openMessagePopup("המשתמש נשמר בהצלחה!");
+        this._parent.openMessagePopup("השמירה התבצעה בהצלחה!");
         this.router.navigate(['users']);
       }
       else
-        this._parent.openMessagePopup("error!");
+        this._parent.openMessagePopup("השמירה נכשלה!");
     }).catch(err=>{
      
     });

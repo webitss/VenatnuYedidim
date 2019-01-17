@@ -106,7 +106,7 @@ export class EventMediaComponent implements OnInit {
       })
       .then(
         data => {
-          this._parent.openMessagePopup('נמחק בהצלחה!');
+          this._parent.openMessagePopup('המחיקה התבצעה בהצלחה!');
           let len = this.documents.length;
           for (let i = 0; i < len; i++) {
             if (this.documents[i].iDocumentId == id) {

@@ -113,7 +113,7 @@ export class SettingsYeshivotComponent implements OnInit {
           yeshiva= this.yeshivaList.find(y=>y.iYeshivaId==this.iYeshivaId);
           this.iYeshivaId = null;
           this.flag = null;
-          this._parent.openMessagePopup('הישיבה נמחקה בהצלחה!');
+          this._parent.openMessagePopup('המחיקה התבצעה בהצלחה!');
           this.yeshivaList.splice(this.yeshivaList.indexOf(yeshiva), 1);
           this.vyTableComponent.refreshTable(this.yeshivaList);
         });

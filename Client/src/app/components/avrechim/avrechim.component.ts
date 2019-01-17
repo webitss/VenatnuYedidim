@@ -79,14 +79,14 @@ export class AvrechimComponent implements OnInit {
     this.appProxy.post('DeleteAvrech', { iPersonId: this.avrechId })
       .then(result => {
         if (result) {
-      this._parent.openMessagePopup("האברך נמחק בהצלחה!");
+      this._parent.openMessagePopup("המחיקה התבצעה בהצלחה!");
           const i=this.avrechimList.findIndex(x=>x.iPersonId==this.avrechId);
         this.avrechimList.splice(i, 1);
         this.vyTableComponent.refreshTable(this.avrechimList);
 
 
 
-        } else { this._parent.openMessagePopup(' המחיקה נכשלה'); }
+        } else { this._parent.openMessagePopup('המחיקה נכשלה'); }
         this.flag = false;
       });
   }

@@ -87,7 +87,7 @@ export class EventParticipantsComponent implements OnInit {
         })
           .then(data => {
             if (data == true)
-              this._parent.openMessagePopup("נוסף בהצלחה לארוע");
+              this._parent.openMessagePopup("השמירה התבצעה בהצלחה!");
             else
               this._parent.openMessagePopup("השמירה נכשלה");
 

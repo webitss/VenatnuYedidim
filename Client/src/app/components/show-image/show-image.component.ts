@@ -234,7 +234,7 @@ export class ShowImageComponent implements OnInit {
             });
 
           }
-            , err => this._parent.openMessagePopup("שגיאה"));
+            , err => this._parent.openMessagePopup("השמירה נכשלה"));
 
         }
       }

@@ -34,7 +34,7 @@ export class UploadDocumentComponent implements OnInit {
       this.component = url.toString();
       if (this.component == "student-documents") {
         this.sysTableService.getValues(SysTableService.dataTables.sheetType.iSysTableId).then(data => this.sheetTypes = data
-          , err => this._parent.openMessagePopup('error'));
+          , err => this._parent.openMessagePopup('שגיאה בשליפת הנתונים'));
       }
       this.save.name = this.document.nvDocumentName; 
       this.save.type=this.document.nvDocumentType;    

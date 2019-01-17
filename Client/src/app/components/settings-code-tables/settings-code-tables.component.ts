@@ -96,7 +96,7 @@ export class SettingsCodeTableComponent implements OnInit {
             if (l) {
 
               SysTableService.dataTables[this.Mykey].SysTableRow = l;
-              this._parent.openMessagePopup('העריכה התבצעה בהצלחה!');
+              this._parent.openMessagePopup('השמירה התבצעה בהצלחה!');
             }
             else
               console.log("err");
@@ -104,7 +104,7 @@ export class SettingsCodeTableComponent implements OnInit {
 
       }
       else {
-        this._parent.openMessagePopup('ארעה שגיאה העריכה!');
+        this._parent.openMessagePopup('השמירה נכשלה!');
       }
     });
 
@@ -133,11 +133,11 @@ export class SettingsCodeTableComponent implements OnInit {
 
           this.roeToadd = new SysTableRow();
           this.divNewValue = this.showOverlap = false;
-          this._parent.openMessagePopup('ההוספה התבצעה בהצלחה!');
+          this._parent.openMessagePopup('השמירה התבצעה בהצלחה!');
 
         }
         else {
-          this._parent.openMessagePopup('ההוספה נכשלה!');
+          this._parent.openMessagePopup('השמירה נכשלה!');
         }
 
       });
