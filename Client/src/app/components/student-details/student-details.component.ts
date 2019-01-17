@@ -53,6 +53,15 @@ export class StudentDetailsComponent implements OnInit {
   change: boolean;
   flag: boolean = false;
   message: string;
+  public hebrewYearsList:Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
+  'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
+  'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin', 'Düsseldorf',
+  'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg', 'Hamburg', 'Hannover',
+  'Helsinki', 'Leeds', 'Leipzig', 'Lisbon', 'Łódź', 'London', 'Kraków', 'Madrid',
+  'Málaga', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Naples', 'Palermo',
+  'Paris', 'Poznań', 'Prague', 'Riga', 'Rome', 'Rotterdam', 'Seville', 'Sheffield',
+  'Sofia', 'Stockholm', 'Stuttgart', 'The Hague', 'Turin', 'Valencia', 'Vienna',
+  'Vilnius', 'Warsaw', 'Wrocław', 'Zagreb', 'Zaragoza'];
 
   e;
   // message = 'dfds';
@@ -60,8 +69,7 @@ export class StudentDetailsComponent implements OnInit {
   header = 'מחיקת ישיבה';
   currentYear: Date = new Date();
   letterArr = new Array<LetterEbrew>();
-
-
+ 
 
   ngOnInit() {
 
@@ -145,17 +153,7 @@ export class StudentDetailsComponent implements OnInit {
     this.appProxy.post("GetYeshivotOfStudent", { iPersonId: this.paramRout }).then(data => this.yeshivaListOfStudent = data);
 
 
-    // this.dateMonthArr.push("תשרי"); this.dateMonthArr.push("חשון"); this.dateMonthArr.push("כסלו"); this.dateMonthArr.push("טבת");
-    // this.dateMonthArr.push("שבט"); this.dateMonthArr.push("אדר"); this.dateMonthArr.push("ניסן"); this.dateMonthArr.push("אייר");
-    // this.dateMonthArr.push("סיון"); this.dateMonthArr.push("תמוז"); this.dateMonthArr.push("אב"); this.dateMonthArr.push("אלול");
-
-    // this.dateDayArr.push("א"); this.dateDayArr.push("ב"); this.dateDayArr.push("ג"); this.dateDayArr.push("ד"); this.dateDayArr.push("ה");
-    // this.dateDayArr.push("ו"); this.dateDayArr.push("ז"); this.dateDayArr.push("ח"); this.dateDayArr.push("ט"); this.dateDayArr.push("י");
-    // this.dateDayArr.push('י"א'); this.dateDayArr.push('י"ב'); this.dateDayArr.push('י"ג'); this.dateDayArr.push('י"ד'); this.dateDayArr.push('ט"ו');
-    // this.dateDayArr.push('ט"ז'); this.dateDayArr.push('י"ז'); this.dateDayArr.push('י"ח'); this.dateDayArr.push('י"ט'); this.dateDayArr.push('כ');
-    // this.dateDayArr.push('כ"א'); this.dateDayArr.push('כ"ב'); this.dateDayArr.push('כ"ג'); this.dateDayArr.push('כ"ד'); this.dateDayArr.push('כ"ה');
-    // this.dateDayArr.push('כ"ו'); this.dateDayArr.push('כ"ז'); this.dateDayArr.push('כ"ח'); this.dateDayArr.push('כ"ט'); this.dateDayArr.push('ל');
-
+  
     this.letterArr.push({ nvChar: "א", iValue: 1 }); this.letterArr.push({ nvChar: "ב", iValue: 2 }); this.letterArr.push({ nvChar: "ג", iValue: 3 });
     this.letterArr.push({ nvChar: "ד", iValue: 4 }); this.letterArr.push({ nvChar: "ה", iValue: 5 }); this.letterArr.push({ nvChar: "ו", iValue: 6 });
     this.letterArr.push({ nvChar: "ז", iValue: 7 }); this.letterArr.push({ nvChar: "ח", iValue: 8 }); this.letterArr.push({ nvChar: "ט", iValue: 9 });
@@ -164,8 +162,14 @@ export class StudentDetailsComponent implements OnInit {
     this.letterArr.push({ nvChar: "ע", iValue: 70 }); this.letterArr.push({ nvChar: "פ", iValue: 80 }); this.letterArr.push({ nvChar: "צ", iValue: 90 });
     this.letterArr.push({ nvChar: "ק", iValue: 100 }); this.letterArr.push({ nvChar: "ר", iValue: 200 }); this.letterArr.push({ nvChar: "ש", iValue: 300 });
     this.letterArr.push({ nvChar: "ת", iValue: 400 });
-
+    var dateUrl = "http://www.hebcal.com/converter/?cfg=json&gy=" + 2018 + "&gm=" + 4 + "&gd=" + 12 + "&g2h=1";
+    console.log (dateUrl);
     for (var i = 1990; i <= this.currentYear.getFullYear(); i++) {
+      // while(i>0)
+      // {
+
+      // }
+      //this.hebrewYearsList.push()
       this.dateYearArr.push(i);
     }
     for (var i = 0; i < this.dateYearArr.length - 1; i++) {
