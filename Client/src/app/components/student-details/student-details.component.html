@@ -44,7 +44,7 @@
 
 
             <div class="row">
-                <div class="form-group col-sm-4">
+                <div class="form-group col-sm-3">
                     <label for="lastName">שם משפחה : *</label>
                     <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="student.nvLastName"
                         required #lastName="ngModel" (keypress)="keyPress($event)" (change)="change=true">
@@ -53,7 +53,7 @@
                             <strong>! </strong>שדה נדרש</div>
                     </div>
                 </div>
-                <div class="form-group col-sm-4">
+                <div class="form-group col-sm-3">
                     <label for="lastName">שם פרטי : *</label>
                     <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="student.nvFirstName"
                         required #firstName="ngModel" (keypress)="keyPress($event)" (change)="change=true">
@@ -113,18 +113,7 @@
                     </div>
 
                 </div>
-                <div class="form-group col-sm-3">
-                    <label for="dateAdd"> תאריך הצטרפות :</label>
-                    <input type="date" class="form-control" id="dateAdd" name="dateAdd" [ngModel]="student.dtAddStudentDate | date:'yyyy-MM-dd' "
-                        (ngModelChange)="e.dtAddStudentDate = $event" (change)="change=true" [ngModelOptions]="{standalone: true}"
-                        style='width: 210px'>
-                </div>
-                <div class="form-group  col-sm-3">
-                    <label for="dtBornDate"> תאריך לידה לועזי:</label>
-                    <input type="date" class="form-control" id="dtBornDate" name="dtBornDate" (change)="change=true"
-                        [ngModel]="student.dtBirthdate  | date:'yyyy-MM-dd' " (ngModelChange)="e.dtBirthdate = $event"
-                        [ngModelOptions]="{standalone: true}">
-                </div>
+
             </div>
             <div class="row">
                 <div class="form-group  col-sm-3">
@@ -171,6 +160,20 @@
                 </select> -->
             </div>
 
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <label for="dateAdd"> תאריך הצטרפות :</label>
+                <input type="date" class="form-control" id="dateAdd" name="dateAdd" [ngModel]="student.dtAddStudentDate | date:'yyyy-MM-dd' "
+                    (ngModelChange)="e.dtAddStudentDate = $event" (change)="change=true" [ngModelOptions]="{standalone: true}"
+                    style='width: 210px'>
+            </div>
+            <div class="form-group  col-sm-3">
+                <label for="dtBornDate"> תאריך לידה לועזי:</label>
+                <input type="date" class="form-control" id="dtBornDate" name="dtBornDate" (change)="change=true"
+                    [ngModel]="student.dtBirthdate  | date:'yyyy-MM-dd' " (ngModelChange)="e.dtBirthdate = $event"
+                    [ngModelOptions]="{standalone: true}">
+            </div>
         </div>
         <div class="row">
 
