@@ -47,21 +47,21 @@ export class StudentDetailsComponent implements OnInit {
   monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
   dateDayArr = new Array<string>();
   dateMonthArr = new Array<string>();
-  dateYearArr = new Array<any>();
+  //dateYearArr = new Array<any>();
   addYeshiva = false;
   yeshivaId: number;
   change: boolean;
   flag: boolean = false;
   message: string;
-  public hebrewYearsList:Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
-  'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
-  'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin', 'Düsseldorf',
-  'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg', 'Hamburg', 'Hannover',
-  'Helsinki', 'Leeds', 'Leipzig', 'Lisbon', 'Łódź', 'London', 'Kraków', 'Madrid',
-  'Málaga', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Naples', 'Palermo',
-  'Paris', 'Poznań', 'Prague', 'Riga', 'Rome', 'Rotterdam', 'Seville', 'Sheffield',
-  'Sofia', 'Stockholm', 'Stuttgart', 'The Hague', 'Turin', 'Valencia', 'Vienna',
-  'Vilnius', 'Warsaw', 'Wrocław', 'Zagreb', 'Zaragoza'];
+  public hebrewYearsList: Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
+    'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
+    'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin', 'Düsseldorf',
+    'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg', 'Hamburg', 'Hannover',
+    'Helsinki', 'Leeds', 'Leipzig', 'Lisbon', 'Łódź', 'London', 'Kraków', 'Madrid',
+    'Málaga', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Naples', 'Palermo',
+    'Paris', 'Poznań', 'Prague', 'Riga', 'Rome', 'Rotterdam', 'Seville', 'Sheffield',
+    'Sofia', 'Stockholm', 'Stuttgart', 'The Hague', 'Turin', 'Valencia', 'Vienna',
+    'Vilnius', 'Warsaw', 'Wrocław', 'Zagreb', 'Zaragoza'];
 
   e;
   // message = 'dfds';
@@ -69,7 +69,7 @@ export class StudentDetailsComponent implements OnInit {
   header = 'מחיקת ישיבה';
   currentYear: Date = new Date();
   letterArr = new Array<LetterEbrew>();
- 
+
 
   ngOnInit() {
 
@@ -153,7 +153,7 @@ export class StudentDetailsComponent implements OnInit {
     this.appProxy.post("GetYeshivotOfStudent", { iPersonId: this.paramRout }).then(data => this.yeshivaListOfStudent = data);
 
 
-  
+
     this.letterArr.push({ nvChar: "א", iValue: 1 }); this.letterArr.push({ nvChar: "ב", iValue: 2 }); this.letterArr.push({ nvChar: "ג", iValue: 3 });
     this.letterArr.push({ nvChar: "ד", iValue: 4 }); this.letterArr.push({ nvChar: "ה", iValue: 5 }); this.letterArr.push({ nvChar: "ו", iValue: 6 });
     this.letterArr.push({ nvChar: "ז", iValue: 7 }); this.letterArr.push({ nvChar: "ח", iValue: 8 }); this.letterArr.push({ nvChar: "ט", iValue: 9 });
@@ -162,21 +162,31 @@ export class StudentDetailsComponent implements OnInit {
     this.letterArr.push({ nvChar: "ע", iValue: 70 }); this.letterArr.push({ nvChar: "פ", iValue: 80 }); this.letterArr.push({ nvChar: "צ", iValue: 90 });
     this.letterArr.push({ nvChar: "ק", iValue: 100 }); this.letterArr.push({ nvChar: "ר", iValue: 200 }); this.letterArr.push({ nvChar: "ש", iValue: 300 });
     this.letterArr.push({ nvChar: "ת", iValue: 400 });
-    var dateUrl = "http://www.hebcal.com/converter/?cfg=json&gy=" + 2018 + "&gm=" + 4 + "&gd=" + 12 + "&g2h=1";
-    console.log (dateUrl);
-    for (var i = 1990; i <= this.currentYear.getFullYear(); i++) {
-      // while(i>0)
-      // {
-
-      // }
-      //this.hebrewYearsList.push()
-      this.dateYearArr.push(i);
+    this.letterArr = this.letterArr.sort((n1, n2) => { return n2.iValue - n1.iValue });
+    //var dateUrl = "http://www.hebcal.com/converter/?cfg=json&gy=" + 2018 + "&gm=" + 4 + "&gd=" + 12 + "&g2h=1";
+    this.hebrewYearsList = [];
+    for (var i =this.currentYear.getFullYear() ; i >1950 ; i--) {
+      let year = (i + 3760) % 1000;
+      let strYear = ''
+      while (year > 0) {
+        let j = 0;
+        while (j < this.letterArr.length && j > -1) {
+          if (this.letterArr[j].iValue <= year) { 
+            strYear+=this.letterArr[j].nvChar;
+            year = year - this.letterArr[j].iValue; 
+            j = -1; }
+          else
+            j++;
+        }
+      }
+      this.hebrewYearsList.push(strYear);
+      //this.dateYearArr.push(i);
     }
-    for (var i = 0; i < this.dateYearArr.length - 1; i++) {
-      // const hebrewDate = require("hebrew-date");
-      // this.dateYearArr[i] = hebrewDate(new Date(this.dateYearArr[i], 0, 0)).year;
-      this.dateYearArr[i] = this.calcEbrewDatw(this.dateYearArr[i]);
-    }
+    // for (var i = 0; i < this.dateYearArr.length - 1; i++) {
+    //   // const hebrewDate = require("hebrew-date");
+    //   // this.dateYearArr[i] = hebrewDate(new Date(this.dateYearArr[i], 0, 0)).year;
+    //   this.dateYearArr[i] = this.calcEbrewDatw(this.dateYearArr[i]);
+    // }
   }
 
   shift(newStatus) {
@@ -341,44 +351,43 @@ export class StudentDetailsComponent implements OnInit {
         if (this.status == 'תלמיד')
           this._parent.openMessagePopup("פרטי התלמיד עודכנו בהצלחה!");
         else
-        this._parent.openMessagePopup("פרטי הבוגר עודכנו בהצלחה!");
-          this.change = false;
-          this.backToGridStudent();
-        
+          this._parent.openMessagePopup("פרטי הבוגר עודכנו בהצלחה!");
+        this.change = false;
+        this.backToGridStudent();
+
       }, err => {
         if (this.status == 'תלמיד')
           alert("שגיאה בעריכת תלמיד");
         else
           alert("שגיאה בעריכת בוגר");
-          //this.change = false;
+        //this.change = false;
       });
-     
+
     }
 
     else
-      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => { 
-        
+      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => {
+
         this._parent.openMessagePopup("התלמיד נוסף בהצלחה!");
         this.change = false;
         this.backToGridStudent();
-      }, err => { 
+      }, err => {
         this._parent.openMessagePopup("שגיאה בהוספת תלמיד!");
       });
-    
+
   }
-  backToGridStudent()
-  {
+  backToGridStudent() {
     if (this.student == undefined)
-    this.router.navigate(["students"]);
-  else {
-    this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
-      if (this.student.iStatusType == data.filter(d => d.nvValue == 'תלמיד')[0].iSysTableRowId)
-        this.router.navigate(["students"]);
-      else
-        this.router.navigate(["graduates"]);
+      this.router.navigate(["students"]);
+    else {
+      this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
+        if (this.student.iStatusType == data.filter(d => d.nvValue == 'תלמיד')[0].iSysTableRowId)
+          this.router.navigate(["students"]);
+        else
+          this.router.navigate(["graduates"]);
+      }
+      )
     }
-    )
-  }
   }
   get baseFileUrl() {
     return AppProxy.getBaseUrl() + 'Files/';
@@ -429,13 +438,12 @@ export class StudentDetailsComponent implements OnInit {
       event.preventDefault();
     }
   }
-  onKeyPress(event:any)
-  {
+  onKeyPress(event: any) {
     const pattern = /[0-9]/;
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
       event.preventDefault();
-    } 
+    }
   }
 }
 
