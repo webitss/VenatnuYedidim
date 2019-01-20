@@ -161,10 +161,10 @@ this.currentYeshivaOfStudent=new Map<number,string>();
   {
     this.vyTableComponent.downloadExcel();
   }
-  tableToPdf(name)
-  {
-    this.vyTableComponent.downloadPdf(name,'pdf');
-  }
+  // tableToPdf(name)
+  // {
+  //   this.vyTableComponent.downloadPdf(name,'pdf');
+  // }
   editAndDeleteStudent(e) {
 
     if (e.columnClickName == 'edit')

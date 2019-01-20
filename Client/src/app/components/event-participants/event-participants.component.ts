@@ -99,7 +99,7 @@ export class EventParticipantsComponent implements OnInit {
             if (sumSave == sumToSave) {
               this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
               this.lstDataRows = this.lstDataRows.concat(lstToSave);
-              this.buildGrid(this.lstDataRows,true);
+              this.buildGrid2(this.lstDataRows,true);
 
               
               // this.refresh
@@ -121,8 +121,6 @@ export class EventParticipantsComponent implements OnInit {
 
     this.appProxy.post('GetPersonList', { iPersonId: 0 }).then(
       data => {
-
-
         this.allPersons = data
         this.allPersons.forEach(
           person => {
@@ -152,7 +150,7 @@ export class EventParticipantsComponent implements OnInit {
     });
   }
 
-  buildGrid(lst, refresh = false) {
+  buildGrid(lst) {
     this.lstDataRows = [];
     lst.forEach(p => {
       let nvArriveStatusType=this.sysTableRowList.filter(s => s.iSysTableRowId == (p.lstObject?p.lstObject.iArrivalStatusType:p.iArrivalStatusType));
@@ -175,9 +173,39 @@ export class EventParticipantsComponent implements OnInit {
         //   this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0] ? this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0].nvValue : ''
       });
     });
+    // if (refresh)
+    //   this.vyTableComponent.refreshTable(this.lstDataRows);
+  }
+  buildGrid2(lst, refresh) {
+    this.lstDataRows = [];
+    lst.forEach(p => {
+      // let nvArriveStatusType=this.sysTableRowList.filter(s => s.iSysTableRowId == (p.lstObject?p.lstObject.iArrivalStatusType:p.iArrivalStatusType));
+       let nvArriveStatusType=p;
+     let iArriveStatusType=nvArriveStatusType.iArriveStatusType;
+     
+      // let iArriveStatusType=nvArriveStatusType && nvArriveStatusType[0]?nvArriveStatusType[0].nvValue:''
+     
+      // this.participant.forEach(p => {
+      this.lstDataRows.push({
+        delete: '<div class="delete"></div>',
+        iEventId: p.iEventId,
+        nvFirstName: p.nvFirstName,
+        nvLastName: p.nvLastName,
+        nvPhone: p.nvPhone,
+        nvMobile: p.nvMobile,
+        nvEmail: p.nvEmail,
+        nvParticipantType: p.lstObject?p.lstObject.nvParticipantType:p.nvParticipantType,
+         iArriveStatusType: iArriveStatusType,
+        //iArriveStatusType: '<select> <option>j,k</option><option>ughjk</option></select>'
+        // iArriveStatusType:'<button>fgd</button>'
+        // iArriveStatusType: this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType) &&
+        //   this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0] ? this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0].nvValue : ''
+      });
+    });
     if (refresh)
       this.vyTableComponent.refreshTable(this.lstDataRows);
   }
+
 }
 
 
