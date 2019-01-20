@@ -61,14 +61,14 @@ export class EventParticipantsComponent implements OnInit {
       data => {
         this.allPersons = data;
         this.flag = true
-        this.listToSelect=this.allPersons.filter(per=>(!this.participantList.find(p => p.iPersonId == per.iPersonId)));
+        this.listToSelect = this.allPersons.filter(per => (!this.participantList.find(p => p.iPersonId == per.iPersonId)));
         this.listToSelect.forEach(
           person => {
-            person['value']=person.nvFirstName + ' ' + person.lstObject['nvParticipantType'];
+            person['value'] = person.nvFirstName + ' ' + person.lstObject['nvParticipantType'];
 
-              //this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'], iPersonId: person.iPersonId });
-              //this.iPersonId = person.iPersonId;
-            
+            //this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'], iPersonId: person.iPersonId });
+            //this.iPersonId = person.iPersonId;
+
           }
         );
 
@@ -84,7 +84,7 @@ export class EventParticipantsComponent implements OnInit {
   save() {
     let sumSave = 0;
     let lstToSave = this.listToSelect.filter(f => f['bMultySelectChecked']);
-    let sumToSave =lstToSave.length;
+    let sumToSave = lstToSave.length;
     this.flag = false;
     lstToSave.forEach(item => {
       //if (item['bMultySelectChecked'] == true)
@@ -95,13 +95,13 @@ export class EventParticipantsComponent implements OnInit {
         .then(data => {
           if (data == true) {
             sumSave++;
-           // item['delete'] = '<div class="delete"></div>';
+            // item['delete'] = '<div class="delete"></div>';
             if (sumSave == sumToSave) {
               this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
               this.lstDataRows = this.lstDataRows.concat(lstToSave);
-              this.buildGrid2(this.lstDataRows,true);
+              this.buildGrid2(this.lstDataRows, true);
 
-              
+
               // this.refresh
               //refresh table
             }
@@ -153,9 +153,9 @@ export class EventParticipantsComponent implements OnInit {
   buildGrid(lst) {
     this.lstDataRows = [];
     lst.forEach(p => {
-      let nvArriveStatusType=this.sysTableRowList.filter(s => s.iSysTableRowId == (p.lstObject?p.lstObject.iArrivalStatusType:p.iArrivalStatusType));
-      let iArriveStatusType=nvArriveStatusType && nvArriveStatusType[0]?nvArriveStatusType[0].nvValue:''
-     
+      let nvArriveStatusType = this.sysTableRowList.filter(s => s.iSysTableRowId == (p.lstObject ? p.lstObject.iArrivalStatusType : p.iArrivalStatusType));
+      let iArriveStatusType = nvArriveStatusType && nvArriveStatusType[0] ? nvArriveStatusType[0].nvValue : ''
+
       // this.participant.forEach(p => {
       this.lstDataRows.push({
         delete: '<div class="delete"></div>',
@@ -165,8 +165,8 @@ export class EventParticipantsComponent implements OnInit {
         nvPhone: p.nvPhone,
         nvMobile: p.nvMobile,
         nvEmail: p.nvEmail,
-        nvParticipantType: p.lstObject?p.lstObject.nvParticipantType:p.nvParticipantType,
-         iArriveStatusType: iArriveStatusType,
+        nvParticipantType: p.lstObject ? p.lstObject.nvParticipantType : p.nvParticipantType,
+        iArriveStatusType: iArriveStatusType,
         //iArriveStatusType: '<select> <option>j,k</option><option>ughjk</option></select>'
         // iArriveStatusType:'<button>fgd</button>'
         // iArriveStatusType: this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType) &&
@@ -179,8 +179,8 @@ export class EventParticipantsComponent implements OnInit {
   buildGrid2(lst, refresh) {
     this.lstDataRows = [];
     lst.forEach(p => {
-       let nvArriveStatusType=p;
-      let iArriveStatusType=nvArriveStatusType.iArrivalStatusType;
+      let nvArriveStatusType = p;
+      let iArriveStatusType = nvArriveStatusType.iArrivalStatusType;
       this.lstDataRows.push({
         delete: '<div class="delete"></div>',
         iEventId: p.iEventId,
@@ -189,14 +189,25 @@ export class EventParticipantsComponent implements OnInit {
         nvPhone: p.nvPhone,
         nvMobile: p.nvMobile,
         nvEmail: p.nvEmail,
-        nvParticipantType: p.lstObject?p.lstObject.nvParticipantType:p.nvParticipantType,
-         iArriveStatusType: iArriveStatusType,
+        nvParticipantType: p.lstObject ? p.lstObject.nvParticipantType : p.nvParticipantType,
+        iArriveStatusType: iArriveStatusType,
       });
     });
     if (refresh)
       this.vyTableComponent.refreshTable(this.lstDataRows);
   }
 
+  click(e) {
+    // this.avrechId = e.iPersonId;
+    if (e.columnClickName == "delete")
+      this.delete(e);
+
+
+  }
+
+  delete(e) {
+    ///delete
+  }
 }
 
 
