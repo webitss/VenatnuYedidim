@@ -179,13 +179,8 @@ export class EventParticipantsComponent implements OnInit {
   buildGrid2(lst, refresh) {
     this.lstDataRows = [];
     lst.forEach(p => {
-      // let nvArriveStatusType=this.sysTableRowList.filter(s => s.iSysTableRowId == (p.lstObject?p.lstObject.iArrivalStatusType:p.iArrivalStatusType));
        let nvArriveStatusType=p;
-     let iArriveStatusType=nvArriveStatusType.iArriveStatusType;
-     
-      // let iArriveStatusType=nvArriveStatusType && nvArriveStatusType[0]?nvArriveStatusType[0].nvValue:''
-     
-      // this.participant.forEach(p => {
+      let iArriveStatusType=nvArriveStatusType.iArrivalStatusType;
       this.lstDataRows.push({
         delete: '<div class="delete"></div>',
         iEventId: p.iEventId,
@@ -196,10 +191,6 @@ export class EventParticipantsComponent implements OnInit {
         nvEmail: p.nvEmail,
         nvParticipantType: p.lstObject?p.lstObject.nvParticipantType:p.nvParticipantType,
          iArriveStatusType: iArriveStatusType,
-        //iArriveStatusType: '<select> <option>j,k</option><option>ughjk</option></select>'
-        // iArriveStatusType:'<button>fgd</button>'
-        // iArriveStatusType: this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType) &&
-        //   this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0] ? this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0].nvValue : ''
       });
     });
     if (refresh)
