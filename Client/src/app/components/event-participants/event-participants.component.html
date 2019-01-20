@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<div *ngIf="flag==true" class="col-sm-12 addParticipants">
+<div *ngIf="flag" class="col-sm-12 addParticipants">
 
   <div class="row row-first">
     <button (click)="cancel()" class="btn-close">סגור </button>
@@ -41,9 +41,9 @@
   <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table>
 </div>
 
-<select>
+<!-- <select>
   <option *ngFor="let s of sysTableRowList">{{s.nvValue}}</option>
-</select>
+</select> -->
 
 <!-- <select value='+p.iArriveStatusType+'>
   <option *ngFor="let s of sysTableRowList1"></option>
