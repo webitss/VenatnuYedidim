@@ -233,7 +233,7 @@ import { DataSharingService } from './services/dataSharing.Service';
       // { path: "", component: StudentsComponent },
     { path: "", component: ShowImageComponent },
    
-     { path: "ShowImage",  component: ShowImageComponent },
+     { path: "ResultComponent",  component: ShowImageComponent },
      { path: "log-in", component: LogInComponent, canDeactivate: [CanDeactivateGuard] },
       { path: "students", component: StudentsComponent },
       // { path: "graduates", component: StudentsComponent },
