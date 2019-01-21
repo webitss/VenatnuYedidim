@@ -95,18 +95,14 @@ export class EventParticipantsComponent implements OnInit {
         .then(data => {
           if (data == true) {
             sumSave++;
-            
+
             if (sumSave == sumToSave) {
               this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
               // this.lstDataRows = this.lstDataRows.concat(lstToSave);
               this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
                 if (res.length > 0) {
-                  this.participantList = res;
-                  this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
-                    this.sysTableRowList = data;
-                    this.buildGrid2(this.lstDataRows, true);
-                  });
-        
+                  this.lstDataRows = res;
+                  this.buildGrid(this.lstDataRows, true);
                 }
               });
             }
@@ -143,7 +139,7 @@ export class EventParticipantsComponent implements OnInit {
           this.participantList = res;
           this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
             this.sysTableRowList = data;
-            this.buildGrid(res);
+            this.buildGrid(res,false);
 
           });
 
@@ -155,7 +151,7 @@ export class EventParticipantsComponent implements OnInit {
     });
   }
 
-  buildGrid(lst) {
+  buildGrid(lst, refresh) {
     this.lstDataRows = [];
     lst.forEach(p => {
       let nvArriveStatusType = this.sysTableRowList.filter(s => s.iSysTableRowId == (p.lstObject ? p.lstObject.iArrivalStatusType : p.iArrivalStatusType));
@@ -172,14 +168,15 @@ export class EventParticipantsComponent implements OnInit {
         nvEmail: p.nvEmail,
         nvParticipantType: p.lstObject ? p.lstObject.nvParticipantType : p.nvParticipantType,
         iArriveStatusType: iArriveStatusType,
+        iPersonId:p.iPersonId
         //iArriveStatusType: '<select> <option>j,k</option><option>ughjk</option></select>'
         // iArriveStatusType:'<button>fgd</button>'
         // iArriveStatusType: this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType) &&
         //   this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0] ? this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0].nvValue : ''
       });
     });
-    // if (refresh)
-    //   this.vyTableComponent.refreshTable(this.lstDataRows);
+    if (refresh)
+      this.vyTableComponent.refreshTable(this.lstDataRows);
   }
   buildGrid2(lst, refresh) {
     this.lstDataRows = [];
@@ -187,7 +184,7 @@ export class EventParticipantsComponent implements OnInit {
       // let nvArriveStatusType=this.sysTableRowList.filter(s => s.iSysTableRowId == (p.lstObject?p.lstObject.iArrivalStatusType:p.iArrivalStatusType));
       let nvArriveStatusType = p;
       let iArriveStatusType = nvArriveStatusType.iArriveStatusType;
-   
+
       this.lstDataRows.push({
         delete: '<div class="delete"></div>',
         iEventId: p.iEventId,
@@ -198,7 +195,7 @@ export class EventParticipantsComponent implements OnInit {
         nvEmail: p.nvEmail,
         nvParticipantType: p.lstObject ? p.lstObject.nvParticipantType : p.nvParticipantType,
         iArriveStatusType: iArriveStatusType,
-     
+
       });
     });
     if (refresh)
@@ -214,7 +211,14 @@ export class EventParticipantsComponent implements OnInit {
   }
 
   delete(e) {
-    ///delete
+    this.appProxy.post('DeleteParticipant', { iEventId: this.iEventId, iPersonId: e.iPersonId, iUserId: this.globalService.getUser().iPersonId })
+      .then(data => {
+        this._parent.openMessagePopup('המחיקה בוצעה בהצלחה!');
+        this.lstDataRows.splice(this.lstDataRows.findIndex(p=>p.iPersonId==e.iPersonId), 1);
+        this.vyTableComponent.refreshTable(this.lstDataRows);
+      }).catch(err => {
+       // alert(err)
+      });
   }
 }
 
