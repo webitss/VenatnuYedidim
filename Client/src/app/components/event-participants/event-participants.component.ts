@@ -205,5 +205,16 @@ export class EventParticipantsComponent implements OnInit {
       this.vyTableComponent.refreshTable(this.lstDataRows);
   }
 
+  click(e) {
+    // this.avrechId = e.iPersonId;
+    if (e.columnClickName == "delete")
+      this.delete(e);
+
+
+  }
+
+  delete(e) {
+    ///delete
+  }
 }
 

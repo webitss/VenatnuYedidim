@@ -10,13 +10,13 @@
                         פרטים
                     </div>
                 </li>
-                <li [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventParticipants') != -1}" class="nav-item" *ngIf="isDetails==true">
+                <li [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventParticipants') != -1}" class="nav-item" *ngIf="isDetails">
                     <div class="fullTab" routerLink="event-participants">משתתפים
 
                     </div>
                 </li>
                 <li [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventMedia') != -1}" class="nav-item"
-                    *ngIf="isDetails==true">
+                    *ngIf="isDetails">
                     <div class="fullTab" routerLink="event-media">
                         מדיה
                     </div>
@@ -41,18 +41,18 @@
         <a class="control" routerLink="event-details">פרטים</a>
     </div>
     <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventParticipants') != -1}" class="tab col-sm-1">
-        <a class="control" routerLink="event-participants"  *ngIf="isDetails==true">משתתפים</a>
+        <a class="control" routerLink="event-participants"  *ngIf="isDetails">משתתפים</a>
     </div>
 
     <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventMedia') != -1}" class="tab col-sm-1">
-      <a class="control" routerLink="event-media"  *ngIf="isDetails==true">מדיה</a>
+      <a class="control" routerLink="event-media"  *ngIf="isDetails">מדיה</a>
   </div>
   </div>
 <div class="col-sm-12 event-menu">
   <div class="name col-sm-4">{{header}}</div>
   <div class="col-sm-1"></div>
   <div class="col-sm-5"></div>
-  <button *ngIf="isDetails==true" (click)="save()" class="btn-circle btn-save">שמירה</button>
+  <button *ngIf="isDetails" (click)="save()" class="btn-circle btn-save">שמירה</button>
   <button routerLink="/events" class="btn-circle btn-close">סגור</button>
 </div>
 
