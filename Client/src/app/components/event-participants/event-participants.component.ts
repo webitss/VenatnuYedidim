@@ -99,16 +99,22 @@ export class EventParticipantsComponent implements OnInit {
             if (sumSave == sumToSave) {
               this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
               // this.lstDataRows = this.lstDataRows.concat(lstToSave);
+              // this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
+              //   if (res.length > 0) {
+              //     this.participantList = res;
+              //     this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
+              //       this.sysTableRowList = data;
               this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
                 if (res.length > 0) {
                   this.participantList = res;
-                  this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
-                    this.sysTableRowList = data;
-                    this.buildGrid2(this.lstDataRows, true);
-                  });
-        
                 }
+                this.buildGrid2(this.lstDataRows, true);
               });
+                   
+                  // });
+        
+                // }
+              // });
             }
           }
           else
@@ -184,9 +190,11 @@ export class EventParticipantsComponent implements OnInit {
   buildGrid2(lst, refresh) {
     this.lstDataRows = [];
     lst.forEach(p => {
-      // let nvArriveStatusType=this.sysTableRowList.filter(s => s.iSysTableRowId == (p.lstObject?p.lstObject.iArrivalStatusType:p.iArrivalStatusType));
-      let nvArriveStatusType = p;
-      let iArriveStatusType = nvArriveStatusType.iArriveStatusType;
+      let nvArriveStatusType =  p;
+      let iArriveStatusType =p.iArriveStatusType ;
+    // lst.forEach(p => {
+    //   let nvArriveStatusType = p;
+    //   let iArriveStatusType = nvArriveStatusType.iArriveStatusType;
    
       this.lstDataRows.push({
         delete: '<div class="delete"></div>',
