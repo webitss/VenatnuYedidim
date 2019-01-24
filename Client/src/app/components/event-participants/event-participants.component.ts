@@ -53,6 +53,12 @@ export class EventParticipantsComponent implements OnInit {
     new VyTableColumn('סוג משתמש', 'nvParticipantType'),
     new VyTableColumn('סטטוס הגעה', 'iArriveStatusType', 'html', true, false)
   ];
+  public Columns = [
+    new VyTableColumn('בחר', 'checked', 'checkbox'),
+    new VyTableColumn('שם פרטי', 'nvFirstName'),
+    new VyTableColumn('סוג משתמש', 'nvParticipantType'),
+   
+  ];
   public lstDataRows = [];
 
   addParticipants() {
