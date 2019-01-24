@@ -107,8 +107,9 @@ export class EventParticipantsComponent implements OnInit {
               this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
                 if (res.length > 0) {
                   this.participantList = res;
+                  this.lstDataRows=res;
                 }
-                this.buildGrid2(this.lstDataRows, true);
+                this.buildGrid(this.lstDataRows, true);
               });
                    
                   // });
@@ -188,32 +189,7 @@ export class EventParticipantsComponent implements OnInit {
     if (refresh)
       this.vyTableComponent.refreshTable(this.lstDataRows);
   }
-  buildGrid2(lst, refresh) {
-    this.lstDataRows = [];
-    lst.forEach(p => {
-      let nvArriveStatusType =  p;
-      let iArriveStatusType =p.iArriveStatusType ;
-    // lst.forEach(p => {
-    //   let nvArriveStatusType = p;
-    //   let iArriveStatusType = nvArriveStatusType.iArriveStatusType;
-   
-      this.lstDataRows.push({
-        delete: '<div class="delete"></div>',
-        iEventId: p.iEventId,
-        nvFirstName: p.nvFirstName,
-        nvLastName: p.nvLastName,
-        nvPhone: p.nvPhone,
-        nvMobile: p.nvMobile,
-        nvEmail: p.nvEmail,
-        nvParticipantType: p.lstObject ? p.lstObject.nvParticipantType : p.nvParticipantType,
-        iArriveStatusType: iArriveStatusType,
-
-      });
-    });
-    if (refresh)
-      this.vyTableComponent.refreshTable(this.lstDataRows);
-  }
-
+  
   click(e) {
     // this.avrechId = e.iPersonId;
     if (e.columnClickName == "delete")
@@ -233,4 +209,7 @@ export class EventParticipantsComponent implements OnInit {
       });
   }
 }
+
+
+
 
