@@ -71,6 +71,7 @@ export class EventParticipantsComponent implements OnInit {
         this.listToSelect.forEach(
           person => {
             person['value'] = person.nvFirstName + ' ' + person.lstObject['nvParticipantType'];
+            person['nvParticipantType'] = person.lstObject['nvParticipantType'] ;
 
             //this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'], iPersonId: person.iPersonId });
             //this.iPersonId = person.iPersonId;
