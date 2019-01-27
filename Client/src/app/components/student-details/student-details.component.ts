@@ -219,7 +219,8 @@ export class StudentDetailsComponent implements OnInit {
     };
   }
   dateDay(){  
-      this.student.dtBirthdate=new Date(this.student['fDays'],this.student['fMonth'],this.student['fYear']);
+      this.student.dtBirthdate=new Date(Number(this.student['fYears']),3,Number(this.student['fDays']));
+      console.log(this.student.dtBirthdate);
       // this.lenOfMonth = new Date(this.student.dtBirthdate.getFullYear(),this.student.dtBirthdate.getMonth(), 0).getDate();
     
   }
