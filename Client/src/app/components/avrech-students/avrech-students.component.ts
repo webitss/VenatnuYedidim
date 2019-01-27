@@ -29,7 +29,7 @@ export class AvrechStudentsComponent implements OnInit {
 
   @ViewChild('child') VyMultySelect: VyMultySelectComponent;
 
-
+public Columns;
   listToSelect: Array<any>;
 
   //studentList: Student[];
@@ -66,8 +66,8 @@ export class AvrechStudentsComponent implements OnInit {
   // t2int:T2Int=new T2Int();
 
   saveAdd() {
-    this.studentsToAdd = this.VyMultySelect.selectedList;
-    this.VyMultySelect.save();
+    this.studentsToAdd =  this.listToSelect.filter(f => f['checked']==true);;
+    // this.VyMultySelect.save();
     this.studentAndAvrechArr = new Array<T2Int>();
     this.studentsToAdd.forEach(element => {
       this.studentAndAvrechArr.push(new T2Int(this.id, element.iPersonId));
@@ -123,11 +123,16 @@ export class AvrechStudentsComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
     this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
 
-
+    
     // this.fields.push("nvLastName");
     // this.fields.push("nvLastName");
     // this.fields.push("nvIdentityCad");
-
+    this.Columns = [
+      new VyTableColumn('בחר', 'checked', 'checkbox'),
+      new VyTableColumn('שם פרטי', 'nvFirstName'),
+      new VyTableColumn('ת"ז ', 'nvIdentityCard'),
+     
+    ];
 
   }
 

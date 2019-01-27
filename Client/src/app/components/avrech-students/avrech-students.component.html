@@ -11,8 +11,11 @@
   <span class="Student-affiliation">שיוך תלמידים</span>
   <button (click)="cancelAdd()" class="btn-close">סגור </button>
   <button (click)="saveAdd()" class="btn-save">  שמור</button>
-  <div class="col-sm-8 my-div">
+  <!-- <div class="col-sm-8 my-div">
     <app-vy-multy-select #child [fullList]="listToSelect" [titleStr]="title" [inputTitle]="inputTitle" (onSave)="getFromChild($event)"></app-vy-multy-select>
+  </div> -->
+  <div class="main-table">
+    <app-vy-table [lstColumns]="Columns" [lstDataRows]="listToSelect" ></app-vy-table>
   </div>
 </div>
 

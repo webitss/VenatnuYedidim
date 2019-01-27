@@ -45,6 +45,14 @@ export class StudentDetailsComponent implements OnInit {
   currentUser: number;
   days: string[] = ["א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב", "יג", "יד", "טו", "טז", "יז", "יח", "יט", "כ", "כא", "כב", "כג", "כד", "כה", "כו", "כז", "כח", "כט", "ל"];
   monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
+  foreignDays:Array<number>=[1,1,1,1,1,1];
+  foreignMonthes:string[]= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  foreignYearsList:Array<string>;
+  
+  fDays:number;
+  fMonthes:string;
+  fYears:string;
+ 
   dateDayArr = new Array<string>();
   dateMonthArr = new Array<string>();
   //dateYearArr = new Array<any>();
@@ -72,7 +80,8 @@ export class StudentDetailsComponent implements OnInit {
 
 
   ngOnInit() {
-
+  
+    this.date();
     this.bornDateHebrewStudent = new HebrewDate();
     this.diedDateHebrewFather = new HebrewDate();
     this.diedDateHebrewMother = new HebrewDate();
@@ -188,7 +197,26 @@ export class StudentDetailsComponent implements OnInit {
     //   this.dateYearArr[i] = this.calcEbrewDatw(this.dateYearArr[i]);
     // }
   }
-
+  date(){
+    this.foreignYearsList=new Array<string>();
+    for (var i =this.currentYear.getFullYear() ; i >1950 ; i--) {
+      // let year = i ;
+      // let strYear = ''
+      // while (year > 0) {
+      //   let j = 0;
+      //   while (j < this.letterArr.length && j > -1) {
+      //     if (this.letterArr[j].iValue <= year) { 
+      //       strYear+=this.letterArr[j].nvChar;
+      //       year = year - this.letterArr[j].iValue; 
+      //       j = -1; }
+      //     else
+      //       j++;
+      //   }
+      // }
+      this.foreignYearsList.push(i.toString());
+      //this.dateYearArr.push(i);
+    };
+  }
   shift(newStatus) {
     this.appProxy.post("UpdateStatusStudent", { iPersonId: this.student.iPersonId, iStatusType: newStatus }).then(
       data => {

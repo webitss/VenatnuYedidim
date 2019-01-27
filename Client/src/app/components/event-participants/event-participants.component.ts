@@ -90,7 +90,7 @@ export class EventParticipantsComponent implements OnInit {
   event: any;
   save() {
     let sumSave = 0;
-    let lstToSave = this.listToSelect.filter(f => f['bMultySelectChecked']);
+    let lstToSave = this.listToSelect.filter(f => f['checked']==true);
     let sumToSave = lstToSave.length;
     this.flag = false;
     lstToSave.forEach(item => {
