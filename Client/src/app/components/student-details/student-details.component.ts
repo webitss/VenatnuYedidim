@@ -114,6 +114,9 @@ export class StudentDetailsComponent implements OnInit {
             this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data; });
           });
           this.student['fYears'] = this.student.dtBirthdate?this.student.dtBirthdate.getFullYear().toString():null;
+          this.student['fMonthes'] = this.foreignMonthes[this.student.dtBirthdate?this.student.dtBirthdate.getMonth().toString():null];
+          this.student['fDays'] = this.student.dtBirthdate?this.student.dtBirthdate.getDay():null;
+
           this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
           this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];
           this.bornDateHebrewStudent.Month = this.bornDateStudentArr[1];
@@ -221,8 +224,8 @@ export class StudentDetailsComponent implements OnInit {
   }
   dateDay() {
     this.student.dtBirthdate = new Date(Number(this.student['fYears']), 3, Number(this.student['fDays']));
-    console.log(this.student.dtBirthdate);
-    // this.lenOfMonth = new Date(this.student.dtBirthdate.getFullYear(),this.student.dtBirthdate.getMonth(), 0).getDate();
+    // console.log(this.student.dtBirthdate);
+    this.lenOfMonth = new Date(Number(this.student['fYears']),this.student['fMonth'], 0).getDate();
 
   }
   shift(newStatus) {

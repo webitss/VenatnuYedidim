@@ -146,12 +146,12 @@
                     (ngModelChange)="e.dtAddStudentDate = $event" (change)="change=true" [ngModelOptions]="{standalone: true}"
                     style='width: 210px'>
             </div>
-            <div class="form-group  col-sm-3">
+            <!-- <div class="form-group  col-sm-3">
                 <label for="dtBornDate"> תאריך לידה לועזי:</label>
                 <input type="date" class="form-control" id="dtBornDate" name="dtBornDate" (change)="change=true"
                     [ngModel]="student.dtBirthdate  | date:'yyyy-MM-dd' " (ngModelChange)="e.dtBirthdate = $event"
                     [ngModelOptions]="{standalone: true}">
-            </div>
+            </div> -->
             
             <div class="form-group  col-sm-3">
                 <ng-select [items]="foreignDays" placeholder="תאריך לידה לועזי" id="nvBornDateDay" name="nvBornDateDay"
