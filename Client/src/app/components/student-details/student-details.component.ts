@@ -45,13 +45,13 @@ export class StudentDetailsComponent implements OnInit {
   currentUser: number;
   days: string[] = ["א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב", "יג", "יד", "טו", "טז", "יז", "יח", "יט", "כ", "כא", "כב", "כג", "כד", "כה", "כו", "כז", "כח", "כט", "ל"];
   monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
-  foreignDays:Array<number>=[1,1,1,1,1,1];
-  foreignMonthes:string[]= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  foreignYearsList:Array<string>;
-  
- 
- 
-  lenOfMonth:number;
+  foreignDays: Array<number> = [1, 1, 1, 1, 1, 1];
+  foreignMonthes: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  foreignYearsList: Array<string>;
+
+
+
+  lenOfMonth: number;
 
   dateDayArr = new Array<string>();
   dateMonthArr = new Array<string>();
@@ -80,7 +80,7 @@ export class StudentDetailsComponent implements OnInit {
 
 
   ngOnInit() {
-  
+
     this.dateYear();
     // this.dateDay();
     this.bornDateHebrewStudent = new HebrewDate();
@@ -113,7 +113,7 @@ export class StudentDetailsComponent implements OnInit {
             this.status = data.filter(x => x.iSysTableRowId == this.student.iStatusType)[0].nvValue;
             this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data; });
           });
-
+          this.student['fYears'] = this.student.dtBirthdate?this.student.dtBirthdate.getFullYear().toString():null;
           this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
           this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];
           this.bornDateHebrewStudent.Month = this.bornDateStudentArr[1];
@@ -175,16 +175,17 @@ export class StudentDetailsComponent implements OnInit {
     this.letterArr = this.letterArr.sort((n1, n2) => { return n2.iValue - n1.iValue });
     //var dateUrl = "http://www.hebcal.com/converter/?cfg=json&gy=" + 2018 + "&gm=" + 4 + "&gd=" + 12 + "&g2h=1";
     this.hebrewYearsList = [];
-    for (var i =this.currentYear.getFullYear() ; i >1950 ; i--) {
+    for (var i = this.currentYear.getFullYear(); i > 1950; i--) {
       let year = (i + 3760) % 1000;
       let strYear = ''
       while (year > 0) {
         let j = 0;
         while (j < this.letterArr.length && j > -1) {
-          if (this.letterArr[j].iValue <= year) { 
-            strYear+=this.letterArr[j].nvChar;
-            year = year - this.letterArr[j].iValue; 
-            j = -1; }
+          if (this.letterArr[j].iValue <= year) {
+            strYear += this.letterArr[j].nvChar;
+            year = year - this.letterArr[j].iValue;
+            j = -1;
+          }
           else
             j++;
         }
@@ -198,9 +199,9 @@ export class StudentDetailsComponent implements OnInit {
     //   this.dateYearArr[i] = this.calcEbrewDatw(this.dateYearArr[i]);
     // }
   }
-  dateYear(){
-    this.foreignYearsList=new Array<string>();
-    for (var i =this.currentYear.getFullYear() ; i >1950 ; i--) {
+  dateYear() {
+    this.foreignYearsList = new Array<string>();
+    for (var i = this.currentYear.getFullYear(); i > 1950; i--) {
       // let year = i ;
       // let strYear = ''
       // while (year > 0) {
@@ -218,11 +219,11 @@ export class StudentDetailsComponent implements OnInit {
       //this.dateYearArr.push(i);
     };
   }
-  dateDay(){  
-      this.student.dtBirthdate=new Date(Number(this.student['fYears']),3,Number(this.student['fDays']));
-      console.log(this.student.dtBirthdate);
-      // this.lenOfMonth = new Date(this.student.dtBirthdate.getFullYear(),this.student.dtBirthdate.getMonth(), 0).getDate();
-    
+  dateDay() {
+    this.student.dtBirthdate = new Date(Number(this.student['fYears']), 3, Number(this.student['fDays']));
+    console.log(this.student.dtBirthdate);
+    // this.lenOfMonth = new Date(this.student.dtBirthdate.getFullYear(),this.student.dtBirthdate.getMonth(), 0).getDate();
+
   }
   shift(newStatus) {
     this.appProxy.post("UpdateStatusStudent", { iPersonId: this.student.iPersonId, iStatusType: newStatus }).then(
