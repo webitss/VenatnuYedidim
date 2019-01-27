@@ -152,24 +152,24 @@
                     [ngModel]="student.dtBirthdate  | date:'yyyy-MM-dd' " (ngModelChange)="e.dtBirthdate = $event"
                     [ngModelOptions]="{standalone: true}">
             </div> -->
-        
+            
             <div class="form-group  col-sm-3">
                 <ng-select [items]="foreignDays" placeholder="תאריך לידה לועזי" id="nvBornDateDay" name="nvBornDateDay"
-                    (change)="change=true" [(ngModel)]="student.dtBirthdate.day" [ngModelOptions]="{standalone: true}">
+                    (change)="change=true" [(ngModel)]="student.fDays" [ngModelOptions]="{standalone: true}">
                 </ng-select>
             </div>
             <div class="form-group  col-sm-3">
                
 
                 <ng-select [items]="foreignMonthes" placeholder="חודש" (change)="change=true" id="nvBornDateMonth" name="nvBornDateMonth"
-                    [(ngModel)]="student.dtBirthdate.month">
+                    [(ngModel)]="student.fMonthes">
                 </ng-select>
 
             </div>
 
             <div class="form-group  col-sm-3">
                 <ng-select [items]="foreignYearsList" placeholder="שנה" id="nvBornDateYear" name="nvBornDateYear"
-                    (change)="change=true" [(ngModel)]="student.dtBirthdate.Year" [ngModelOptions]="{standalone: true}">
+                    (change)="change=true" [(ngModel)]="student.fYears" [ngModelOptions]="{standalone: true}">
                 </ng-select>
             </div>
         </div>

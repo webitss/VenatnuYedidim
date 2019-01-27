@@ -49,10 +49,10 @@ export class StudentDetailsComponent implements OnInit {
   foreignMonthes:string[]= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   foreignYearsList:Array<string>;
   
-  fDays:number;
-  fMonthes:string;
-  fYears:string;
  
+ 
+  lenOfMonth:number;
+
   dateDayArr = new Array<string>();
   dateMonthArr = new Array<string>();
   //dateYearArr = new Array<any>();
@@ -81,7 +81,8 @@ export class StudentDetailsComponent implements OnInit {
 
   ngOnInit() {
   
-    this.date();
+    this.dateYear();
+    // this.dateDay();
     this.bornDateHebrewStudent = new HebrewDate();
     this.diedDateHebrewFather = new HebrewDate();
     this.diedDateHebrewMother = new HebrewDate();
@@ -197,7 +198,7 @@ export class StudentDetailsComponent implements OnInit {
     //   this.dateYearArr[i] = this.calcEbrewDatw(this.dateYearArr[i]);
     // }
   }
-  date(){
+  dateYear(){
     this.foreignYearsList=new Array<string>();
     for (var i =this.currentYear.getFullYear() ; i >1950 ; i--) {
       // let year = i ;
@@ -216,6 +217,11 @@ export class StudentDetailsComponent implements OnInit {
       this.foreignYearsList.push(i.toString());
       //this.dateYearArr.push(i);
     };
+  }
+  dateDay(){  
+      this.student.dtBirthdate=new Date(this.student['fDays'],this.student['fMonth'],this.student['fYear']);
+      // this.lenOfMonth = new Date(this.student.dtBirthdate.getFullYear(),this.student.dtBirthdate.getMonth(), 0).getDate();
+    
   }
   shift(newStatus) {
     this.appProxy.post("UpdateStatusStudent", { iPersonId: this.student.iPersonId, iStatusType: newStatus }).then(

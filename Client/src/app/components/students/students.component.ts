@@ -49,7 +49,7 @@ this.currentYeshivaOfStudent=new Map<number,string>();
           this.appProxy.get("GetCurrentYeshivaOfStudent").then(data => {
             this.currentYeshivaOfStudent = data;
             this.studentList.forEach(student => {
-              debugger;
+              // debugger;
               if (this.studentsAssociatedToAvrech.filter(x => x == student.iPersonId).length > 0)
                 student['nvAssociated'] = '<span>כן</span>';
 
