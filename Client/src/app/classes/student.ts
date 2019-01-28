@@ -29,8 +29,8 @@ export class Student implements Person {
     public iStatusType:number=null;
 
     public fDays:number;
-    public fMonthes:string;
-    public fYears:string;
+    public fMonthes:number;
+    public fYears:number;
     constructor() {
        
     }

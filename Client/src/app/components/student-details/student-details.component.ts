@@ -10,6 +10,7 @@ import { Yeshiva } from '../../classes/Yeshiva';
 import { AppComponent } from '../app/app.component';
 import { LetterEbrew } from '../../classes/LetterEbrew';
 import { NgForm } from '../../../../node_modules/@angular/forms';
+import { KeyValue } from '../../classes/key-value';
 
 @Component({
   selector: 'app-student-details',
@@ -46,12 +47,14 @@ export class StudentDetailsComponent implements OnInit {
   days: string[] = ["א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב", "יג", "יד", "טו", "טז", "יז", "יח", "יט", "כ", "כא", "כב", "כג", "כד", "כה", "כו", "כז", "כח", "כט", "ל"];
   monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
   foreignDays: Array<number> =[];
-  foreignMonthes: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  foreignMonthes: Array<KeyValue>;
+ 
+  // this.foreignMonthes=["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   foreignYearsList: Array<string>;
+ 
 
 
-
-  lenOfMonth: number=30;
+  lenOfMonth: number;
 
   dateDayArr = new Array<string>();
   dateMonthArr = new Array<string>();
@@ -80,7 +83,22 @@ export class StudentDetailsComponent implements OnInit {
 
 
   ngOnInit() {
-
+    this.foreignMonthes=[
+    {id:1,text:"Jan"},
+    {id:2,text:"Feb"},
+    {id:3,text:"Mar"},
+    {id:4,text:"Apr"},
+    {id:5,text:"May"},
+    {id:6,text:"Jun"},
+    {id:7,text:"Jul"},
+    {id:8,text:"Aug"},
+    {id:9,text:"Sep"},
+    {id:10,text:"Oct"},
+    {id:11,text:"Nov"},
+    {id:12,text:"Dec"},
+];
+ 
+    this.lenOfMonth=30
     this.dateYear();
     this.generateDay();
     this.bornDateHebrewStudent = new HebrewDate();
@@ -113,9 +131,11 @@ export class StudentDetailsComponent implements OnInit {
             this.status = data.filter(x => x.iSysTableRowId == this.student.iStatusType)[0].nvValue;
             this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data; });
           });
-          this.student['fYears'] = this.student.dtBirthdate?this.student.dtBirthdate.getFullYear().toString():null;
-          this.student['fMonthes'] = this.foreignMonthes[this.student.dtBirthdate?this.student.dtBirthdate.getMonth().toString():null];
-          this.student['fDays'] = this.student.dtBirthdate?this.student.dtBirthdate.getDay():null;
+          this.student['fYears'] = this.student.dtBirthdate?this.student.dtBirthdate.getFullYear():0;
+          // this.student['fMonthes'] = this.foreignMonthes[this.student.dtBirthdate?this.student.dtBirthdate.getMonth().toString():null];
+          this.student['fMonthes']=this.foreignMonthes[this.student.dtBirthdate.getMonth()].id;
+          // this.student['fMonthes']['text']=this.foreignMonthes[this.student.dtBirthdate.getMonth()].text;
+          this.student['fDays'] = this.student.dtBirthdate?this.student.dtBirthdate.getDay():0;
 
           this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
           this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];
@@ -223,14 +243,15 @@ export class StudentDetailsComponent implements OnInit {
     };
   }
   dateDay() {
-    this.student.dtBirthdate = new Date(Number(this.student['fYears']), 3, Number(this.student['fDays']));
+    this.student.dtBirthdate = new Date(Number(this.student['fYears']),(this.student['fMonthes']['id']), Number(this.student['fDays']));
     // console.log(this.student.dtBirthdate);
-    this.lenOfMonth = new Date(Number(this.student['fYears']),this.student['fMonth'], 0).getDate();
+    this.lenOfMonth = new Date(Number(this.student['fYears']),(this.student['fMonthes']['id']), 0).getDate();
     this.generateDay();
 
   }
   generateDay()
   {
+    this.foreignDays=[];
     for(var i=1;i<=this.lenOfMonth;i++)
     this.foreignDays.push(i);
   }

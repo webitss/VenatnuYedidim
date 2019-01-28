@@ -161,7 +161,7 @@
             <div class="form-group  col-sm-3">
                
 
-                <ng-select [items]="foreignMonthes" placeholder="חודש" (change)="change=true;dateDay()" id="nvBornDateMonth" name="nvBornDateMonth"
+                <ng-select [items]="foreignMonthes" placeholder="חודש" (change)="change=true;dateDay()" id="nvBornDateMonth" name="nvBornDateMonth" bindLabel="text"
                     [(ngModel)]="student.fMonthes">
                 </ng-select>
 
