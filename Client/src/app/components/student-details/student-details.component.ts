@@ -133,9 +133,9 @@ export class StudentDetailsComponent implements OnInit {
           });
           this.student['fYears'] = this.student.dtBirthdate?this.student.dtBirthdate.getFullYear():0;
           // this.student['fMonthes'] = this.foreignMonthes[this.student.dtBirthdate?this.student.dtBirthdate.getMonth().toString():null];
-          this.student['fMonthes']=this.foreignMonthes[this.student.dtBirthdate.getMonth()].id;
+          this.student['fMonthes']=this.student.dtBirthdate.getMonth();
           // this.student['fMonthes']['text']=this.foreignMonthes[this.student.dtBirthdate.getMonth()].text;
-          this.student['fDays'] = this.student.dtBirthdate?this.student.dtBirthdate.getDay():0;
+          this.student['fDays'] = this.student.dtBirthdate?this.student.dtBirthdate.getDate():0;
 
           this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
           this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];
@@ -243,9 +243,9 @@ export class StudentDetailsComponent implements OnInit {
     };
   }
   dateDay() {
-    this.student.dtBirthdate = new Date(Number(this.student['fYears']),(this.student['fMonthes']['id']), Number(this.student['fDays']));
+    this.student.dtBirthdate = new Date(Number(this.student['fYears']),(this.student['fMonthes']), this.student['fDays']);
     // console.log(this.student.dtBirthdate);
-    this.lenOfMonth = new Date(Number(this.student['fYears']),(this.student['fMonthes']['id']), 0).getDate();
+    this.lenOfMonth = new Date(this.student['fYears'],(this.student['fMonthes']), 0).getDate();
     this.generateDay();
 
   }

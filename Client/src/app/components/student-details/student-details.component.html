@@ -124,7 +124,7 @@
                 <div class="form-group  col-sm-3">
                    
 
-                    <ng-select [items]="monthes" placeholder="חודש" (change)="change=true" id="nvBornDateMonth" name="nvBornDateMonth"
+                    <ng-select [items]="monthes" placeholder="חודש" (change)="change=true" id="nvBornDateMonthHebreo" name="nvBornDateMonthHebreo"
                         [(ngModel)]="bornDateHebrewStudent.Month">
                     </ng-select>
 
@@ -161,7 +161,7 @@
             <div class="form-group  col-sm-3">
                
 
-                <ng-select [items]="foreignMonthes" placeholder="חודש" (change)="change=true;dateDay()" id="nvBornDateMonth" name="nvBornDateMonth" bindLabel="text"
+                <ng-select [items]="foreignMonthes" placeholder="חודש" (change)="change=true;dateDay()" id="nvBornDateMonth" name="nvBornDateMonth" bindValue='id' bindLabel="text"
                     [(ngModel)]="student.fMonthes">
                 </ng-select>
 
@@ -225,7 +225,7 @@
                                 {{month}}
                             </option>
                         </select> -->
-                    <ng-select [items]="monthes" placeholder="חודש" id="nvBornDateMonth" name="nvBornDateMonth"
+                    <ng-select [items]="monthes" placeholder="חודש" id="diedDateHebrewFather" name="diedDateHebrewFather"
                         [(ngModel)]="diedDateHebrewFather.Month" [ngModelOptions]="{standalone: true}">
                     </ng-select>
 
