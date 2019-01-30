@@ -29,13 +29,13 @@ namespace Service.Entities
             try
             {
                 int id;
-                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_GetParticipantByEventId_SLCT", new SqlParameter("iEventId", iEventId)).Tables[0];                
+                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_GetParticipantByEventId_SLCT", new SqlParameter("iEventId", iEventId)).Tables[0];
                 List<Person> participants = new List<Person>();
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Person p = new Person();
-                    
-                    
+
+
                     p.iPersonId = int.Parse(dt.Rows[i]["iPersonId"].ToString());
                     p.nvLastName = dt.Rows[i]["nvLastName"].ToString();
                     p.nvFirstName = dt.Rows[i]["nvFirstName"].ToString();
@@ -43,7 +43,7 @@ namespace Service.Entities
                     p.nvMobile = dt.Rows[i]["nvMobile"].ToString();
                     p.nvEmail = dt.Rows[i]["nvEmail"].ToString();
                     p.lstObject.Add("iArrivalStatusType", dt.Rows[i]["iArrivalStatusType"].ToString());
-                   p.lstObject.Add("nvParticipantType", dt.Rows[i]["nvParticipantType"].ToString());
+                    p.lstObject.Add("nvParticipantType", dt.Rows[i]["nvParticipantType"].ToString());
 
                     participants.Add(p);
                 }
@@ -52,7 +52,7 @@ namespace Service.Entities
             }
             catch (Exception ex)
             {
-                Log.LogError("GetParticipantsList / TParticipant_SLCT", "ex " + ex +", iEventId : "+ iEventId);
+                Log.LogError("GetParticipantsList / TParticipant_SLCT", "ex " + ex + ", iEventId : " + iEventId);
                 return null;
             }
         }
@@ -68,7 +68,7 @@ namespace Service.Entities
                 DataTable dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_DEL", parameters).Tables[0];
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.LogError("DeleteParticipant / TParticipant_DEL", "ex " + ex);
                 return false;
@@ -84,12 +84,12 @@ namespace Service.Entities
 
                 for (int i = 0; i < drc.Count; i++)
                 {
-                   // Person p = new Person();
-                    Persons[i].lstObject=new Dictionary<string,string>();
+                    // Person p = new Person();
+                    Persons[i].lstObject = new Dictionary<string, string>();
                     Persons[i].nvFirstName = drc[i]["nvFirstName"].ToString();
                     //Persons[i].iPersonId = drc[i]["iPersonId"].ToString();
                     Persons[i].lstObject.Add("nvParticipantType", drc[i]["nvParticipantType"].ToString());
-                  
+
                 }
 
 
@@ -122,6 +122,26 @@ namespace Service.Entities
                 return false;
             }
         }
-    }
 
+        public static bool SetEventParticipantList(Participant[] ParticipantList, int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                //parameters.Add(new SqlParameter("isNew", isNew));
+                //parameters.Add(new SqlParameter("iStatusType", iStatusType));
+                //parameters.Add(new SqlParameter("iPersonId", iPersonId));
+                //parameters.Add(new SqlParameter("iEventId", iEventId));
+                //parameters.Add(new SqlParameter("iUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TParticipant_INS_UPD", parameters);
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("SetEventParticipant / TParticipant_INS_UPD", ": , ex " + ex);
+                return false;
+            }
+        }
+    }
 }

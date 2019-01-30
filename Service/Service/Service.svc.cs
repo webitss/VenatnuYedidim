@@ -411,6 +411,11 @@ namespace Service
         {
             return Participant.SetEventParticipant(isNew, iStatusType, iPersonId, iEventId, iUserId);
         }
+        public bool SetEventParticipantList(Participant [] ParticipantList, int iUserId)
+        {
+            return Participant.SetEventParticipantList(ParticipantList, iUserId);
+        }
+        
         #endregion
 
         #region Fileshandler
