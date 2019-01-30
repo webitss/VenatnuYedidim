@@ -57,7 +57,7 @@ export class EventParticipantsComponent implements OnInit {
     new VyTableColumn('בחר', 'checked', 'checkbox'),
     new VyTableColumn('שם פרטי', 'nvFirstName'),
     new VyTableColumn('סוג משתמש', 'nvParticipantType'),
-   
+
   ];
   public lstDataRows = [];
 
@@ -71,7 +71,7 @@ export class EventParticipantsComponent implements OnInit {
         this.listToSelect.forEach(
           person => {
             person['value'] = person.nvFirstName + ' ' + person.lstObject['nvParticipantType'];
-            person['nvParticipantType'] = person.lstObject['nvParticipantType'] ;
+            person['nvParticipantType'] = person.lstObject['nvParticipantType'];
 
             //this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'], iPersonId: person.iPersonId });
             //this.iPersonId = person.iPersonId;
@@ -86,52 +86,52 @@ export class EventParticipantsComponent implements OnInit {
   }
 
   //  להוסיף את המשתתפים שנבחרו
-
+  listParticipant: Array<Participants>;
+  // i: number = 0;
   event: any;
   save() {
+    this.listParticipant=new Array<Participants>();
+    // this.i = 0;
     let sumSave = 0;
-    let lstToSave = this.listToSelect.filter(f => f['checked']==true);
+    let lstToSave = this.listToSelect.filter(f => f['checked'] == true);
     let sumToSave = lstToSave.length;
     this.flag = false;
     lstToSave.forEach(item => {
-      //if (item['bMultySelectChecked'] == true)
-      this.appProxy.post("SetEventParticipant", {
-        isNew: true, iStatusType: 34, iPersonId: item.iPersonId, iEventId: this.iEventId,
-        iUserId: this.globalService.getUser().iPersonId
-      })
-        .then(data => {
-          if (data == true) {
-            sumSave++;
-
-            if (sumSave == sumToSave) {
-              this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
-              // this.lstDataRows = this.lstDataRows.concat(lstToSave);
-              // this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
-              //   if (res.length > 0) {
-              //     this.participantList = res;
-              //     this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
-              //       this.sysTableRowList = data;
-              this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
-                if (res.length > 0) {
-                  this.participantList = res;
-                  this.lstDataRows=res;
-                }
-                this.buildGrid(this.lstDataRows, true);
-              });
-                   
-                  // });
-        
-                // }
-              // });
-            }
-          }
-          else
-            this._parent.openMessagePopup("השמירה נכשלה");
-
-        });
-
-
+      if (item['checked'] == true) {
+        this.listParticipant.push(item);
+        // this.listParticipant[this.i].iEventId = item.iEventId;
+        // this.listParticipant[this.i].iArrivalStatusType = 34;
+        // this.i++;
+      }
     });
+    // if (item['bMultySelectChecked'] == true)
+    this.appProxy.post("SetEventParticipantList", {
+      listParticipant:this.listParticipant,iUserId: this.globalService.getUser().iPersonId
+    })
+    //   .then(data => {
+    //     if (data == true) {
+    //       sumSave++;
+
+    //       if (sumSave == sumToSave) {
+    //         this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
+    //         this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
+    //           if (res.length > 0) {
+    //             this.participantList = res;
+    //             this.lstDataRows=res;
+    //           }
+    //           this.buildGrid(this.lstDataRows, true);
+    //         });
+
+
+    // }
+    // }
+    // else
+    //   this._parent.openMessagePopup("השמירה נכשלה");
+
+    // });
+
+
+    // });
 
   }
   ngOnInit() {
@@ -157,7 +157,7 @@ export class EventParticipantsComponent implements OnInit {
           this.participantList = res;
           this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
             this.sysTableRowList = data;
-            this.buildGrid(res,false);
+            this.buildGrid(res, false);
 
           });
 
@@ -186,7 +186,7 @@ export class EventParticipantsComponent implements OnInit {
         nvEmail: p.nvEmail,
         nvParticipantType: p.lstObject ? p.lstObject.nvParticipantType : p.nvParticipantType,
         iArriveStatusType: iArriveStatusType,
-        iPersonId:p.iPersonId
+        iPersonId: p.iPersonId
         //iArriveStatusType: '<select> <option>j,k</option><option>ughjk</option></select>'
         // iArriveStatusType:'<button>fgd</button>'
         // iArriveStatusType: this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType) &&
@@ -196,7 +196,7 @@ export class EventParticipantsComponent implements OnInit {
     if (refresh)
       this.vyTableComponent.refreshTable(this.lstDataRows);
   }
-  
+
   click(e) {
     // this.avrechId = e.iPersonId;
     if (e.columnClickName == "delete")
@@ -209,11 +209,12 @@ export class EventParticipantsComponent implements OnInit {
     this.appProxy.post('DeleteParticipant', { iEventId: this.iEventId, iPersonId: e.iPersonId, iUserId: this.globalService.getUser().iPersonId })
       .then(data => {
         this._parent.openMessagePopup('המחיקה בוצעה בהצלחה!');
-        this.lstDataRows.splice(this.lstDataRows.findIndex(p=>p.iPersonId==e.iPersonId), 1);
+        this.lstDataRows.splice(this.lstDataRows.findIndex(p => p.iPersonId == e.iPersonId), 1);
         this.vyTableComponent.refreshTable(this.lstDataRows);
       }).catch(err => {
-       // alert(err)
+        // alert(err)
       });
+
   }
 }
 
