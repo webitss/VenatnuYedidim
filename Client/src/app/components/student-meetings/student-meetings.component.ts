@@ -36,35 +36,13 @@ export class StudentMeetingsComponent implements OnInit {
     @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
 
-  public lstColumns = [{
-    name: 'edit',
-    bClickCell: true,
-    type: 'html'
-
-  },
-  {
-    name: 'delete',
-    bClickCell: true,
-    type: 'html'
-  },
-  {
-    title: 'סוג פגישה',
-    name: 'nvMeetingType',
-
-
-  },
-  {
-    title: 'תאריך',
-    name: 'nvDate',
-  },
-  {
-    title: 'שעה',
-    name: 'nvHour'
-  },
-  {
-    title: 'סיכום',
-    name: 'nvSummary',
-  }
+  public lstColumns = [
+  {name: 'edit',bClickCell: true,type: 'html'},
+  {name: 'delete',bClickCell: true,type: 'html'},
+  {title: 'סוג פגישה',name: 'nvMeetingType',},
+  {title: 'תאריך',name: 'nvDate',},
+  {title: 'שעה',name: 'nvHour'},
+  {title: 'סיכום',name: 'nvSummary',}
   ]
 
   editMeeting(meeting: Meeting) {
@@ -75,7 +53,7 @@ export class StudentMeetingsComponent implements OnInit {
 
   deleteMeeting(meeting: Meeting) {
     this.appProxy.post('DeleteMeeting', { iMeetingId: meeting.iMeetingId, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
-      this._parent.openMessagePopup('נמחק בהצלחה!');
+      this._parent.openMessagePopup('המחיקה בוצעה בהצלחה!');
       this.meetingList.splice(this.meetingList.indexOf(meeting), 1);
       this.cc.refreshTable(this.meetingList);
     });
@@ -137,7 +115,7 @@ export class StudentMeetingsComponent implements OnInit {
     m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
     m['edit'] = '<div class="edit"></div>';
     m['delete'] = '<div class="delete"></div>';
-    m['nvMeetingType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0].nvValue;
+    m['nvMeetingType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)?this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0]?this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0].nvValue:'':'';
     this.meet = m;
   }
   GetMeetingsByStudentId(id: number) {

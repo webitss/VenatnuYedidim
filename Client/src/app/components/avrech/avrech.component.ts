@@ -62,6 +62,7 @@ export class AvrechComponent implements OnInit {
   save() {
     if (this.currentComponent.save) {
       this.currentComponent.save()
+     this.router.navigateByUrl("/avrechim");
     }
   }
 

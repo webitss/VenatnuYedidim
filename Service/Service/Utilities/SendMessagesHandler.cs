@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Mail;
 using System.Text;
 using System.Web;
+using Service.Entities;
 
 namespace Service.Utilities
 {
@@ -14,10 +15,29 @@ namespace Service.Utilities
     {
         public static bool SendEmailOrFax(string from, string to, string subject, string body, List<Attachment> lAttach)
         {
+            
             using (SmtpClient smtpClient = new SmtpClient())
             {
                 try
                 {
+                    
+                    smtpClient.Credentials = new System.Net.NetworkCredential()
+                    {
+                        UserName = ConfigSettings.ReadSetting("Email"),
+                        Password = ConfigSettings.ReadSetting("passwordMail")
+                    };
+                    smtpClient.EnableSsl = true;
+                    
+                    System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate (object s,
+                            System.Security.Cryptography.X509Certificates.X509Certificate certificate,
+                            System.Security.Cryptography.X509Certificates.X509Chain chain,
+                            System.Net.Security.SslPolicyErrors sslPolicyErrors)
+                    {
+                        return true;
+                    };
+
+
+
                     MailMessage mailObj = new MailMessage(from, to);
                     mailObj.ReplyToList.Add(new MailAddress(from, "reply-to"));
 

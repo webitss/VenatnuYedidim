@@ -29,7 +29,7 @@ export class SettingsYeshivotComponent implements OnInit {
   public flag;
 
   @ViewChild('yeshivot') yeshivot: any;
-  @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
+  @ViewChild("AppVyTable") vyTableComponent: VyTableComponent;
 
   // @Output()
   // public closeYeshiva = new EventEmitter();
@@ -78,9 +78,7 @@ export class SettingsYeshivotComponent implements OnInit {
   changeTable(y: Yeshiva) {
     y['edit'] = '<div class="edit"></div>';
     y['delete'] = '<div class="delete"></div>';
-    y['nvRoleType'] = this.sysTableList.filter(x => x.iSysTableRowId == y.iRoleType)[0].nvValue;
-     y['edit'] = '<div class="edit"></div>';
-    y['delete'] = '<div class="delete"></div>';
+    y['nvRoleType'] = this.sysTableList.filter(x => x.iSysTableRowId == y.iRoleType)?this.sysTableList.filter(x => x.iSysTableRowId == y.iRoleType)[0]?this.sysTableList.filter(x => x.iSysTableRowId == y.iRoleType)[0].nvValue:'':'';
     //this.yeshiva = y;
   }
 
@@ -113,7 +111,7 @@ export class SettingsYeshivotComponent implements OnInit {
           yeshiva= this.yeshivaList.find(y=>y.iYeshivaId==this.iYeshivaId);
           this.iYeshivaId = null;
           this.flag = null;
-          this._parent.openMessagePopup('הישיבה נמחקה בהצלחה!');
+          this._parent.openMessagePopup('המחיקה התבצעה בהצלחה!');
           this.yeshivaList.splice(this.yeshivaList.indexOf(yeshiva), 1);
           this.vyTableComponent.refreshTable(this.yeshivaList);
         });
@@ -157,7 +155,7 @@ export class SettingsYeshivotComponent implements OnInit {
   }
 
   downloadExcel() {
-    this.yeshivot.downloadExcel();
+    this.vyTableComponent.downloadExcel();
   }
 }
 

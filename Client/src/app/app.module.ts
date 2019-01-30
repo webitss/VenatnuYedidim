@@ -18,7 +18,8 @@ import { NgxImageGalleryModule } from 'ngx-image-gallery';
 
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { IgxCalendarModule } from 'igniteui-angular';
-
+// import {SelectModule} from 'ng2-select';
+import { NgSelectModule } from '@ng-select/ng-select';
 //--- templates ---
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
@@ -206,6 +207,8 @@ import { DataSharingService } from './services/dataSharing.Service';
    
   //],
   imports: [
+    // SelectModule,
+    NgSelectModule,
     // BrowserAnimationsModule, IgxCalendarModule,
     // CommonModule,
     // NgbModalModule,
@@ -230,7 +233,7 @@ import { DataSharingService } from './services/dataSharing.Service';
       // { path: "", component: StudentsComponent },
     { path: "", component: ShowImageComponent },
    
-     { path: "ShowImage",  component: ShowImageComponent },
+     { path: "ResultComponent",  component: ShowImageComponent },
      { path: "log-in", component: LogInComponent, canDeactivate: [CanDeactivateGuard] },
       { path: "students", component: StudentsComponent },
       // { path: "graduates", component: StudentsComponent },

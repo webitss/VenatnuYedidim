@@ -35,27 +35,32 @@ export class StudentEventDetailsComponent implements OnInit {
       this.id = params["iPersonId"]
     });
 
-    if (this.event == null) {
-      this.event = new Event1();
-      this.event['iArrivalStatusType'] = null;
-      this.event.nvName = null;
-      this.isNew = true;
-    }
-    else {
-      this.event['iArrivalStatusType'] = this.iArrivalStatusType;
-      this.isNew = false;
-    }
+   
     this.appProxy.post("GetEventsList")
       .then(data => {
         this.eventsList = data;
+        this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(lst => {
+          this.lst = lst;
+          if (this.event == null) {
+            this.event = new Event1();
+        
+            this.iArrivalStatusType =  this.lst[0].iSysTableRowId;
+            this.event.nvName = null;
+            this.isNew = true;
+          }
+          else {
+            this.iArrivalStatusType = this.lst.find(x => x.nvValue == this.event['iArrivalStatusType']).iSysTableRowId;
+            this.isNew = false;
+          }
+        });
+        
+        
       }).catch(err => {
         // alert(err);
       })
 
 
-    this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
-      this.lst = data;
-    });
+   
 
 
 
@@ -81,12 +86,13 @@ export class StudentEventDetailsComponent implements OnInit {
         this.close();
       }
       else {
-        this.iArrivalStatusType = this.lst.find(x => x.nvValue == this.event['iArrivalStatusType']).iSysTableRowId;
+        //this.iArrivalStatusType = this.lst.find(x => x.nvValue == this.event['iArrivalStatusType']).iSysTableRowId;
         this.appProxy.post("SetEventParticipant", { isNew: this.isNew, iStatusType: this.iArrivalStatusType, iPersonId: this.id, iEventId: this.event.iEventId, iUserId: this.globalService.getUser().iPersonId })
           .then(data => {
             if (data == true) {
+              this.event['iArrivalStatusType']=this.lst.find(x => x.iSysTableRowId == this.iArrivalStatusType).nvValue;
               this.lst.push(this.event);
-              this._parent.openMessagePopup('האירוע נשמר בהצלחה!')
+              this._parent.openMessagePopup('השמירה התבצעה בהצלחה!')
               this.close();
             }
           }).catch(err => {

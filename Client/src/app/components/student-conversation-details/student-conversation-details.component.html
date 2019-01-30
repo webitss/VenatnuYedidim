@@ -25,7 +25,7 @@
             <label for="conversationType">סוג שיחה</label>
             <!-- <input type="text" name="conversationType" class="form-control"  [(ngModel)]="conversation.nvConversationType" [ngModelOptions]="{standalone: true}"/>-->
             <select id="conversationType" class="form-control" [(ngModel)]="conversation.iConversationType" required #type="ngModel">
-              <option [ngValue]="undefined" disabled>בחר</option>
+              <!-- <option [ngValue]="undefined" disabled>בחר</option> -->
               <option *ngFor='let t of sysTableList' [value]="t.iSysTableRowId">{{t.nvValue}}</option>
             </select>
             <div *ngIf="type.invalid && (type.dirty || type.touched)">

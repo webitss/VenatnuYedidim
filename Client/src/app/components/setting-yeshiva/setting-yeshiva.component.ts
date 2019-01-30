@@ -45,7 +45,7 @@ export class SettingYeshivaComponent implements OnInit {
   formValid = false;
 
   isDisabled(): boolean {
-    if (this.isDisabled)
+    //if (this.isDisabled)
       return this.form.valid;
   }
 
@@ -56,6 +56,7 @@ export class SettingYeshivaComponent implements OnInit {
   ngOnInit() {
     if (this.iYeshivaId == 0) {
       this.yeshiva = new Yeshiva();
+      this.yeshiva.iRoleType=this.sysTableList && this.sysTableList[0]?this.sysTableList[0].iSysTableRowId:null;
       this.isNew = true;
       this.header="מוסד חדש";
     }
@@ -79,38 +80,43 @@ export class SettingYeshivaComponent implements OnInit {
 
   save() {
     if (this.iYeshivaId == 0) {
-      if (this.appProxy.post('AddYeshiva', { yeshiva: this.yeshiva })
+      this.appProxy.post('AddYeshiva', { yeshiva: this.yeshiva })
         .then(
           data => {
-            if (this.yeshiva.iRoleType == null)
-              this.isDisabled();
-            else {
-              this._parent.openMessagePopup("save!");
-              this.closeYeshiva.emit(null);
-              this.add.emit(this.yeshiva);
+            if(data>0)
+            {
+              
+                this._parent.openMessagePopup("השמירה התבצעה בהצלחה");
+                this.yeshiva.iYeshivaId=data;
+                this.closeYeshiva.emit(null);
+                this.add.emit(this.yeshiva);
             }
-          }
-        )
-      ) { }
-      else {
-        this._parent.openMessagePopup("faild in save");
-      }
+            else {
+              this._parent.openMessagePopup("השמירה נכשלה!");
+            }
+          });
+      
+     
     }
     else {
-      if (this.appProxy.post('EditYeshiva', { yeshiva: this.yeshiva, iYeshivaId: this.yeshiva.iYeshivaId })
+      this.appProxy.post('EditYeshiva', { yeshiva: this.yeshiva, iYeshivaId: this.yeshiva.iYeshivaId })
         .then(
           data => {
             //this.yeshiva = data;
-            this._parent.openMessagePopup("save!");
-            this.closeYeshiva.emit(null);
-
-             this.update.emit(this.yeshiva);
+            if(data)
+            {
+              this._parent.openMessagePopup("השמירה התבצעה בהצלחה!");
+              this.closeYeshiva.emit(null);
+  
+               this.update.emit(this.yeshiva);
+            }
+            else
+            this._parent.openMessagePopup("השמירה נכשלה!");
 
           }
         )
-      ) { }
-      else
-      this._parent.openMessagePopup("faild in save");
+       
+     
     }
   }
 

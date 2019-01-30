@@ -27,6 +27,10 @@ export class Student implements Person {
     public dtAddStudentDate: Date= new Date();
     public nvComment: string=null;
     public iStatusType:number=null;
+
+    public fDays:number;
+    public fMonthes:number;
+    public fYears:number;
     constructor() {
        
     }

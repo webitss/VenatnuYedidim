@@ -17,7 +17,7 @@ export class EventComponent implements OnInit {
 
   public currentComponent: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private appProxy: AppProxy,private cdr: ChangeDetectorRef) {
+  constructor(private router: Router, private route: ActivatedRoute, private appProxy: AppProxy, private cdr: ChangeDetectorRef) {
 
 
   }
@@ -31,37 +31,37 @@ export class EventComponent implements OnInit {
 
   isDetails: boolean = true;
 
-  formValid=false;
+  formValid = false;
 
-  isDisabled():boolean {
-    if(this.currentComponent.form!=undefined) {
+  isDisabled(): boolean {
+    if (this.currentComponent.form) {
       return this.currentComponent.form.valid;
-   
+    }
+    return false;
   }
-}
 
 
- 
+
 
   save() {
     if (this.currentComponent.save) this.currentComponent.save();
   }
-e:Event1;
-header:string;
+  e: Event1;
+  header: string;
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params['iEventId'] != '0') {
-       this.isDetails=true;
-       this.appProxy.post("GetEvent", { iEventId: params['iEventId'] })
+        this.isDetails = true;
+        this.appProxy.post("GetEvent", { iEventId: params['iEventId'] })
           .then(data => {
             this.e = data;
-            this.header=this.e.nvName;
-  
+            this.header = this.e.nvName;
+
           });
       }
       else {
-       this.isDetails=false;
-        this.header='אירוע חדש';
+        this.isDetails = false;
+        this.header = 'אירוע חדש';
       }
     });
 

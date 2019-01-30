@@ -7,7 +7,7 @@ import { PresenceAvrech } from '../../classes/presenceAvrech';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { GlobalService } from '../../services/global.service';
 import { AppComponent } from '../app/app.component';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-avrech-presence',
   templateUrl: './avrech-presence.component.html',
@@ -54,7 +54,7 @@ export class AvrechPresenceComponent implements OnInit {
         this.lstDataRows.push({
           iPersonId: p.iPersonId,
           iPresenceAvrech: p.iPresenceAvrech,
-          ['nvDate']: p.dtDatePresence.toLocaleDateString(),
+          ['nvDate']:moment( p.dtDatePresence).format('YYYY/MM/DD'),
           dtDatePresence: p.dtDatePresence,
           iHoursSum: p.iHoursSum,
           edit: '<div class="edit"></div>',
@@ -89,7 +89,7 @@ export class AvrechPresenceComponent implements OnInit {
     this.appProxy.post('DeletePresenceAvrech', { iPresenceAvrech: p.iPresenceAvrech, iLastModifyUserId: this.globalService.getUser()['iUserId'] }).then(data => {
       if(data)
       {
-        this._parent.openMessagePopup('נמחק בהצלחה!');
+        this._parent.openMessagePopup('המחיקה התבצעה בהצלחה!');
         this.lstDataRows.splice(this.presences.indexOf(p), 1);
         this.cc.refreshTable(this.lstDataRows);
       }
@@ -111,31 +111,35 @@ export class AvrechPresenceComponent implements OnInit {
     this.presence.iPersonId = this.iPersonId;
   }
   closePresenceDialog(event,save) {
-    debugger;
+    
     let index;
     if (save == true) {
-      for (let i = 0; i < this.lstDataRows.length; i++) {
-        if (this.lstDataRows[i].iPresenceAvrech == this.presence.iPresenceAvrech) {
-          index = i;
-          break;
-        }
-      }
-      if (index == undefined) {
+      index=this.lstDataRows.findIndex(p=>p.iPresenceAvrech == this.presence.iPresenceAvrech);
+      // for (let i = 0; i < this.lstDataRows.length; i++) {
+      //   if (this.lstDataRows[i].iPresenceAvrech == this.presence.iPresenceAvrech) {
+      //     index = i;
+      //     break;
+      //   }
+      // }
+      if (index == -1) {
         this.lstDataRows.push({
           iPersonId: event.iPersonId,
           iPresenceAvrech: event.iPresenceAvrech,
-          ['nvDate']:event.dtDatePresence?event.dtDatePresence: new Date().toLocaleDateString(),
+          ['nvDate']:event.dtDatePresence?moment( event.dtDatePresence).format('YYYY/MM/DD'):moment( new Date()).format('YYYY/MM/DD'),
           // dtDatePresence:this.presence.dtDatePresence,
           iHoursSum: event.iHoursSum,
           edit: '<div class="edit"></div>',
           delete: '<div class="delete"></div>',
+          dtDatePresence:event.dtDatePresence?event.dtDatePresence: new Date()
         });
       }
       else {
         this.lstDataRows[index].iHoursSum = event.iHoursSum;
-        this.lstDataRows[index].nvDate = event.dtDate.toLocaleDateString();
+        this.lstDataRows[index].nvDate =moment( event.dtDatePresence).format('YYYY/MM/DD');
+        this.lstDataRows[index].dtDatePresence = event.dtDatePresence;
+        //this.lstDataRows. = event.dtDate.toLocaleDateString();
       }
-      debugger;
+      
       this.cc.refreshTable(this.lstDataRows);
       this.presence = null;
 

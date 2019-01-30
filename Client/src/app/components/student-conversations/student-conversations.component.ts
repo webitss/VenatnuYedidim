@@ -116,7 +116,7 @@ export class StudentConversationsComponent implements OnInit {
    
     
       this.appProxy.post('DeleteConversations', { iConversationId:this.con.iConversationId, iUserId: this.iUserId }).then(data => {
-        this._parent.openMessagePopup('נמחק בהצלחה!');
+        this._parent.openMessagePopup('המחיקה התבצעה בהצלחה!');
          this.lstDataRows.splice(this.lstDataRows.indexOf(this.con), 1);
       this.vyTableComponent.refreshTable(this.lstDataRows);
        });

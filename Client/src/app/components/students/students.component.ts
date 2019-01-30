@@ -49,7 +49,7 @@ this.currentYeshivaOfStudent=new Map<number,string>();
           this.appProxy.get("GetCurrentYeshivaOfStudent").then(data => {
             this.currentYeshivaOfStudent = data;
             this.studentList.forEach(student => {
-              debugger;
+              // debugger;
               if (this.studentsAssociatedToAvrech.filter(x => x == student.iPersonId).length > 0)
                 student['nvAssociated'] = '<span>כן</span>';
 
@@ -125,13 +125,13 @@ this.currentYeshivaOfStudent=new Map<number,string>();
     this.appProxy.post('DeleteStudent', { iPersonId: this.studentId, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
       if (res == true) {
         //alert('נמחק בהצלחה!');
-        this._parent.openMessagePopup("התלמיד נמחק בהצלחה!");
+        this._parent.openMessagePopup("המחיקה התבצעה בהצלחה!");
         const s = this.studentList.find(x => x.iPersonId == this.studentId);
         this.studentList.splice(this.studentList.indexOf(s), 1);
         this.vyTableComponent.refreshTable(this.studentList);
       }
       else {
-        this._parent.openMessagePopup('לא נמחק!');
+        this._parent.openMessagePopup('המחיקה נכשלה!');
       }
     });
   }
@@ -161,10 +161,10 @@ this.currentYeshivaOfStudent=new Map<number,string>();
   {
     this.vyTableComponent.downloadExcel();
   }
-  tableToPdf(name)
-  {
-    this.vyTableComponent.downloadPdf(name,'pdf');
-  }
+  // tableToPdf(name)
+  // {
+  //   this.vyTableComponent.downloadPdf(name,'pdf');
+  // }
   editAndDeleteStudent(e) {
 
     if (e.columnClickName == 'edit')

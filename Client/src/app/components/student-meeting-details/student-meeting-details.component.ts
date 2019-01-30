@@ -10,7 +10,7 @@ import { TaskComponent } from '../task/task.component';
 import { NguiDatetime } from '@ngui/datetime-picker';
 import { GlobalService } from '../../services/global.service';
 import { AppComponent } from '../app/app.component';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-student-meeting-details',
   templateUrl: './student-meeting-details.component.html',
@@ -35,7 +35,27 @@ export class StudentMeetingDetailsComponent implements OnInit {
   @ViewChild('task') TaskComponent: TaskComponent;
   sub: any;
   iPersonId: number;
+  currentMeeting: Meeting;
+  constructor(private route: ActivatedRoute, private appProxi: AppProxy, private globalService: GlobalService
+    , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
+  ngOnInit() {
+    this.taskSelect = false;
+
+    this.sub = this.route.parent.params.subscribe(params => {
+      this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
+    });
+    if(this.meeting.iMeetingId==null)
+    {
+      this.meeting.iMeetingType=this.sysTableRowList[0].iSysTableRowId
+    }
+    this.currentMeeting = new Meeting();
+    this.currentMeeting = Object.assign({}, this.meeting);
+    this.currentMeeting['dtDate'] =new Date((this.currentMeeting.dtMeetingDate));
+    this.currentMeeting['dtHour'] =moment(this.currentMeeting.dtMeetingDate).format('HH:mm');
+    
+   
+  }
   close() {
     this.Close.emit(null);
   }
@@ -46,8 +66,6 @@ export class StudentMeetingDetailsComponent implements OnInit {
     //פגישה חדשה
 
     this.currentMeeting.dtMeetingDate = new Date(this.currentMeeting['dtDate'] + ' ' + this.currentMeeting['dtHour']);
-    // this.currentMeeting['nvDate'] = this.currentMeeting['dtDate'].toLocaleDateString();
-    // this.currentMeeting['nvHour'] = this.currentMeeting['dtHour'].toLocaleTimeString();
 
     if (this.currentMeeting.iMeetingId == null)
       this.currentMeeting.iPersonId = this.iPersonId;
@@ -62,48 +80,18 @@ export class StudentMeetingDetailsComponent implements OnInit {
           else
             this.UpdateMeeting.emit(this.currentMeeting);
 
-         // alert("השמירה בוצעה בהצלחה");
-         this._parent.openMessagePopup('השמירה בוצעה בהצלחה!');
+          // alert("השמירה בוצעה בהצלחה");
+          this._parent.openMessagePopup('השמירה בוצעה בהצלחה!');
           this.Close.emit(null);
         }
         else
           //alert("השמירה נכשלה");
-         this._parent.openMessagePopup('השמירה נכשלה!');
-          
+          this._parent.openMessagePopup('השמירה נכשלה!');
+
       },
     );
   }
-  currentMeeting: Meeting;
-  constructor(private route: ActivatedRoute, private appProxi: AppProxy, private globalService: GlobalService
-    ,@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
-
-  ngOnInit() {
-    this.taskSelect = false;
-
-    this.sub = this.route.parent.params.subscribe(params => {
-      this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
-    });
-
-    this.currentMeeting = new Meeting();
-    this.currentMeeting = Object.assign({}, this.meeting);
-debugger;
-    this.currentMeeting['dtDate'] = new Date((this.currentMeeting.dtMeetingDate).getTime());
-
-
-    if ((this.meeting.dtMeetingDate).getMinutes() < 10)
-      this.minutes = '0' + (this.currentMeeting.dtMeetingDate).getMinutes().toString();
-    else
-      this.minutes = (this.currentMeeting.dtMeetingDate).getMinutes().toString();
-
-    if ((this.currentMeeting.dtMeetingDate).getHours() < 10)
-      this.hours = '0' + (this.currentMeeting.dtMeetingDate).getHours().toString();
-    else
-      this.hours = (this.currentMeeting.dtMeetingDate).getHours().toString();
-
-
-    this.currentMeeting['dtHour'] = this.hours + ':' + this.minutes;
-
-  }
+ 
 
   ngOnDestroy() {
     this.sub.unsubscribe();

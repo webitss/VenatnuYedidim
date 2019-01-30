@@ -28,7 +28,7 @@ export class EventDetailsComponent implements OnInit {
   to: Array<any>;
   participantsToSend: Array<Tint> = new Array<Tint>();
 
-  @ViewChild(NgForm) form;
+  @ViewChild(NgForm) public  form;
 
   @ViewChild('child') VyMultySelect: VyMultySelectComponent;
 

@@ -2,7 +2,7 @@
   <div class="row">
     <!-- <div class="col-sm-3"></div> -->
     <div class="form-group col-sm-3">
-      <label for='event-name'>כותרת הארוע</label>
+      <label for='event-name'>כותרת הארוע *</label>
       <input type="text" name='event-name' class="form-control" [(ngModel)]="e.nvName" required #name="ngModel">
       <div *ngIf="name.invalid && (name.dirty || name.touched)">
         <div *ngIf="(name.errors.required)" class="text-danger text-right">
@@ -11,8 +11,8 @@
     </div>
 
     <div class="form-group col-sm-3">
-      <label for='event-place'>מקום הארוע</label>
-      <input type="text" name='event-place' class="form-control" [(ngModel)]="e.nvPlace" #place="ngModel" pattern="[A-Za-z]" title="לא ניתן להזין ספרות"
+      <label for='event-place'>מקום הארוע *</label>
+      <input type="text" id='place' name='event-place' class="form-control" [(ngModel)]="e.nvPlace" #place="ngModel" title="לא ניתן להזין ספרות"
         required/>
       <div *ngIf="place.invalid && (place.dirty || place.touched)">
         <div *ngIf="(place.errors.required)" class="text-danger text-right">
@@ -22,7 +22,7 @@
 
     <div class="form-group col-sm-3">
 
-      <label for='event-date'>תאריך</label>
+      <label for='event-date'>תאריך *</label>
       <input type="date" name='event-date' class="form-control" [ngModel]="e.dtEventDate | date:'yyyy-MM-dd'" (ngModelChange)="e.dtEventDate = $event"
         required #date="ngModel" />
       <div *ngIf="date.invalid && (date.dirty || date.touched)">
@@ -48,6 +48,6 @@
   </div>
 
 
-
+  <label class='required-fields'>* שדות חובה</label>
 
 </form>

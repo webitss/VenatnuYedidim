@@ -1,11 +1,11 @@
 <!-- <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="htmlContent"></app-ngx-editor> -->
 
-<div name="table" class="vy-table">
+<div id="myTable" name="table" class="vy-table">
   <div name="columns" class="row">
 
     <div *ngFor="let col of lstColumns" class="col cell cell-title" [ngStyle]="col.titleStyle">
       <div class="small-title">
-        <label *ngIf="col.type == 'checkbox'" class="container" style='float: right;'>
+        <label id='my-table' *ngIf="col.type == 'checkbox'" class="container" style='float: right;'>
           {{col.title}}
           <input type="checkbox" (change)='checkAllTable(col.name)'>
           <span class="checkmark"></span>

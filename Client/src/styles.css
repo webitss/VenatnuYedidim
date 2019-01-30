@@ -1,3 +1,4 @@
+@import "~@ng-select/ng-select/themes/material.theme.css";
 *{
     background-repeat: no-repeat;
     background-size: contain;
@@ -15,8 +16,15 @@ button:focus, input:focus, li:focus {
 outline: none;
 }
 
-
-
+.ng-select .ng-select-container .ng-value-container .ng-placeholder {
+    float: right;
+    color: #c87895;
+    font-size: 16px;
+    font-weight: bold; 
+}
+*:focus{
+    outline: none;
+}
 /* .navbar-collapse{
     margin-top: 50px;
     margin-bottom: 50px;
@@ -92,10 +100,17 @@ outline: none;
 .form-group>label
 {
     float: right;
-    color: #d8d8d8;
+    color: #c87895;
     font-size: 12px;
+    font-weight: bold;
 }
-
+.required-fields
+{
+    float: right;
+    color: #fa005a;
+    font-size: 16px;
+    font-weight: bolder;
+}
 
 
 

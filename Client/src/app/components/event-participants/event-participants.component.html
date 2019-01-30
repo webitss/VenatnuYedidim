@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<div *ngIf="flag==true" class="col-sm-12 addParticipants">
+<div *ngIf="flag" class="col-sm-12 addParticipants">
 
   <div class="row row-first">
     <button (click)="cancel()" class="btn-close">סגור </button>
@@ -16,9 +16,8 @@
   <div class="row">
     <span class="Student-affiliation">שיוך תלמידים</span>
   </div>
-  <div class=" my-div ">
-    <!-- <app-vy-multy-select #child [fullList]="listToSelect" [titleStr]="title" [inputTitle]="inputTitle" (onSave)="getFromChild($event)"></app-vy-multy-select> -->
-
+  <!-- <div class=" my-div ">
+  
     <div *ngFor="let item of listToSelect |filter:search" class="row">
     
         <div class="item-to-select col-sm-12"> <input type="checkbox"  [(ngModel)]="item['bMultySelectChecked']">
@@ -30,6 +29,9 @@
 
 
     </div>
+  </div> -->
+  <div class="main-table">
+    <app-vy-table [lstColumns]="Columns" [lstDataRows]="listToSelect" ></app-vy-table>
   </div>
 </div>
 
@@ -38,12 +40,12 @@
 
 </div> -->
 <div class="main-table">
-  <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows"></app-vy-table>
+  <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)='click($event)'></app-vy-table>
 </div>
 
-<select>
+<!-- <select>
   <option *ngFor="let s of sysTableRowList">{{s.nvValue}}</option>
-</select>
+</select> -->
 
 <!-- <select value='+p.iArriveStatusType+'>
   <option *ngFor="let s of sysTableRowList1"></option>

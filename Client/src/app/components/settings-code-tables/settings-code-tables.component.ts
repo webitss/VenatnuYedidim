@@ -22,7 +22,7 @@ export class SettingsCodeTableComponent implements OnInit {
   public tableNames: Array<SysTables>;
   public Values: Array<SysTableRow>;
 
-  public idSysTableRow: number;
+  public iSysTableId: number;
   public divNewValue: boolean;
   public toEdit: boolean;
   protected row: SysTableRow;
@@ -49,7 +49,7 @@ export class SettingsCodeTableComponent implements OnInit {
 
     this.sysTableService.getTableNames().then(data => {
       this.tableNames = data;
-      this.idSysTableRow = this.tableNames[0].iSysTableId;
+      this.iSysTableId = this.tableNames[0].iSysTableId;
       this.getValues();
     }
     );
@@ -57,7 +57,7 @@ export class SettingsCodeTableComponent implements OnInit {
   }
   public getValues() {
 
-    this.sysTableService.getValues(this.idSysTableRow).then(data => {
+    this.sysTableService.getValues(this.iSysTableId).then(data => {
       if (data) {
         debugger;
         this.Values = data as Array<SysTableRow>;
@@ -76,7 +76,7 @@ export class SettingsCodeTableComponent implements OnInit {
 
   public editSysTableRow(myRow: SysTableRow) {
     this.showOverlap = true;
-    this.row = myRow;
+    this.row =JSON.parse(JSON.stringify(myRow)) ;
     this.toEdit = true;
   }
 
@@ -87,16 +87,21 @@ export class SettingsCodeTableComponent implements OnInit {
     this.sysTableService.editValue(this.row).then(res => {
       if (res) {
         Object.keys(SysTableService.dataTables).forEach(key => {
-          if (SysTableService.dataTables[key].iSysTableId == this.idSysTableRow) {
+          if (SysTableService.dataTables[key].iSysTableId == this.iSysTableId) {
             this.Mykey = key;
           }
         });
-        return this.appProxy.post("GetValues", { iSysTableId: this.idSysTableRow })
+        return this.appProxy.post("GetValues", { iSysTableId: this.iSysTableId })
           .then(l => {
             if (l) {
 
               SysTableService.dataTables[this.Mykey].SysTableRow = l;
-              this._parent.openMessagePopup('העריכה התבצעה בהצלחה!');
+              l.forEach(v => {
+                v['edit'] = '<div class="edit"></div>';
+              
+              });
+             this.vyTableComponent.refreshTable(l);
+              this._parent.openMessagePopup('השמירה התבצעה בהצלחה!');
             }
             else
               console.log("err");
@@ -104,20 +109,18 @@ export class SettingsCodeTableComponent implements OnInit {
 
       }
       else {
-        this._parent.openMessagePopup('ארעה שגיאה העריכה!');
+        this._parent.openMessagePopup('השמירה נכשלה!');
       }
     });
 
 
   }
   saveNewValue() {
-    this.roeToadd.dtLastModifyDate = new Date();
-    this.roeToadd.dtCreateDate = new Date();
-    this.roeToadd.iSysTableId = this.idSysTableRow;
+    this.roeToadd.iSysTableId = this.iSysTableId;
 
    
     Object.keys(SysTableService.dataTables).forEach(key => {
-      if (SysTableService.dataTables[key].iSysTableId == this.idSysTableRow) {
+      if (SysTableService.dataTables[key].iSysTableId == this.iSysTableId) {
         this.Mykey = key;
 
       }
@@ -133,11 +136,11 @@ export class SettingsCodeTableComponent implements OnInit {
 
           this.roeToadd = new SysTableRow();
           this.divNewValue = this.showOverlap = false;
-          this._parent.openMessagePopup('ההוספה התבצעה בהצלחה!');
+          this._parent.openMessagePopup('השמירה התבצעה בהצלחה!');
 
         }
         else {
-          this._parent.openMessagePopup('ההוספה נכשלה!');
+          this._parent.openMessagePopup('השמירה נכשלה!');
         }
 
       });

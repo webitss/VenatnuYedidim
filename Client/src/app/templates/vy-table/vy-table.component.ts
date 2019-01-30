@@ -2,8 +2,12 @@ import { Component, OnInit, Output, Input, EventEmitter, OnChanges } from '@angu
 import { VyTableColumn } from './vy-table.classes';
 import { VyTableOrderByPipe, OrderByPipe } from './vy-table-order-by.pipe';
 import { AppProxy } from '../../services/app.proxy';
-
-
+import * as XLSX from 'xlsx';
+// import * as jsPDF from 'jspdf';
+// import html2canvas from 'html2canvas';
+// let jsPDF = require('jspdf');
+import 'jspdf-autotable';
+const EXCEL_EXTENSION = '.xlsx';
 @Component({
   selector: 'app-vy-table',
   templateUrl: './vy-table.component.html',
@@ -41,8 +45,8 @@ export class VyTableComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.lstColumns.forEach(c=>{
-      this.lstFilterColumns[c.name]=null
+    this.lstColumns.forEach(c => {
+      this.lstFilterColumns[c.name] = null
     })
 
   }
@@ -61,15 +65,13 @@ export class VyTableComponent implements OnInit {
   }
 
   filterChange(col) {
-    let lst=JSON.parse(JSON.stringify(this.lstDataRows)) ;
-    for(let key of Object.keys(this.lstFilterColumns))
-    {
-      if(this.lstFilterColumns[key])
-      {
-         lst=lst.filter(row => row[key].indexOf(this.lstFilterColumns[key]) > -1)
+    let lst = JSON.parse(JSON.stringify(this.lstDataRows));
+    for (let key of Object.keys(this.lstFilterColumns)) {
+      if (this.lstFilterColumns[key]) {
+        lst = lst.filter(row => row[key].indexOf(this.lstFilterColumns[key]) > -1)
       }
     }
-    this.lstCurrentDataRows=lst;
+    this.lstCurrentDataRows = lst;
     // this.lstCurrentDataRows = this.lstDataRows.filter(row => row[col.name].indexOf(col.filter) > -1);
     this.moveToPage(0);
   }
@@ -88,9 +90,9 @@ export class VyTableComponent implements OnInit {
   }
 
   checkAllTable(colName) {
-    if (this.lstDataRows.find(r => r[colName])==null)
+    if (this.lstDataRows.find(r => r[colName]) == null)
       this.lstDataRows.forEach(r => r[colName] = true);
-    else if (this.lstDataRows.find(r => !r[colName])==null)
+    else if (this.lstDataRows.find(r => !r[colName]) == null)
       this.lstDataRows.forEach(r => r[colName] = false);
     else
       this.lstDataRows.forEach(r => r[colName] = this.lstDataRows[0][colName]);
@@ -126,7 +128,7 @@ export class VyTableComponent implements OnInit {
 
 
   private createTable() {
-    let table = "<table id='avrechim' style='width: 100%; background-color:#f9e4b1; height: 500px;><thead><tr style='text-align: initial'>";
+    let table = "<table id='avrechim' style='width: 100%; background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
     this.lstColumns.forEach(column => {
       if (column.bExcel)
         table += "<th>" + column.title + "</th>";
@@ -147,7 +149,7 @@ export class VyTableComponent implements OnInit {
 
   public downloadExcel() {
     let uri = 'data:application/vnd.ms-excel;base64,'
-      , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+      , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"/><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
       , base64 = function (s) { return window.btoa(eval('unescape(encodeURIComponent(s))')) }
       , format = function (s, c) {
         return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; })
@@ -156,52 +158,103 @@ export class VyTableComponent implements OnInit {
     debugger;
     window.location.href = uri + base64(format(template, ctx))
   }
-  
-  public current_date = new Date();
-  downloadPdf(componentName: string, type: string) {
-    debugger;
-    // let date:Date;
-    // let d=new Date().getUTCFullYear()+"/"+new Date().getMonth();
 
-
-    var dt = new Date();
-    var mm = dt.getMonth() + 1;
-    var dd = dt.getDate();
-    var yyyy = dt.getFullYear();
-    var format = dd + '/' + mm + '/' + yyyy
-
-    //  var d = new Date().toLocaleDateString('dd/mm/yy');
-    debugger;
-    let header = "<div  style='direction: rtl;'><h1>ונתנו ידידים</h1><p style='direction: ltr;'>" + format + "</p><br/><br/><h2 style='text-align:center;'>טבלת " + componentName + "</h2></div>";
-    let footer = "<div style='font-weight: bold;  '>סה\"\כ שורות: " + this.lstDataRows.length;
-    this.appProxy.post('GeneratPdf', { headerHtml: header, bodyHtml: this.createTable(), footerHtml: footer })
-      .then(res => {
-        let binaryString = window.atob(res);
-        let binaryLen = binaryString.length;
-        let bytes = new Uint8Array(binaryLen);
-        for (let i = 0; i < binaryLen; i++) {
-          let ascii = binaryString.charCodeAt(i);
-          bytes[i] = ascii;
-        }
-        let file = type ? new Blob([bytes], { type: type }) : new Blob([bytes]);
-        let link = document.createElement('a');
-        link.setAttribute('id', 'linkDownload');
-        link.href = window.URL.createObjectURL(file);
-        link.download = componentName + (type ? '.' + type : '');
-        link.click();
-        try {
-          document.getElementById('linkDownload').remove();
-        } catch (e) {
-          //Global_service.showMessage("הורדת הקובץ נכשלה", "fail");
-          console.log(e);
-        }
-      })
+  public downloadExcel1(excelFileName: string): void {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.lstDataRows);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    XLSX.writeFile(workbook, excelFileName + EXCEL_EXTENSION);
   }
+  public current_date = new Date();
+  // downloadPdf(componentName: string, type: string) {
+
+  //   // let date:Date;
+  //   // let d=new Date().getUTCFullYear()+"/"+new Date().getMonth();
+
+
+  //   var dt = new Date();
+  //   var mm = dt.getMonth() + 1;
+  //   var dd = dt.getDate();
+  //   var yyyy = dt.getFullYear();
+  //   var format = dd + '/' + mm + '/' + yyyy
+
+  //   //  var d = new Date().toLocaleDateString('dd/mm/yy');
+  //   let header = "<div  style='direction: rtl;'><h1>ונתנו ידידים</h1><p style='direction: ltr;'>" + format + "</p><br/><br/><h2 style='text-align:center;'>טבלת " + componentName + "</h2></div>";
+  //   let footer = "<div style='font-weight: bold;  '>סה\"\כ שורות: " + this.lstDataRows.length;
+  //   let body = this.createTable();
+  //   let element = document.createElement('div');
+  //   //console.log("<meta charset='UTF-8'/>" +header + body + footer);
+  //   element.innerHTML = "<meta charset='UTF-8'/>" + header + body + footer;
+  //   element.id = 'linkDownload1';
+
+  //   var data = document.getElementById('myTable');
+  //   html2canvas(data).then(canvas => {
+  //     // Few necessary setting options  
+
+  //     var pdf = new jsPDF('p', 'pt', 'a4');
+
+
+  //     pdf.text("שכשדכשדכשדכ", 10, 10);
+  //     //console.log(element);
+  //     // pdf.fromHTML(element, 10, 10);
+  //     //#region
+     
+  //     //#endregion
+  //     // pdf.addFont('../../assets/fonts/RUBIK-REGULAR.TTF', 'Rubik','normal');
+  //    // pdf.autoTable({ html: '#my-table' });
+
+  //     // Or JavaScript:
+     
+  //     pdf.addFont('RUBIK-REGULAR.TTF', 'Rubik', 'normal');
+  //     pdf.setFont('Rubik');
+  //     pdf.setFontSize(18);
+  //     //var imgData  = canvas.toDataURL("image/jpeg", 1.0);
+  //     // pdf.addImage(imgData,0,0,canvas.width, canvas.height);
+  //     pdf.save('converteddoc.pdf');
+  //   });
+
+
+
+
+
+
+    // let doc = new jsPDF('p', 'pt', 'a4');
+    // doc.addHTML(document.getElementById('linkDownload'),function(){
+    //   doc.save("aaa.pdf");
+    //   //document.getElementById('linkDownload').remove();
+    // });
+    // this.appProxy.post('GeneratPdf', { headerHtml: header, bodyHtml: this.createTable(), footerHtml: footer })
+    //   .then(res => {
+
+
+    //     // let binaryString = window.atob(res);
+
+    //     // let binaryLen = binaryString.length;
+    //     // let bytes = new Uint8Array(binaryLen);
+    //     // for (let i = 0; i < binaryLen; i++) {
+    //     //   let ascii = binaryString.charCodeAt(i);
+    //     //   bytes[i] = ascii;
+    //     // }
+    //     // let file = type ? new Blob([bytes], { type: type }) : new Blob([bytes]);
+    //     // let link = document.createElement('a');
+    //     // link.setAttribute('id', 'linkDownload');
+    //     // link.href = window.URL.createObjectURL(file);
+    //     // link.download = componentName + (type ? '.' + type : '');
+    //     // link.click();
+    //     // try {
+    //     //   document.getElementById('linkDownload').remove();
+    //     // } catch (e) {
+    //     //   //Global_service.showMessage("הורדת הקובץ נכשלה", "fail");
+    //     //   console.log(e);
+    //     // }
+    //   })
+  //}
   // removeFromList(item){
   //   this.lstDataRows.splice(this.lstDataRows.indexOf(item),1);
   // }
   public refreshTable(newList) {
     this.lstDataRows = newList;
-    this.moveToPage(this.currentPage>0?this.currentPage:0, true);
+    this.moveToPage(this.currentPage > 0 ? this.currentPage : 0, true);
   }
+
+
 }

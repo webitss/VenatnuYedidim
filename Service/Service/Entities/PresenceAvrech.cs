@@ -86,8 +86,9 @@ namespace Service.Entities
                 SqlDataAccess.ExecuteDatasetSP("TPresenceAvrech_DEL", lstParameters);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Log.LogError("DeletePresenceAvrech / TPresenceAvrech_DEL", "iPresenceAvrech" + iPresenceAvrech + ", ex " + ex);
                 return false;
             }
             #endregion

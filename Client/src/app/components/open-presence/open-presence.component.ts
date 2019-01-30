@@ -28,7 +28,7 @@ export class OpenPresenceComponent implements OnInit {
     debugger;
     this.currentPresence=new PresenceAvrech();
     this.currentPresence=Object.assign({},this.presence);
-    this.currentPresence['dtDate']=new Date((this.currentPresence.dtDatePresence).getTime());
+    this.currentPresence['dtDate']=this.currentPresence.dtDatePresence;
   }
 
   

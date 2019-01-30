@@ -10,6 +10,7 @@ import { Yeshiva } from '../../classes/Yeshiva';
 import { AppComponent } from '../app/app.component';
 import { LetterEbrew } from '../../classes/LetterEbrew';
 import { NgForm } from '../../../../node_modules/@angular/forms';
+import { KeyValue } from '../../classes/key-value';
 
 @Component({
   selector: 'app-student-details',
@@ -45,14 +46,33 @@ export class StudentDetailsComponent implements OnInit {
   currentUser: number;
   days: string[] = ["א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב", "יג", "יד", "טו", "טז", "יז", "יח", "יט", "כ", "כא", "כב", "כג", "כד", "כה", "כו", "כז", "כח", "כט", "ל"];
   monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
+  foreignDays: Array<number> =[];
+  foreignMonthes: Array<KeyValue>;
+ 
+  // this.foreignMonthes=["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  foreignYearsList: Array<string>;
+ 
+
+
+  lenOfMonth: number;
+
   dateDayArr = new Array<string>();
   dateMonthArr = new Array<string>();
-  dateYearArr = new Array<any>();
+  //dateYearArr = new Array<any>();
   addYeshiva = false;
   yeshivaId: number;
   change: boolean;
   flag: boolean = false;
   message: string;
+  public hebrewYearsList: Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
+    'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
+    'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin', 'Düsseldorf',
+    'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg', 'Hamburg', 'Hannover',
+    'Helsinki', 'Leeds', 'Leipzig', 'Lisbon', 'Łódź', 'London', 'Kraków', 'Madrid',
+    'Málaga', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Naples', 'Palermo',
+    'Paris', 'Poznań', 'Prague', 'Riga', 'Rome', 'Rotterdam', 'Seville', 'Sheffield',
+    'Sofia', 'Stockholm', 'Stuttgart', 'The Hague', 'Turin', 'Valencia', 'Vienna',
+    'Vilnius', 'Warsaw', 'Wrocław', 'Zagreb', 'Zaragoza'];
 
   e;
   // message = 'dfds';
@@ -62,9 +82,25 @@ export class StudentDetailsComponent implements OnInit {
   letterArr = new Array<LetterEbrew>();
 
 
-
   ngOnInit() {
-
+    this.foreignMonthes=[
+    {id:1,text:"Jan"},
+    {id:2,text:"Feb"},
+    {id:3,text:"Mar"},
+    {id:4,text:"Apr"},
+    {id:5,text:"May"},
+    {id:6,text:"Jun"},
+    {id:7,text:"Jul"},
+    {id:8,text:"Aug"},
+    {id:9,text:"Sep"},
+    {id:10,text:"Oct"},
+    {id:11,text:"Nov"},
+    {id:12,text:"Dec"},
+];
+ 
+    this.lenOfMonth=30
+    this.dateYear();
+    this.generateDay();
     this.bornDateHebrewStudent = new HebrewDate();
     this.diedDateHebrewFather = new HebrewDate();
     this.diedDateHebrewMother = new HebrewDate();
@@ -95,6 +131,11 @@ export class StudentDetailsComponent implements OnInit {
             this.status = data.filter(x => x.iSysTableRowId == this.student.iStatusType)[0].nvValue;
             this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data; });
           });
+          this.student['fYears'] = this.student.dtBirthdate?this.student.dtBirthdate.getFullYear():0;
+          // this.student['fMonthes'] = this.foreignMonthes[this.student.dtBirthdate?this.student.dtBirthdate.getMonth().toString():null];
+          this.student['fMonthes']=this.student.dtBirthdate.getMonth();
+          // this.student['fMonthes']['text']=this.foreignMonthes[this.student.dtBirthdate.getMonth()].text;
+          this.student['fDays'] = this.student.dtBirthdate?this.student.dtBirthdate.getDate():0;
 
           this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
           this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];
@@ -145,16 +186,6 @@ export class StudentDetailsComponent implements OnInit {
     this.appProxy.post("GetYeshivotOfStudent", { iPersonId: this.paramRout }).then(data => this.yeshivaListOfStudent = data);
 
 
-    // this.dateMonthArr.push("תשרי"); this.dateMonthArr.push("חשון"); this.dateMonthArr.push("כסלו"); this.dateMonthArr.push("טבת");
-    // this.dateMonthArr.push("שבט"); this.dateMonthArr.push("אדר"); this.dateMonthArr.push("ניסן"); this.dateMonthArr.push("אייר");
-    // this.dateMonthArr.push("סיון"); this.dateMonthArr.push("תמוז"); this.dateMonthArr.push("אב"); this.dateMonthArr.push("אלול");
-
-    // this.dateDayArr.push("א"); this.dateDayArr.push("ב"); this.dateDayArr.push("ג"); this.dateDayArr.push("ד"); this.dateDayArr.push("ה");
-    // this.dateDayArr.push("ו"); this.dateDayArr.push("ז"); this.dateDayArr.push("ח"); this.dateDayArr.push("ט"); this.dateDayArr.push("י");
-    // this.dateDayArr.push('י"א'); this.dateDayArr.push('י"ב'); this.dateDayArr.push('י"ג'); this.dateDayArr.push('י"ד'); this.dateDayArr.push('ט"ו');
-    // this.dateDayArr.push('ט"ז'); this.dateDayArr.push('י"ז'); this.dateDayArr.push('י"ח'); this.dateDayArr.push('י"ט'); this.dateDayArr.push('כ');
-    // this.dateDayArr.push('כ"א'); this.dateDayArr.push('כ"ב'); this.dateDayArr.push('כ"ג'); this.dateDayArr.push('כ"ד'); this.dateDayArr.push('כ"ה');
-    // this.dateDayArr.push('כ"ו'); this.dateDayArr.push('כ"ז'); this.dateDayArr.push('כ"ח'); this.dateDayArr.push('כ"ט'); this.dateDayArr.push('ל');
 
     this.letterArr.push({ nvChar: "א", iValue: 1 }); this.letterArr.push({ nvChar: "ב", iValue: 2 }); this.letterArr.push({ nvChar: "ג", iValue: 3 });
     this.letterArr.push({ nvChar: "ד", iValue: 4 }); this.letterArr.push({ nvChar: "ה", iValue: 5 }); this.letterArr.push({ nvChar: "ו", iValue: 6 });
@@ -164,17 +195,66 @@ export class StudentDetailsComponent implements OnInit {
     this.letterArr.push({ nvChar: "ע", iValue: 70 }); this.letterArr.push({ nvChar: "פ", iValue: 80 }); this.letterArr.push({ nvChar: "צ", iValue: 90 });
     this.letterArr.push({ nvChar: "ק", iValue: 100 }); this.letterArr.push({ nvChar: "ר", iValue: 200 }); this.letterArr.push({ nvChar: "ש", iValue: 300 });
     this.letterArr.push({ nvChar: "ת", iValue: 400 });
-
-    for (var i = 1990; i <= this.currentYear.getFullYear(); i++) {
-      this.dateYearArr.push(i);
+    this.letterArr = this.letterArr.sort((n1, n2) => { return n2.iValue - n1.iValue });
+    //var dateUrl = "http://www.hebcal.com/converter/?cfg=json&gy=" + 2018 + "&gm=" + 4 + "&gd=" + 12 + "&g2h=1";
+    this.hebrewYearsList = [];
+    for (var i = this.currentYear.getFullYear(); i > 1950; i--) {
+      let year = (i + 3760) % 1000;
+      let strYear = ''
+      while (year > 0) {
+        let j = 0;
+        while (j < this.letterArr.length && j > -1) {
+          if (this.letterArr[j].iValue <= year) {
+            strYear += this.letterArr[j].nvChar;
+            year = year - this.letterArr[j].iValue;
+            j = -1;
+          }
+          else
+            j++;
+        }
+      }
+      this.hebrewYearsList.push(strYear);
+      //this.dateYearArr.push(i);
     }
-    for (var i = 0; i < this.dateYearArr.length - 1; i++) {
-      // const hebrewDate = require("hebrew-date");
-      // this.dateYearArr[i] = hebrewDate(new Date(this.dateYearArr[i], 0, 0)).year;
-      this.dateYearArr[i] = this.calcEbrewDatw(this.dateYearArr[i]);
-    }
+    // for (var i = 0; i < this.dateYearArr.length - 1; i++) {
+    //   // const hebrewDate = require("hebrew-date");
+    //   // this.dateYearArr[i] = hebrewDate(new Date(this.dateYearArr[i], 0, 0)).year;
+    //   this.dateYearArr[i] = this.calcEbrewDatw(this.dateYearArr[i]);
+    // }
   }
+  dateYear() {
+    this.foreignYearsList = new Array<string>();
+    for (var i = this.currentYear.getFullYear(); i > 1950; i--) {
+      // let year = i ;
+      // let strYear = ''
+      // while (year > 0) {
+      //   let j = 0;
+      //   while (j < this.letterArr.length && j > -1) {
+      //     if (this.letterArr[j].iValue <= year) { 
+      //       strYear+=this.letterArr[j].nvChar;
+      //       year = year - this.letterArr[j].iValue; 
+      //       j = -1; }
+      //     else
+      //       j++;
+      //   }
+      // }
+      this.foreignYearsList.push(i.toString());
+      //this.dateYearArr.push(i);
+    };
+  }
+  dateDay() {
+    this.student.dtBirthdate = new Date(Number(this.student['fYears']),(this.student['fMonthes']), this.student['fDays']);
+    // console.log(this.student.dtBirthdate);
+    this.lenOfMonth = new Date(this.student['fYears'],(this.student['fMonthes']), 0).getDate();
+    this.generateDay();
 
+  }
+  generateDay()
+  {
+    this.foreignDays=[];
+    for(var i=1;i<=this.lenOfMonth;i++)
+    this.foreignDays.push(i);
+  }
   shift(newStatus) {
     this.appProxy.post("UpdateStatusStudent", { iPersonId: this.student.iPersonId, iStatusType: newStatus }).then(
       data => {
@@ -337,44 +417,43 @@ export class StudentDetailsComponent implements OnInit {
         if (this.status == 'תלמיד')
           this._parent.openMessagePopup("פרטי התלמיד עודכנו בהצלחה!");
         else
-        this._parent.openMessagePopup("פרטי הבוגר עודכנו בהצלחה!");
-          this.change = false;
-          this.backToGridStudent();
-        
+          this._parent.openMessagePopup("פרטי הבוגר עודכנו בהצלחה!");
+        this.change = false;
+        this.backToGridStudent();
+
       }, err => {
         if (this.status == 'תלמיד')
           alert("שגיאה בעריכת תלמיד");
         else
           alert("שגיאה בעריכת בוגר");
-          //this.change = false;
+        //this.change = false;
       });
-     
+
     }
 
     else
-      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => { 
-        
+      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => {
+
         this._parent.openMessagePopup("התלמיד נוסף בהצלחה!");
         this.change = false;
         this.backToGridStudent();
-      }, err => { 
+      }, err => {
         this._parent.openMessagePopup("שגיאה בהוספת תלמיד!");
       });
-    
+
   }
-  backToGridStudent()
-  {
+  backToGridStudent() {
     if (this.student == undefined)
-    this.router.navigate(["students"]);
-  else {
-    this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
-      if (this.student.iStatusType == data.filter(d => d.nvValue == 'תלמיד')[0].iSysTableRowId)
-        this.router.navigate(["students"]);
-      else
-        this.router.navigate(["graduates"]);
+      this.router.navigate(["students"]);
+    else {
+      this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
+        if (this.student.iStatusType == data.filter(d => d.nvValue == 'תלמיד')[0].iSysTableRowId)
+          this.router.navigate(["students"]);
+        else
+          this.router.navigate(["graduates"]);
+      }
+      )
     }
-    )
-  }
   }
   get baseFileUrl() {
     return AppProxy.getBaseUrl() + 'Files/';
@@ -417,6 +496,20 @@ export class StudentDetailsComponent implements OnInit {
         this.saveStudent();
     }
 
+  }
+  keyPress(event: any) {
+    const pattern = /[0-9]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (!(event.keyCode != 8 && !pattern.test(inputChar))) {
+      event.preventDefault();
+    }
+  }
+  onKeyPress(event: any) {
+    const pattern = /[0-9]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
   }
 }
 

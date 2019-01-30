@@ -40,11 +40,11 @@ export class EditMailComponent implements OnInit {
         .then(result => {
           if (result == true) { this._parent.openMessagePopup("המסר נשלח בהצלחה!"); }
           else {
-            this._parent.openMessagePopup("ארעה שגיאה בשליחה!");
+            this._parent.openMessagePopup("שליחת המסר נכשלה!");
           }
           this.close.emit();
         }
-          , err => { this._parent.openMessagePopup("ארעה שגיאה בשליחה!"); }
+          , err => { this._parent.openMessagePopup("שליחת המסר נכשלה!"); }
         );
     }
 

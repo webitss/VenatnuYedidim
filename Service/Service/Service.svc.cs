@@ -244,13 +244,13 @@ namespace Service
 
             return SysTableRow.GetValues(iSysTableId);
         }
-        public bool UpdateValue(SysTableRow sysTableRow)
+        public bool UpdateValue(SysTableRow sysTableRow, int iUserId)
         {
-            return SysTableRow.UpdateValue(sysTableRow);
+            return SysTableRow.UpdateValue(sysTableRow, iUserId);
         }
-        public bool AddValue(SysTableRow sysTableRow)
+        public bool AddValue(SysTableRow sysTableRow, int iUserId)
         {
-            return SysTableRow.AddValue(sysTableRow);
+            return SysTableRow.AddValue(sysTableRow, iUserId);
         }
 
         #endregion
@@ -297,7 +297,7 @@ namespace Service
             return Yeshivot.GetAllYeshivot();
         }
 
-        public bool AddYeshiva(Yeshivot yeshiva)
+        public int AddYeshiva(Yeshivot yeshiva)
         {
             return Yeshivot.AddYeshiva(yeshiva);
         }

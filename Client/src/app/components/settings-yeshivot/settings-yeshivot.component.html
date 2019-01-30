@@ -4,7 +4,7 @@
         <div class="actions col-sm-8">
             <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
             <button class="btn btn-small pdf" title="הורד pdf"></button>
-            <button (click)="iYeshivaId = 0">מוסד חדש</button>
+            <button class="btn btn-circle1 btn-pink" (click)="iYeshivaId = 0">מוסד חדש</button>
         </div>
     </div>
 
@@ -15,7 +15,7 @@
     
 
 <div class="main-table">
-    <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="setYeshiva($event)"></app-vy-table>
+    <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="setYeshiva($event)" #AppVyTable></app-vy-table>
 </div>
 
 <!-- 
