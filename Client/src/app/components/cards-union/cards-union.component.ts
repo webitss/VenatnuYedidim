@@ -107,18 +107,18 @@ export class CardsUnionComponent implements OnInit {
       data => {
         if (data == true) {
           this._parent.openMessagePopup("השמירה התבצעה בהצלחה");
-          this.onClose.emit();
+          this.onClose.emit(this.student);
 
           // this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
           //   this.studentList = data;
           // }); 
-         this.StudentsComponent= new StudentsComponent(this.appProxy, this.router, this.activatedRoute, this.globalService, this._parent);
-         this.StudentsComponent.aaaa().then(data => {
-          this.newList = data;
-          this.VyTableComponent = new VyTableComponent(this.appProxy);
-          this.VyTableComponent.refreshTable(this.newList);
+        //  this.StudentsComponent= new StudentsComponent(this.appProxy, this.router, this.activatedRoute, this.globalService, this._parent);
+        //  this.StudentsComponent.aaaa().then(data => {
+        //   this.newList = data;
+        //   this.VyTableComponent = new VyTableComponent(this.appProxy);
+        //   this.VyTableComponent.refreshTable(this.newList);
           // this.router.navigate(['/students']);
-         });
+        //  });
         }
         else
           this._parent.openMessagePopup("שגיאה באיחוד הכרטיסים")

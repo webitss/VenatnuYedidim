@@ -116,13 +116,13 @@ export class EventParticipantsComponent implements OnInit {
     //       sumSave++;
 
     //       if (sumSave == sumToSave) {
-    //         this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
+           this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
     //         this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
     //           if (res.length > 0) {
     //             this.participantList = res;
     //             this.lstDataRows=res;
     //           }
-    //           this.buildGrid(this.lstDataRows, true);
+             //this.buildGrid(this.lstDataRows, true);
     //         });
 
 
