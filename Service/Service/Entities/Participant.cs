@@ -147,6 +147,7 @@ namespace Service.Entities
                 }
                 parameters.Add(new SqlParameter("lstParticipant", dt));
                 parameters.Add(new SqlParameter("iUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TParticipant_List_INS_UPD", parameters);
                 return true;
             }
             catch (Exception ex)
