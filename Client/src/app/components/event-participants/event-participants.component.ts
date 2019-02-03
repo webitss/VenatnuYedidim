@@ -10,6 +10,7 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { NgIf } from '@angular/common';
 import { AppComponent } from '../app/app.component';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { EventParticipant } from '../../classes/event-participant';
 
 @Component({
   selector: 'app-event-participants',
@@ -86,25 +87,27 @@ export class EventParticipantsComponent implements OnInit {
   }
 
   //  להוסיף את המשתתפים שנבחרו
-  listParticipant: Array<Participants>;
-  // i: number = 0;
-  event: any;
+  listParticipant: Array<EventParticipant>;
+  
+  eventParticipant:EventParticipant
+  // event: any;
   save() {
-    this.listParticipant=new Array<Participants>();
-    // this.i = 0;
+    this.listParticipant=new Array<EventParticipant>();
+    this.eventParticipant=new EventParticipant();
     let sumSave = 0;
     let lstToSave = this.listToSelect.filter(f => f['checked'] == true);
     let sumToSave = lstToSave.length;
     this.flag = false;
     lstToSave.forEach(item => {
       if (item['checked'] == true) {
-        this.listParticipant.push(item);
-        // this.listParticipant[this.i].iEventId = item.iEventId;
-        // this.listParticipant[this.i].iArrivalStatusType = 34;
-        // this.i++;
+        this.eventParticipant=new EventParticipant();
+        this.eventParticipant.iPersonId=item.iPersonId;
+        this.eventParticipant.iEventId=this.iEventId;
+        this.eventParticipant.iArrivalStatusType=34;
+        this.listParticipant.push(this.eventParticipant);
       }
     });
-    // if (item['bMultySelectChecked'] == true)
+    
     this.appProxy.post("SetEventParticipantList", {
       listParticipant:this.listParticipant,iUserId: this.globalService.getUser().iPersonId
     })

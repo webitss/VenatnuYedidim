@@ -12,6 +12,8 @@ import { Yeshiva } from '../../classes/Yeshiva';
 import { Avrech } from '../../classes/avrech';
 import { AppComponent } from '../app/app.component';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { promise } from 'protractor';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-students',
@@ -26,6 +28,7 @@ export class StudentsComponent implements OnInit {
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
   studentId: number;
   component;
+
   constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute, private globalService: GlobalService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
   param: any;
   id: number;
@@ -37,7 +40,7 @@ export class StudentsComponent implements OnInit {
   private alert: any;
   @ViewChild('students') students: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
-  ngOnInit() {
+ public ngOnInit() {
 this.currentYeshivaOfStudent=new Map<number,string>();
     this.component = this.router.url;
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
@@ -113,8 +116,25 @@ this.currentYeshivaOfStudent=new Map<number,string>();
 
 
   }
-
-
+  aaaa(): Promise<any> {
+    return this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
+      this.studentList = data;
+      //return this.studentList;
+      
+    })
+      .catch(error => {
+        console.log(error);
+        alert("שגיאת התחברות");
+      });
+  }
+  // public a(){
+  //   this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
+  //     this.studentList = data;
+  //     //return this.studentList;
+      
+  //   });
+    
+ // }
 
   editStudent(e) {
     this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);

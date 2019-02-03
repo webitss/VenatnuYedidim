@@ -1,10 +1,12 @@
-import { Component, OnInit, EventEmitter, Output, Inject, forwardRef } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Inject, forwardRef, ViewChild } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Student } from '../../classes/student';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../../services/global.service';
 import { SysTableService } from '../../services/sys-table.service';
 import { AppComponent } from '../app/app.component';
+import { StudentsComponent } from '../students/students.component';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 @Component({
   selector: 'app-cards-union',
@@ -23,15 +25,17 @@ export class CardsUnionComponent implements OnInit {
 
   studentList: Student[];
   students: boolean = false;
-  functionName:string ='';
+  functionName: string = '';
   id: number;
+  newList: any;
   @Output() onClose: EventEmitter<any> = new EventEmitter();
-
-  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
+  @ViewChild('VyTableComponent') VyTableComponent: VyTableComponent;
+  @ViewChild('StudentsComponent') StudentsComponent: StudentsComponent ;
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
 
-    
+
 
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
     this.student.dtAddStudentDate = null;
@@ -39,7 +43,7 @@ export class CardsUnionComponent implements OnInit {
     //  this.activatedRoute.parent.params.subscribe(params => {
     //     this.id = params['iPersonId'];
     //   });
-    if(window.location.hash == '#/graduates')
+    if (window.location.hash == '#/graduates')
       this.functionName = 'GetBugrimList';
     else this.functionName = 'GetStudentList';
 
@@ -52,10 +56,10 @@ export class CardsUnionComponent implements OnInit {
   student1Change(event: any) {
     this.studentList.forEach(e => {
       if (e.iPersonId == event.currentTarget.value) {
-        this.student1 = e; 
+        this.student1 = e;
         if (this.student2 && this.student2.iPersonId == e.iPersonId) {
           this.sameNameStudents = false;
-         
+
         }
         else
           this.sameNameStudents = true;
@@ -105,9 +109,19 @@ export class CardsUnionComponent implements OnInit {
           this._parent.openMessagePopup("השמירה התבצעה בהצלחה");
           this.onClose.emit();
 
+          // this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
+          //   this.studentList = data;
+          // }); 
+         this.StudentsComponent= new StudentsComponent(this.appProxy, this.router, this.activatedRoute, this.globalService, this._parent);
+         this.StudentsComponent.aaaa().then(data => {
+          this.newList = data;
+          this.VyTableComponent = new VyTableComponent(this.appProxy);
+          this.VyTableComponent.refreshTable(this.newList);
+          // this.router.navigate(['/students']);
+         });
         }
         else
-        this._parent.openMessagePopup("שגיאה באיחוד הכרטיסים")
+          this._parent.openMessagePopup("שגיאה באיחוד הכרטיסים")
       }
       , err => this._parent.openMessagePopup("שגיאה בגישה לשרת"));
   }

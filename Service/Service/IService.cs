@@ -588,12 +588,20 @@ namespace Service
 		RequestFormat = WebMessageFormat.Json)]
 		bool SetEventParticipant(bool isNew, int iStatusType, int iPersonId, int iEventId, int iUserId);
 
-		#endregion
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "SetEventParticipantList",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool SetEventParticipantList(Participant[] listParticipant, int iUserId);
+        #endregion
 
-		#region Documents
+        #region Documents
 
 
-		[OperationContract]
+        [OperationContract]
 		[WebInvoke(
 		Method = "GET",
 		UriTemplate = "GetDocuments",
