@@ -88,50 +88,49 @@ export class EventParticipantsComponent implements OnInit {
 
   //  להוסיף את המשתתפים שנבחרו
   listParticipant: Array<EventParticipant>;
-  
-  eventParticipant:EventParticipant
+
+  eventParticipant: EventParticipant
   // event: any;
   save() {
-    this.listParticipant=new Array<EventParticipant>();
-    this.eventParticipant=new EventParticipant();
+    this.listParticipant = new Array<EventParticipant>();
+    this.eventParticipant = new EventParticipant();
     let sumSave = 0;
     let lstToSave = this.listToSelect.filter(f => f['checked'] == true);
     let sumToSave = lstToSave.length;
     this.flag = false;
     lstToSave.forEach(item => {
       if (item['checked'] == true) {
-        this.eventParticipant=new EventParticipant();
-        this.eventParticipant.iPersonId=item.iPersonId;
-        this.eventParticipant.iEventId=this.iEventId;
-        this.eventParticipant.iArrivalStatusType=34;
+        this.eventParticipant = new EventParticipant();
+        this.eventParticipant.iPersonId = item.iPersonId;
+        this.eventParticipant.iEventId = this.iEventId;
+        this.eventParticipant.iArrivalStatusType = 34;
         this.listParticipant.push(this.eventParticipant);
+        // this.vyTableComponent.refreshTable(this.listParticipant);
       }
     });
-    
+
     this.appProxy.post("SetEventParticipantList", {
-      listParticipant:this.listParticipant,iUserId: this.globalService.getUser().iPersonId
+      listParticipant: this.listParticipant, iUserId: this.globalService.getUser().iPersonId
     })
-    //   .then(data => {
-    //     if (data == true) {
-    //       sumSave++;
+      .then(data => {
+        if (data == true) {
+          // sumSave++;
 
-    //       if (sumSave == sumToSave) {
-           this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
-    //         this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
-    //           if (res.length > 0) {
-    //             this.participantList = res;
-    //             this.lstDataRows=res;
-    //           }
-             //this.buildGrid(this.lstDataRows, true);
-    //         });
+          // if (sumSave == sumToSave) {
+          this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
+                  this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
+                    if (res.length > 0) {
+                      this.participantList = res;
+                      this.lstDataRows=res;
+                    }
+          this.buildGrid(this.lstDataRows, true);
+                  });
+        }
 
+        else
+          this._parent.openMessagePopup("השמירה נכשלה");
 
-    // }
-    // }
-    // else
-    //   this._parent.openMessagePopup("השמירה נכשלה");
-
-    // });
+      });
 
 
     // });
