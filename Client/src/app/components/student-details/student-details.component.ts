@@ -511,6 +511,7 @@ export class StudentDetailsComponent implements OnInit {
       event.preventDefault();
     }
   }
+  
 }
 
 

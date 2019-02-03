@@ -27,8 +27,9 @@ export class CardsUnionComponent implements OnInit {
   students: boolean = false;
   functionName: string = '';
   id: number;
-  newList: any;
-  @Output() onClose: EventEmitter<any> = new EventEmitter();
+  // newList: any;
+  @Output() 
+  public onClose: EventEmitter<any> = new EventEmitter();
   @ViewChild('VyTableComponent') VyTableComponent: VyTableComponent;
   @ViewChild('StudentsComponent') StudentsComponent: StudentsComponent ;
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }

@@ -35,13 +35,13 @@ export class StudentsComponent implements OnInit {
   studentList: Student[];
   yeshivaList: Yeshiva[];
   studentsAssociatedToAvrech: number[];
-  avrechimListOfStudent:Avrech[];
-  currentYeshivaOfStudent:Map<number, string>;
+  avrechimListOfStudent: Avrech[];
+  currentYeshivaOfStudent: Map<number, string>;
   private alert: any;
   @ViewChild('students') students: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
- public ngOnInit() {
-this.currentYeshivaOfStudent=new Map<number,string>();
+  public ngOnInit() {
+    this.currentYeshivaOfStudent = new Map<number, string>();
     this.component = this.router.url;
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
     if (this.component == '/students') {
@@ -90,7 +90,7 @@ this.currentYeshivaOfStudent=new Map<number,string>();
           });
         });
       }//, err => { alert(err); }
-    );
+      );
     }
 
 
@@ -116,26 +116,25 @@ this.currentYeshivaOfStudent=new Map<number,string>();
 
 
   }
-  aaaa(): Promise<any> {
-    return this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
-      this.studentList = data;
-      //return this.studentList;
+  lstDataRows = [];
+  onClose(e) {
+    if (e.iPersonId) {
+      this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
+        this.studentList = data;
+        this.studentList.forEach(student => {
+          student['edit'] = '<div class="edit"></div>'
+          student['delete'] = '<div class = "delete"></>';
+        });
+     
+        this.vyTableComponent.refreshTable(this.studentList);
       
-    })
-      .catch(error => {
-        console.log(error);
-        alert("שגיאת התחברות");
       });
+       
+     
+    }
+    this.flag = false;
   }
-  // public a(){
-  //   this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
-  //     this.studentList = data;
-  //     //return this.studentList;
-      
-  //   });
-    
- // }
-
+  
   editStudent(e) {
     this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);
   }
@@ -177,8 +176,7 @@ this.currentYeshivaOfStudent=new Map<number,string>();
   // clickCell:true,
   // type: 'html'
 
-  downloadExcel()
-  {
+  downloadExcel() {
     this.vyTableComponent.downloadExcel();
   }
   // tableToPdf(name)
