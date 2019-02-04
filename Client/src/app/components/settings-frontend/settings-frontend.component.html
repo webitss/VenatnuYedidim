@@ -27,9 +27,27 @@
 
  
 </div> -->
-
-<angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
-
+ <div class="row">
+  <div class="Show" >
+    <label class="lableng col-sm-12"></label>
+    <h3 class="text">כותרת</h3>
+<angular-editor id="header"[(ngModel)]="GlobalHeader.nvValue" [config]="config"></angular-editor>
+  </div>
+</div>
+<div class="row">
+  <div class="Show" >
+    <label class="lableng col-sm-12"></label>
+    <h3 class="text">טקסט ראשי</h3>
+<angular-editor id="VerMarch"[(ngModel)]="GlobalVerMarch.nvValue" [config]="config"></angular-editor>
+</div>
+</div>
+<div class="row">
+  <div class="Show" >
+    <label class="lableng col-sm-12"></label>
+    <h3 class="text">טקסט משני</h3> 
+<angular-editor id="MarchSF"[(ngModel)]="GlobalMarchSF.nvValue" [config]="config"></angular-editor>
+</div>
+</div>
 <div class="uploadDocumentComponent" *ngIf="document!=null">
   <app-upload-document [document]="document" (closeMe)="closeDocumentDialog(true)" (closeMeNoSave)="closeDocumentDialog(false)"></app-upload-document>
 </div>

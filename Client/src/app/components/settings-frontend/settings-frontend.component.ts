@@ -18,7 +18,10 @@ export class SettingsFrontendComponent implements OnInit {
 
 
   name = 'Angular 6';
-  htmlContent = '';
+  htmlContent1 = '';
+  htmlContent2 = '';
+  htmlContent3 = '';
+
 
   config: AngularEditorConfig = {
     editable: true,
