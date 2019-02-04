@@ -64,23 +64,29 @@ export class EventParticipantsComponent implements OnInit {
 
   addParticipants() {
     this.listToSelect = [];
-    this.appProxy.post("GetPersonList").then(
-      data => {
-        this.allPersons = data;
-        this.flag = true
-        this.listToSelect = this.allPersons.filter(per => (!this.participantList.find(p => p.iPersonId == per.iPersonId)));
-        this.listToSelect.forEach(
-          person => {
-            person['value'] = person.nvFirstName + ' ' + person.lstObject['nvParticipantType'];
-            person['nvParticipantType'] = person.lstObject['nvParticipantType'];
-
-            //this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'], iPersonId: person.iPersonId });
-            //this.iPersonId = person.iPersonId;
-
-          }
-        );
-
+    this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
+      if (res.length > 0) {
+        this.participantList = res;
+        this.lstDataRows = res;
       }
+
+      this.appProxy.post("GetPersonList").then(
+        data => {
+          this.allPersons = data;
+          this.flag = true
+          this.listToSelect = this.allPersons.filter(per => (!this.participantList.find(p => p.iPersonId == per.iPersonId)));
+          this.listToSelect.forEach(
+            person => {
+              person['value'] = person.nvFirstName + ' ' + person.lstObject['nvParticipantType'];
+              person['nvParticipantType'] = person.lstObject['nvParticipantType'];
+
+              //this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'], iPersonId: person.iPersonId });
+              //this.iPersonId = person.iPersonId;
+
+            }
+          );
+        });
+    }
     );
 
 
@@ -118,13 +124,13 @@ export class EventParticipantsComponent implements OnInit {
 
           // if (sumSave == sumToSave) {
           this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
-                  this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
-                    if (res.length > 0) {
-                      this.participantList = res;
-                      this.lstDataRows=res;
-                    }
-          this.buildGrid(this.lstDataRows, true);
-                  });
+          this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
+            if (res.length > 0) {
+              this.participantList = res;
+              this.lstDataRows = res;
+            }
+            this.buildGrid(this.lstDataRows, true);
+          });
         }
 
         else

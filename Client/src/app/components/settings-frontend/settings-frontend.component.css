@@ -68,7 +68,14 @@ li>button{
 .btn-add{
   height: 15%;
   margin-left: 16%;
-  width: 70%;
+  /* width: 70%; */
+  width: 150px;
+}
+.btn-add:hover {
+  color: #FFF;
+  background-color: rgb(207, 37,94);
+ 
+
 }
 .textarea{
   width:650px;

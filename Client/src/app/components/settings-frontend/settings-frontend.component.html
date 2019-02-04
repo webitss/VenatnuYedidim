@@ -1,9 +1,14 @@
-<div class="col col-sm-2">
+
+<div class="row">
+<!-- <div > -->
     <input class="btn-add btn-circle" type="button" value="שנה תצוגה" (click)="saveGlobalParams()">
-  </div>
-  <div class="col col-sm-2">
+    <app-vy-pop-up [isDouble]="false" [message]="message" *ngIf="flag" [header]="header" (close)="flag=false" (ok)="flag=false;"></app-vy-pop-up>
+  <!-- </div>
+  <div class="col col-sm-2"> -->
       <button (click)="addDocument()" class="btn-add btn-circle">הוספת מדיה</button>
-    </div>
+    <!-- </div> -->
+ </div>
+
  
 <!-- <div class="row">
   <div class="Show" >
@@ -27,13 +32,21 @@
 
  
 </div> -->
- <div class="row">
+ <!-- <div class="row">
   <div class="Show" >
     <label class="lableng col-sm-12"></label>
     <h3 class="text">כותרת</h3>
 <angular-editor id="header"[(ngModel)]="GlobalHeader.nvValue" [config]="config"></angular-editor>
   </div>
-</div>
+</div> -->
+
+<div class="row">
+    <div class="Show" >
+      <label class="lableng col-sm-12"></label>
+      <h3 class="text"> כותרת</h3>
+  <angular-editor id="header"[(ngModel)]="GlobalHeader.nvValue" [config]="config"></angular-editor>
+  </div>
+  </div>
 <div class="row">
   <div class="Show" >
     <label class="lableng col-sm-12"></label>

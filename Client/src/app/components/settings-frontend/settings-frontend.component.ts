@@ -47,7 +47,6 @@ export class SettingsFrontendComponent implements OnInit {
     ]
   }
   public GlobalHeader: TGlobalParameters = new TGlobalParameters();
-
   public GlobalVerMarch: TGlobalParameters = new TGlobalParameters();
   public GlobalMarchSF: TGlobalParameters = new TGlobalParameters();
   public GlobalParameters: TGlobalParameters[] = new Array<TGlobalParameters>();
@@ -63,6 +62,8 @@ export class SettingsFrontendComponent implements OnInit {
     private router: Router,
     private sysTableService: SysTableService
   ) { }
+  flag:boolean=false;
+  message:any='';
   ngOnInit() {
     this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType = data.filter(x => x.nvValue == 'תדמית')[0].iSysTableRowId);
     this.loadDocuments();
@@ -148,11 +149,14 @@ export class SettingsFrontendComponent implements OnInit {
 
     );
   }
-
+  openMessagePopup(message: string) {
+    this.message = message;
+    this.flag = true;
+  }
   saveGlobalParams() {
 
-
-
+    this.openMessagePopup('השמירה התבצעה בהצלחה');
+// this.flag=true;
     this.settingsFrontend.GlobalHeader.nvTitle = GLOBAL.title;
     this.settingsFrontend.GlobalHeader.nvValue = this.GlobalHeader.nvValue;
 
