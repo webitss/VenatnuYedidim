@@ -5,9 +5,9 @@
       <button (click)="addDocument()" class="btn-add btn-circle">הוספת מדיה</button>
     </div>
  
-<div class="row">
+<!-- <div class="row">
   <div class="Show" >
-    <label class="lable col-sm-12"  for="header"><h3 class="text">כותרת</h3></label>
+    <label class="lableng col-sm-12"  for="header"><h3 class="text">כותרת</h3></label>
    
     <textarea  class="textarea" id="header" rows="4" cols="50" [(ngModel)]="GlobalHeader.nvValue">
     </textarea>
@@ -26,9 +26,9 @@
 
 
  
-</div>
+</div> -->
 
-
+<angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
 
 <div class="uploadDocumentComponent" *ngIf="document!=null">
   <app-upload-document [document]="document" (closeMe)="closeDocumentDialog(true)" (closeMeNoSave)="closeDocumentDialog(false)"></app-upload-document>

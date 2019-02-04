@@ -104,7 +104,7 @@ import { EditMailComponent } from './components/edit-mail/edit-mail.component';
 import { NgxPasswordToggleModule } from 'ngx-password-toggle';
 import { DataSharingService } from './services/dataSharing.Service';
 
-
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 
@@ -208,6 +208,7 @@ import { DataSharingService } from './services/dataSharing.Service';
   //],
   imports: [
     // SelectModule,
+    AngularEditorModule,
     NgSelectModule,
     // BrowserAnimationsModule, IgxCalendarModule,
     // CommonModule,

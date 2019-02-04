@@ -6,6 +6,7 @@ import { GlobalService } from '../../services/global.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Document } from '../../classes/document';
 import { SysTableService } from '../../services/sys-table.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-settings-frontend',
@@ -13,39 +14,66 @@ import { SysTableService } from '../../services/sys-table.service';
   styleUrls: ['./settings-frontend.component.css']
 })
 export class SettingsFrontendComponent implements OnInit {
-  public GlobalHeader:TGlobalParameters=new TGlobalParameters();
 
-  public  GlobalVerMarch:TGlobalParameters=new TGlobalParameters();
-  public GlobalMarchSF:TGlobalParameters=new TGlobalParameters();
-  public GlobalParameters: TGlobalParameters[] = new Array<
-    TGlobalParameters
-  >();
-  belongSheetType:number;
+
+
+  name = 'Angular 6';
+  htmlContent = '';
+
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    customClasses: [
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ]
+  }
+  public GlobalHeader: TGlobalParameters = new TGlobalParameters();
+
+  public GlobalVerMarch: TGlobalParameters = new TGlobalParameters();
+  public GlobalMarchSF: TGlobalParameters = new TGlobalParameters();
+  public GlobalParameters: TGlobalParameters[] = new Array<TGlobalParameters>();
+  belongSheetType: number;
   document: Document;
   documents: any[] = new Array();
   constructor(
-    private cdRef:ChangeDetectorRef,
+    private cdRef: ChangeDetectorRef,
     public settingsFrontend: settingsFrontend,
     private appProxy: AppProxy,
     private globalService: GlobalService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private sysTableService: SysTableService
-  ) {}
-  ngOnInit() {   
-    this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType= data.filter(x => x.nvValue == 'תדמית')[0].iSysTableRowId);
+  ) { }
+  ngOnInit() {
+    this.sysTableService.getValues(SysTableService.dataTables.belongSheetType.iSysTableId).then(data => this.belongSheetType = data.filter(x => x.nvValue == 'תדמית')[0].iSysTableRowId);
     this.loadDocuments();
-    this.settingsFrontend.GetGlobalParameters().then(res=>{
-         this.settingsFrontend.GlobalHeader=(<any>res).filter(r=>r.nvTitle==[GLOBAL.title])[0]
-         this.settingsFrontend.GlobalVerMarch=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalVerMarch])[0]
-        this.settingsFrontend.GlobalMarchSF=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalMarchSF])[0]
-        debugger;
-        this.GlobalHeader=this.settingsFrontend.GlobalHeader;
-        this.GlobalMarchSF=this.settingsFrontend.GlobalMarchSF;
-        this.GlobalVerMarch=this.settingsFrontend.GlobalVerMarch;
-        this.cdRef.detectChanges();
-  })
- 
+    this.settingsFrontend.GetGlobalParameters().then(res => {
+      this.settingsFrontend.GlobalHeader = (<any>res).filter(r => r.nvTitle == [GLOBAL.title])[0]
+      this.settingsFrontend.GlobalVerMarch = (<any>res).filter(r => r.nvTitle == [GLOBAL.GlobalVerMarch])[0]
+      this.settingsFrontend.GlobalMarchSF = (<any>res).filter(r => r.nvTitle == [GLOBAL.GlobalMarchSF])[0]
+      debugger;
+      this.GlobalHeader = this.settingsFrontend.GlobalHeader;
+      this.GlobalMarchSF = this.settingsFrontend.GlobalMarchSF;
+      this.GlobalVerMarch = this.settingsFrontend.GlobalVerMarch;
+      this.cdRef.detectChanges();
+    })
+
   }
 
 
@@ -61,7 +89,7 @@ export class SettingsFrontendComponent implements OnInit {
   addDocument() {
     this.document = new Document();
     this.document.bShowInTadmit = false;
-    this.document.iBelongingType =  this.belongSheetType;
+    this.document.iBelongingType = this.belongSheetType;
     this.document.iCategoryType = 0;
   }
 
@@ -69,7 +97,7 @@ export class SettingsFrontendComponent implements OnInit {
     this.documents.forEach(element => {
       if (element.iDocumentId === id) {
         this.document = new Document();
-        this.document.iBelongingType =  this.belongSheetType;
+        this.document.iBelongingType = this.belongSheetType;
         this.document.iCategoryType = 0;
         this.document.iDocumentId = element.iDocumentId;
         this.document.iItemId = element.iItemId;
@@ -114,44 +142,44 @@ export class SettingsFrontendComponent implements OnInit {
             }
           }
         },
-      
-      );
+
+    );
   }
 
-saveGlobalParams(){
+  saveGlobalParams() {
 
-  
 
-  this.settingsFrontend.GlobalHeader.nvTitle=GLOBAL.title;
-  this.settingsFrontend.GlobalHeader.nvValue=this.GlobalHeader.nvValue;
- 
-  this.GlobalParameters.push(this.settingsFrontend.GlobalHeader);
-  this.settingsFrontend.GlobalVerMarch.nvTitle=GLOBAL.GlobalVerMarch;
-  this.settingsFrontend.GlobalVerMarch.nvValue=this.GlobalVerMarch.nvValue;
-  this.GlobalParameters.push(this.settingsFrontend.GlobalVerMarch);
-  this.settingsFrontend.GlobalMarchSF.nvTitle=GLOBAL.GlobalMarchSF;
-  this.settingsFrontend.GlobalMarchSF.nvValue=this.GlobalMarchSF.nvValue;
-  this.GlobalParameters.push(this.settingsFrontend.GlobalMarchSF);
- debugger;
-  this.settingsFrontend.GetGlobalParameters().then(res=>{
- 
-    if((<any>res).length>0){
 
-      this.settingsFrontend.updateGlobalParameters(this.GlobalParameters).then(
+    this.settingsFrontend.GlobalHeader.nvTitle = GLOBAL.title;
+    this.settingsFrontend.GlobalHeader.nvValue = this.GlobalHeader.nvValue;
 
-        l=>console.log("kkkkk")
-      );
-     
-    }
-    else{
-      this.settingsFrontend.SaveGlobalParameters(this.GlobalParameters).then(
-      
-        l=>console.log("kkkkk"));
+    this.GlobalParameters.push(this.settingsFrontend.GlobalHeader);
+    this.settingsFrontend.GlobalVerMarch.nvTitle = GLOBAL.GlobalVerMarch;
+    this.settingsFrontend.GlobalVerMarch.nvValue = this.GlobalVerMarch.nvValue;
+    this.GlobalParameters.push(this.settingsFrontend.GlobalVerMarch);
+    this.settingsFrontend.GlobalMarchSF.nvTitle = GLOBAL.GlobalMarchSF;
+    this.settingsFrontend.GlobalMarchSF.nvValue = this.GlobalMarchSF.nvValue;
+    this.GlobalParameters.push(this.settingsFrontend.GlobalMarchSF);
+    debugger;
+    this.settingsFrontend.GetGlobalParameters().then(res => {
+
+      if ((<any>res).length > 0) {
+
+        this.settingsFrontend.updateGlobalParameters(this.GlobalParameters).then(
+
+          l => console.log("kkkkk")
+        );
+
       }
-  });
- 
-}
- 
+      else {
+        this.settingsFrontend.SaveGlobalParameters(this.GlobalParameters).then(
+
+          l => console.log("kkkkk"));
+      }
+    });
+
+  }
+
 
 
 }
