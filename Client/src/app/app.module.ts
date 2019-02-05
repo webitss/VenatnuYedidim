@@ -5,27 +5,18 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from "@angular/http";
 import { RouterModule, Route } from '@angular/router';
 import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
-// import { GooglePlaceModule } from "ngx-google-places-autocomplete";
-//import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { NgxImageGalleryModule } from 'ngx-image-gallery';
-// import { CommonModule } from '@angular/common';
-// import { FlatpickrModule } from 'angularx-flatpickr';
-// import { CalendarModule, DateAdapter } from 'angular-calendar';
-// import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-// import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-// import {MatButtonModule} from '@angular/material';
-
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { IgxCalendarModule } from 'igniteui-angular';
-// import {SelectModule} from 'ng2-select';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxPasswordToggleModule } from 'ngx-password-toggle';
+
+import { AngularEditorModule } from '@kolkov/angular-editor';
 //--- templates ---
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
-import{VyTableFilterPipe}from './templates/vy-table/vy-table-filter.pipe';
+import { VyTableFilterPipe } from './templates/vy-table/vy-table-filter.pipe';
 import { VyTableOrderByPipe, OrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
-
+import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
 //--- Pipes ---
 import { FilterPipe } from './pipes/filter.pipe';
 
@@ -35,7 +26,7 @@ import { SysTableService } from './services/sys-table.service';
 import { GlobalService } from './services/global.service';
 import { DialogService } from './services/dialog.service';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
-
+import { DataSharingService } from './services/dataSharing.Service';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
 
@@ -85,26 +76,17 @@ import { TaskComponent } from './components/task/task.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
 import { ShowImageComponent } from './components/show-image/show-image.component';
-import { SafeUrl } from './directives/safe-url';
-import { GoogleCity } from './directives/googleCity';
-import { FitElement } from './directives/fit-element';
 import { MediaComponent } from './components/media/media.component';
-
 import { GaleryComponent } from './components/galery/galery.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { settingsFrontend } from './services/settings-frontend.service';
 import { OpenPresenceComponent } from './components/open-presence/open-presence.component';
-
 import { AddParticipantComponent } from './components/add-participant/add-participant.component';
-
-import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
 import { EditMailComponent } from './components/edit-mail/edit-mail.component';
-// import { NgxEditorModule } from 'ngx-editor';
-// import { ShowHidePasswordModule } from 'ngx-show-hide-password';
-import { NgxPasswordToggleModule } from 'ngx-password-toggle';
-import { DataSharingService } from './services/dataSharing.Service';
 
-import { AngularEditorModule } from '@kolkov/angular-editor';
+import { SafeUrl } from './directives/safe-url';
+import { GoogleCity } from './directives/googleCity';
+import { FitElement } from './directives/fit-element';
 
 
 
@@ -116,14 +98,14 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     VyTableComponent,
     VyTableFilterPipe,
     VyTableOrderByPipe,
-    OrderByPipe,
+
 
     // pipes
     FilterPipe,
- 
+    OrderByPipe,
     //directives
     GoogleCity,
-    SafeUrl,    
+    SafeUrl,
     FitElement,
 
     //components
@@ -176,7 +158,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     TaskComponent,
 
     LogInComponent,
-    
+
 
     ShowImageComponent,
 
@@ -199,12 +181,12 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     AddParticipantComponent,
     VyPopUpComponent,
     EditMailComponent,
-   
+
   ],
- //imports: [ 
-    // Ng2SearchPipeModule,
-    
-   
+  //imports: [ 
+  // Ng2SearchPipeModule,
+
+
   //],
   imports: [
     // SelectModule,
@@ -232,13 +214,13 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     NgxPasswordToggleModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
-    { path: "", component: ShowImageComponent },
-   
-     { path: "ResultComponent",  component: ShowImageComponent },
-     { path: "log-in", component: LogInComponent, canDeactivate: [CanDeactivateGuard] },
+      { path: "", component: ShowImageComponent },
+
+      { path: "ResultComponent", component: ShowImageComponent },
+      { path: "log-in", component: LogInComponent, canDeactivate: [CanDeactivateGuard] },
       { path: "students", component: StudentsComponent },
       // { path: "graduates", component: StudentsComponent },
-      
+
       {
 
         path: "students/student/:iPersonId", component: StudentComponent,
@@ -330,7 +312,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 
     ], { useHash: true })
   ],
-  providers: [AppProxy, SysTableService, GlobalService, CanDeactivateGuard, DialogService,settingsFrontend,DataSharingService],
+  providers: [AppProxy, SysTableService, GlobalService, CanDeactivateGuard, DialogService, settingsFrontend, DataSharingService],
   bootstrap: [AppComponent],
 
   // exports: [CalendarComponent]

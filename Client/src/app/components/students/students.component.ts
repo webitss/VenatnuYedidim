@@ -179,10 +179,10 @@ export class StudentsComponent implements OnInit {
   downloadExcel() {
     this.vyTableComponent.downloadExcel();
   }
-  // tableToPdf(name)
-  // {
-  //   this.vyTableComponent.downloadPdf(name,'pdf');
-  // }
+  tableToPdf(name)
+  {
+    this.vyTableComponent.downloadPdf(name,'pdf');
+  }
   editAndDeleteStudent(e) {
 
     if (e.columnClickName == 'edit')

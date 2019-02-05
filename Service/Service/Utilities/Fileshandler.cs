@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using NReco.PdfGenerator;
+using System.Text;
 
 namespace Service.Utilities
 {
@@ -245,6 +247,48 @@ namespace Service.Utilities
             pdf.CustomWkHtmlArgs = " --load-media-error-handling ignore ";
             byte[] pdfBytes = pdf.GeneratePdf(bodyHtml);
             return Convert.ToBase64String(pdfBytes);
+        }
+
+        public static string GeneratePdf(string title, string html, string css, string name)
+        {
+            try
+            {
+                css = " table { page -break-inside:auto }tr{ page-break-inside:avoid; page-break-after:auto }thead { display: table-header-group }"
+                +"tfoot { display: table-footer-group }";
+                NReco.PdfGenerator.HtmlToPdfConverter pdf = new NReco.PdfGenerator.HtmlToPdfConverter();
+                pdf.Margins = new NReco.PdfGenerator.PageMargins();
+                pdf.Margins.Top = 15;
+                pdf.Margins.Bottom = 5;
+                pdf.Margins.Right = 5;
+                pdf.Margins.Left = 5;
+                pdf.Orientation = PageOrientation.Portrait;
+                pdf.Size = PageSize.A4;
+                string hostName = @AppDomain.CurrentDomain.BaseDirectory + ConfigSettings.ReadSetting("FileFolderPath");
+                if (css != null)
+                    css = css.Replace("../", hostName + "/");
+                pdf.PageFooterHtml = "<div style='text-align:center;'><span class='page' style='border-left:1px solid #ddbfd3;padding-left:10px'></span> / <span style='border-right:1px solid #ddbfd3;padding-right:10px' class='topage'></span></div>";
+                pdf.PageHeaderHtml = "<div><div style='text-align:center; font-size:20px; color: #06416D; font-family: Arial'>" + title + "</div></div>";
+                html = "<html><head><meta charset='utf-8' /><style type='text/css'>" + css + "</style></head>" +
+                    "<body><div style='text-align:right;' dir='rtl'>" + html + "</div></body></html>";
+                string fileName = name.Replace("\\", "").Replace("/", "").Replace(":", "").Replace("*", "").Replace("?", "").Replace("\"", "").Replace("<", "").Replace(">", "").Replace("|", "") + "_" + DateTime.Now.ToFileTime();
+                byte[] Bytes = Encoding.UTF8.GetBytes(html);
+
+                File.WriteAllBytes(hostName + @"\pdfGenerator.html", Bytes);
+                Log.LogError("file path: ", hostName + fileName + ".html");
+                var pdfBytes = pdf.GeneratePdfFromFile(hostName + "\\pdfGenerator.html", null);
+
+                File.WriteAllBytes(hostName + fileName + ".pdf", pdfBytes);
+
+                DeleteFile(fileName + ".html");//delete html file
+
+                return fileName + ".pdf";
+            }
+            catch (Exception ex)
+            {
+                Log.LogError(ex.Message, "GeneratePdf");
+                return null;
+            }
+
         }
 
     }

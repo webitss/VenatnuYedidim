@@ -46,12 +46,12 @@ export class StudentDetailsComponent implements OnInit {
   currentUser: number;
   days: string[] = ["א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב", "יג", "יד", "טו", "טז", "יז", "יח", "יט", "כ", "כא", "כב", "כג", "כד", "כה", "כו", "כז", "כח", "כט", "ל"];
   monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
-  foreignDays: Array<number> =[];
+  foreignDays: Array<number> = [];
   foreignMonthes: Array<KeyValue>;
- 
+
   // this.foreignMonthes=["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   foreignYearsList: Array<string>;
- 
+
 
 
   lenOfMonth: number;
@@ -83,22 +83,22 @@ export class StudentDetailsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.foreignMonthes=[
-    {id:1,text:"Jan"},
-    {id:2,text:"Feb"},
-    {id:3,text:"Mar"},
-    {id:4,text:"Apr"},
-    {id:5,text:"May"},
-    {id:6,text:"Jun"},
-    {id:7,text:"Jul"},
-    {id:8,text:"Aug"},
-    {id:9,text:"Sep"},
-    {id:10,text:"Oct"},
-    {id:11,text:"Nov"},
-    {id:12,text:"Dec"},
-];
- 
-    this.lenOfMonth=30
+    this.foreignMonthes = [
+      { id: 1, text: "Jan" },
+      { id: 2, text: "Feb" },
+      { id: 3, text: "Mar" },
+      { id: 4, text: "Apr" },
+      { id: 5, text: "May" },
+      { id: 6, text: "Jun" },
+      { id: 7, text: "Jul" },
+      { id: 8, text: "Aug" },
+      { id: 9, text: "Sep" },
+      { id: 10, text: "Oct" },
+      { id: 11, text: "Nov" },
+      { id: 12, text: "Dec" },
+    ];
+
+    this.lenOfMonth = 30
     this.dateYear();
     this.generateDay();
     this.bornDateHebrewStudent = new HebrewDate();
@@ -131,11 +131,11 @@ export class StudentDetailsComponent implements OnInit {
             this.status = data.filter(x => x.iSysTableRowId == this.student.iStatusType)[0].nvValue;
             this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data; });
           });
-          this.student['fYears'] = this.student.dtBirthdate?this.student.dtBirthdate.getFullYear():0;
+          this.student['fYears'] = this.student.dtBirthdate ? this.student.dtBirthdate.getFullYear() : 0;
           // this.student['fMonthes'] = this.foreignMonthes[this.student.dtBirthdate?this.student.dtBirthdate.getMonth().toString():null];
-          this.student['fMonthes']=this.student.dtBirthdate.getMonth();
+          this.student['fMonthes'] = this.student.dtBirthdate.getMonth();
           // this.student['fMonthes']['text']=this.foreignMonthes[this.student.dtBirthdate.getMonth()].text;
-          this.student['fDays'] = this.student.dtBirthdate?this.student.dtBirthdate.getDate():0;
+          this.student['fDays'] = this.student.dtBirthdate ? this.student.dtBirthdate.getDate() : 0;
 
           this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
           this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];
@@ -243,17 +243,16 @@ export class StudentDetailsComponent implements OnInit {
     };
   }
   dateDay() {
-    this.student.dtBirthdate = new Date(Number(this.student['fYears']),(this.student['fMonthes']), this.student['fDays']);
+    this.student.dtBirthdate = new Date(Number(this.student['fYears']), (this.student['fMonthes']), this.student['fDays']);
     // console.log(this.student.dtBirthdate);
-    this.lenOfMonth = new Date(this.student['fYears'],(this.student['fMonthes']), 0).getDate();
+    this.lenOfMonth = new Date(this.student['fYears'], (this.student['fMonthes']), 0).getDate();
     this.generateDay();
 
   }
-  generateDay()
-  {
-    this.foreignDays=[];
-    for(var i=1;i<=this.lenOfMonth;i++)
-    this.foreignDays.push(i);
+  generateDay() {
+    this.foreignDays = [];
+    for (var i = 1; i <= this.lenOfMonth; i++)
+      this.foreignDays.push(i);
   }
   shift(newStatus) {
     this.appProxy.post("UpdateStatusStudent", { iPersonId: this.student.iPersonId, iStatusType: newStatus }).then(
@@ -392,7 +391,7 @@ export class StudentDetailsComponent implements OnInit {
   }
 
 
-  saveStudent() {
+  saveStudent(destroy = false) {
     if (this.save.name != '')
       this.student.nvImgStudent = this.save.name;
     this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;
@@ -419,7 +418,8 @@ export class StudentDetailsComponent implements OnInit {
         else
           this._parent.openMessagePopup("פרטי הבוגר עודכנו בהצלחה!");
         this.change = false;
-        this.backToGridStudent();
+        if (!destroy)
+          this.backToGridStudent();
 
       }, err => {
         if (this.status == 'תלמיד')
@@ -436,7 +436,8 @@ export class StudentDetailsComponent implements OnInit {
 
         this._parent.openMessagePopup("התלמיד נוסף בהצלחה!");
         this.change = false;
-        this.backToGridStudent();
+        if (!destroy)
+          this.backToGridStudent();
       }, err => {
         this._parent.openMessagePopup("שגיאה בהוספת תלמיד!");
       });
@@ -493,7 +494,7 @@ export class StudentDetailsComponent implements OnInit {
     if (this.change) {
       let v = confirm("האם ברצונך לשמור?");
       if (v)
-        this.saveStudent();
+        this.saveStudent(true);
     }
 
   }
@@ -511,7 +512,7 @@ export class StudentDetailsComponent implements OnInit {
       event.preventDefault();
     }
   }
-  
+
 }
 
 

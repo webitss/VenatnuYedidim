@@ -37,9 +37,7 @@ export class ShowImageComponent implements OnInit {
   ngxImageGallery: NgxImageGalleryComponent;
   public divModal: boolean;
 
-  protected listImage: string[] = ['http://localhost:14776/Files/red.jpg', 'assets/חוף ים.jpg',
-    "assets/3-big.jpg", "assets/IMG_5650.JPG",
-    "assets/IMG_5650.JPG", "assets/IMG_5650.JPG",]
+  protected listImage: string[] = []
   protected documents: any;
   protected password: any;
   protected name: any

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
@@ -20,7 +20,7 @@ export class StudentComponent implements OnInit, OnDestroy {
   student: Student;
   id: number;
 
-  constructor(private router: Router, private route: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService,private cdRef:ChangeDetectorRef) { }
   // subscription:Subscription;
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -64,7 +64,11 @@ export class StudentComponent implements OnInit, OnDestroy {
     else
       return false;
   }
+  ngAfterViewChecked()
+  {
 
+    this.cdRef.detectChanges();
+  }
   save() {
    
     if (this.currentComponent.saveStudent)

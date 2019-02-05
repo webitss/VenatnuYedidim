@@ -380,12 +380,20 @@ namespace Service
 		RequestFormat = WebMessageFormat.Json)]
 		string GeneratPdf(string headerHtml, string bodyHtml, string footerHtml);
 
-		#endregion
+        [OperationContract]
+        [WebInvoke(
+Method = "POST",
+UriTemplate = "DeleteFile",
+BodyStyle = WebMessageBodyStyle.WrappedRequest,
+ResponseFormat = WebMessageFormat.Json,
+RequestFormat = WebMessageFormat.Json)]
+        bool DeleteFile(string fileName, string folderPath = "");
+        #endregion
 
 
-		#region SysTableRow
+        #region SysTableRow
 
-		[OperationContract]
+        [OperationContract]
 		[WebInvoke(
 		Method = "POST",
 		UriTemplate = "GetValues",
@@ -832,10 +840,18 @@ namespace Service
 		RequestFormat = WebMessageFormat.Json)]
 		int SetPresence(PresenceAvrech presenceAvrech, int iUserId);
 
-		#endregion
+        #endregion
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "PrintToPDF",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        string PrintToPDF(string body, string title, string nvFilePath = null);
 
-	}
+    }
 
 
 

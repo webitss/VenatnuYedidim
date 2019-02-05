@@ -3,10 +3,12 @@ import { VyTableColumn } from './vy-table.classes';
 import { VyTableOrderByPipe, OrderByPipe } from './vy-table-order-by.pipe';
 import { AppProxy } from '../../services/app.proxy';
 import * as XLSX from 'xlsx';
-// import * as jsPDF from 'jspdf';
-// import html2canvas from 'html2canvas';
+import * as jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 // let jsPDF = require('jspdf');
 import 'jspdf-autotable';
+import { data } from 'jquery';
+import * as moment from 'moment';
 const EXCEL_EXTENSION = '.xlsx';
 @Component({
   selector: 'app-vy-table',
@@ -130,15 +132,16 @@ export class VyTableComponent implements OnInit {
   private createTable() {
     let table = "<table id='avrechim' style='width: 100%; background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
     this.lstColumns.forEach(column => {
-      if (column.bExcel)
+      if (column.bExcel && column.type!= 'checkbox' && column.type!= 'html')
         table += "<th>" + column.title + "</th>";
     });
     table += "</tr></thead><tbody>";
     this.lstDataRows.forEach(dataRow => {
+      
       table += "<tr style='text-align: initial'>";
       this.lstColumns.forEach(col => {
-        if (col.bExcel)
-          table += "<td>" + dataRow[col.name] + "</td>";
+        if (col.bExcel && col.type!= 'checkbox' && col.type!= 'html')
+          table += "<td style='border-left:1px solid gainsboro;  border-bottom:1px solid gainsboro;'>" + dataRow[col.name] + "</td>";
       });
       table += "</tr>";
     });
@@ -155,62 +158,52 @@ export class VyTableComponent implements OnInit {
         return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; })
       }
     var ctx = { worksheet: name || 'Worksheet', table: this.createTable() }
-    debugger;
+   
     window.location.href = uri + base64(format(template, ctx))
   }
 
-  public downloadExcel1(excelFileName: string): void {
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.lstDataRows);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    XLSX.writeFile(workbook, excelFileName + EXCEL_EXTENSION);
-  }
+ 
   public current_date = new Date();
-  // downloadPdf(componentName: string, type: string) {
+  downloadPdf(componentName: string, type: string) {
+    var format =moment(new Date()).format('YYYY/MM/DD HH:mm');
 
-  //   // let date:Date;
-  //   // let d=new Date().getUTCFullYear()+"/"+new Date().getMonth();
+    //   //  var d = new Date().toLocaleDateString('dd/mm/yy');
+    let header = "<div  style='direction: rtl;'><h1>ונתנו ידידים</h1><p style='direction: ltr;'>" + format + "</p><br/><br/><h2 style='text-align:center;'>טבלת " + componentName + "</h2></div>";
+    let footer = "<div style='font-weight: bold;  '>סה\"\כ שורות: " + this.lstDataRows.length;
+    let body = this.createTable();
+    // let element = document.createElement('div');
+    
+    this.printToPDF(header + body + footer,componentName+'-'+format);
+    //#region delete 2019.02.05??
+//   //console.log("<meta charset='UTF-8'/>" +header + body + footer);
+    // element.innerHTML = "<meta charset='UTF-8'/>" + header + body + footer;
+    // element.id = 'linkDownload1';
 
+    // var data = document.getElementById('myTable');
+    // html2canvas(data).then(canvas => {
+    //   //     // Few necessary setting options  
 
-  //   var dt = new Date();
-  //   var mm = dt.getMonth() + 1;
-  //   var dd = dt.getDate();
-  //   var yyyy = dt.getFullYear();
-  //   var format = dd + '/' + mm + '/' + yyyy
-
-  //   //  var d = new Date().toLocaleDateString('dd/mm/yy');
-  //   let header = "<div  style='direction: rtl;'><h1>ונתנו ידידים</h1><p style='direction: ltr;'>" + format + "</p><br/><br/><h2 style='text-align:center;'>טבלת " + componentName + "</h2></div>";
-  //   let footer = "<div style='font-weight: bold;  '>סה\"\כ שורות: " + this.lstDataRows.length;
-  //   let body = this.createTable();
-  //   let element = document.createElement('div');
-  //   //console.log("<meta charset='UTF-8'/>" +header + body + footer);
-  //   element.innerHTML = "<meta charset='UTF-8'/>" + header + body + footer;
-  //   element.id = 'linkDownload1';
-
-  //   var data = document.getElementById('myTable');
-  //   html2canvas(data).then(canvas => {
-  //     // Few necessary setting options  
-
-  //     var pdf = new jsPDF('p', 'pt', 'a4');
+    //   var pdf = new jsPDF('p', 'pt', 'a4');
 
 
-  //     pdf.text("שכשדכשדכשדכ", 10, 10);
-  //     //console.log(element);
-  //     // pdf.fromHTML(element, 10, 10);
-  //     //#region
-     
-  //     //#endregion
-  //     // pdf.addFont('../../assets/fonts/RUBIK-REGULAR.TTF', 'Rubik','normal');
-  //    // pdf.autoTable({ html: '#my-table' });
+    //   // pdf.text("שכשדכשדכשדכ", 10, 10);
+    //   //     //console.log(element);
+    //   pdf.fromHTML(canvas, 10, 10);
 
-  //     // Or JavaScript:
-     
-  //     pdf.addFont('RUBIK-REGULAR.TTF', 'Rubik', 'normal');
-  //     pdf.setFont('Rubik');
-  //     pdf.setFontSize(18);
-  //     //var imgData  = canvas.toDataURL("image/jpeg", 1.0);
-  //     // pdf.addImage(imgData,0,0,canvas.width, canvas.height);
-  //     pdf.save('converteddoc.pdf');
-  //   });
+    //   //pdf.addFont('../../../src/assets/fonts/RUBIK-REGULAR.TTF', 'Rubik', 'normal');
+
+
+    //   //     // Or JavaScript:
+    //   pdf.addFileToVFS('RUBIK-REGULAR.TTF', fontbase64);
+
+    //   pdf.addFont('RUBIK-REGULAR.TTF', 'custom', 'normal');
+
+    //   pdf.setFont('custom');
+    //   pdf.setFontSize(18);
+    //   //     //var imgData  = canvas.toDataURL("image/jpeg", 1.0);
+    //   //     // pdf.addImage(imgData,0,0,canvas.width, canvas.height);
+    //   pdf.save('converteddoc.pdf');
+    // });
 
 
 
@@ -247,14 +240,95 @@ export class VyTableComponent implements OnInit {
     //     //   console.log(e);
     //     // }
     //   })
-  //}
-  // removeFromList(item){
-  //   this.lstDataRows.splice(this.lstDataRows.indexOf(item),1);
-  // }
+    //}
+    // removeFromList(item){
+    //   this.lstDataRows.splice(this.lstDataRows.indexOf(item),1);
+    //#endregion
+    
+  }
   public refreshTable(newList) {
     this.lstDataRows = newList;
     this.moveToPage(this.currentPage > 0 ? this.currentPage : 0, true);
   }
 
+  printToPDF(body,title) {
+    var string =
+      '<DataTable xmlns="http://schemas.datacontract.org/2004/07/System.Data"><xs:schema id="NewDataSet" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"><xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="dt" msdata:UseCurrentLocale="true"><xs:complexType><xs:choice minOccurs="0" maxOccurs="unbounded"><xs:element name="dt"><xs:complexType><xs:sequence>';
+
+    string +=
+      '</xs:sequence></xs:complexType></xs:element></xs:choice></xs:complexType></xs:element></xs:schema><diffgr:diffgram xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"><DocumentElement xmlns="">';
+    string += body;
+    string += "</DocumentElement></diffgr:diffgram></DataTable>";
+    this.PrintToPDF(string, title, "pdff")
+      .then(res => {
+        // var link = document.createElement("a");
+        // link.download = AppProxy.getBaseUrl() + "Files/" + res;
+        // link.href = AppProxy.getBaseUrl() + "Files/" + res;
+        this.downloadFile(AppProxy.getBaseUrl() + "Files/" + res,title,'pdf');
+
+        this.appProxy.post("DeleteFile",{fileName:res})
+         //link.click();
+        // window.open(AppProxy.getBaseUrl() + "Files/" + res);
+      });
+    //  }
+  }
+
+  PrintToPDF(body, title, filePath): Promise<any> {
+    return this.appProxy
+      .post("PrintToPDF", {
+        body: body,
+        title: title,
+        // nvFilePath: filePath
+      })
+
+      .then(res => {
+        return res;
+      })
+      .catch(err => {
+        console.log("err-----" + err);
+        return false;
+      });
+  }
+  downloadFile(url: string, name: string, type: string) {
+    console.log(url);
+    this.toDataUrl(url, function (base64) {
+        let data = base64.split(',')[1];
+        let binaryString = window.atob(data);
+        let binaryLen = binaryString.length;
+        let bytes = new Uint8Array(binaryLen);
+        for (let i = 0; i < binaryLen; i++) {
+            let ascii = binaryString.charCodeAt(i);
+            bytes[i] = ascii;
+        }
+        data = bytes;
+
+        let file = type ? new Blob([data], { type: type }) : new Blob([data]);
+        let link = document.createElement('a');
+        link.setAttribute('id', 'linkDownload');
+        link.href = window.URL.createObjectURL(file);
+        link.download = name + (type ? '.' + type : '');
+        link.click();
+        try {
+            document.getElementById('linkDownload').remove();
+        } catch (e) {
+            //Global_service.showMessage("הורדת הקובץ נכשלה", "fail");
+            console.log(e);
+        }
+
+    });
+}
+  toDataUrl(url, callback) {
+    let xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        let reader = new FileReader();
+        reader.onloadend = function () {
+            callback(reader.result);
+        }
+        reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
+}
 
 }

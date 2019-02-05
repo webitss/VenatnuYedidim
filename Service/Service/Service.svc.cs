@@ -104,15 +104,15 @@ namespace Service
             return Student.GetBugrimList(iUserId);
         }
         public List<int> GetStudentsAssociatedToAvrechim()
-		{
-			return Student.GetStudentsAssociatedToAvrechim();
-		}
-		public Dictionary<int, string> GetCurrentYeshivaOfStudent()
-		{
-			return Student.GetCurrentYeshivaOfStudent();
-		}
+        {
+            return Student.GetStudentsAssociatedToAvrechim();
+        }
+        public Dictionary<int, string> GetCurrentYeshivaOfStudent()
+        {
+            return Student.GetCurrentYeshivaOfStudent();
+        }
 
-		public List<Yeshivot> GetYeshivotOfStudent(int iPersonId)
+        public List<Yeshivot> GetYeshivotOfStudent(int iPersonId)
         {
             return Student.GetYeshivotOfStudent(iPersonId);
         }
@@ -417,11 +417,11 @@ namespace Service
         //    return Participant.SetEventParticipantList(listParticipant, iUserId);
         //}
 
-        public bool SetEventParticipantList(Participant [] ParticipantList, int iUserId)
+        public bool SetEventParticipantList(Participant[] ParticipantList, int iUserId)
         {
             return Participant.SetEventParticipantList(ParticipantList, iUserId);
         }
-        
+
 
         #endregion
 
@@ -430,6 +430,10 @@ namespace Service
         public string GeneratPdf(string headerHtml, string bodyHtml, string footerHtml)
         {
             return Fileshandler.GeneratPdf(headerHtml, bodyHtml, footerHtml);
+        }
+        public bool DeleteFile(string fileName, string folderPath = "")
+        {
+            return Fileshandler.DeleteFile(fileName, folderPath);
         }
 
         #endregion
@@ -494,6 +498,11 @@ namespace Service
 
 
         #endregion
+
+        public string PrintToPDF(string body, string title, string nvFilePath = null)
+        {
+            return TGlobalParameters.PrintToPDF(body, title, nvFilePath);
+        }
     }
 
 }
