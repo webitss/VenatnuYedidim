@@ -100,6 +100,7 @@ export class VyTableComponent implements OnInit {
       this.lstDataRows.forEach(r => r[colName] = this.lstDataRows[0][colName]);
     this.moveToPage(this.currentPage, true);
   }
+  
   public moveToPage(pageNum: number, move = false) {
     if (move || !(pageNum == this.currentPage || pageNum < 0 || (this.iEndNumRow == this.lstDataRows.length && pageNum > this.currentPage))) {
       this.lstCurrentDataRows = this.lstDataRows.slice((pageNum) * this.iCountRows, (pageNum * this.iCountRows) + this.iCountRows);

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewChild, Inject, forwardRef, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
 import { Student } from '../../classes/student';
@@ -6,6 +6,7 @@ import { T2Int } from '../../classes/T2Int';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { VyMultySelectComponent } from '../../templates/vy-multy-select/vy-multy-select.component';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-avrech-students',
@@ -29,17 +30,18 @@ export class AvrechStudentsComponent implements OnInit {
 
   @ViewChild('child') VyMultySelect: VyMultySelectComponent;
 
-public Columns;
+  public Columns;
   listToSelect: Array<any>;
 
   //studentList: Student[];
 
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
 
-  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy) {
+  constructor(private cdRef: ChangeDetectorRef, private activatedRoute: ActivatedRoute, private appProxy: AppProxy, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent, ) {
 
   }
   openAdd() {
+    this.listToSelect = [];
     this.appProxy.post('GetStudentList', { iPersonId: 0 }).then(
       data => {
         let allStudents = data
@@ -66,7 +68,7 @@ public Columns;
   // t2int:T2Int=new T2Int();
 
   saveAdd() {
-    this.studentsToAdd =  this.listToSelect.filter(f => f['checked']==true);;
+    this.studentsToAdd = this.listToSelect.filter(f => f['checked'] == true);
     // this.VyMultySelect.save();
     this.studentAndAvrechArr = new Array<T2Int>();
     this.studentsToAdd.forEach(element => {
@@ -76,18 +78,23 @@ public Columns;
 
     this.appProxy.post('AddStudentsToAvrech', { studentAndAvrechArr: this.studentAndAvrechArr, iUserId: this.userId }).then(data => {
       if (data) {
-
+        this._parent.openMessagePopup('השמירה התבצעה בהצלחה!');
+        this.flag = false;
+        let lst = this.allStudents;
         this.studentsToAdd.forEach(s => {
-          this.allStudents.push(s);
+          lst.push(s);
         })
-        this.allStudents
-        this.allStudents.forEach(
+
+        
+        this.allStudents = [];
+        lst.forEach(
           st => {
             st['delete'] = '<div class="delete"></div>';
           });
-        this.vyTableComponent.refreshTable(this.allStudents);
-        this.flag = false
+        this.allStudents = lst;
+        this.vyTableComponent.refreshTable(lst);
 
+        //this.cdRef.detectChanges();
 
 
         // "הוספת התלמידים התבצעה בהצלחה!"
@@ -123,15 +130,15 @@ public Columns;
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
     this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
 
-    
+
     // this.fields.push("nvLastName");
     // this.fields.push("nvLastName");
     // this.fields.push("nvIdentityCad");
     this.Columns = [
       new VyTableColumn('בחר', 'checked', 'checkbox'),
-      new VyTableColumn('שם פרטי', 'nvFirstName'),
+      new VyTableColumn('שם פרטי', 'value'),
       new VyTableColumn('ת"ז ', 'nvIdentityCard'),
-     
+
     ];
 
   }
@@ -142,12 +149,12 @@ public Columns;
     this.delFlag = true;
     this.studentToDel = e;
   }
-  @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
+  @ViewChild('allStudendts') vyTableComponent: VyTableComponent;
   deleteStudent(e: Student) {
 
     this.appProxy.post('DeleteAvrechStudent', { iAvrechId: this.id, iStudentId: e.iPersonId }).then(data => {
       if (data == true) {
-
+        this._parent.openMessagePopup('המחיקה התבצעה בהצלחה!');
         const i = this.allStudents.find(x => x.iStudentId == e.iStudentId);
         this.allStudents.splice(this.allStudents.indexOf(i), 1);
         this.vyTableComponent.refreshTable(this.allStudents);
