@@ -5,23 +5,22 @@
   <div class="col-sm-1"></div>
   <div class="row col-sm-10 with-shadow">
     <div class="col-sm-4"></div>
-    <div class="my-div col-sm-4">
-      <div class="row">
+    <div class="my-div d-flex flex-column justify-content-center col-sm-4">
+      <div class="d-flex flex-column align-items-center">
+
         <img src="../../../assets/images/logo.jpg" height="50px;" class="img" />
-      </div>
-      <div class="row">
+
+
         <h2>ונתנו ידידים</h2>
+
+        <h4>כולנו משפחה אחת</h4>
+
+        <input type="text" name="user-name" [(ngModel)]="nvUserName" class="form-control usr-input mt-5" placeholder="שם משתמש">
+
+        <input type="password" name="password" [(ngModel)]="nvPassword" class="form-control lock-input mt-4" placeholder="סיסמה">
+
+        <button class="btn btn-circle1 btn-pink my-btn mt-3" (click)="logIn()">כניסה</button>
       </div>
-      <div class="row">
-          <h4>כולנו משפחה אחת</h4>
-        </div>
-      <div class="row">
-        <input type="text" name="user-name" [(ngModel)]="nvUserName" class="form-control usr-input" placeholder="שם משתמש">
-      </div>
-      <div class="row">
-        <input type="password" name="password" [(ngModel)]="nvPassword" class="form-control lock-input" placeholder="סיסמה">
-      </div>
-      <button class="btn btn-circle1 btn-pink my-btn" (click)="logIn()">כניסה</button>
     </div>
   </div>
 </div>

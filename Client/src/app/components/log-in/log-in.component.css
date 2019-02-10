@@ -3,10 +3,10 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100vh;
 }
 .my-div{
-    top: 35%;
-    margin-right: 5%;
+
 }
 /* .small-logo{
     background-image: url("../../../assets/images/logo.jpg");
@@ -16,18 +16,12 @@
     height: 50px;
     
 } */
-.img{
-    margin-right: 30%;
-}
+
 .form-control{
     background-color: transparent;
     color: #535353;
     border-color: #535353;
-    float: left;
-    width: 80%;
-    background-position: right;
-    padding-right: 40px;
-    background-size: 20px;
+
 
 }
 .usr-input{
@@ -58,11 +52,4 @@
     height: 80%;
     top: 10%;
     box-shadow:  1px 3px 22px 4px rgba(128,128,128,0.63);;
-}
-
-.my-btn{
-    margin-left:45%;
-    margin-top:20px;
-    width:30%;
-    height: auto;
 }
