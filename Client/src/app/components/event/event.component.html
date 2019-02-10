@@ -1,22 +1,23 @@
-<div class="name-area">{{header}}</div>
+
 
 <div class="content-area">
 
     <div class="header row">
-        <nav class="navbar navbar-expand-sm nav header-navbar">
-            <ul class="navbar-nav navbar-list" *ngIf="currentComponent">
-                <li [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventDetails') != -1}" class="nav-item">
+         
+        <nav class="navbar navbar-expand-sm nav header-navbar col-7">
+            <ul class="navbar-nav navbar-list row" *ngIf="currentComponent">
+                <li [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventDetails') != -1}" class="nav-item col-4">
                     <div class="fullTab" routerLink="event-details">
                         פרטים
                     </div>
                 </li>
-                <li [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventParticipants') != -1}" class="nav-item" *ngIf="isDetails==true">
+                <li [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventParticipants') != -1}" class="nav-item col-4" *ngIf="isDetails">
                     <div class="fullTab" routerLink="event-participants">משתתפים
 
                     </div>
                 </li>
-                <li [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventMedia') != -1}" class="nav-item"
-                    *ngIf="isDetails==true">
+                <li [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventMedia') != -1}" class="nav-item col-4"
+                    *ngIf="isDetails">
                     <div class="fullTab" routerLink="event-media">
                         מדיה
                     </div>
@@ -27,10 +28,13 @@
 
 
         </nav>
-        <div class="btn-area">
-            <button class="btn-circle btn-save" (click)="save()">שמור v </button>
-            <button class="btn-circle btn-close" routerLink="/events">סגור x </button>
+        <!-- isDisabled() -->
+        <div class="col-2">
+
+        <button *ngIf="currentComponent.constructor.name.indexOf('EventDetails')!=-1" class="btn-circle btn-save" [ngClass]="{'disabled': !isDisabled() }" (click)="save()" [disabled]="!isDisabled()">שמור  </button>
+            <button class="btn-circle btn-close" routerLink="/events">סגור  </button>
         </div>
+        <div class="name-area col-3">{{header}}</div>
     </div>
 
     <!-- <div class="navbar-collapse row">
@@ -38,18 +42,18 @@
         <a class="control" routerLink="event-details">פרטים</a>
     </div>
     <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventParticipants') != -1}" class="tab col-sm-1">
-        <a class="control" routerLink="event-participants"  *ngIf="isDetails==true">משתתפים</a>
+        <a class="control" routerLink="event-participants"  *ngIf="isDetails">משתתפים</a>
     </div>
 
     <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventMedia') != -1}" class="tab col-sm-1">
-      <a class="control" routerLink="event-media"  *ngIf="isDetails==true">מדיה</a>
+      <a class="control" routerLink="event-media"  *ngIf="isDetails">מדיה</a>
   </div>
   </div>
 <div class="col-sm-12 event-menu">
   <div class="name col-sm-4">{{header}}</div>
   <div class="col-sm-1"></div>
   <div class="col-sm-5"></div>
-  <button *ngIf="isDetails==true" (click)="save()" class="btn-circle btn-save">שמירה</button>
+  <button *ngIf="isDetails" (click)="save()" class="btn-circle btn-save">שמירה</button>
   <button routerLink="/events" class="btn-circle btn-close">סגור</button>
 </div>
 

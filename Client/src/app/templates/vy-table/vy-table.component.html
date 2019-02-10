@@ -1,42 +1,72 @@
-<div style="margin: 0 80px" id="testTable">
-  <div class="row">
+<!-- <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="htmlContent"></app-ngx-editor> -->
+
+<div id="myTable" name="table" class="vy-table">
+  <div name="columns" class="row">
+
     <div *ngFor="let col of lstColumns" class="col cell cell-title" [ngStyle]="col.titleStyle">
       <div class="small-title">
-        {{col.title}}
+        <label id='my-table' *ngIf="col.type == 'checkbox'" class="container" style='float: right;'>
+          {{col.title}}
+          <input type="checkbox" (change)='checkAllTable(col.name)'>
+          <span class="checkmark"></span>
+
+        </label>
+
+        <span *ngIf="col.type != 'checkbox'"> {{col.title}}
+          <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(-1,col.name)'>&#xe010;</span>
+          <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(1,col.name)'>&#xe011;</span>
+          <!-- *ngIf="lstSortColumns[col.name] && lstSortColumns[col.name]>0"  -->
+          <!-- *ngIf="(lstSortColumns[col.name] && lstSortColumns[col.name]<0)" -->
+          <span class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(0,col.name)'>X</span>
+        </span>
+
+
       </div>
+
     </div>
   </div>
 
-  <div class="row">
+  <div name="filters" class="row vy-filter-row">
     <div *ngFor="let col of lstColumns" class="col cell cell-filter" [ngStyle]="col.filterStyle">
-      <input type="text" [(ngModel)]="col.filter" class="form-control" id="search">
+      <input type="text" [(ngModel)]="lstFilterColumns[col.name]" (keyup)="filterChange(col)" class="form-control vy-filter-search">
     </div>
   </div>
-<!-- 
-  <div *ngFor="let row of lstCurrentDataRows | vyTableFilter : lstColumns | vyTableOrderBy : lstOrderByFields; let i = index"
-    [ngClass]="{'even': i%2 == 0}" class="row"> -->
-    <div *ngFor="let row of lstDataRows | vyTableFilter : lstColumns | vyTableOrderBy : lstOrderByFields; let i = index" [ngClass]="{'even': i%2 == 0}"
-    class="row">
-    <div *ngFor="let col of lstColumns" class="col cell" [ngStyle]="col.cellStyle" (click)="col.bClickCell ? clickCellFunc(row, col.name): ''">
-      <div *ngIf="col.type == 'html'" [innerHtml]="row[col.name]"></div>
-      <div *ngIf="col.type != 'html'"> {{row[col.name]}} </div>
+
+  <div class="vy-tbody" *ngIf="lstCurrentDataRows">
+    <div name="rows" *ngFor="let row of lstCurrentDataRows; let i = index" [ngClass]="{'even': i%2 == 0}" class="row vy-row">
+      <div *ngFor="let col of lstColumns" class="col cell" [ngStyle]="col.cellStyle" (click)="col.bClickCell ? clickCellFunc(row, col.name): ''">
+        <div *ngIf="col.type == 'html'" [innerHtml]="row[col.name]"></div>
+        <div *ngIf="col.type != 'html' && col.type != 'checkbox'"> {{row[col.name]}} </div>
+        <div *ngIf="col.type == 'checkbox'">
+          <label class="container" style='float: right;'>
+
+            <input type="checkbox" [(ngModel)]="row[col.name]">
+            <span class="checkmark"></span>
+
+          </label>
+
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
+<div name="pagination & sammary" *ngIf="lstDataRows">
 
+  <div class="sammary-rows">סה"כ {{lstDataRows.length}} רשומות</div>
 
+  <div class="pagination" *ngIf="lstPagesNum.length > 1">
+    <span (click)="currentPage != 0 ? moveToPage(0) : ''" class="pagination-page" [ngStyle]="{'color': (currentPage == 0 ? 'gray' : 'black')}"
+      title="להתחלה">
+      <<</span>
+        <span (click)="currentPage != 0 ? moveToPage(currentPage - 1) : ''" class="pagination-page" [ngStyle]="{'color': (currentPage == 0 ? 'gray' : 'black')}"
+          title="הקודם">
+          <</span>
+            <span *ngFor="let i of lstPagesNum" (click)="i != currentPage ? moveToPage(i) : ''" class="pagination-page" [ngClass]="{'pagination-current-page': i == currentPage}">{{i+1}}</span>
+            <span (click)="iEndNumRow != lstDataRows.length ? moveToPage(currentPage + 1) : ''" class="pagination-page" [ngStyle]="{'color': (iEndNumRow == lstDataRows.length ? 'gray' : 'black')}"
+              title="הבא">></span>
+            <span (click)="iEndNumRow != lstDataRows.length ? moveToPage(Math.ceil(lstDataRows.length / iCountRows)-1) : ''" class="pagination-page"
+              [ngStyle]="{'color': (iEndNumRow == lstDataRows.length ? 'gray' : 'black')}" title="לסוף">>></span>
+  </div>
 
-<!-- <div *ngIf="lstDataRows">
-
-  <span (click)="iEndNumRow != lstDataRows.length ? moveToPage((lstDataRows.length / iCountRows)-1) : ''" [ngStyle]="{'color': (iEndNumRow == lstDataRows.length ? 'gray' : 'black')}" title="לסוף"><<</span>
-
-  <span (click)="iEndNumRow != lstDataRows.length ? moveToPage(currentPage + 1) : ''" class="pagination-page" [ngStyle]="{'color': (iEndNumRow == lstDataRows.length ? 'gray' : 'black')}" title="הבא"><</span> 
-
-  <span *ngFor="let i of lstPagesNum" (click)="i != currentPage ? moveToPage(i) : ''" class="pagination-page" [ngClass]="{'pagination-current-page': i == currentPage}">{{i+1}}</span>
-
-  <span (click)="currentPage != 0 ? moveToPage(currentPage - 1) : ''" class="pagination-page" [ngStyle]="{'color': (currentPage == 0 ? 'gray' : 'black')}" title="הקודם">></span>
-
-  <span (click)="currentPage != 0 ? moveToPage(0) : ''" [ngStyle]="{'color': (currentPage == 0 ? 'gray' : 'black')}" title="להתחלה">>></span>
-
-</div> -->
+</div>

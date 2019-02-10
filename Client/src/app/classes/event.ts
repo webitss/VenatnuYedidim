@@ -10,4 +10,10 @@ export class Event1 {
     // dtLastModifyDate:Date;
     // bSysRowStatus:boolean;
 
+    constructor(){
+        this.iEventId = 0;
+        this.nvName = '';
+        this.dtEventDate = new Date();
+        this.nvPlace = '';
+    }
 }

@@ -8,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
 export class SettingsComponent implements OnInit {
 
   constructor() { }
-protected currentComponent:any;
+  public currentComponent:any;
   ngOnInit() {
   }
   onRouterOutletActivate(event) {
     this.currentComponent = event;
+  }
+  close()
+  {
+
+  }
+  save()
+  {
+
   }
 }

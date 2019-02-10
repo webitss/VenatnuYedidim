@@ -20,7 +20,7 @@ namespace Service.Entities
         [DataMember]
         public DateTime dtTaskdatetime{ get; set; }
         [DataMember]
-        public string nvComment { get; set; }
+        public string nvComments { get; set; }
         [DataMember]
         public string iPersonId { get; set; }
 
@@ -53,7 +53,38 @@ namespace Service.Entities
             }
         }
 
-     
+        public static List<Task> GetTasksByPersonId( int iPersonId)
+        {
+            try
+            {
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TTask_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
+                List<Task> tasks = ObjectGenerator<Task>.GeneratListFromDataRowCollection(drc);
+                return tasks;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetTasksByPersonId / TTask_SLCT", ", ex " + ex);
+                return null;
+            }
+        }
+
+        public static bool DeleteTask(int iTaskId, int iPersonId)
+        {
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iTaskId", iTaskId));
+                parameters.Add(new SqlParameter("iPersonId", iPersonId));
+                SqlDataAccess.ExecuteDatasetSP("TTask_DEL", parameters);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("DeleteTask / TTask_DEL", "ex" + ex);
+                return false;
+            }
+        }
     
      
 

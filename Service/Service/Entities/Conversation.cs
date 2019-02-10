@@ -15,21 +15,20 @@ namespace Service.Entities
     public class Conversation
     {
         #region Data Members
-
-        [DataMember]
-        public int iConversationId { get; set; }
         [DataMember]
         public int iPersonId { get; set; }
         [DataMember]
+        public int iConversationId { get; set; }
+
+        [DataMember]
         public int iConversationType { get; set; }
         [DataMember]
-        public DateTime dConversationDate { get; set; }
-        [DataMember]
-        public DateTime dtConversationTime { get; set; }
+        public DateTime dtConversationDate { get; set; }
+       
         [DataMember]
         public string nvConversationSummary { get; set; }
-        [DataMember]
-        public DateTime dtNextConversationDate { get; set; }
+        //[DataMember]
+        //public DateTime dtNextConversationDate { get; set; }
 
         [NoSQL]
         [DataMember]
@@ -39,9 +38,9 @@ namespace Service.Entities
         #endregion
         public Conversation()
         {
-            dConversationDate = new DateTime();
-            dtConversationTime = new DateTime();
-            dtNextConversationDate = new DateTime();
+            dtConversationDate = new DateTime();
+           
+            //dtNextConversationDate = new DateTime();
             lstObject = new Dictionary<string, string>();
         }
 
@@ -69,22 +68,24 @@ namespace Service.Entities
         }
 
 
-        public static bool SetConversation(Conversation conversation, int iUserId)
+        public static int SetConversations(Conversation conversation,int iUserId)
         {
 
             try
-            {
+                {
                 List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
                 parameters.Add(new SqlParameter("iCreatedByUserId", iUserId));
-                SqlDataAccess.ExecuteDatasetSP("TConversation_INS/UPD", parameters);
-                return true;
+				int id = int.Parse(SqlDataAccess.ExecuteDatasetSP("TConversation_INS/UPD", parameters).Tables[0].Rows[0][0].ToString());
+             
+                return id;
+
 
 
             }
             catch (Exception ex)
             {
-                Log.LogError("SetConversation / TConversation_INS/UPD", "ex" + ex + ", conversation: " + JsonConvert.SerializeObject(conversation));
-                return false;
+                Log.LogError("SetConversations / TConversation_INS/UPD", "ex" + ex + ", conversation: " + JsonConvert.SerializeObject(conversation));
+                return 0;
             }
         }
         //public static bool AddConversation(Conversation conversation, int iPersonId)
@@ -140,6 +141,6 @@ namespace Service.Entities
                 Log.LogError("DeleteConversation / TConversation_DEL", "ex" + ex);
                 return false;
             }
-        }
+        }       
     }
 }

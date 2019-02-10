@@ -1,3 +1,77 @@
-<p>
-  images works!
-</p>
+
+<div class="row">
+<!-- <div > -->
+    <input class="btn-add btn-circle" type="button" value="שנה תצוגה" (click)="saveGlobalParams()">
+    <app-vy-pop-up [isDouble]="false" [message]="message" *ngIf="flag" [header]="header" (close)="flag=false" (ok)="flag=false;"></app-vy-pop-up>
+  <!-- </div>
+  <div class="col col-sm-2"> -->
+      <button (click)="addDocument()" class="btn-add btn-circle">הוספת מדיה</button>
+    <!-- </div> -->
+ </div>
+
+ 
+<!-- <div class="row">
+  <div class="Show" >
+    <label class="lableng col-sm-12"  for="header"><h3 class="text">כותרת</h3></label>
+   
+    <textarea  class="textarea" id="header" rows="4" cols="50" [(ngModel)]="GlobalHeader.nvValue">
+    </textarea>
+    <br/>
+    <label class="lable col-sm-12" style="margin-left:600px "  for="VerMarch" ><h3 class="text">טקסט ראשי</h3></label>
+    <textarea class="textarea" id="VerMarch" rows="4" cols="50" [(ngModel)]="GlobalVerMarch.nvValue">
+    </textarea>
+    <br/>
+    <label class="lable col-sm-12"  for="MarchSF"><h3 class="text">טקסט משני</h3></label>
+    
+    <textarea class="textarea" id="MarchSF" rows="4" cols="50"  [(ngModel)]="GlobalMarchSF.nvValue" >
+
+</textarea><br/>
+
+  </div>
+
+
+ 
+</div> -->
+ <!-- <div class="row">
+  <div class="Show" >
+    <label class="lableng col-sm-12"></label>
+    <h3 class="text">כותרת</h3>
+<angular-editor id="header"[(ngModel)]="GlobalHeader.nvValue" [config]="config"></angular-editor>
+  </div>
+</div> -->
+
+<div class="row">
+    <div class="Show" >
+      <label class="lableng col-sm-12"></label>
+      <h3 class="text"> כותרת</h3>
+  <angular-editor id="header"[(ngModel)]="GlobalHeader.nvValue" [config]="config"></angular-editor>
+  </div>
+  </div>
+<div class="row">
+  <div class="Show" >
+    <label class="lableng col-sm-12"></label>
+    <h3 class="text">טקסט ראשי</h3>
+<angular-editor id="VerMarch"[(ngModel)]="GlobalVerMarch.nvValue" [config]="config"></angular-editor>
+</div>
+</div>
+<div class="row">
+  <div class="Show" >
+    <label class="lableng col-sm-12"></label>
+    <h3 class="text">טקסט משני</h3> 
+<angular-editor id="MarchSF"[(ngModel)]="GlobalMarchSF.nvValue" [config]="config"></angular-editor>
+</div>
+</div>
+<div class="uploadDocumentComponent" *ngIf="document!=null">
+  <app-upload-document [document]="document" (closeMe)="closeDocumentDialog(true)" (closeMeNoSave)="closeDocumentDialog(false)"></app-upload-document>
+</div>
+
+<ul>
+  <li   *ngFor="let d of documents" class="media-item">
+    <app-media  [document]="d"></app-media>
+    <br/>
+    <div class="buttons">
+      <button class="btn btn-del" (click)="deleteDocument(d.iDocumentId)" title="מחק"></button>
+      <button class="btn btn-edit" (click)="editDocument(d.iDocumentId)" title="ערוך"></button>
+    </div>
+  </li>
+</ul>

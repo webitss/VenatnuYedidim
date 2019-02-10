@@ -1,13 +1,18 @@
-<div class="row">
-    <div class="col col-sm-8"></div>
-    <div class="col col-sm-4">
-        <button (click)="addDocument()" class="btn-add btn-circle">העלאת מסמך</button>
+<div class="container">
+    <div class="row">
+        <div class="col col-sm-8"></div>
+        <div class="col col-sm-4">
+            <button (click)="addDocument()" class="btn-add btn-circle">העלאת מסמך</button>
+        </div>
+    </div>
+    <div class="main-table">
+        <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="click($event)"></app-vy-table>
+
+    </div>
+
+    <div class="uploadDocumentComponent" *ngIf="document!=null">
+        <app-upload-document [document]="document" (closeMe)="closeDocumentDialog(true)" (closeMeNoSave)="closeDocumentDialog(false)"
+            #VyTableComponent></app-upload-document>
     </div>
 </div>
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="editDocument($event)"></app-vy-table>
-
-
-
-<div class="uploadDocumentComponent" *ngIf="document!=null">
-    <app-upload-document [document]="document" (closeMe)="closeDocumentDialog()" (closeMeNoSave)="closeDocumentDialog()"></app-upload-document>
-</div> 
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; deleteDocument(documentToDelete);"></app-vy-pop-up>

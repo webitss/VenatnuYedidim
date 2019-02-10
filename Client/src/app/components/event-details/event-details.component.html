@@ -1,21 +1,34 @@
-<form class="form">
+<form class="form" #form="ngForm" *ngIf="e">
   <div class="row">
     <!-- <div class="col-sm-3"></div> -->
     <div class="form-group col-sm-3">
-      <label for='event-name'>כותרת הארוע</label>
-      <input type="text" name='event-name' class="form-control" [(ngModel)]="e.nvName" />
+      <label for='event-name'>כותרת הארוע *</label>
+      <input type="text" name='event-name' class="form-control" [(ngModel)]="e.nvName" required #name="ngModel">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)">
+        <div *ngIf="(name.errors.required)" class="text-danger text-right">
+          <strong>! </strong>שדה נדרש</div>
+      </div>
     </div>
 
     <div class="form-group col-sm-3">
-      <label for='event-place'>מקום הארוע</label>
-      <input type="text" name='event-place' class="form-control" [(ngModel)]="e.nvPlace" />
+      <label for='event-place'>מקום הארוע *</label>
+      <input type="text" id='place' name='event-place' class="form-control" [(ngModel)]="e.nvPlace" #place="ngModel" title="לא ניתן להזין ספרות"
+        required/>
+      <div *ngIf="place.invalid && (place.dirty || place.touched)">
+        <div *ngIf="(place.errors.required)" class="text-danger text-right">
+          <strong>! </strong>שדה נדרש</div>
+      </div>
     </div>
 
     <div class="form-group col-sm-3">
 
-      <label for='event-date'>תאריך</label>
-      <input type="date" name='event-date' class="form-control" [ngModel] ="e.dtEventDate | date:'yyyy-MM-dd'" (ngModelChange)="e.dtEventDate = $event" />
-      <!-- [(ngModel)]="e.dtEventDate" -->
+      <label for='event-date'>תאריך *</label>
+      <input type="date" name='event-date' class="form-control" [ngModel]="e.dtEventDate | date:'yyyy-MM-dd'" (ngModelChange)="e.dtEventDate = $event"
+        required #date="ngModel" />
+      <div *ngIf="date.invalid && (date.dirty || date.touched)">
+        <div *ngIf="(date.errors.required)" class="text-danger text-right">
+          <strong>! </strong>שדה נדרש</div>
+      </div>
     </div>
   </div>
 
@@ -28,6 +41,13 @@
 
 
   <div class="row">
-  <app-vy-multy-select #child *ngIf="!isDetails" [fullList]="sysTableRowList" [titleStr]="title" [inputTitle]="inputTitle" (onSave)="getFromChild($event)" class="col-sm-3"></app-vy-multy-select>
-</div>
+    <div class="col-sm-3" (click)="touched=true">
+      <app-vy-multy-select #child *ngIf="!isDetails" [fullList]="sysTableRowList" [titleStr]="title" [inputTitle]="inputTitle"
+        (onSave)="getFromChild($event)"></app-vy-multy-select>
+    </div>
+  </div>
+
+
+  <label class='required-fields'>* שדות חובה</label>
+
 </form>

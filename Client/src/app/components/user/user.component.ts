@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
   @Input()
   @Output()
   public user: User;
-  protected title: string;
+  public title: string;
 
   constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute) { }
 
@@ -24,6 +24,8 @@ export class UserComponent implements OnInit {
           .then(data => {
             this.user = data;
             this.title = this.user.nvUserName;
+          }).catch(err=>{
+              //alert(err);
           });
       }
       else {
@@ -33,10 +35,16 @@ export class UserComponent implements OnInit {
     });
   }
 
-  protected currentComponent: any;
+  public currentComponent: any;
 
   onRouterOutletActivate(event) {
     this.currentComponent = event;
+  }
+
+  formValid=false;
+
+  isDisabled():boolean {
+    return this.currentComponent.form.valid;
   }
 
   saveUser() {

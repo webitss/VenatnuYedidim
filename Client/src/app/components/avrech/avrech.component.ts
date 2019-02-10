@@ -1,8 +1,10 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {AvrechDetailsComponent} from '../avrech-details/avrech-details.component'
+import { AvrechDetailsComponent } from '../avrech-details/avrech-details.component'
 import { AppProxy } from '../../services/app.proxy';
-import{BehaviorSubject} from'rxjs/BehaviorSubject'
+import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { Avrech } from '../../classes/avrech';
 
 
 @Component({
@@ -12,31 +14,60 @@ import{BehaviorSubject} from'rxjs/BehaviorSubject'
 })
 export class AvrechComponent implements OnInit {
 
-  protected currentComponent: any;
+  public currentComponent: any;
 
 
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private appProxy:AppProxy) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private appProxy: AppProxy) {
   }
 
+  name: string;
+  id: number;
+  avrech: Avrech;
   ngOnInit() {
-  }
+    this.id = this.activatedRoute.snapshot.params["iPersonId"];
 
+    
+    if (this.id != 0) {
+
+      this.appProxy.post("GetAvrechById", { iPersonId: this.id }).then(
+        data => {
+          this.avrech = data;
+          this.name = this.avrech['lstObject']['nvUserName'];
+
+        },
+        err => ("err")
+      );
+
+    }
+    else {
+      this.name = "";
+    }
+
+  }
   onRouterOutletActivate(event) {
     this.currentComponent = event;
-    debugger;
+  }
+
+
+  get isDisabled(): boolean {
+    if (this.currentComponent.form != undefined) {
+      return this.currentComponent.form.valid;
+    }
+    else
+      return false;
   }
 
   save() {
-
-    if (this.currentComponent.save) this.currentComponent.save();
+    if (this.currentComponent.save) {
+      this.currentComponent.save()
+     this.router.navigateByUrl("/avrechim");
+    }
   }
 
-  close()
-  {
+  close() {
     this.router.navigate(["avrechim"]);
   }
-  
-} 
-    
+}
+

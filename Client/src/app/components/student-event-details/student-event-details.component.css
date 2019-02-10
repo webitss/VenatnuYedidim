@@ -1,0 +1,15 @@
+.title{
+    padding-bottom: 2%;
+    padding-right: 2%;
+}
+button{
+    margin-top:  4%;
+    margin-left: 4%;
+}
+form{
+    background-color: white;
+}
+
+#overlay {
+    z-index: -5 !important;
+}

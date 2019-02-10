@@ -5,17 +5,18 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from "@angular/http";
 import { RouterModule, Route } from '@angular/router';
 import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
-// import { GooglePlaceModule } from "ngx-google-places-autocomplete";
-//import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { NgxImageGalleryModule } from 'ngx-image-gallery';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxPasswordToggleModule } from 'ngx-password-toggle';
 
+import { AngularEditorModule } from '@kolkov/angular-editor';
 //--- templates ---
 import { VyMultySelectComponent } from './templates/vy-multy-select/vy-multy-select.component';
 import { VyTableComponent } from './templates/vy-table/vy-table.component';
 import { VyTableFilterPipe } from './templates/vy-table/vy-table-filter.pipe';
 import { VyTableOrderByPipe, OrderByPipe } from './templates/vy-table/vy-table-order-by.pipe';
-
+import { VyPopUpComponent } from './templates/vy-pop-up/vy-pop-up.component';
 //--- Pipes ---
 import { FilterPipe } from './pipes/filter.pipe';
 
@@ -25,7 +26,7 @@ import { SysTableService } from './services/sys-table.service';
 import { GlobalService } from './services/global.service';
 import { DialogService } from './services/dialog.service';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
-
+import { DataSharingService } from './services/dataSharing.Service';
 //--- components ---
 import { AppComponent } from './components/app/app.component';
 
@@ -37,6 +38,8 @@ import { StudentConversationsComponent } from './components/student-conversation
 import { StudentDocumentsComponent } from './components/student-documents/student-documents.component';
 import { StudentConversationDetailsComponent } from './components/student-conversation-details/student-conversation-details.component';
 import { StudentMeetingDetailsComponent } from './components/student-meeting-details/student-meeting-details.component';
+import { StudentEventsComponent } from './components/student-events/student-events.component';
+import { StudentEventDetailsComponent } from './components/student-event-details/student-event-details.component';
 
 import { AvrechimComponent } from './components/avrechim/avrechim.component';
 import { AvrechComponent } from './components/avrech/avrech.component';
@@ -50,7 +53,6 @@ import { EventComponent } from './components/event/event.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { EventParticipantsComponent } from './components/event-participants/event-participants.component';
 
-import { GraduatesComponent } from './components/graduates/graduates.component';
 
 import { UsersComponent } from './components/users/users.component';
 import { UserComponent } from './components/user/user.component';
@@ -64,7 +66,6 @@ import { SettingsDocumentsComponent } from './components/settings-documents/sett
 import { SettingsFrontendComponent } from './components/settings-frontend/settings-frontend.component';
 
 import { SettingYeshivaComponent } from './components/setting-yeshiva/setting-yeshiva.component';
-import {SettingYeshivaDeleteComponent} from './components/setting-yeshiva-delete/setting-yeshiva-delete.component';
 
 // import { inject } from '@angular/core/testing';
 // import { injectElementRef } from '@angular/core/src/render3';
@@ -75,12 +76,17 @@ import { TaskComponent } from './components/task/task.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { CardsUnionComponent } from './components/cards-union/cards-union.component';
 import { ShowImageComponent } from './components/show-image/show-image.component';
+import { MediaComponent } from './components/media/media.component';
+import { GaleryComponent } from './components/galery/galery.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { settingsFrontend } from './services/settings-frontend.service';
+import { OpenPresenceComponent } from './components/open-presence/open-presence.component';
+import { AddParticipantComponent } from './components/add-participant/add-participant.component';
+import { EditMailComponent } from './components/edit-mail/edit-mail.component';
+
 import { SafeUrl } from './directives/safe-url';
 import { GoogleCity } from './directives/googleCity';
 import { FitElement } from './directives/fit-element';
-import { MediaComponent } from './components/media/media.component';
-
-import { GaleryComponent } from './components/galery/galery.component';
 
 
 
@@ -92,14 +98,14 @@ import { GaleryComponent } from './components/galery/galery.component';
     VyTableComponent,
     VyTableFilterPipe,
     VyTableOrderByPipe,
-    OrderByPipe,
+
 
     // pipes
     FilterPipe,
-
+    OrderByPipe,
     //directives
     GoogleCity,
-    SafeUrl,    
+    SafeUrl,
     FitElement,
 
     //components
@@ -113,6 +119,8 @@ import { GaleryComponent } from './components/galery/galery.component';
     StudentConversationDetailsComponent,
     StudentMeetingDetailsComponent,
     StudentDocumentsComponent,
+    StudentEventsComponent,
+    StudentEventDetailsComponent,
     CardsUnionComponent,
 
     AvrechimComponent,
@@ -127,7 +135,6 @@ import { GaleryComponent } from './components/galery/galery.component';
     EventDetailsComponent,
     EventParticipantsComponent,
 
-    GraduatesComponent,
 
     UsersComponent,
     UserComponent,
@@ -151,7 +158,7 @@ import { GaleryComponent } from './components/galery/galery.component';
     TaskComponent,
 
     LogInComponent,
-    
+
 
     ShowImageComponent,
 
@@ -162,20 +169,37 @@ import { GaleryComponent } from './components/galery/galery.component';
     GaleryComponent,
 
 
-    SettingYeshivaDeleteComponent,
+
+    CalendarComponent,
 
 
-    
-   
 
-   
+    OpenPresenceComponent,
+
+
+
+    AddParticipantComponent,
+    VyPopUpComponent,
+    EditMailComponent,
+
   ],
- //imports: [ 
-    // Ng2SearchPipeModule,
-    
-   
+  //imports: [ 
+  // Ng2SearchPipeModule,
+
+
   //],
   imports: [
+    // SelectModule,
+    AngularEditorModule,
+    NgSelectModule,
+    // BrowserAnimationsModule, IgxCalendarModule,
+    // CommonModule,
+    // NgbModalModule,
+    // FlatpickrModule.forRoot(),
+    // CalendarModule.forRoot({
+    //   provide: DateAdapter,
+    //   useFactory: adapterFactory
+    // }),
     // NgbModule.forRoot(),
     // Ng2SearchPipeModule,
     NgxGalleryModule,
@@ -185,12 +209,18 @@ import { GaleryComponent } from './components/galery/galery.component';
     HttpClientModule,
     NguiDatetimePickerModule,
     NgxImageGalleryModule,
+    // NgxEditorModule,
+    // ShowHidePasswordModule.forRoot(),
+    NgxPasswordToggleModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
-    { path: "ShowImage", component: ShowImageComponent },
+      { path: "", component: ShowImageComponent },
 
-     { path: "", component: LogInComponent, canDeactivate: [CanDeactivateGuard] },
+      { path: "ResultComponent", component: ShowImageComponent },
+      { path: "log-in", component: LogInComponent, canDeactivate: [CanDeactivateGuard] },
       { path: "students", component: StudentsComponent },
+      // { path: "graduates", component: StudentsComponent },
+
       {
 
         path: "students/student/:iPersonId", component: StudentComponent,
@@ -212,7 +242,20 @@ import { GaleryComponent } from './components/galery/galery.component';
           },
           {
             path: "student-documents", component: StudentDocumentsComponent
-          }
+          },
+          {
+            path: "student-events", component: StudentEventsComponent
+            //  children:[
+            //   {path: "student-event-details/:iEventId", component: StudentEventDetailsComponent}
+            // ]
+          },
+          {
+            path: "student-events-details/:iEventId", component: StudentEventDetailsComponent
+            // ,children: [
+            //   { path: "", component: UserDetailsComponent },
+            //   { path: "student-event-details", component: StudentEventDetailsComponent }
+            //]
+          },
 
         ]
       },
@@ -238,7 +281,7 @@ import { GaleryComponent } from './components/galery/galery.component';
 
         ]
       },
-      { path: "graduates", component: GraduatesComponent },
+      { path: "graduates", component: StudentsComponent },
 
       { path: "users", component: UsersComponent },
       {
@@ -257,20 +300,22 @@ import { GaleryComponent } from './components/galery/galery.component';
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [
-              { path: "setting-yeshiva/:EditNewYeshiva", component: SettingYeshivaComponent },
-              {path:"setting-yeshiva/setting-yeshiva-delete",component:SettingYeshivaDeleteComponent}
+              { path: "setting-yeshiva/:EditNewYeshiva", component: SettingYeshivaComponent }
             ]
           },
           { path: "settings-documents", component: SettingsDocumentsComponent },
           { path: "settings-frontend", component: SettingsFrontendComponent },
         ]
       },
-      { path: "task", component: TaskComponent }
+      { path: "task", component: TaskComponent },
+      { path: "calendar", component: CalendarComponent }
 
     ], { useHash: true })
   ],
-  providers: [AppProxy, SysTableService, GlobalService, CanDeactivateGuard, DialogService],
+  providers: [AppProxy, SysTableService, GlobalService, CanDeactivateGuard, DialogService, settingsFrontend, DataSharingService],
   bootstrap: [AppComponent],
+
+  // exports: [CalendarComponent]
   // entryComponents:[
   //   CardsUnionComponent
   // ]

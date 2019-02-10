@@ -1,15 +1,53 @@
 <div class="row component-name-header">
     <div class="col-sm-4 component-name">אברכים</div>
     <div class="actions col-sm-8">
-
-        <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
-        <button class="btn btn-small" (click)="tableToPdf('אברכים')">pdf</button>
-        <button class="btn btn-circle1 btn-orange"> שליחת מייל</button>
-        <button class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">אברך חדש</button>
+        <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
+        <button class="btn btn-small pdf" title="הורד pdf" (click)="tableToPdf('אברכים')"></button>
+        <button class="btn btn-circle1 btn-orange" (click)="mailToAvrechim()"> שליחת מייל</button>
+        <button class="btn btn-circle1 btn-pink" routerLink="avrech/0">אברך חדש</button>
     </div>
 </div>
 
-<app-vy-table #avrechim [lstColumns]="lstColumns" [lstDataRows]="avrechimList" (clickCell)="editAvrech($event)"></app-vy-table>
+<div class="main-table">
+    <app-vy-table #avrechim [lstColumns]="lstColumns" [lstDataRows]="avrechimList" (clickCell)="click($event)"></app-vy-table>
+</div>
+
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">מחיקת אברך</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    האם אתה בטוח שברצונך למחוק אברך זה?
+                </p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-yesNo" (click)="delete()">כן</button>
+                <button type="button" class="btn-yesNo" (click)="flag=false">לא</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
+    <app-edit-mail *ngIf="mail" [mails]="mailList" (close)="closeMe()"></app-edit-mail>
+<!-- <div *ngIf="flag">
+    <div  class="content-modal">
+        <div class="close" (click)="flag=false">x</div>
+       <span class="caption-delete">מחיקת אברך</span>
+         <p>
+            האם אתה בטוח שברצונך למחוק אברך זה?
+         </p>
+         <button class="btn-yesNo" (click)="delete()">כן</button>
+         <button class="btn-yesNo" (click)="flag=false">לא</button>
+     </div>
+    </div>      -->
+<!-- </div> -->
+<!-- </div> -->
 
+
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flag" [header]="header" (close)="flag=false" (ok)="flag=false; delete();"></app-vy-pop-up>

@@ -1,5 +1,65 @@
-<p>
-  event-participants works!
-</p>
+<!-- <div id="overlay"></div> -->
+<div class="row first-row">
+  <div class="add-area">
+    <button (click)="addParticipants()" class="btn-add btn-circle">הוסף משתתפים</button>
 
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="participant"></app-vy-table>
+    <!-- <button class="btn-circle btn-add" (click)="addParticipants()"></button> -->
+  </div>
+</div>
+
+<div *ngIf="flag" class="col-sm-12 addParticipants">
+
+  <div class="row row-first">
+    <button (click)="cancel()" class="btn-close">סגור </button>
+    <button (click)="save()" class="btn-save"> שמור</button>
+  </div>
+  <div class="row">
+    <span class="Student-affiliation">שיוך תלמידים</span>
+  </div>
+  <!-- <div class=" my-div ">
+  
+    <div *ngFor="let item of listToSelect |filter:search" class="row">
+    
+        <div class="item-to-select col-sm-12"> <input type="checkbox"  [(ngModel)]="item['bMultySelectChecked']">
+          <span >{{item.value}}
+
+          </span>
+        </div>
+     
+
+
+    </div>
+  </div> -->
+  <div class="main-table">
+    <app-vy-table [lstColumns]="Columns" [lstDataRows]="listToSelect" ></app-vy-table>
+  </div>
+</div>
+
+<!-- <div *ngIf="flag!=null" class="addParticipants">
+  <app->גכעכ</app-add-participant>
+
+</div> -->
+<div class="main-table">
+  <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)='click($event)'></app-vy-table>
+</div>
+
+<!-- <select>
+  <option *ngFor="let s of sysTableRowList">{{s.nvValue}}</option>
+</select> -->
+
+<!-- <select value='+p.iArriveStatusType+'>
+  <option *ngFor="let s of sysTableRowList1"></option>
+</select> -->
+<!-- <div *ngIf="flag" class="settingParticipantDelete">
+  <div>
+       <p>
+          האם אתה בטוח שברצונך למחוק משתתף זה?
+       </p>
+       <button (click)="delete()">כן</button>
+       <button (click)="close()">לא</button>
+   </div>
+</div> -->
+
+
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false"
+  (ok)="flagDelete=false; deleteTask();"></app-vy-pop-up>

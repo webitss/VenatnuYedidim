@@ -38,7 +38,9 @@ button{
 }
 #documentName{
     height: 60px;
-    padding-top: 27px;
+    padding-top: 7px;
+    text-align: right;
+    color:blue;
 }
 h3{
     text-align: right;
@@ -46,4 +48,24 @@ h3{
 }
 .form-group.documentName{
     width: 60%;
+}
+.checkbox {
+  margin-top: 1%;
+  margin-left: 1%;
+}
+.form-group{
+    width: 35%;
+}
+button[disabled]
+{
+    background-color: rgb(228, 147, 174);
+    cursor: not-allowed;
+}
+.form{
+    z-index: 100;
+    background-color: white;
+}
+#overlay{
+    z-index: -5;
+    cursor: default;
 }

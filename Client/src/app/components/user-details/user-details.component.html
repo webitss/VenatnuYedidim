@@ -1,38 +1,81 @@
-<form class="form">
+<form class="form" #form="ngForm">
   <div class="row">
-      <div class="form-group col-sm-3">
-        <label for="last-name">שם משפחה:</label>
-        <input type="text" name="last-name" class="form-control" maxlength="15" [(ngModel)]="user.nvLastName"/>
+    <div class="form-group col-sm-3">
+      <label for="last-name">שם משפחה *</label>
+      <input type="text" name="last-name" class="form-control" maxlength="15" required #lastName="ngModel" [(ngModel)]="user.nvLastName" 
+      />
+      <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+        <div class="text-danger" *ngIf="lastName.errors && (lastName.errors.required)">שדה זה חובה!</div>
       </div>
-      <div class="form-group col-sm-3">
-        <label for="first-name">שם פרטי:</label>
-        <input type="text" name="first-name" class="form-control" maxlength="15" [(ngModel)]="user.nvFirstName" />
+  
+
+      
+    </div>
+    <div class="form-group col-sm-3">
+      <label for="first-name">שם פרטי *</label>
+      <input type="text" name="first-name" class="form-control" maxlength="15" required="user.nvFirstName" #firstName="ngModel"
+        [(ngModel)]="user.nvFirstName" />
+      <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+        <div class="text-danger" *ngIf="firstName.errors && (firstName.errors.required)">שדה זה חובה!</div>
+      </div>
+  
+      
+    </div>
+
+    <div class="form-group col-sm-3">
+      <label for="mobile">נייד:</label>
+      <input type="tel" name="mobile" class="form-control" pattern="^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$" [(ngModel)]="user.nvMobile"
+        #mobile="ngModel" (focus)="notFocused1 = false" (focusout)="notFocused1 = true" />
+      <div *ngIf="mobile.invalid && notFocused1">
+        <!-- *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" -->
+        <div class="text-danger" *ngIf="mobile.errors && (mobile.errors.pattern)">נייד לא תקין!</div>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-3">
+      <label for="email">מייל:</label>
+      <input type="email" name="email" class="form-control" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$" #email="ngModel"
+        [(ngModel)]="user.nvEmail" (focus)="notFocused2 = false" (focusout)="notFocused2 = true" />
+      <div *ngIf="email.invalid && notFocused2">
+        <!--[hidden]="email.valid || email.untouched"  -->
+        <div class="text-danger" *ngIf="email.errors && (email.errors.pattern)">מייל לא תקין!</div>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-3">
+      <label for="user-name">שם משתמש *</label>
+      <input type="text" name="user-name" class="form-control" maxlength="15" required [(ngModel)]="user.nvUserName" #userName="ngModel" 
+      />
+      <div *ngIf="userName.invalid && (userName.dirty || userName.touched)">
+        <div class="text-danger" *ngIf="userName.errors && (userName.errors.required)">שדה זה חובה!</div>
       </div>
 
-      <div class="form-group col-sm-3">
-        <label for="mobile">נייד:</label>
-        <input type="tel" name="mobile" class="form-control" [(ngModel)]="user.nvMobile" />
-      </div>
 
-      <div class="form-group col-sm-3">
-        <label for="email">מייל:</label>
-        <input type="email" name="email" class="form-control" [(ngModel)]="user.nvEmail" />
-      </div>
+    </div>
 
-      <div class="form-group col-sm-3">
-        <label for="user-name">שם משתמש:</label>
-        <input type="text" name="user-name" class="form-control" maxlength="15" [(ngModel)]="user.nvUserName" />
+    <div class="form-group col-sm-3">
+      <label for="password">סיסמה *</label>
+      <!-- <show-hide-password size="lg" icon="entypo" btnStyle="primary" [btnOutline]="false"> -->
+      <input type="password" passwordToggle name="password" class="form-control" required [(ngModel)]="user.nvPassword" minlength="4" #password="ngModel"
+        (focus)="notFocused3 = false" (focusout)="notFocused3 = true" />
+        <!-- </show-hide-password> -->
+      <div *ngIf="password.invalid && (password.dirty || password.touched) && notFocused3">
+        <div class="text-danger" *ngIf="password.errors && (password.errors.required)">שדה זה חובה!</div>
       </div>
+      <div class="text-danger" *ngIf="password.errors && (password.errors.minlength)">הסיסמה קצרה!</div>
 
-      <div class="form-group col-sm-3">
-        <label for="password">סיסמה:</label>
-        <input type="password" name="password" class="form-control" [(ngModel)]="user.nvPassword" />
+    </div>
+    <div class="form-group col-sm-3">
+      <label for="permittion">הרשאה *</label>
+      <select [(ngModel)]="user.iPermissionId" class="form-control" #permittion="ngModel" name="iPermissionId" [disabled]="isManeger == false"
+        required>
+        <!-- <option [value]="0">בחר</option> -->
+        <option [value]="item.iSysTableRowId" *ngFor="let item of lst" [selected]="item.iSysTableRowId==user.iPermissionId">{{item.nvValue}}</option>
+      </select>
+      <div *ngIf="permittion.dirty || permittion.touched">
+        <div class="text-danger" *ngIf="permittion == 0">שדה זה חובה!</div>
       </div>
-      <div class="form-group col-sm-3">
-        <label for="permittion">הרשאה:</label>
-        <select [(ngModel)]="user.iPermissionId" class="form-control" name="iPermissionId" [disabled]="isManeger == false">
-          <option [value]="item.iSysTableRowId" *ngFor="let item of lst" [selected]="item.iSysTableRowId==user.iPermissionId">{{item.nvValue}}</option>
-        </select>
-      </div>
+    </div>
   </div>
+  <label class='required-fields'>* שדות חובה</label>
 </form>

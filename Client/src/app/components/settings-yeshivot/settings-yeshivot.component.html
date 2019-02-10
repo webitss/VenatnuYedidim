@@ -2,22 +2,32 @@
 <div class="row component-name-header">
         <div class="col-sm-4 component-name"> מוסדות</div>
         <div class="actions col-sm-8">
-            <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
-            <button class="btn btn-small">s</button>
-            <button (click)="iYeshivaId = 0">מוסד חדש</button>
+            <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
+            <button class="btn btn-small pdf" title="הורד pdf"></button>
+            <button class="btn btn-circle1 btn-pink" (click)="iYeshivaId = 0">מוסד חדש</button>
         </div>
     </div>
 
-<div *ngIf="iYeshivaId != null">
+<div *ngIf="(iYeshivaId != null && !flag)">
+    <app-setting-yeshiva #yeshivot [sysTableList]="sysTableList" [iYeshivaId]="iYeshivaId" (add)="addYeshiva($event)" (update)="updateYeshiva($event)" (closeYeshiva)="close()"></app-setting-yeshiva>
+</div>
+ 
+    
 
-    <app-setting-yeshiva #yeshivot [sysTableList]="sysTableList" [iYeshivaId]="iYeshivaId" (closeYeshiva)="close()"></app-setting-yeshiva>
-
+<div class="main-table">
+    <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="setYeshiva($event)" #AppVyTable></app-vy-table>
 </div>
 
-<div *ngIf="iYeshivaId"> 
+<!-- 
+<div class="deleteYeshiva" *ngIf="flag"> 
+    <p>
+        האם אתה בטוח שברצונך למחוק מוסד זה?
+    </p>
+    <button class="btn-yesNo" (click)="delete()">כן</button>
+    <button class="btn-yesNo" (click)="close()">לא</button>
+</div> -->
 
-    <app-setting-yeshiva-delete #yeshivot [iYeshivaId]="iYeshivaId" (closeYeshiva)="close()"></app-setting-yeshiva-delete>
 
-</div>
 
-<app-vy-table [lstColumns]="lstColumns" [lstDataRows]="yeshivaList" (clickCell)="setYeshiva($event)"></app-vy-table>
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; delete(deleteYeshiva);"></app-vy-pop-up>
+

@@ -5,17 +5,26 @@
     padding: 0%;
     background-color:lightgray;
 }
-/* .header{
+.header1{
     font-family: tahoma;
-    font-size: 40px;
-    text-align:left;
+    
+    text-align:right;
     color: deeppink
 
-} */
-.text{
-width:100%;
-height:350px ;
-background-color: darksalmon;
+}
+.MarchSF{
+    /* width:100%; */
+    /* height:150px ; */
+    background-color: chartreuse;  
+}
+.VerMarch p{
+/* width:100%; */
+/* height:150px ; */
+/* background-color: darksalmon; */
+margin:10%;
+margin-top: 0;
+    text-align: justify;
+    text-align-last: center;
 }
 .image{
     width:100%;
@@ -41,7 +50,7 @@ background-color: darksalmon;
     margin-bottom: 15px;
   }
   .ngx-gallery-thumbnail.ngx-gallery-active {  
-  background-color: crimson;
+  background-color: rgb(207, 37, 94);
 }
 ngx-gallery /deep/ .ngx-gallery-arrow {
     background-color: aquamarine;
@@ -55,3 +64,96 @@ ngx-gallery /deep/ ngx-gallery-thumbnails .ngx-gallery-arrow {
 ngx-gallery /deep/ ngx-gallery-preview .ngx-gallery-arrow {
     background-color: beige
 }
+/* .div-text{
+   background-color: blueviolet;height:1000px;
+} */
+div-image{
+    background-color:aquamarine;height: 1000px;
+}
+
+
+.flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    min-height: 100vh;
+    /* width: 100vw; */
+}
+
+.item {
+    width: 49%;
+    margin: 15px;
+    border: 1px rgb(207, 37, 94) solid;
+    border-radius: 4px;
+}
+
+
+.globalHeader{
+    text-align: center;
+    margin: 40px;
+}
+
+.login-btn:hover {
+    color: #FFF;
+    background-color: rgb(207, 37,94);
+   
+
+}
+
+.login-btn{
+    background-color: #fff;
+    color: rgb(207, 37, 94);
+    border: 1px solid rgb(207, 37,94);
+    border-radius: 25px;
+    margin: 50px;
+    width: 30%;
+
+}
+
+.login {
+    text-align: center;
+}
+
+
+
+
+
+
+
+/* .ngx-gallery-arrow-wrapper.ngx-gallery-arrow-right{
+    width: 50px;
+    height: 50px;
+    background-image: url('../../../assets/icons/back.png');
+    background-color: aqua;
+} */
+
+
+ngx-gallery /deep/.ngx-gallery-arrow-right .ngx-gallery-arrow {
+    width: 30px;
+    height: 30px;
+    background-image: url('/../../assets/icons/right-arrow\ \(1\).png');
+    background-color: transparent !important;
+}
+
+ngx-gallery /deep/.ngx-gallery-arrow-left .ngx-gallery-arrow {
+    width: 30px;
+    height: 30px;
+    background-image: url('/../../assets/icons/left-arrow.png');
+    background-color: transparent !important;
+}
+
+/* ngx-gallery /deep/ ngx-gallery-image .ngx-gallery-arrow {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+}
+ngx-gallery /deep/ ngx-gallery-thumbnails .ngx-gallery-arrow {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+}
+ngx-gallery /deep/ ngx-gallery-preview .ngx-gallery-arrow {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+} */

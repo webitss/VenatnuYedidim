@@ -1,21 +1,32 @@
-
-
-
 <div class=" row component-name-header">
-        <div class="col-sm-4 component-name">תלמידים</div>
-        <div class="actions col-sm-8">
-    <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
-    <button class="btn btn-small" (click)="tableToPdf('תלמידים')">s</button>
-    <button class="btn btn-circle1 btn-orange" (click)="flag=true"> איחוד כרטיסים</button>
-    <button class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">תלמיד חדש</button>
-</div>
+    <div *ngIf="component=='/students'" class="col-sm-4 component-name">תלמידים</div>
+    <div *ngIf="component=='/graduates'" class="col-sm-4 component-name">בוגרים</div>
+    <div class="actions col-sm-8">
+        <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
+        <button *ngIf="component=='/students'" class="btn btn-small pdf" title="הורד pdf" (click)="tableToPdf('תלמידים')"></button>
+        <button *ngIf="component=='/graduates'" class="btn btn-small pdf" title="הורד pdf" (click)="tableToPdf('בוגרים')"></button>
+        <button class="btn btn-circle1 btn-orange" (click)="flag=true"> איחוד כרטיסים</button>
+        <button *ngIf="component=='/students'" class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">תלמיד
+            חדש</button>
+    </div>
 </div>
 
- <app-vy-table #students [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editStudent($event)"></app-vy-table> 
+<div class="main-table">
+    <app-vy-table #students [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editAndDeleteStudent($event)"></app-vy-table>
+</div>
 
-<div *ngIf="flag==true"> 
-    <app-cards-union></app-cards-union>
-</div> 
+<div *ngIf="flag==true">
+    <app-cards-union (onClose)="onClose($event);flag=false"></app-cards-union>
+</div>
+
+
+
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false"
+    (ok)="flagDelete=false; deleteStudent();"></app-vy-pop-up>
+
+
+
+
 
 
 

@@ -11,25 +11,27 @@ import { GlobalService } from '../../services/global.service';
 })
 export class AppComponent implements OnInit {
 
+  protected isGraduate: number = 0;
+  component: string;
   protected currentComponent: any;
   protected PicUrl: any;
   protected nvBase64File: string;
   protected name: string;
-
+  protected flag = false;
+  protected message = '';
+  protected header = '';
+  protected tubsName = { student: 1, avrechim: 2, events: 3, graduates: 4, users: 5, settings: 6 };
+  protected cuurentTub=this.tubsName.student;
   public instance: AppComponent;
-  public userName: string = this.globalService.getUser() !=  null ?  this.globalService.getUser().nvUserName : "משתמש";
-  constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute, private globalService: GlobalService) { }
+  public userName: string = this.globalService.getUser() != null ? this.globalService.getUser().nvUserName : "משתמש";
+  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, public router: Router, private route: ActivatedRoute
+    , private globalService: GlobalService) { }
 
   ngOnInit() {
     this.instance = this;
     if (this.globalService.getUser() == null)
       this.router.navigate(['']);
 
-    // this.appProxy.post('Login', { nvUserName: 'מערכת', nvPassword: '1234' })
-    //   .then(user => {
-    //     if (user) alert('שם משתמש: ' + user.nvUserName + ', סיסמה:' + user.nvPassword);
-    //     else alert('משתמש לא קיים');
-    //   });
   }
 
   onRouterOutletActivate(event) {
@@ -39,7 +41,7 @@ export class AppComponent implements OnInit {
   saveFile() {
     this.appProxy.post('SaveFileByBase64', this.nvBase64File)
       .then(result => {
-        if (result) { alert('שמירת הקובץ התבצעה בהצלחה'); } else { alert('שמירת הקובץ נכשלה'); }
+        if (result) { this.openMessagePopup('השמירה התבצעה בהצלחה'); } else { this.openMessagePopup('שמירת הקובץ נכשלה'); }
       });
   }
 
@@ -69,14 +71,20 @@ export class AppComponent implements OnInit {
   }
   private id: number;
   goToUserDetails() {
-     this.id = JSON.parse(localStorage.getItem("user")).iPersonId;
-     this.router.navigate(['users/user/',this.id]);
+    this.id = JSON.parse(localStorage.getItem("user")).iPersonId;
+    this.router.navigate(['users/user/', this.id]);
   }
+
+
+  openMessagePopup(message: string) {
+    this.message = message;
+    this.flag = true;
+  }
+  
   //     }
   //   }
 
   // }
-
 
 
 }

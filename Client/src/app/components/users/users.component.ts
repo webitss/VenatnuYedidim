@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output, Inject, forwardRef } from '@angular/core';
 
 import { User } from '../../classes/user';
 import { AppProxy } from '../../services/app.proxy';
@@ -7,6 +7,8 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { SysTableService } from '../../services/sys-table.service';
 import { GlobalService } from '../../services/global.service';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-users',
@@ -15,28 +17,36 @@ import { GlobalService } from '../../services/global.service';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private router: Router, private sysTableService: SysTableService, private globalService: GlobalService) { }
-  @ViewChild('users') users:any;
+  constructor(private appProxy: AppProxy, 
+    private router: Router, 
+    private sysTableService: SysTableService, 
+    public globalService: GlobalService,
+    @Inject(forwardRef(() => AppComponent)) private _parent:AppComponent
+    
+  ) { }
+  @ViewChild('users') users: any;
+  @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
+
+  // @Output()
+  //  onRemoveUser: EventEmitter<User> = new EventEmitter<User>();
 
   ngOnInit() {
-    this.iPersonId =  this.globalService.getUser()['iUserId'];
-    debugger
-    this.appProxy.post("GetUsers", { iPersonId: this.iPersonId}).then(data => {
+    this.iPersonId = this.globalService.getUser()['iUserId'];
+    this.appProxy.post("GetUsers", { iPersonId: this.iPersonId }).then(data => {
       this.lstDataRows = data;
-
       this.lstDataRows.forEach(u => {
-
         u["edit"] = "<div class='edit'></div>";
+        u["delete"] = "<div class='delete'></div>";
       });
-
       this.sysTableService.getValues(SysTableService.dataTables.permissionType.iSysTableId).then(data => {
         this.lstDataRows.forEach(user => {
           this.lstValues = data;
           user["nvPermittion"] = data.filter(s => s.iSysTableRowId == user["iPermissionId"])[0].nvValue;
         });
       });
+    }).catch(err => {
+      //alert(err);
     });
-
   }
 
 
@@ -45,7 +55,8 @@ export class UsersComponent implements OnInit {
 
 
   public lstColumns = [
-    new VyTableColumn('עריכה', 'edit', 'html', true,false),
+    new VyTableColumn('עריכה', 'edit', 'html', true, false),
+    new VyTableColumn('מחיקה', 'delete', 'html', true, false),
     new VyTableColumn('שם משפחה', 'nvLastName'),
     new VyTableColumn('שם פרטי', 'nvFirstName'),
     new VyTableColumn('נייד', 'nvMobile'),
@@ -54,15 +65,50 @@ export class UsersComponent implements OnInit {
   ];
   public lstDataRows = [];
 
+  click(e) {
+    if (e.columnClickName == 'edit')
+      this.editUser(e);
+    else
+      this.delUser(e);
 
+  }
 
   editUser(u: User) {
     this.router.navigate(['users/user/', u.iPersonId]);
   }
-  downloadExcel(){
+
+  flagDelete = false;
+  message = '';
+  header = 'מחיקת משתמש';
+  userToDelete;
+
+
+  delUser(u: User) {
+    this.userToDelete = u;
+    if (u.iPermissionId == 5)
+      this.message = 'יתכן ולאחר המחיקה לא יהיה מנהל למערכת, האם אתה בטוח שברצונך למחוק את ' + u.nvFirstName + ' ' + u.nvLastName + '?';
+    else
+      this.message = 'האם אתה בטוח שברצונך למחוק את ' + u.nvFirstName + ' ' + u.nvLastName + '?';
+    this.flagDelete = true;
+
+  }
+  private alert: any;
+  private flag: boolean = false;
+  deleteUser(u: User) {
+    this.appProxy.post('DeleteUser', { iPersonId: u.iPersonId, iUserId: this.globalService.getUser().iPersonId }).then(data => {
+this._parent.openMessagePopup('נמחק בהצלחה!');
+     }).catch(err => {
+     // alert(err);
+    });
+    this.lstDataRows.splice(this.lstDataRows.indexOf(u), 1);
+    this.vyTableComponent.refreshTable(this.lstDataRows);
+  }
+
+  downloadExcel() {
     this.users.downloadExcel();
   }
-  tableToPdf(name:string){
-    this.users.downloadPdf(name,'pdf');
-      }
+
+  tableToPdf(name: string) {
+    this.users.downloadPdf(name, 'pdf');
+  }
 }

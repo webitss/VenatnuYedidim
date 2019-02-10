@@ -1,12 +1,26 @@
 *{
     direction: rtl;
 }
-.settingYeshiva{
+
+.btn-yesNo{
+    float: left;
+    border-radius:30px;
+    width:75px;
+    margin-left:10px;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    border: 1px rgb(207, 37, 94) solid;
+    color: rgb(207, 37, 94);
+}
+.deleteYeshiva{
     position: fixed;
     z-index: 100;
-    top: 28%;
-    right: 120px;
-    left: 120px;
-    background:lightgray;
+    top: 35%;
+    right: 40%;
+    background:white;
     border: 2px;
+    width: 20%;
+    height: 13%;
+    border: solid rgb(207, 37, 94);
 }

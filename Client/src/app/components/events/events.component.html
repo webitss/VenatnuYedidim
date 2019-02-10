@@ -4,17 +4,17 @@
 <div class=" row component-name-header">
 
 
-
-
-
     <div class="col-sm-4 component-name">אירועים</div>
     <div class="actions col-sm-8">
-        <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
-        <button class="btn btn-small" (click)="tableToPdf('אירועים')">s</button>
+        <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
+        <button class="btn btn-small pdf" title="הורד pdf" (click)="tableToPdf('אירועים')"></button>
         <button class="btn btn-circle1 btn-pink" routerLink="/events/event/0">אירוע חדש</button>
     </div>
 </div>
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flag" [header]="header" (close)="flag=false" (ok)="flag=false; deleteEvent(eventIdToDelete);"></app-vy-pop-up>
 
-<app-vy-table #events [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="edit($event)"></app-vy-table>
+<div class="main-table">
+    <app-vy-table #events [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="click($event)"></app-vy-table>
+</div>
 
 <router-outlet></router-outlet>

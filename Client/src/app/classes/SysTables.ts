@@ -1,5 +1,5 @@
 export class SysTables{
-    iSysTableId:Number;
+    iSysTableId:number;
    
     nvSysTableName :String;
    }

@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, Input, ViewChild, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Event1 } from '../../classes/event';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { EventComponent } from '../event/event.component';
-import { ActivatedRoute } from '@angular/router';
-import { FormArrayName } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormArrayName, NgForm } from '@angular/forms';
 import { PARAMETERS } from '@angular/core/src/util/decorators';
 import { Tint } from '../../classes/tint';
 import { SysTableService } from '../../services/sys-table.service';
@@ -20,31 +20,44 @@ import { GlobalService } from '../../services/global.service';
 })
 export class EventDetailsComponent implements OnInit {
   list: Array<any> = new Array<any>();
-  title:string="";
-  inputTitle:string="עבור";
+  title: string = "בחר";
+  inputTitle: string = "עבור";
+  touched = false;
 
-  protected e: Event1;
-to:Array<any>;
-participantsToSend:Array<Tint>=new Array<Tint>();
+  public e: Event1;
+  to: Array<any>;
+  participantsToSend: Array<Tint> = new Array<Tint>();
 
-@ViewChild('child')VyMultySelect: VyMultySelectComponent;
+  @ViewChild(NgForm) public  form;
+
+  @ViewChild('child') VyMultySelect: VyMultySelectComponent;
+
+
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
+
 
   save() {
-    this.participantsToSend.splice(0, this.participantsToSend.length);
-    this.e.dtEventDate = new Date(this.e.dtEventDate);
-    this.to.forEach(t=>{
-      this.participantsToSend.push(new Tint(t.iSysTableRowId));
-    })
-    // this.VyMultySelect.save();
-
-    this.appProxy.post('SetEvent', { oEvent: this.e, iUserId:   this.globalService.getUser()['iUserId'] , to:this.participantsToSend})
+    if (!this.isDetails) {
+      this.participantsToSend.splice(0, this.participantsToSend.length);
+     
+      if (this.to != undefined && this.to.length > 0)
+        this.to.forEach(t => {
+          this.participantsToSend.push(new Tint(t.iSysTableRowId));
+        });
+    }
+ this.e.dtEventDate = new Date(this.e.dtEventDate);
+    this.appProxy.post('SetEvent', { oEvent: this.e, iUserId: this.globalService.getUser()['iUserId'], to: this.participantsToSend })
       .then(
         data => {
-          alert("success" + data);
+          this.route.navigate(['events/']);
         }).catch(err => {
-          alert("error:" + err);
+         
         });
   }
+
+  @Output() updateValid = new EventEmitter();
 
   getFromChild(list: Array<any>) {
     this.to = list;
@@ -52,10 +65,10 @@ participantsToSend:Array<Tint>=new Array<Tint>();
   private sub: any;
   private iEventId: number;
   isDetails: boolean;
-  sysTableRowList:SysTableRow[];
+  sysTableRowList: SysTableRow[];
 
-  constructor(private appProxy: AppProxy, private router: ActivatedRoute,private sysTableService: SysTableService,
-     private globalService: GlobalService) { }
+  constructor(private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService,
+    private globalService: GlobalService, private route: Router,private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
 
@@ -75,24 +88,16 @@ participantsToSend:Array<Tint>=new Array<Tint>();
     });
 
 
-  this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data=>{
-    this.sysTableRowList=data;
-    this.sysTableRowList.forEach(s=>{
-     // s.iSysTableRowId
-      s['value']= s.nvValue;
+    this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
+      this.sysTableRowList = data;
+      this.sysTableRowList.forEach(s => {
+        s['value'] = s.nvValue;
+      })
+    }, err => {
     })
-    //alert("success"+this.sysTableRowList[0].nvValue);
-  },err=>{
-   // alert("error")
-  })
-
-//this.participantsToSend=new Array<string>();
-
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 }
-
-

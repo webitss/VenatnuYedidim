@@ -1,10 +1,12 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, Inject, forwardRef } from '@angular/core';
 import { User } from '../../classes/user';
 import { Person } from '../../classes/person';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SysTableService } from '../../services/sys-table.service';
 import { GlobalService } from '../../services/global.service';
+import { NgForm } from '@angular/forms';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-user-details',
@@ -13,22 +15,27 @@ import { GlobalService } from '../../services/global.service';
 })
 export class UserDetailsComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private globalService: GlobalService, private router: Router, private route: ActivatedRoute, private sysTableService: SysTableService) { }
+  constructor(private appProxy: AppProxy, private globalService: GlobalService, private router: Router, private route: ActivatedRoute
+    , private sysTableService: SysTableService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
+    this.user = new User();
     this.route.parent.params.subscribe(params => {
       if (params['iPersonId'] != '0') {
         this.appProxy.post("GetUser", { iPersonId: params['iPersonId'] })
           .then(data => {
             this.user = data;
+          }).catch(err => {
+            this._parent.openMessagePopup("שגיאה בשליפת הנתונים!");
           });
-      }
-      else {
-        this.user = new User();
       }
     });
     this.sysTableService.getValues(4).then(data => {
+
       this.lst = data;
+      if (this.user.iPersonId == 0) {
+        this.user.iPermissionId = this.lst[0].iSysTableRowId;
+      }
     });
     if (this.globalService.getUser().iPermissionId == 5)
       this.isManeger = true;
@@ -44,19 +51,26 @@ export class UserDetailsComponent implements OnInit {
 
   @Output()
   isManeger: boolean = false;
+  notFocused1: boolean = true;
+  notFocused2: boolean = true;
+  notFocused3: boolean = true;
+
+
+  @ViewChild(NgForm) form;
 
   public lst: Array<any>;
 
   saveUser() {
-    this.appProxy.post("SetUser", { user: this.user, iUserId: 1 }).then(data => {
+    this.appProxy.post("SetUser", { user: this.user, iUserId: this.globalService.getUser().iPersonId }).then(data => {
       if (data == true) {
-        alert("המשתמש נוסף בהצלחה!");
+        this._parent.openMessagePopup("השמירה התבצעה בהצלחה!");
         this.router.navigate(['users']);
       }
-
       else
-        alert("error!");
-    })
+        this._parent.openMessagePopup("השמירה נכשלה!");
+    }).catch(err => {
+
+    });
   }
 
 }

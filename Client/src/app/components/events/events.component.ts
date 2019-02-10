@@ -1,8 +1,11 @@
-﻿import { Component, OnInit, ViewChild } from '@angular/core';
+﻿import { Component, OnInit, ViewChild, Inject, forwardRef } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Event1 } from '../../classes/event';
 import { Router } from '@angular/router';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
+import { GlobalService } from '../../services/global.service';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-events',
@@ -11,20 +14,54 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 })
 export class EventsComponent implements OnInit {
   protected eventsList: Event1[];
-  @ViewChild('events') events:any;
+  @ViewChild('events') events: any;
+  @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
+  message:string;
+  flag = false;
+  header = "מחיקת אירוע";
+  eventIdToDelete:number;
+  
+  constructor(private appProxy: AppProxy, private router: Router, private globalService: GlobalService,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
 
-  constructor(private appProxy: AppProxy, private router: Router) { }
+  edit(e) {
+    this.router.navigate(['events/event/', e.iEventId]);
+  }
 
-edit(e){
-  this.router.navigate(['events/event/', e.iEventId]);
+  deleteEvent(e) {
+    this.appProxy.post('DeleteEvent', { iEventId: e, iUserId: this.globalService.getUser()['iUserId'] }).then(res => {
+      if (res == true) {
+        this._parent.openMessagePopup('המחיקה התבצעה בהצלחה!');
+        const i=this.lstDataRows.findIndex(x=>x.iEventId==e);
+        this.lstDataRows.splice(i, 1);
+        this.vyTableComponent.refreshTable(this.lstDataRows);
+      }
+      else {
+        this._parent.openMessagePopup('המחיקה נכשלה!');
+      }
+    });
+  }
 
-}
+  deleteE(e: Event1) {
+    this.message='האם אתה בטוח שברצונך למחוק את אירוע '+e.nvName+'?';
+    this.eventIdToDelete=e.iEventId;
+    this.flag=true;
+  }
+
+  click(e) {
+    // this.avrechId = e.iPersonId;
+    if (e.columnClickName == "edit")
+      this.edit(e);
+    else
+      this.deleteE(e);
+
+  }
 
   public lstColumns = [
-new VyTableColumn('עריכה','edit','html', true,false),
-new VyTableColumn('שם ארוע','nvName'),
-new VyTableColumn('תאריך','dtEventDate'),
-new VyTableColumn('מקום','nvPlace') ];
+    new VyTableColumn('', 'edit', 'html', true, false),
+    new VyTableColumn('', 'delete', 'html', true, false),
+    new VyTableColumn('שם ארוע', 'nvName'),
+    new VyTableColumn('תאריך', 'dtEventDate'),
+    new VyTableColumn('מקום', 'nvPlace')];
   public lstDataRows = [];
 
 
@@ -32,15 +69,15 @@ new VyTableColumn('מקום','nvPlace') ];
 
 
 
-    this.appProxy.post('GetEventsList', { iUserId: 0 }).then(res => {
+    this.appProxy.post('GetEventsList').then(res => {
       res.forEach(e => {
         this.lstDataRows.push({
           iEventId: e.iEventId,
           nvName: e.nvName,
           dtEventDate: e.dtEventDate.toLocaleDateString(),
           nvPlace: e.nvPlace,
-          edit: '<div class="edit"></div>'
-
+          edit: '<div class="edit"></div>',
+          delete: '<div class="delete"></div>'
         });
       });
     }
@@ -48,10 +85,10 @@ new VyTableColumn('מקום','nvPlace') ];
 
 
   }
-  downloadExcel(){
+  downloadExcel() {
     this.events.downloadExcel();
   }
-  tableToPdf(name:string){
-    this.events.downloadPdf(name,'pdf');
-      }
+  tableToPdf(name: string) {
+    this.events.downloadPdf(name, 'pdf');
+  }
 }

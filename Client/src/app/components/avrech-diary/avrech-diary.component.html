@@ -1,22 +1,27 @@
-<div class="row first-row">
+
+<div class="row first-row" >
   <div class="add-area">
-    <button class="btn-circle btn-add" (click)="addTask()"> הוספת משימה +</button>
+    <button class="btn-circle btn-add" (click)="addTask()"> הוספת משימה</button>
+  </div>
+  <div class="table">
+    <app-calendar #calendar></app-calendar>
   </div>
 </div>
 <div class="newTask" *ngIf="flag==true">
-  <div class="row ">
+  <div class="row">
     <div class="col-sm-8"></div>
     <div class="col-sm-4">
-      <button class="btn-circle btn-save" (click)="saveTask()">שמור v </button>
-      <button class="btn-circle btn-close" (click)="close()">סגור x </button>
+      <button class="btn-circle btn-save" (click)="saveTask()">שמור  </button>
+      <button class="btn-circle btn-close" (click)="close()">סגור  </button>
     </div>
   </div>
   <div class="row">
     <h3>משימה חדשה</h3>
   </div>
-  <app-task #task></app-task>
+  <app-task #task  (close)="closeMe()" ></app-task>
+  <!-- (refresh)='refresh($event)' -->
   <!--[(task)]="task"
 </div>
-<!-- *ngIf="task != null"  -->
+ *ngIf="task != null"  -->
 
-<!--(activate)="onRouterOutletActivate($event)"-->
+  <!--(activate)="onRouterOutletActivate($event)"-->

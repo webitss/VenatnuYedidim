@@ -37,5 +37,31 @@ li>button{
     height: 13%;
     padding: 0px;
 }
+.btn-del{
+    background-image: url("../../../assets/icons/trash.png");
+}
+.btn-edit{
+    background-image: url("../../../assets/icons/edit.png");
+}
+.btn-plus{
+  background-image: url("../../../assets/icons/add.png");
+}
+.btn-minus{
+  background-image: url("../../../assets/icons/minus.png");
+}
 
-  
+
+.btn-del,.btn-edit,.btn-plus,.btn-minus{
+    border-radius: 0px;
+    margin-left: 2%;
+    height: 25px;
+}
+.buttons{
+    padding-left: 25%;
+    margin-top: -10%;
+    visibility: hidden;
+}
+.media-item:hover>.buttons{
+    visibility: visible;
+
+}

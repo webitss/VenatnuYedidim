@@ -1,11 +1,13 @@
-import { Output,EventEmitter,Component, OnInit,ViewChild } from '@angular/core';
+import { Output, EventEmitter, Component, OnInit, ViewChild, Inject, forwardRef } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { AvrechComponent } from '../avrech/avrech.component';
 
-import {Avrech} from '../../classes/avrech';
+import { Avrech } from '../../classes/avrech';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { Router } from '@angular/router';
 import { viewClassName } from '../../../../node_modules/@angular/compiler';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { AppComponent } from '../app/app.component';
 
 
 
@@ -16,50 +18,123 @@ import { viewClassName } from '../../../../node_modules/@angular/compiler';
 })
 export class AvrechimComponent implements OnInit {
 
- avrech:Avrech
-   avrechimList:Avrech[];
-   @ViewChild('avrechim') avrechim:any;
-   protected currentComponent:any;   
-   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
+  avrech: Avrech
+  avrechimList: Avrech[];
+  mailList: string[] = [];
 
-  constructor(private router: Router,private appProxy:AppProxy) { }
+  header='מחיקת אברך';
+  message='האם אתה בטוח שברצונך למחוק אברך זה?';
+
+  @ViewChild('avrechim') avrechim: any;
+  @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
+  protected currentComponent: any;
+  public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
+
+  constructor(private router: Router, private appProxy: AppProxy,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
 
   ngOnInit() {
 
-   
-    this.appProxy.post("GetAllAvrechim",{iPersonId:null}).then(
-      data=>
-      {
-    this.avrechimList=data;
-    this.avrechimList.forEach(
-      
-      a => {
-         a['open'] = '<div class="edit"></div>'; 
-        });
- 
 
-    },
+    this.appProxy.post("GetAllAvrechim", { iPersonId: null }).then(
+      data => {
+        this.avrechimList = data;
+        this.avrechimList.forEach(
+
+          a => {
+            a['open'] = '<div class="edit"></div>';
+            a['delete'] = '<div class="delete"></div>';
+          });
+
+
+      },
     );
 
-    this.lstColumns.push(new VyTableColumn('פתיחה', 'open', 'html', true,false));
+    this.lstColumns.push(new VyTableColumn('פתיחה', 'open', 'html', true, false));
+    this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true, false));
     this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
     this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
     this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
-    this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));   
+    this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
+    this.lstColumns.push(new VyTableColumn('בחר', 'checked', 'checkbox'));
   }
-  editAvrech(e) {
-        this.router.navigate(['avrechim/avrech/',e.iPersonId])
+  avrechId: number;
+  flag = false;
+  click(e) {
+    this.avrechId = e.iPersonId;
+    if (e.columnClickName == "open")
+      this.editAvrech();
+    else
+      this.deleteAvrech();
+
+  }
+  editAvrech() {
+    this.router.navigate(['avrechim/avrech/', this.avrechId])
+  }
+  deleteAvrech() {
+    this.flag = true;
   }
 
-  downloadExcel(t){
+  delete() {
+    this.appProxy.post('DeleteAvrech', { iPersonId: this.avrechId })
+      .then(result => {
+        if (result) {
+      this._parent.openMessagePopup("המחיקה התבצעה בהצלחה!");
+          const i=this.avrechimList.findIndex(x=>x.iPersonId==this.avrechId);
+        this.avrechimList.splice(i, 1);
+        this.vyTableComponent.refreshTable(this.avrechimList);
+
+
+
+        } else { this._parent.openMessagePopup('המחיקה נכשלה'); }
+        this.flag = false;
+      });
+  }
+
+  downloadExcel(t = null) {
     debugger;
     this.avrechim.downloadExcel(t);
   }
   onRouterOutletActivate(event) {
     this.currentComponent = event;
   }
-  tableToPdf(name:string){
-this.avrechim.downloadPdf(name,'pdf');
+  tableToPdf(name: string) {
+    this.avrechim.downloadPdf(name, 'pdf');
+  }
+  mail: boolean = false;
+  
+  mailToAvrechim() {
+    this.mail = true;
+    this.mailList = [];
+    this.avrechimList.filter(a => a['checked'] == true).forEach(avrech => {
+      this.mailList.push(avrech.nvEmail);
+    });
+    this.mail=true;
+    // if(this.mailList.length == 0){
+    //   this._parent.openMessagePopup("לא נבחרו אברכים");
+    //   this.mail=false;
+    // }
+    // else
+    // {
+
+    // }
+      // this.appProxy.post('MailToAvrechim', { mailList: this.mailList })
+      // .then(result => {
+      // }
+      //   , err => { }
+      // );
+    // let s = ''
+    // let n = 777;
+    // let arr = [{ 400: 'ת' },{ 1: 'א' }]
+    // let n1=n;
+    // for (let i = 0; i < 22; i++) {
+    //   while (n1 - arr[i][] > 0) {
+    //     s += arr[i];
+    //     n1-=arr[i];
+    //   }
+    // }
+  }
+  closeMe(){
+    this.mail=false;
   }
 }

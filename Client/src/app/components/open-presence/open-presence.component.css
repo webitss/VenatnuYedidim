@@ -1,0 +1,12 @@
+.form-group{
+    margin-right: 10%;
+    width: 25%;
+}
+.form{
+    background-color: white;
+}
+
+
+#overlay {
+    z-index:-5 !important;
+}

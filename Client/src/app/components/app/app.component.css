@@ -32,12 +32,13 @@ li{
 }
 .valign{
     background-color: #f3f3f3;
-    width: 305px;
+    /* width: 305px; */
     height: 66px;
     text-align: center;
     margin-top: 30;
     padding-top: 6%;
     padding-bottom: 0px;
+    padding-right: 39px;
 }
 .valign span{
     color: rgb(207, 37, 94);
@@ -49,7 +50,7 @@ li{
 .title img{
     width: 50px;
     height: 50px;
-    margin-right: 30px;
+    /* margin-right: 30px; */
 }
 .user{
     cursor: pointer;
@@ -57,4 +58,11 @@ li{
 }
 .user :hover{
     background-color: #b4b3b3;
+}
+.log-out{
+    background-color: #cf255e;
+    color: #ffffff;
+    padding-left: 19px;
+    /* margin-right: auto; */
+    padding-right: 9px;
 }

@@ -112,6 +112,7 @@
     <Compile Include="Entities\Conversation.cs" />
     <Compile Include="Entities\Event1.cs" />
     <Compile Include="Entities\Document.cs" />
+    <Compile Include="Entities\PresenceAvrech.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\Meeting.cs" />
     <Compile Include="Entities\SysTableRow.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Entities\Participant.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\Student.cs" />
+    <Compile Include="Entities\TGlobalParameters.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Yeshivot.cs" />
     <Compile Include="Global.asax.cs">
@@ -139,7 +141,7 @@
     <Compile Include="Utilities\SendMessagesHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Files\" />
+    <Folder Include="Files\Students\" />
     <Folder Include="Logs\" />
   </ItemGroup>
   <ItemGroup>

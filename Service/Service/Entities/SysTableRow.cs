@@ -20,16 +20,9 @@ namespace Service.Entities
         public int iSysTableId { get; set; }
         [DataMember]
         public string nvValue { get; set; }
+
         [DataMember]
-        public int iSysRowStatus { get; set; }
-        [DataMember]
-        public DateTime dtLastModifyDate { get; set; }
-        [DataMember]
-        public  int iLastModifyUserId { get; set; }
-        [DataMember]
-        public DateTime dtCreateDate { get; set; }
-        [DataMember]
-        public int iCreateUserId { get; set; }
+        public int nvShowText { get; set; }
         #endregion
 
         #region Methods
@@ -52,20 +45,15 @@ namespace Service.Entities
         }
 
         //להפוך לאובייקט
-        public static bool AddValue(SysTableRow sysTableRow)
+        public static bool AddValue(SysTableRow sysTableRow, int iUserId)
 
         {
-//            @iSysRowStatus   int,
-// @dtLastModifyDate   datetime,	
-//@iLastModifyUserId  int ,
-//@dtCreateDate   datetime,	
-//@iCreateUserId  int ,
-//@nvValue    nvarchar(50)    ,
-//@iSysTableId    int
+
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<SysTableRow>.GetSqlParametersFromObject(sysTableRow);
-
+                parameters.Remove(parameters.Find(x => x.ParameterName == "nvShowText"));
+                parameters.Add(new SqlParameter("iUserId", iUserId));
 
 
                 SqlDataAccess.ExecuteDatasetSP("TSysTableRow_INS", parameters);
@@ -83,14 +71,15 @@ namespace Service.Entities
 
         //להחליף את iSysTableId
         //ב iSysTableRowId
-        public static bool UpdateValue(SysTableRow sysTableRow)
+        public static bool UpdateValue(SysTableRow sysTableRow, int iUserId)
         {
 
-
+ 
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<SysTableRow>.GetSqlParametersFromObject(sysTableRow);
-
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                parameters.Remove(parameters.Find(x => x.ParameterName == "nvShowText"));
 
 
                 SqlDataAccess.ExecuteDatasetSP("TSysTableRow_UPD", parameters);

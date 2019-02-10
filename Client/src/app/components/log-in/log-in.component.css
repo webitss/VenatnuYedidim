@@ -1,3 +1,4 @@
+
 .background-logo { 
     background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255,255,255,0.5)), url("../../../assets/images/logo.jpg");
     background-position: center;
@@ -8,28 +9,28 @@
 .my-div{
 
 }
-/* .small-logo{
+ /* .small-logo{
     background-image: url("../../../assets/images/logo.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 50px;
+    height: 150px;
+    width: 50px;
+    background-color: bisque;
     
-} */
 
 .form-control{
     background-color: transparent;
     color: #535353;
     border-color: #535353;
 
-
 }
 .usr-input{
     background-image: url("../../../assets/icons/usr.png");
 }
 .lock-input{
-    background-image: url("../../../assets/icons/lock.png");
-}
+    /* background-image: url("../../../assets/icons/lock.png"); */
+/* } */
 .usr-icon{
     width: 5%;
     height: 25px;
@@ -51,5 +52,24 @@
     background-color: white;
     height: 80%;
     top: 10%;
-    box-shadow:  1px 3px 22px 4px rgba(128,128,128,0.63);;
+    box-shadow:  1px 3px 22px 4px rgba(128,128,128,0.63);
+    padding: 10%;
+    
+}
+.hide-password {
+    background-repeat: no-repeat;
+     background-size: unset !important;
+}
+.my-btn{
+    width:30%;
+}
+h1, h5{
+    text-align: center;
+}
+h5{
+    margin-bottom: 10%;
+    font-size: 1rem
+}
+h1{
+    font-size: 2.5rem
 }

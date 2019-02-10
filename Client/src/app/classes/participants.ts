@@ -1,7 +1,7 @@
 export class Participants {
     iEventId :number;
     iPersonId:number;
-    iArrivalStatus:number;
+    iArrivalStatusType:number;
     iCreatedByUserId:	number;
     dtCreatedate:Date;	
     iLastModifyUserId:number;

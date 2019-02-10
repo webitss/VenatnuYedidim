@@ -38,6 +38,13 @@ namespace Service
             return User.SetUser(user, iUserId);
         }
 
+        public bool DeleteUser(int iPersonId, int iUserId)
+        {
+
+            return User.DeleteUser(iPersonId, iUserId);
+
+        }
+
         #endregion
 
         #region Meeting
@@ -75,6 +82,15 @@ namespace Service
             return Task.SetTask(task, iUserId);
         }
 
+        public List<Task> GetTasksByPersonId(int iPersonId)
+        {
+            return Task.GetTasksByPersonId(iPersonId);
+        }
+        public bool DeleteTask(int iTaskId, int iPersonId)
+        {
+            return Task.DeleteTask(iTaskId, iPersonId);
+        }
+
         #endregion
 
         #region Student
@@ -82,6 +98,23 @@ namespace Service
         public List<Student> GetStudentList(int iUserId)
         {
             return Student.GetStudentList(iUserId);
+        }
+        public List<Student> GetBugrimList(int iUserId)
+        {
+            return Student.GetBugrimList(iUserId);
+        }
+        public List<int> GetStudentsAssociatedToAvrechim()
+        {
+            return Student.GetStudentsAssociatedToAvrechim();
+        }
+        public Dictionary<int, string> GetCurrentYeshivaOfStudent()
+        {
+            return Student.GetCurrentYeshivaOfStudent();
+        }
+
+        public List<Yeshivot> GetYeshivotOfStudent(int iPersonId)
+        {
+            return Student.GetYeshivotOfStudent(iPersonId);
         }
 
         public Student GetStudentById(int iUserId)
@@ -94,15 +127,15 @@ namespace Service
             return Student.AddStudentsToAvrech(studentAndAvrechArr, iUserId);
         }
 
-        public bool AddStudent(Student student, int iUserId)
+        public bool AddStudent(Student student, string base64Image, int iUserId)
         {
-            return Student.AddStudent(student, iUserId);
+            return Student.AddStudent(student, base64Image, iUserId);
         }
 
 
-        public bool UpdateStudent(Student student, int iUserId)
+        public bool UpdateStudent(Student student, string base64Image, int iUserId)
         {
-            return Student.UpdateStudent(student, iUserId);
+            return Student.UpdateStudent(student, base64Image, iUserId);
         }
 
 
@@ -114,10 +147,14 @@ namespace Service
         public bool UnionCards(Student student, int iStudent2)
         {
             return Student.UnionCards(student, iStudent2);
-        }        
+        }
+        public bool DeleteStudent(int iPersonId, int iUserId)
+        {
+            return Student.DeleteStudent(iPersonId, iUserId);
+        }
+
 
         #endregion
-
 
         #region Event
         public bool SetEvent(Event1 oEvent, int iUserId, List<TInt> to)
@@ -125,9 +162,9 @@ namespace Service
             return Event1.SetEvent(oEvent, iUserId, to);
         }
 
-        public List<Event1> GetEventsList(int iUserId)
+        public List<Event1> GetEventsList()
         {
-            return Event1.GetEventsList(iUserId);
+            return Event1.GetEventsList();
         }
 
         public Event1 GetEvent(int? iEventId)
@@ -135,7 +172,18 @@ namespace Service
             return Event1.GetEvent(iEventId);
         }
 
+
+        public bool DeleteEvent(int iEventId, int iUserId)
+        {
+            return Event1.DeleteEvent(iEventId, iUserId);
+        }
+
+        public List<Event1> GetEventsByStudent(int iPersonId)
+        {
+            return Event1.GetEventsByStudent(iPersonId);
+        }
         #endregion
+
         #region Avrech
 
 
@@ -169,10 +217,24 @@ namespace Service
         {
             return Avrech.UpdateUserNameAndPassword(iPersonId, nvUserName, nvPassword, iUserId);
         }
+        public bool DeleteAvrech(int iPersonId)
+        {
+            return Avrech.DeleteAvrech(iPersonId);
+        }
+
+        public List<Avrech> GetAvrechimByStudentId(int iPersonId)
+        {
+            return Avrech.GetAvrechimByStudentId(iPersonId);
+        }
 
 
-       
+        public bool MailToAvrechim(string[] mailList, string subject, string body)
+        {
+            return Avrech.MailToAvrechim(mailList, subject, body);
+        }
+
         #endregion
+
 
 
 
@@ -182,13 +244,13 @@ namespace Service
 
             return SysTableRow.GetValues(iSysTableId);
         }
-        public bool UpdateValue(SysTableRow sysTableRow)
+        public bool UpdateValue(SysTableRow sysTableRow, int iUserId)
         {
-            return SysTableRow.UpdateValue(sysTableRow);
+            return SysTableRow.UpdateValue(sysTableRow, iUserId);
         }
-        public bool AddValue(SysTableRow sysTableRow)
+        public bool AddValue(SysTableRow sysTableRow, int iUserId)
         {
-            return SysTableRow.AddValue(sysTableRow);
+            return SysTableRow.AddValue(sysTableRow, iUserId);
         }
 
         #endregion
@@ -209,9 +271,9 @@ namespace Service
         {
             return Conversation.GetConversations(iPersonId);
         }
-        public bool SetConversations(Conversation conversation, int iPersonId)
+        public int SetConversations(Conversation conversation, int iUserId)
         {
-            return Conversation.SetConversation(conversation, iPersonId);
+            return Conversation.SetConversations(conversation, iUserId);
         }
         //public bool AddConversations(Conversation conversation, int iPersonId)
         //{
@@ -235,7 +297,7 @@ namespace Service
             return Yeshivot.GetAllYeshivot();
         }
 
-        public bool AddYeshiva(Yeshivot yeshiva)
+        public int AddYeshiva(Yeshivot yeshiva)
         {
             return Yeshivot.AddYeshiva(yeshiva);
         }
@@ -249,10 +311,24 @@ namespace Service
         {
             return Yeshivot.getYeshivaById(iYeshivaId);
         }
-        public bool DeleteYeshiva(int iYeshivaId,int iLastModifyUserId)
+        public bool DeleteYeshiva(int iYeshivaId, int iLastModifyUserId)
         {
             return Yeshivot.DeleteYeshiva(iYeshivaId, iLastModifyUserId);
         }
+
+        public bool DeleteYeshivaOfStudent(int iPersonId, int iYeshivaId, int iUserId)
+        {
+            return Yeshivot.DeleteYeshivaOfStudent(iPersonId, iYeshivaId, iUserId);
+        }
+
+
+        public bool AddYeshivaToStudent(int iPersonId, int iYeshivaId, int iUserId)
+        {
+            return Yeshivot.AddYeshivaToStudent(iPersonId, iYeshivaId, iUserId);
+        }
+
+
+
 
         #endregion
 
@@ -270,7 +346,7 @@ namespace Service
         //{
         //    return Document.AddFile(iItemId, iBelongingType, iCategoryType, nvBase64File, nvFileName, nvComment);
         //}
-        public int SetDocument(Document document, string nvBase64File,int iUserId)
+        public int SetDocument(Document document, string nvBase64File, int iUserId)
         {
             return Document.SetDocument(document, nvBase64File, iUserId);
         }
@@ -287,7 +363,25 @@ namespace Service
             return Document.DeleteDocument(iDocumentId, iLastModifyUserId);
         }
 
-       
+        public List<Document> GetDocumentsOfTadmit()
+        {
+            return Document.GetDocumentsOfTadmit();
+        }
+
+        public List<Document> GetMoreDocumentsOfTadmit()
+        {
+            return Document.GetMoreDocumentsOfTadmit();
+        }
+
+        public bool changeTadmitStatus(int iDocumentId, int iUserId)
+        {
+            return Document.changeTadmitStatus(iDocumentId, iUserId);
+        }
+        public string GetBase64StringForDocument(string documentName)
+        {
+            return Document.GetBase64StringForDocument(documentName);
+        }
+
 
         #endregion
 
@@ -298,20 +392,48 @@ namespace Service
             return Participant.GetParticipantsList(iEventId);
         }
 
+        public bool DeleteParticipant(int iEventId, int iPsersonId, int iUserId)
+        {
+            return Participant.DeleteParticipant(iEventId, iPsersonId, iUserId);
+        }
+
         public List<Student> GetGraduatesList(int iUserId)
         {
             //throw new NotImplementedException();
             return Student.GetGraduatesList(iUserId);
         }
+        public List<Person> GetPersonList()
+        {
+            return Participant.GetPersonList();
+        }
+
+        public bool SetEventParticipant(bool isNew, int iStatusType, int iPersonId, int iEventId, int iUserId)
+        {
+            return Participant.SetEventParticipant(isNew, iStatusType, iPersonId, iEventId, iUserId);
+        }
+
+        //public bool SetEventParticipantList(Participant[] listParticipant, int iUserId)
+        //{
+        //    return Participant.SetEventParticipantList(listParticipant, iUserId);
+        //}
+
+        public bool SetEventParticipantList(Participant[] ParticipantList, int iUserId)
+        {
+            return Participant.SetEventParticipantList(ParticipantList, iUserId);
+        }
+
 
         #endregion
-
 
         #region Fileshandler
 
         public string GeneratPdf(string headerHtml, string bodyHtml, string footerHtml)
         {
             return Fileshandler.GeneratPdf(headerHtml, bodyHtml, footerHtml);
+        }
+        public bool DeleteFile(string fileName, string folderPath = "")
+        {
+            return Fileshandler.DeleteFile(fileName, folderPath);
         }
 
         #endregion
@@ -322,7 +444,65 @@ namespace Service
         {
             return SendMessagesHandler.SendEmailOrFax(from, to, subject, body, lAttach);
         }
+        #endregion
+        #region GlobalParameters
+
+        public bool SaveGlobalParameters(List<TGlobalParameters> GlobalParameters)
+        {
+            return TGlobalParameters.SaveGlobalParameters(GlobalParameters);
+        }
+
+        public List<TGlobalParameters> GetGlobalParameters()
+        {
+            return TGlobalParameters.GetGlobalParameters();
+        }
+
+
+        public bool UpdGlobalParameters(List<TGlobalParameters> GlobalParameters)
+        {
+            return TGlobalParameters.UpdGlobalParameters(GlobalParameters);
+        }
+        public bool InsGlobalParameters(List<TGlobalParameters> GlobalParameters)
+        {
+            return TGlobalParameters.InsGlobalParameters(GlobalParameters);
+        }
+
+
 
         #endregion
+
+
+
+        #region presenceAvrech
+
+
+
+
+        public List<PresenceAvrech> GetPresenceAvrechById(int iPersonId)
+        {
+            return PresenceAvrech.GetPresenceAvrechById(iPersonId);
+        }
+
+        public int SetPresence(PresenceAvrech presenceAvrech, int iUserId)
+        {
+            return PresenceAvrech.SetPresence(presenceAvrech, iUserId);
+        }
+
+        public bool DeletePresenceAvrech(int iPresenceAvrech, int iLastModifyUserId)
+        {
+            return PresenceAvrech.DeletePresenceAvrech(iPresenceAvrech, iLastModifyUserId);
+        }
+
+
+
+
+
+        #endregion
+
+        public string PrintToPDF(string body, string title, string nvFilePath = null)
+        {
+            return TGlobalParameters.PrintToPDF(body, title, nvFilePath);
+        }
     }
+
 }

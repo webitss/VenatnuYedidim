@@ -1,16 +1,22 @@
 
 <div class="row first-row">
                <div class="add-area"> 
-            <button class="btn-circle btn-add" (click)="addMeeting()"> הוספת פגישה +</button>
+            <button class="btn-circle btn-add" (click)="addMeeting()"> הוספת פגישה</button>
             </div>
             </div>
 
 
         <div *ngIf="meeting != null" class="meetingDetails">
-                <app-student-meeting-details [sysTableRowList]="sysTableRowList" [meeting]="meeting" (UpdateMeeting)="updateMeeting($event)" (NewMeeting)="newMeeting($event)" (Meeting)="close()"></app-student-meeting-details> 
+<!-- <div id="overlay"></div> -->
+               
+                <app-student-meeting-details [sysTableRowList]="sysTableRowList" [meeting]="meeting" (UpdateMeeting)="updateMeeting($event)" (NewMeeting)="newMeeting($event)" (Close)="close()"></app-student-meeting-details> 
              </div> 
 
  
-<!-- <div class="row"> -->
- <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="meetingList"  (clickCell)="editMeeting($event)"></app-vy-table>
-<!-- </div> -->
+<div class="main-table">
+ <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="meetingList" (clickCell)="click($event)"></app-vy-table>
+</div>
+
+
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; deleteMeeting(deleMeeting);"></app-vy-pop-up>
+

@@ -16,3 +16,25 @@ li{
     font-weight: 700;
 }
 
+.disabled {
+    cursor: not-allowed;
+}
+
+.disabled:hover {
+    background-color: #D9D9D9;
+    color: rgb(207, 37, 94);
+}
+.name-area {
+    /* margin: 20px; */
+    /* width: 100%; */
+    text-align: right;
+    margin:0px;
+    font-size: 25px;
+    height: 100%;
+    border-right-style: double;
+    border-right-width: thick;
+}
+.header>.navbar-expand-sm>.navbar-nav {
+    margin-right: -27px;
+   
+}

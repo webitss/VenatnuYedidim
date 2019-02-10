@@ -26,6 +26,12 @@ namespace Service.Entities
         public string nvComments { get; set; }
         [DataMember]
         public int iCreatedByUserId { get; set; }
+
+
+
+        [NoSendToSQL]
+        [DataMember]
+        public int iArrivalStatusType { get; set; }
         //[DataMember]
         //public DateTime? dtCreatedate { get; set; }
         //[DataMember]
@@ -37,11 +43,11 @@ namespace Service.Entities
 
         #endregion
 
-        public static List<Event1> GetEventsList(int? iUserId)
+        public static List<Event1> GetEventsList()
         {
             try
             {
-                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_SLCT", new SqlParameter("iUserId", iUserId)).Tables[0].Rows;
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_SLCT").Tables[0].Rows;
                 List<Event1> events = ObjectGenerator<Event1>.GeneratListFromDataRowCollection(drc);
                 return events;
             }
@@ -52,10 +58,27 @@ namespace Service.Entities
             }
         }
 
+        public static List<Event1> GetEventsByStudent(int iPersonId)
+        {
+            try
+            {
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_ByStudent_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
+                List<Event1> events = ObjectGenerator<Event1>.GeneratListFromDataRowCollection(drc);
+                return events;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetEventsByStudent / TEvent_ByStudent_SLCT", "ex" + ex);
+                return null;
+            }
+        }
+
         public static bool SetEvent(Event1 oEvent, int iUserId, List<TInt> to)
         {
             try
             {
+                bool isNew;
+                isNew = oEvent.iEventId == 0 ? true : false;
                 List<SqlParameter> parameters = new List<SqlParameter>();
                 parameters.Add(new SqlParameter("iEventId", oEvent.iEventId));
                 parameters.Add(new SqlParameter("nvName", oEvent.nvName));
@@ -66,15 +89,14 @@ namespace Service.Entities
                 parameters.Add(new SqlParameter("participantIds", ObjectGenerator<TInt>.GetDataTable(to)));
 
 
-                if(oEvent.iEventId!=0)
+                if(!isNew)
                     SqlDataAccess.ExecuteDatasetSP("TEvent_INS/UPD", parameters);
-                if (oEvent.iEventId == 0)
+                if (isNew)
                 {
                     User user = User.GetUser(iUserId);
                     DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TEvent_INS/UPD", parameters).Tables[0].Rows;
                     for (int i = 0; i < drc.Count; i++)
                     {
-
                         int iPersonId = int.Parse(drc[i]["iPersonId"].ToString());
                         string nvEmail = drc[i]["nvEmail"].ToString();
                         string body = "<b>הנך מוזמן ל" + oEvent.nvName +
@@ -87,7 +109,14 @@ namespace Service.Entities
                         {
                             from = ConfigSettings.ReadSetting("Email");
                         }
-                        SendMessagesHandler.SendEmailOrFax(from, nvEmail, oEvent.nvName, body, null);
+                        if(SendMessagesHandler.SendEmailOrFax(from, nvEmail, oEvent.nvName, body, null)==true)
+                        {
+                            List<SqlParameter> param = new List<SqlParameter>();
+                            param.Add(new SqlParameter("iEventId", drc[i]["iEventId"]));
+                            param.Add(new SqlParameter("iPersonId", iPersonId));
+                            param.Add(new SqlParameter("iStatusType", 34));  //סטטוס קיבל הודעה
+                            SqlDataAccess.ExecuteDatasetSP("TParticipantsUpdateArrivalStatus_UPD", param);
+                        }
                     }
                     //SendMessagesHandler.SendEmailOrFax()
                 }
@@ -114,6 +143,24 @@ namespace Service.Entities
             {
                 Log.LogError("GetEvent / TEvent_GetEvent_SLCT", "ex" + ex);
                 return null;
+            }
+        }
+
+
+        public static bool DeleteEvent(int? iEventId, int iUserId)
+        {
+            try
+            {
+                List<SqlParameter> sqlParameters = new List<SqlParameter>();
+                sqlParameters.Add(new SqlParameter("iEventId", iEventId));
+                sqlParameters.Add(new SqlParameter("iUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TEvent_DEL",sqlParameters );
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetEvent / TEvent_GetEvent_SLCT", "ex" + ex);
+                return false;
             }
         }
 

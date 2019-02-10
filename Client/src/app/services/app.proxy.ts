@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { debug } from "util";
 
 @Injectable()
 export class AppProxy {
@@ -16,13 +17,13 @@ export class AppProxy {
   constructor(private http: HttpClient) { }
 
   public post(url: string, data: any = {}): Promise<any> {
-
+  
     return this.http
       .post(`${AppProxy.getBaseUrl() + 'Service.svc/'}${url.trim()}`, this.convertData(data, true))
       .toPromise()
-      .then(data => { return this.convertData(data, false) })
+      .then(data => {if(data) return this.convertData(data, false); else return null;})
       .catch(error => {
-        alert('שגיאה בגישה לשרת');
+        //alert('שגיאה בגישה לשרת');
         // return Promise.reject(error)
       });
   }
@@ -33,7 +34,7 @@ export class AppProxy {
       .toPromise()
       .then(result => { return this.convertData(result, false) })
       .catch(error => {
-        alert('שגיאה בגישה לשרת');
+        //alert('שגיאה בגישה לשרת');
         // return Promise.reject(error) 
       });
   }

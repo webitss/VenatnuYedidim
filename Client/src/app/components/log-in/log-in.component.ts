@@ -5,6 +5,7 @@ import { AppComponent } from '../app/app.component';
 import { GlobalService } from '../../services/global.service';
 import { DialogService } from '../../services/dialog.service';
 import { Observable } from 'rxjs/Observable';
+import { User } from '../../classes/user';
 // import {GoogleCity} from '../../directives/googleCity';
 
 @Component({
@@ -18,23 +19,35 @@ export class LogInComponent implements OnInit {
 
   ngOnInit() {
     this.imgHeight = window.innerHeight;
-
+    
+    // if (JSON.parse(localStorage.getItem("user")) != null)
+    // this.router.navigate(['students']);
+    // else if ()
+    // {
+    //   this.router.navigate(['students']);
+    // }
   }
 
-  protected imgHeight: number;
+  public imgHeight: number;
 
   @Input()
-  protected nvUserName: string;
+  public nvUserName: string;
 
   @Input()
-  protected nvPassword: string;
+  public nvPassword: string;
 
 
   logIn() {
-    debugger
+    
     this.appProxy.post("Login", { nvUserName: this.nvUserName, nvPassword: this.nvPassword }).then(
       data => {
-        if (data != null) {
+       
+        if (data!=null) {
+         
+         
+          if((data as User).iPermissionId!=7){
+            
+           
           // this.user = data;
           data["iUserId"] = data.iPersonId;
           this.appComponent.instance.userName = data.nvUserName;
@@ -43,16 +56,32 @@ export class LogInComponent implements OnInit {
 
           this.router.navigate(['students']);
         }
-        else {
-          alert("שם משתמש או סיסמה שגויים!");
+        if((data as User).iPermissionId==7) 
+        {
+         
+         debugger;
+          
+          this.globalService.UserPermition=7;
+        
+          this.router.navigate(['/']);
+        
         }
+      }
+        else
+        {
+          this.globalService.UserPermition=0
+          this.router.navigate(['/']);
+        }
+      
+        
       })
-  };
+  }
+;
 
   canDeactivate() {
     if (this.globalService.getUser() != null)
       return true;
-    return false;// this.dialogService.confirm('Discard changes for Person?');
+    return false;
 
 
   }

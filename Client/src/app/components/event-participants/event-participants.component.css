@@ -1,0 +1,95 @@
+.settingParticipantDelete{
+    position: absolute;
+    z-index: 100;
+    width: 20%;
+    height: 100px;
+    background:rgb(238, 233, 233);
+    border:2px;
+    top:30%;
+    left: 500px;
+    position: rtl;
+}
+.addParticipants{
+    position: fixed;
+    z-index: 100;
+    top: 25%;
+    right: 40%;
+    background:white;
+    border: 2px;
+    width: 35%;
+    border: solid rgb(207, 37, 94);
+    /* position: absolute;
+    margin-top: -145px;
+    margin-bottom: 25%;
+    margin-right: 15%;
+    border: 1px solid rgb(207, 37, 94);
+    width: 35%;
+    height: 75%;
+    padding: 50px;
+    background-color: white;
+    z-index: 999; */
+
+   
+}
+
+.addParticipants .row{
+margin: 3%;
+}
+.row-first{
+    padding-right: 67%;
+}
+
+.item-to-select{
+    text-align: right;
+}
+.Student-affiliation{
+    font-weight: bold;
+    } 
+    
+    .my-div {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        height: 250px;
+        border: 1px gray solid;
+        width: 80%;
+        margin-bottom: 10%;
+    }
+    
+    .btn-close{
+          background-color: white;
+          border: 1px rgb(207, 37, 94) solid;
+          color: rgb(207, 37, 94);
+    }
+    
+    .btn-add
+    {
+    width: 45%; 
+    border: 1px solid rgb(207, 37, 94);
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
+    padding-top: 5px;
+    cursor: pointer;
+    color: rgb(207, 37, 94);
+    margin-bottom:2%; 
+    }
+    
+    
+    .open-list{
+        overflow-y: scroll;
+        height: 200px;
+    
+    }
+    button{
+        float: left;
+        border-radius:30px;
+        width:75px;
+        margin-left:10px;
+        color: white;
+        border: none;
+  }
+  .btn-close{
+        background-color: white;
+        border: 1px rgb(207, 37, 94) solid;
+        color: rgb(207, 37, 94);
+  }

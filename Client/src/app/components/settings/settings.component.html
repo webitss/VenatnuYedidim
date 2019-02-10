@@ -1,4 +1,4 @@
-<div class="navbar-collapse row">
+<!-- <div class="navbar-collapse row">
   <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('SettingsCodeTable') != -1}" class="tab col-sm-1">
     <a class="control" routerLink="settings-code-tables">טבלאות קוד</a>
   </div>
@@ -14,5 +14,46 @@
   <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentFrontend') != -1}" class="tab col-sm-1">
     <a class="control" routerLink="settings-frontend">תדמית</a>
   </div>
-</div>
+</div> -->
+
+
+<div class="content-area">
+  <div class="header row">
+  <nav class="navbar navbar-expand-sm nav header-navbar">
+      <ul class="navbar-nav navbar-list" *ngIf="currentComponent">
+          <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('SettingsCodeTable') != -1}" class="nav-item" routerLink="settings-code-tables">
+            <span class="fullTab">
+              טבלאות קוד
+                        </span>
+          </li>
+          <!-- <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('SettingsReports') != -1}" class="nav-item" routerLink="settings-reports">
+              <span class="fullTab">דוחו"ת
+
+              </span>
+            </li> -->
+            <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('SettingsYeshivot') != -1}" class="nav-item" routerLink="settings-yeshivot">
+                <span class="fullTab">
+                  מוסדות
+                </span>
+              </li><li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('SettingsDocuments') != -1}" class="nav-item" routerLink="settings-documents">
+                  <span class="fullTab">
+                    מסמכים
+                  </span>
+
+              </li>
+              <li  [ngClass]="{'select': currentComponent.constructor.name.indexOf('StudentFrontend') != -1}" class="nav-item" routerLink="settings-frontend">
+                <span class="fullTab">
+                  תדמית
+                </span>
+              </li>
+          </ul>
+
+
+
+  </nav>
+  <!-- <div class="btn-area">
+  <button class="btn-circle btn-save" (click)="save()">שמור v </button>
+  <button class="btn-circle btn-close" (click)="close()">סגור x </button>
+  </div> -->
+  </div>
 <router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>

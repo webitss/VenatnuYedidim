@@ -1,65 +1,128 @@
-<div class="form ">
+<div id="overlay"></div>
+<div class="form">
   <div class="row ">
     <div class="col-sm-8"></div>
     <div class="col-sm-4">
-      <button class="btn-circle btn-save" (click)="saveConversation()">שמור v </button>
-      <button class="btn-circle btn-close" (click)="cancel()">סגור x </button>
+      <button class="btn-circle btn-save" (click)="saveConversation()">שמור </button>
+      <button class="btn-circle btn-close" (click)="cancel()">סגור </button>
     </div>
   </div>
+
   <div class="content">
-    <div class="row ">
-      <div *ngIf="conversation && conversation.iConversationId!=null">
-        <h2>עריכה</h2>
-      </div>
-      <div *ngIf="conversation.iConversationId==null">
-        <h2>הוספה</h2>
-      </div>
-      <div class="row ">
-
-        <div class="form-group">
-          <label for="conversationType">סוג שיחה</label>
-          <!-- <input type="text" name="conversationType" class="form-control"  [(ngModel)]="conversation.nvConversationType" [ngModelOptions]="{standalone: true}"/>-->
-          <select id="conversationType" [(ngModel)]="conversation.iConversationType">
-            <option *ngFor='let t of sysTableList' [value]="t.iSysTableRowId">{{t.nvValue}}</option>
-          </select>
-        </div>
-        <br/>
-        <!-- <div class="form-group ">
-          <label for="conversationDate">תאריך</label>
-          <input type="date" name="conversationDate" class="form-control" [ngModel]="conversation.dConversationDate|date:'yyyy-MM-dd'"
-            (ngModelChange)="conversation.dConversationDate = $event" [ngModelOptions]="{standalone: true}" />
-        </div> -->
-
-
-        
-        <div class="form-group">
-          <label for="conversationDate">תאריך</label>
-          <input id="conversationDate" name="conversationDate" class="form-control" [(ngModel)]="currentConver.dConversationDate" ngui-datetime-picker
-            date-only="true" close-on-select="false" />
-        </div>
-
-        <div class="form-group">
-          <label for="conversationTime">שעה</label>
-          <input id="conversationTime" type="time" class="form-control" name="conversationTime" [(ngModel)]="currentConver.conversationTime"
-            [ngModelOptions]="{standalone: true}" />
-        </div>
-        <br/>
-        <br/>
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
         <div class="row">
-          <div class="form-group col-sm-12">
-            <label for="conversationSummary">סיכום</label>
-            <input id="conversationSummary" name="conversationSummary" type="text" class="form-control" [(ngModel)]="currentConver.nvConversationSummary"
-              [ngModelOptions]="{standalone: true}" />
+          <div *ngIf="conversation && conversation.iConversationId!=null">
+            <h2>עריכת שיחה</h2>
+          </div>
+          <div *ngIf="conversation.iConversationId==null">
+            <h2>שיחה חדשה</h2>
           </div>
         </div>
-        <div class="form-group">
-          <label for="nextConversationDate">תאריך שיחה הבאה</label>
-          <input id="nextConversationDate" name="nextConversationDate" class="form-control" [(ngModel)]="currentConver.dtNextConversationDate"
-            ngui-datetime-picker close-on-select="false" />
+        <div class="row">
+          <div class="form-group col-sm-3">
+            <label for="conversationType">סוג שיחה</label>
+            <!-- <input type="text" name="conversationType" class="form-control"  [(ngModel)]="conversation.nvConversationType" [ngModelOptions]="{standalone: true}"/>-->
+            <select id="conversationType" class="form-control" [(ngModel)]="conversation.iConversationType" required #type="ngModel">
+              <!-- <option [ngValue]="undefined" disabled>בחר</option> -->
+              <option *ngFor='let t of sysTableList' [value]="t.iSysTableRowId">{{t.nvValue}}</option>
+            </select>
+            <div *ngIf="type.invalid && (type.dirty || type.touched)">
+              <div *ngIf="(type.errors.required)" class="text-danger text-right">
+                <strong>! </strong>שדה נדרש</div>
+            </div>
+          </div>
+          <br/>
+          <div class="form-group col-sm-3">
+            <label for="conversationDate">תאריך</label>
+            <input id="conversationDate" name="conversationDate" class="form-control" [(ngModel)]="currentConver['dtDate']" ngui-datetime-picker
+              date-only="true" close-on-select="false" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" #date="ngModel" />
+
+            <span class="text-danger text-right" *ngIf="date.invalid&& (date.dirty || date.touched)">תאריך לא חוקי</span>
+            <div *ngIf="date.invalid && (date.dirty || date.touched)">
+              <div *ngIf="(date.errors.required)" class="text-danger text-right">
+                <strong>! </strong>שדה נדרש</div>
+            </div>
+          </div>
+
+
+          <div class="form-group col-sm-3">
+            <label for="conversationTime">שעה</label>
+            <input id="conversationTime" type="time" class="form-control" name="conversationTime" [(ngModel)]="currentConver['conversationTime']"
+              [ngModelOptions]="{standalone: true}" required #time="ngModel" />
+            <div *ngIf="time.invalid && (time.dirty || time.touched)">
+              <div *ngIf="(time.errors.required)" class="text-danger text-right">
+                <strong>! </strong>שדה נדרש</div>
+            </div>
+          </div>
+
+          <br/>
+          <br/>
         </div>
 
+        <div class="row col-sm-12">
+          <div class="form-group col-sm-10">
+            <label for="conversationSummary">סיכום</label>
+            <textarea id="conversationSummary" name="conversationSummary" class="form-control" [(ngModel)]="currentConver.nvConversationSummary"
+              [ngModelOptions]="{standalone: true}"></textarea>
+          </div>
+        </div>
+
+
       </div>
-      <app-task #task></app-task>
+      <div class=" col-sm-12">
+        <div *ngIf="conversation.iConversationId==null">
+          <div *ngIf="taskSelect==false" class="col-sm-8">
+            <input id="task" name="task" type="button" class="btn-circle btn-add" value="הוספת משימה" (click)="taskSelect=true" />
+          </div>
+          <div *ngIf="taskSelect==true">
+            <app-task #task></app-task>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="col-sm-1"></div>
   </div>
-  <!-- [type]="typeTask" -->
+  <!-- </div> -->
+
+
+
+
+  <!--   
+        <div class="row">
+        <div class="col-sm-1"></div>
+      <div class="content col-sm-10">
+          <div class="row">
+              <div *ngIf="meeting.iMeetingId">
+                <h3>עריכה </h3>
+              </div>
+              <div *ngIf="meeting.iMeetingId==null">
+                <h3>פגישה חדשה </h3>
+              </div>
+            </div>
+        <div class="row ">
+          <div class="form-group col-sm-3">
+            <label for="nvMeetingType">סוג פגישה</label>
+            <select [(ngModel)]="currentMeeting.iMeetingType">
+              <option *ngFor='let s of sysTableRowList' [value]="s.iSysTableRowId">
+                {{s.nvValue}}
+              </option>
+            </select>
+          </div>
+    <div class="form-group col-sm-3">
+        <label for="dtDate">תאריך:</label>
+          <input class="form-control" [(ngModel)]="currentMeeting.dtDate"  ngui-datetime-picker date-only="true" close-on-select="false" id="dtDate" name="dtDate">
+        </div>
+        
+          <div class="form-group col-sm-3">
+            <label for="time">שעה:</label>
+            <input type="time" class="form-control" id="time" name="time" [(ngModel)]="currentMeeting.dtHour " (ngModelChange)="meeting.dtHour = $event"  >
+          </div>
+    
+        </div>
+    
+   
+    
+    
+     -->

@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, forwardRef } from '@angular/core';
 import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { AppProxy } from '../../services/app.proxy';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Student } from '../../classes/student';
+import { AppComponent } from '../app/app.component';
 
 @Component({
   selector: 'app-graduates',
@@ -11,30 +12,27 @@ import { Student } from '../../classes/student';
 })
 export class GraduatesComponent implements OnInit {
 
-  
-  constructor(private appProxy: AppProxy, private router: Router,private route: ActivatedRoute ) { }
-  param:any;
+
+  constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
+  param: any;
   id: number;
   studentList: Student[];
-  @ViewChild('graduates') graduates:any;
+  @ViewChild('graduates') graduates: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   ngOnInit() {
-
-    
-  
     this.id = 0;
-
+    console.log("refresh...");
     this.appProxy.post('GetGraduatesList', { iUserId: this.id }).then(data => {
       this.studentList = data;
 
       this.studentList.forEach(
         st => {
-           st['edit'] = '<div class="edit"></div>'; 
-          })
-    }, err => { alert(err); });
+          st['edit'] = '<div class="edit"></div>';
+        })
+    }, err => { this._parent.openMessagePopup("שגיאה בשליפת הנתונים!"); });
 
 
-    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true,false));
+    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true, false));
     this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
     this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
     this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
@@ -42,12 +40,16 @@ export class GraduatesComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
     this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
 
-}
-downloadExcel(){
-  debugger;
-  this.graduates.downloadExcel();
-}
-tableToPdf(name:string){
-  this.graduates.downloadPdf(name,'pdf');
-    }
+  }
+  downloadExcel() {
+    debugger;
+    this.graduates.downloadExcel();
+  }
+  tableToPdf(name: string) {
+    this.graduates.downloadPdf(name, 'pdf');
+  }
+
+  editStudent(even) {
+    console.log(even);
+  }
 }

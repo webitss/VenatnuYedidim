@@ -1,3 +1,12 @@
-<p>
-  avrech-presence works!
-</p>
+<div>
+  <button (click)="addPresence()" class="btn-add btn-circle">הוספת נוכחות</button>
+</div>
+<div class="main-table">
+  <app-vy-table [lstColumns]="lstColumns" [lstDataRows]="lstDataRows" (clickCell)="click($event)"></app-vy-table>
+</div>
+<div class="openPresence" *ngIf="presence!=null">
+  <app-open-presence [presence]="presence" (closeMe)="closePresenceDialog($event,true)" (closeMeNoSave)="closePresenceDialog($event,false)"></app-open-presence>
+</div> 
+
+<app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false" (ok)="flagDelete=false; deletePres(deletPresence);"></app-vy-pop-up>
+
