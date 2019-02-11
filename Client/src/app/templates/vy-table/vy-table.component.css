@@ -4,7 +4,7 @@
     padding: 10px;
     text-align: right;
     word-wrap:break-word;
-    overflow-y: scroll;
+    overflow-y: auto;
 
 }
 
@@ -75,7 +75,7 @@ span.glyphicons.glyphicons-sort-by-alphabet-alt {
 }
 
 .col{
-  max-height: 50px;
+  /* max-height: 50px; */
 }
 
 .container {

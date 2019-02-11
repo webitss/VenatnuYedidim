@@ -6,6 +6,8 @@
 }
 body{
     direction: rtl;
+    height: 100%;
+    text-align: right;
 }
 .select{
     background-color: rgb(207, 37, 94);
@@ -51,18 +53,23 @@ outline: none;
     margin-left: 1%;
     
 }
-.btn-circle1{
-    width: 15%;
-    height: 60%;
+
+.btn-pink{
+    background-color: rgb(207, 37, 94);
     border-radius: 30px;
     color: white;
-   
+    border: #cf255e;
+    padding: .375rem 2rem;
+
 }
-.btn-pink{
-    background-color:  rgb(207, 37, 94);
-    margin-right: 10px;
-    /* margin-left: 80px; */
+
+.btn-pink:hover ,.btn-pink:focus ,.btn-pink:active{
+    background-color: rgb(207, 37, 94);
+    border: #cf255e;
+    outline:none;
+    color: white;
 }
+
 .iconPen{
     width: 5%;
     height: 5%;
@@ -71,6 +78,10 @@ outline: none;
 
 .btn-orange{
     background-color: orange;
+    border-radius: 30px;
+    color: white;
+    border: orange;
+    padding: .375rem 2rem;
 }
 .btn-circle{
     height: 80%;
@@ -212,7 +223,7 @@ outline: none;
     cursor: pointer;
 }
 .edit{
-    background-image: url("../src/assets/images/pencil.png");    
+    background-image: url("../src/assets/icons/pencil.png");    
 }
 .delete{
     background-image: url("../src/assets/icons/garbage.png");    
@@ -260,7 +271,8 @@ margin-top: 30px;
 }
 
 .main-page{
-    padding: 0 60px;
+    /* padding: 0 60px; */
+    width: 90%;
 }
 
 .main-table{

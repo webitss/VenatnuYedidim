@@ -2,18 +2,13 @@
 .background-logo { 
    /* background-image:  url("../../../assets/images/logo.jpg"); */
    background-color: rgba(220, 53, 69, 0.28);
-   position: absolute;
     /* background-position: center; */
     /* background-repeat: no-repeat; */
     /* background-size: cover; */
     width:100%;
-    height: 100%;
+    height: 100vh;
 }
-.my-div{
-    position: relative;
-    height: 80%;
-    /* margin-right: 5%; */
-}
+
  /* .small-logo{
     background-image: url("../../../assets/images/logo.jpg");
     background-position: center;
@@ -74,13 +69,7 @@
     background-repeat: no-repeat;
      background-size: unset !important;
 }
-.my-btn{
-    margin-left:30%;
-    margin-top:10%;
-    width:30%;
-    height: auto;
-    font-size: 1rem
-}
+
 h1, h5{
     text-align: center;
 }

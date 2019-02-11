@@ -21,12 +21,9 @@
               "src/favicon.ico"
             ],
             "styles": [
-              {
-                "input": "./node_modules/bootstrap/dist/css/bootstrap.min.css"
-              },
-              {
-                "input": "./node_modules/bootstrap-rtl/dist/css/bootstrap-rtl.min.css"
-              },"src/styles.css"
+             
+               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
              
             ],
             "scripts": [
