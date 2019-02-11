@@ -168,7 +168,7 @@ export class StudentConversationsComponent implements OnInit {
 
   }
   ngOnInit() {
-    debugger;
+    
     this.iUserId = this.globalService.getUser()['iUserId'];
     this.route.parent.params.subscribe(params => {
       this.iPersonId = +params['iPersonId'];

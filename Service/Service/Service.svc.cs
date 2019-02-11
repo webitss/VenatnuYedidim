@@ -283,9 +283,9 @@ namespace Service
         //{
         //    return Conversation.UpdateConversation(conversation, iPersonId);
         //}
-        public bool DeleteConversations(int iConversationId, int iPersonId)
+        public bool DeleteConversations(int iConversationId, int iUserId)
         {
-            return Conversation.DeleteConversation(iConversationId, iPersonId);
+            return Conversation.DeleteConversation(iConversationId, iUserId);
         }
 
         #endregion

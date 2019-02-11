@@ -28,7 +28,7 @@ export class StudentMeetingDetailsComponent implements OnInit {
   @Output()
   @Input()
   sysTableRowList: SysTableRow[];
-
+  addTask:string;
   minutes: string;
   hours: string;
   taskSelect: boolean;
@@ -40,6 +40,8 @@ export class StudentMeetingDetailsComponent implements OnInit {
     , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
+
+    this.addTask="הוספת";
     this.taskSelect = false;
 
     this.sub = this.route.parent.params.subscribe(params => {
@@ -92,7 +94,13 @@ export class StudentMeetingDetailsComponent implements OnInit {
     );
   }
  
-
+  change()
+  {
+    if(this.addTask=="הוספת")
+    this.addTask="הסר";
+    else
+    this.addTask="הוספת";
+  }
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

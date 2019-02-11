@@ -17,6 +17,8 @@ export class StudentConversationDetailsComponent implements OnInit {
   private sub: any;
   protected iUserId: number;
   protected iPersonId: number;
+
+  addTask:string;
   @Output()
   Conversation = new EventEmitter();
   typeTask: Task;
@@ -44,6 +46,8 @@ export class StudentConversationDetailsComponent implements OnInit {
     , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
+    this.addTask="הוספת";
+
     this.iUserId = this.globalService.getUser()['iUserId'];
     this.sub = this.route.parent.params.subscribe(params => {
       this.iPersonId = +params['iPersonId']
@@ -97,7 +101,13 @@ export class StudentConversationDetailsComponent implements OnInit {
 
 
 
-
+  change()
+  {
+    if(this.addTask=="הוספת")
+    this.addTask="הסר";
+    else
+    this.addTask="הוספת";
+  }
   reset() {
 
     this.currentConver.dtConversationDate.setDate(null);
