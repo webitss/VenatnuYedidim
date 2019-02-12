@@ -1,11 +1,6 @@
 <div class="row component-name-header">
-    <div class="actions col-5" style="position: absolute;left: 10%;">
-        <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
-        <button class="btn btn-small pdf" title="הורד pdf"></button>
-        <input type="button" value="ערך חדש" (click)="addNewValue()" class="btn btn-circle1 btn-pink" *ngIf="iSysTableId!=null" />
 
-    </div>
-    <div class="col-7" style="float: right; padding: 2%;" [ngClass]="{'bottom': showOverlap}">
+    <div class="col-7" [ngClass]="{'bottom': showOverlap}">
         <div class='row'>
             <label class="lbl col-6">בחר טבלה לעריכה</label>
             <div class="form-group col-6 ">
@@ -14,12 +9,15 @@
                     <option *ngFor="let name of tableNames" value={{name.iSysTableId}}>{{name.nvShowText}}</option>
                 </select>
             </div>
-
         </div>
-
-
         <!-- [(ngModel)]="Id" -->
 
+    </div>
+
+    <div class="actions">
+        <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
+        <button class="btn btn-small pdf" title="הורד pdf"></button>
+        <input type="button" value="ערך חדש" (click)="addNewValue()" class="btn btn-circle1 btn-pink" *ngIf="iSysTableId!=null" />
     </div>
 </div>
 
@@ -30,8 +28,7 @@
     <div class="col-sm-10 myTable" style="vertical-align: middle;">
 
         <!-- SysTableService -->
-        <app-vy-table style="vertical-align: middle;" #CodeTables [lstColumns]="lstColumns" [lstDataRows]="Values"
-            (clickCell)="editSysTableRow($event)"></app-vy-table>
+        <app-vy-table style="vertical-align: middle;" #CodeTables [lstColumns]="lstColumns" [lstDataRows]="Values" (clickCell)="editSysTableRow($event)"></app-vy-table>
 
     </div>
 </div>
@@ -51,25 +48,24 @@
 
 </div>
 
-<div class="form edit" *ngIf="toEdit">
-    <div class="row col-sm-12">
-        <div class="col-sm-8"></div>
-        <input type="button" value="סגור" (click)="close()" class="btn-circle btn-close" />
-        <input *ngIf='row.nvValue' type="button" value="שמור" (click)="saveEditValue()" class="btn-circle btn-save" />
-    </div>
-    <h3>עריכת ערך</h3>
+<div class="form dialog" *ngIf="toEdit">
+
+    <h4>עריכת ערך</h4>
     <div class='row'>
         <div _ngcontent-c10="" class="form-group col-sm-12 ">
             <label _ngcontent-c10="" class="pad-close pad-close">ערך *</label>
-            <input type="text" [(ngModel)]="row.nvValue" value={{row.nvValue}} class="form-control inp" required
-                [ngModelOptions]="{standalone: true}" />
+            <input type="text" [(ngModel)]="row.nvValue" value={{row.nvValue}} class="form-control inp" required [ngModelOptions]="{standalone: true}"
+            />
 
         </div>
     </div>
     <div class='row'>
         <label class='required-fields'>* שדה חובה</label>
     </div>
-    <!-- <label class='required-fields'>* שדה חובה</label> -->
+    <div>
+        <button *ngIf='row.nvValue' type="button" (click)="saveEditValue()" class="btn  btn-pink">שמור</button>
+        <button type="button" (click)="close()" class="btn  btn-pink mr-3">סגור</button>
+    </div>
 
 </div>
 

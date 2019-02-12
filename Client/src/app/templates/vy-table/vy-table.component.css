@@ -12,7 +12,7 @@
   background:  rgb(59, 45, 45);
   opacity: 0.9;
   color: #ccc;
-  border-bottom: 3px solid #cf255e;
+  border-bottom: 1px solid #cf255e;
  -moz-border-bottom-colors: #cf255e  rgb(207, 37, 94);
 }
 .even{
@@ -28,7 +28,22 @@
 }
 
 .vy-filter-search {
-  background:#eaecee url("./../../../assets/icons/search.png") left no-repeat;
+  /* background:#eaecee url("./../../../assets/icons/search.png") left no-repeat; */
+  border: 1px solid #cecece; 
+  font-family: 'VenatnuYedidim' !important; 
+  font-size: 1rem;
+}
+
+.vy-filter-search:after{
+  content: "\e90f";
+  font-family: 'VenatnuYedidim' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
 }
 span.glyphicons.glyphicons-sort-by-alphabet-alt {
   color: #eaecee;

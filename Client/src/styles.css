@@ -19,10 +19,10 @@ outline: none;
 }
 
 .ng-select .ng-select-container .ng-value-container .ng-placeholder {
-    float: right;
+    /* float: right; */
     color: #c87895;
-    font-size: 16px;
-    font-weight: bold; 
+    /* font-size: 16px;
+    font-weight: bold;  */
 }
 *:focus{
     outline: none;
@@ -47,14 +47,23 @@ outline: none;
     cursor: pointer;
 }
 .btn-small{
-    width: 4%;
-    height: 60%;
-    background-color: rgba(169, 169, 169, 0.37);
-    margin-left: 1%;
-    
+    font-size: 1.7rem;
+    border: none;
+    background: transparent;
+    position: relative;  
+}
+.btn-small~.btn-small:after {
+    background: #e0e0e0;
+    width: 1px;
+    height: 50%;
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 23%;
+
 }
 
-.btn-pink{
+.btn-pink, .btn-close,.btn-add{
     background-color: rgb(207, 37, 94);
     border-radius: 30px;
     color: white;
@@ -84,25 +93,22 @@ outline: none;
     padding: .375rem 2rem;
 }
 .btn-circle{
-    height: 80%;
+   /*  height: 80%;
     width: 40%;
-    /* float: left; */
+    float: left; 
     border: 1px solid rgb(207, 37, 94);
     border-radius: 20px;
     text-align: center;
     text-decoration: none;
     padding-top: 5px;
-    cursor: pointer;
+    cursor: pointer;*/
 }
 .btn-save{
     background-color: rgb(207, 37, 94);
     color:white;
     margin-left: 1%;
 }
-.btn-close,.btn-add{
-    background-color:white ;
-    color:rgb(207, 37, 94);
-}
+
 .form-control{
     border-radius: 0px;
     border: 0px;
@@ -110,17 +116,14 @@ outline: none;
 }
 .form-group>label
 {
-    float: right;
+    /* float: right; */
     color: #c87895;
-    font-size: 12px;
-    font-weight: bold;
+    /* font-size: 12px; */
+    /* font-weight: bold; */
 }
 .required-fields
 {
-    float: right;
     color: #fa005a;
-    font-size: 16px;
-    font-weight: bolder;
 }
 
 
@@ -206,35 +209,34 @@ outline: none;
 
 }
 .form-group{
-    width: 20%;
-    float: right;
-   
-    /* margin: auto; */
-     margin-left: 2%;
+/* width: 20%;
+   float: right;
+   margin: auto;
+   margin-left: 2%; */
     
 }
 
-.edit,.delete
+.edit, .delete ,.download
 {
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 30px;
-    height: 30px;
     cursor: pointer;
+    color: #cf255e;
+    font-size: 1.3rem;
+    text-align: center;
+    font-family: 'VenatnuYedidim' !important;
 }
-.edit{
-    background-image: url("../src/assets/icons/pencil.png");    
+
+.edit::before{
+    content: "\e917";
+    /* background-image: url("../src/assets/icons/pencil.png");     */
 }
-.delete{
-    background-image: url("../src/assets/icons/garbage.png");    
+
+.delete::before{
+    /* background-image: url("../src/assets/icons/garbage.png");     */
+    content: "\e900";
 }
-.download{
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    background-image: url("../src/assets/icons/download.png");
+.download::before{
+    /* background-image: url("../src/assets/icons/download.png"); */
+    content: "\e904";
 }
 .avrechim{
     float: right;
@@ -265,9 +267,9 @@ margin-top: 30px;
     
 }
 .excel{
-    background-image: url("../src/assets/icons/file-excel.svg");    
+    /* background-image: url("../src/assets/icons/file-excel.svg");    
     background-repeat: no repeat;
-    background-size: contain;
+    background-size: contain; */
 }
 
 .main-page{
@@ -309,5 +311,5 @@ height: 650px;
     position: absolute;
 }
 .pdf{
-    background-image: url(assets/icons/pdf.png);
+    /* background-image: url(assets/icons/pdf.png); */
 }
