@@ -42,17 +42,18 @@ export class StudentMeetingDetailsComponent implements OnInit {
     , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
-    this.appProxi.post("GetAllAvrechimByStudent", { iPersonId: 39 }).then(
-      data => {
-        this.avrechByStuden = data;
-      },
-    );
+    
     // this.avrechByStuden
     this.addTask="הוספת";
     this.taskSelect = false;
 
     this.sub = this.route.parent.params.subscribe(params => {
       this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
+      this.appProxi.post("GetAllAvrechimByStudent", { iPersonId:this.iPersonId }).then(
+        data => {
+          this.avrechByStuden = data;
+        },
+      );
     });
     if(this.meeting.iMeetingId==null)
     {
