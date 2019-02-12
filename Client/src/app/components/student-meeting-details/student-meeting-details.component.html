@@ -52,10 +52,10 @@
         </div>
         <div class=" col-sm-12">
           <div *ngIf="meeting.iMeetingId==null">
-            <div *ngIf="taskSelect==false" class="col-sm-8">
-              <button class="btn-circle btn-add " (click)="taskSelect=true">הוספת משימה</button>
+            <div class="col-sm-8">
+              <button class="btn-circle btn-add " (click)="taskSelect=!taskSelect " (click)="change()">{{addTask}} משימה</button>
             </div>
-            <div *ngIf="taskSelect==true">
+            <div *ngIf="taskSelect==true"class=" col-sm-12">
               <app-task #task></app-task>
             </div>
           </div>

@@ -553,7 +553,7 @@ RequestFormat = WebMessageFormat.Json)]
 		BodyStyle = WebMessageBodyStyle.WrappedRequest,
 		ResponseFormat = WebMessageFormat.Json,
 		RequestFormat = WebMessageFormat.Json)]
-		bool DeleteConversations(int iConversationId, int iPersonId);
+		bool DeleteConversations(int iConversationId, int iUserId);
 
 
 		#endregion Conversation

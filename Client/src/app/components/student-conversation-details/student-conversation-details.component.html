@@ -73,10 +73,10 @@
       </div>
       <div class=" col-sm-12">
         <div *ngIf="conversation.iConversationId==null">
-          <div *ngIf="taskSelect==false" class="col-sm-8">
-            <input id="task" name="task" type="button" class="btn-circle btn-add" value="הוספת משימה" (click)="taskSelect=true" />
+          <div class="col-sm-8">
+            <input id="task" name="task" type="button" class="btn-circle btn-add" value="{{addTask}} משימה" (click)="taskSelect=!taskSelect"(click)="change()" />
           </div>
-          <div *ngIf="taskSelect==true">
+          <div *ngIf="taskSelect==true"class="col-sm-8">
             <app-task #task></app-task>
           </div>
         </div>
