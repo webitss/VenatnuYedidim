@@ -188,9 +188,26 @@ namespace Service.Entities
 
 
 		}
+        public static List<Avrech> GetAllAvrechimByStudent(int iPersonId)
+
+        {
+            try
+            {
+               DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrech_GetAvrechimOfStudent_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
+                List<Avrech> avrech = ObjectGenerator<Avrech>.GeneratListFromDataRowCollection(drc);
+                return avrech;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetAllAvrechimByStudent", ", ex " + ex);
+                return null;
+            }
 
 
-	}
+        }
+        
+
+    }
 }
 
        

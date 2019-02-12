@@ -186,7 +186,6 @@ namespace Service
 
         #region Avrech
 
-
         public List<Avrech> GetAllAvrechim(int? iPersonId)
         {
             return Avrech.GetAllAvrechim(iPersonId);
@@ -233,6 +232,10 @@ namespace Service
             return Avrech.MailToAvrechim(mailList, subject, body);
         }
 
+        public List<Avrech> GetAllAvrechimByStudent(int iPersonId)
+        {
+            return Avrech.GetAllAvrechimByStudent(iPersonId);
+        }
         #endregion
 
 
@@ -502,6 +505,11 @@ namespace Service
         public string PrintToPDF(string body, string title, string nvFilePath = null)
         {
             return TGlobalParameters.PrintToPDF(body, title, nvFilePath);
+        }
+
+        Avrech IService.GetAllAvrechimByStudent(int iPersonId)
+        {
+            throw new NotImplementedException();
         }
     }
 

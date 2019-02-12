@@ -40,6 +40,7 @@ export class StudentMeetingsComponent implements OnInit {
   {name: 'edit',bClickCell: true,type: 'html'},
   {name: 'delete',bClickCell: true,type: 'html'},
   {title: 'סוג פגישה',name: 'nvMeetingType',},
+  {title: 'שם אברך',name: 'IAvrechId',},
   {title: 'תאריך',name: 'nvDate',},
   {title: 'שעה',name: 'nvHour'},
   {title: 'סיכום',name: 'nvSummary',}

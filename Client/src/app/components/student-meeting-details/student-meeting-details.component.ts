@@ -11,6 +11,7 @@ import { NguiDatetime } from '@ngui/datetime-picker';
 import { GlobalService } from '../../services/global.service';
 import { AppComponent } from '../app/app.component';
 import * as moment from 'moment';
+import { Avrech } from '../../classes/avrech';
 @Component({
   selector: 'app-student-meeting-details',
   templateUrl: './student-meeting-details.component.html',
@@ -28,6 +29,7 @@ export class StudentMeetingDetailsComponent implements OnInit {
   @Output()
   @Input()
   sysTableRowList: SysTableRow[];
+  avrechByStuden:Array<Avrech>;
   addTask:string;
   minutes: string;
   hours: string;
@@ -40,7 +42,12 @@ export class StudentMeetingDetailsComponent implements OnInit {
     , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
-
+    this.appProxi.post("GetAllAvrechimByStudent", { iPersonId: null }).then(
+      data => {
+        this.avrechByStuden = data;
+      },
+    );
+    // this.avrechByStuden
     this.addTask="הוספת";
     this.taskSelect = false;
 

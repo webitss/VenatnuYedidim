@@ -9,7 +9,7 @@
     iLastModifyUserId:number;
     dtLastModifyDate:Date;
     bSysRowStatus:boolean;    
-
+    iAvrechId:number;
 
     constructor(){
         this.dtMeetingDate=new Date();

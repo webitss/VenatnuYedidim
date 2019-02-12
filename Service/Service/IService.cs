@@ -274,14 +274,21 @@ namespace Service
 	   RequestFormat = WebMessageFormat.Json)]
 		bool MailToAvrechim(string[] mailList, string subject, string body);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetAllAvrechimByStudent",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        Avrech GetAllAvrechimByStudent(int iPersonId);
+
+        #endregion
 
 
-		#endregion
+        #region events
 
-
-		#region events
-
-		[OperationContract]
+        [OperationContract]
 		[WebInvoke(
 		Method = "POST",
 		UriTemplate = "SetEvent",
