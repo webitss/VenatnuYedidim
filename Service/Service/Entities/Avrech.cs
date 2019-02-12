@@ -193,7 +193,7 @@ namespace Service.Entities
         {
             try
             {
-               DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrech_GetAvrechimOfStudent_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows;
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechimBystudent_SLCT", new SqlParameter("iStudentId", iPersonId)).Tables[0].Rows;
                 List<Avrech> avrech = ObjectGenerator<Avrech>.GeneratListFromDataRowCollection(drc);
                 return avrech;
             }
