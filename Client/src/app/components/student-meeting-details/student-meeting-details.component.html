@@ -36,8 +36,8 @@
 
           <select class="form-control" [(ngModel)]="currentMeeting.iAvrechId">
             <option [ngValue]=null disabled>בחר</option>
-            <option *ngFor='let a of avrechByStuden' [value]="a.id">
-              {{s.text}}
+            <option *ngFor='let a of avrechByStuden' [value]="a.iPersonId">
+              {{a.nvFirstName+' '+a.nvLastName}}
             </option>
           </select>
         </div>
