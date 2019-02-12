@@ -117,6 +117,7 @@ export class StudentMeetingsComponent implements OnInit {
     m['edit'] = '<div class="edit"></div>';
     m['delete'] = '<div class="delete"></div>';
     m['nvMeetingType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)?this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0]?this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0].nvValue:'':'';
+    m['iAvrechId']=m.iAvrechId;
     this.meet = m;
   }
   GetMeetingsByStudentId(id: number) {

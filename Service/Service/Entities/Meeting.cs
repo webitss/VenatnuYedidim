@@ -18,6 +18,10 @@ namespace Service.Entities
         [DataMember]
         public int iPersonId { get; set; }
         [DataMember]
+        public int iAvrechId { get; set; }
+        [NoSendToSQL]
+        public string nvAvrechName { get; set; }
+        [DataMember]
         public int iMeetingType { get; set; }
         [DataMember]
         public DateTime dtMeetingDate { get; set; }
