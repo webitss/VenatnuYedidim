@@ -30,7 +30,7 @@ export class AvrechDiaryComponent implements OnInit {
   // protected currentComponent: any;
 
   // onRouterOutletActivate(event) {
-  //   debugger;
+  //     
   //   this.currentComponent = event;
   // }
   closeMe(){

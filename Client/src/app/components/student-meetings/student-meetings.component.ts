@@ -47,7 +47,7 @@ export class StudentMeetingsComponent implements OnInit {
   ]
 
   editMeeting(meeting: Meeting) {
-    debugger;
+     
     this.meeting = meeting;
     this.flag = 1;
   }
@@ -131,7 +131,7 @@ export class StudentMeetingsComponent implements OnInit {
 
 
         });
-        debugger;
+         
       }
     );
   }

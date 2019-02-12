@@ -70,7 +70,7 @@ export class ShowImageComponent implements OnInit {
 
         this.documents = data1;
         this.documents.forEach(element => {
-          debugger;
+           
 
 
           let head = AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName;
@@ -139,7 +139,7 @@ export class ShowImageComponent implements OnInit {
     //    this.settingsFrontend.GlobalMarchSF=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalVerMarch])[0],
 
     //  this.settingsFrontend.GlobalVerMarch=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalMarchSF])[0]
-    //  debugger;
+    //   
    
     // })
 
@@ -158,7 +158,7 @@ export class ShowImageComponent implements OnInit {
     this.appProxy.get('GetDocumentsOfTadmit').then(data => {
       this.documents = data;
       this.documents.forEach(element => {
-        //debugger;
+        // 
 
 
         let head = AppProxy.getBaseUrl() + '/Files/' + element.nvDocumentName;

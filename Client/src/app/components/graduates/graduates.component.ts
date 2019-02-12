@@ -42,7 +42,7 @@ export class GraduatesComponent implements OnInit {
 
   }
   downloadExcel() {
-    debugger;
+      
     this.graduates.downloadExcel();
   }
   tableToPdf(name: string) {

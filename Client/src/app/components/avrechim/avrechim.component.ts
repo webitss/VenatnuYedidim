@@ -92,7 +92,7 @@ export class AvrechimComponent implements OnInit {
   }
 
   downloadExcel(t = null) {
-    debugger;
+      
     this.avrechim.downloadExcel(t);
   }
   onRouterOutletActivate(event) {

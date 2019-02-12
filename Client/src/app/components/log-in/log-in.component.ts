@@ -59,7 +59,7 @@ export class LogInComponent implements OnInit {
         if((data as User).iPermissionId==7) 
         {
          
-         debugger;
+           
           
           this.globalService.UserPermition=7;
         

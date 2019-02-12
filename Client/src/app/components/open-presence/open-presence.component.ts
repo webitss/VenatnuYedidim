@@ -25,7 +25,7 @@ export class OpenPresenceComponent implements OnInit {
   @Input()
   currentPresence:PresenceAvrech;
   ngOnInit() {
-    debugger;
+     
     this.currentPresence=new PresenceAvrech();
     this.currentPresence=Object.assign({},this.presence);
     this.currentPresence['dtDate']=this.currentPresence.dtDatePresence;
@@ -42,7 +42,7 @@ export class OpenPresenceComponent implements OnInit {
   savePresence(){
     // this.presence.dtDatePresence = this.save.name;
     // this.document.nvDocumentType = this.save.type;
-debugger;
+ 
 this.currentPresence.dtDatePresence=this.currentPresence['dtDate'];
     this.appProxy.post('SetPresence', { presenceAvrech: this.currentPresence,iUserId:this.globalService.getUser()['iUserId']}).then(
       data => {

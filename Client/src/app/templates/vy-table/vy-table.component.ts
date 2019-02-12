@@ -147,7 +147,7 @@ export class VyTableComponent implements OnInit {
       table += "</tr>";
     });
     table + "</tbody></table>"
-    // debugger;
+    //  
     return table;
   }
 

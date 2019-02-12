@@ -42,7 +42,7 @@ export class StudentMeetingDetailsComponent implements OnInit {
     , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
-    this.appProxi.post("GetAllAvrechimByStudent", { iPersonId: null }).then(
+    this.appProxi.post("GetAllAvrechimByStudent", { iPersonId: 39 }).then(
       data => {
         this.avrechByStuden = data;
       },

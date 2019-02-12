@@ -59,7 +59,7 @@ export class SettingsCodeTableComponent implements OnInit {
 
     this.sysTableService.getValues(this.iSysTableId).then(data => {
       if (data) {
-        debugger;
+         
         this.Values = data as Array<SysTableRow>;
         this.Values.forEach(v => {
           v['edit'] = '<div class="edit"></div>';

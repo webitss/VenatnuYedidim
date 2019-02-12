@@ -29,7 +29,7 @@ export class settingsFrontend {
 updateGlobalParameters(GlobalParameters:Array<TGlobalParameters> ) : Promise<boolean>{
 
   
-  // debugger;
+  //  
   return  this.appProxy.post("UpdGlobalParameters", { GlobalParameters: GlobalParameters }).
       then(l => {
         if (l) {
@@ -52,5 +52,5 @@ setGlobalParameters(){
        this.GlobalVerMarch     =(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalVerMarch])[0]
        
        this.GlobalMarchSF=(<any>res).filter(r=>r.nvTitle==[GLOBAL.GlobalMarchSF])[0]
-    // debugger;
+    //  
 })}}

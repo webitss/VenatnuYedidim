@@ -71,7 +71,7 @@ export class SettingsFrontendComponent implements OnInit {
       this.settingsFrontend.GlobalHeader = (<any>res).filter(r => r.nvTitle == [GLOBAL.title])[0]
       this.settingsFrontend.GlobalVerMarch = (<any>res).filter(r => r.nvTitle == [GLOBAL.GlobalVerMarch])[0]
       this.settingsFrontend.GlobalMarchSF = (<any>res).filter(r => r.nvTitle == [GLOBAL.GlobalMarchSF])[0]
-      debugger;
+       
       this.GlobalHeader = this.settingsFrontend.GlobalHeader;
       this.GlobalMarchSF = this.settingsFrontend.GlobalMarchSF;
       this.GlobalVerMarch = this.settingsFrontend.GlobalVerMarch;
@@ -167,7 +167,7 @@ export class SettingsFrontendComponent implements OnInit {
     this.settingsFrontend.GlobalMarchSF.nvTitle = GLOBAL.GlobalMarchSF;
     this.settingsFrontend.GlobalMarchSF.nvValue = this.GlobalMarchSF.nvValue;
     this.GlobalParameters.push(this.settingsFrontend.GlobalMarchSF);
-    debugger;
+     
     this.settingsFrontend.GetGlobalParameters().then(res => {
 
       if ((<any>res).length > 0) {

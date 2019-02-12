@@ -41,13 +41,13 @@ export class AvrechPresenceComponent implements OnInit {
   ngOnInit() {
     this.sub = this.router.parent.params.subscribe(params => {
       this.iPersonId = +params["iPersonId"];
-      debugger;
+        
       this.loadPresences();
 
     });
   }
   loadPresences() {
-    debugger;
+      
     this.appProxy.post('GetPresenceAvrechById', { iPersonId: this.iPersonId }).then(res => {
       this.presences = res;
       this.presences.forEach(p => {
@@ -102,7 +102,7 @@ export class AvrechPresenceComponent implements OnInit {
   }
 
   editPresence(p: PresenceAvrech) {
-    debugger;
+      
      this.presence = p;
   }
   addPresence() {
