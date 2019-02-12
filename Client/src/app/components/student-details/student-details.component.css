@@ -7,9 +7,9 @@
 .imageStudent{
    
     background-color: #e6e4e4;
-    float: right;
+    /* float: right;
     height: 230px;
-    width: 223px;
+    width: 223px; */
     /* overflow: hidden; */
 }
 .image>img{
@@ -131,5 +131,6 @@ caption {
     vertical-align: middle;
     border-top: 0; 
 }
+
 
 

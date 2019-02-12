@@ -2,25 +2,24 @@
 
 
 <div class="background-logo">
-  <div class="col-sm-1"></div>
-  <div class="row col-sm-10 with-shadow">
-    <div class="col-sm-4"></div>
-    <div class="my-div col-sm-4">
+
+  <div class="mx-auto col-sm-10 with-shadow ">
+
+    <div class="col-sm-4 mx-auto d-flex flex-column align-items-center">
       <div class="small-logo">
         <img src="./assets/icons/logo.jpg" style='height: 239px;'>
       </div>
       <!-- <h1>ונתנו ידידים</h1>
       <h5>כולנו משפחה אחת</h5> -->
-      <div class="col-sm-1"></div>
-      <div class="row">
-        <input type="text" name="user-name" [(ngModel)]="nvUserName" class="form-control usr-input" placeholder="שם משתמש">
+
+      <input type="text" name="user-name" [(ngModel)]="nvUserName" class="form-control usr-input" placeholder="שם משתמש">
+
+      <input type="password" name="password" [(ngModel)]="nvPassword" class="form-control lock-input hide-password" passwordToggle
+        placeholder="סיסמה">
+
+      <div class="mt-4">
+        <button class="btn btn-primary btn-pink" (click)="logIn()">כניסה</button>
       </div>
-      <div class="col-sm-1"></div>
-      <div class="row">
-        <input type="password" name="password" [(ngModel)]="nvPassword" class="form-control lock-input hide-password" passwordToggle
-          placeholder="סיסמה">
-      </div>
-      <button class="btn btn-circle1 btn-pink my-btn" (click)="logIn()">כניסה</button>
     </div>
 
     <!-- <img src="./assets/icons/file-excel.svg" style='height: 100px;'> -->

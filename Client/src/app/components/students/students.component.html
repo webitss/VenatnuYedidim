@@ -1,12 +1,18 @@
 <div class=" row component-name-header">
     <div *ngIf="component=='/students'" class="col-sm-4 component-name">תלמידים</div>
     <div *ngIf="component=='/graduates'" class="col-sm-4 component-name">בוגרים</div>
-    <div class="actions col-sm-8">
-        <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
-        <button *ngIf="component=='/students'" class="btn btn-small pdf" title="הורד pdf" (click)="tableToPdf('תלמידים')"></button>
-        <button *ngIf="component=='/graduates'" class="btn btn-small pdf" title="הורד pdf" (click)="tableToPdf('בוגרים')"></button>
-        <button class="btn btn-circle1 btn-orange" (click)="flag=true"> איחוד כרטיסים</button>
-        <button *ngIf="component=='/students'" class="btn btn-circle1 btn-pink" routerLink="student/0/student-details">תלמיד
+    <div class="actions col-sm-8 d-flex align-items-center justify-content-end">
+        <button class="btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל">
+            <i class="icon-excel-file"></i>
+        </button>
+        <button *ngIf="component=='/students'" class="btn-small pdf" title="הורד pdf" (click)="tableToPdf('תלמידים')">
+            <i class="icon-pdf-file"></i>
+        </button>
+        <button *ngIf="component=='/graduates'" class="btn-small pdf" title="הורד pdf" (click)="tableToPdf('בוגרים')">
+            <i class="icon-pdf-file"></i>
+        </button>
+        <button class="btn btn-circle1 btn-orange ml-3" (click)="flag=true"> איחוד כרטיסים</button>
+        <button *ngIf="component=='/students'" class="btn-circle1 btn-pink" routerLink="student/0/student-details">תלמיד
             חדש</button>
     </div>
 </div>
@@ -23,11 +29,5 @@
 
 <app-vy-pop-up [isDouble]="true" [message]="message" *ngIf="flagDelete" [header]="header" (close)="flagDelete=false"
     (ok)="flagDelete=false; deleteStudent();"></app-vy-pop-up>
-
-
-
-
-
-
 
 <!-- </div> -->

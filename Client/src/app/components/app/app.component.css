@@ -12,9 +12,26 @@
 }
 .nav{
     box-shadow: #eae6e6 15px 5px 15px;
-    height: 65px;   
+    height: 75px;
     width: 100%;
     padding: 0%;
+}
+.nav::before{
+    height: 4px;
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+background: #ffa500; /* Old browsers */
+background: -moz-linear-gradient(left, #ffa500 0%, #cf255e 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #ffa500 0%,#cf255e 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #ffa500 0%,#cf255e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffa500', endColorstr='#cf255e',GradientType=1 ); /* IE6-9 */   
+
+}
+
+.nav img{
+    width: 68px;
 }
 .n{
     font-size: 15px;
@@ -23,29 +40,41 @@ ul{
     height: 100%;
 }
 li{
-    border: rgba(31, 0, 0, 0.185);
-    text-align: center;
     cursor: pointer;
-    height: 100%;
     width: 17%;
-    padding-top: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+li~li:after {
+    background: #eaeaea;
+    width: 1px;
+    height: 50%;
+    content: "";
+    position: absolute;
+    right: 0;
+
 }
 .valign{
-    background-color: #f3f3f3;
-    /* width: 305px; */
+   /* background-color: #f3f3f3;
+     width: 305px; 
     height: 66px;
     text-align: center;
     margin-top: 30;
     padding-top: 6%;
     padding-bottom: 0px;
-    padding-right: 39px;
+    padding-right: 39px;*/
+    background: #f5f6f7;
+    justify-content: center;
 }
 .valign span{
     color: rgb(207, 37, 94);
 }
-.valign img{
-    width: 50px;
-    height: 50px;
+.valign a{
+    color: rgb(207, 37, 94);
+    font-size: 1.5rem
 }
 .title img{
     width: 50px;
@@ -60,9 +89,9 @@ li{
     background-color: #b4b3b3;
 }
 .log-out{
-    background-color: #cf255e;
+    /* background-color: #cf255e;
     color: #ffffff;
     padding-left: 19px;
-    /* margin-right: auto; */
-    padding-right: 9px;
+    margin-right: auto; 
+    padding-right: 9px;*/
 }

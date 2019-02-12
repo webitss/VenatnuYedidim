@@ -1,8 +1,12 @@
 <div class=" row component-name-header">
     <div class="col-sm-4 component-name">משתמשים</div>
-    <div class="actions col-sm-8">
-        <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל"></button>
-        <button class="btn btn-small pdf" title="הורד pdf" (click)="tableToPdf('משתמשים')"></button>
+    <div class="actions col-sm-8 d-flex align-items-center justify-content-end">
+        <button class="btn-small excel" (click)="downloadExcel()" value="Export to Excel" title="יצא לאקסל">
+            <i class="icon-excel-file"></i>
+        </button>
+        <button class="btn-small pdf" title="הורד pdf" (click)="tableToPdf('משתמשים')">
+            <i class="icon-pdf-file"></i>
+        </button>
         <button class="btn btn-circle1 btn-pink" [class.btn-disabled]="globalService.getUser().iPermissionId != 5" [disabled]="globalService.getUser().iPermissionId != 5"
             routerLink="/users/user/0">משתמש חדש</button>
     </div>
