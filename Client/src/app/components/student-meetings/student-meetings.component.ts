@@ -40,7 +40,7 @@ export class StudentMeetingsComponent implements OnInit {
   {name: 'edit',bClickCell: true,type: 'html'},
   {name: 'delete',bClickCell: true,type: 'html'},
   {title: 'סוג פגישה',name: 'nvMeetingType',},
-  {title: 'שם אברך',name: 'IAvrechId',},
+  {title: 'שם אברך',name: 'avrechName',},
   {title: 'תאריך',name: 'nvDate',},
   {title: 'שעה',name: 'nvHour'},
   {title: 'סיכום',name: 'nvSummary',}
@@ -117,7 +117,7 @@ export class StudentMeetingsComponent implements OnInit {
     m['edit'] = '<div class="edit"></div>';
     m['delete'] = '<div class="delete"></div>';
     m['nvMeetingType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)?this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0]?this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0].nvValue:'':'';
-    m['iAvrechId']=m.iAvrechId;
+    m['avrechName']=m.avrechName;
     this.meet = m;
   }
   GetMeetingsByStudentId(id: number) {

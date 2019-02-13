@@ -10,7 +10,7 @@
     dtLastModifyDate:Date;
     bSysRowStatus:boolean;    
     iAvrechId:number;
-    nvAvrechName:string;
+    avrechName:string;
     constructor(){
         this.dtMeetingDate=new Date();
     }
