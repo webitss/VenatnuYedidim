@@ -92,6 +92,7 @@ export class StudentMeetingDetailsComponent implements OnInit {
 
           // alert("השמירה בוצעה בהצלחה");
           this._parent.openMessagePopup('השמירה בוצעה בהצלחה!');
+          // this.currentMeeting.iAvrechId=
           this.Close.emit(null);
         }
         else
