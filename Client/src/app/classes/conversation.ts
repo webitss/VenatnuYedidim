@@ -9,7 +9,7 @@ export class Conversation {
 
     public nvConversationSummary: string;
     //public dtNextConversationDate:Date;
-
+    public iAvrechId: number;
     constructor() {
         this.dtConversationDate = new Date();
         //this.dtNextConversationDate=new Date();

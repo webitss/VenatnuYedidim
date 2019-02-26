@@ -8,6 +8,8 @@ import { TaskComponent } from '../task/task.component';
 import { GlobalService } from '../../services/global.service';
 import { AppComponent } from '../app/app.component';
 import * as moment from 'moment';
+import { Avrech } from '../../classes/avrech';
+import { Meeting } from '../../classes/meeting';
 @Component({
   selector: 'app-student-conversation-details',
   templateUrl: './student-conversation-details.component.html',
@@ -17,7 +19,8 @@ export class StudentConversationDetailsComponent implements OnInit {
   private sub: any;
   protected iUserId: number;
   protected iPersonId: number;
-
+  public avrechByStuden:Array<Avrech>=new Array<Avrech>();
+  currentMeeting: Meeting;
   addTask:string;
   @Output()
   Conversation = new EventEmitter();
@@ -46,6 +49,13 @@ export class StudentConversationDetailsComponent implements OnInit {
     , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
+    this.currentMeeting=new Meeting();
+    // this.sub = this.route.parent.params.subscribe(params => {
+    //   this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
+    
+    // });
+
+
     this.addTask="הוספת";
 
     this.iUserId = this.globalService.getUser()['iUserId'];
@@ -59,6 +69,14 @@ export class StudentConversationDetailsComponent implements OnInit {
       this.currentConver['dtDate'] = new Date(this.currentConver.dtConversationDate);
       this.currentConver['conversationTime'] =moment(this.currentConver.dtConversationDate).format('HH:mm');
     })
+    this.appProxy.post("GetAllAvrechimByStudent", { iPersonId:this.iPersonId }).then(
+      data => {
+        this.avrechByStuden = data; 
+        // this.a=this.avrechByStuden;
+         this.conver.iAvrechId=this.avrechByStuden[1].iPersonId;
+        // this.currentMeeting.avrechName=this.avrechByStuden[1]
+      },
+    );
   }
   cancel() {
     this.Conversation.emit(null);

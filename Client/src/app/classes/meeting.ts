@@ -11,6 +11,7 @@
     bSysRowStatus:boolean;    
     iAvrechId:number;
     avrechName:string;
+   
     constructor(){
         this.dtMeetingDate=new Date();
     }

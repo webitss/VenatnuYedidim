@@ -9,6 +9,7 @@ import { element } from 'protractor';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { GlobalService } from '../../services/global.service';
 import { AppComponent } from '../app/app.component';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 
 
@@ -31,7 +32,7 @@ export class StudentMeetingsComponent implements OnInit {
   header = 'מחיקת פגישה';
   message = '';
   deleMeeting: Meeting;
-
+@ViewChild('StudentMeetingDetailsComponent') StudentMeetingDetailsComponent:StudentMeetingDetailsComponent;
   constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private globalService: GlobalService,
     @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
@@ -110,14 +111,17 @@ export class StudentMeetingsComponent implements OnInit {
 
     
   }
-
+  // avrechName:any;
   changeTable(m: Meeting) {
+    this.StudentMeetingDetailsComponent=new StudentMeetingDetailsComponent(this.route,this.appProxy,this.globalService,this._parent);
     m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
     m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
     m['edit'] = '<div class="edit"></div>';
     m['delete'] = '<div class="delete"></div>';
     m['nvMeetingType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)?this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0]?this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0].nvValue:'':'';
+    m['iAvrechId']=m.iAvrechId;
     m['avrechName']=m.avrechName;
+    //  m['avrechName']=this.StudentMeetingDetailsComponent.avrechByStuden.find(a=>a.iPersonId==m.iAvrechId).nvLastName;
     this.meet = m;
   }
   GetMeetingsByStudentId(id: number) {
@@ -141,7 +145,7 @@ export class StudentMeetingsComponent implements OnInit {
     this.sub = this.route.parent.params.subscribe(params => {
       this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
     });
-
+   
     this.GetMeetingsByStudentId(this.iPersonId);
   }
   ngOnDestroy() {
