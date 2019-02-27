@@ -85,7 +85,7 @@ export class ShowImageComponent implements OnInit {
               });
 
             })
-            .catch(error => { });
+            .catch(error => {console.log(error) });
 
 
 
@@ -175,7 +175,7 @@ export class ShowImageComponent implements OnInit {
 
           )
 
-          .catch(error => { });
+          .catch(error => { console.log(error)});
 
 
 
