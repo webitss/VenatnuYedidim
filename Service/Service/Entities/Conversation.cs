@@ -18,6 +18,8 @@ namespace Service.Entities
         [DataMember]
         public int iPersonId { get; set; }
         [DataMember]
+        public int iAvrechId { get; set; }
+        [DataMember]
         public int iConversationId { get; set; }
 
         [DataMember]
@@ -79,7 +81,7 @@ namespace Service.Entities
              
                 return id;
 
-
+               
 
             }
             catch (Exception ex)
@@ -141,6 +143,23 @@ namespace Service.Entities
                 Log.LogError("DeleteConversation / TConversation_DEL", "ex" + ex);
                 return false;
             }
-        }       
+        }
+        public static List<Avrech> GetAllConversation(int iPersonId)
+
+        {
+            try
+            {
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechimBystudent_SLCT", new SqlParameter("iStudentId", iPersonId)).Tables[0].Rows;
+                List<Avrech> avrech = ObjectGenerator<Avrech>.GeneratListFromDataRowCollection(drc);
+                return avrech;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetAllAvrechimByStudent", ", ex " + ex);
+                return null;
+            }
+
+
+        }
     }
 }

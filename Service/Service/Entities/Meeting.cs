@@ -19,8 +19,9 @@ namespace Service.Entities
         public int iPersonId { get; set; }
         [DataMember]
         public int iAvrechId { get; set; }
+        [DataMember]
         [NoSendToSQL]
-        public string nvAvrechName { get; set; }
+        public string avrechName { get; set; }
         [DataMember]
         public int iMeetingType { get; set; }
         [DataMember]
