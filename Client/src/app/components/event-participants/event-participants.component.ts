@@ -66,8 +66,30 @@ export class EventParticipantsComponent implements OnInit {
     this.listToSelect = [];
     this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
       if (res.length > 0) {
-        this.participantList = res;
-        this.lstDataRows = res;
+        res.forEach(p => {
+          let nvArriveStatusType = this.sysTableRowList.filter(s => s.iSysTableRowId == (p.lstObject ? p.lstObject.iArrivalStatusType : p.iArrivalStatusType));
+          let iArriveStatusType = nvArriveStatusType && nvArriveStatusType[0] ? nvArriveStatusType[0].nvValue : ''
+    
+          // this.participant.forEach(p => {
+          this.lstDataRows.push({
+            delete: '<div class="delete"></div>',
+            iEventId: p.iEventId,
+            nvFirstName: p.nvFirstName,
+            nvLastName: p.nvLastName,
+            nvPhone: p.nvPhone,
+            nvMobile: p.nvMobile,
+            nvEmail: p.nvEmail,
+            nvParticipantType: p.lstObject ? p.lstObject.nvParticipantType : p.nvParticipantType,
+            iArriveStatusType: iArriveStatusType,
+            iPersonId: p.iPersonId
+            // iArriveStatusType: '<select> <option>j,k</option><option>ughjk</option></select>'
+            // iArriveStatusType:'<button>fgd</button>'
+            // iArriveStatusType: this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType) &&
+            //   this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0] ? this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0].nvValue : ''
+          });
+        });
+        // this.participantList = res;
+        // this.lstDataRows = res;
       }
 
       this.appProxy.post("GetPersonList").then(
@@ -126,6 +148,7 @@ export class EventParticipantsComponent implements OnInit {
           this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
           this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
             if (res.length > 0) {
+             
               this.participantList = res;
               this.lstDataRows = res;
             }

@@ -177,8 +177,6 @@ export class ShowImageComponent implements OnInit {
 
           .catch(error => { });
 
-
-
       });
     })
 

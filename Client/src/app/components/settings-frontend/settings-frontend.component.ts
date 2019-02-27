@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Document } from '../../classes/document';
 import { SysTableService } from '../../services/sys-table.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { HttpClient, HttpRequest, HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-settings-frontend',
@@ -60,7 +61,8 @@ export class SettingsFrontendComponent implements OnInit {
     private globalService: GlobalService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private sysTableService: SysTableService
+    private sysTableService: SysTableService,
+    private http: HttpClient
   ) { }
   flag:boolean=false;
   message:any='';
@@ -187,6 +189,43 @@ export class SettingsFrontendComponent implements OnInit {
 
   }
 
+  selectedFile: File
 
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0]
+  }
 
+  // onUpload() {
+  //   this.appProxy.post('my-backend.com/file-upload',{ uploadData, 
+  //     reportProgress: true,
+  //     observe: 'events'
+  //   })
+  //     .subscribe(event => {
+  //       console.log(event); // handle event here
+  //     });
+  // }
+
+  // public progress: number;
+  // public message1: string;
+  
+  // upload(files) {
+  //   if (files.length === 0)
+  //     return;
+
+  //   const formData = new FormData();
+
+  //   for (let file of files)
+  //     formData.append(file.name, file);
+
+  //   const uploadReq = new HttpRequest('POST', `api/upload`, formData, {
+  //     reportProgress: true,
+  //   });
+
+  //   this.http.request(uploadReq).subscribe(event => {
+  //     if (event.type === HttpEventType.UploadProgress)
+  //       this.progress = Math.round(100 * event.loaded / event.total);
+  //     else if (event.type === HttpEventType.Response)
+  //       this.message1 = event.body.toString();
+  //   });
+  // }
 }
