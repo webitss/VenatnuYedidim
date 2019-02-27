@@ -29,13 +29,14 @@
 
         </nav>
         <!-- isDisabled() -->
-        <div class="col-2">
+        <div class="col-1">
 
         <button *ngIf="currentComponent.constructor.name.indexOf('EventDetails')!=-1" class="btn-circle btn-save" [ngClass]="{'disabled': !isDisabled() }" (click)="save()" [disabled]="!isDisabled()">שמור  </button>
+         </div><div class="col-1">
             <button class="btn-circle btn-close" routerLink="/events">סגור  </button>
         </div>
         <div class="name-area col-3">{{header}}</div>
-    </div>
+   
 
     <!-- <div class="navbar-collapse row">
     <div  [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventDetails') != -1}" class="tab col-sm-1">

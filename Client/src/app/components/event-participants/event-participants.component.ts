@@ -82,10 +82,6 @@ export class EventParticipantsComponent implements OnInit {
             nvParticipantType: p.lstObject ? p.lstObject.nvParticipantType : p.nvParticipantType,
             iArriveStatusType: iArriveStatusType,
             iPersonId: p.iPersonId
-            // iArriveStatusType: '<select> <option>j,k</option><option>ughjk</option></select>'
-            // iArriveStatusType:'<button>fgd</button>'
-            // iArriveStatusType: this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType) &&
-            //   this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0] ? this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0].nvValue : ''
           });
         });
         // this.participantList = res;
