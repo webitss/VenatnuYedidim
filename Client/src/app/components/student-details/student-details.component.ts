@@ -11,6 +11,7 @@ import { AppComponent } from '../app/app.component';
 import { LetterEbrew } from '../../classes/LetterEbrew';
 import { NgForm } from '../../../../node_modules/@angular/forms';
 import { KeyValue } from '../../classes/key-value';
+import { Avrech } from 'src/app/classes/avrech';
 
 @Component({
   selector: 'app-student-details',
@@ -43,6 +44,7 @@ export class StudentDetailsComponent implements OnInit {
   yeshivaList: Yeshiva[];
   yeshivaListOfStudent: Yeshiva[];
   yeshivaSelected: Yeshiva;
+  avrechList:Avrech[];
   currentUser: number;
   days: string[] = ["א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב", "יג", "יד", "טו", "טז", "יז", "יח", "יט", "כ", "כא", "כב", "כג", "כד", "כה", "כו", "כז", "כח", "כט", "ל"];
   monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
@@ -111,6 +113,7 @@ export class StudentDetailsComponent implements OnInit {
     // this.addYeshivaToStudent.iYeshivaId
 
     this.currentUser = this.globalService.getUser().iPersonId;
+    this.appProxy.post("GetAllAvrechim").then(date => { this.avrechList = date; })
 
     this.appProxy.post("GetAllYeshivot").then(date => { this.yeshivaList = date; })
 

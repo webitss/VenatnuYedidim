@@ -395,6 +395,13 @@
     
     
                 </div> -->
+                <div class="form-group col-sm-3">
+                    <label for="yeshivaName">שיוך לאברך :</label>
+                    <select class="form-control" id="avrechId" name="avrechName" (change)="selectYesh($event)">
+                         <option> בחר אברך </option>
+                        <option *ngFor="let av of avrechList" placeholder="בחר אברך">{{av.nvFirstName}}</option>
+                    </select>
+                </div>
 
 
                 <div class="col-sm-12">

@@ -29,6 +29,8 @@ namespace Service.Entities
         [DataMember]
         public bool? bDeathMother { get; set; }
         [DataMember]
+        public string Avrech { get; set; }
+        [DataMember]
         public string iCauseOfDeathFather { get; set; }
         [DataMember]
         public string iCauseOfDeathMother { get; set; }

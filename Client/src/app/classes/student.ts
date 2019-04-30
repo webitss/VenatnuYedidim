@@ -1,4 +1,5 @@
 import { Person } from "./person";
+import { Avrech } from './avrech';
 
 export class Student implements Person {
 
@@ -27,6 +28,7 @@ export class Student implements Person {
     public dtAddStudentDate: Date= new Date();
     public nvComment: string=null;
     public iStatusType:number=null;
+    public avrech:Avrech=null;
 
     public fDays:number;
     public fMonthes:number;
