@@ -205,7 +205,24 @@ namespace Service.Entities
 
 
         }
-        
+        //public static bool AddAvrechToStudent(int iStudentId, int iAvrechId, int iUserId)
+        //{
+        //    try
+        //    {
+        //        List<SqlParameter> parameters = new List<SqlParameter>();
+        //        parameters.Add(new SqlParameter("iStudentId", iStudentId));
+        //        parameters.Add(new SqlParameter("iAvrechId", iAvrechId));
+        //        parameters.Add(new SqlParameter("iUserId", iUserId));
+        //        SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_INS", parameters);
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.LogError("AddAvrechToStudent / TAvrechStudents_INS", "ex" + ex);
+        //        return false;
+        //    }
+        //}
+
 
     }
 }

@@ -107,15 +107,13 @@ namespace Service.Entities
 		{
 			try
 			{
-
                 List<int> studentsId = new List<int>();
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_SLCT").Tables[0].Rows;
                 foreach (DataRow row in drc)
                 {
                     studentsId.Add(int.Parse(row["iStudentId"].ToString()));
                 }
-                return studentsId;
-                
+                return studentsId;                
 			}
 			catch (Exception ex)
 			{
@@ -175,7 +173,7 @@ namespace Service.Entities
         }
 
 
-       public static bool AddStudent(Student student, string base64Image, int iUserId)
+       public static bool AddStudent(Student student, string base64Image, int iUserId, int iAvrechId)
         {
             try
 			{
@@ -184,7 +182,12 @@ namespace Service.Entities
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
                 SqlDataAccess.ExecuteDatasetSP("TStudent_INS", parameters);
-
+                List<SqlParameter> parameters2 = new List<SqlParameter>();
+                parameters2.Add(new SqlParameter("iStudentId", student.iPersonId));
+                parameters2.Add(new SqlParameter("iAvrechId", iAvrechId));
+                parameters2.Add(new SqlParameter("iUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_INS", parameters);
+                return true;
                 return true;
             }
             catch (Exception ex)

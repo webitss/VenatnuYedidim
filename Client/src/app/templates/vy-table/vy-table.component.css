@@ -7,7 +7,14 @@
     overflow-y: auto;
 
 }
-
+.cell .edit{
+  background-color: green;
+  width:50%;
+}
+.edit::parent{
+  background-color: green;
+  width:50%;
+}
 .cell-title,small-title{
   background:  rgb(59, 45, 45);
   opacity: 0.9;

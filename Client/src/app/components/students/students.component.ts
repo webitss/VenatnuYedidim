@@ -34,7 +34,7 @@ export class StudentsComponent implements OnInit {
   id: number;
   studentList: Student[];
   yeshivaList: Yeshiva[];
-  studentsAssociatedToAvrech: number[];
+  studentsAssociatedToAvrech:Map<number,number> ;
   avrechimListOfStudent: Avrech[];
   currentYeshivaOfStudent: Map<number, string>;
   private alert: any;
@@ -47,14 +47,18 @@ export class StudentsComponent implements OnInit {
     if (this.component == '/students') {
       this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
         this.studentList = data;
+        debugger;
         this.appProxy.get("GetStudentsAssociatedToAvrechim").then(data => {
+          debugger;
           this.studentsAssociatedToAvrech = data;
           this.appProxy.get("GetCurrentYeshivaOfStudent").then(data => {
             this.currentYeshivaOfStudent = data;
             this.studentList.forEach(student => {
               //  
-              if (this.studentsAssociatedToAvrech.filter(x => x == student.iPersonId).length > 0)
-                student['nvAssociated'] = '<span>כן</span>';
+              // if (this.studentsAssociatedToAvrech.filter(x => x. == student.iPersonId).length > 0)
+              // this.appProxy.post('GetAvrechById', { iPersonId:  }).then(data => {
+
+                // student['nvAssociated'] = student.;
 
               student['nvYeshivaName'] = this.currentYeshivaOfStudent[student.iPersonId];
               student['edit'] = '<div class="edit"></div>'
@@ -112,7 +116,7 @@ export class StudentsComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
     this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
     this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
-    this.lstColumns.push(new VyTableColumn('משויך לאברך', 'nvAssociated', 'html'));
+    this.lstColumns.push(new VyTableColumn('משויך לאברך', 'nvAssociated', 'checkbox'));
 
 
   }

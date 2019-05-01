@@ -52,7 +52,7 @@ export class EventParticipantsComponent implements OnInit {
     new VyTableColumn('נייד', 'nvMobile'),
     new VyTableColumn('מייל', 'nvEmail'),
     new VyTableColumn('סוג משתמש', 'nvParticipantType'),
-    new VyTableColumn('סטטוס הגעה', 'iArriveStatusType', 'html', true, false)
+    new VyTableColumn('סטטוס הגעה', 'iArriveStatusType', 'checkbox', false)
   ];
   public Columns = [
     new VyTableColumn('בחר', 'checked', 'checkbox'),

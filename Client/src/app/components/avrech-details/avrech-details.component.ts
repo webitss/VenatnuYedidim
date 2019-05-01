@@ -28,11 +28,14 @@ export class AvrechDetailsComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.parent.params.subscribe(params => {
       this.id = params['iPersonId'];
-     
+     debugger;
       if (this.id != 0) {
         this.isDetails = true;
+        debugger;
         this.appProxy.post("GetAvrechById", { iPersonId: this.id }).then(
+
           data => {
+            debugger;
             this.avrech = data;
             this.userName = this.avrech['lstObject']['nvUserName'];
             this.password = this.avrech['lstObject']['nvPassword'];
@@ -52,6 +55,7 @@ export class AvrechDetailsComponent implements OnInit {
 
   save() {
     this.appProxy.post("UpdateAvrech", { avrech: this.avrech, iUserId: this.globalService.getUser()['iUserId'] }).then(res=>
+      
       {this._parent.openMessagePopup("השמירה התבצעה בהצלחה!")
     this.change=false;
   });

@@ -11,7 +11,7 @@ import { AppComponent } from '../app/app.component';
 import { LetterEbrew } from '../../classes/LetterEbrew';
 import { NgForm } from '../../../../node_modules/@angular/forms';
 import { KeyValue } from '../../classes/key-value';
-import { Avrech } from 'src/app/classes/avrech';
+import { Avrech } from '../../classes/avrech';
 
 @Component({
   selector: 'app-student-details',
@@ -25,7 +25,7 @@ export class StudentDetailsComponent implements OnInit {
     private globalService: GlobalService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   @ViewChild(NgForm) form;
-  @Input() student: Student
+  @Input() student: Student;
   statusType: any = { boger: 160, student: 159 };
   paramRout: any;
   fatherDead: boolean;
@@ -45,6 +45,7 @@ export class StudentDetailsComponent implements OnInit {
   yeshivaListOfStudent: Yeshiva[];
   yeshivaSelected: Yeshiva;
   avrechList:Avrech[];
+  AvrechSelected:Avrech=null;
   currentUser: number;
   days: string[] = ["א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב", "יג", "יד", "טו", "טז", "יז", "יח", "יט", "כ", "כא", "כב", "כג", "כד", "כה", "כו", "כז", "כח", "כט", "ל"];
   monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
@@ -107,6 +108,7 @@ export class StudentDetailsComponent implements OnInit {
     this.diedDateHebrewFather = new HebrewDate();
     this.diedDateHebrewMother = new HebrewDate();
     this.yeshivaSelected = new Yeshiva();
+    this.AvrechSelected=new Avrech();
     // this.yeshivaSelected.nvCity="";
     // this.yeshivaSelected.nvAddress="";
     // this.addYeshivaToStudent.iPersonId
@@ -281,6 +283,7 @@ export class StudentDetailsComponent implements OnInit {
 
 
   selectYesh(event: any) {
+debugger;
     if (event.currentTarget.value == 'בחר מוסד') {
       this.yeshivaSelected.nvAddress = null;
       this.yeshivaSelected.nvCity = null;
@@ -328,9 +331,42 @@ export class StudentDetailsComponent implements OnInit {
   // changeForm(){
   //   this.change=true;
   // }
+  selectAv(event: any) {
+    debugger;
+    if (event.currentTarget.value == 'בחר אברך') {
+      this.AvrechSelected.nvAddress = null;
+      this.AvrechSelected.nvCity = null;
+    }
 
+    this.avrechList.forEach(e => {
+      debugger;
+      if (e.nvFirstName+" "+e.nvLastName == event.currentTarget.value) {
+        this.AvrechSelected.nvFirstName = e.nvFirstName;
+        this.AvrechSelected.iPersonId = e.iPersonId;
+        // this.AvrechSelected. = e.nvCity;
+        // this.yeshivaSelected.iYeshivaId = e.iYeshivaId;
+        debugger;
+        // alert(this.AvrechSelected.nvFirstName);
+      }
 
+    })
+    // this.addSelectAvrechToStudent();
+  }
 
+  // addSelectAvrechToStudent(){
+  //   this.appProxy.post("AddAvrechToStudent", {
+  //     iStudentId: this.paramRout, iPersonId:
+  //       this.AvrechSelected.iPersonId, iUserId: this.currentUser
+  //   }).then(data => {
+      
+  //   }
+  //     , err => this._parent.openMessagePopup("שגיאה"))
+
+  //   var newAvrech: Avrech = new Avrech();
+  //   newAvrech.nvFirstName = this.AvrechSelected.nvFirstName;
+  //   // newAvrech.nvAddress = this.yeshivaSelected.nvAddress;
+  //   // newYeshiva.nvYeshivaName = this.yeshivaSelected.nvYeshivaName;
+  // }
 
   addSelectYeshivaToStudent() {
     this.appProxy.post("AddYeshivaToStudent", {
@@ -435,8 +471,9 @@ export class StudentDetailsComponent implements OnInit {
     }
 
     else
-      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => {
-
+      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser, iAverchId: this.AvrechSelected.iPersonId}).then(data => {
+debugger;
+if(data)
         this._parent.openMessagePopup("התלמיד נוסף בהצלחה!");
         this.change = false;
         if (!destroy)

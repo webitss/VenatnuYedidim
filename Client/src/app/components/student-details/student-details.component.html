@@ -41,7 +41,7 @@
               </div> -->
     <div>
 
-        <form class="form" #form="ngForm">
+        <form class="form" #form="ngForm" >
             <div class="form" #details>
 
 
@@ -397,9 +397,9 @@
                 </div> -->
                 <div class="form-group col-sm-3">
                     <label for="yeshivaName">שיוך לאברך :</label>
-                    <select class="form-control" id="avrechId" name="avrechName" (change)="selectYesh($event)">
-                         <option> בחר אברך </option>
-                        <option *ngFor="let av of avrechList" placeholder="בחר אברך">{{av.nvFirstName}}</option>
+                    <select class="form-control" id="avrechId" name="avrechName" (change)="selectAv($event)">
+                        <option> בחר אברך </option>
+                        <option *ngFor="let av of avrechList">{{av.nvFirstName}} {{av.nvLastName}}</option>
                     </select>
                 </div>
 
