@@ -103,15 +103,15 @@ namespace Service.Entities
                 return null;
             }
         }
-        public static List<int> GetStudentsAssociatedToAvrechim()
+        public static Dictionary<int, int> GetStudentsAssociatedToAvrechim()
 		{
 			try
 			{
-                List<int> studentsId = new List<int>();
+                Dictionary<int, int> studentsId = new Dictionary<int, int>();
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_SLCT").Tables[0].Rows;
                 foreach (DataRow row in drc)
                 {
-                    studentsId.Add(int.Parse(row["iStudentId"].ToString()));
+                    studentsId.Add(int.Parse(row["iStudentId"].ToString()), int.Parse(row["iAvrechId"].ToString()));
                 }
                 return studentsId;                
 			}
