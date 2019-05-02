@@ -14,6 +14,7 @@ import { AppComponent } from '../app/app.component';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { promise } from 'protractor';
 import { Observable } from 'rxjs';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-students',
@@ -34,9 +35,11 @@ export class StudentsComponent implements OnInit {
   id: number;
   studentList: Student[];
   yeshivaList: Yeshiva[];
+  nvYeshivaCityOfStudents:Map<number,string>;
   studentsAssociatedToAvrech:Map<number,number> ;
   avrechimListOfStudent: Avrech[];
   currentYeshivaOfStudent: Map<number, string>;
+  citiesOfYeshivotOfStudents: Map<number,string>;
   private alert: any;
   @ViewChild('students') students: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
@@ -46,27 +49,34 @@ export class StudentsComponent implements OnInit {
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
     if (this.component == '/students') {
       this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
-        this.studentList = data;
         debugger;
+        this.studentList = data;
         this.appProxy.get("GetStudentsAssociatedToAvrechim").then(data => {
-          debugger;
           this.studentsAssociatedToAvrech = data;
           this.appProxy.get("GetCurrentYeshivaOfStudent").then(data => {
             this.currentYeshivaOfStudent = data;
+            this.appProxy.get("GetCitiesOfYeshivotOfStudents").then(data => {
+              this.citiesOfYeshivotOfStudents = data;
             this.studentList.forEach(student => {
-              //  
               // if (this.studentsAssociatedToAvrech.filter(x => x. == student.iPersonId).length > 0)
               // this.appProxy.post('GetAvrechById', { iPersonId:  }).then(data => {
 
                 // student['nvAssociated'] = student.;
-
+            if((student.bDeathFather==true)&&(student.bDeathMother==true))
+                student['orphan']="אב ואם";
+              else
+              if(student.bDeathFather==true)
+                student['orphan']="אב";
+                else
+                  student['orphan']="אם";
               student['nvYeshivaName'] = this.currentYeshivaOfStudent[student.iPersonId];
+              student['nvCityName'] = this.citiesOfYeshivotOfStudents[student.iPersonId];
               student['edit'] = '<div class="edit"></div>'
               student['delete'] = '<div class = "delete"></>';
             });
           });
         });
-
+      });
       }, err => { alert(err); });
     }
 
@@ -99,25 +109,17 @@ export class StudentsComponent implements OnInit {
 
 
 
-    // this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true, false));
-    // this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true, false));
-    // this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
-    // this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
-    // this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
-    // this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
-    // this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
-    // this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
-    // this.lstColumns.push(new VyTableColumn(' משויך לאברך','nvAvrechName','html'));
     this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true, false));
     this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true, false));
     this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
     this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
     this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));
     this.lstColumns.push(new VyTableColumn('נייד', 'nvMobile'));
-    this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
+    this.lstColumns.push(new VyTableColumn('עיר', 'nvCity'));
     this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
+    this.lstColumns.push(new VyTableColumn('עיר מוסד', 'nvCityName'));
     this.lstColumns.push(new VyTableColumn('משויך לאברך', 'nvAssociated', 'checkbox'));
-
+    this.lstColumns.push(new VyTableColumn('יתום מ', 'orphan'));
 
   }
   lstDataRows = [];

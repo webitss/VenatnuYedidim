@@ -93,7 +93,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-		List<int> GetStudentsAssociatedToAvrechim();
+		Dictionary<int,int> GetStudentsAssociatedToAvrechim();
 
 		[OperationContract]
 		[WebInvoke(
@@ -104,7 +104,16 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         Dictionary<int, string> GetCurrentYeshivaOfStudent();
 
-		[OperationContract]
+        [OperationContract]
+        [WebInvoke(
+        Method = "GET",
+        UriTemplate = "GetCitiesOfYeshivotOfStudents",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        Dictionary<int, string> GetCitiesOfYeshivotOfStudents();
+
+        [OperationContract]
 		[WebInvoke(
 		Method = "POST",
 		UriTemplate = "GetStudentById",

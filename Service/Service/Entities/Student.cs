@@ -111,13 +111,14 @@ namespace Service.Entities
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_SLCT").Tables[0].Rows;
                 foreach (DataRow row in drc)
                 {
+                    
                     studentsId.Add(int.Parse(row["iStudentId"].ToString()), int.Parse(row["iAvrechId"].ToString()));
                 }
                 return studentsId;                
 			}
 			catch (Exception ex)
 			{
-				Log.LogError("GetStudentList / TAvrechStudents_SLCT", "ex" + ex);
+				Log.LogError("GetStudentsAssociatedToAvrechim / TAvrechStudents_SLCT", "ex" + ex);
 				return null;
 			}
 		}
@@ -296,7 +297,25 @@ namespace Service.Entities
 			}
 		}
 
+        public static Dictionary<int,string> GetCitiesOfYeshivotOfStudents()
+        {
+            try
+            {
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TYeshivotOfStudents_SLCT").Tables[0].Rows;
+                Dictionary<int, string> cities = new Dictionary<int, string>();
+                foreach (DataRow r in drc)
+                {
+                    cities.Add(int.Parse(r["iPersonId"].ToString()), r["nvCity"].ToString());
+                }
 
+                return cities;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetCitiesOfYeshivotOfStudents / TYeshivotOfStudents_SLCT", "ex" + ex);
+                return null;
+            }
+        }
 
     //   public static  bool DeleteStudent(int iPersonId, int iUserId)
     //    {
@@ -318,6 +337,6 @@ namespace Service.Entities
     //    }
 
 
-    }
+}
 
 }

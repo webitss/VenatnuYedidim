@@ -103,7 +103,7 @@ namespace Service
         {
             return Student.GetBugrimList(iUserId);
         }
-        public List<int> GetStudentsAssociatedToAvrechim()
+        public Dictionary<int,int> GetStudentsAssociatedToAvrechim()
         {
             return Student.GetStudentsAssociatedToAvrechim();
         }
@@ -115,6 +115,11 @@ namespace Service
         public List<Yeshivot> GetYeshivotOfStudent(int iPersonId)
         {
             return Student.GetYeshivotOfStudent(iPersonId);
+        }
+
+        public Dictionary<int,string> GetCitiesOfYeshivotOfStudents()
+        {
+            return Student.GetCitiesOfYeshivotOfStudents();
         }
 
         public Student GetStudentById(int iUserId)

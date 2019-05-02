@@ -7,10 +7,10 @@
     overflow-y: auto;
 
 }
-.cell .edit{
-  background-color: green;
-  width:50%;
+.cell-title{
+  width: 300px !important;
 }
+
 .edit::parent{
   background-color: green;
   width:50%;

@@ -1,9 +1,8 @@
 import { Person } from "./person";
-import { Avrech } from './avrech';
 
 export class Student implements Person {
 
-
+    public iAvrechId:number=null;
     public iPersonId: number=null;
     public nvFirstName: string=null;
     public nvLastName: string=null;
@@ -19,16 +18,15 @@ export class Student implements Person {
 
     public iStudentId: number=null;
     public nvFatherDeathDate: string=null;
-    public bDeathFather: boolean=false;
+    public bDeathFather: boolean=null;
     public nvMotherDeathDate: string=null;
-    public bDeathMother: Boolean=null;
+    public bDeathMother: boolean=null;
     public iCauseOfDeathFather:number=null;
     public iCauseOfDeathMother:number=null;
     public nvImgStudent: string=null;
     public dtAddStudentDate: Date= new Date();
     public nvComment: string=null;
     public iStatusType:number=null;
-    // public iAvrechId:number=null;
 
     public fDays:number;
     public fMonthes:number;
