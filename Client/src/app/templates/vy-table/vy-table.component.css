@@ -28,7 +28,9 @@
 .small-title{
   height: 90%;
   border-left: 1px solid #808080;
-
+}
+.edel{
+  width: 20%;
 }
 .cell-filter{
   opacity: 0.5;

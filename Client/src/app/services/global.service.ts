@@ -13,6 +13,7 @@ export class GlobalService {
   }
 
   getUser() {
+    debugger;
     return this.user;
   }
 

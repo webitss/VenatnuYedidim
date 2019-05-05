@@ -3,7 +3,7 @@
 <div id="myTable" name="table" class="vy-table">
   <div name="columns" class="row">
 
-    <div *ngFor="let col of lstColumns" class="col cell cell-title" [ngStyle]="col.titleStyle">
+    <div *ngFor="let col of lstColumns" [ngClass]="{'col':col.title!='עריכה'&&col.title!='מחיקה','edel':col.title=='עריכה'&&col.title=='מחיקה'}" class="cell cell-title" [ngStyle]="col.titleStyle">
       <div class="small-title">
         <label id='my-table' *ngIf="col.type == 'checkbox'" class="container" style='float: right;'>
           {{col.title}}

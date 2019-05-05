@@ -87,6 +87,7 @@ import { EditMailComponent } from './components/edit-mail/edit-mail.component';
 import { SafeUrl } from './directives/safe-url';
 import { GoogleCity } from './directives/googleCity';
 import { FitElement } from './directives/fit-element';
+import { GraduatesComponent } from './components/graduates/graduates.component';
 
 
 
@@ -281,7 +282,7 @@ import { FitElement } from './directives/fit-element';
 
         ]
       },
-      { path: "graduates", component: StudentsComponent },
+      { path: "graduates", component: StudentComponent },
 
       { path: "users", component: UsersComponent },
       {

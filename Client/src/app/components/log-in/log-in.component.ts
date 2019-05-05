@@ -38,16 +38,17 @@ export class LogInComponent implements OnInit {
 
 
   logIn() {
-    
+
     this.appProxy.post("Login", { nvUserName: this.nvUserName, nvPassword: this.nvPassword }).then(
+      
       data => {
-       
+
         if (data!=null) {
          
          
           if((data as User).iPermissionId!=7){
             
-           
+
           // this.user = data;
           data["iUserId"] = data.iPersonId;
           this.appComponent.instance.userName = data.nvUserName;
