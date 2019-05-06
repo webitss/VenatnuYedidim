@@ -37,7 +37,7 @@ export class StudentsComponent implements OnInit {
   yeshivaList: Yeshiva[];
   nvYeshivaCityOfStudents:Map<number,string>;
   studentsAssociatedToAvrech:Map<number,number> ;
-  avrechimListOfStudent: Avrech[];
+  avrechStudent: Avrech=null;
   currentYeshivaOfStudent: Map<number, string>;
   citiesOfYeshivotOfStudents: Map<number,string>;
   private alert: any;
@@ -49,7 +49,7 @@ export class StudentsComponent implements OnInit {
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
     if (this.component == '/students') {
       this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
-        debugger;
+
         this.studentList = data;
         this.appProxy.get("GetStudentsAssociatedToAvrechim").then(data => {
           this.studentsAssociatedToAvrech = data;
@@ -73,6 +73,12 @@ export class StudentsComponent implements OnInit {
               student['nvCityName'] = this.citiesOfYeshivotOfStudents[student.iPersonId];
               student['edit'] = '<div class="edit"></div>'
               student['delete'] = '<div class = "delete"></>';
+              this.appProxy.post("GetAvrechByStudentId", { iPersonId: student.iPersonId }).then(data => {
+                debugger;
+                this.avrechStudent = data;
+                student['nvAvrechName'] = "";
+                  student['nvAvrechName'] += " " + this.avrechStudent[0].nvFirstName + " " + this.avrechStudent[0].nvLastName;
+                });
             });
           });
         });
@@ -94,18 +100,16 @@ debugger;
             this.yeshivaList = data;
             student['nvYeshivaName'] = this.yeshivaList[this.yeshivaList.length - 1].nvYeshivaName;
           });
-          this.appProxy.post("GetAvrechimByStudentId", { iPersonId: student.iPersonId }).then(data => {
-            this.avrechimListOfStudent = data;
+          this.appProxy.post("GetAvrechByStudentId", { iPersonId: student.iPersonId }).then(data => {
+            this.avrechStudent = data;
             student['nvAvrechName'] = "";
-            this.avrechimListOfStudent.forEach(avrech => {
-              student['nvAvrechName'] += " " + avrech.nvFirstName + " " + avrech.nvLastName + '<br/>';
+              student['nvAvrechName'] += " " + this.avrechStudent.nvFirstName + " " + this.avrechStudent.nvLastName + '<br/>';
             });
 
           });
         });
       }//, err => { alert(err); }
-      );
-    }
+    
 
 
 
@@ -118,7 +122,7 @@ debugger;
     this.lstColumns.push(new VyTableColumn('עיר', 'nvCity'));
     this.lstColumns.push(new VyTableColumn('מוסד לימודים', 'nvYeshivaName'));
     this.lstColumns.push(new VyTableColumn('עיר מוסד', 'nvCityName'));
-    this.lstColumns.push(new VyTableColumn('משויך לאברך', 'nvAssociated', 'checkbox'));
+    this.lstColumns.push(new VyTableColumn('משויך לאברך', 'nvAvrechName'));
     this.lstColumns.push(new VyTableColumn('יתום מ', 'orphan'));
 
   }

@@ -4,6 +4,7 @@ import { AppProxy } from '../../services/app.proxy';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Student } from '../../classes/student';
 import { AppComponent } from '../app/app.component';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
   selector: 'app-graduates',
@@ -13,17 +14,21 @@ import { AppComponent } from '../app/app.component';
 export class GraduatesComponent implements OnInit {
 
 
-  constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
+  constructor(public globalService:GlobalService, private appProxy: AppProxy, private router: Router, private route: ActivatedRoute,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
   param: any;
   id: number;
   studentList: Student[];
+  private iPersonId:number;
   @ViewChild('graduates') graduates: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   ngOnInit() {
+    this.iPersonId = this.globalService.getUser()['iPersonId'];
+
     alert("come");
     debugger;
-    this.id = 0;
+    // this.id = 0;
     console.log("refresh...");
+    
     this.appProxy.post('GetGraduatesList', { iUserId: this.id }).then(data => {
       debugger;
       this.studentList = data;

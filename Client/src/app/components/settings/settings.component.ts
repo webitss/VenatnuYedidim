@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from '../../services/global.service';
+import { SysTableService } from '../../services/sys-table.service'
 
 @Component({
   selector: 'app-settings',
@@ -7,12 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public globalService:GlobalService) { }
   public currentComponent:any;
+  private iPersonId:number;
+  public id:number;
   ngOnInit() {
   }
   onRouterOutletActivate(event) {
-    this.currentComponent = event;
+
+    if(!this.id)
+    {
+      this.currentComponent = event;
+    }
+
   }
   close()
   {

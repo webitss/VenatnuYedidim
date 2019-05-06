@@ -230,9 +230,9 @@ namespace Service
             return Avrech.DeleteAvrech(iPersonId);
         }
 
-        public List<Avrech> GetAvrechimByStudentId(int iPersonId)
+        public List<Avrech> GetAvrechByStudentId(int iPersonId)
         {
-            return Avrech.GetAvrechimByStudentId(iPersonId);
+            return Avrech.GetAvrechByStudentId(iPersonId);
         }
 
 

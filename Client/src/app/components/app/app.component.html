@@ -41,10 +41,10 @@
 
         <span>משתמשים</span>
       </li>
-      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('settings') != -1}" class="nav-item" routerLink='/settings'>
-
+      <li (click)="isGraduate=0"  [ngClass]="{'appSelect': router.url.indexOf('settings') != -1,'disable': globalService.idPermission>0}" class="nav-item" routerLink='/settings'>
         <span>הגדרות</span>
       </li>
+      <!-- [attr.disabled]="idPermission>0? true:null" -->
       <!-- <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('settings') != -1}" class="nav-item" routerLink='/ShowImage'>
         
         <span>תדמית תצוגה מקדימה</span>

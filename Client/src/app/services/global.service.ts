@@ -8,12 +8,13 @@ import { Observable } from 'rxjs';
 export class GlobalService {
 
   public user: User = null;
+  idPermission:number;
+  
   constructor(private appProxy:AppProxy) {
     this.user = JSON.parse(localStorage.getItem("user"));
   }
 
   getUser() {
-    debugger;
     return this.user;
   }
 

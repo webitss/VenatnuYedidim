@@ -268,11 +268,11 @@ namespace Service
 		[OperationContract]
 		[WebInvoke(
 		Method = "POST",
-		UriTemplate = "GetAvrechimByStudentId",
+		UriTemplate = "GetAvrechByStudentId",
 		BodyStyle = WebMessageBodyStyle.WrappedRequest,
 		ResponseFormat = WebMessageFormat.Json,
 		RequestFormat = WebMessageFormat.Json)]
-		List<Avrech> GetAvrechimByStudentId(int iPersonId);
+		List<Avrech> GetAvrechByStudentId(int iPersonId);
 
 		[OperationContract]
 		[WebInvoke(

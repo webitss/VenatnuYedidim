@@ -6,6 +6,7 @@ import { GlobalService } from '../../services/global.service';
 import { DialogService } from '../../services/dialog.service';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../../classes/user';
+import { SysTableService } from '../../services/sys-table.service';
 // import {GoogleCity} from '../../directives/googleCity';
 
 @Component({
@@ -42,6 +43,8 @@ export class LogInComponent implements OnInit {
     this.appProxy.post("Login", { nvUserName: this.nvUserName, nvPassword: this.nvPassword }).then(
       
       data => {
+
+        this.globalService.idPermission = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
 
         if (data!=null) {
          

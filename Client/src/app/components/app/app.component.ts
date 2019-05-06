@@ -3,6 +3,7 @@ import { AppProxy } from '../../services/app.proxy';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../classes/user';
 import { GlobalService } from '../../services/global.service';
+import { SysTableService }from '../../services/sys-table.service'
 
 @Component({
   selector: 'app-root',
@@ -22,16 +23,21 @@ export class AppComponent implements OnInit {
   protected header = '';
   protected tubsName = { student: 1, avrechim: 2, events: 3, graduates: 4, users: 5, settings: 6 };
   protected cuurentTub=this.tubsName.student;
+  private idPermission:number;
   public instance: AppComponent;
   public userName: string = this.globalService.getUser() != null ? this.globalService.getUser().nvUserName : "משתמש";
   constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, public router: Router, private route: ActivatedRoute
     , private globalService: GlobalService) { }
+    public iPersonId:number;
 
   ngOnInit() {
     this.instance = this;
     if (this.globalService.getUser() == null)
       this.router.navigate(['']);
-
+      this.iPersonId = this.globalService.getUser()['iPersonId'];
+      debugger;
+      // this.idPermission = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
+  
   }
 
   onRouterOutletActivate(event) {

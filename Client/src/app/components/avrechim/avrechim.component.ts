@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { viewClassName } from '../../../../node_modules/@angular/compiler';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { AppComponent } from '../app/app.component';
+import { GlobalService } from '../../services/global.service';
+import { debug } from 'util';
 
 
 
@@ -30,12 +32,11 @@ export class AvrechimComponent implements OnInit {
   protected currentComponent: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
 
-  constructor(private router: Router, private appProxy: AppProxy,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
+  constructor(private router: Router,public globalService: GlobalService, private appProxy: AppProxy,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
 
   ngOnInit() {
-
-
-    this.appProxy.post("GetAllAvrechim", { iPersonId: null }).then(
+    this.iPersonId = this.globalService.getUser()['iPersonId'];
+    this.appProxy.post("GetAllAvrechim", { iPersonId: this.iPersonId }).then(
       data => {
         this.avrechimList = data;
         this.avrechimList.forEach(
@@ -49,6 +50,8 @@ export class AvrechimComponent implements OnInit {
       },
     );
 
+
+
     this.lstColumns.push(new VyTableColumn('פתיחה', 'open', 'html', true, false));
     this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true, false));
     this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
@@ -58,6 +61,9 @@ export class AvrechimComponent implements OnInit {
     this.lstColumns.push(new VyTableColumn('דו"אל', 'nvEmail'));
     this.lstColumns.push(new VyTableColumn('בחר', 'checked', 'checkbox'));
   }
+
+  private iPersonId:number;
+
   avrechId: number;
   flag = false;
   click(e) {

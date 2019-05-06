@@ -95,3 +95,8 @@ li~li:after {
     margin-right: auto; 
     padding-right: 9px;*/
 }
+
+.disable{
+    pointer-events:none; 
+    opacity:0.6; 
+}

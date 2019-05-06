@@ -171,7 +171,7 @@ namespace Service.Entities
 
            return flag;
         }
-        public static List<Avrech> GetAvrechimByStudentId(int iPersonId)
+        public static List<Avrech> GetAvrechByStudentId(int iPersonId)
 
 		{
 			try
@@ -185,8 +185,6 @@ namespace Service.Entities
 				Log.LogError("GetAvrechimByStudentId / TAvrech_GetAvrechimOfStudent_SLCT", ", ex " + ex);
 				return null;
 			}
-
-
 		}
         public static List<Avrech> GetAllAvrechimByStudent(int iPersonId)
 
