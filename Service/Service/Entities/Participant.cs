@@ -24,12 +24,19 @@ namespace Service.Entities
 
         //להוסיף iPersonId
         //של היוזר ולשלוף את המשתתפים לפיו
-        public static List<Person> GetParticipantsList(int iEventId)
+        public static List<Person> GetParticipantsList(int iEventId, int iUserId)
         {
             try
             {
                 int id;
-                DataTable dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_GetParticipantByEventId_SLCT", new SqlParameter("iEventId", iEventId)).Tables[0];
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iEventId", iEventId));
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                DataTable dt;
+                if (iUserId==0)
+                   dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_GetParticipantByEventId_SLCT", new SqlParameter("iEventId", iEventId)).Tables[0];
+                else
+                   dt = SqlDataAccess.ExecuteDatasetSP("TParticipant_GetParticipantByEventAndUserId_SLCT",parameters).Tables[0];
                 List<Person> participants = new List<Person>();
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
@@ -74,12 +81,11 @@ namespace Service.Entities
                 return false;
             }
         }
-        public static List<Person> GetPersonList()
+        public static List<Person> GetPersonByUserId(int iUserId)
         {
             try
             {
-
-                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TPerson_GetAllPerson_SLCT").Tables[0].Rows;
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("[TPerson_GetPersonByUserId_SLCT]", new SqlParameter("iUserId",iUserId)).Tables[0].Rows;
                 List<Person> Persons = ObjectGenerator<Person>.GeneratListFromDataRowCollection(drc);
 
                 for (int i = 0; i < drc.Count; i++)

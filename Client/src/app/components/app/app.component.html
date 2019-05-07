@@ -20,27 +20,27 @@
     <ul class="navbar-nav col-sm-8" *ngIf="currentComponent">
       <li (click)="isGraduate=0" [ngClass]="{'appSelect': currentComponent.constructor.name.indexOf('Student') != -1  && router.url != '/graduates' && isGraduate==0}"
         class="nav-item" routerLink='/students'>
-
         <span>תלמידים</span>
       </li>
-      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('avrechim') != -1 }" class="nav-item" routerLink='/avrechim'>
 
+      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('avrechim') != -1 }" class="nav-item" routerLink='/avrechim'>
         <span>אברכים</span>
       </li>
+
       <li (click)="isGraduate=0" [ngClass]="{'appSelect': (router.url.indexOf('events') != -1 && router.url.indexOf('students') == -1) &&  router.url.indexOf('graduates') ==-1}"
         class="nav-item" routerLink='/events'>
-
         <span>ארועים</span>
       </li>
+
       <li (click)="isGraduate=1" [ngClass]="{'appSelect': router.url.indexOf('graduates') != -1 || isGraduate==1}" class="nav-item"
         routerLink='/graduates'>
-
         <span>בוגרים</span>
       </li>
-      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('users') != -1}" class="nav-item" routerLink='/users'>
 
+      <li (click)="isGraduate=0" [ngClass]="{'appSelect': router.url.indexOf('users') != -1}" class="nav-item" routerLink='/users'>
         <span>משתמשים</span>
       </li>
+      
       <li (click)="isGraduate=0"  [ngClass]="{'appSelect': router.url.indexOf('settings') != -1,'disable': globalService.idPermission>0}" class="nav-item" routerLink='/settings'>
         <span>הגדרות</span>
       </li>

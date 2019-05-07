@@ -48,7 +48,6 @@ export class VyTableComponent implements OnInit {
 
   public ngOnInit() {
     this.lstColumns.forEach(c => {
-      debugger;
       this.lstFilterColumns[c.name] = null
       // alert(c.title);
     })

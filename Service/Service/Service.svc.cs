@@ -399,9 +399,9 @@ namespace Service
 
         #region participant
 
-        public List<Person> GetParticipantsList(int iEventId)
+        public List<Person> GetParticipantsList(int iEventId, int iUserId)
         {
-            return Participant.GetParticipantsList(iEventId);
+            return Participant.GetParticipantsList(iEventId,iUserId);
         }
 
         public bool DeleteParticipant(int iEventId, int iPsersonId, int iUserId)
@@ -414,9 +414,9 @@ namespace Service
             //throw new NotImplementedException();
             return Student.GetGraduatesList(iUserId);
         }
-        public List<Person> GetPersonList()
+        public List<Person> GetPersonByUserId(int iUserId)
         {
-            return Participant.GetPersonList();
+            return Participant.GetPersonByUserId(iUserId);
         }
 
         public bool SetEventParticipant(bool isNew, int iStatusType, int iPersonId, int iEventId, int iUserId)

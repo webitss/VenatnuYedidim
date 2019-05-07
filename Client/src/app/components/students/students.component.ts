@@ -47,6 +47,7 @@ export class StudentsComponent implements OnInit {
     this.currentYeshivaOfStudent = new Map<number, string>();
     this.component = this.router.url;
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
+    debugger;
     if (this.component == '/students') {
       this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
 
@@ -74,7 +75,6 @@ export class StudentsComponent implements OnInit {
               student['edit'] = '<div class="edit"></div>'
               student['delete'] = '<div class = "delete"></>';
               this.appProxy.post("GetAvrechByStudentId", { iPersonId: student.iPersonId }).then(data => {
-                debugger;
                 this.avrechStudent = data;
                 student['nvAvrechName'] = "";
                   student['nvAvrechName'] += " " + this.avrechStudent[0].nvFirstName + " " + this.avrechStudent[0].nvLastName;
@@ -89,13 +89,14 @@ export class StudentsComponent implements OnInit {
     else {
       this.message = 'האם אתה בטוח שברצונך למחוק בוגר זה?';
       this.header = 'מחיקת בוגר';
+      debugger;
+      alert(this.id);
       this.appProxy.post('GetGraduatesList', { iUserId: this.id }).then(data => {
         this.studentList = data;
         // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
         this.studentList.forEach(student => {
           student['edit'] = '<div class="edit"></div>'
           student['delete'] = '<div class = "delete"></>';
-debugger;
           this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
             this.yeshivaList = data;
             student['nvYeshivaName'] = this.yeshivaList[this.yeshivaList.length - 1].nvYeshivaName;

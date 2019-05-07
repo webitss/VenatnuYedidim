@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Student } from '../../classes/student';
 import { AppComponent } from '../app/app.component';
 import { GlobalService } from '../../services/global.service';
+import { SysTableService } from '../../services/sys-table.service';
 
 @Component({
   selector: 'app-graduates',
@@ -22,13 +23,14 @@ export class GraduatesComponent implements OnInit {
   @ViewChild('graduates') graduates: any;
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   ngOnInit() {
+    debugger;
     this.iPersonId = this.globalService.getUser()['iPersonId'];
 
-    alert("come");
     debugger;
-    // this.id = 0;
+    this.id = 0;
     console.log("refresh...");
-    
+    this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
+
     this.appProxy.post('GetGraduatesList', { iUserId: this.id }).then(data => {
       debugger;
       this.studentList = data;

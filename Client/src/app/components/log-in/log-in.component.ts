@@ -44,8 +44,8 @@ export class LogInComponent implements OnInit {
       
       data => {
 
-        this.globalService.idPermission = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
-
+//         this.globalService.idPermission = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
+// alert(this.globalService.idPermission);
         if (data!=null) {
          
          
@@ -59,6 +59,7 @@ export class LogInComponent implements OnInit {
           this.globalService.user = data;
 
           this.router.navigate(['students']);
+          this.globalService.idPermission = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
         }
         if((data as User).iPermissionId==7) 
         {

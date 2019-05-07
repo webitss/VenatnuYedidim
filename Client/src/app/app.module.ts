@@ -150,6 +150,8 @@ import { GraduatesComponent } from './components/graduates/graduates.component';
 
     SettingYeshivaComponent,
 
+    GraduatesComponent,
+
     UploadDocumentComponent,
 
     FilterBMultySelectCheckedPipe,
@@ -282,7 +284,7 @@ import { GraduatesComponent } from './components/graduates/graduates.component';
 
         ]
       },
-      { path: "graduates", component: StudentComponent },
+      { path: "graduates", component: GraduatesComponent },
 
       { path: "users", component: UsersComponent },
       {

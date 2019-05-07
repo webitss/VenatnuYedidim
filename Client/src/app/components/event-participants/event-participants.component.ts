@@ -40,6 +40,7 @@ export class EventParticipantsComponent implements OnInit {
   header = 'מחיקת משתתף';
   iPersonId: number;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
+  id: number;
   constructor(@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent, private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService, private globalService: GlobalService) { }
   cancel(event) {
     this.flag = false;
@@ -162,15 +163,20 @@ export class EventParticipantsComponent implements OnInit {
 
   }
   ngOnInit() {
-
+    this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
     this.listToSelect = new Array<any>();
 
-    this.appProxy.post('GetPersonList', { iPersonId: 0 }).then(
+    this.appProxy.post('GetPersonByUserId', { iUserId: this.id }).then(
       data => {
+        debugger;
+
+
         this.allPersons = data
+
         this.allPersons.forEach(
           person => {
             this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] });
+            
           }
         );
 
@@ -179,8 +185,9 @@ export class EventParticipantsComponent implements OnInit {
 
     this.sub = this.router.parent.params.subscribe(params => {
       this.iEventId = +params['iEventId'];
-      this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
+      this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId ,iUserId: this.id}).then(res => {
         if (res.length > 0) {
+
           this.participantList = res;
           this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
             this.sysTableRowList = data;

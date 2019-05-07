@@ -35,9 +35,7 @@ export class AppComponent implements OnInit {
     if (this.globalService.getUser() == null)
       this.router.navigate(['']);
       this.iPersonId = this.globalService.getUser()['iPersonId'];
-      debugger;
-      // this.idPermission = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
-  
+    
   }
 
   onRouterOutletActivate(event) {

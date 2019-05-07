@@ -591,7 +591,7 @@ RequestFormat = WebMessageFormat.Json)]
 		BodyStyle = WebMessageBodyStyle.WrappedRequest,
 		ResponseFormat = WebMessageFormat.Json,
 		RequestFormat = WebMessageFormat.Json)]
-		List<Person> GetParticipantsList(int iEventId);
+		List<Person> GetParticipantsList(int iEventId, int iUserId);
 
 		[OperationContract]
 		[WebInvoke(
@@ -605,11 +605,11 @@ RequestFormat = WebMessageFormat.Json)]
 		[OperationContract]
 		[WebInvoke(
 	   Method = "POST",
-	   UriTemplate = "GetPersonList",
+	   UriTemplate = "GetPersonByUserId",
 	   BodyStyle = WebMessageBodyStyle.WrappedRequest,
 	   ResponseFormat = WebMessageFormat.Json,
 	   RequestFormat = WebMessageFormat.Json)]
-		List<Person> GetPersonList();
+		List<Person> GetPersonByUserId(int iUserId);
 
 		[OperationContract]
 		[WebInvoke(
