@@ -49,7 +49,7 @@ export class VyTableComponent implements OnInit {
   public ngOnInit() {
     this.lstColumns.forEach(c => {
       this.lstFilterColumns[c.name] = null
-      // alert(c.title);
+      // alert(c.name);
     })
 
   }
@@ -66,11 +66,14 @@ export class VyTableComponent implements OnInit {
       this.ngOnChanges();
     }
   }
+  // const result = words.filter(word => word.length > 6);
 
   filterChange(col) {
     let lst = JSON.parse(JSON.stringify(this.lstDataRows));
     for (let key of Object.keys(this.lstFilterColumns)) {
       if (this.lstFilterColumns[key]) {
+        debugger;
+                        //  lst[0].nvMobile.indexOf("5")>0
         lst = lst.filter(row => row[key].indexOf(this.lstFilterColumns[key]) > -1)
       }
     }

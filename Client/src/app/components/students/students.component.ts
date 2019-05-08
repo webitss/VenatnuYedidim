@@ -47,22 +47,22 @@ export class StudentsComponent implements OnInit {
     this.currentYeshivaOfStudent = new Map<number, string>();
     this.component = this.router.url;
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
-    debugger;
     if (this.component == '/students') {
       this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
 
         this.studentList = data;
+
         this.appProxy.get("GetStudentsAssociatedToAvrechim").then(data => {
           this.studentsAssociatedToAvrech = data;
           this.appProxy.get("GetCurrentYeshivaOfStudent").then(data => {
             this.currentYeshivaOfStudent = data;
+
             this.appProxy.get("GetCitiesOfYeshivotOfStudents").then(data => {
               this.citiesOfYeshivotOfStudents = data;
             this.studentList.forEach(student => {
-              // if (this.studentsAssociatedToAvrech.filter(x => x. == student.iPersonId).length > 0)
-              // this.appProxy.post('GetAvrechById', { iPersonId:  }).then(data => {
+              student['edit'] = '<div class="edit"></div>'
+              student['delete'] = '<div class = "delete"></>';
 
-                // student['nvAssociated'] = student.;
             if((student.bDeathFather==true)&&(student.bDeathMother==true))
                 student['orphan']="אב ואם";
               else
@@ -70,12 +70,15 @@ export class StudentsComponent implements OnInit {
                 student['orphan']="אב";
                 else
                   student['orphan']="אם";
+
               student['nvYeshivaName'] = this.currentYeshivaOfStudent[student.iPersonId];
+debugger;
               student['nvCityName'] = this.citiesOfYeshivotOfStudents[student.iPersonId];
-              student['edit'] = '<div class="edit"></div>'
-              student['delete'] = '<div class = "delete"></>';
+              debugger;
+
               this.appProxy.post("GetAvrechByStudentId", { iPersonId: student.iPersonId }).then(data => {
                 this.avrechStudent = data;
+                debugger;
                 student['nvAvrechName'] = "";
                   student['nvAvrechName'] += " " + this.avrechStudent[0].nvFirstName + " " + this.avrechStudent[0].nvLastName;
                 });
