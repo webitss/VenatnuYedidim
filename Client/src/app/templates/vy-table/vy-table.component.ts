@@ -26,6 +26,7 @@ export class VyTableComponent implements OnInit {
   protected lstPagesNum: Array<number> = new Array<number>();
   protected lstSortColumns: any = {};
   protected lstFilterColumns: any = {};
+  flag=false;
 
   @Input()
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
@@ -69,6 +70,7 @@ export class VyTableComponent implements OnInit {
   // const result = words.filter(word => word.length > 6);
 
   filterChange(col) {
+    this.flag=true;
     let lst = JSON.parse(JSON.stringify(this.lstDataRows));
     for (let key of Object.keys(this.lstFilterColumns)) {
       if (this.lstFilterColumns[key]) {
@@ -135,13 +137,27 @@ export class VyTableComponent implements OnInit {
 
 
   private createTable() {
-    let table = "<table id='avrechim' style='width: 100%; background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
+    let table = "<table id='avrechim' style='width: 100%; direction:rtl background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
     this.lstColumns.forEach(column => {
       if (column.bExcel && column.type!= 'checkbox' && column.type!= 'html')
         table += "<th>" + column.title + "</th>";
     });
     table += "</tr></thead><tbody>";
-    this.lstDataRows.forEach(dataRow => {
+    
+    if(this.flag)
+    {
+      this.lstCurrentDataRows.forEach(dataRow => {
+      
+        table += "<tr style='text-align: initial'>";
+        this.lstColumns.forEach(col => {
+          if (col.bExcel && col.type!= 'checkbox' && col.type!= 'html')
+            table += "<td style='border-left:1px solid gainsboro;  border-bottom:1px solid gainsboro;'>" + dataRow[col.name] + "</td>";
+        });
+        table += "</tr>";
+      });
+    }
+    else{
+          this.lstDataRows.forEach(dataRow => {
       
       table += "<tr style='text-align: initial'>";
       this.lstColumns.forEach(col => {
@@ -150,6 +166,8 @@ export class VyTableComponent implements OnInit {
       });
       table += "</tr>";
     });
+    }
+
     table + "</tbody></table>"
     //  
     return table;

@@ -143,6 +143,11 @@ namespace Service
             return Student.UpdateStudent(student, base64Image, iUserId);
         }
 
+        public string castEbrewToForeign(DateTime d)
+        {
+            return Student.castEbrewToForeign(d);
+        }
+
 
         public bool UpdateStatusStudent(int iPersonId, int iStatusType)
         {
@@ -157,7 +162,7 @@ namespace Service
         {
             return Student.DeleteStudent(iPersonId, iUserId);
         }
-
+        
 
         #endregion
 

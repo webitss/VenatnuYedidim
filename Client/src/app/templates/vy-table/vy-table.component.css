@@ -32,13 +32,13 @@
 .edel{
   width: 5% !important;
 }
-.edelf{
+/* .edelf{
   width: 4%;
   margin-left: 0.5%;
-}
+} */
 .cols{
   width:10%;
-  margin-left: 1%;
+  /* margin-left: 1%; */
 }
 
 .cell-filter{

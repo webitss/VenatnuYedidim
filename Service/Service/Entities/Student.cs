@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
@@ -276,8 +277,25 @@ namespace Service.Entities
                 return false;
             }
         }
+        public static string castEbrewToForeign(DateTime hebrewDate)
+        {
+            try
+            {
+                HebrewCalendar hb = new HebrewCalendar();
+                new DateTime(13, 11, 1987, new HebrewCalendar());
+                return "f";
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("error");
+                return null;
+            }
+        }
 
-		public static List<Yeshivot> GetYeshivotOfStudent(int iPersonId)
+
+
+
+        public static List<Yeshivot> GetYeshivotOfStudent(int iPersonId)
 		{
 			try
 			{

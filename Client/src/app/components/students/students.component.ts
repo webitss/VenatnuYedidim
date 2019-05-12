@@ -72,13 +72,11 @@ export class StudentsComponent implements OnInit {
                   student['orphan']="אם";
 
               student['nvYeshivaName'] = this.currentYeshivaOfStudent[student.iPersonId];
-debugger;
+
               student['nvCityName'] = this.citiesOfYeshivotOfStudents[student.iPersonId];
-              debugger;
 
               this.appProxy.post("GetAvrechByStudentId", { iPersonId: student.iPersonId }).then(data => {
                 this.avrechStudent = data;
-                debugger;
                 student['nvAvrechName'] = "";
                   student['nvAvrechName'] += " " + this.avrechStudent[0].nvFirstName + " " + this.avrechStudent[0].nvLastName;
                 });
@@ -92,7 +90,6 @@ debugger;
     else {
       this.message = 'האם אתה בטוח שברצונך למחוק בוגר זה?';
       this.header = 'מחיקת בוגר';
-      debugger;
       alert(this.id);
       this.appProxy.post('GetGraduatesList', { iUserId: this.id }).then(data => {
         this.studentList = data;

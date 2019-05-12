@@ -88,6 +88,7 @@ import { SafeUrl } from './directives/safe-url';
 import { GoogleCity } from './directives/googleCity';
 import { FitElement } from './directives/fit-element';
 import { GraduatesComponent } from './components/graduates/graduates.component';
+import { EditAndDeletePipe } from './pipes/edit-and-delete.pipe';
 
 
 
@@ -184,6 +185,7 @@ import { GraduatesComponent } from './components/graduates/graduates.component';
     AddParticipantComponent,
     VyPopUpComponent,
     EditMailComponent,
+    EditAndDeletePipe,
 
   ],
   //imports: [ 

@@ -12,6 +12,7 @@ import { LetterEbrew } from '../../classes/LetterEbrew';
 import { NgForm } from '../../../../node_modules/@angular/forms';
 import { KeyValue } from '../../classes/key-value';
 import { Avrech } from '../../classes/avrech';
+import { stringify } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-student-details',
@@ -51,7 +52,8 @@ export class StudentDetailsComponent implements OnInit {
   monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
   foreignDays: Array<number> = [];
   foreignMonthes: Array<KeyValue>;
-
+  foreignDate:string;
+d:string;
   // this.foreignMonthes=["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   foreignYearsList: Array<string>;
 
@@ -251,10 +253,12 @@ export class StudentDetailsComponent implements OnInit {
     this.student.dtBirthdate = new Date(Number(this.student['fYears']), (this.student['fMonthes']), this.student['fDays']);
     // console.log(this.student.dtBirthdate);
     this.lenOfMonth = new Date(this.student['fYears'], (this.student['fMonthes']), 0).getDate();
+    debugger;
     this.generateDay();
 
   }
   generateDay() {
+    debugger;
     this.foreignDays = [];
     for (var i = 1; i <= this.lenOfMonth; i++)
       this.foreignDays.push(i);
@@ -280,7 +284,16 @@ export class StudentDetailsComponent implements OnInit {
     }
     return yearString;
   }
-
+  hebrewDate(){
+    alert("come");
+   this.d="";
+//לשרשר את התאריך שמולא בטופס, להמיר את המחרוזת לטיפוס date' לשלוח לשרת ולבדוק
+    this.appProxy.post("castEbrewToForeign",{hebrewDate:this.bornDateHebrewStudent}).then(
+      data=>{
+alert(HebrewDate);
+      }
+    )
+  }
 
   selectYesh(event: any) {
 debugger;
