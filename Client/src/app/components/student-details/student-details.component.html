@@ -129,7 +129,7 @@
                     </div>
 
                     <div class="form-group  col-sm-3">
-                        <ng-select [items]="hebrewYearsList" placeholder="שנה" id="nvBornDateYear" name="nvBornDateYear" (change)="change=true" (blur)="hebrewDate()" [(ngModel)]="bornDateHebrewStudent.Year"
+                        <ng-select [items]="hebrewYearsList" placeholder="שנה" id="nvBornDateYear" name="nvBornDateYear" (change)="change=true" (blur)="gregorianDate()" [(ngModel)]="bornDateHebrewStudent.Year"
                             [ngModelOptions]="{standalone: true}">
                         </ng-select>
                     </div>
@@ -161,7 +161,7 @@
                 </div>
 
                 <div class="form-group  col-sm-3">
-                    <ng-select [items]="foreignYearsList" placeholder="שנה" id="nvBornDateYear" name="nvBornDateYear" (change)="change=true;dateDay()"
+                    <ng-select [items]="foreignYearsList" placeholder="שנה" id="nvBornDateYear" name="nvBornDateYear" (change)="change=true;dateDay()" (blur)="hebrewDate()"
                         [(ngModel)]="student.fYears" [ngModelOptions]="{standalone: true}">
                     </ng-select>
                 </div>

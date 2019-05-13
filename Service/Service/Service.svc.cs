@@ -143,7 +143,7 @@ namespace Service
             return Student.UpdateStudent(student, base64Image, iUserId);
         }
 
-        public string castEbrewToForeign(DateTime d)
+        public string castEbrewToForeign(string d)
         {
             return Student.castEbrewToForeign(d);
         }

@@ -39,7 +39,7 @@ export class LogInComponent implements OnInit {
 
 
   logIn() {
-
+debugger;
     this.appProxy.post("Login", { nvUserName: this.nvUserName, nvPassword: this.nvPassword }).then(
       
       data => {
@@ -51,13 +51,13 @@ export class LogInComponent implements OnInit {
          
           if((data as User).iPermissionId!=7){
             
-
+debugger;
           // this.user = data;
           data["iUserId"] = data.iPersonId;
           this.appComponent.instance.userName = data.nvUserName;
           localStorage.setItem("user", JSON.stringify(data));
           this.globalService.user = data;
-
+debugger;
           this.router.navigate(['students']);
           this.globalService.idPermission = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
         }

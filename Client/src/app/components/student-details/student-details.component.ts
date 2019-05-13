@@ -13,6 +13,10 @@ import { NgForm } from '../../../../node_modules/@angular/forms';
 import { KeyValue } from '../../classes/key-value';
 import { Avrech } from '../../classes/avrech';
 import { stringify } from '@angular/core/src/render3/util';
+import { P } from '@angular/core/src/render3';
+import { Alert } from 'selenium-webdriver';
+// import { trace } from 'node_modules/@type/node/index.d.ts/console';
+import { url } from 'inspector';
 
 @Component({
   selector: 'app-student-details',
@@ -49,14 +53,15 @@ export class StudentDetailsComponent implements OnInit {
   AvrechSelected:Avrech=null;
   currentUser: number;
   days: string[] = ["א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב", "יג", "יד", "טו", "טז", "יז", "יח", "יט", "כ", "כא", "כב", "כג", "כד", "כה", "כו", "כז", "כח", "כט", "ל"];
-  monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
+  monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר א","אדר ב", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
   foreignDays: Array<number> = [];
   foreignMonthes: Array<KeyValue>;
   foreignDate:string;
 d:string;
   // this.foreignMonthes=["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   foreignYearsList: Array<string>;
-
+  month:number=null;
+dateUrl:string;
 
 
   lenOfMonth: number;
@@ -203,7 +208,8 @@ d:string;
     this.letterArr.push({ nvChar: "ק", iValue: 100 }); this.letterArr.push({ nvChar: "ר", iValue: 200 }); this.letterArr.push({ nvChar: "ש", iValue: 300 });
     this.letterArr.push({ nvChar: "ת", iValue: 400 });
     this.letterArr = this.letterArr.sort((n1, n2) => { return n2.iValue - n1.iValue });
-    //var dateUrl = "http://www.hebcal.com/converter/?cfg=json&gy=" + 2018 + "&gm=" + 4 + "&gd=" + 12 + "&g2h=1";
+     this.dateUrl ="https://www.hebcal.com/converter/?cfg=json&hd=21&hm=Av&hy=5758&h2g=Convert+Hebrew+to+Gregorian+date"
+    
     this.hebrewYearsList = [];
     for (var i = this.currentYear.getFullYear(); i > 1950; i--) {
       let year = (i + 3760) % 1000;
@@ -226,7 +232,7 @@ d:string;
     // for (var i = 0; i < this.dateYearArr.length - 1; i++) {
     //   // const hebrewDate = require("hebrew-date");
     //   // this.dateYearArr[i] = hebrewDate(new Date(this.dateYearArr[i], 0, 0)).year;
-    //   this.dateYearArr[i] = this.calcEbrewDatw(this.dateYearArr[i]);
+    //   this.dateYearArr[i] = this.calcEbrewDate(this.dateYearArr[i]);
     // }
   }
   dateYear() {
@@ -253,12 +259,11 @@ d:string;
     this.student.dtBirthdate = new Date(Number(this.student['fYears']), (this.student['fMonthes']), this.student['fDays']);
     // console.log(this.student.dtBirthdate);
     this.lenOfMonth = new Date(this.student['fYears'], (this.student['fMonthes']), 0).getDate();
-    debugger;
     this.generateDay();
 
   }
   generateDay() {
-    debugger;
+
     this.foreignDays = [];
     for (var i = 1; i <= this.lenOfMonth; i++)
       this.foreignDays.push(i);
@@ -272,8 +277,8 @@ d:string;
     );
 
   }
-  calcEbrewDatw(year) {
-
+  calcEbrewDate(year) {
+debugger;
     year = year - 5000;
     let yearString = "";
     for (let i = this.letterArr.length - 1; i > 0; i--) {
@@ -284,15 +289,77 @@ d:string;
     }
     return yearString;
   }
+  calcYear(year){
+    debugger;
+    year = year - 5000;
+    let yearString = "";
+    if(year>=400)
+    yearString+="ת";
+    year-=400;
+    var i=0;
+while(year!=0)
+{
+  if(parseInt((year/100).toString())*100)
+  {
+    if(this.letterArr[i].iValue==parseInt((year/100).toString())*100)
+    {
+      yearString+=this.letterArr[i].nvChar;
+      year=year%100;
+    }
+  }
+  else
+  if(parseInt((year/10).toString())*10)
+  {
+    if(this.letterArr[i].iValue==parseInt((year/10).toString())*10)
+    {
+      yearString+=this.letterArr[i].nvChar;
+      year=year%10;
+    }
+  }
+  else
+  {
+    if(this.letterArr[i].iValue==year)
+    {
+      yearString+=this.letterArr[i].nvChar;
+      year-=year;
+    }
+  }
+  i++;
+  if(i==this.letterArr.length)
+  i=0;
+}
+return yearString;
+  }
+gregorianDate(){
+  // trace(this.dateUrl);
+}
+
   hebrewDate(){
-    alert("come");
-   this.d="";
-//לשרשר את התאריך שמולא בטופס, להמיר את המחרוזת לטיפוס date' לשלוח לשרת ולבדוק
-    this.appProxy.post("castEbrewToForeign",{hebrewDate:this.bornDateHebrewStudent}).then(
-      data=>{
-alert(HebrewDate);
-      }
-    )
+    var hb = require("hebrew-date");
+    // var fb=require("gregorian-date");
+ var hebrewDate;
+ var fb=require("hebrew-date");
+var foreignDate;
+
+ this.month=this.student.fMonthes.valueOf();
+debugger;
+
+ hebrewDate=(hb(parseInt(this.student.fYears.toString()),this.month,this.student.fDays));
+ this.bornDateHebrewStudent.Month=this.monthes[hebrewDate.month-1];
+ this.bornDateHebrewStudent.Year=this.calcYear(hebrewDate.year);
+ this.bornDateHebrewStudent.Day=this.days[hebrewDate.date-1];
+
+
+//     alert("come");
+//    this.d="";
+//    this.d+=this.bornDateHebrewStudent.Day+" "+this.bornDateHebrewStudent.Month+" "+this.bornDateHebrewStudent.Year;
+//    Date.parse(this.d);
+//    debugger;
+//     this.appProxy.post("castEbrewToForeign",{hebrewDate:this.d}).then(
+//       data=>{
+// // alert(HebrewDate);
+//       }
+//     )
   }
 
   selectYesh(event: any) {

@@ -277,12 +277,13 @@ namespace Service.Entities
                 return false;
             }
         }
-        public static string castEbrewToForeign(DateTime hebrewDate)
+        public static string castEbrewToForeign(string hebrewDate)
         {
             try
             {
-                HebrewCalendar hb = new HebrewCalendar();
-                new DateTime(13, 11, 1987, new HebrewCalendar());
+                HebrewCalendar hc = new HebrewCalendar();
+                
+                DateTime d = new DateTime(1998, 08, 15);
                 return "f";
             }
             catch (Exception ex)

@@ -191,11 +191,11 @@ namespace Service
 		[OperationContract]
 		[WebInvoke(
 		Method = "POST",
-		UriTemplate = "GetYeshivotOfStudent",
+		UriTemplate = "castEbrewToForeign",
 		BodyStyle = WebMessageBodyStyle.WrappedRequest,
 		ResponseFormat = WebMessageFormat.Json,
 		RequestFormat = WebMessageFormat.Json)]
-		string castEbrewToForeign(DateTime hebrewDate);
+		string castEbrewToForeign(string hebrewDate);
 		#endregion Student
 
 
