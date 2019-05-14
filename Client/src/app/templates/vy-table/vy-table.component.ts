@@ -9,6 +9,7 @@ import html2canvas from 'html2canvas';
 import 'jspdf-autotable';
 import { data } from 'jquery';
 import * as moment from 'moment';
+import { Task } from 'src/app/classes/task';
 const EXCEL_EXTENSION = '.xlsx';
 @Component({
   selector: 'app-vy-table',
@@ -135,6 +136,14 @@ export class VyTableComponent implements OnInit {
     this.clickCell.emit(item);
   }
 
+  private createTableToReport(tasks:Task[]){
+    let table = "<table id='report' style='width: 100%; direction:rtl background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
+   table+="<th>שעה</th><th>סוג משימה</th><th>הערה</th></tr></thead><tbody>";
+
+    tasks.forEach(t=>{
+
+    })
+  }
 
   private createTable() {
     let table = "<table id='avrechim' style='width: 100%; direction:rtl background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
