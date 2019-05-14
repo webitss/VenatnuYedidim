@@ -86,6 +86,12 @@ namespace Service
         {
             return Task.GetTasksByPersonId(iPersonId);
         }
+
+        public List<Task> GetTasksByPersonIdBetweenDates(int iPersonId, DateTime fromDate, DateTime toDate)
+        {
+            return Task.GetTasksByPersonIdBetweenDates(iPersonId,fromDate,toDate);
+        }
+
         public bool DeleteTask(int iTaskId, int iPersonId)
         {
             return Task.DeleteTask(iTaskId, iPersonId);

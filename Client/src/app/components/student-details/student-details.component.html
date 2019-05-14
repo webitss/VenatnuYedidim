@@ -133,7 +133,6 @@
                             [ngModelOptions]="{standalone: true}">
                         </ng-select>
                     </div>
-
                 </div>
 
             </div>
@@ -398,7 +397,7 @@
                 <div class="form-group col-sm-3">
                     <label for="yeshivaName">שיוך לאברך :</label>
                     <select class="form-control" id="avrechId" name="avrechName" (change)="selectAv($event)">
-                        <option> בחר אברך </option>
+                        <option disabled> בחר אברך </option>
                         <option *ngFor="let av of avrechList">{{av.nvFirstName}} {{av.nvLastName}}</option>
                     </select>
                 </div>

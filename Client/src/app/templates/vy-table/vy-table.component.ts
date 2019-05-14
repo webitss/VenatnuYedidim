@@ -138,6 +138,7 @@ export class VyTableComponent implements OnInit {
 
   private createTable() {
     let table = "<table id='avrechim' style='width: 100%; direction:rtl background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
+    debugger;
     this.lstColumns.forEach(column => {
       if (column.bExcel && column.type!= 'checkbox' && column.type!= 'html')
         table += "<th>" + column.title + "</th>";

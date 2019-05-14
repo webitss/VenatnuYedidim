@@ -53,15 +53,19 @@ export class StudentDetailsComponent implements OnInit {
   AvrechSelected:Avrech=null;
   currentUser: number;
   days: string[] = ["א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב", "יג", "יד", "טו", "טז", "יז", "יח", "יט", "כ", "כא", "כב", "כג", "כד", "כה", "כו", "כז", "כח", "כט", "ל"];
+  monthesEng:string[]=["Tishrei","Cheshvan","Kislev","Tevet","Shvat","Adar 1","Adar 2","Nisan","Iyyar","Sivan","Tamuz","Av","Elul"]
   monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר א","אדר ב", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
   foreignDays: Array<number> = [];
   foreignMonthes: Array<KeyValue>;
   foreignDate:string;
 d:string;
+day:number;
+monthEb:string;
+year:number;
   // this.foreignMonthes=["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   foreignYearsList: Array<string>;
   month:number=null;
-dateUrl:string;
+url:string;
 
 
   lenOfMonth: number;
@@ -208,7 +212,6 @@ dateUrl:string;
     this.letterArr.push({ nvChar: "ק", iValue: 100 }); this.letterArr.push({ nvChar: "ר", iValue: 200 }); this.letterArr.push({ nvChar: "ש", iValue: 300 });
     this.letterArr.push({ nvChar: "ת", iValue: 400 });
     this.letterArr = this.letterArr.sort((n1, n2) => { return n2.iValue - n1.iValue });
-     this.dateUrl ="https://www.hebcal.com/converter/?cfg=json&hd=21&hm=Av&hy=5758&h2g=Convert+Hebrew+to+Gregorian+date"
     
     this.hebrewYearsList = [];
     for (var i = this.currentYear.getFullYear(); i > 1950; i--) {
@@ -331,15 +334,55 @@ while(year!=0)
 return yearString;
   }
 gregorianDate(){
-  // trace(this.dateUrl);
+  //  trace(this.dateUrl);
+  // $location.path('/foo/bar');
+  //   expect($location.path()).toBe('/foo/bar');
+  for(var i=0;i<this.days.length;i++)
+  {
+    if(this.days[i]==this.bornDateHebrewStudent.Day)
+    break;
+  }
+  
+  this.day=i+1;
+ 
+  for(var i=0;i<this.monthes.length;i++)
+  {
+    if(this.monthes[i]==this.bornDateHebrewStudent.Month)
+    {
+      this.monthEb=this.monthesEng[i];
+      break;
+    }
+  }
+
+  
+  var currentYear=this.bornDateHebrewStudent.Year;
+  this.year=5000;
+  var i=0,j=0;
+  while(currentYear.length>0)
+  {
+    
+    if(this.letterArr[i].nvChar==currentYear[0])
+    {
+      this.year+=this.letterArr[i].iValue;
+      currentYear=currentYear.slice(1,4-j);
+      j++;
+      i=0;
+    }
+    i++;
+  }
+  
+  var Hebcal = require('hebcal');
+  var date = new Hebcal.HDate(this.day, this.monthEb, this.year);
+  debugger;
+   this.student.fDays=date.greg().toString().slice(8,10);
+   this.student.fMonthes=date.getGregMonthObject().month;
+   this.student.fYears=date.getGregMonthObject().year;
 }
 
   hebrewDate(){
     var hb = require("hebrew-date");
-    // var fb=require("gregorian-date");
  var hebrewDate;
- var fb=require("hebrew-date");
-var foreignDate;
+
 
  this.month=this.student.fMonthes.valueOf();
 debugger;
@@ -413,10 +456,7 @@ debugger;
   // }
   selectAv(event: any) {
     debugger;
-    if (event.currentTarget.value == 'בחר אברך') {
-      this.AvrechSelected.nvAddress = null;
-      this.AvrechSelected.nvCity = null;
-    }
+    
 
     this.avrechList.forEach(e => {
       debugger;

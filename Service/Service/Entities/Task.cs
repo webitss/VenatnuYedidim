@@ -68,6 +68,25 @@ namespace Service.Entities
             }
         }
 
+        public static List<Task> GetTasksByPersonIdBetweenDates(int iPersonId,DateTime fromDate,DateTime toDate)
+        {
+            try 
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("iEventId", iPersonId));
+                parameters.Add(new SqlParameter("fromDate", fromDate));
+                parameters.Add(new SqlParameter("toDate", toDate));
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TTaskGetTasksByAvrechIdAndDates_SLCT", parameters).Tables[0].Rows;
+                List<Task> tasks = ObjectGenerator<Task>.GeneratListFromDataRowCollection(drc);
+                return tasks;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetTasksByPersonIdBetweenDates / TTaskGetTasksByAvrechIdAndDates_SLCT", ", ex " + ex);
+                return null;
+            }
+        }
+
         public static bool DeleteTask(int iTaskId, int iPersonId)
         {
             try

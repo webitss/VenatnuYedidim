@@ -1,3 +1,44 @@
-<p>
-  reports works!
-</p>
+
+    <div class="col" [ngClass]="{'bottom': showOverlap}">
+      <div class='col'>
+        <div class='form-group row-sm-3 row'>
+          <label class="lbl col-2 labels">בחר דו"ח</label>
+          <div class="col-2">
+              <select class="form-control" (change)="getValues()" [(ngModel)]="iReportId">
+                  <option [ngValue]="undefined" disabled>בחר</option>
+                  <option *ngFor="let name of reports" value={{name.id}}>{{name.text}}</option>
+              </select>
+          </div>     
+        </div>
+        <div class="form-group row-sm-3 row">
+            <label for="yeshivaName" class="col-2 labels">בחר אברך :</label>
+            <div class="col-2">
+              <select class="form-control" id="avrechId" name="avrechName" (change)="selectAv($event)" [(ngModel)]="iAvrechId">
+                <option disabled> בחר אברך </option>
+                <option *ngFor="let av of avrechList">{{av.nvFirstName}} {{av.nvLastName}}</option>
+            </select>
+            </div>
+            
+        </div> 
+      <div class="form-group row-sm-3 row">
+        <label for="dateAdd" class="col-2 labels" > מתאריך :</label>
+        <div class="col-2">
+          <input type="date" class="form-control" id="dateAdd" name="dateAdd" [(ngModel)]="fromDate"
+            (ngModelChange)="e.dtAddStudentDate = $event" (blur)="jj()" [ngModelOptions]="{standalone: true}"
+            style='width: 160px'>
+        </div>
+        
+      </div>
+      <div class="form-group row-sm-3 row">
+        <label for="dateAdd" class="col-2 labels"> עד תאריך :</label>
+        <div class="col-2">
+          <input type="date" class="form-control" id="dateAdd" name="dateAdd" [(ngModel)]="toDate"
+            (ngModelChange)="e.dtAddStudentDate = $event" (change)="change=true" [ngModelOptions]="{standalone: true}"
+            style='width: 160px'>
+        </div>
+      
+      </div>
+      <button class="btn-circle btn-save" (click)="produceReport()">הפק דו"ח</button>
+
+</div>
+  </div>
