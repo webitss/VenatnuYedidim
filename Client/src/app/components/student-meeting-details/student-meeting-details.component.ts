@@ -86,8 +86,10 @@ text:string;
     if (this.currentMeeting.iMeetingId == null)
       this.currentMeeting.iPersonId = this.iPersonId;
       // this.currentMeeting.avrechName=;
+      debugger;
     this.appProxi.post("SetMeeting", { meeting: this.currentMeeting, iUserId: this.globalService.getUser()['iUserId'] }).then(
       data => {
+        debugger;
         if (data != 0) {
           if (this.currentMeeting.iMeetingId == null) {
             this.currentMeeting.iMeetingId = data;

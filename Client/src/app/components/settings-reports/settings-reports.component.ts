@@ -1,9 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { KeyValue } from '../../classes/key-value';
 import { Avrech } from '../../classes/avrech';
 import { AppProxy } from '../../services/app.proxy';
-import { Task } from 'src/app/classes/task';
-import { VyTableColumn } from 'src/app/templates/vy-table/vy-table.classes';
+import { Task } from '../../classes/task';
+import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
+import { SysTableService } from '../../services/sys-table.service';
+import { SysTableRow } from '../../classes/SysTableRow';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 
 @Component({
   selector: 'app-settings-reports',
@@ -12,19 +15,21 @@ import { VyTableColumn } from 'src/app/templates/vy-table/vy-table.classes';
 })
 export class SettingsReportsComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy) { }
+  constructor(private appProxy: AppProxy,private sysTableService:SysTableService) { }
   @Input()
   reports:Array<KeyValue>;
-  tasks:Task[];
+  @ViewChild('tasks') tasks: any;
+  @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
+
+  tasksList=[];
+  flag=0;
   public iReportId: number;
   // public iAvrechId:number;
-  public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
 
   avrechList:Avrech[];
   AvrechSelected:Avrech=null;
- 
+  lstValues: SysTableRow[];
   fromDate:Date;
-
   toDate:Date;
 
   ngOnInit() {
@@ -36,6 +41,18 @@ export class SettingsReportsComponent implements OnInit {
     // this.iAvrechId=this.avrechList[0].iPersonId;
     
   }
+
+  downloadExcel(t = null) {
+
+    this.tasks.downloadExcel(t)
+  }
+
+  public lstColumns = [
+    new VyTableColumn('שעה', 'nvHour'),
+    new VyTableColumn('סוג משימה', 'taskType'),
+    new VyTableColumn('הערה', 'nvComment'),
+  ];
+
   selectAv(event: any) {
     debugger;
     this.avrechList.forEach(e => {
@@ -48,11 +65,33 @@ export class SettingsReportsComponent implements OnInit {
     debugger;
   }
   produceReport(){
-          debugger;
 
-    this.appProxy.post("GetTasksByPersonIdBetweenDates", { iPersonId: this.AvrechSelected.iPersonId,fromDate:Date.parse(this.fromDate.toString()),toDate:Date.parse(this.toDate.toString()) }).then(data => {
-      debugger;
-      this.tasks = data;
+          // Date.parse(this.fromDate.toString())
+    this.appProxy.post("GetTasksByPersonIdBetweenDates", { iPersonId: this.AvrechSelected.iPersonId,fromDate:this.fromDate,toDate:this.toDate }).then(data => {
+
+      this.tasksList = data;
+      this.tasksList.forEach(e => {
+
+        e["nvHour"] = e.dtTaskdatetime.toLocaleTimeString();
+        e["nvComment"]=e.nvComments;
+      });
       }); 
+
+     
+      this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
+        this.tasksList.forEach(e => {
+          this.lstValues = data;
+
+          e["taskType"] = data.filter(s => s.iSysTableRowId == e["iTaskType"])[0].nvValue;
+        });
+      });
+
+      this.downloadExcel();
   }
+
 }
+
+
+
+
+// data[0].dtTaskdatetime.toLocaleTimeString()

@@ -37,6 +37,7 @@ export class StudentEventsComponent implements OnInit {
       this.iPersonId = params["iPersonId"]
     });
     this.appProxy.post("GetEventsByStudent", { iPersonId: this.iPersonId }).then(data => {
+
       this.lstDataRows = data;
       this.lstDataRows.forEach(e => {
         e["dtEventDate"] = e.dtEventDate.toLocaleDateString();
@@ -46,6 +47,7 @@ export class StudentEventsComponent implements OnInit {
       this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
         this.lstDataRows.forEach(event => {
           this.lstValues = data;
+          debugger;
           event["iArrivalStatusType"] = data.filter(s => s.iSysTableRowId == event["iArrivalStatusType"])[0].nvValue;
         });
       });

@@ -13,7 +13,7 @@
         <div class="form-group row-sm-3 row">
             <label for="yeshivaName" class="col-2 labels">בחר אברך :</label>
             <div class="col-2">
-              <select class="form-control" id="avrechId" name="avrechName" (change)="selectAv($event)" [(ngModel)]="iAvrechId">
+              <select class="form-control" id="avrechId" name="avrechName" (change)="selectAv($event)">
                 <option disabled> בחר אברך </option>
                 <option *ngFor="let av of avrechList">{{av.nvFirstName}} {{av.nvLastName}}</option>
             </select>
@@ -23,17 +23,21 @@
       <div class="form-group row-sm-3 row">
         <label for="dateAdd" class="col-2 labels" > מתאריך :</label>
         <div class="col-2">
-          <input type="date" class="form-control" id="dateAdd" name="dateAdd" [(ngModel)]="fromDate"
-            (ngModelChange)="e.dtAddStudentDate = $event" (blur)="jj()" [ngModelOptions]="{standalone: true}"
+          <input class="form-control" id="dtFrom" name="dtFrom" [(ngModel)]="fromDate" ngui-datetime-picker date-only="true"
+ [ngModelOptions]="{standalone: true}"
             style='width: 160px'>
         </div>
         
+        <!-- <input class="form-control" [(ngModel)]="currentMeeting['dtDate']" ngui-datetime-picker date-only="true" close-on-select="false"
+        id="dtDate" name="dtDate"> -->
+        <!-- [(ngModel)]="currentMeeting['dtDate']" ngui-datetime-picker date-only="true" -->
+
       </div>
       <div class="form-group row-sm-3 row">
         <label for="dateAdd" class="col-2 labels"> עד תאריך :</label>
         <div class="col-2">
-          <input type="date" class="form-control" id="dateAdd" name="dateAdd" [(ngModel)]="toDate"
-            (ngModelChange)="e.dtAddStudentDate = $event" (change)="change=true" [ngModelOptions]="{standalone: true}"
+          <input class="form-control" id="dtTo" name="dtTo" [(ngModel)]="toDate" ngui-datetime-picker date-only="true"
+ (change)="change=true" [ngModelOptions]="{standalone: true}"
             style='width: 160px'>
         </div>
       
@@ -42,3 +46,6 @@
 
 </div>
   </div>
+  <div class="main-table">
+    <app-vy-table #tasks [lstColumns]="lstColumns" [lstDataRows]="tasksList" (clickCell)="click($event)" ></app-vy-table>
+</div>

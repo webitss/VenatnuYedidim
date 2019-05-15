@@ -136,18 +136,18 @@ export class VyTableComponent implements OnInit {
     this.clickCell.emit(item);
   }
 
-  private createTableToReport(tasks:Task[]){
-    let table = "<table id='report' style='width: 100%; direction:rtl background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
-   table+="<th>שעה</th><th>סוג משימה</th><th>הערה</th></tr></thead><tbody>";
+  // private createTableToReport(tasks:Task[]){
+  //   let table = "<table id='report' style='width: 100%; direction:rtl background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
+  //  table+="<th>שעה</th><th>סוג משימה</th><th>הערה</th></tr></thead><tbody>";
 
-    tasks.forEach(t=>{
+  //   tasks.forEach(t=>{
 
-    })
-  }
+  //   })
+  // }
 
   private createTable() {
-    let table = "<table id='avrechim' style='width: 100%; direction:rtl background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
     debugger;
+    let table = "<table id='avrechim' style='width: 100%; direction:rtl background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
     this.lstColumns.forEach(column => {
       if (column.bExcel && column.type!= 'checkbox' && column.type!= 'html')
         table += "<th>" + column.title + "</th>";
@@ -157,7 +157,8 @@ export class VyTableComponent implements OnInit {
     if(this.flag)
     {
       this.lstCurrentDataRows.forEach(dataRow => {
-      
+
+
         table += "<tr style='text-align: initial'>";
         this.lstColumns.forEach(col => {
           if (col.bExcel && col.type!= 'checkbox' && col.type!= 'html')
@@ -172,6 +173,7 @@ export class VyTableComponent implements OnInit {
       table += "<tr style='text-align: initial'>";
       this.lstColumns.forEach(col => {
         if (col.bExcel && col.type!= 'checkbox' && col.type!= 'html')
+        debugger;
           table += "<td style='border-left:1px solid gainsboro;  border-bottom:1px solid gainsboro;'>" + dataRow[col.name] + "</td>";
       });
       table += "</tr>";

@@ -59,6 +59,7 @@ namespace Service.Entities
         {
             try
             {
+            
                 
                 List<SqlParameter> parameters = ObjectGenerator<Meeting>.GetSqlParametersFromObject(meeting);
                 parameters.Add(new SqlParameter("iUserId", iUserId));

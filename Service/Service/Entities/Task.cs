@@ -73,7 +73,7 @@ namespace Service.Entities
             try 
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("iEventId", iPersonId));
+                parameters.Add(new SqlParameter("iPersonId", iPersonId));
                 parameters.Add(new SqlParameter("fromDate", fromDate));
                 parameters.Add(new SqlParameter("toDate", toDate));
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TTaskGetTasksByAvrechIdAndDates_SLCT", parameters).Tables[0].Rows;
