@@ -51,7 +51,7 @@ export class StudentDetailsComponent implements OnInit {
   yeshivaSelected: Yeshiva;
   avrechList:Avrech[];
   AvrechSelected:Avrech=null;
-  currentUser: number;
+  iUserId: number;
   days: string[] = ["א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב", "יג", "יד", "טו", "טז", "יז", "יח", "יט", "כ", "כא", "כב", "כג", "כד", "כה", "כו", "כז", "כח", "כט", "ל"];
   monthesEng:string[]=["Tishrei","Cheshvan","Kislev","Tevet","Shvat","Adar 1","Adar 2","Nisan","Iyyar","Sivan","Tamuz","Av","Elul"]
   monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר א","אדר ב", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
@@ -125,8 +125,8 @@ url:string;
     // this.addYeshivaToStudent.iPersonId
     // this.addYeshivaToStudent.iYeshivaId
 
-    this.currentUser = this.globalService.getUser().iPersonId;
-    this.appProxy.post("GetAllAvrechim").then(date => { this.avrechList = date; })
+    this.iUserId = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
+    this.appProxy.post("GetAllAvrechim",{iPersonId:this.iUserId}).then(date => { this.avrechList = date; })
 
     this.appProxy.post("GetAllYeshivot").then(date => { this.yeshivaList = date; })
 
@@ -434,7 +434,7 @@ debugger;
   deleteYeshivaOfStudent() {
 
     this.appProxy.post("DeleteYeshivaOfStudent", {
-      iPersonId: this.paramRout, iYeshivaId: this.yeshivaId, iUserId: this.currentUser
+      iPersonId: this.paramRout, iYeshivaId: this.yeshivaId, iUserId: this.iUserId
     }).then(data => { this._parent.openMessagePopup("הישיבה נמחקה בהצלחה!") }, err => { this._parent.openMessagePopup("שגיאה במחיקת ישיבהיד"); });
     var i = 0;
     this.yeshivaListOfStudent.forEach(e => {
@@ -459,13 +459,11 @@ debugger;
     
 
     this.avrechList.forEach(e => {
-      debugger;
       if (e.nvFirstName+" "+e.nvLastName == event.currentTarget.value) {
         this.AvrechSelected.nvFirstName = e.nvFirstName;
         this.AvrechSelected.iPersonId = e.iPersonId;
         // this.AvrechSelected. = e.nvCity;
         // this.yeshivaSelected.iYeshivaId = e.iYeshivaId;
-        debugger;
         // alert(this.AvrechSelected.nvFirstName);
       }
 
@@ -491,7 +489,7 @@ debugger;
   addSelectYeshivaToStudent() {
     this.appProxy.post("AddYeshivaToStudent", {
       iPersonId: this.paramRout, iYeshivaId:
-        this.yeshivaSelected.iYeshivaId, iUserId: this.currentUser
+        this.yeshivaSelected.iYeshivaId, iUserId: this.iUserId
     }).then(data => {
       if (data)
         this._parent.openMessagePopup("הישיבה נוספה בהצלחה!");
@@ -551,6 +549,7 @@ debugger;
 
 
   saveStudent(destroy = false) {
+    debugger;
     if (this.save.name != '')
       this.student.nvImgStudent = this.save.name;
     this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;
@@ -571,7 +570,7 @@ debugger;
       this.student.nvMotherDeathDate = null;
     }
     if (this.paramRout != '0') {
-      this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser }).then(data => {
+      this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId }).then(data => {
         if (this.status == 'תלמיד')
           this._parent.openMessagePopup("פרטי התלמיד עודכנו בהצלחה!");
         else
@@ -585,13 +584,13 @@ debugger;
           alert("שגיאה בעריכת תלמיד");
         else
           alert("שגיאה בעריכת בוגר");
-        //this.change = false;
+        //this.change = false;s
       });
 
     }
 
     else
-      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.currentUser, iAverchId: this.AvrechSelected.iPersonId}).then(data => {
+      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId, iAvrechId: this.AvrechSelected.iPersonId}).then(data => {
 debugger;
 if(data)
         this._parent.openMessagePopup("התלמיד נוסף בהצלחה!");

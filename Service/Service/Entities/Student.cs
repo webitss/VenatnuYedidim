@@ -174,8 +174,22 @@ namespace Service.Entities
             }
         }
 
+        public static List<Student> GetStudentsByAvrechId(int iAvrechId)
+        {
+            try
+            {
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TStudent_ByAvrechId_SLCT", new SqlParameter("iPersonId", iAvrechId)).Tables[0].Rows;
+                List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
+                return students;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetStudentsByAvrechId / TStudent_ByAvrechId_SLCT", "ex" + ex);
+                return null;
+            }
+        }
 
-       public static bool AddStudent(Student student, string base64Image, int iUserId, int iAvrechId)
+        public static bool AddStudent(Student student, string base64Image, int iUserId, int iAvrechId)
         {
             try
 			{
@@ -190,7 +204,7 @@ namespace Service.Entities
                 parameters2.Add(new SqlParameter("iUserId", iUserId));
                 SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_INS", parameters);
                 return true;
-                return true;
+
             }
             catch (Exception ex)
             {

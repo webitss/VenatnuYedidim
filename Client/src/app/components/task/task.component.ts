@@ -28,7 +28,7 @@ export class TaskComponent implements OnInit {
   selectType: string;
   type: Task;
   iuserid: number;
-
+ studentSelected:Student;
 
   constructor(@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent,private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private router: Router,  private cdRef: ChangeDetectorRef, private route: ActivatedRoute) { 
 
@@ -40,11 +40,13 @@ export class TaskComponent implements OnInit {
   personId: number;
   student: Student;
   isNew: boolean = false;
+  studentsList:Student[];
   ngOnInit() {
     this.currentTask = Object.assign({}, this.task);
     if (!this.task ) {
       this.task = new Task();
       this.isNew = true;
+
     }
    
 
@@ -57,7 +59,13 @@ export class TaskComponent implements OnInit {
         this.currentTask['dtHour'] =moment(this.task.dtTaskdatetime).format('HH:mm'); //this.hours + ':' + this.minutes;
         
        
-
+        this.appProxy.post('GetStudentsByAvrechId',{ iAvrechId: this.personId}).then(data => { 
+          debugger;
+          if(data)
+          this.studentsList = data; 
+        })
+  
+  
         if (this.isNew == true) {
           this.task.iTaskType =this.taskTypeList[0].iSysTableRowId;
           if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
@@ -95,6 +103,18 @@ export class TaskComponent implements OnInit {
     });
     
 
+  }
+  selectAv(event: any) {
+    debugger;
+    this.studentsList.forEach(e => {
+      if (e.nvFirstName+" "+e.nvLastName == event.currentTarget.value) {
+        debugger;
+        this.studentSelected=new Student();
+        this.studentSelected.nvFirstName = e.nvFirstName;
+        this.studentSelected.iPersonId = e.iPersonId;
+      }
+    })
+    debugger;
   }
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
   @Output() refresh = new EventEmitter();

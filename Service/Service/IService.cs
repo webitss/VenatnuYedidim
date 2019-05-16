@@ -125,6 +125,15 @@ namespace Service
         [OperationContract]
         [WebInvoke(
         Method = "POST",
+        UriTemplate = "GetStudentsByAvrechId",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Student> GetStudentsByAvrechId(int iAvrechId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
         UriTemplate = "AddStudentsToAvrech",
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,

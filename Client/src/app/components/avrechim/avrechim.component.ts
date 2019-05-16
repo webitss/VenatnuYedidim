@@ -10,6 +10,7 @@ import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { AppComponent } from '../app/app.component';
 import { GlobalService } from '../../services/global.service';
 import { debug } from 'util';
+import { SysTableService } from '../../services/sys-table.service';
 
 
 
@@ -35,12 +36,14 @@ export class AvrechimComponent implements OnInit {
   constructor(private router: Router,public globalService: GlobalService, private appProxy: AppProxy,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
 
   ngOnInit() {
-    this.iPersonId = this.globalService.getUser()['iPersonId'];
+    this.iPersonId = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
+    debugger;
     this.appProxy.post("GetAllAvrechim", { iPersonId: this.iPersonId }).then(
       data => {
+        debugger;
         this.avrechimList = data;
         this.avrechimList.forEach(
-
+            
           a => {
             a['open'] = '<div class="edit"></div>';
             a['delete'] = '<div class="delete"></div>';

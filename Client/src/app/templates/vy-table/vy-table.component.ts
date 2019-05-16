@@ -9,7 +9,7 @@ import html2canvas from 'html2canvas';
 import 'jspdf-autotable';
 import { data } from 'jquery';
 import * as moment from 'moment';
-import { Task } from 'src/app/classes/task';
+import { Task } from '../../classes/task';
 const EXCEL_EXTENSION = '.xlsx';
 @Component({
   selector: 'app-vy-table',
@@ -136,17 +136,33 @@ export class VyTableComponent implements OnInit {
     this.clickCell.emit(item);
   }
 
-  // private createTableToReport(tasks:Task[]){
-  //   let table = "<table id='report' style='width: 100%; direction:rtl background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
-  //  table+="<th>שעה</th><th>סוג משימה</th><th>הערה</th></tr></thead><tbody>";
+  private createTableToReport(tasks){
+    var current;
+    debugger;
+    let table = "<table id='report' style='width: 100%; direction:rtl background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
+   this.lstColumns.forEach(column => {
+    if (column.bExcel && column.type!= 'checkbox' && column.type!= 'html')
+      table += "<th>" + column.title + "</th>";
+  });
+  table += "</tr></thead><tbody>";
+  
+      tasks.forEach(t=>{
 
-  //   tasks.forEach(t=>{
+    table += "<tr style='text-align: initial'>";
 
-  //   })
-  // }
+      this.lstColumns.forEach(col => {
+      table += "<td style='border-left:1px solid gainsboro;  border-bottom:1px solid gainsboro;'>" + t[col.name] + "</td>";
+    });
+    table += "</tr>";
+  });
+  table + "</tbody></table>"
+ 
+  return table;
+
+  }
 
   private createTable() {
-    debugger;
+
     let table = "<table id='avrechim' style='width: 100%; direction:rtl background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
     this.lstColumns.forEach(column => {
       if (column.bExcel && column.type!= 'checkbox' && column.type!= 'html')
@@ -185,14 +201,20 @@ export class VyTableComponent implements OnInit {
     return table;
   }
 
-  public downloadExcel() {
+  public downloadExcel(tasksList?) {
+    debugger;
     let uri = 'data:application/vnd.ms-excel;base64,'
       , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"/><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
       , base64 = function (s) { return window.btoa(eval('unescape(encodeURIComponent(s))')) }
       , format = function (s, c) {
         return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; })
       }
-    var ctx = { worksheet: name || 'Worksheet', table: this.createTable() }
+    var ctx;
+    if(tasksList)
+    ctx={ worksheet: name || 'Worksheet', table: this.createTableToReport(tasksList) }
+    else
+    ctx={ worksheet: name || 'Worksheet', table: this.createTable() }
+
    
     window.location.href = uri + base64(format(template, ctx))
   }

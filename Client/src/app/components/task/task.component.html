@@ -31,4 +31,13 @@
       <!-- <input type="text" name="comment" class="form-control" [(ngModel)]="task.nvComments" /> -->
     </div>
   </div>
+  <div class="form-group row-sm-3 row">
+    <label for="yeshivaName" class="col-2 labels">בחר תלמיד :</label>
+    <div class="col-2">
+      <select class="form-control" id="studentId" name="studentName" (change)="selectStudent($event)">
+        <option disabled> בחר תלמיד </option>
+        <option *ngFor="let s of studentsList">{{s.nvFirstName}} {{s.nvLastName}}</option>
+    </select>
+    </div>
+</div>
 </div>
