@@ -69,8 +69,10 @@ export class StudentConversationDetailsComponent implements OnInit {
       this.currentConver['dtDate'] = new Date(this.currentConver.dtConversationDate);
       this.currentConver['conversationTime'] =moment(this.currentConver.dtConversationDate).format('HH:mm');
     })
+    debugger;
     this.appProxy.post("GetAllAvrechimByStudent", { iPersonId:this.iPersonId }).then(
       data => {
+        debugger;
         this.avrechByStuden = data; 
         // this.a=this.avrechByStuden;
          this.conver.iAvrechId=this.avrechByStuden[1].iPersonId;

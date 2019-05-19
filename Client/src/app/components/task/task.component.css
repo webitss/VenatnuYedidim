@@ -4,3 +4,7 @@
 .body{
     z-index: -3;
 }
+.labels{
+    width: 1000px;
+    padding-top: 5px;
+}

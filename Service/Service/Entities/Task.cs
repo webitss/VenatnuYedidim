@@ -23,7 +23,8 @@ namespace Service.Entities
         public string nvComments { get; set; }
         [DataMember]
         public string iPersonId { get; set; }
-
+        [DataMember]
+        public string iStudentId { get; set; }
 
         #endregion
 

@@ -8,6 +8,7 @@ export class Task {
     // public tTaskTime:Time;
     public nvComments:string;
     public iPersonId:number;
+    public iStudentId:number;
     // public iCreatedByUserId: number;
     // public dtCreatedate: Date;
     // public iLastModifyUserId: number;

@@ -34,10 +34,21 @@
   <div class="form-group row-sm-3 row">
     <label for="yeshivaName" class="col-2 labels">בחר תלמיד :</label>
     <div class="col-2">
-      <select class="form-control" id="studentId" name="studentName" (change)="selectStudent($event)">
-        <option disabled> בחר תלמיד </option>
-        <option *ngFor="let s of studentsList">{{s.nvFirstName}} {{s.nvLastName}}</option>
+      <select class="form-control" id="studentId" name="studentName" [(ngModel)]="task.iStudentId">
+        <option disabled> בחר </option>
+        <option *ngFor="let s of studentsList" [value]="s.iPersonId">{{s.nvFirstName}} {{s.nvLastName}}</option>
     </select>
+
+    <!-- <select required [(ngModel)]="model.plan">
+      <option selected="selected" disabled>Plan...</option>
+      <option *ngFor="#plan of plans" [value]="plan">{{ plan.name }}</option>
+    </select> -->
+
+
     </div>
 </div>
 </div>
+
+
+<!-- [(ngModel)]="iArrivalStatusType" class="form-control" #status="ngModel" name="status" -->
+<!-- [(ngModel)]="studentSelected.nvFirstName" -->
