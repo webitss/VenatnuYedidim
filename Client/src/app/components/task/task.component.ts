@@ -40,7 +40,8 @@ export class TaskComponent implements OnInit {
  flag=false;
  @Input()
 public sysTableList:SysTableRow[];
-
+@Output()
+onSaveTask:EventEmitter<any>=new EventEmitter<any>();
   constructor(@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent,private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private router: Router,  private cdRef: ChangeDetectorRef, private route: ActivatedRoute) { 
 
   }
@@ -129,7 +130,7 @@ debugger;
         this.cdRef.detectChanges();
       });
       this.InitConversationType(); 
-
+.               
     });
 
   }

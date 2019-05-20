@@ -29,7 +29,11 @@ export class StudentConversationDetailsComponent implements OnInit {
   public conversation: Conversation;
   public currentConver: Conversation;
   @Input()
+  @Input()
+  task:Task;
   public sysTableList: SysTableRow[];
+  @Output()
+  onSaveTask:EventEmitter<Task>=new EventEmitter<Task>();
 
   @Output()
   protected updateConver = new EventEmitter();
@@ -91,6 +95,7 @@ export class StudentConversationDetailsComponent implements OnInit {
     this.conver.iConversationId = this.conversation.iConversationId;
     this.conver.iConversationType = this.conversation.iConversationType;
     this.conver.nvConversationSummary = this.currentConver.nvConversationSummary;
+    this.onSaveTask.emit(this.task);
     //if(this.conver.iConversationId)
     this.conver.dtConversationDate = new Date(this.currentConver['dtDate'] + ' ' + this.currentConver['conversationTime']);
     if (this.currentConver.iConversationId == null) {
