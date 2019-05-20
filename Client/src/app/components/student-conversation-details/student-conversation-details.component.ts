@@ -19,7 +19,7 @@ export class StudentConversationDetailsComponent implements OnInit {
   private sub: any;
   protected iUserId: number;
   protected iPersonId: number;
-  public avrechByStuden:Array<Avrech>=new Array<Avrech>();
+  public avrechByStuden:Avrech=new Avrech();
   currentMeeting: Meeting;
   addTask:string;
   @Output()
@@ -74,9 +74,10 @@ export class StudentConversationDetailsComponent implements OnInit {
       data => {
         debugger;
         this.avrechByStuden = data; 
-        // this.a=this.avrechByStuden;
-         this.conver.iAvrechId=this.avrechByStuden[1].iPersonId;
-        // this.currentMeeting.avrechName=this.avrechByStuden[1]
+         this.conver.iAvrechId=this.avrechByStuden.iPersonId;
+         debugger;
+         this.currentConver['avrechName']= this.avrechByStuden.nvFirstName+' '+this.avrechByStuden.nvLastName;
+     
       },
     );
   }
@@ -127,6 +128,7 @@ export class StudentConversationDetailsComponent implements OnInit {
     this.addTask="הסר";
     else
     this.addTask="הוספת";
+
   }
   reset() {
 

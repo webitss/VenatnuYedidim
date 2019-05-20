@@ -306,7 +306,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Avrech> GetAllAvrechimByStudent(int iPersonId);
+        Avrech GetAllAvrechimByStudent(int iPersonId);
 
         //[OperationContract]
         //[WebInvoke(

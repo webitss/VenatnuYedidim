@@ -256,7 +256,7 @@ namespace Service
             return Avrech.MailToAvrechim(mailList, subject, body);
         }
 
-       public List<Avrech> GetAllAvrechimByStudent(int iPersonId)
+       public Avrech GetAllAvrechimByStudent(int iPersonId)
         {
             return Avrech.GetAllAvrechimByStudent(iPersonId);
         }

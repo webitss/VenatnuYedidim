@@ -53,7 +53,7 @@ export class StudentConversationsComponent implements OnInit {
     },
     {
       title: 'שם אברך',
-      name: 'nvLastName',
+      name: 'avrechName',
     },
     {
       title: 'סוג שיחה',
@@ -144,7 +144,8 @@ export class StudentConversationsComponent implements OnInit {
   changeTable(c: Conversation) {
     c['nvConversationDate'] = c.dtConversationDate.toLocaleDateString();
     c['nvConversationTime'] = c.dtConversationDate.toLocaleTimeString();
-    c['nvLastName']=this.name;
+
+    c['avrechName']=this.name;
     c['nvConversationType'] = this.sysTableList.filter(s => s.iSysTableRowId == c.iConversationType)[0].nvValue;
     c['edit'] = '<div class="edit"></div>';
     c['delete'] = '<div class="delete"></div>';
@@ -158,8 +159,8 @@ export class StudentConversationsComponent implements OnInit {
         this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
           this.sysTableList = val;
           this.conversationsList.forEach(c => {
-            c['nvLastName'] = c['lstObject'].nvFirstName + " " + c['lstObject'].nvLastName;
-            this.name=c['nvLastName'];
+            c['avrechName'] = c['lstObject'].nvFirstName + " " + c['lstObject'].nvLastName;
+            this.name=c['avrechName'];
             this.changeTable(c);
 
           });

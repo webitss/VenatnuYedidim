@@ -30,7 +30,7 @@ export class StudentMeetingDetailsComponent implements OnInit {
   @Output()
   @Input()
   sysTableRowList: SysTableRow[];
-  public avrechByStuden:Array<Avrech>=new Array<Avrech>();
+  public avrechByStuden:Avrech=new Avrech();
   addTask:string;
   minutes: string;
   hours: string;
@@ -44,18 +44,22 @@ export class StudentMeetingDetailsComponent implements OnInit {
     , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
-    
     // this.avrechByStuden
     this.addTask="הוספת";
     this.taskSelect = false;
 
     this.sub = this.route.parent.params.subscribe(params => {
       this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
+      debugger;
       this.appProxi.post("GetAllAvrechimByStudent", { iPersonId:this.iPersonId }).then(
         data => {
+          debugger;
           this.avrechByStuden = data; 
           // this.a=this.avrechByStuden;
-          this.currentMeeting.iAvrechId=this.avrechByStuden[1].iPersonId;
+          this.currentMeeting.iAvrechId=this.avrechByStuden.iPersonId;
+              this.text= this.avrechByStuden.nvFirstName+' '+this.avrechByStuden.nvLastName;
+              this.currentMeeting.avrechName= this.text;
+
           // this.currentMeeting.avrechName=this.avrechByStuden[1]
         },
       );
@@ -82,10 +86,11 @@ text:string;
     //פגישה חדשה
 
     this.currentMeeting.dtMeetingDate = new Date(this.currentMeeting['dtDate'] + ' ' + this.currentMeeting['dtHour']);
-
+debugger;
     if (this.currentMeeting.iMeetingId == null)
       this.currentMeeting.iPersonId = this.iPersonId;
-      // this.currentMeeting.avrechName=;
+      this.text= this.avrechByStuden.nvFirstName+' '+this.avrechByStuden.nvLastName;
+      this.currentMeeting.avrechName= this.text;
       debugger;
     this.appProxi.post("SetMeeting", { meeting: this.currentMeeting, iUserId: this.globalService.getUser()['iUserId'] }).then(
       data => {
@@ -93,7 +98,7 @@ text:string;
         if (data != 0) {
           if (this.currentMeeting.iMeetingId == null) {
             this.currentMeeting.iMeetingId = data;
-            this.text= this.avrechByStuden.find(a=>a.iPersonId==this.currentMeeting.iAvrechId).nvFirstName+' '+this.avrechByStuden.find(a=>a.iPersonId==this.currentMeeting.iAvrechId).nvLastName
+            this.text= this.avrechByStuden.nvFirstName+' '+this.avrechByStuden.nvLastName;
             this.currentMeeting.avrechName= this.text;
             this.NewMeeting.emit(this.currentMeeting);
           }

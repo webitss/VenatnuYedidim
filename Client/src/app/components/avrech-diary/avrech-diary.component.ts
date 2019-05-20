@@ -22,7 +22,7 @@ export class AvrechDiaryComponent implements OnInit {
   @Output()
   @Input()
   task: Task;
-
+  taskStu:boolean=true;
   ngOnInit() {
     this.task = new Task();
   }

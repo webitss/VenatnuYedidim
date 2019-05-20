@@ -186,13 +186,13 @@ namespace Service.Entities
 				return null;
 			}
 		}
-        public static List<Avrech> GetAllAvrechimByStudent(int iPersonId)
+        public static Avrech GetAllAvrechimByStudent(int iPersonId)
 
         {
             try
             {
-                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechimBystudent_SLCT", new SqlParameter("iStudentId", iPersonId)).Tables[0].Rows;
-                List<Avrech> avrech = ObjectGenerator<Avrech>.GeneratListFromDataRowCollection(drc);
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TAvrechimBystudent_SLCT", new SqlParameter("iStudentId", iPersonId)).Tables[0].Rows[0];
+                Avrech avrech = ObjectGenerator<Avrech>.GeneratFromDataRow(dr);
                 return avrech;
             }
             catch (Exception ex)

@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import { AppComponent } from '../app/app.component';
 import { Conversation } from '../../classes/conversation';
 import { Meeting } from '../../classes/meeting';
+import { SysTableRow } from '../../classes/SysTableRow';
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -32,8 +33,13 @@ export class TaskComponent implements OnInit {
   iuserid: number;
  studentSelected:Student;
  studentName:string;
+ taskType:string="שיחה";
  conversation=new Conversation();
  meeting=new Meeting();
+ iTasOrConType:number;
+ flag=false;
+ @Input()
+public sysTableList:SysTableRow[];
 
   constructor(@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent,private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private router: Router,  private cdRef: ChangeDetectorRef, private route: ActivatedRoute) { 
 
@@ -45,24 +51,35 @@ export class TaskComponent implements OnInit {
   personId: number;
   student: Student;
   isNew: boolean = false;
+  taskStu:boolean;
   studentsList:Student[];
   ngOnInit() {
-    debugger;
+
     this.currentTask = Object.assign({}, this.task);
 
-    debugger;
+
     if (!this.task ) {
       this.task = new Task();
       this.isNew = true;
 
     }
-   
+    debugger;
+    
+
+      // alert(this.sysTableList[0].nvValue)
 
     this.route.parent.params.subscribe(params => {
       this.personId = +params['iPersonId'];
 // alert(this.personId);
+if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
+    this.taskStu=true;
+    else
+    this.taskStu=false;
+   
+debugger;
       this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
         this.taskTypeList = data;
+        debugger;
         this.currentTask['dtDate'] = this.task.dtTaskdatetime;
         this.currentTask['dtHour'] =moment(this.task.dtTaskdatetime).format('HH:mm'); //this.hours + ':' + this.minutes;
         
@@ -111,8 +128,9 @@ export class TaskComponent implements OnInit {
         }
         this.cdRef.detectChanges();
       });
+      this.InitConversationType(); 
+
     });
-    
 
   }
   // selectStudent(event: any) {
@@ -129,12 +147,46 @@ export class TaskComponent implements OnInit {
 
 
   // }
+  InitConversationType(){
+    debugger;
+this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
+      this.sysTableList = val;
+    });
+  }
+  InitMeetingType(){
+    debugger;
+    this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(val => {
+      debugger;
+      this.sysTableList = val;
+    });
+  }
 
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
   @Output() refresh = new EventEmitter();
 
   // @Output() refresh:EventEmitter<any>= new EventEmitter<any>();
   // addOrEdit:boolean=false;
+  changeType(){
+    debugger;
+    this.taskType=this.taskTypeList.find(x=>x.iSysTableRowId==parseInt(this.task.iTaskType.toString())).nvValue;
+    if(!this.flag)
+    {
+      this.InitMeetingType();
+      this.flag=true;
+    }
+    else
+    {
+      this.InitConversationType();
+      this.flag=false;
+    }
+    
+    
+    
+
+debugger;
+  }
+
+
   saveTask():Promise<boolean> {
   
     this.task.dtTaskdatetime = new Date(this.currentTask['dtDate'] + ' ' + this.currentTask['dtHour']);
@@ -143,7 +195,9 @@ export class TaskComponent implements OnInit {
     {
       this.conversation.iAvrechId=this.task.iPersonId;
       this.conversation.iPersonId=this.task.iStudentId;
-      this.conversation.dtConversationDate=this.task.dtTaskdatetime;    
+      this.conversation.dtConversationDate=this.task.dtTaskdatetime; 
+      this.conversation.iConversationType = this.iTasOrConType;
+   
           this.appProxy.post('SetConversations',{conversation:this.conversation,iUserId:this.globalService.getUser()['iUserId']}).then(data=>{
             alert(data);
           })
@@ -152,11 +206,14 @@ export class TaskComponent implements OnInit {
     else 
        if(this.task.iTaskType==75)
        {
+         debugger;
          this.meeting.iMeetingId=0;
          this.meeting.iPersonId=this.task.iStudentId;
          this.meeting.iAvrechId=this.task.iPersonId;
-         this.meeting.dtMeetingDate=this.task.dtTaskdatetime;
-         this.meeting.iMeetingType=107;
+         this.meeting.dtMeetingDate=this.task.dtTaskdatetime;      
+         this.meeting.iMeetingType = this.iTasOrConType;
+
+        //  this.meeting.iMeetingType=107;
          this.appProxy.post('SetMeeting',{meeting:this.meeting,iUserId:this.globalService.getUser()['iUserId']}).then(data=>{
            alert(data);
          })
