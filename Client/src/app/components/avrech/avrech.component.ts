@@ -26,6 +26,7 @@ export class AvrechComponent implements OnInit {
   id: number;
   avrech: Avrech;
   ngOnInit() {
+    debugger;
     this.id = this.activatedRoute.snapshot.params["iPersonId"];
 
     
@@ -47,6 +48,7 @@ export class AvrechComponent implements OnInit {
 
   }
   onRouterOutletActivate(event) {
+  debugger;
     this.currentComponent = event;
   }
 
@@ -60,7 +62,9 @@ export class AvrechComponent implements OnInit {
   }
 
   save() {
+    debugger;
     if (this.currentComponent.save) {
+      debugger;
       this.currentComponent.save()
      this.router.navigateByUrl("/avrechim");
     }

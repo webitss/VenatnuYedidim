@@ -38,10 +38,12 @@ export class TaskComponent implements OnInit {
  meeting=new Meeting();
  iTasOrConType:number;
  flag=false;
+ @Output() SaveT = new EventEmitter<Task>();
+
  @Input()
 public sysTableList:SysTableRow[];
-@Output()
-onSaveTask:EventEmitter<any>=new EventEmitter<any>();
+// @Output()
+// onSaveTask:EventEmitter<any>=new EventEmitter<any>();
   constructor(@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent,private appProxy: AppProxy, private sysTableService: SysTableService, private globalService: GlobalService, private router: Router,  private cdRef: ChangeDetectorRef, private route: ActivatedRoute) { 
 
   }
@@ -64,7 +66,7 @@ onSaveTask:EventEmitter<any>=new EventEmitter<any>();
       this.isNew = true;
 
     }
-    debugger;
+
     
 
       // alert(this.sysTableList[0].nvValue)
@@ -72,26 +74,26 @@ onSaveTask:EventEmitter<any>=new EventEmitter<any>();
     this.route.parent.params.subscribe(params => {
       this.personId = +params['iPersonId'];
 // alert(this.personId);
-if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
+        
+       if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
     this.taskStu=true;
     else
     this.taskStu=false;
-   
-debugger;
       this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
         this.taskTypeList = data;
-        debugger;
         this.currentTask['dtDate'] = this.task.dtTaskdatetime;
         this.currentTask['dtHour'] =moment(this.task.dtTaskdatetime).format('HH:mm'); //this.hours + ':' + this.minutes;
-        
-       
+
         this.appProxy.post('GetStudentsByAvrechId',{ iAvrechId: this.personId}).then(data => { 
 
           if(data)
           this.studentsList = data; 
         })
+debugger;
+        this.InitConversationType();
+        for(var i=0;i<this.sysTableList.length;i++) 
+        alert(this.sysTableList[i].iSysTableRowId);
 
-  
         if (this.isNew == true) {
           this.task.iTaskType =this.taskTypeList[0].iSysTableRowId;
           if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
@@ -103,14 +105,12 @@ debugger;
             // alert(this.personId);
             this.appProxy.post('GetStudentById', { iPersonId: this.personId }).then(data => {
               if (data) {
-                debugger;
                 this.student = data;
                 // alert(this.student.nvFirstName);
                 if (this.router.url == "/students/student/" + this.personId + "/student-meetings")//תלמידים ->פגישות
                 {
                   this.task.nvComments = "";
                   this.task.iPersonId = this.globalService.getUser().iPersonId;//משתמש
-                  debugger;
                   // this.studentName=this.student.nvFirstName+" "+this.student.nvLastName;
                 }
                 else
@@ -126,11 +126,22 @@ debugger;
     
             });
           }
+          debugger;
+        }        
+        
+        else{
+          debugger;
+          if(this.task.iTaskType==75)
+          {
+            this.InitMeetingType();   
+          }
+          //iTasOrConType=
         }
-        this.cdRef.detectChanges();
+          this.cdRef.detectChanges();
+
       });
-      this.InitConversationType(); 
-.               
+      
+              
     });
 
   }
@@ -149,15 +160,14 @@ debugger;
 
   // }
   InitConversationType(){
-    debugger;
+debugger;
 this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
       this.sysTableList = val;
     });
   }
   InitMeetingType(){
-    debugger;
+
     this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(val => {
-      debugger;
       this.sysTableList = val;
     });
   }
@@ -184,15 +194,17 @@ this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysT
     
     
 
-debugger;
+
   }
 
 
-  saveTask():Promise<boolean> {
-  
+
+  saveTask(flag,iAvrechId?,iStudentId?):Promise<boolean> {
+  debugger;
     this.task.dtTaskdatetime = new Date(this.currentTask['dtDate'] + ' ' + this.currentTask['dtHour']);
     //    if (this.currentTask.iTaskId == 0)
-    if(this.task.iTaskType==73)
+    if(flag){
+          if(this.task.iTaskType==73)
     {
       this.conversation.iAvrechId=this.task.iPersonId;
       this.conversation.iPersonId=this.task.iStudentId;
@@ -219,6 +231,14 @@ debugger;
            alert(data);
          })
        }
+    }
+debugger;
+if(iAvrechId)
+{
+  this.task.iPersonId=iAvrechId;
+this.task.iStudentId=iStudentId;
+}
+alert(this.task.iStudentId);
     return this.appProxy.post('SetTask', { task: this.task, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
       if (data) {
         this._parent.openMessagePopup("השמירה התבצעה בהצלחה!");
@@ -231,6 +251,7 @@ debugger;
       return Promise.resolve(false);
       
     });
+
 
   }
 

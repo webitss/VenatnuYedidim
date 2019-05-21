@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, OnDestroy, ViewChild, forwardRef, Inject } from '@angular/core';
+import { Component, OnInit, Input, Output, OnDestroy, ViewChild, forwardRef, Inject, EventEmitter } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Conversation } from '../../classes/conversation';
 import { SysTableService } from '../../services/sys-table.service';
@@ -12,6 +12,7 @@ import { SelectorListContext } from '@angular/compiler';
 import { GlobalService } from '../../services/global.service'
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { AppComponent } from '../app/app.component';
+import { Task } from '../../classes/task';
 
 @Component({
   selector: 'app-student-conversations',
@@ -37,6 +38,7 @@ export class StudentConversationsComponent implements OnInit {
   public sysTableList: SysTableRow[];
   @Input()
   public newConver: Conversation;
+
   @Input()
   public lstColumns = [
     {
@@ -104,7 +106,7 @@ export class StudentConversationsComponent implements OnInit {
   addConversation() {
     this.conversationSelect = new Conversation();
     this.conversationSelect.dtConversationDate = null;
-
+debugger;
   }
 
   private alert: any;
@@ -126,6 +128,7 @@ export class StudentConversationsComponent implements OnInit {
 
 
   saveNewConver(conver: Conversation) {
+    debugger;
     this.changeTable(conver);
     this.lstDataRows.push(this.conv);
     this.vyTableComponent.refreshTable(this.lstDataRows);

@@ -31,9 +31,12 @@ export class StudentConversationDetailsComponent implements OnInit {
   @Input()
   @Input()
   task:Task;
+  @Input()
   public sysTableList: SysTableRow[];
-  @Output()
-  onSaveTask:EventEmitter<Task>=new EventEmitter<Task>();
+  public currentComponent: any;
+
+  // @Output()
+  // onSaveTask:EventEmitter<Task>=new EventEmitter<Task>();
 
   @Output()
   protected updateConver = new EventEmitter();
@@ -43,6 +46,7 @@ export class StudentConversationDetailsComponent implements OnInit {
   // protected newConver :Conversation;
  
   taskSelect: boolean = false;
+  @ViewChild(TaskComponent) child: TaskComponent;
 
   @ViewChild('task') TaskComponent: TaskComponent;
 
@@ -53,6 +57,7 @@ export class StudentConversationDetailsComponent implements OnInit {
     , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
+    debugger;
     this.currentMeeting=new Meeting();
     // this.sub = this.route.parent.params.subscribe(params => {
     //   this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
@@ -89,13 +94,20 @@ export class StudentConversationDetailsComponent implements OnInit {
     this.Conversation.emit(null);
   }
 
+  onRouterOutletActivate(event) {
+    debugger;
+    this.currentComponent = event;
+  }
+
+
   conver = new Conversation();
   saveConversation() {
-    this.conver.iPersonId = this.conversation.iPersonId;
+    debugger;
+    this.conver.iPersonId = this.iPersonId;
     this.conver.iConversationId = this.conversation.iConversationId;
     this.conver.iConversationType = this.conversation.iConversationType;
     this.conver.nvConversationSummary = this.currentConver.nvConversationSummary;
-    this.onSaveTask.emit(this.task);
+    // this.onSaveTask.emit(this.task);
     //if(this.conver.iConversationId)
     this.conver.dtConversationDate = new Date(this.currentConver['dtDate'] + ' ' + this.currentConver['conversationTime']);
     if (this.currentConver.iConversationId == null) {
@@ -119,7 +131,9 @@ export class StudentConversationDetailsComponent implements OnInit {
         else
           this._parent.openMessagePopup("השמירה נכשלה");
       });
-
+      debugger;
+this.child.saveTask(false,this.conver.iAvrechId,this.conver.iPersonId);
+      
   }
 
   //איפה למקם?
@@ -133,7 +147,9 @@ export class StudentConversationDetailsComponent implements OnInit {
     this.addTask="הסר";
     else
     this.addTask="הוספת";
-
+    // alert("come");
+    // debugger;
+    // this.currentComponent = event;
   }
   reset() {
 

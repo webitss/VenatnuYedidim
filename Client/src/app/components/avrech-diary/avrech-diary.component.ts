@@ -41,7 +41,7 @@ export class AvrechDiaryComponent implements OnInit {
     // this.task = new Task()
   }
   saveTask() {
-    this.TaskComponent.saveTask().then(res=>{
+    this.TaskComponent.saveTask(true).then(res=>{
     this.CalendarComponent.refreshMe()});
 
    

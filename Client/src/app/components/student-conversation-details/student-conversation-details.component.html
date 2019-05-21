@@ -88,7 +88,7 @@
             <input id="task" name="task" type="button" class="btn-circle btn-add" value="{{addTask}} משימה" (click)="taskSelect=!taskSelect"(click)="change()" />
           </div>
           <div *ngIf="taskSelect==true"class="col-sm-8">
-            <app-task #task></app-task>
+            <app-task #task ></app-task>
           </div>
         </div>
       </div>

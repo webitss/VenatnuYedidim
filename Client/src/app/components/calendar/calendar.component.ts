@@ -53,7 +53,7 @@ export class CalendarComponent implements OnInit {
 
   }
   saveTask() {
-    this.child.saveTask();
+    this.child.saveTask(true);
 
   }
   close() {

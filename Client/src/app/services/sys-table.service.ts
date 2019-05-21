@@ -71,7 +71,6 @@ export class SysTableService {
         this.Mykey = key;
         if (SysTableService.dataTables[key].SysTableRow.length > 0) {
           if(col)col(SysTableService.dataTables[key].SysTableRow)
-          debugger;
           return Promise.resolve(SysTableService.dataTables[key].SysTableRow);
 
         }

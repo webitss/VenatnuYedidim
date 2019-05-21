@@ -35,7 +35,8 @@ export class StudentMeetingDetailsComponent implements OnInit {
   minutes: string;
   hours: string;
   taskSelect: boolean;
-  
+  @ViewChild(TaskComponent) child: TaskComponent;
+
   @ViewChild('task') TaskComponent: TaskComponent;
   sub: any;
   iPersonId: number;
@@ -116,6 +117,8 @@ debugger;
 
       },
     );
+    this.child.saveTask(false,this.currentMeeting.iAvrechId);
+
   }
  
   change()
