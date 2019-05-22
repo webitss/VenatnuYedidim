@@ -96,7 +96,7 @@ export class StudentsComponent implements OnInit {
         // this.studentList.forEach(st => {st['edit'] = '<div class="edit"></div>';})
         this.studentList.forEach(student => {
           student['edit'] = '<div class="edit"></div>'
-          student['delete'] = '<div class = "delete"></>';
+          student['delete'] = '<div class = "delete"></div>';
           this.appProxy.post("GetYeshivotOfStudent", { iPersonId: student.iPersonId }).then(data => {
             this.yeshivaList = data;
             student['nvYeshivaName'] = this.yeshivaList[this.yeshivaList.length - 1].nvYeshivaName;

@@ -11,6 +11,7 @@ import { NgIf } from '@angular/common';
 import { AppComponent } from '../app/app.component';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { EventParticipant } from '../../classes/event-participant';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-event-participants',
@@ -32,7 +33,7 @@ export class EventParticipantsComponent implements OnInit {
   protected personsList: string[];
   // protected listToSelect: person[];
   listToSelect: Array<any>;
-  allPersons: Array<any>;
+   allPersons: Array<any>;
   title: string = "רשימת כולם";
   inputTitle: string = "בחר משתתפים";
   flagDelete = false;
@@ -41,7 +42,8 @@ export class EventParticipantsComponent implements OnInit {
   iPersonId: number;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
   id: number;
-  constructor(@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent, private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService, private globalService: GlobalService) { }
+  constructor(@Inject(forwardRef(() => AppComponent)) private _parent: AppComponent,private _sanitizer: DomSanitizer,
+   private appProxy: AppProxy, private router: ActivatedRoute, private sysTableService: SysTableService, private globalService: GlobalService) { }
   cancel(event) {
     this.flag = false;
   }
@@ -53,7 +55,7 @@ export class EventParticipantsComponent implements OnInit {
     new VyTableColumn('נייד', 'nvMobile'),
     new VyTableColumn('מייל', 'nvEmail'),
     new VyTableColumn('סוג משתמש', 'nvParticipantType'),
-    new VyTableColumn('סטטוס הגעה', 'iArriveStatusType', 'checkbox', false)
+    new VyTableColumn('סטטוס הגעה', 'iArriveStatusType','select')
   ];
   public Columns = [
     new VyTableColumn('בחר', 'checked', 'checkbox'),
@@ -110,6 +112,9 @@ export class EventParticipantsComponent implements OnInit {
 
 
   }
+  public inputpdf(str) : SafeHtml {
+    return this._sanitizer.bypassSecurityTrustHtml(str);
+ }
 
   //  להוסיף את המשתתפים שנבחרו
   listParticipant: Array<EventParticipant>;
@@ -168,7 +173,7 @@ export class EventParticipantsComponent implements OnInit {
 
     this.appProxy.post('GetPersonByUserId', { iUserId: this.id }).then(
       data => {
-        debugger;
+
 
 
         this.allPersons = data
@@ -202,12 +207,15 @@ export class EventParticipantsComponent implements OnInit {
       });
     });
   }
-
+  iArriveStatusType:any;
+  arrive:Array<number>=new Array<number>();
   buildGrid(lst, refresh) {
     this.lstDataRows = [];
     lst.forEach(p => {
       let nvArriveStatusType = this.sysTableRowList.filter(s => s.iSysTableRowId == (p.lstObject ? p.lstObject.iArrivalStatusType : p.iArrivalStatusType));
-      let iArriveStatusType = nvArriveStatusType && nvArriveStatusType[0] ? nvArriveStatusType[0].nvValue : ''
+      this.arrive.push(nvArriveStatusType[0].iSysTableRowId)
+      this.createSelect();
+       this.iArriveStatusType = nvArriveStatusType && nvArriveStatusType[0] ? nvArriveStatusType[0].nvValue : ''
 
       // this.participant.forEach(p => {
       this.lstDataRows.push({
@@ -219,9 +227,9 @@ export class EventParticipantsComponent implements OnInit {
         nvMobile: p.nvMobile,
         nvEmail: p.nvEmail,
         nvParticipantType: p.lstObject ? p.lstObject.nvParticipantType : p.nvParticipantType,
-        iArriveStatusType: iArriveStatusType,
-        iPersonId: p.iPersonId
-        //iArriveStatusType: '<select> <option>j,k</option><option>ughjk</option></select>'
+        // iArriveStatusType: iArriveStatusType,
+        iPersonId: p.iPersonId,
+        iArriveStatusType:{value:nvArriveStatusType[0].iSysTableRowId,options:this.createSelect()}         
         // iArriveStatusType:'<button>fgd</button>'
         // iArriveStatusType: this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType) &&
         //   this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0] ? this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0].nvValue : ''
@@ -238,6 +246,25 @@ export class EventParticipantsComponent implements OnInit {
 
 
   }
+ public d:string;
+ options:Array<any>;
+createSelect(){
+  debugger;
+  this.options=new Array<any>()
+  this.sysTableRowList.forEach(s => {
+    this.options.push({id:s.iSysTableRowId,value:s.nvValue});
+        });
+return this.options;
+  
+  // this.arrive.forEach(ls=>{
+  //     this.d='<select for="s" style="width:120px"'+'#s="ngModel"'+ '[(ngModel)]="'+ls+'">'
+  // this.sysTableRowList.forEach(s => {
+  //       this.d+='<option value="'+s.iSysTableRowId+'">'+ s.nvValue+'</option>'
+  //       });
+  // })
+
+  //      this.d+='</select>';  
+}
 
   delete(e) {
     this.appProxy.post('DeleteParticipant', { iEventId: this.iEventId, iPersonId: e.iPersonId, iUserId: this.globalService.getUser().iPersonId })

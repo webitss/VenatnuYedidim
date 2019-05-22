@@ -219,10 +219,11 @@ import { EditAndDeletePipe } from './pipes/edit-and-delete.pipe';
     NgxPasswordToggleModule,
     RouterModule.forRoot([
       // { path: "", component: StudentsComponent },
-      { path: "", component: ShowImageComponent },
-
+          { path: "", component: LogInComponent, canDeactivate: [CanDeactivateGuard] },
+  
       { path: "ResultComponent", component: ShowImageComponent },
-      { path: "log-in", component: LogInComponent, canDeactivate: [CanDeactivateGuard] },
+      { path: "show-image", component: ShowImageComponent },
+
       { path: "students", component: StudentsComponent },
       // { path: "graduates", component: StudentsComponent },
 

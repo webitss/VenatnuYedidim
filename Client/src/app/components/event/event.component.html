@@ -29,37 +29,18 @@
 
         </nav>
         <!-- isDisabled() -->
-        <div class="col-1">
-
-        <button *ngIf="currentComponent.constructor.name.indexOf('EventDetails')!=-1" class="btn-circle btn-save" [ngClass]="{'disabled': !isDisabled() }" (click)="save()" [disabled]="!isDisabled()">שמור  </button>
-         </div><div class="col-1">
+        <div class="col-3">
+        <div>
+            <button *ngIf="currentComponent.constructor.name.indexOf('EventDetails')!=-1" class="btn-circle btn-save" [ngClass]="{'disabled': !isDisabled() }" (click)="save()" [disabled]="!isDisabled()">שמור  </button>
+         </div>
+         <div>
             <button class="btn-circle btn-close" routerLink="/events">סגור  </button>
         </div>
-        <div class="name-area col-3">{{header}}</div>
+
+        </div>
+        <div class="name-area col-2">{{header}}</div>
    
 
-    <!-- <div class="navbar-collapse row">
-    <div  [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventDetails') != -1}" class="tab col-sm-1">
-        <a class="control" routerLink="event-details">פרטים</a>
-    </div>
-    <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventParticipants') != -1}" class="tab col-sm-1">
-        <a class="control" routerLink="event-participants"  *ngIf="isDetails">משתתפים</a>
-    </div>
-
-    <div [ngClass]="{'select': currentComponent.constructor.name.indexOf('EventMedia') != -1}" class="tab col-sm-1">
-      <a class="control" routerLink="event-media"  *ngIf="isDetails">מדיה</a>
-  </div>
-  </div>
-<div class="col-sm-12 event-menu">
-  <div class="name col-sm-4">{{header}}</div>
-  <div class="col-sm-1"></div>
-  <div class="col-sm-5"></div>
-  <button *ngIf="isDetails" (click)="save()" class="btn-circle btn-save">שמירה</button>
-  <button routerLink="/events" class="btn-circle btn-close">סגור</button>
-</div>
-
-<router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>
-</div> -->
 
 
     <router-outlet (activate)="onRouterOutletActivate($event)"> </router-outlet>

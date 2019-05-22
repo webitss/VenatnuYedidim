@@ -16,7 +16,7 @@ import { SysTableService } from '../../services/sys-table.service';
 })
 export class LogInComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private router: Router, private appComponent: AppComponent, private globalService: GlobalService, private dialogService: DialogService) { }
+  constructor(private appProxy: AppProxy, private router: Router, private appComponent: AppComponent, private globalService: GlobalService, private dialogService: DialogService, private _parent: AppComponent) { }
 
   ngOnInit() {
     this.imgHeight = window.innerHeight;
@@ -47,7 +47,7 @@ debugger;
 //         this.globalService.idPermission = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
 // alert(this.globalService.idPermission);
         if (data!=null) {
-         
+         debugger;
          
           if((data as User).iPermissionId!=7){
             
@@ -63,19 +63,22 @@ debugger;
         }
         if((data as User).iPermissionId==7) 
         {
-         
+         debugger;
            
           
           this.globalService.UserPermition=7;
-        
-          this.router.navigate(['/']);
+        this.router.navigate(['/show-image']);
         
         }
       }
         else
         {
-          this.globalService.UserPermition=0
-          this.router.navigate(['/']);
+          this.globalService.UserPermition=0;
+          this._parent.openMessagePopup("שם משתמש או סיסמה אינם נכונים,\n נא הכנס שנית!");
+          this.nvUserName="";
+          this.nvPassword="";
+
+          // this.router.navigate(['/']);
         }
       
         

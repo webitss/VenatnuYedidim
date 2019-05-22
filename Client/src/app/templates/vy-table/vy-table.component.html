@@ -12,7 +12,15 @@
           <span class="checkmark"></span>
 
         </label>
-
+        <!-- <label id='my-table' *ngIf="col.type == 'select'" class="container" style='float: right;'>
+            {{col.title}}
+            <select>
+              
+            </select>
+            <input type="checkbox" (change)='checkAllTable(col.name)'>
+            <span class="checkmark"></span>
+  
+          </label> -->
         <span *ngIf="col.type != 'checkbox'"> {{col.title}}
           <span *ngIf="col.title!='עריכה'&&col.title!='מחיקה'" class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(-1,col.name)'>&#xe010;</span>
           <span *ngIf="col.title!='עריכה'&&col.title!='מחיקה'" class="glyphicons glyphicons-sort-by-alphabet-alt" (click)='sortTable(1,col.name)'>&#xe011;</span>
@@ -42,7 +50,7 @@
       [ngClass]="{'col':col.title!='עריכה'&&col.title!='מחיקה','edel':col.title=='עריכה' || col.title=='מחיקה'}"
         (click)="col.bClickCell ? clickCellFunc(row, col.name): ''">
         <div *ngIf="col.type == 'html'" [innerHtml]="row[col.name]"></div>
-        <div *ngIf="col.type != 'html' && col.type != 'checkbox'"> {{row[col.name]}} </div>
+        <div *ngIf="col.type != 'html' && col.type != 'checkbox'&&col.type!='select'"> {{row[col.name]}} </div>
         <div *ngIf="col.type == 'checkbox'">
           <label class="container" style='float: right;'>
 
@@ -52,6 +60,19 @@
           </label>
 
         </div>
+        <div *ngIf="col.type == 'select'">
+          <select style="width: 140px;" [(ngModel)]="row[col.name].value">
+          <option *ngFor="let o of row[col.name].options" [value]="o.id">{{o.value}}</option>
+          </select>
+            <!-- <label class="container" style='float: right;'>
+  
+              <input type="checkbox" [(ngModel)]="row[col.name]">
+              <span class="checkmark"></span>
+  
+            </label> -->
+
+  
+          </div>
       </div>
     </div>
   </div>
