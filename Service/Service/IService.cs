@@ -644,6 +644,15 @@ RequestFormat = WebMessageFormat.Json)]
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         bool SetEventParticipantList(Participant[] listParticipant, int iUserId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "updateArriveStatus",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        bool updateArriveStatus(Participant[] lstParticipant, int iUserId);
         #endregion
 
         #region Documents

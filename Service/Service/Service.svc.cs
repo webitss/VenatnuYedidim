@@ -439,6 +439,10 @@ namespace Service
             return Participant.SetEventParticipant(isNew, iStatusType, iPersonId, iEventId, iUserId);
         }
 
+        public bool updateArriveStatus(Participant[] lstParticipant, int iUserId)
+        {
+            return Participant.updateArriveStatus(lstParticipant, iUserId);
+        }
         //public bool SetEventParticipantList(Participant[] listParticipant, int iUserId)
         //{
         //    return Participant.SetEventParticipantList(listParticipant, iUserId);

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter, OnChanges } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, OnChanges, ViewChild } from '@angular/core';
 import { VyTableColumn } from './vy-table.classes';
 import { VyTableOrderByPipe, OrderByPipe } from './vy-table-order-by.pipe';
 import { AppProxy } from '../../services/app.proxy';
@@ -10,6 +10,7 @@ import 'jspdf-autotable';
 import { data } from 'jquery';
 import * as moment from 'moment';
 import { Task } from '../../classes/task';
+import { EventParticipantsComponent } from '../../components/event-participants/event-participants.component';
 const EXCEL_EXTENSION = '.xlsx';
 @Component({
   selector: 'app-vy-table',
@@ -36,6 +37,9 @@ export class VyTableComponent implements OnInit {
   lstCurrentDataRows: Array<any>;
   @Output()
   public clickCell: EventEmitter<any> = new EventEmitter<any>();
+  @Output()
+  public changeOpt: EventEmitter<any> = new EventEmitter<any>();
+  // @ViewChild(EventParticipantsComponent) child: EventParticipantsComponent;
 
   private lstOrderByFields: Array<any>
 
@@ -55,6 +59,8 @@ export class VyTableComponent implements OnInit {
     })
 
   }
+  
+ 
 
   ngOnChanges() {
     if (this.lstDataRows && this.lstDataRows.length > 0) {
@@ -132,10 +138,15 @@ export class VyTableComponent implements OnInit {
   }
 
   public clickCellFunc(item, colName) {
+    debugger;
     item['columnClickName'] = colName;
     this.clickCell.emit(item);
   }
-
+  public changeOptFunc(item,colName){
+    debugger;
+    item['columnClickName'] = colName;
+this.changeOpt.emit(item);
+  }
   private createTableToReport(tasks){
     var current;
     debugger;

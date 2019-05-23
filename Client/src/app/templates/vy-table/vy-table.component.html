@@ -60,7 +60,7 @@
           </label>
 
         </div>
-        <div *ngIf="col.type == 'select'">
+        <div *ngIf="col.type == 'select'" (change)="changeOptFunc(row, col.name)">
           <select style="width: 140px;" [(ngModel)]="row[col.name].value">
           <option *ngFor="let o of row[col.name].options" [value]="o.id">{{o.value}}</option>
           </select>

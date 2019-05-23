@@ -31,7 +31,7 @@ li{
     margin:0px;
     font-size: 25px;
     height: 100%;
-    border-right-style: double;
+    /* border-right-style: double; */
     border-right-width: thick;
 }
 .header>.navbar-expand-sm>.navbar-nav {

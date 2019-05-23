@@ -12,6 +12,7 @@ import { AppComponent } from '../app/app.component';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { EventParticipant } from '../../classes/event-participant';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { a } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-event-participants',
@@ -37,6 +38,7 @@ export class EventParticipantsComponent implements OnInit {
   title: string = "רשימת כולם";
   inputTitle: string = "בחר משתתפים";
   flagDelete = false;
+  flagUpdate=false;
   message = 'האם אתה בטוח שברצונך למחוק משתתף זה?';
   header = 'מחיקת משתתף';
   iPersonId: number;
@@ -122,7 +124,21 @@ export class EventParticipantsComponent implements OnInit {
   eventParticipant: EventParticipant
   // event: any;
   save() {
-    this.listParticipant = new Array<EventParticipant>();
+if(this.flagUpdate)
+{
+  
+this.appProxy.post("updateArriveStatus",{lstParticipant: this.lstParticipant ,iUserId:this.id}).then(data=>{
+  if(data){
+    this._parent.openMessagePopup('עדכון השנויים התבצע בהצלחה!'); 
+  }
+     else {
+        this._parent.openMessagePopup('שמירת הקובץ נכשלה'); 
+  }
+  
+})
+}
+else{
+      this.listParticipant = new Array<EventParticipant>();
     this.eventParticipant = new EventParticipant();
     let sumSave = 0;
     let lstToSave = this.listToSelect.filter(f => f['checked'] == true);
@@ -164,6 +180,8 @@ export class EventParticipantsComponent implements OnInit {
       });
 
 
+
+}
     // });
 
   }
@@ -230,9 +248,6 @@ export class EventParticipantsComponent implements OnInit {
         // iArriveStatusType: iArriveStatusType,
         iPersonId: p.iPersonId,
         iArriveStatusType:{value:nvArriveStatusType[0].iSysTableRowId,options:this.createSelect()}         
-        // iArriveStatusType:'<button>fgd</button>'
-        // iArriveStatusType: this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType) &&
-        //   this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0] ? this.sysTableRowList.filter(s => s.iSysTableRowId == p.lstObject.iArrivalStatusType)[0].nvValue : ''
       });
     });
     if (refresh)
@@ -240,16 +255,30 @@ export class EventParticipantsComponent implements OnInit {
   }
 
   click(e) {
+    debugger;
     // this.avrechId = e.iPersonId;
     if (e.columnClickName == "delete")
       this.delete(e);
 
 
   }
+  // iEventId :number;
+  //   iPersonId:number;
+  //   iArrivalStatusType
+lstChange:Array<any>=new Array<any>();
+lstParticipant:Array<Participants>=new Array<Participants>();
+  change(item){
+    debugger;
+    this.lstChange.push(item);
+    this.lstParticipant.push(new Participants(this.iEventId,item.iPersonId,parseInt(item.iArriveStatusType.value)));
+    this.flagUpdate=true;
+    // this.appProxy.post("SetEventParticipant",{isNew:false,iStatusType:parseInt(item.iArriveStatusType.value),iPersonId:item.iPersonId,iEventId:this.iEventId,iUserId:this.id})
+  }
+
  public d:string;
  options:Array<any>;
 createSelect(){
-  debugger;
+ 
   this.options=new Array<any>()
   this.sysTableRowList.forEach(s => {
     this.options.push({id:s.iSysTableRowId,value:s.nvValue});

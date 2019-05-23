@@ -129,6 +129,42 @@ namespace Service.Entities
             }
         }
 
+        public static bool updateArriveStatus(Participant[] lstParticipant, int iUserId)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("iEventId", typeof(int));
+                dt.Columns.Add("iPersonId", typeof(int));
+                dt.Columns.Add("iArrivalStatusType", typeof(int));
+
+                    List<SqlParameter> parameters = new List<SqlParameter>();
+                    for (int i = 0; i < lstParticipant.Length; i++)
+                    {
+                        DataRow dr = dt.NewRow();
+                        dr["iEventId"] = lstParticipant[i].iEventId;
+                        dr["iPersonId"] = lstParticipant[i].iPersonId;
+                        dr["iArrivalStatusType"] = lstParticipant[i].iArrivalStatusType;
+                        dt.Rows.Add(dr);
+                        //parameters.Add(new SqlParameter("iEventId", listParticipant[i].iEventId));
+                        //parameters.Add(new SqlParameter("iPersonId",listParticipant[i].iPersonId));
+                        //parameters.Add(new SqlParameter("iArrivalStatusType", listParticipant[i].iArrivalStatusType));
+
+
+                    }
+
+                parameters.Add(new SqlParameter("lstParticipant", dt));
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                SqlDataAccess.ExecuteDatasetSP("TParticipant_List_INS_UPD", parameters);
+                return true;
+            }
+            catch(Exception e)
+            {
+                Log.LogError("updateArriveStatus / TParticipant_List_INS_UPD", " :ex " + e);
+                return false;
+            }
+        }
+
         public static bool SetEventParticipantList(Participant[] listParticipant, int iUserId)
         {
             DataTable dt = new DataTable();

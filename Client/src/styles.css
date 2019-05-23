@@ -62,6 +62,9 @@ outline: none;
     top: 23%;
 
 }
+.btn-close,.btn-save{
+cursor: pointer;
+}
 
 .btn-pink, .btn-close,.btn-add{
     background-color: rgb(207, 37, 94);

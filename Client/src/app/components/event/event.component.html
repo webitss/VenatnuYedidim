@@ -1,4 +1,5 @@
 
+<div class="name-area" > ארועים | {{header}} </div>
 
 <div class="content-area">
 
@@ -31,14 +32,14 @@
         <!-- isDisabled() -->
         <div class="col-3">
         <div>
-            <button *ngIf="currentComponent.constructor.name.indexOf('EventDetails')!=-1" class="btn-circle btn-save" [ngClass]="{'disabled': !isDisabled() }" (click)="save()" [disabled]="!isDisabled()">שמור  </button>
-         </div>
-         <div>
+            <button *ngIf="currentComponent.constructor.name.indexOf('EventDetails')!=-1||currentComponent.constructor.name.indexOf('EventParticipants')!=-1" class="btn-circle btn-save" [ngClass]="{'disabled': !isDisabled() }" (click)="save()" [disabled]="!isDisabled()">שמור  </button>
             <button class="btn-circle btn-close" routerLink="/events">סגור  </button>
+        </div>
+         <div>
+             <!-- <button class="btn-save" (click)="saveChanges()"></button> -->
         </div>
 
         </div>
-        <div class="name-area col-2">{{header}}</div>
    
 
 

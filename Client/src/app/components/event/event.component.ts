@@ -37,6 +37,9 @@ export class EventComponent implements OnInit {
     if (this.currentComponent.form) {
       return this.currentComponent.form.valid;
     }
+    debugger;
+    if(this.currentComponent.flagUpdate==true)
+    return true;
     return false;
   }
 
