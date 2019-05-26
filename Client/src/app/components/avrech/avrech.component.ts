@@ -5,6 +5,7 @@ import { AppProxy } from '../../services/app.proxy';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { Avrech } from '../../classes/avrech';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -21,12 +22,12 @@ export class AvrechComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private appProxy: AppProxy) {
   }
+  @ViewChild(NgForm) form;
 
   name: string;
   id: number;
   avrech: Avrech;
   ngOnInit() {
-    debugger;
     this.id = this.activatedRoute.snapshot.params["iPersonId"];
 
     
@@ -34,8 +35,9 @@ export class AvrechComponent implements OnInit {
 
       this.appProxy.post("GetAvrechById", { iPersonId: this.id }).then(
         data => {
+          debugger;
           this.avrech = data;
-          this.name = this.avrech['lstObject']['nvUserName'];
+          this.name = this.avrech.nvFirstName+" "+this.avrech.nvLastName;
 
         },
         err => ("err")
@@ -43,17 +45,18 @@ export class AvrechComponent implements OnInit {
 
     }
     else {
-      this.name = "";
+      this.name = "אברך חדש";
     }
 
   }
   onRouterOutletActivate(event) {
-  debugger;
+
     this.currentComponent = event;
   }
 
 
   get isDisabled(): boolean {
+    debugger;
     if (this.currentComponent.form != undefined) {
       return this.currentComponent.form.valid;
     }

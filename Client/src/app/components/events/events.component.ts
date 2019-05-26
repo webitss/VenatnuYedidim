@@ -57,8 +57,8 @@ export class EventsComponent implements OnInit {
   }
 
   public lstColumns = [
-    new VyTableColumn('', 'edit', 'html', true, false),
-    new VyTableColumn('', 'delete', 'html', true, false),
+    new VyTableColumn('עריכה', 'edit', 'html', true, false),
+    new VyTableColumn('מחיקה', 'delete', 'html', true, false),
     new VyTableColumn('שם ארוע', 'nvName'),
     new VyTableColumn('תאריך', 'dtEventDate'),
     new VyTableColumn('מקום', 'nvPlace')];

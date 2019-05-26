@@ -11,6 +11,7 @@ import { data } from 'jquery';
 import * as moment from 'moment';
 import { Task } from '../../classes/task';
 import { EventParticipantsComponent } from '../../components/event-participants/event-participants.component';
+import { debug } from 'util';
 const EXCEL_EXTENSION = '.xlsx';
 @Component({
   selector: 'app-vy-table',
@@ -105,6 +106,7 @@ export class VyTableComponent implements OnInit {
   }
 
   checkAllTable(colName) {
+    debugger;
     if (this.lstDataRows.find(r => r[colName]) == null)
       this.lstDataRows.forEach(r => r[colName] = true);
     else if (this.lstDataRows.find(r => !r[colName]) == null)
@@ -149,7 +151,6 @@ this.changeOpt.emit(item);
   }
   private createTableToReport(tasks){
     var current;
-    debugger;
     let table = "<table id='report' style='width: 100%; direction:rtl background-color:#f9e4b1; height: 500px;'><thead><tr style='text-align: initial'>";
    this.lstColumns.forEach(column => {
     if (column.bExcel && column.type!= 'checkbox' && column.type!= 'html')
@@ -200,7 +201,7 @@ this.changeOpt.emit(item);
       table += "<tr style='text-align: initial'>";
       this.lstColumns.forEach(col => {
         if (col.bExcel && col.type!= 'checkbox' && col.type!= 'html')
-        debugger;
+
           table += "<td style='border-left:1px solid gainsboro;  border-bottom:1px solid gainsboro;'>" + dataRow[col.name] + "</td>";
       });
       table += "</tr>";

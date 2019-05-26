@@ -1,4 +1,4 @@
-<div class="name-area">{{name}}</div>
+<div class="name-area">אברכים | {{name}}</div>
 <div class="content-area">
   <div class="header row">
     <nav class="navbar navbar-expand-sm nav header-navbar">
@@ -30,7 +30,7 @@
     </nav>
     <div class="btn-area">
       <button *ngIf="currentComponent.constructor.name.indexOf('AvrechDetails') != -1" class="btn-circle btn-save" [ngClass]="{'disabled': !isDisabled }"
-        [disabled]="!isDisabled" (click)="save()">שמור</button>
+        [disabled]="avrech!=null" (click)="save()">שמור</button>
       <button class="btn-circle btn-close" (click)="close()">סגור</button>
     </div>
   </div>

@@ -24,16 +24,17 @@ export class SettingsCodeTableComponent implements OnInit {
 
   public iSysTableId: number;
   public divNewValue: boolean;
-  public toEdit: boolean;
+  public pop: boolean;
   protected row: SysTableRow;
   protected roeToadd: SysTableRow = new SysTableRow();
   protected roeToadd1: SysTableRow = new SysTableRow();
   protected Mykey: string;
   public showOverlap: boolean;
-
+  flag:boolean;
+header:string;
   public lstColumns =
     [
-    { title: '', name: 'edit', bClickCell: true, type: 'html' },
+    { title: 'עריכה', name: 'edit', bClickCell: true, type: 'html' },
     { title: 'ערך', name: 'nvValue' }
     ]
   private readonly newProperty = this;
@@ -53,7 +54,7 @@ export class SettingsCodeTableComponent implements OnInit {
       this.getValues();
     }
     );
-
+    // debugger;
   }
   public getValues() {
 
@@ -74,15 +75,34 @@ export class SettingsCodeTableComponent implements OnInit {
     
   }
 
-  public editSysTableRow(myRow: SysTableRow) {
+  public editSysTableRow(myRow?: SysTableRow) {
     this.showOverlap = true;
-    this.row =JSON.parse(JSON.stringify(myRow)) ;
-    this.toEdit = true;
+    debugger;
+    if(myRow)
+    {
+      this.row =JSON.parse(JSON.stringify(myRow)) ;
+      this.header="עריכת ערך";
+      this.flag=true;
+    }
+    else
+    {
+      this.row=new SysTableRow();
+      this.header="הוספת ערך";
+      this.flag=false;
+    }
+    this.pop = true;
+  }
+
+  saveValue(){
+    if(this.flag)
+    this.saveEditValue();
+    else
+    this.saveNewValue();
   }
 
   saveEditValue() {
 
-    this.toEdit = false;
+    this.pop = false;
     this.showOverlap = false;
     this.sysTableService.editValue(this.row).then(res => {
       if (res) {
@@ -115,9 +135,16 @@ export class SettingsCodeTableComponent implements OnInit {
 
 
   }
-  saveNewValue() {
-    this.roeToadd.iSysTableId = this.iSysTableId;
 
+
+
+  saveNewValue() {
+    debugger;
+    this.pop = false;
+    this.showOverlap = false;
+
+    this.roeToadd.iSysTableId = this.iSysTableId;
+this.roeToadd.nvValue=this.row.nvValue;
    
     Object.keys(SysTableService.dataTables).forEach(key => {
       if (SysTableService.dataTables[key].iSysTableId == this.iSysTableId) {
@@ -154,7 +181,7 @@ export class SettingsCodeTableComponent implements OnInit {
   close() {
     this.divNewValue = false
     this.showOverlap = false
-    this.toEdit = false;
+    this.pop = false;
 
 
   }

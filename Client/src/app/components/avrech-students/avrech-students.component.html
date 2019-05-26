@@ -9,8 +9,15 @@
 <div *ngIf="flag==true" class="add-student">
 
   <span class="Student-affiliation">שיוך תלמידים</span>
-  <button (click)="cancelAdd()" class="btn-close">סגור </button>
-  <button (click)="saveAdd()" class="btn-save">  שמור</button>
+  <div class="row buttons">
+      <div class="col-sm-6"></div>
+      <div class="col-sm-6">
+        <button class="btn-circle btn-save" (click)="saveAdd()">שמור  </button>
+        <button class="btn-circle btn-close" (click)="cancelAdd()">סגור  </button>
+      </div>
+    </div>
+
+
   <!-- <div class="col-sm-8 my-div">
     <app-vy-multy-select #child [fullList]="listToSelect" [titleStr]="title" [inputTitle]="inputTitle" (onSave)="getFromChild($event)"></app-vy-multy-select>
   </div> -->

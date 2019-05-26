@@ -48,7 +48,7 @@ export class AvrechStudentsComponent implements OnInit {
         allStudents.forEach(
           student => {
             if (this.allStudents.findIndex(s => s.iPersonId == student.iPersonId) == -1) {
-              student['value'] = student.nvFirstName + ' ' + student.nvLastName + " " + student.nvIdentityCard;
+              student['value'] = student.nvFirstName + ' ' + student.nvLastName ;
               this.listToSelect.push(student);
             }
             this.flag = true;
@@ -123,7 +123,7 @@ export class AvrechStudentsComponent implements OnInit {
 
 
 
-    this.lstColumns.push(new VyTableColumn('', 'delete', 'html', true));
+    this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true));
     this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
     this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
     this.lstColumns.push(new VyTableColumn('טלפון', 'nvPhone'));

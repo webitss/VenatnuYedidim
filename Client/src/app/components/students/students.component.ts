@@ -48,6 +48,7 @@ export class StudentsComponent implements OnInit {
     this.component = this.router.url;
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
     if (this.component == '/students') {
+      debugger;
       this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
 
         this.studentList = data;
@@ -195,7 +196,7 @@ export class StudentsComponent implements OnInit {
     this.vyTableComponent.downloadPdf(name,'pdf');
   }
   editAndDeleteStudent(e) {
-
+debugger;
     if (e.columnClickName == 'edit')
       this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);
     else {

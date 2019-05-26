@@ -55,7 +55,7 @@ export class AvrechimComponent implements OnInit {
 
 
 
-    this.lstColumns.push(new VyTableColumn('פתיחה', 'open', 'html', true, false));
+    this.lstColumns.push(new VyTableColumn('עריכה', 'open', 'html', true, false));
     this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true, false));
     this.lstColumns.push(new VyTableColumn('שם פרטי', 'nvFirstName'));
     this.lstColumns.push(new VyTableColumn('שם משפחה', 'nvLastName'));
@@ -72,13 +72,13 @@ export class AvrechimComponent implements OnInit {
   click(e) {
     this.avrechId = e.iPersonId;
     if (e.columnClickName == "open")
-      this.editAvrech();
+      this.editAvrech(e);
     else
       this.deleteAvrech();
 
   }
-  editAvrech() {
-    this.router.navigate(['avrechim/avrech/', this.avrechId])
+  editAvrech(e) {
+    this.router.navigate(['avrechim/avrech/'+ e.iPersonId + '/avrech-details'])
   }
   deleteAvrech() {
     this.flag = true;
