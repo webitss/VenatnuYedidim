@@ -1,8 +1,13 @@
 <div class=" row component-name-header">
     <div class="col-sm-4 component-name">בוגרים</div>
-    <div class="actions col-sm-8">
-        <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel"></button>
-        <button class="btn btn-small" (click)="tableToPdf('בוגרים')">s</button>
+    <div class="actions col-sm-8 d-flex align-items-center justify-content-end">
+        <button class="btn btn-small excel" (click)="downloadExcel()" value="Export to Excel">
+            <i class="icon-excel-file"></i>
+        </button>
+        <button class="btn btn-small" (click)="tableToPdf('בוגרים')">
+            <i class="icon-pdf-file"></i>
+
+        </button>
     </div>
 </div>
 <div class="main-table">

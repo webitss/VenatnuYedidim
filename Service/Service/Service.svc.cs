@@ -142,9 +142,9 @@ namespace Service
             return Student.AddStudentsToAvrech(studentAndAvrechArr, iUserId);
         }
 
-        public bool AddStudent(Student student, string base64Image, int iUserId, int iAvrechId)
+        public bool AddStudent(Student student, string base64Image, int iUserId)
         {
-            return Student.AddStudent(student, base64Image, iUserId, iAvrechId);
+            return Student.AddStudent(student, base64Image, iUserId);
         }
 
 
@@ -213,6 +213,11 @@ namespace Service
         public List<Avrech> GetAllAvrechim(int? iPersonId)
         {
             return Avrech.GetAllAvrechim(iPersonId);
+        }
+          
+        public int  GetAvrechIdByStudentId (int iStudentId)
+        {
+            return Avrech.GetAvrechIdByStudentId(iStudentId);
         }
 
         public Avrech GetAvrechById(int? iPersonId)

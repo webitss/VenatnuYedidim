@@ -203,6 +203,23 @@ namespace Service.Entities
 
 
         }
+        public static int GetAvrechIdByStudentId(int iStudentId)
+
+        {
+            try
+            {
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_ByStudentId_SLCT", new SqlParameter("iStudentId", iStudentId)).Tables[0].Rows[0];
+                int iAvrechId = int.Parse(dr.ItemArray[0].ToString());
+                return iAvrechId;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetAvrechIdByStudentId", ", ex " + ex);
+                return 0;
+            }
+
+
+        }
         //public static bool AddAvrechToStudent(int iStudentId, int iAvrechId, int iUserId)
         //{
         //    try

@@ -116,20 +116,20 @@
                     </div>
 
                     <div class="form-group  col-sm-3">
-                        <ng-select [items]="days" placeholder="תאריך לידה עברי" id="nvBornDateDay" name="nvBornDateDay" (change)="change=true" [(ngModel)]="bornDateHebrewStudent.Day"
+                        <ng-select [items]="days" placeholder="תאריך לידה עברי" id="nvBornDateDay" name="nvBornDateDay" (change)="change=true" [(ngModel)]="bornDateHebrewStudent.Day" (change)="gregorianDate()"
                             [ngModelOptions]="{standalone: true}">
                         </ng-select>
                     </div>
 
                     <div class="form-group  col-sm-3">
-                        <ng-select [items]="monthes" placeholder="חודש" (change)="change=true" id="nvBornDateMonthHebreo" name="nvBornDateMonthHebreo"
+                        <ng-select [items]="monthes" placeholder="חודש" (change)="change=true" id="nvBornDateMonthHebreo" name="nvBornDateMonthHebreo" (change)="gregorianDate()"
                             [(ngModel)]="bornDateHebrewStudent.Month">
                         </ng-select>
 
                     </div>
 
                     <div class="form-group  col-sm-3">
-                        <ng-select [items]="hebrewYearsList" placeholder="שנה" id="nvBornDateYear" name="nvBornDateYear" (change)="change=true" (blur)="gregorianDate()" [(ngModel)]="bornDateHebrewStudent.Year"
+                        <ng-select [items]="hebrewYearsList" placeholder="שנה" id="nvBornDateYear" name="nvBornDateYear" (change)="change=true" (change)="gregorianDate()" [(ngModel)]="bornDateHebrewStudent.Year"
                             [ngModelOptions]="{standalone: true}">
                         </ng-select>
                     </div>
@@ -146,21 +146,21 @@
             </div> -->
 
                 <div class="form-group  col-sm-3">
-                    <ng-select [items]="foreignDays" placeholder="תאריך לידה לועזי" id="nvBornDateDay" name="nvBornDateDay" (change)="change=true;dateDay()"
+                    <ng-select [items]="foreignDays" placeholder="תאריך לידה לועזי" id="nvBornDateDay" name="nvBornDateDay" (change)="change=true;dateDay()" (change)="hebrewDate()"
                         [(ngModel)]="student.fDays" [ngModelOptions]="{standalone: true}">
                     </ng-select>
                 </div>
                 <div class="form-group  col-sm-3">
 
 
-                    <ng-select [items]="foreignMonthes" placeholder="חודש" (change)="change=true;dateDay()" id="nvBornDateMonth" name="nvBornDateMonth"
+                    <ng-select [items]="foreignMonthes" placeholder="חודש" (change)="change=true;dateDay()" id="nvBornDateMonth" name="nvBornDateMonth" (change)="hebrewDate()"
                         bindValue='id' bindLabel="text" [(ngModel)]="student.fMonthes">
                     </ng-select>
 
                 </div>
 
                 <div class="form-group  col-sm-3">
-                    <ng-select [items]="foreignYearsList" placeholder="שנה" id="nvBornDateYear" name="nvBornDateYear" (change)="change=true;dateDay()" (blur)="hebrewDate()"
+                    <ng-select [items]="foreignYearsList" placeholder="שנה" id="nvBornDateYear" name="nvBornDateYear" (change)="change=true;dateDay()" (change)="hebrewDate()"
                         [(ngModel)]="student.fYears" [ngModelOptions]="{standalone: true}">
                     </ng-select>
                 </div>
@@ -395,10 +395,10 @@
     
                 </div> -->
                 <div class="form-group col-sm-3">
-                    <label for="yeshivaName">שיוך לאברך :</label>
-                    <select class="form-control" id="avrechId" name="avrechName" (change)="selectAv($event)">
+                    <label for="avrechId">שיוך לאברך :</label>
+                    <select class="form-control" id="avrechId" (change)="selectAv($event)" [(ngModel)]="AvrechSelected.iPersonId" required #type="ngModel">
                         <option disabled> בחר אברך </option>
-                        <option *ngFor="let av of avrechList">{{av.nvFirstName}} {{av.nvLastName}}</option>
+                        <option *ngFor="let av of avrechList" [value]="av.iPersonId">{{av.nvFirstName}} {{av.nvLastName}}</option>
                     </select>
                 </div>
 

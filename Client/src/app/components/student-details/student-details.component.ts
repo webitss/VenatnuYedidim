@@ -127,7 +127,6 @@ url:string;
 
     this.iUserId = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
     this.appProxy.post("GetAllAvrechim",{iPersonId:this.iUserId}).then(date => { this.avrechList = date; })
-
     this.appProxy.post("GetAllYeshivot").then(date => { this.yeshivaList = date; })
 
     this.route.parent.params.subscribe(params => {
@@ -137,8 +136,12 @@ url:string;
       if (params['iPersonId'] != '0') {
 
         this.appProxy.post("GetStudentById", { iPersonId: this.paramRout }).then(data => {
-
+debugger;
           this.student = data;
+          this.appProxy.post("GetAvrechIdByStudentId",{iStudentId:this.student.iPersonId}).then(data=>{
+            this.AvrechSelected.iPersonId=data;
+          })
+
           if (!this.student || !this.student.iPersonId)
             this.change = true;
           // this.student.dtBirthdate.getTime();
@@ -334,10 +337,9 @@ while(year!=0)
 return yearString;
   }
 gregorianDate(){
-  //  trace(this.dateUrl);
-  // $location.path('/foo/bar');
-  //   expect($location.path()).toBe('/foo/bar');
-  for(var i=0;i<this.days.length;i++)
+  if(this.bornDateHebrewStudent.Year)
+  {
+      for(var i=0;i<this.days.length;i++)
   {
     if(this.days[i]==this.bornDateHebrewStudent.Day)
     break;
@@ -377,13 +379,16 @@ gregorianDate(){
    this.student.fDays=date.greg().toString().slice(8,10);
    this.student.fMonthes=date.getGregMonthObject().month;
    this.student.fYears=date.getGregMonthObject().year;
+
+  }
+
 }
 
   hebrewDate(){
-    var hb = require("hebrew-date");
+    if(this.student.fYears)
+    {
+      var hb = require("hebrew-date");
  var hebrewDate;
-
-
  this.month=this.student.fMonthes.valueOf();
 debugger;
 
@@ -391,18 +396,8 @@ debugger;
  this.bornDateHebrewStudent.Month=this.monthes[hebrewDate.month-1];
  this.bornDateHebrewStudent.Year=this.calcYear(hebrewDate.year);
  this.bornDateHebrewStudent.Day=this.days[hebrewDate.date-1];
-
-
-//     alert("come");
-//    this.d="";
-//    this.d+=this.bornDateHebrewStudent.Day+" "+this.bornDateHebrewStudent.Month+" "+this.bornDateHebrewStudent.Year;
-//    Date.parse(this.d);
-//    debugger;
-//     this.appProxy.post("castEbrewToForeign",{hebrewDate:this.d}).then(
-//       data=>{
-// // alert(HebrewDate);
-//       }
-//     )
+    }
+    
   }
 
   selectYesh(event: any) {
@@ -462,6 +457,7 @@ debugger;
       if (e.nvFirstName+" "+e.nvLastName == event.currentTarget.value) {
         this.AvrechSelected.nvFirstName = e.nvFirstName;
         this.AvrechSelected.iPersonId = e.iPersonId;
+        this.student.iAvrechId=this.AvrechSelected.iPersonId;
         // this.AvrechSelected. = e.nvCity;
         // this.yeshivaSelected.iYeshivaId = e.iYeshivaId;
         // alert(this.AvrechSelected.nvFirstName);
@@ -552,6 +548,10 @@ debugger;
     debugger;
     if (this.save.name != '')
       this.student.nvImgStudent = this.save.name;
+      debugger;
+
+      this.student.dtBirthdate=new Date(this.foreignMonthes[this.student.fMonthes-1].text+" "+this.student.fDays+" "+this.student.fYears);
+      debugger;
     this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;
     if (this.fatherDead == true) {
       this.student.bDeathFather = true;
@@ -571,6 +571,8 @@ debugger;
     }
     if (this.paramRout != '0') {
       this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId }).then(data => {
+        debugger;
+        if(data){
         if (this.status == 'תלמיד')
           this._parent.openMessagePopup("פרטי התלמיד עודכנו בהצלחה!");
         else
@@ -578,6 +580,7 @@ debugger;
         this.change = false;
         if (!destroy)
           this.backToGridStudent();
+        }
 
       }, err => {
         if (this.status == 'תלמיד')
@@ -590,7 +593,7 @@ debugger;
     }
 
     else
-      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId, iAvrechId: this.AvrechSelected.iPersonId}).then(data => {
+      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId}).then(data => {
 debugger;
 if(data)
         this._parent.openMessagePopup("התלמיד נוסף בהצלחה!");

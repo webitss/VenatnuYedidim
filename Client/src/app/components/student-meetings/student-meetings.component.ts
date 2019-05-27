@@ -38,8 +38,8 @@ export class StudentMeetingsComponent implements OnInit {
 
 
   public lstColumns = [
-  {name: 'edit',bClickCell: true,type: 'html'},
-  {name: 'delete',bClickCell: true,type: 'html'},
+  {title: 'עריכה',name: 'edit',bClickCell: true,type: 'html'},
+  {title: 'מחיקה',name: 'delete',bClickCell: true,type: 'html'},
   {title: 'סוג פגישה',name: 'nvMeetingType',},
   {title: 'שם אברך',name: 'avrechName',},
   {title: 'תאריך',name: 'nvDate',},

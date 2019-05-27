@@ -147,7 +147,7 @@ namespace Service
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool AddStudent(Student student, string base64Image, int iUserId, int iAvrechId);
+        bool AddStudent(Student student, string base64Image, int iUserId);
 
 
         [OperationContract]
@@ -289,6 +289,15 @@ namespace Service
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         List<Avrech> GetAvrechByStudentId(int iPersonId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetAvrechIdByStudentId",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        int GetAvrechIdByStudentId(int iStudentId);
 
         [OperationContract]
         [WebInvoke(

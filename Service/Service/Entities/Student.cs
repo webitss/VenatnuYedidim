@@ -30,7 +30,7 @@ namespace Service.Entities
         [DataMember]
         public bool? bDeathMother { get; set; }
         [DataMember]
-        public string Avrech { get; set; }
+        public int iAvrechId { get; set; }
         [DataMember]
         public string iCauseOfDeathFather { get; set; }
         [DataMember]
@@ -189,20 +189,23 @@ namespace Service.Entities
             }
         }
 
-        public static bool AddStudent(Student student, string base64Image, int iUserId, int iAvrechId)
+        public static bool AddStudent(Student student, string base64Image, int iUserId)
         {
             try
 			{
                 if (base64Image != "")
                     student.nvImgStudent = Fileshandler.SaveFileByBase64(base64Image, student.nvImgStudent, "Students//");
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
-                parameters.Add(new SqlParameter("iUserId", iUserId));
-                SqlDataAccess.ExecuteDatasetSP("TStudent_INS", parameters);
                 List<SqlParameter> parameters2 = new List<SqlParameter>();
-                parameters2.Add(new SqlParameter("iStudentId", student.iPersonId));
-                parameters2.Add(new SqlParameter("iAvrechId", iAvrechId));
+                parameters2.Add(new SqlParameter("iAvrechId", parameters.Find(x => x.ParameterName == "iAvrechId").Value));
+                parameters.Remove(parameters.Find(x => x.ParameterName == "iAvrechId"));
+
+                parameters.Add(new SqlParameter("iUserId", iUserId));
+                DataRow dr=SqlDataAccess.ExecuteDatasetSP("TStudent_INS", parameters).Tables[0].Rows[0];
+                int id = int.Parse(dr.ItemArray[0].ToString());
+                parameters2.Add(new SqlParameter("iStudentId", id));
                 parameters2.Add(new SqlParameter("iUserId", iUserId));
-                SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_INS", parameters);
+                SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_INS", parameters2);
                 return true;
 
             }
@@ -248,6 +251,7 @@ namespace Service.Entities
 
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
+                parameters.Remove(parameters.Find(x => x.ParameterName == "iAvrechId"));
                 SqlDataAccess.ExecuteDatasetSP("TStudent_UPD", parameters);
                 return true;
             }

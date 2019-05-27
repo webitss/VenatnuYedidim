@@ -140,12 +140,12 @@ export class VyTableComponent implements OnInit {
   }
 
   public clickCellFunc(item, colName) {
-    debugger;
+
     item['columnClickName'] = colName;
     this.clickCell.emit(item);
   }
   public changeOptFunc(item,colName){
-    debugger;
+
     item['columnClickName'] = colName;
 this.changeOpt.emit(item);
   }

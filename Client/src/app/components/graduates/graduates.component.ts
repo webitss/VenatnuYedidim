@@ -60,6 +60,7 @@ export class GraduatesComponent implements OnInit {
   }
 
   editStudent(even) {
-    console.log(even);
+    debugger;
+    this.router.navigate(['students/student/' + even.iPersonId + '/' + 'student-details'])
   }
 }

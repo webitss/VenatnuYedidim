@@ -51,8 +51,8 @@ export class SettingsYeshivotComponent implements OnInit {
 
   ngOnInit() {
 
-    this.lstColumns.push(new VyTableColumn('', 'edit', 'html', true, false))
-    this.lstColumns.push(new VyTableColumn('', 'delete', 'html', true, false))
+    this.lstColumns.push(new VyTableColumn('עריכה', 'edit', 'html', true, false))
+    this.lstColumns.push(new VyTableColumn('מחיקה', 'delete', 'html', true, false))
     this.lstColumns.push(new VyTableColumn('שם מוסד', 'nvYeshivaName'))
     this.lstColumns.push(new VyTableColumn('כתובת ', 'nvAddress'))
     this.lstColumns.push(new VyTableColumn('עיר', 'nvCity'))

@@ -32,8 +32,8 @@ export class AvrechPresenceComponent implements OnInit {
   constructor(private appProxy: AppProxy, private router: ActivatedRoute, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent, private sysTableService: SysTableService,private globalService: GlobalService) { }
 
   public lstColumns = [
-    new VyTableColumn('', 'edit', 'html', true, false),
-    new VyTableColumn('', 'delete', 'html', true, false),
+    new VyTableColumn('עריכה', 'edit', 'html', true, false),
+    new VyTableColumn('מחיקה', 'delete', 'html', true, false),
     new VyTableColumn('תאריך', 'nvDate'),
     new VyTableColumn('סך שעות', 'iHoursSum')
   ];
