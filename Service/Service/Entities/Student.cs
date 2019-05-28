@@ -250,9 +250,14 @@ namespace Service.Entities
                 }
 
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
+                List<SqlParameter> parameters2 = new List<SqlParameter>();
                 parameters.Add(new SqlParameter("iUserId", iUserId));
+                parameters2.Add(new SqlParameter("iAvrechId", parameters.Find(x => x.ParameterName == "iAvrechId").Value));
+                parameters2.Add(new SqlParameter("iStudentId", student.iPersonId));
+                parameters2.Add(new SqlParameter("iUserId", iUserId));
                 parameters.Remove(parameters.Find(x => x.ParameterName == "iAvrechId"));
                 SqlDataAccess.ExecuteDatasetSP("TStudent_UPD", parameters);
+                SqlDataAccess.ExecuteDatasetSP("TAvrechStudent_INS_UPD", parameters2);
                 return true;
             }
             catch (Exception ex)

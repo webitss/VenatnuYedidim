@@ -103,7 +103,7 @@ export class StudentConversationDetailsComponent implements OnInit {
   conver = new Conversation();
   saveConversation() {
     debugger;
-    this.conver.iPersonId = this.iPersonId;
+    this.conver.iPersonId = this.conversation.iPersonId;
     this.conver.iConversationId = this.conversation.iConversationId;
     this.conver.iConversationType = this.conversation.iConversationType;
     this.conver.nvConversationSummary = this.currentConver.nvConversationSummary;

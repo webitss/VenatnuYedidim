@@ -115,13 +115,13 @@
 
                     </div>
 
-                    <div class="form-group  col-sm-3">
+                    <div class="form-group col-sm-3">
                         <ng-select [items]="days" placeholder="תאריך לידה עברי" id="nvBornDateDay" name="nvBornDateDay" (change)="change=true" [(ngModel)]="bornDateHebrewStudent.Day" (change)="gregorianDate()"
                             [ngModelOptions]="{standalone: true}">
                         </ng-select>
                     </div>
 
-                    <div class="form-group  col-sm-3">
+                    <div class="form-group  col-sm-3" id="m">
                         <ng-select [items]="monthes" placeholder="חודש" (change)="change=true" id="nvBornDateMonthHebreo" name="nvBornDateMonthHebreo" (change)="gregorianDate()"
                             [(ngModel)]="bornDateHebrewStudent.Month">
                         </ng-select>
@@ -396,7 +396,7 @@
                 </div> -->
                 <div class="form-group col-sm-3">
                     <label for="avrechId">שיוך לאברך :</label>
-                    <select class="form-control" id="avrechId" (change)="selectAv($event)" [(ngModel)]="AvrechSelected.iPersonId" required #type="ngModel">
+                    <select class="form-control" id="avrechId" [(ngModel)]="student.iAvrechId" required #type="ngModel">
                         <option disabled> בחר אברך </option>
                         <option *ngFor="let av of avrechList" [value]="av.iPersonId">{{av.nvFirstName}} {{av.nvLastName}}</option>
                     </select>

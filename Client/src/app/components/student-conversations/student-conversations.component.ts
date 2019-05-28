@@ -157,6 +157,7 @@ debugger;
   selecList(id) {
     this.appProxy.post("GetConversations", { iPersonId: id })
       .then(data => {
+        debugger;
         this.conversationsList = data;
         this.lstDataRows = data;
         this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {

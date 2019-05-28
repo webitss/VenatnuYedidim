@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, Inject, forwardRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, Inject, forwardRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Student } from '../../classes/student';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -27,7 +27,7 @@ export class StudentDetailsComponent implements OnInit {
 
   status: string;
   constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router,
-    private globalService: GlobalService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
+    private globalService: GlobalService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent,private cdRef:ChangeDetectorRef) { }
 
   @ViewChild(NgForm) form;
   @Input() student: Student;
@@ -139,7 +139,7 @@ url:string;
 debugger;
           this.student = data;
           this.appProxy.post("GetAvrechIdByStudentId",{iStudentId:this.student.iPersonId}).then(data=>{
-            this.AvrechSelected.iPersonId=data;
+            this.student.iAvrechId=data;
           })
 
           if (!this.student || !this.student.iPersonId)
@@ -337,6 +337,7 @@ while(year!=0)
 return yearString;
   }
 gregorianDate(){
+
   if(this.bornDateHebrewStudent.Year)
   {
       for(var i=0;i<this.days.length;i++)
@@ -375,6 +376,39 @@ gregorianDate(){
   
   var Hebcal = require('hebcal');
   var date = new Hebcal.HDate(this.day, this.monthEb, this.year);
+
+  if(date.getYearObject().months.length==12)
+  { 
+    this.monthes.splice(6,1);
+    this.monthes[5]=this.monthes[5].slice(0,3);
+
+    var list = document.getElementById("nvBornDateMonthHebreo");
+debugger;
+list.removeChild(list.childNodes[0]);
+var mon=document.getElementById("m");
+var att1=document.createAttribute("class");
+att1.value="newSelect";
+// mon.setAttributeNode(att1);
+var select=document.createElement("select");
+var att2=document.createAttribute("class");
+att2.value="form-control";
+ select.setAttributeNode(att2);
+ mon.appendChild(select);
+ var i=0;
+ this.monthes.forEach(month=>{
+   var opt=document.createElement("option");
+   opt.innerText=month;
+   opt.value=i.toString();
+   select.appendChild(opt);
+   i++;
+ })
+ debugger
+    // list.removeChild(list.childNodes[6]);
+    
+  }
+
+
+
   debugger;
    this.student.fDays=date.greg().toString().slice(8,10);
    this.student.fMonthes=date.getGregMonthObject().month;
@@ -399,6 +433,19 @@ debugger;
     }
     
   }
+
+  onUpdateItems = () => {
+    this.monthes.splice(6,1);
+    this.monthes[5]=this.monthes[5].slice(0,3);
+    return this.monthes;
+    // this.setState(state => {
+    //   const list = state.list.map(item => item + 1);
+
+    //   return {
+    //     list,
+    //   };
+    // });
+  };
 
   selectYesh(event: any) {
 debugger;
@@ -449,23 +496,23 @@ debugger;
   // changeForm(){
   //   this.change=true;
   // }
-  selectAv(event: any) {
-    debugger;
+  // selectAv(event: any) {
+  //   debugger;
     
 
-    this.avrechList.forEach(e => {
-      if (e.nvFirstName+" "+e.nvLastName == event.currentTarget.value) {
-        this.AvrechSelected.nvFirstName = e.nvFirstName;
-        this.AvrechSelected.iPersonId = e.iPersonId;
-        this.student.iAvrechId=this.AvrechSelected.iPersonId;
-        // this.AvrechSelected. = e.nvCity;
-        // this.yeshivaSelected.iYeshivaId = e.iYeshivaId;
-        // alert(this.AvrechSelected.nvFirstName);
-      }
+  //   this.avrechList.forEach(e => {
+  //     if (e.nvFirstName+" "+e.nvLastName == event.currentTarget.value) {
+  //       this.AvrechSelected.nvFirstName = e.nvFirstName;
+  //       this.AvrechSelected.iPersonId = e.iPersonId;
+  //       this.student.iAvrechId=this.AvrechSelected.iPersonId;
+  //       // this.AvrechSelected. = e.nvCity;
+  //       // this.yeshivaSelected.iYeshivaId = e.iYeshivaId;
+  //       // alert(this.AvrechSelected.nvFirstName);
+  //     }
 
-    })
-    // this.addSelectAvrechToStudent();
-  }
+  //   })
+  //   // this.addSelectAvrechToStudent();
+  // }
 
   // addSelectAvrechToStudent(){
   //   this.appProxy.post("AddAvrechToStudent", {

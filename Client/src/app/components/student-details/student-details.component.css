@@ -132,5 +132,9 @@ caption {
     border-top: 0; 
 }
 
-
+.newSelect{
+    height: 45%;
+    padding-bottom: 0.9%;
+    border-bottom: 1px solid #a7a4a4;
+}
 
