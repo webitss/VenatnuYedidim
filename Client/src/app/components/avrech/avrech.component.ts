@@ -35,7 +35,7 @@ export class AvrechComponent implements OnInit {
 
       this.appProxy.post("GetAvrechById", { iPersonId: this.id }).then(
         data => {
-          debugger;
+
           this.avrech = data;
           this.name = this.avrech.nvFirstName+" "+this.avrech.nvLastName;
 

@@ -23,17 +23,17 @@ export class StudentComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private route: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService,private cdRef:ChangeDetectorRef) { }
   // subscription:Subscription;
   ngOnInit() {
-    debugger;
+
     this.sub = this.route.params.subscribe(params => {
       this.flag = +params['iPersonId'];
     });
 
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['iPersonId'];
-      debugger;
+
 
       if (this.id != 0) {
-        debugger;
+
 
         this.appProxy.post("GetStudentById", { iPersonId: this.id }).then(data => {
           this.student = data;

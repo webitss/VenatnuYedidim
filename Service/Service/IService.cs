@@ -573,7 +573,7 @@ RequestFormat = WebMessageFormat.Json)]
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        int SetConversations(Conversation conversation, int iUserId);
+        int SetConversations(Conversation conversation,Task task, int iUserId);
 
 
         //[OperationContract]

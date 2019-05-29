@@ -303,9 +303,9 @@ namespace Service
         {
             return Conversation.GetConversations(iPersonId);
         }
-        public int SetConversations(Conversation conversation, int iUserId)
+        public int SetConversations(Conversation conversation,Task task, int iUserId)
         {
-            return Conversation.SetConversations(conversation, iUserId);
+            return Conversation.SetConversations(conversation,task, iUserId);
         }
         //public bool AddConversations(Conversation conversation, int iPersonId)
         //{

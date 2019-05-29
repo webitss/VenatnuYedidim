@@ -94,7 +94,7 @@ button{
     width: 30px;
     height: 30px;
     cursor: pointer;
-    background-image: url("../../../assets/icons/garbage.png");   
+    /* background-image: url("../../../assets/icons/garbage.png");    */
     padding-right: 0px;
     background-color: transparent;
 }
@@ -132,9 +132,4 @@ caption {
     border-top: 0; 
 }
 
-.newSelect{
-    height: 45%;
-    padding-bottom: 0.9%;
-    border-bottom: 1px solid #a7a4a4;
-}
 

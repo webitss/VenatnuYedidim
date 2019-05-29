@@ -122,9 +122,12 @@
                     </div>
 
                     <div class="form-group  col-sm-3" id="m">
-                        <ng-select [items]="monthes" placeholder="חודש" (change)="change=true" id="nvBornDateMonthHebreo" name="nvBornDateMonthHebreo" (change)="gregorianDate()"
+                        <ng-select *ngIf="flagMonth" [items]="monthesMeuberet" placeholder="חודש" (change)="change=true" id="nvBornDateMonthHebreo" name="nvBornDateMonthHebreo" (change)="gregorianDate()"
                             [(ngModel)]="bornDateHebrewStudent.Month">
                         </ng-select>
+                        <ng-select *ngIf="!flagMonth" [items]="monthesRegular" placeholder="חודש" (change)="change=true" id="nvBornDateMonthHebreo" name="nvBornDateMonthHebreo" (change)="gregorianDate()"
+                        [(ngModel)]="bornDateHebrewStudent.Month">
+                    </ng-select>
 
                     </div>
 
@@ -199,38 +202,21 @@
                     </div>
                     <div class="d-flex flex-wrap" *ngIf="(fatherDead||fatherDeadDetails)">
                         <div class="form-group  col-sm-6">
-                            <!-- <label for="nvBornDateDay"> תאריך פטירה עברי של האב:</label> -->
-
-                            <!-- <select class="form-control" id="nvBornDateDay" name="nvBornDateDay" (change)="change=true"
-                            [(ngModel)]="diedDateHebrewFather.Day" [ngModelOptions]="{standalone: true}">
-                            <option *ngFor="let day of days">
-                                {{day}}
-                            </option>
-                        </select> -->
-
                             <ng-select [items]="days" placeholder="תאריך פטירה עברי של האב:" id="nvBornDateDay" name="nvBornDateDay" (change)="change=true"
                                 [(ngModel)]="diedDateHebrewFather.Day" [ngModelOptions]="{standalone: true}">
                             </ng-select>
                         </div>
 
                         <div class="form-group  col-sm-6">
-                            <!-- <label for="nvBornDateDay">חודש :</label>
-                        <select class="form-control" id="nvBornDateMonth" name="nvBornDateMonth" [(ngModel)]="diedDateHebrewFather.Month"
-                            [ngModelOptions]="{standalone: true}">
-                            <option *ngFor="let month of monthes">
-                                {{month}}
-                            </option>
-                        </select> -->
-                            <ng-select [items]="monthes" placeholder="חודש" id="diedDateHebrewFather" name="diedDateHebrewFather" [(ngModel)]="diedDateHebrewFather.Month"
-                                [ngModelOptions]="{standalone: true}">
-                            </ng-select>
+                        <ng-select *ngIf="flagMonth" [items]="monthesMeuberet" placeholder="חודש" (change)="change=true" id="diedDateHebrewFather" name="diedDateHebrewFather"  (change)="gregorianDate()"
+                        [(ngModel)]="diedDateHebrewFather.Month">
+                    </ng-select>
+                    <ng-select *ngIf="!flagMonth" [items]="monthesRegular" placeholder="חודש" (change)="change=true" id="diedDateHebrewFather" name="diedDateHebrewFather"  (change)="gregorianDate()"
+                    [(ngModel)]="diedDateHebrewFather.Month"></ng-select>
 
                         </div>
 
                         <div class="form-group  col-sm-6">
-                            <!-- <label for="nvBornDateDay">שנה :</label>
-                        <input type="text" class="form-control" id="nvBornDateYear" name="nvBornDateYear" (change)="change=true"
-                            [(ngModel)]="diedDateHebrewFather.Year" [ngModelOptions]="{standalone: true}" placeholder="שנה"> -->
                             <ng-select [items]="hebrewYearsList" id="nvBornDateYear" name="nvBornDateYear" (change)="change=true" [(ngModel)]="diedDateHebrewFather.Year"
                                 [ngModelOptions]="{standalone: true}" placeholder="שנה">
                             </ng-select>
@@ -239,7 +225,7 @@
                         <div class="form-group col-sm-6">
                             <label for="couseOfdead"> נפטר מ:</label>
 
-                            <select class="form-control" id="couseOfdead" name="couseOfdead" [(ngModel)]="student.iCauseOfDeathFather">
+                            <select class="form-control" id="couseOfdeadF" name="couseOfdeadF" [(ngModel)]="student.iCauseOfDeathFather">
                                 <option *ngFor="let s of sysTableRowList" [value]="s.iSysTableRowId">
                                     {{s.nvValue}}
                                 </option>
@@ -258,37 +244,21 @@
                     </div>
                     <div class="d-flex flex-wrap" *ngIf="(motherDead||motherDeadDetails)">
                         <div class="form-group  col-sm-6">
-                            <!-- <label for="nvBornDateDay"> תאריך פטירה עברי של האם:</label> -->
-
-                            <!-- <select class="form-control" id="nvBornDateDay" name="nvBornDateDay" (change)="change=true"
-                            [(ngModel)]="diedDateHebrewMother.Day" [ngModelOptions]="{standalone: true}">
-                            <option *ngFor="let day of days">
-                                {{day}}
-                            </option>
-                        </select> -->
                             <ng-select [items]="days" placeholder="תאריך פטירה עברי של האם:" id="nvBornDateDay" name="nvBornDateDay" (change)="change=true"
                                 [(ngModel)]="diedDateHebrewMother.Day" [ngModelOptions]="{standalone: true}">
                             </ng-select>
                         </div>
 
                         <div class="form-group  col-sm-6">
-                            <!-- <label for="nvBornDateDay">חודש :</label>
-                        <select class="form-control" id="nvBornDateMonth" name="nvBornDateMonth" [(ngModel)]="diedDateHebrewMother.Month"
-                            [ngModelOptions]="{standalone: true}">
-                            <option *ngFor="let month of monthes">
-                                {{month}}
-                            </option>
-                        </select> -->
-                            <ng-select [items]="monthes" placeholder="חודש" id="nvBornDateMonth" name="nvBornDateMonth" [(ngModel)]="diedDateHebrewMother.Month"
-                                [ngModelOptions]="{standalone: true}">
-                            </ng-select>
+                        <ng-select *ngIf="flagMonth" [items]="monthesMeuberet" placeholder="חודש" (change)="change=true" id="diedDateHebrewMother" name="diedDateHebrewMother"  (change)="gregorianDate()"
+                        [(ngModel)]="diedDateHebrewMother.Month">
+                    </ng-select>
+                    <ng-select *ngIf="!flagMonth" [items]="monthesRegular" placeholder="חודש" (change)="change=true" id="diedDateHebrewMother" name="diedDateHebrewMother"  (change)="gregorianDate()"
+                    [(ngModel)]="diedDateHebrewMother.Month"></ng-select>
 
                         </div>
 
                         <div class="form-group  col-sm-6">
-                            <!-- <label for="nvBornDateDay">שנה :</label>
-                        <input type="text" class="form-control" id="nvBornDateYear" name="nvBornDateYear" (change)="change=true"
-                            [(ngModel)]="diedDateHebrewMother.Year" [ngModelOptions]="{standalone: true}" placeholder="שנה"> -->
                             <ng-select [items]="hebrewYearsList" id="nvBornDateYear" name="nvBornDateYear" (change)="change=true" [(ngModel)]="diedDateHebrewMother.Year"
                                 [ngModelOptions]="{standalone: true}" placeholder="שנה">
                             </ng-select>
@@ -297,7 +267,7 @@
                         <div class="form-group col-sm-6">
                             <label for="couseOfdead"> נפטרה מ:</label>
 
-                            <select class="form-control" id="couseOfdead" name="couseOfdead" [(ngModel)]="student.iCauseOfDeathMother">
+                            <select class="form-control" id="couseOfdeadM" name="couseOfdeadM" [(ngModel)]="student.iCauseOfDeathMother">
                                 <option *ngFor="let s of sysTableRowList" [value]="s.iSysTableRowId">
                                     {{s.nvValue}}
                                 </option>

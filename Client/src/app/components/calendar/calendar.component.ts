@@ -94,6 +94,7 @@ export class CalendarComponent implements OnInit {
 
     this.appProxy.post("GetTasksByPersonId", { iPersonId: this.id }).then(
       data1 => {
+        debugger;
         //if (data != null) {
         this.taskList = data1;
 

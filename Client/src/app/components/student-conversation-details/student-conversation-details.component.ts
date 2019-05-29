@@ -57,7 +57,6 @@ export class StudentConversationDetailsComponent implements OnInit {
     , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
-    debugger;
     this.currentMeeting=new Meeting();
     // this.sub = this.route.parent.params.subscribe(params => {
     //   this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
@@ -78,7 +77,6 @@ export class StudentConversationDetailsComponent implements OnInit {
       this.currentConver['dtDate'] = new Date(this.currentConver.dtConversationDate);
       this.currentConver['conversationTime'] =moment(this.currentConver.dtConversationDate).format('HH:mm');
     })
-    debugger;
     this.appProxy.post("GetAllAvrechimByStudent", { iPersonId:this.iPersonId }).then(
       data => {
         debugger;
@@ -113,7 +111,7 @@ export class StudentConversationDetailsComponent implements OnInit {
     if (this.currentConver.iConversationId == null) {
       this.conver.iPersonId = this.iPersonId;
     }
-    this.appProxy.post("SetConversations", { conversation: this.conver, iUserId: this.iUserId })
+    this.appProxy.post("SetConversations", { conversation: this.conver,task:this.task, iUserId: this.iUserId })
       .then(data => {
         if (data != 0) {
           if (this.conver.iConversationId == null) {

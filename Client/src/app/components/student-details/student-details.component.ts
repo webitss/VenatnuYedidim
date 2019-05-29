@@ -54,7 +54,8 @@ export class StudentDetailsComponent implements OnInit {
   iUserId: number;
   days: string[] = ["א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב", "יג", "יד", "טו", "טז", "יז", "יח", "יט", "כ", "כא", "כב", "כג", "כד", "כה", "כו", "כז", "כח", "כט", "ל"];
   monthesEng:string[]=["Tishrei","Cheshvan","Kislev","Tevet","Shvat","Adar 1","Adar 2","Nisan","Iyyar","Sivan","Tamuz","Av","Elul"]
-  monthes: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר א","אדר ב", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
+  monthesMeuberet: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר א","אדר ב", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
+monthesRegular:string[]=["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"]
   foreignDays: Array<number> = [];
   foreignMonthes: Array<KeyValue>;
   foreignDate:string;
@@ -66,6 +67,7 @@ year:number;
   foreignYearsList: Array<string>;
   month:number=null;
 url:string;
+flagMonth:boolean=false;
 
 
   lenOfMonth: number;
@@ -97,6 +99,7 @@ url:string;
 
 
   ngOnInit() {
+
     this.foreignMonthes = [
       { id: 1, text: "Jan" },
       { id: 2, text: "Feb" },
@@ -136,7 +139,7 @@ url:string;
       if (params['iPersonId'] != '0') {
 
         this.appProxy.post("GetStudentById", { iPersonId: this.paramRout }).then(data => {
-debugger;
+
           this.student = data;
           this.appProxy.post("GetAvrechIdByStudentId",{iStudentId:this.student.iPersonId}).then(data=>{
             this.student.iAvrechId=data;
@@ -152,20 +155,29 @@ debugger;
           });
           this.student['fYears'] = this.student.dtBirthdate ? this.student.dtBirthdate.getFullYear() : 0;
           // this.student['fMonthes'] = this.foreignMonthes[this.student.dtBirthdate?this.student.dtBirthdate.getMonth().toString():null];
-          this.student['fMonthes'] = this.student.dtBirthdate.getMonth();
+          this.student['fMonthes'] = this.student.dtBirthdate.getMonth()+1;
           // this.student['fMonthes']['text']=this.foreignMonthes[this.student.dtBirthdate.getMonth()].text;
           this.student['fDays'] = this.student.dtBirthdate ? this.student.dtBirthdate.getDate() : 0;
 
           this.bornDateStudentArr = this.student.nvBirthdate.split(" ");
+
           this.bornDateHebrewStudent.Day = this.bornDateStudentArr[0];
           this.bornDateHebrewStudent.Month = this.bornDateStudentArr[1];
+          if(this.bornDateStudentArr.length==4)
+          {
+            this.bornDateHebrewStudent.Month+=" "+this.bornDateStudentArr[2];
+            this.bornDateHebrewStudent.Year = this.bornDateStudentArr[3];
+          }
+          else
           this.bornDateHebrewStudent.Year = this.bornDateStudentArr[2];
           if (this.student.nvFatherDeathDate != null) {
+            debugger;
+
+
             this.diedDateFatherArr = this.student.nvFatherDeathDate.split(" ");
             this.diedDateHebrewFather.Day = this.diedDateFatherArr[0];
             this.diedDateHebrewFather.Month = this.diedDateFatherArr[1];
             this.diedDateHebrewFather.Year = this.diedDateFatherArr[2];
-
           }
           if (this.student.nvMotherDeathDate != null) {
             this.diedDateMotherArr = this.student.nvMotherDeathDate.split(" ");
@@ -336,8 +348,9 @@ while(year!=0)
 }
 return yearString;
   }
-gregorianDate(){
 
+
+gregorianDate(){
   if(this.bornDateHebrewStudent.Year)
   {
       for(var i=0;i<this.days.length;i++)
@@ -348,11 +361,11 @@ gregorianDate(){
   
   this.day=i+1;
  
-  for(var i=0;i<this.monthes.length;i++)
+  for(var i=0;i<this.monthesMeuberet.length;i++)
   {
-    if(this.monthes[i]==this.bornDateHebrewStudent.Month)
+    if(this.monthesMeuberet[i]==this.bornDateHebrewStudent.Month)
     {
-      this.monthEb=this.monthesEng[i];
+      this.monthEb=this.monthesMeuberet[i];
       break;
     }
   }
@@ -376,38 +389,13 @@ gregorianDate(){
   
   var Hebcal = require('hebcal');
   var date = new Hebcal.HDate(this.day, this.monthEb, this.year);
-
   if(date.getYearObject().months.length==12)
-  { 
-    this.monthes.splice(6,1);
-    this.monthes[5]=this.monthes[5].slice(0,3);
-
-    var list = document.getElementById("nvBornDateMonthHebreo");
-debugger;
-list.removeChild(list.childNodes[0]);
-var mon=document.getElementById("m");
-var att1=document.createAttribute("class");
-att1.value="newSelect";
-// mon.setAttributeNode(att1);
-var select=document.createElement("select");
-var att2=document.createAttribute("class");
-att2.value="form-control";
- select.setAttributeNode(att2);
- mon.appendChild(select);
- var i=0;
- this.monthes.forEach(month=>{
-   var opt=document.createElement("option");
-   opt.innerText=month;
-   opt.value=i.toString();
-   select.appendChild(opt);
-   i++;
- })
- debugger
-    // list.removeChild(list.childNodes[6]);
-    
+  {
+    this.flagMonth=false;   
   }
-
-
+  else
+  this.flagMonth=true;
+debugger;
 
   debugger;
    this.student.fDays=date.greg().toString().slice(8,10);
@@ -427,25 +415,14 @@ att2.value="form-control";
 debugger;
 
  hebrewDate=(hb(parseInt(this.student.fYears.toString()),this.month,this.student.fDays));
- this.bornDateHebrewStudent.Month=this.monthes[hebrewDate.month-1];
+ this.bornDateHebrewStudent.Month=this.monthesMeuberet[hebrewDate.month-1];
  this.bornDateHebrewStudent.Year=this.calcYear(hebrewDate.year);
  this.bornDateHebrewStudent.Day=this.days[hebrewDate.date-1];
     }
     
   }
 
-  onUpdateItems = () => {
-    this.monthes.splice(6,1);
-    this.monthes[5]=this.monthes[5].slice(0,3);
-    return this.monthes;
-    // this.setState(state => {
-    //   const list = state.list.map(item => item + 1);
-
-    //   return {
-    //     list,
-    //   };
-    // });
-  };
+  
 
   selectYesh(event: any) {
 debugger;
@@ -468,7 +445,7 @@ debugger;
   deleteYeshiva(yeshiva: Yeshiva) {
     this.flagDelete = true;
     this.yeshivaId = yeshiva.iYeshivaId;
-    this.message = 'האם אתה בטוח שברצונך למחוק את הישיבה ' + yeshiva.nvYeshivaName + '?';
+    this.message = 'האם אתה בטוח שברצונך למחוק את ישיבת ' + yeshiva.nvYeshivaName + ' מתלמיד זה?';
 
   }
 
@@ -552,7 +529,7 @@ debugger;
 
 
   changeStatusParent(parentType) {
-
+debugger;
     switch (parentType) {
       case 1:
 
@@ -560,7 +537,7 @@ debugger;
           if (this.isCheckedFather == false) {
             this.fatherDead = true;
             this.fatherDeadDetails = true;
-            this.isCheckedFather = true;
+            this.isCheckedFather = true;           
           }
           else {
             this.student.bDeathFather = false;
@@ -582,7 +559,7 @@ debugger;
             this.student.bDeathMother = false;
             this.motherDead = false;
             this.motherDeadDetails = false;
-            this.isCheckedMother = false
+            this.isCheckedMother = false;
           }
 
         }
@@ -607,6 +584,7 @@ debugger;
     else {
       this.student.bDeathFather = false
       this.student.nvFatherDeathDate = null;
+      this.student.iCauseOfDeathFather=null;
     }
     if (this.motherDead == true) {
       this.student.bDeathMother = true;
@@ -615,6 +593,7 @@ debugger;
     else {
       this.student.bDeathMother = false
       this.student.nvMotherDeathDate = null;
+      this.student.iCauseOfDeathMother=null;
     }
     if (this.paramRout != '0') {
       this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId }).then(data => {
