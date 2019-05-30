@@ -58,6 +58,11 @@ namespace Service
         //    return Meeting.SetMeeting(meeting, iUserId);
         //}
 
+        public List<Meeting> GetMeetingsByAvrechId(int iAvrechId)
+        {
+            return Meeting.GetMeetingsByAvrechId(iAvrechId);
+        }
+
         public int SetMeeting(Meeting meeting, int iUserId)
         {
             return Meeting.SetMeeting(meeting, iUserId);
@@ -302,6 +307,10 @@ namespace Service
         public List<Conversation> GetConversations(int? iPersonId)
         {
             return Conversation.GetConversations(iPersonId);
+        }
+        public List<Conversation> GetConversationsByAvrechId(int iAvrechId)
+        {
+            return Conversation.GetConversationsByAvrechId(iAvrechId);
         }
         public int SetConversations(Conversation conversation,Task task, int iUserId)
         {

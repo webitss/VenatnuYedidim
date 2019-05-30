@@ -54,6 +54,21 @@ namespace Service.Entities
             }
 
         }
+        public static List<Meeting> GetMeetingsByAvrechId(int iAvrechId)
+        {
+            try
+            {
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TMeeting_ByAvrechId_SLCT", new SqlParameter("iAvrechId", iAvrechId)).Tables[0].Rows;
+                List<Meeting> meetings = ObjectGenerator<Meeting>.GeneratListFromDataRowCollection(drc);
+                return meetings;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetMeetingsByAvrechId/TMeeting_ByAvrechId_SLCT", "ex" + ex + "iAvrechId: " + iAvrechId);
+                return null;
+            }
+        }
+
 
         internal static int SetMeeting(Meeting meeting, int iUserId)
         {

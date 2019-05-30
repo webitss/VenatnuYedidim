@@ -56,6 +56,7 @@ public sysTableList:SysTableRow[];
   isNew: boolean = false;
   taskStu:boolean;
   studentsList:Student[];
+  f:boolean=false;
   ngOnInit() {
 
     this.currentTask = Object.assign({}, this.task);
@@ -90,12 +91,13 @@ public sysTableList:SysTableRow[];
           this.studentsList = data; 
         })
 debugger;
-        this.InitConversationType();
-        for(var i=0;i<this.sysTableList.length;i++) 
-        alert(this.sysTableList[i].iSysTableRowId);
+        // // this.InitConversationType();
+        // for(var i=0;i<this.sysTableList.length;i++) 
+        // alert(this.sysTableList[i].iSysTableRowId);
 
         if (this.isNew == true) {
           this.task.iTaskType =this.taskTypeList[0].iSysTableRowId;
+
           if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
           {
             this.task.nvComments =""
@@ -166,9 +168,10 @@ this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysT
     });
   }
   InitMeetingType(){
-
+debugger;
     this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(val => {
       this.sysTableList = val;
+      debugger;
     });
   }
 

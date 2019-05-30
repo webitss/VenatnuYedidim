@@ -57,11 +57,17 @@ export class AvrechComponent implements OnInit {
 
   get isDisabled(): boolean {
     debugger;
-    if (this.currentComponent.form != undefined) {
-      return this.currentComponent.form.valid;
+    if (this.currentComponent.form != undefined)
+    {
+      var f=this.currentComponent.form.valid;
+      // alert(f+"if");
+      return f;
     }
     else
+    {
+      // alert("else");
       return false;
+    }
   }
 
   save() {

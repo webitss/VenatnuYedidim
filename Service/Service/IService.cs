@@ -389,6 +389,15 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Meeting> GetMeetingsByStudentId(int iPersonId);
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetMeetingsByAvrechId",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Meeting> GetMeetingsByAvrechId(int iAvrechId);
+
         [WebInvoke(
         Method = "POST",
         UriTemplate = "SetMeeting",
@@ -566,6 +575,16 @@ RequestFormat = WebMessageFormat.Json)]
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
         List<Conversation> GetConversations(int? iPersonId);
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetConversationsByAvrechId",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Conversation> GetConversationsByAvrechId(int iAvrechId);
+
         [OperationContract]
         [WebInvoke(
         Method = "POST",

@@ -7,6 +7,10 @@ import { SysTableService } from '../../services/sys-table.service';
 import { GlobalService } from '../../services/global.service';
 import { TaskComponent } from '../task/task.component';
 import { SrvRecord } from 'dns';
+import { Conversation } from '../../classes/conversation';
+import { callbackify } from 'util';
+import { promise } from 'protractor';
+import { Meeting } from '../../classes/meeting';
 @Component({
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,9 +46,11 @@ export class CalendarComponent implements OnInit {
   header = 'מחיקת משימה';
 
   taskList: Array<Task> = new Array<Task>();
+  conversationList:Array<Conversation>=new Array<Conversation>();
   taskTypeList: Array<any>;
-
-
+  conversationTypeList: Array<any>;
+  meetingList:Array<Meeting>=new Array<Meeting>();
+  meetingType:Array<any>;
   editTask1: boolean;
   editTask(taskId: number) {
     this.flag = true;
@@ -75,10 +81,35 @@ export class CalendarComponent implements OnInit {
         this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
           this.taskTypeList = data;
           this.createCalendar();
-
-          //}
         });
       });
+              this.appProxy.post("GetConversationsByAvrechId",{iAvrechId:this.id}).then(data=>{
+          if(data)
+          {
+            this.conversationList=data;
+          }
+        this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(data => {
+          if(data)
+          {          
+            this.conversationTypeList = data;
+            this.createCalendar();
+          }
+        });
+      })
+      this.appProxy.post("GetMeetingsByAvrechId",{iAvrechId:this.id}).then(data=>{
+        if(data)
+        {
+          this.meetingList=data;
+        }
+      this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(data => {
+        if(data)
+        {
+          this.meetingType = data;
+          this.createCalendar();
+        }
+        //}
+      });
+    })
     this.createCalendar();
   }
   ngOnInit() {
@@ -91,22 +122,9 @@ export class CalendarComponent implements OnInit {
     this.activatedRoute.parent.params.subscribe(params => {
       this.id = params['iPersonId'];
     })
+      this.refreshMe();
 
-    this.appProxy.post("GetTasksByPersonId", { iPersonId: this.id }).then(
-      data1 => {
-        debugger;
-        //if (data != null) {
-        this.taskList = data1;
-
-        this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
-          this.taskTypeList = data;
-          this.createCalendar();
-
-          //}
-        });
-      });
-
-   
+      this.createCalendar();
   }
   @Output()
   @Input()
@@ -115,6 +133,7 @@ export class CalendarComponent implements OnInit {
   typeText: string;
   end: number;
   createCalendar() {
+    debugger;
     this.oneOfMonth = new Date(this.year, this.month - 1, 1).getDay() + 1;
     this.lenOfMonth = new Date(this.year, this.month, 0).getDate();
     this.end = (this.lenOfMonth + this.oneOfMonth) / 7;
@@ -125,21 +144,28 @@ export class CalendarComponent implements OnInit {
 
     this.daysMonthNameArr = [];
     for (this.i = 0; this.i < (this.lenOfMonth + this.oneOfMonth) / 7; this.i++) {
+      debugger;
       this.daysMonthNameArr[this.i] = [];
 
       for (let j = 0; j < 7; j++) {
+        debugger;
         //  this.daysMonthNameArr[this.i][j]["task"] = false;
         if (this.i == 0 && j < this.oneOfMonth - 1 || this.d > this.lenOfMonth)
-          this.daysMonthNameArr[this.i][j] = { number: "" };
-        else {
+        {
+          debugger;
+                    this.daysMonthNameArr[this.i][j] = { number: "" };
+        }
+        else {  
           let tasks = Array<any>();
           // let tasks=Array<Task>();
           //הוספת משימה
           this.taskList.forEach(task => {
+
             if (task.dtTaskdatetime.getDate() == this.d && task.dtTaskdatetime.getMonth() + 1 == this.month && task.dtTaskdatetime.getFullYear() == this.year) {
               this.taskTypeList.forEach(type => {
                 if (type.iSysTableRowId == task.iTaskType) {
                   this.typeText = type.nvValue;
+              
                 }
               });
               let t = this.typeText + " " + task.dtTaskdatetime.getHours() + ":" + task.dtTaskdatetime.getMinutes();
@@ -148,6 +174,32 @@ export class CalendarComponent implements OnInit {
               //this.t = task;
             }
           });
+          this.conversationList.forEach(conver=>{
+            if(conver.dtConversationDate.getDate()==this.d&&conver.dtConversationDate.getMonth()+1==this.month&&conver.dtConversationDate.getFullYear()==this.year){
+              this.conversationTypeList.forEach(type=>{
+                if(type.iSysTableRowId==conver.iConversationId){
+                  this.typeText=type.nvValue;
+                }
+              })
+              let t = this.typeText + " " + conver.dtConversationDate.getHours() + ":" + conver.dtConversationDate.getMinutes();
+              tasks.push({ string: t, id: conver.iConversationId, i: this.i, j: j });
+
+            }
+          })
+
+
+          this.meetingList.forEach(meeting=>{
+            if(meeting.dtMeetingDate.getDate()==this.d&&meeting.dtMeetingDate.getMonth()+1==this.month&&meeting.dtMeetingDate.getFullYear()==this.year){
+              this.meetingType.forEach(type=>{
+                if(type.iSysTableRowId==meeting.iMeetingId){
+                  this.typeText=type.nvValue;
+                }
+              })
+              let t = this.typeText + " " + meeting.dtMeetingDate.getHours() + ":" + meeting.dtMeetingDate.getMinutes();
+              tasks.push({ string: t, id: meeting.iMeetingId, i: this.i, j: j });
+
+            }
+          })
           //  this.daysMonthNameArr[this.i][j] = {number:this.d};
 
           this.daysMonthNameArr[this.i][j] = { tasks: tasks, number: this.d, len: tasks.length };

@@ -46,6 +46,20 @@ namespace Service.Entities
             lstObject = new Dictionary<string, string>();
         }
 
+        public static List<Conversation> GetConversationsByAvrechId(int iAvrechId)
+        {
+            try
+            {
+            DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TConversation_ByAvrechId_SLCT", new SqlParameter("iAvrechId", iAvrechId)).Tables[0].Rows;
+            List<Conversation> conversations = ObjectGenerator<Conversation>.GeneratListFromDataRowCollection(drc);
+            return conversations;
+            }
+            catch(Exception ex)
+            {
+                Log.LogError("GetConversationsByAvrechId/TConversation_ByAvrechId_SLCT", "ex" + ex + "iAvrechId: " + iAvrechId);
+                return null;
+            }
+        }
 
         public static List<Conversation> GetConversations(int? iPersonId)
         {

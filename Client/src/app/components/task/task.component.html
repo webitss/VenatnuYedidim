@@ -8,9 +8,9 @@
       </select>
     </div>
   
-      <div class="form-group col-sm-3">
+      <div class="form-group col-sm-3" *ngIf="sysTableList">
       <label for="types">סוג {{taskType}}</label>
-      <select name="types" class="form-control" name="types"  *ngIf="sysTableList" [(ngModel)]="iTasOrConType">
+      <select name="types" class="form-control" name="types"  [(ngModel)]="iTasOrConType">
         <option *ngFor="let s of sysTableList" [value]="s['iSysTableRowId']">{{s['nvValue']}}</option>
       </select>
   

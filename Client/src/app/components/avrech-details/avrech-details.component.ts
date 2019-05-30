@@ -55,8 +55,8 @@ export class AvrechDetailsComponent implements OnInit {
 
   save() {
     this.appProxy.post("UpdateAvrech", { avrech: this.avrech, iUserId: this.globalService.getUser()['iUserId'] }).then(res=>
-      
-      {this._parent.openMessagePopup("השמירה התבצעה בהצלחה!")
+      {debugger;
+        this._parent.openMessagePopup("השמירה התבצעה בהצלחה!")
     this.change=false;
   });
   
