@@ -204,7 +204,7 @@
                         </div>
 
                         <div class="form-group col-sm-6">
-                            <label for="couseOfdead"> נפטר מ:</label>
+                            <label for="couseOfdeadF"> נפטר מ:</label>
 
                             <select class="form-control" id="couseOfdeadF" name="couseOfdeadF" [(ngModel)]="student.iCauseOfDeathFather">
                                 <option *ngFor="let s of sysTableRowList" [value]="s.iSysTableRowId">
@@ -246,7 +246,7 @@
                         </div>
 
                         <div class="form-group col-sm-6">
-                            <label for="couseOfdead"> נפטרה מ:</label>
+                            <label for="couseOfdeadM"> נפטרה מ:</label>
 
                             <select class="form-control" id="couseOfdeadM" name="couseOfdeadM" [(ngModel)]="student.iCauseOfDeathMother">
                                 <option *ngFor="let s of sysTableRowList" [value]="s.iSysTableRowId">
@@ -264,7 +264,7 @@
         <div class="col-sm-12">
 
 
-            <table class="table table-hover" *ngIf="yeshivaListOfStudent!=undefined && yeshivaListOfStudent.length>0">
+            <table class="table table-hover" *ngIf="yeshivaListOfStudent.length>0 && yeshivaListOfStudent!=undefined">
 
 
                 <thead>
@@ -285,29 +285,9 @@
                     </tr>
                 </tbody>
             </table>
-            <!-- <div *ngFor="let yeshiva of yeshivaListOfStudent">
-        <div class="row">
-            <div class="form-group col-sm-3">
-                <label for="yeshivaName">מוסד לימודים :</label>
-                <div>{{yeshiva.nvYeshivaName}}</div>
-            </div>
-    
-            <div class="form-group col-sm-3">
-                <label for="yesivaStreet">כתובת מוסד :</label>
-                <div>{{yeshiva.nvAddress}}</div>
-            </div>
-            <div class="form-group col-sm-3">
-                <label for="yeshivaCity">עיר מוסד :</label>
-                <div>{{yeshiva.nvCity}}</div>
-            </div>
-            <div>
-                <button class="btn delete" (click)="deleteYeshiva(yeshiva)" title="מחק מוסד לימודים"></button>
-            </div>
-        </div>
-    
-    </div> -->
 
-            <button class="col-sm-2 btn-circle btn-add" (click)="addYeshiva=true" (click)="addYeshiva=true">הוסף מוסד</button>
+
+            <button class="col-sm-2 btn-circle btn-add" (click)="addYeshiva=true" (click)="addYeshiva=true">בחר מוסד</button>
             <button class="col-sm-2 btn-circle btn-add" *ngIf="student.iPersonId&&student.iStatusType==159" (click)="shift(statusType.boger)">העבר לבוגרים
             </button>
             <button class="col-sm-2 btn-circle btn-add" *ngIf="student.iPersonId&&student.iStatusType==160" (click)="shift(statusType.student)">החזר לתלמידים
@@ -330,7 +310,7 @@
                         <label for="yeshivaCity">עיר מוסד :</label>
                         <input type="text" class="form-control" id="yeshivaCity" name="yeshivaCity" [(ngModel)]="yeshivaSelected.nvCity">
                     </div>
-                    <button class="btn-circle save col-sm-2" (click)="addYeshiva=false" (click)="addSelectYeshivaToStudent()">שמור מוסד
+                    <button class="btn-circle save col-sm-2" (click)="addYeshiva=false" (click)="addSelectYeshivaToStudent()">הוסף
                     </button>
                 </div>
                 <!-- <div class="row">

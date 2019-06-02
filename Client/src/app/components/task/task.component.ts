@@ -206,35 +206,35 @@ debugger;
   debugger;
     this.task.dtTaskdatetime = new Date(this.currentTask['dtDate'] + ' ' + this.currentTask['dtHour']);
     //    if (this.currentTask.iTaskId == 0)
-    if(flag){
-          if(this.task.iTaskType==73)
-    {
-      this.conversation.iAvrechId=this.task.iPersonId;
-      this.conversation.iPersonId=this.task.iStudentId;
-      this.conversation.dtConversationDate=this.task.dtTaskdatetime; 
-      this.conversation.iConversationType = this.iTasOrConType;
+    // if(flag){
+    //       if(this.task.iTaskType==73)
+    // {
+    //   this.conversation.iAvrechId=this.task.iPersonId;
+    //   this.conversation.iPersonId=this.task.iStudentId;
+    //   this.conversation.dtConversationDate=this.task.dtTaskdatetime; 
+    //   this.conversation.iConversationType = this.iTasOrConType;
    
-          this.appProxy.post('SetConversations',{conversation:this.conversation,iUserId:this.globalService.getUser()['iUserId']}).then(data=>{
-            alert(data);
-          })
+    //       this.appProxy.post('SetConversations',{conversation:this.conversation,iUserId:this.globalService.getUser()['iUserId']}).then(data=>{
+    //         alert(data);
+    //       })
 
-    }
-    else 
-       if(this.task.iTaskType==75)
-       {
-         debugger;
-         this.meeting.iMeetingId=0;
-         this.meeting.iPersonId=this.task.iStudentId;
-         this.meeting.iAvrechId=this.task.iPersonId;
-         this.meeting.dtMeetingDate=this.task.dtTaskdatetime;      
-         this.meeting.iMeetingType = this.iTasOrConType;
+    // }
+    // else 
+    //    if(this.task.iTaskType==75)
+    //    {
+    //      debugger;
+    //      this.meeting.iMeetingId=0;
+    //      this.meeting.iPersonId=this.task.iStudentId;
+    //      this.meeting.iAvrechId=this.task.iPersonId;
+    //      this.meeting.dtMeetingDate=this.task.dtTaskdatetime;      
+    //      this.meeting.iMeetingType = this.iTasOrConType;
 
-        //  this.meeting.iMeetingType=107;
-         this.appProxy.post('SetMeeting',{meeting:this.meeting,iUserId:this.globalService.getUser()['iUserId']}).then(data=>{
-           alert(data);
-         })
-       }
-    }
+    //     //  this.meeting.iMeetingType=107;
+    //      this.appProxy.post('SetMeeting',{meeting:this.meeting,iUserId:this.globalService.getUser()['iUserId']}).then(data=>{
+    //        alert(data);
+    //      })
+    //    }
+    // }
 debugger;
 if(iAvrechId)
 {

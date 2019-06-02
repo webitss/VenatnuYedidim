@@ -28,7 +28,11 @@
       </table>
   </div>
   <div *ngIf="editTask1==true">
-    <div id="overlay"></div>
+        <div id="overlay"></div>
+
+    <div *ngIf="task!=undefined">
+
+    
     <div class="newTask">
       <div class="row ">
         <div class="col-sm-8"></div>
@@ -42,6 +46,14 @@
       </div>
       <app-task [task]="task" (close)="closeMe()" (refresh)="refreshMe($event)"></app-task>
     </div>
+  </div>
+
+      <app-student-conversation-details *ngIf="conversation!=undefined" (Conversation)="close()" [conversation]="conversation" [sysTableList]="sysTableList"  class="conversationDetails">
+    </app-student-conversation-details>  
+      
+      <app-student-meeting-details *ngIf="meeting!=undefined" [sysTableRowList]="sysTableRowList" [meeting]="meeting" (Close)="close()" >
+      </app-student-meeting-details> 
+
   </div>
 
 

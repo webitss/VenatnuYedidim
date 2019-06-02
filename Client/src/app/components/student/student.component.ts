@@ -64,7 +64,7 @@ export class StudentComponent implements OnInit, OnDestroy {
   get isDisabled(): boolean {
     if (this.currentComponent.form != undefined) {
       var f=this.currentComponent.form.valid;
-debugger;
+
       return f;
     }
     else

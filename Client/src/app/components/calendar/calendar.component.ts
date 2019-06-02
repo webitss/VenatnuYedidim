@@ -39,7 +39,9 @@ export class CalendarComponent implements OnInit {
   @Input()
   @ViewChild(TaskComponent) child: TaskComponent;
   openNewTask: boolean = false;
-  task: Task
+  task: Task;
+  conversation:Conversation;
+  meeting:Meeting;
   id: number;
   flagDelete = false;
   message = '';
@@ -53,10 +55,12 @@ export class CalendarComponent implements OnInit {
   meetingType:Array<any>;
   editTask1: boolean;
   editTask(taskId: number) {
+    debugger;
     this.flag = true;
     this.editTask1 = true;
     this.task = this.taskList.find(t => t.iTaskId == taskId);
-
+    this.conversation=this.conversationList.find(c=>c.iConversationId==taskId);
+    this.meeting=this.meetingList.find(m=>m.iMeetingId==taskId);
   }
   saveTask() {
     this.child.saveTask(true);
@@ -87,11 +91,13 @@ export class CalendarComponent implements OnInit {
           if(data)
           {
             this.conversationList=data;
+
           }
         this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(data => {
           if(data)
           {          
             this.conversationTypeList = data;
+debugger;
             this.createCalendar();
           }
         });
@@ -100,11 +106,13 @@ export class CalendarComponent implements OnInit {
         if(data)
         {
           this.meetingList=data;
+
         }
       this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(data => {
         if(data)
         {
           this.meetingType = data;
+          debugger;
           this.createCalendar();
         }
         //}
@@ -133,7 +141,7 @@ export class CalendarComponent implements OnInit {
   typeText: string;
   end: number;
   createCalendar() {
-    debugger;
+
     this.oneOfMonth = new Date(this.year, this.month - 1, 1).getDay() + 1;
     this.lenOfMonth = new Date(this.year, this.month, 0).getDate();
     this.end = (this.lenOfMonth + this.oneOfMonth) / 7;
@@ -144,15 +152,15 @@ export class CalendarComponent implements OnInit {
 
     this.daysMonthNameArr = [];
     for (this.i = 0; this.i < (this.lenOfMonth + this.oneOfMonth) / 7; this.i++) {
-      debugger;
+
       this.daysMonthNameArr[this.i] = [];
 
       for (let j = 0; j < 7; j++) {
-        debugger;
+
         //  this.daysMonthNameArr[this.i][j]["task"] = false;
         if (this.i == 0 && j < this.oneOfMonth - 1 || this.d > this.lenOfMonth)
         {
-          debugger;
+
                     this.daysMonthNameArr[this.i][j] = { number: "" };
         }
         else {  
@@ -162,42 +170,56 @@ export class CalendarComponent implements OnInit {
           this.taskList.forEach(task => {
 
             if (task.dtTaskdatetime.getDate() == this.d && task.dtTaskdatetime.getMonth() + 1 == this.month && task.dtTaskdatetime.getFullYear() == this.year) {
+              this.typeText=null;
+
               this.taskTypeList.forEach(type => {
+
                 if (type.iSysTableRowId == task.iTaskType) {
-                  this.typeText = type.nvValue;
-              
+
+                  this.typeText = type.nvValue;             
                 }
               });
               let t = this.typeText + " " + task.dtTaskdatetime.getHours() + ":" + task.dtTaskdatetime.getMinutes();
+              //alert(t);
               tasks.push({ string: t, id: task.iTaskId, i: this.i, j: j });
-              // tasks.push(task);
-              //this.t = task;
+              // if(tasks.length>0)
+              // debugger;
             }
           });
           this.conversationList.forEach(conver=>{
+
             if(conver.dtConversationDate.getDate()==this.d&&conver.dtConversationDate.getMonth()+1==this.month&&conver.dtConversationDate.getFullYear()==this.year){
+              this.typeText=null;
               this.conversationTypeList.forEach(type=>{
-                if(type.iSysTableRowId==conver.iConversationId){
-                  this.typeText=type.nvValue;
+                if(type.iSysTableRowId==conver.iConversationType){
+                  this.typeText="שיחה "+type.nvValue;
                 }
               })
               let t = this.typeText + " " + conver.dtConversationDate.getHours() + ":" + conver.dtConversationDate.getMinutes();
+             // alert(t);
               tasks.push({ string: t, id: conver.iConversationId, i: this.i, j: j });
-
+              // if(tasks.length>0)
+              // debugger;
             }
           })
 
 
           this.meetingList.forEach(meeting=>{
+
             if(meeting.dtMeetingDate.getDate()==this.d&&meeting.dtMeetingDate.getMonth()+1==this.month&&meeting.dtMeetingDate.getFullYear()==this.year){
+              this.typeText=null;
               this.meetingType.forEach(type=>{
-                if(type.iSysTableRowId==meeting.iMeetingId){
-                  this.typeText=type.nvValue;
+                // alert(type.nvValue);
+                if(type.iSysTableRowId==meeting.iMeetingType){
+                  this.typeText="פגישה "+type.nvValue;
+
                 }
               })
               let t = this.typeText + " " + meeting.dtMeetingDate.getHours() + ":" + meeting.dtMeetingDate.getMinutes();
+              //alert(t);
               tasks.push({ string: t, id: meeting.iMeetingId, i: this.i, j: j });
-
+if(tasks.length>0)
+debugger;
             }
           })
           //  this.daysMonthNameArr[this.i][j] = {number:this.d};
@@ -241,7 +263,7 @@ export class CalendarComponent implements OnInit {
   taskJ;
 
   delTask(taskId: number, i: number, j: number) {
-   
+   debugger;
     this.flagDelete = true;
     this.taskId = taskId;
     this.taskI = i;
@@ -252,7 +274,12 @@ export class CalendarComponent implements OnInit {
 
 
   deleteTask() {
-    this.appProxy.post("DeleteTask", { iTaskId: this.taskId, iPersonId: this.globalService.getUser().iPersonId }).then(
+    this.task = this.taskList.find(t => t.iTaskId == this.taskId);
+    this.conversation=this.conversationList.find(c=>c.iConversationId==this.taskId);
+    this.meeting=this.meetingList.find(m=>m.iMeetingId==this.taskId);
+if(this.task)
+{
+      this.appProxy.post("DeleteTask", { iTaskId: this.taskId, iPersonId: this.globalService.getUser().iPersonId }).then(
       data => {
         if (data == true) {
          
@@ -263,6 +290,31 @@ export class CalendarComponent implements OnInit {
 
         }
       });
+}
+else
+if(this.conversation)
+{
+  this.appProxy.post("DeleteConversations",{iConversationId:this.conversation.iConversationId,iUserId:this.globalService.getUser().iPersonId}).then(
+    data=>{
+      if(data){
+          this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].splice(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].indexOf(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].find(t => t.id == this.taskId)), 1);
+          this.cdRef.detectChanges();
+
+      }
+    }
+  )
+}
+else
+this.appProxy.post("DeleteMeeting",{iMeetingId:this.meeting.iMeetingId,iUserId:this.globalService.getUser().iPersonId}).then(
+  data=>{
+    if(data)
+    {
+                this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].splice(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].indexOf(this.daysMonthNameArr[this.taskI][this.taskJ]['tasks'].find(t => t.id == this.taskId)), 1);
+          this.cdRef.detectChanges();
+
+    }
+  }
+)
   }
 
   // public trackItem(index: number, item: any) {

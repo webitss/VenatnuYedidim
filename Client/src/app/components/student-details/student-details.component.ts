@@ -135,7 +135,10 @@ flagMonth:boolean=false;
     this.route.parent.params.subscribe(params => {
 
       this.paramRout = params['iPersonId'];
+           this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => {
 
+               this.sysTableRowList = data;
+               });
       if (params['iPersonId'] != '0') {
 
         this.appProxy.post("GetStudentById", { iPersonId: this.paramRout }).then(data => {
@@ -144,14 +147,13 @@ flagMonth:boolean=false;
           this.appProxy.post("GetAvrechIdByStudentId",{iStudentId:this.student.iPersonId}).then(data=>{
             this.student.iAvrechId=data;
           })
-
+// alert(this.student.iCauseOfDeathFather||this.student.iCauseOfDeathMother)
           if (!this.student || !this.student.iPersonId)
             this.change = true;
-          // this.student.dtBirthdate.getTime();
-          // this.student.dtAddStudentDate.getTime();
           this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
             this.status = data.filter(x => x.iSysTableRowId == this.student.iStatusType)[0].nvValue;
-            this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => { this.sysTableRowList = data; });
+
+ 
           });
           this.student['fYears'] = this.student.dtBirthdate ? this.student.dtBirthdate.getFullYear() : 0;
           // this.student['fMonthes'] = this.foreignMonthes[this.student.dtBirthdate?this.student.dtBirthdate.getMonth().toString():null];
@@ -178,12 +180,14 @@ flagMonth:boolean=false;
             this.diedDateHebrewFather.Day = this.diedDateFatherArr[0];
             this.diedDateHebrewFather.Month = this.diedDateFatherArr[1];
             this.diedDateHebrewFather.Year = this.diedDateFatherArr[2];
+
           }
           if (this.student.nvMotherDeathDate != null) {
             this.diedDateMotherArr = this.student.nvMotherDeathDate.split(" ");
             this.diedDateHebrewMother.Day = this.diedDateMotherArr[0];
             this.diedDateHebrewMother.Month = this.diedDateMotherArr[1];
             this.diedDateHebrewMother.Year = this.diedDateMotherArr[2];
+
           }
 
           if (this.student.bDeathFather == true) {
@@ -205,12 +209,14 @@ flagMonth:boolean=false;
         this.student = new Student();
         this.student.iPersonId = 0;
         this.student.iStatusType = 159;
-        // this.student.iCauseOfDeathFather=0;
-        // this.student.iCauseOfDeathMother=0;
+
         this.student.iStudentId = 0;
         this.student.bDeathFather = false;
         this.student.bDeathMother = false;
         this.change = true;
+       this.yeshivaListOfStudent=new Array<Yeshiva>();
+       alert(this.yeshivaListOfStudent.length)
+       alert(this.yeshivaListOfStudent!=undefined)
       }
 
     });
@@ -507,15 +513,7 @@ debugger;
   // }
 
   addSelectYeshivaToStudent() {
-    this.appProxy.post("AddYeshivaToStudent", {
-      iPersonId: this.paramRout, iYeshivaId:
-        this.yeshivaSelected.iYeshivaId, iUserId: this.iUserId
-    }).then(data => {
-      if (data)
-        this._parent.openMessagePopup("הישיבה נוספה בהצלחה!");
-      else this._parent.openMessagePopup("שגיאה בהוספת ישיבה")
-    }
-      , err => this._parent.openMessagePopup("שגיאה"))
+    
 
     var newYeshiva: Yeshiva = new Yeshiva();
     newYeshiva.nvCity = this.yeshivaSelected.nvCity;
@@ -619,17 +617,33 @@ debugger;
     }
 
     else
-      this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId}).then(data => {
-debugger;
+    {
+            this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId}).then(data => {
+
 if(data)
         this._parent.openMessagePopup("התלמיד נוסף בהצלחה!");
         this.change = false;
-        if (!destroy)
-          this.backToGridStudent();
+        // if (!destroy)
+        //   this.backToGridStudent();
       }, err => {
         this._parent.openMessagePopup("שגיאה בהוספת תלמיד!");
       });
+                 this.appProxy.post("AddYeshivaToStudent", {
+        iPersonId: this.paramRout, iYeshivaId:
+          this.yeshivaSelected.iYeshivaId, iUserId: this.iUserId
+      }).then(data => {
+        debugger;
+        if (data)
+          this._parent.openMessagePopup("הישיבה נוספה בהצלחה!");
+          if (!destroy)
+          this.backToGridStudent();
+        else this._parent.openMessagePopup("שגיאה בהוספת ישיבה")
+      }
+        , err => this._parent.openMessagePopup("שגיאה"))
 
+
+    }
+   
   }
   backToGridStudent() {
     if (this.student == undefined)
