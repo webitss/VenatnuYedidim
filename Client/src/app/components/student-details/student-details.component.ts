@@ -47,7 +47,9 @@ export class StudentDetailsComponent implements OnInit {
   diedDateMotherArr = new Array<string>();
   sysTableRowList: SysTableRow[];
   yeshivaList: Yeshiva[];
-  yeshivaListOfStudent: Yeshiva[];
+  newYeshivaListOfStudent: Yeshiva[];
+  yeshivaListOfStudent:Yeshiva[];
+  yeshivaListToAdd:Array<Yeshiva>=new Array<Yeshiva>();
   yeshivaSelected: Yeshiva;
   avrechList:Avrech[];
   AvrechSelected:Avrech=null;
@@ -76,6 +78,7 @@ flagMonth:boolean=false;
   dateMonthArr = new Array<string>();
   //dateYearArr = new Array<any>();
   addYeshiva = false;
+  selectYeshi=false;
   yeshivaId: number;
   change: boolean;
   flag: boolean = false;
@@ -122,6 +125,7 @@ flagMonth:boolean=false;
     this.diedDateHebrewFather = new HebrewDate();
     this.diedDateHebrewMother = new HebrewDate();
     this.yeshivaSelected = new Yeshiva();
+
     this.AvrechSelected=new Avrech();
     // this.yeshivaSelected.nvCity="";
     // this.yeshivaSelected.nvAddress="";
@@ -173,7 +177,7 @@ flagMonth:boolean=false;
           else
           this.bornDateHebrewStudent.Year = this.bornDateStudentArr[2];
           if (this.student.nvFatherDeathDate != null) {
-            debugger;
+
 
 
             this.diedDateFatherArr = this.student.nvFatherDeathDate.split(" ");
@@ -214,15 +218,34 @@ flagMonth:boolean=false;
         this.student.bDeathFather = false;
         this.student.bDeathMother = false;
         this.change = true;
-       this.yeshivaListOfStudent=new Array<Yeshiva>();
-       alert(this.yeshivaListOfStudent.length)
-       alert(this.yeshivaListOfStudent!=undefined)
+       this.newYeshivaListOfStudent=new Array<Yeshiva>();
+      //  alert(this.yeshivaListOfStudent.length)
+      //  alert(this.yeshivaListOfStudent!=undefined)
       }
 
     });
-    this.appProxy.post("GetYeshivotOfStudent", { iPersonId: this.paramRout }).then(data => this.yeshivaListOfStudent = data);
+    this.appProxy.post("GetYeshivotOfStudent", { iPersonId: this.paramRout }).then(data => {
+      if(data){
+      this.newYeshivaListOfStudent = data;
+
+debugger;
+      }
+    }
+      
+      );
+
+      if(this.newYeshivaListOfStudent.length!=0)
+      {     
+
+         this.yeshivaListOfStudent=[];
 
 
+      }
+      
+else
+      this.newYeshivaListOfStudent.forEach(y => {
+  this.yeshivaListOfStudent.push(y);
+});
 
     this.letterArr.push({ nvChar: "א", iValue: 1 }); this.letterArr.push({ nvChar: "ב", iValue: 2 }); this.letterArr.push({ nvChar: "ג", iValue: 3 });
     this.letterArr.push({ nvChar: "ד", iValue: 4 }); this.letterArr.push({ nvChar: "ה", iValue: 5 }); this.letterArr.push({ nvChar: "ו", iValue: 6 });
@@ -445,7 +468,8 @@ debugger;
         this.yeshivaSelected.iYeshivaId = e.iYeshivaId;
       }
 
-    })
+    })      
+    this.selectYeshi=true
   }
 
   deleteYeshiva(yeshiva: Yeshiva) {
@@ -460,11 +484,11 @@ debugger;
 
     this.appProxy.post("DeleteYeshivaOfStudent", {
       iPersonId: this.paramRout, iYeshivaId: this.yeshivaId, iUserId: this.iUserId
-    }).then(data => { this._parent.openMessagePopup("הישיבה נמחקה בהצלחה!") }, err => { this._parent.openMessagePopup("שגיאה במחיקת ישיבהיד"); });
+    }).then(data => { this._parent.openMessagePopup("הישיבה נמחקה בהצלחה!") }, err => { this._parent.openMessagePopup("שגיאה במחיקת ישיבה"); });
     var i = 0;
-    this.yeshivaListOfStudent.forEach(e => {
+    this.newYeshivaListOfStudent.forEach(e => {
       if (e.iYeshivaId == this.yeshivaId)
-        this.yeshivaListOfStudent.splice(i, 1);
+        this.newYeshivaListOfStudent.splice(i, 1);
       i++;
     });
   }
@@ -519,8 +543,14 @@ debugger;
     newYeshiva.nvCity = this.yeshivaSelected.nvCity;
     newYeshiva.nvAddress = this.yeshivaSelected.nvAddress;
     newYeshiva.nvYeshivaName = this.yeshivaSelected.nvYeshivaName;
-    this.yeshivaListOfStudent.push(newYeshiva);
+    alert("new:"+this.newYeshivaListOfStudent.length);
+    alert("old:"+this.yeshivaListOfStudent.length);
 
+    this.newYeshivaListOfStudent.push(newYeshiva);
+    alert("new:"+this.newYeshivaListOfStudent.length);
+    alert("old:"+this.yeshivaListOfStudent.length);
+    this.selectYeshi=false;
+   this.yeshivaSelected=new Yeshiva();
   }
 
 
@@ -613,7 +643,47 @@ debugger;
           alert("שגיאה בעריכת בוגר");
         //this.change = false;s
       });
-
+      if(this.yeshivaListOfStudent.length==0&&this.newYeshivaListOfStudent.length>0)
+      {
+            this.appProxy.post("AddYeshivaToStudent", {
+        iPersonId: this.paramRout, lstYeshivaId:
+          this.newYeshivaListOfStudent, iUserId: this.iUserId
+      }).then(data => {
+        debugger;
+        if (data)
+          this._parent.openMessagePopup("הישיבה/ות נוספה/ו בהצלחה!");
+          if (!destroy)
+          this.backToGridStudent();
+        else this._parent.openMessagePopup("שגיאה בהוספת ישיבה")
+      }
+        , err => this._parent.openMessagePopup("שגיאה"))
+      }
+      else
+    {
+      this.newYeshivaListOfStudent.forEach(ny => {
+        var flag=false;
+        this.yeshivaListOfStudent.forEach(y => {
+          if(ny.iYeshivaId==y.iYeshivaId)
+             flag=true;
+        });
+        if(!flag)
+        {
+          this.yeshivaListToAdd.push(ny);
+        }
+      });
+      this.appProxy.post("AddYeshivaToStudent", {
+        iPersonId: this.paramRout, lstYeshivaId:
+          this.yeshivaListToAdd, iUserId: this.iUserId
+      }).then(data => {
+        debugger;
+        if (data)
+          this._parent.openMessagePopup("הישיבה/ות עודכנה/ו בהצלחה!");
+          if (!destroy)
+          this.backToGridStudent();
+        else this._parent.openMessagePopup("שגיאה בעדכון ישיבה")
+      }
+        , err => this._parent.openMessagePopup("שגיאה"))
+    }
     }
 
     else
@@ -628,18 +698,22 @@ if(data)
       }, err => {
         this._parent.openMessagePopup("שגיאה בהוספת תלמיד!");
       });
-                 this.appProxy.post("AddYeshivaToStudent", {
-        iPersonId: this.paramRout, iYeshivaId:
-          this.yeshivaSelected.iYeshivaId, iUserId: this.iUserId
+            
+      this.appProxy.post("AddYeshivaToStudent", {
+        iPersonId: this.paramRout, lstYeshivaId:
+          this.newYeshivaListOfStudent, iUserId: this.iUserId
       }).then(data => {
         debugger;
         if (data)
-          this._parent.openMessagePopup("הישיבה נוספה בהצלחה!");
+          this._parent.openMessagePopup("הישיבה/ות נוספה/ו בהצלחה!");
           if (!destroy)
           this.backToGridStudent();
         else this._parent.openMessagePopup("שגיאה בהוספת ישיבה")
       }
         , err => this._parent.openMessagePopup("שגיאה"))
+      
+ 
+
 
 
     }

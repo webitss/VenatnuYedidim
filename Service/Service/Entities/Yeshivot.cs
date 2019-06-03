@@ -135,15 +135,18 @@ namespace Service.Entities
 			}
 		}
 
-		public static bool AddYeshivaToStudent(int iPersonId, int iYeshivaId, int iUserId)
+		public static bool AddYeshivaToStudent(int iPersonId, int[] lstYeshivaId, int iUserId)
 		{
 			try
 			{
+                foreach(var id in lstYeshivaId)
+                {
 				List<SqlParameter> parameters = new List<SqlParameter>();
 				parameters.Add(new SqlParameter("iPersonId", iPersonId));
-				parameters.Add(new SqlParameter("iYeshivaId", iYeshivaId));
+				parameters.Add(new SqlParameter("iYeshivaId", id));
 				parameters.Add(new SqlParameter("iUserId", iUserId));
-				SqlDataAccess.ExecuteDatasetSP("TYeshivotOfStudent_INS", parameters);
+                    SqlDataAccess.ExecuteDatasetSP("TYeshivotOfStudent_INS", parameters);
+                }
 				return true;
 			}
 			catch (Exception ex)

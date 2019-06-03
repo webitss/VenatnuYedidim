@@ -363,9 +363,9 @@ namespace Service
         }
 
 
-        public bool AddYeshivaToStudent(int iPersonId, int iYeshivaId, int iUserId)
+        public bool AddYeshivaToStudent(int iPersonId, int[] lstYeshivaId, int iUserId)
         {
-            return Yeshivot.AddYeshivaToStudent(iPersonId, iYeshivaId, iUserId);
+            return Yeshivot.AddYeshivaToStudent(iPersonId, lstYeshivaId, iUserId);
         }
 
 

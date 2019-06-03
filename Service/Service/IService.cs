@@ -555,7 +555,7 @@ RequestFormat = WebMessageFormat.Json)]
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        bool AddYeshivaToStudent(int iPersonId, int iYeshivaId, int iUserId);
+        bool AddYeshivaToStudent(int iPersonId, int[] lstYeshivaId, int iUserId);
 
 
 
