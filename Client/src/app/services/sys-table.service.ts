@@ -60,7 +60,7 @@ export class SysTableService {
   constructor(private appProxy: AppProxy,private globalService:GlobalService) { }
   ////#region מקבל ID של טבלה מחזיר ערכים מאותה טבלה 
   getValues(iSysTableId: number, col?:any): Promise<Array<SysTableRow>> {
-
+// alert(iSysTableId)
     // console.log(iSysTableId + "arived");
     for (let key in SysTableService.dataTables) {
 

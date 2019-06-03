@@ -19,6 +19,7 @@ export class StudentComponent implements OnInit, OnDestroy {
   public currentComponent: any;
   student: Student;
   id: number;
+  ff:boolean=false;
 
   constructor(private router: Router, private route: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService,private cdRef:ChangeDetectorRef) { }
   // subscription:Subscription;
@@ -80,6 +81,8 @@ export class StudentComponent implements OnInit, OnDestroy {
     if (this.currentComponent.saveStudent)
       this.currentComponent.saveStudent();
   }
+
+
 
   close() {
     if (this.student == undefined)

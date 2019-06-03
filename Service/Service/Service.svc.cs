@@ -158,10 +158,7 @@ namespace Service
             return Student.UpdateStudent(student, base64Image, iUserId);
         }
 
-        public string castEbrewToForeign(string d)
-        {
-            return Student.castEbrewToForeign(d);
-        }
+
 
 
         public bool UpdateStatusStudent(int iPersonId, int iStatusType)

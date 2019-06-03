@@ -197,14 +197,7 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         List<Yeshivot> GetYeshivotOfStudent(int iPersonId);
 
-        [OperationContract]
-        [WebInvoke(
-        Method = "POST",
-        UriTemplate = "castEbrewToForeign",
-        BodyStyle = WebMessageBodyStyle.WrappedRequest,
-        ResponseFormat = WebMessageFormat.Json,
-        RequestFormat = WebMessageFormat.Json)]
-        string castEbrewToForeign(string hebrewDate);
+
         #endregion Student
 
 

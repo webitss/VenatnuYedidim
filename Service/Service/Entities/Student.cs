@@ -300,21 +300,7 @@ namespace Service.Entities
                 return false;
             }
         }
-        public static string castEbrewToForeign(string hebrewDate)
-        {
-            try
-            {
-                HebrewCalendar hc = new HebrewCalendar();
-                
-                DateTime d = new DateTime(1998, 08, 15);
-                return "f";
-            }
-            catch (Exception ex)
-            {
-                Log.LogError("error");
-                return null;
-            }
-        }
+
 
 
 

@@ -48,12 +48,13 @@ export class StudentDetailsComponent implements OnInit {
   sysTableRowList: SysTableRow[];
   yeshivaList: Yeshiva[];
   newYeshivaListOfStudent: Yeshiva[];
-  yeshivaListOfStudent:Yeshiva[];
+  yeshivaListOfStudent:Array<Yeshiva>;
   yeshivaListToAdd:Array<Yeshiva>=new Array<Yeshiva>();
   yeshivaSelected: Yeshiva;
   avrechList:Avrech[];
   AvrechSelected:Avrech=null;
   iUserId: number;
+  yeshivotId:number[]=[];
   days: string[] = ["א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י", "יא", "יב", "יג", "יד", "טו", "טז", "יז", "יח", "יט", "כ", "כא", "כב", "כג", "כד", "כה", "כו", "כז", "כח", "כט", "ל"];
   monthesEng:string[]=["Tishrei","Cheshvan","Kislev","Tevet","Shvat","Adar 1","Adar 2","Nisan","Iyyar","Sivan","Tamuz","Av","Elul"]
   monthesMeuberet: string[] = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר א","אדר ב", "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול"];
@@ -134,15 +135,15 @@ flagMonth:boolean=false;
 
     this.iUserId = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
     this.appProxy.post("GetAllAvrechim",{iPersonId:this.iUserId}).then(date => { this.avrechList = date; })
-    this.appProxy.post("GetAllYeshivot").then(date => { this.yeshivaList = date; })
+    this.appProxy.post("GetAllYeshivot").then(date => { 
+      debugger;
+      this.yeshivaList = date;
+     })
 
     this.route.parent.params.subscribe(params => {
 
       this.paramRout = params['iPersonId'];
-           this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => {
 
-               this.sysTableRowList = data;
-               });
       if (params['iPersonId'] != '0') {
 
         this.appProxy.post("GetStudentById", { iPersonId: this.paramRout }).then(data => {
@@ -155,10 +156,15 @@ flagMonth:boolean=false;
           if (!this.student || !this.student.iPersonId)
             this.change = true;
           this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
+            debugger;
             this.status = data.filter(x => x.iSysTableRowId == this.student.iStatusType)[0].nvValue;
-
+// alert(this.status)
  
           });
+                     this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => {
+
+               this.sysTableRowList = data;
+               });
           this.student['fYears'] = this.student.dtBirthdate ? this.student.dtBirthdate.getFullYear() : 0;
           // this.student['fMonthes'] = this.foreignMonthes[this.student.dtBirthdate?this.student.dtBirthdate.getMonth().toString():null];
           this.student['fMonthes'] = this.student.dtBirthdate.getMonth()+1;
@@ -218,34 +224,37 @@ flagMonth:boolean=false;
         this.student.bDeathFather = false;
         this.student.bDeathMother = false;
         this.change = true;
-       this.newYeshivaListOfStudent=new Array<Yeshiva>();
       //  alert(this.yeshivaListOfStudent.length)
       //  alert(this.yeshivaListOfStudent!=undefined)
       }
 
-    });
+    });     
+      this.newYeshivaListOfStudent=new Array<Yeshiva>();
+       this.yeshivaListOfStudent=new Array<Yeshiva>();
+
     this.appProxy.post("GetYeshivotOfStudent", { iPersonId: this.paramRout }).then(data => {
       if(data){
       this.newYeshivaListOfStudent = data;
-
+// this.yeshivaListOfStudent=data;
 debugger;
-      }
+      } 
+      // if(this.newYeshivaListOfStudent.length==0)
+      // {  
+      //    this.yeshivaListOfStudent=[];
+      // }
+      // else
+      this.newYeshivaListOfStudent.forEach(y => {
+
+  this.yeshivaListOfStudent.push(y);
+
+});
     }
+     
       
       );
 
-      if(this.newYeshivaListOfStudent.length!=0)
-      {     
-
-         this.yeshivaListOfStudent=[];
-
-
-      }
       
-else
-      this.newYeshivaListOfStudent.forEach(y => {
-  this.yeshivaListOfStudent.push(y);
-});
+
 
     this.letterArr.push({ nvChar: "א", iValue: 1 }); this.letterArr.push({ nvChar: "ב", iValue: 2 }); this.letterArr.push({ nvChar: "ג", iValue: 3 });
     this.letterArr.push({ nvChar: "ד", iValue: 4 }); this.letterArr.push({ nvChar: "ה", iValue: 5 }); this.letterArr.push({ nvChar: "ו", iValue: 6 });
@@ -543,12 +552,14 @@ debugger;
     newYeshiva.nvCity = this.yeshivaSelected.nvCity;
     newYeshiva.nvAddress = this.yeshivaSelected.nvAddress;
     newYeshiva.nvYeshivaName = this.yeshivaSelected.nvYeshivaName;
-    alert("new:"+this.newYeshivaListOfStudent.length);
-    alert("old:"+this.yeshivaListOfStudent.length);
 
     this.newYeshivaListOfStudent.push(newYeshiva);
-    alert("new:"+this.newYeshivaListOfStudent.length);
-    alert("old:"+this.yeshivaListOfStudent.length);
+    debugger;    
+
+
+    this.yeshivotId.push(this.yeshivaSelected.iYeshivaId);
+
+ 
     this.selectYeshi=false;
    this.yeshivaSelected=new Yeshiva();
   }
@@ -597,13 +608,13 @@ debugger;
 
 
   saveStudent(destroy = false) {
-    debugger;
+
     if (this.save.name != '')
       this.student.nvImgStudent = this.save.name;
-      debugger;
+
 
       this.student.dtBirthdate=new Date(this.foreignMonthes[this.student.fMonthes-1].text+" "+this.student.fDays+" "+this.student.fYears);
-      debugger;
+
     this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;
     if (this.fatherDead == true) {
       this.student.bDeathFather = true;
@@ -624,42 +635,11 @@ debugger;
       this.student.iCauseOfDeathMother=null;
     }
     if (this.paramRout != '0') {
-      this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId }).then(data => {
+      debugger;
+      if(this.newYeshivaListOfStudent.length>0)
+      {  
+        alert(this.newYeshivaListOfStudent.length)  
         debugger;
-        if(data){
-        if (this.status == 'תלמיד')
-          this._parent.openMessagePopup("פרטי התלמיד עודכנו בהצלחה!");
-        else
-          this._parent.openMessagePopup("פרטי הבוגר עודכנו בהצלחה!");
-        this.change = false;
-        if (!destroy)
-          this.backToGridStudent();
-        }
-
-      }, err => {
-        if (this.status == 'תלמיד')
-          alert("שגיאה בעריכת תלמיד");
-        else
-          alert("שגיאה בעריכת בוגר");
-        //this.change = false;s
-      });
-      if(this.yeshivaListOfStudent.length==0&&this.newYeshivaListOfStudent.length>0)
-      {
-            this.appProxy.post("AddYeshivaToStudent", {
-        iPersonId: this.paramRout, lstYeshivaId:
-          this.newYeshivaListOfStudent, iUserId: this.iUserId
-      }).then(data => {
-        debugger;
-        if (data)
-          this._parent.openMessagePopup("הישיבה/ות נוספה/ו בהצלחה!");
-          if (!destroy)
-          this.backToGridStudent();
-        else this._parent.openMessagePopup("שגיאה בהוספת ישיבה")
-      }
-        , err => this._parent.openMessagePopup("שגיאה"))
-      }
-      else
-    {
       this.newYeshivaListOfStudent.forEach(ny => {
         var flag=false;
         this.yeshivaListOfStudent.forEach(y => {
@@ -669,48 +649,60 @@ debugger;
         if(!flag)
         {
           this.yeshivaListToAdd.push(ny);
+          var id=this.yeshivaList.find(x=>x.nvYeshivaName==ny.nvYeshivaName&&x.nvAddress==ny.nvAddress).iYeshivaId
+          this.yeshivotId.push(id);
+          alert(this.yeshivotId.length);
+          alert(id);
         }
       });
-      this.appProxy.post("AddYeshivaToStudent", {
-        iPersonId: this.paramRout, lstYeshivaId:
-          this.yeshivaListToAdd, iUserId: this.iUserId
-      }).then(data => {
-        debugger;
-        if (data)
-          this._parent.openMessagePopup("הישיבה/ות עודכנה/ו בהצלחה!");
+    }
+    else{
+
+    }
+    this.AddYeshiva();
+      this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId }).then(data => {
+
+        if(data){
+     
+        if (this.status == 'תלמיד')
+          this._parent.openMessagePopup("פרטי התלמיד עודכנו בהצלחה!");
           if (!destroy)
           this.backToGridStudent();
-        else this._parent.openMessagePopup("שגיאה בעדכון ישיבה")
-      }
-        , err => this._parent.openMessagePopup("שגיאה"))
-    }
+        else
+          this._parent.openMessagePopup("פרטי הבוגר עודכנו בהצלחה!");
+        this.change = false;
+        // if (!destroy)
+        //   this.backToGridStudent();
+        }
+
+      }, err => {
+        if (this.status == 'תלמיד')
+          alert("שגיאה בעריכת תלמיד");
+        else
+          alert("שגיאה בעריכת בוגר");
+        //this.change = false;s
+      });
+
+
     }
 
     else
     {
+      if(this.newYeshivaListOfStudent.length>0)
+
+this.AddYeshiva();
+
             this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId}).then(data => {
 
 if(data)
         this._parent.openMessagePopup("התלמיד נוסף בהצלחה!");
         this.change = false;
-        // if (!destroy)
-        //   this.backToGridStudent();
+        if (!destroy)
+          this.backToGridStudent();
       }, err => {
         this._parent.openMessagePopup("שגיאה בהוספת תלמיד!");
       });
             
-      this.appProxy.post("AddYeshivaToStudent", {
-        iPersonId: this.paramRout, lstYeshivaId:
-          this.newYeshivaListOfStudent, iUserId: this.iUserId
-      }).then(data => {
-        debugger;
-        if (data)
-          this._parent.openMessagePopup("הישיבה/ות נוספה/ו בהצלחה!");
-          if (!destroy)
-          this.backToGridStudent();
-        else this._parent.openMessagePopup("שגיאה בהוספת ישיבה")
-      }
-        , err => this._parent.openMessagePopup("שגיאה"))
       
  
 
@@ -719,6 +711,25 @@ if(data)
     }
    
   }
+
+AddYeshiva(){
+  debugger;
+  this.appProxy.post("AddYeshivaToStudent", {
+    iPersonId: this.paramRout, lstYeshivaId:
+      this.yeshivotId, iUserId: this.iUserId
+  }).then(data => {
+    debugger;
+    if (data)
+    {
+            return true;
+    }
+    else 
+    return false;
+  }
+    , err => this._parent.openMessagePopup("שגיאה"))
+
+}
+
   backToGridStudent() {
     if (this.student == undefined)
       this.router.navigate(["students"]);
