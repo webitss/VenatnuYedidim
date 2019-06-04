@@ -27,7 +27,7 @@ export class EditMailComponent implements OnInit {
 
     // });
   }
-  @Output() close: EventEmitter<any> = new EventEmitter<any>();
+  @Output()  close: EventEmitter<any> = new EventEmitter<any>();
   addMail() {
     this.mails.push(this.mail);
   }

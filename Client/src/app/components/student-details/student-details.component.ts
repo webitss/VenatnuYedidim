@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, Inject, forwardRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, Output, Inject, forwardRef, ViewChild, ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { Student } from '../../classes/student';
 import { AppProxy } from '../../services/app.proxy';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -70,8 +70,10 @@ year:number;
   foreignYearsList: Array<string>;
   month:number=null;
 url:string;
+public htm:any=document.getElementById("htm");
 flagMonth:boolean=false;
-
+@Output()
+changeMe = new EventEmitter();
 
   lenOfMonth: number;
 
@@ -81,7 +83,7 @@ flagMonth:boolean=false;
   addYeshiva = false;
   selectYeshi=false;
   yeshivaId: number;
-  change: boolean;
+  change: boolean=false;
   flag: boolean = false;
   message: string;
   public hebrewYearsList: Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
@@ -103,6 +105,8 @@ flagMonth:boolean=false;
 
 
   ngOnInit() {
+
+    // this.htm=document.getElementById("htm");
 
     this.foreignMonthes = [
       { id: 1, text: "Jan" },
@@ -136,7 +140,7 @@ flagMonth:boolean=false;
     this.iUserId = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
     this.appProxy.post("GetAllAvrechim",{iPersonId:this.iUserId}).then(date => { this.avrechList = date; })
     this.appProxy.post("GetAllYeshivot").then(date => { 
-      debugger;
+
       this.yeshivaList = date;
      })
 
@@ -156,7 +160,7 @@ flagMonth:boolean=false;
           if (!this.student || !this.student.iPersonId)
             this.change = true;
           this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
-            debugger;
+
             this.status = data.filter(x => x.iSysTableRowId == this.student.iStatusType)[0].nvValue;
 // alert(this.status)
  
@@ -236,7 +240,7 @@ flagMonth:boolean=false;
       if(data){
       this.newYeshivaListOfStudent = data;
 // this.yeshivaListOfStudent=data;
-debugger;
+
       } 
       // if(this.newYeshivaListOfStudent.length==0)
       // {  
@@ -246,6 +250,8 @@ debugger;
       this.newYeshivaListOfStudent.forEach(y => {
 
   this.yeshivaListOfStudent.push(y);
+
+
 
 });
     }
@@ -317,6 +323,10 @@ debugger;
     this.lenOfMonth = new Date(this.student['fYears'], (this.student['fMonthes']), 0).getDate();
     this.generateDay();
 
+  }
+  ccc() {
+
+    this.changeMe.emit();
   }
   generateDay() {
 
@@ -608,7 +618,7 @@ debugger;
 
 
   saveStudent(destroy = false) {
-
+debugger;
     if (this.save.name != '')
       this.student.nvImgStudent = this.save.name;
 
@@ -638,7 +648,6 @@ debugger;
       debugger;
       if(this.newYeshivaListOfStudent.length>0)
       {  
-        alert(this.newYeshivaListOfStudent.length)  
         debugger;
       this.newYeshivaListOfStudent.forEach(ny => {
         var flag=false;
@@ -651,23 +660,22 @@ debugger;
           this.yeshivaListToAdd.push(ny);
           var id=this.yeshivaList.find(x=>x.nvYeshivaName==ny.nvYeshivaName&&x.nvAddress==ny.nvAddress).iYeshivaId
           this.yeshivotId.push(id);
-          alert(this.yeshivotId.length);
-          alert(id);
+
         }
       });
     }
-    else{
-
-    }
+    if(this.yeshivotId.length>0)
     this.AddYeshiva();
       this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId }).then(data => {
 
         if(data){
      
         if (this.status == 'תלמיד')
+        {
           this._parent.openMessagePopup("פרטי התלמיד עודכנו בהצלחה!");
           if (!destroy)
           this.backToGridStudent();
+        }
         else
           this._parent.openMessagePopup("פרטי הבוגר עודכנו בהצלחה!");
         this.change = false;
@@ -692,7 +700,7 @@ debugger;
 
 this.AddYeshiva();
 
-            this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId}).then(data => {
+this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId}).then(data => {
 
 if(data)
         this._parent.openMessagePopup("התלמיד נוסף בהצלחה!");
@@ -702,14 +710,7 @@ if(data)
       }, err => {
         this._parent.openMessagePopup("שגיאה בהוספת תלמיד!");
       });
-            
-      
- 
-
-
-
     }
-   
   }
 
 AddYeshiva(){
@@ -721,7 +722,7 @@ AddYeshiva(){
     debugger;
     if (data)
     {
-            return true;
+      return true;
     }
     else 
     return false;
@@ -778,10 +779,15 @@ AddYeshiva(){
 
   }
   ngOnDestroy() {
+    debugger;
     if (this.change) {
       let v = confirm("האם ברצונך לשמור?");
       if (v)
+      {
+        debugger;  
         this.saveStudent(true);
+
+      }
     }
 
   }
@@ -799,6 +805,13 @@ AddYeshiva(){
       event.preventDefault();
     }
   }
+
+changes(){
+  if(this.change)
+  alert("יש שנויים!");
+  else
+  alert("אין שנויים!");
+}
 
 }
 

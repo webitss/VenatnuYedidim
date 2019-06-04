@@ -42,6 +42,8 @@ export class StudentsComponent implements OnInit {
   citiesOfYeshivotOfStudents: Map<number,string>;
   private alert: any;
   @ViewChild('students') students: any;
+
+  
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   public ngOnInit() {
     this.currentYeshivaOfStudent = new Map<number, string>();

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ViewChild,AfterViewChecked, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppProxy } from '../../services/app.proxy';
@@ -6,25 +6,32 @@ import { Student } from '../../classes/student';
 import { AppComponent } from '../app/app.component';
 import { GlobalService } from '../../services/global.service';
 import { SysTableService } from '../../services/sys-table.service';
+import { NgForm } from '@angular/forms';
+import { StudentDetailsComponent } from '../student-details/student-details.component';
 
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
   styleUrls: ['./student.component.css']
 })
-export class StudentComponent implements OnInit, OnDestroy {
+export class StudentComponent implements OnInit, OnDestroy,AfterViewInit {
+  
   status: string;
   private sub: any;
   flag: number;
   public currentComponent: any;
   student: Student;
   id: number;
-  ff:boolean=false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private appProxy: AppProxy, private sysTableService: SysTableService,private cdRef:ChangeDetectorRef) { }
+  disabled:boolean=false;
+  @ViewChild(NgForm) form;
+  @ViewChild('students') students: any;
+  constructor(private router: Router, private route: ActivatedRoute, 
+    private appProxy: AppProxy, private sysTableService: SysTableService,
+    private cdRef:ChangeDetectorRef) { }
   // subscription:Subscription;
   ngOnInit() {
-
+debugger;
     this.sub = this.route.params.subscribe(params => {
       this.flag = +params['iPersonId'];
     });
@@ -48,6 +55,22 @@ export class StudentComponent implements OnInit, OnDestroy {
 
 
   };
+  ngAfterViewInit(): void {
+    debugger;
+    let changeMe = new CustomEvent("changeButton");
+
+debugger;
+alert(this.currentComponent.htm);
+this.currentComponent.htm.addEventListener("changeButton",function(e:Event){
+    
+}.bind(this));
+
+this.currentComponent.dispatchEvent(changeMe);
+  }
+  // s(){
+  //   debugger;
+  //   this.currentComponent.changes();
+  // }
   // ngOnInit() {
   //   this.sub = this.route.params.subscribe(params => {
   //      this.id = +params['id']; // (+) converts string 'id' to a number
@@ -62,14 +85,15 @@ export class StudentComponent implements OnInit, OnDestroy {
     this.currentComponent = event;
   }
 
-  get isDisabled(): boolean {
-    if (this.currentComponent.form != undefined) {
-      var f=this.currentComponent.form.valid;
+  isDisabled(): boolean {
+    // if (this.currentComponent.form != undefined) {
+    //   var f=this.currentComponent.form.valid;
 
-      return f;
-    }
-    else
-      return false;
+    //   return f;
+    // }
+    // else
+    //   return false;
+    return this.currentComponent.form.valid;
   }
   ngAfterViewChecked()
   {
@@ -81,8 +105,13 @@ export class StudentComponent implements OnInit, OnDestroy {
     if (this.currentComponent.saveStudent)
       this.currentComponent.saveStudent();
   }
-
-
+  changeButton(){
+    debugger;
+    this.disabled=true;
+  }
+ff(){
+  alert("hi")
+}
 
   close() {
     if (this.student == undefined)

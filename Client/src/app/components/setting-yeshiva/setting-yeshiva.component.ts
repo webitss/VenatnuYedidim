@@ -45,6 +45,7 @@ export class SettingYeshivaComponent implements OnInit {
   formValid = false;
 
   isDisabled(): boolean {
+    debugger;
     //if (this.isDisabled)
       return this.form.valid;
   }
@@ -102,12 +103,14 @@ export class SettingYeshivaComponent implements OnInit {
       this.appProxy.post('EditYeshiva', { yeshiva: this.yeshiva, iYeshivaId: this.yeshiva.iYeshivaId })
         .then(
           data => {
+            debugger;
             //this.yeshiva = data;
             if(data)
             {
               this._parent.openMessagePopup("השמירה התבצעה בהצלחה!");
+              debugger;
               this.closeYeshiva.emit(null);
-  
+  debugger;
                this.update.emit(this.yeshiva);
             }
             else
