@@ -3,16 +3,22 @@ import { User } from '../classes/user';
 import { Person } from '../classes/person';
 import { AppProxy } from '../services/app.proxy';
 import { Observable } from 'rxjs';
+import { Student } from '../classes/student';
 
 @Injectable()
 export class GlobalService {
 
   public user: User = null;
+  public student:Student;
   idPermission:number;
   
   constructor(private appProxy:AppProxy) {
     this.user = JSON.parse(localStorage.getItem("user"));
   }
+
+getStudent(){
+  return this.student;
+}
 
   getUser() {
     return this.user;

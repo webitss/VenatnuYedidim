@@ -38,11 +38,11 @@
 
     </nav>
     <div class="btn-area">
-      <button type='button' *ngIf="disabled"  
-      class="btn-circle btn-save" (click)="save()" [ngClass]="{'disabled': !isDisabled }">שמור </button>
+      <button type='button'
+      class="btn-circle btn-save" (click)="save()" [disabled]="!f" [ngClass]="{'disabled': !f }">שמור </button>
       <button type='button' class="btn-circle btn-close" (click)="close()">סגור</button>
     </div>
   </div>
 <!-- <app-student-details (changeMe)="changeButton()"></app-student-details> -->
-  <router-outlet id="ht" (changeMe)="changeButton()" (activate)="onRouterOutletActivate($event)" (change)="ff()"> </router-outlet>
+  <router-outlet id="ht" (activate)="onRouterOutletActivate($event)"> </router-outlet>
 </div>

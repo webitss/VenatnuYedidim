@@ -158,11 +158,11 @@ namespace Service.Entities
                 return null;
             }
         }
-        public static Student GetStudentById(int iPersonId)
+        public static Student GetStudentById(int iStudentId)
         {
             try
             {
-                DataRow drc = SqlDataAccess.ExecuteDatasetSP("TStudentGetStudentbyId_SLCT", new SqlParameter("iPersonId", iPersonId)).Tables[0].Rows[0];
+                DataRow drc = SqlDataAccess.ExecuteDatasetSP("TStudentGetStudentbyId_SLCT", new SqlParameter("iPersonId", iStudentId)).Tables[0].Rows[0];
                 Student student = ObjectGenerator<Student>.GeneratFromDataRow(drc);
 
                 return student;

@@ -14,6 +14,7 @@ import { AppComponent } from '../app/app.component';
 import { Conversation } from '../../classes/conversation';
 import { Meeting } from '../../classes/meeting';
 import { SysTableRow } from '../../classes/SysTableRow';
+import { Avrech } from 'src/app/classes/avrech';
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -37,6 +38,7 @@ export class TaskComponent implements OnInit {
  conversation=new Conversation();
  meeting=new Meeting();
  iTasOrConType:number;
+ public sysTable:SysTableRow[];
  flag=false;
  @Output() SaveT = new EventEmitter<Task>();
 
@@ -50,14 +52,17 @@ public sysTableList:SysTableRow[];
 
   minutes: string;
   hours: string;
-
+len:number;
   personId: number;
   student: Student;
   isNew: boolean = false;
   taskStu:boolean;
   studentsList:Student[];
   f:boolean=false;
+  it:number;
+  currentStu:Student;
   ngOnInit() {
+    debugger;
 
     this.currentTask = Object.assign({}, this.task);
 
@@ -65,32 +70,73 @@ public sysTableList:SysTableRow[];
     if (!this.task ) {
       this.task = new Task();
       this.isNew = true;
-
     }
 
-    
 
-      // alert(this.sysTableList[0].nvValue)
 
     this.route.parent.params.subscribe(params => {
       this.personId = +params['iPersonId'];
 // alert(this.personId);
-        
-       if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
-    this.taskStu=true;
-    else
-    this.taskStu=false;
-      this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
-        this.taskTypeList = data;
-        this.currentTask['dtDate'] = this.task.dtTaskdatetime;
-        this.currentTask['dtHour'] =moment(this.task.dtTaskdatetime).format('HH:mm'); //this.hours + ':' + this.minutes;
-
         this.appProxy.post('GetStudentsByAvrechId',{ iAvrechId: this.personId}).then(data => { 
 
           if(data)
           this.studentsList = data; 
         })
+if(this.task.iTaskType==73)
+this.it=10;
+else
+if(this.task.iTaskType==75)
+this.it=9;
+this.appProxy.post('GetValues',{iSysTableId:this.it}).then(d=>{
+
+  this.sysTable=d;
+  // alert(this.sysTable.length);
+  // alert("jg");
+})
+let t=document.getElementById("t");
+// alert(this.currentTask.iStudentId);
+//   alert(this.currentTask.iPersonId);
+if(t)
+{
+
+  debugger;
+// this.appProxy.post("GetStudentById",{iStudentId:this.task.iStudentId}).then(dd=>{
+//   if(dd){
+     this.currentStu=this.globalService.getStudent();
+   
+this.task['nvName']=this.currentStu.nvFirstName+" "+this.currentStu.nvLastName;
+
+//   }
+
+// })
 debugger;
+}
+
+      this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
+        this.taskTypeList = data;
+        this.currentTask['dtDate'] = this.task.dtTaskdatetime;
+        this.currentTask['dtHour'] =moment(this.task.dtTaskdatetime).format('HH:mm'); //this.hours + ':' + this.minutes;
+        debugger;
+this.taskType=this.taskTypeList.find(x=>x.iSysTableRowId==this.task.iTaskType).nvValue; 
+// if(this.taskType=="שיחה")
+// this.it=10;
+// else
+// if(this.taskType=="פגישה")
+// this.it=9;
+// this.appProxy.post('GetValues',{iSysTableId:this.it}).then(d=>{
+
+//   this.sysTable=d;
+//   alert(this.sysTable.length);
+//   alert("jg")
+// })
+// alert(this.sysTable.length);
+// this.InitConversationType();
+      if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
+    this.taskStu=true;
+    else
+    this.taskStu=false;
+
+//         
         // // this.InitConversationType();
         // for(var i=0;i<this.sysTableList.length;i++) 
         // alert(this.sysTableList[i].iSysTableRowId);
@@ -166,13 +212,14 @@ debugger;
 this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
       this.sysTableList = val;
     });
+    return this.sysTableList.length;
   }
   InitMeetingType(){
 debugger;
     this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(val => {
-      this.sysTableList = val;
-      debugger;
+   return val;
     });
+    return null;
   }
 
   @Output() close: EventEmitter<any> = new EventEmitter<any>();

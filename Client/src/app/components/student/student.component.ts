@@ -8,13 +8,14 @@ import { GlobalService } from '../../services/global.service';
 import { SysTableService } from '../../services/sys-table.service';
 import { NgForm } from '@angular/forms';
 import { StudentDetailsComponent } from '../student-details/student-details.component';
+import { ParentChildService } from '../../services/parent-child.service';
 
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
   styleUrls: ['./student.component.css']
 })
-export class StudentComponent implements OnInit, OnDestroy,AfterViewInit {
+export class StudentComponent implements OnInit, OnDestroy {
   
   status: string;
   private sub: any;
@@ -22,16 +23,24 @@ export class StudentComponent implements OnInit, OnDestroy,AfterViewInit {
   public currentComponent: any;
   student: Student;
   id: number;
-
+f:boolean=false;
   disabled:boolean=false;
+  htm:any;
   @ViewChild(NgForm) form;
   @ViewChild('students') students: any;
   constructor(private router: Router, private route: ActivatedRoute, 
     private appProxy: AppProxy, private sysTableService: SysTableService,
+    private _sharedService:ParentChildService,
     private cdRef:ChangeDetectorRef) { }
   // subscription:Subscription;
   ngOnInit() {
-debugger;
+
+    this._sharedService.changeEmitted$.subscribe(
+      text => {
+          this.f=true;
+      });
+
+
     this.sub = this.route.params.subscribe(params => {
       this.flag = +params['iPersonId'];
     });
@@ -43,7 +52,7 @@ debugger;
       if (this.id != 0) {
 
 
-        this.appProxy.post("GetStudentById", { iPersonId: this.id }).then(data => {
+        this.appProxy.post("GetStudentById", { iStudentId: this.id }).then(data => {
           this.student = data;
           this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
             this.status = data.filter(x => x.iSysTableRowId == this.student.iStatusType)[0].nvValue;
@@ -55,21 +64,24 @@ debugger;
 
 
   };
-  ngAfterViewInit(): void {
-    debugger;
-    let changeMe = new CustomEvent("changeButton");
+//  changeMe:Event;
+//   ngAfterViewInit(): void {
 
-debugger;
-alert(this.currentComponent.htm);
-this.currentComponent.htm.addEventListener("changeButton",function(e:Event){
-    
-}.bind(this));
+//     this.changeMe = new CustomEvent("changeButton");
 
-this.currentComponent.dispatchEvent(changeMe);
-  }
+// debugger;
+// alert(this.currentComponent.htm);
+// this.currentComponent.htm.addEventListener("changeButton",function(e:Event){
+//   debugger;
+//   this.disabled=true;
+//   alert(this.disabled)
+// }.bind(this));
+// debugger;
+// this.currentComponent.htm.dispatchEvent(this.changeMe);
+//   }
   // s(){
   //   debugger;
-  //   this.currentComponent.changes();
+  //  this.f=this.currentComponent.changes();
   // }
   // ngOnInit() {
   //   this.sub = this.route.params.subscribe(params => {
@@ -105,13 +117,12 @@ this.currentComponent.dispatchEvent(changeMe);
     if (this.currentComponent.saveStudent)
       this.currentComponent.saveStudent();
   }
-  changeButton(){
-    debugger;
-    this.disabled=true;
-  }
-ff(){
-  alert("hi")
-}
+  // changeButton(){
+  //   debugger;
+  //   this.disabled=true;
+  //   alert(this.disabled)
+  // }
+
 
   close() {
     if (this.student == undefined)
@@ -132,6 +143,17 @@ ff(){
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

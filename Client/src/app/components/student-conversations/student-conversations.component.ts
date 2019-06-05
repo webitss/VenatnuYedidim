@@ -13,6 +13,7 @@ import { GlobalService } from '../../services/global.service'
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { AppComponent } from '../app/app.component';
 import { Task } from '../../classes/task';
+import { Student } from 'src/app/classes/student';
 
 @Component({
   selector: 'app-student-conversations',
@@ -30,6 +31,7 @@ export class StudentConversationsComponent implements OnInit {
   protected conv:Conversation;
   protected name:string; 
 
+  student:Student;
   con;
   flagDelete = false;
   header = 'מחיקת שיחה';
@@ -177,10 +179,16 @@ debugger;
     this.iUserId = this.globalService.getUser()['iUserId'];
     this.route.parent.params.subscribe(params => {
       this.iPersonId = +params['iPersonId'];
+
       //this.iPersonId.toString();
 
     });
-
+debugger;
+    this.appProxy.post("GetStudentById",{iStudentId:this.iPersonId}).then(dd=>{
+      this.student=dd;      
+      this.globalService.student=this.student;
+debugger;
+    })
     this.iUserId = this.globalService.getUser()['iUserId'];
 
     this.selecList(this.iPersonId);

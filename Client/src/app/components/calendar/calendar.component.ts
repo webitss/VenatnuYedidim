@@ -55,7 +55,7 @@ export class CalendarComponent implements OnInit {
   meetingType:Array<any>;
   editTask1: boolean;
   editTask(taskId: number) {
-    debugger;
+
     this.flag = true;
     this.editTask1 = true;
     this.task = this.taskList.find(t => t.iTaskId == taskId);

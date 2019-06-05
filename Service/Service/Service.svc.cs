@@ -133,9 +133,9 @@ namespace Service
             return Student.GetCitiesOfYeshivotOfStudents();
         }
 
-        public Student GetStudentById(int iUserId)
+        public Student GetStudentById(int iStudentId)
         {
-            return Student.GetStudentById(iUserId);
+            return Student.GetStudentById(iStudentId);
         }
         public List<Student> GetStudentsByAvrechId(int iAvrechId)
         {

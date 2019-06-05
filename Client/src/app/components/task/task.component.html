@@ -7,36 +7,54 @@
         <option *ngFor="let type of taskTypeList" [value]="type['iSysTableRowId']">{{type['nvValue']}}</option>
       </select>
     </div>
-  
-      <div class="form-group col-sm-3" *ngIf="sysTableList">
+
+      <!-- <div class="form-group col-sm-3">
       <label for="types">סוג {{taskType}}</label>
       <select name="types" class="form-control" name="types"  [(ngModel)]="iTasOrConType">
-        <option *ngFor="let s of sysTableList" [value]="s['iSysTableRowId']">{{s['nvValue']}}</option>
+        <option *ngFor="let s of sysTable" [value]="s['iSysTableRowId']">{{s['nvValue']}}</option>
       </select>
-  
-    </div>
-  
+
+    </div> -->
+
     </div>
     <div class="row-sm-6 row">
         <div class="form-group col-sm-3" >
       <label for="dtDate">תאריך</label>
-  
+
       <input class="form-control" [(ngModel)]="currentTask.dtDate"  ngui-datetime-picker date-only="true" close-on-select="false" id="dtDate" name="dtDate">
-  
+
     </div>
     <div *ngIf="currentTask && currentTask['dtHour']" class="form-group col-sm-3">
       <label for="taskTime">שעה</label>
       <input type="time" class="form-control" id="time" name="taskTime" [(ngModel)]="currentTask.dtHour" [ngModelOptions]="{standalone: true}" />
     </div>
-    <div *ngIf="taskStu" class="form-group col-sm-3 row">
-        <label for="yeshivaName"  style="width: 100px;"> תלמיד </label>
+    <!-- <div *ngIf="taskStu" class="form-group col-sm-3 row">
+        <label for="studentId"  style="width: 100px;"> תלמיד </label>
         <div >
           <select class="form-control" id="studentId" name="studentName" [(ngModel)]="task.iStudentId">
             <option disabled> בחר </option>
             <option *ngFor="let s of studentsList" [value]="s.iPersonId">{{s.nvFirstName}} {{s.nvLastName}}</option>
         </select>
         </div>
+    </div> -->
+    <div class="form-group col-sm-3" *ngIf="t==null">
+      <label for="studentId">תלמיד</label>
+      <select name="studentId" class="form-control"  *ngIf="studentsList" [(ngModel)]="task.iStudentId" (change)="changeType()">
+        <option *ngFor="let s of studentsList" [value]="s.iPersonId">{{s.nvFirstName}} {{s.nvLastName}}</option>
+      </select>
     </div>
+
+    <!-- <div class="form-group col-sm-3" *ngIf="t!=null">
+      <label class="form-control">{{task['nvName']}}gkhkhjk</label>
+
+    </div> -->
+    <!-- <div class="form-group col-sm-3 row">
+      <label for="studentId" style="width: 100px">תלמיד :</label>
+      <select class="form-control" id="studentId" [(ngModel)]="task.iStudentId">
+          <option disabled> בחר </option>
+          <option *ngFor="let s of studentsList" [value]="s.iPersonId">{{s.nvFirstName}} {{s.nvLastName}}</option>
+      </select>
+  </div> -->
     </div>
 </div>
   <div class="row col-sm-12">

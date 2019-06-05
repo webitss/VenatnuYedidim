@@ -17,6 +17,7 @@ import { P } from '@angular/core/src/render3';
 import { Alert } from 'selenium-webdriver';
 // import { trace } from 'node_modules/@type/node/index.d.ts/console';
 import { url } from 'inspector';
+import { ParentChildService } from '../../services/parent-child.service';
 
 @Component({
   selector: 'app-student-details',
@@ -27,7 +28,7 @@ export class StudentDetailsComponent implements OnInit {
 
   status: string;
   constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private router: Router,
-    private globalService: GlobalService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent,private cdRef:ChangeDetectorRef) { }
+    private globalService: GlobalService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent,private _sharedService: ParentChildService,private cdRef:ChangeDetectorRef) { }
 
   @ViewChild(NgForm) form;
   @Input() student: Student;
@@ -70,7 +71,7 @@ year:number;
   foreignYearsList: Array<string>;
   month:number=null;
 url:string;
-public htm:any=document.getElementById("htm");
+public htm:any=document.getElementById("ht");
 flagMonth:boolean=false;
 @Output()
 changeMe = new EventEmitter();
@@ -149,9 +150,9 @@ changeMe = new EventEmitter();
       this.paramRout = params['iPersonId'];
 
       if (params['iPersonId'] != '0') {
-
-        this.appProxy.post("GetStudentById", { iPersonId: this.paramRout }).then(data => {
-
+debugger;
+        this.appProxy.post("GetStudentById", { iStudentId: this.paramRout }).then(data => {
+debugger;
           this.student = data;
           this.appProxy.post("GetAvrechIdByStudentId",{iStudentId:this.student.iPersonId}).then(data=>{
             this.student.iAvrechId=data;
@@ -325,7 +326,7 @@ changeMe = new EventEmitter();
 
   }
   ccc() {
-
+debugger;
     this.changeMe.emit();
   }
   generateDay() {
@@ -396,7 +397,10 @@ while(year!=0)
 }
 return yearString;
   }
-
+  Change(){
+    this.change=true;
+    this._sharedService.emitChange();
+   }
 
 gregorianDate(){
   if(this.bornDateHebrewStudent.Year)
@@ -808,9 +812,9 @@ AddYeshiva(){
 
 changes(){
   if(this.change)
-  alert("יש שנויים!");
+  return true
   else
-  alert("אין שנויים!");
+  return false;
 }
 
 }
