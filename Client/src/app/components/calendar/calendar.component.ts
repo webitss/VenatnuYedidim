@@ -11,6 +11,7 @@ import { Conversation } from '../../classes/conversation';
 import { callbackify } from 'util';
 import { promise } from 'protractor';
 import { Meeting } from '../../classes/meeting';
+import { SysTableRow } from '../../classes/SysTableRow';
 @Component({
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,7 +47,8 @@ export class CalendarComponent implements OnInit {
   flagDelete = false;
   message = '';
   header = 'מחיקת משימה';
-
+  public sysTableList: SysTableRow[];
+  public sysTableRowList:SysTableRow[];
   taskList: Array<Task> = new Array<Task>();
   conversationList:Array<Conversation>=new Array<Conversation>();
   taskTypeList: Array<any>;
@@ -54,13 +56,30 @@ export class CalendarComponent implements OnInit {
   meetingList:Array<Meeting>=new Array<Meeting>();
   meetingType:Array<any>;
   editTask1: boolean;
+  public flagCome:boolean;
   editTask(taskId: number) {
 
     this.flag = true;
     this.editTask1 = true;
     this.task = this.taskList.find(t => t.iTaskId == taskId);
     this.conversation=this.conversationList.find(c=>c.iConversationId==taskId);
+// alert(this.conversation.nvConversationSummary);
     this.meeting=this.meetingList.find(m=>m.iMeetingId==taskId);
+    if(this.conversation)
+    {
+            this.getConversationType();
+// alert("con")
+    }
+      else
+      {
+              if(this.meeting)
+              {
+                      this.getMeetingType();
+// alert("meet")
+
+              }
+      }
+
   }
   saveTask() {
     this.child.saveTask(true);
@@ -97,7 +116,7 @@ export class CalendarComponent implements OnInit {
           if(data)
           {          
             this.conversationTypeList = data;
-debugger;
+            debugger;
             this.createCalendar();
           }
         });
@@ -120,10 +139,31 @@ debugger;
     })
     this.createCalendar();
   }
+
+getConversationType(){
+  this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
+    if(val)
+    {
+          this.sysTableList = val;
+
+    }
+  });
+}
+getMeetingType(){
+  // alert("come");
+this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(val=>{
+  if(val){
+      this.sysTableRowList=val;
+  // alert(this.sysTableRowList.length);
+
+  }
+})
+}
+
   ngOnInit() {
     // this.task = new Task();
 
-   
+   this.flagCome=true;
     this.month = new Date().getMonth() + 1;
     this.year = new Date().getFullYear();
 
@@ -133,6 +173,7 @@ debugger;
       this.refreshMe();
 
       this.createCalendar();
+      
   }
   @Output()
   @Input()

@@ -4,12 +4,14 @@ import { Person } from '../classes/person';
 import { AppProxy } from '../services/app.proxy';
 import { Observable } from 'rxjs';
 import { Student } from '../classes/student';
+import { Avrech } from '../classes/avrech';
 
 @Injectable()
 export class GlobalService {
 
   public user: User = null;
   public student:Student;
+  public avrech:Avrech;
   idPermission:number;
   
   constructor(private appProxy:AppProxy) {
@@ -23,7 +25,9 @@ getStudent(){
   getUser() {
     return this.user;
   }
-
+getAvrech(){
+  return this.avrech;
+}
   flag: boolean = false;
 
   IsParticipantsExists(participantId: number, eventId: number) {

@@ -34,7 +34,9 @@ export class StudentConversationDetailsComponent implements OnInit {
   @Input()
   public sysTableList: SysTableRow[];
   public currentComponent: any;
-
+  @Input()
+  public flagCome:boolean;
+avrech:Avrech;
   // @Output()
   // onSaveTask:EventEmitter<Task>=new EventEmitter<Task>();
 
@@ -63,30 +65,37 @@ export class StudentConversationDetailsComponent implements OnInit {
     
     // });
 
-
     this.addTask="הוספת";
 
     this.iUserId = this.globalService.getUser()['iUserId'];
+    // this.sysTableList=thi
     this.sub = this.route.parent.params.subscribe(params => {
       this.iPersonId = +params['iPersonId']
       this.currentConver = Object.assign({}, this.conversation);
       if (this.currentConver.iConversationId == null) {
         this.conversation.iConversationType = this.sysTableList && this.sysTableList[0] ? this.sysTableList[0].iSysTableRowId : null;
-        this.currentConver = new Conversation();
-      }
-      this.currentConver['dtDate'] = new Date(this.currentConver.dtConversationDate);
-      this.currentConver['conversationTime'] =moment(this.currentConver.dtConversationDate).format('HH:mm');
-    })
-    this.appProxy.post("GetAllAvrechimByStudent", { iPersonId:this.iPersonId }).then(
+        this.currentConver = new Conversation();    
+        this.appProxy.post("GetAllAvrechimByStudent", { iPersonId:this.iPersonId }).then(
       data => {
         debugger;
         this.avrechByStuden = data; 
          this.conver.iAvrechId=this.avrechByStuden.iPersonId;
          debugger;
          this.currentConver['avrechName']= this.avrechByStuden.nvFirstName+' '+this.avrechByStuden.nvLastName;
-     
+      
       },
     );
+      }
+      else
+      if(this.flagCome)
+      {
+        this.avrech=this.globalService.getAvrech()
+        this.currentConver['avrechName']=this.avrech.nvFirstName+' '+this.avrech.nvLastName;
+      }
+      this.currentConver['dtDate'] = new Date(this.currentConver.dtConversationDate);
+      this.currentConver['conversationTime'] =moment(this.currentConver.dtConversationDate).format('HH:mm');
+    })
+
   }
   cancel() {
     this.Conversation.emit(null);

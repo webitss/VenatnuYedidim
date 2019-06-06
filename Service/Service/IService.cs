@@ -12,7 +12,17 @@ namespace Service
     [ServiceContract]
     public interface IService
     {
+        #region Person
 
+        [OperationContract]
+        [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetPersonLevel",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        string GetPersonLevel(int iPersonId);
+        #endregion
 
         #region User
 

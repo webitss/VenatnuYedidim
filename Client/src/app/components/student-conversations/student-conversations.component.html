@@ -4,7 +4,7 @@
     </div>
 </div>
 <div *ngIf="conversationSelect!=null">
-    <app-student-conversation-details [conversation]="conversationSelect" [sysTableList]="sysTableList"  class="conversationDetails"
+    <app-student-conversation-details [conversation]="conversationSelect" [sysTableList]="sysTableList" [flagCome]="flagCome" class="conversationDetails"
      (Conversation)="close()" (updateConver)="updateConver($event)" (saveNewConver)="saveNewConver($event)"></app-student-conversation-details>
 </div>
 

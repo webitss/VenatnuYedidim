@@ -1,4 +1,4 @@
-<div id="overlay"></div>
+<div id="overlay" *ngIf="!flagCome"></div>
 <div class="form ">
   <div class="row ">
     <div class="col-sm-8"></div>
@@ -68,7 +68,7 @@
               <button class="btn-circle btn-add " (click)="taskSelect=!taskSelect " (click)="change()">{{addTask}} משימה</button>
             </div>
             <div  *ngIf="taskSelect==true" class=" col-sm-12">
-              <app-task #task></app-task>
+              <app-task #task id="t"></app-task>
             </div>
           </div>
         </div>

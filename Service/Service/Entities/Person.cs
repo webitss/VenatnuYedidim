@@ -68,6 +68,20 @@ namespace Service.Entities
             }
         }
 
+        public static string GetPersonLevel(int iPersonId)
+        {
+            try
+            {
+                DataRow dr = SqlDataAccess.ExecuteDatasetSP("TPerson_GetPersonLevel_SLCT", new SqlParameter("iUserId", iPersonId)).Tables[0].Rows[0];
+                string level = dr["userLevel"].ToString();
+                return level;
+            }
+            catch(Exception ex)
+            {
+                Log.LogError("GetPersonLevel / TPerson_GetPersonLevel_SLCT", "iPersonId" + iPersonId + ", ex " + ex);
+                return null;
+            }
+        }
         #endregion
     }
 }

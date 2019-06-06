@@ -14,7 +14,7 @@ import { AppComponent } from '../app/app.component';
 import { Conversation } from '../../classes/conversation';
 import { Meeting } from '../../classes/meeting';
 import { SysTableRow } from '../../classes/SysTableRow';
-import { Avrech } from 'src/app/classes/avrech';
+import { Avrech } from '../../classes/avrech';
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -60,9 +60,9 @@ len:number;
   studentsList:Student[];
   f:boolean=false;
   it:number;
+  t:any;
   currentStu:Student;
   ngOnInit() {
-    debugger;
 
     this.currentTask = Object.assign({}, this.task);
 
@@ -73,8 +73,9 @@ len:number;
     }
 
 
-
+debugger;
     this.route.parent.params.subscribe(params => {
+      debugger;
       this.personId = +params['iPersonId'];
 // alert(this.personId);
         this.appProxy.post('GetStudentsByAvrechId',{ iAvrechId: this.personId}).then(data => { 
@@ -82,42 +83,31 @@ len:number;
           if(data)
           this.studentsList = data; 
         })
-if(this.task.iTaskType==73)
-this.it=10;
-else
-if(this.task.iTaskType==75)
-this.it=9;
-this.appProxy.post('GetValues',{iSysTableId:this.it}).then(d=>{
+// if(this.task.iTaskType==73)
+// this.it=10;
+// else
+// if(this.task.iTaskType==75)
+// this.it=9;
+// this.appProxy.post('GetValues',{iSysTableId:this.it}).then(d=>{
 
-  this.sysTable=d;
-  // alert(this.sysTable.length);
-  // alert("jg");
-})
-let t=document.getElementById("t");
-// alert(this.currentTask.iStudentId);
-//   alert(this.currentTask.iPersonId);
-if(t)
+//   this.sysTable=d;
+// })
+this.t=document.getElementById("t");
+if(this.t)
 {
-
-  debugger;
-// this.appProxy.post("GetStudentById",{iStudentId:this.task.iStudentId}).then(dd=>{
-//   if(dd){
      this.currentStu=this.globalService.getStudent();
    
 this.task['nvName']=this.currentStu.nvFirstName+" "+this.currentStu.nvLastName;
 
-//   }
-
-// })
-debugger;
 }
 
       this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
+        debugger;
         this.taskTypeList = data;
         this.currentTask['dtDate'] = this.task.dtTaskdatetime;
         this.currentTask['dtHour'] =moment(this.task.dtTaskdatetime).format('HH:mm'); //this.hours + ':' + this.minutes;
-        debugger;
-this.taskType=this.taskTypeList.find(x=>x.iSysTableRowId==this.task.iTaskType).nvValue; 
+
+// this.taskType=this.taskTypeList.find(x=>x.iSysTableRowId==this.task.iTaskType).nvValue; 
 // if(this.taskType=="שיחה")
 // this.it=10;
 // else
@@ -131,6 +121,7 @@ this.taskType=this.taskTypeList.find(x=>x.iSysTableRowId==this.task.iTaskType).n
 // })
 // alert(this.sysTable.length);
 // this.InitConversationType();
+debugger;
       if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
     this.taskStu=true;
     else
@@ -146,6 +137,7 @@ this.taskType=this.taskTypeList.find(x=>x.iSysTableRowId==this.task.iTaskType).n
 
           if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
           {
+            debugger;
             this.task.nvComments =""
             this.task.iPersonId = this.personId;//מי שלחצו עליו
           }
@@ -288,7 +280,7 @@ if(iAvrechId)
   this.task.iPersonId=iAvrechId;
 this.task.iStudentId=iStudentId;
 }
-alert(this.task.iStudentId);
+// alert(this.task.iStudentId);
     return this.appProxy.post('SetTask', { task: this.task, iUserId: this.globalService.getUser()['iUserId'] }).then(data => {
       if (data) {
         this._parent.openMessagePopup("השמירה התבצעה בהצלחה!");

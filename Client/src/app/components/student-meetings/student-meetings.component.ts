@@ -10,6 +10,7 @@ import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { GlobalService } from '../../services/global.service';
 import { AppComponent } from '../app/app.component';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { Student } from '../../classes/student';
 
 
 
@@ -32,6 +33,7 @@ export class StudentMeetingsComponent implements OnInit {
   header = 'מחיקת פגישה';
   message = '';
   deleMeeting: Meeting;
+  student:Student;
 @ViewChild('StudentMeetingDetailsComponent') StudentMeetingDetailsComponent:StudentMeetingDetailsComponent;
   constructor(private appProxy: AppProxy, private sysTableService: SysTableService, private route: ActivatedRoute, private globalService: GlobalService,
     @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
@@ -145,7 +147,11 @@ export class StudentMeetingsComponent implements OnInit {
     this.sub = this.route.parent.params.subscribe(params => {
       this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
     });
-   
+    this.appProxy.post("GetStudentById",{iStudentId:this.iPersonId}).then(dd=>{
+      this.student=dd;      
+      this.globalService.student=this.student;
+debugger;
+    })
     this.GetMeetingsByStudentId(this.iPersonId);
   }
   ngOnDestroy() {

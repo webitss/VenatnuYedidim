@@ -1,7 +1,7 @@
 
 <div class="row">
-  <div (click)="prevMonth()" class="prev-next" title="חודש קודם">
-    <</div>
+  <div (click)="prevMonth()" class="prev-next" title="חודש קודם">   <</div>
+ 
       <p class="prev-next">{{month}}/{{year}}</p>
       <div (click)="nextMonth()" class="prev-next" title="חודש הבא">></div>
 
@@ -29,7 +29,6 @@
   </div>
   <div *ngIf="editTask1==true">
         <div id="overlay"></div>
-
     <div *ngIf="task!=undefined">
 
     
@@ -48,11 +47,12 @@
     </div>
   </div>
 
-      <app-student-conversation-details *ngIf="conversation!=undefined" (Conversation)="close()" [conversation]="conversation" [sysTableList]="sysTableList"  class="conversationDetails">
+      <app-student-conversation-details *ngIf="conversation!=undefined" (Conversation)="close()" [flagCome]="flagCome" [conversation]="conversation" [sysTableList]="sysTableList"  class="conversationDetails">
     </app-student-conversation-details>  
-      
-      <app-student-meeting-details *ngIf="meeting!=undefined" [sysTableRowList]="sysTableRowList" [meeting]="meeting" (Close)="close()" >
+           <app-student-meeting-details *ngIf="meeting!=undefined" [sysTableRowList]="sysTableRowList" [meeting]="meeting" [flagCome]="flagCome" (Close)="close()" >
       </app-student-meeting-details> 
+
+ 
 
   </div>
 

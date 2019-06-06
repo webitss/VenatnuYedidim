@@ -14,6 +14,11 @@ namespace Service
         //{
         //    return Person.GetPerson(iPersonId);
         //}
+
+        public string GetPersonLevel(int iPersonId)
+        {
+            return Person.GetPersonLevel(iPersonId);
+        }
         #endregion
 
         #region User

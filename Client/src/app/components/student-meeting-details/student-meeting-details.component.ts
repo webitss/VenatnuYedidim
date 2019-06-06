@@ -35,6 +35,10 @@ export class StudentMeetingDetailsComponent implements OnInit {
   minutes: string;
   hours: string;
   taskSelect: boolean;
+  level:string;
+  avrech:Avrech;
+  @Input()
+  public flagCome:boolean;
   @ViewChild(TaskComponent) child: TaskComponent;
 
   @ViewChild('task') TaskComponent: TaskComponent;
@@ -45,37 +49,71 @@ export class StudentMeetingDetailsComponent implements OnInit {
     , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
+
     // this.avrechByStuden
     this.addTask="הוספת";
     this.taskSelect = false;
 
     this.sub = this.route.parent.params.subscribe(params => {
       this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
-      debugger;
-      this.appProxi.post("GetAllAvrechimByStudent", { iPersonId:this.iPersonId }).then(
-        data => {
-          debugger;
-          this.avrechByStuden = data; 
-          // this.a=this.avrechByStuden;
-          this.currentMeeting.iAvrechId=this.avrechByStuden.iPersonId;
-              this.text= this.avrechByStuden.nvFirstName+' '+this.avrechByStuden.nvLastName;
-              this.currentMeeting.avrechName= this.text;
+ });
+      //  this.appProxi.post("GetPersonLevel",{iPersonId:this.iPersonId}).then(data=>{
 
-          // this.currentMeeting.avrechName=this.avrechByStuden[1]
-        },
-      );
-    });
+      //    if(data)
+      //    {
+      //      this.level=data;
+      //     }
+      //   });
+
+
+         
+       
+
+
+    
+
     if(this.meeting.iMeetingId==null)
     {
       this.meeting.iMeetingType=this.sysTableRowList[0].iSysTableRowId
     }
     
     this.currentMeeting = new Meeting();
+    debugger;
     this.currentMeeting = Object.assign({}, this.meeting);
+    debugger;
     this.currentMeeting['dtDate'] =new Date((this.currentMeeting.dtMeetingDate));
     this.currentMeeting['dtHour'] =moment(this.currentMeeting.dtMeetingDate).format('HH:mm');
     // this.currentMeeting['iAvrechId']=this.currentMeeting.iAvrechId;
-   
+    debugger;
+    if(this.currentMeeting.avrechName==null)
+    {
+      this.avrech=this.globalService.getAvrech()
+    this.currentMeeting.avrechName=this.avrech.nvFirstName+' '+this.avrech.nvLastName;
+
+    }
+    // if(this.level=="אברך")
+    // {
+    //   this.appProxi.post("GetAvrechById",{iPersonId:this.iPersonId}).then(dd=>{
+    //     this.currentMeeting.avrechName=dd.nvFirstName+' '+dd.nvLastName;
+    //   })
+    // }
+    // else
+    // if(this.level=="תלמיד")
+    //       {
+    //       //         this.appProxi.post("GetAllAvrechimByStudent", { iPersonId:this.iPersonId }).then(
+    //       //   data => {
+     
+    //       //     this.avrechByStuden = data; 
+    //       //     // this.a=this.avrechByStuden;
+    //       //     this.currentMeeting.iAvrechId=this.avrechByStuden.iPersonId;
+    //       //         this.text= this.avrechByStuden.nvFirstName+' '+this.avrechByStuden.nvLastName;
+    //       //         this.currentMeeting.avrechName= this.text;
+    
+    //       //     // this.currentMeeting.avrechName=this.avrechByStuden[1]
+    //       //   },
+    //       // );
+    //       }
+
   }
   close() {
     this.Close.emit(null);

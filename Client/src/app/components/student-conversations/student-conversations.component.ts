@@ -13,7 +13,7 @@ import { GlobalService } from '../../services/global.service'
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { AppComponent } from '../app/app.component';
 import { Task } from '../../classes/task';
-import { Student } from 'src/app/classes/student';
+import { Student } from '../../classes/student';
 
 @Component({
   selector: 'app-student-conversations',
@@ -40,7 +40,7 @@ export class StudentConversationsComponent implements OnInit {
   public sysTableList: SysTableRow[];
   @Input()
   public newConver: Conversation;
-
+public flagCome:boolean;
   @Input()
   public lstColumns = [
     {
@@ -175,7 +175,7 @@ debugger;
 
   }
   ngOnInit() {
-    
+    this.flagCome=false;
     this.iUserId = this.globalService.getUser()['iUserId'];
     this.route.parent.params.subscribe(params => {
       this.iPersonId = +params['iPersonId'];

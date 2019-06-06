@@ -44,10 +44,11 @@
       </select>
     </div>
 
-    <!-- <div class="form-group col-sm-3" *ngIf="t!=null">
-      <label class="form-control">{{task['nvName']}}gkhkhjk</label>
+    <div *ngIf="t!=null" class="form-group col-sm-3">
+        <label for="studentName">תלמיד</label>
+      <label class="form-control">{{task['nvName']}}</label>
 
-    </div> -->
+    </div>
     <!-- <div class="form-group col-sm-3 row">
       <label for="studentId" style="width: 100px">תלמיד :</label>
       <select class="form-control" id="studentId" [(ngModel)]="task.iStudentId">

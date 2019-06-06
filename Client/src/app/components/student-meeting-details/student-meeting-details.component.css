@@ -37,6 +37,10 @@ button{
     z-index:-5;
 }
 .form{
-    background: white;
-    top:35%;
+    background-color: white;
+    top:23%;
+    left: 30%;
+    right: 30%;
+    z-index: 99999;
+    position: fixed;
 }
