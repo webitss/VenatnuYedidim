@@ -69,7 +69,7 @@ export class EventParticipantsComponent implements OnInit {
 
   addParticipants() {
     this.listToSelect = [];
-    this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
+    this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId}).then(res => {
       if (res.length > 0) {
         res.forEach(p => {
           let nvArriveStatusType = this.sysTableRowList.filter(s => s.iSysTableRowId == (p.lstObject ? p.lstObject.iArrivalStatusType : p.iArrivalStatusType));
@@ -92,9 +92,11 @@ export class EventParticipantsComponent implements OnInit {
         // this.participantList = res;
         // this.lstDataRows = res;
       }
+          debugger;
 
       this.appProxy.post("GetPersonList").then(
         data => {
+          debugger;
           this.allPersons = data;
           this.flag = true
           this.listToSelect = this.allPersons.filter(per => (!this.participantList.find(p => p.iPersonId == per.iPersonId)));

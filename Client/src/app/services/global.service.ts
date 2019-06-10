@@ -26,6 +26,7 @@ getStudent(){
     return this.user;
   }
 getAvrech(){
+  // alert(this.avrech.iPersonId);
   return this.avrech;
 }
   flag: boolean = false;

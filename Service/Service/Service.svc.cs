@@ -314,9 +314,9 @@ namespace Service
         {
             return Conversation.GetConversationsByAvrechId(iAvrechId);
         }
-        public int SetConversations(Conversation conversation,Task task, int iUserId)
+        public int SetConversations(Conversation conversation, int iUserId)
         {
-            return Conversation.SetConversations(conversation,task, iUserId);
+            return Conversation.SetConversations(conversation, iUserId);
         }
         //public bool AddConversations(Conversation conversation, int iPersonId)
         //{

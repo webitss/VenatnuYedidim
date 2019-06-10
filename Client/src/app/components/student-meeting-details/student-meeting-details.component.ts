@@ -36,7 +36,10 @@ export class StudentMeetingDetailsComponent implements OnInit {
   hours: string;
   taskSelect: boolean;
   level:string;
+  protected iUserId: number;
   avrech:Avrech;
+  @Output() refresh = new EventEmitter();
+
   @Input()
   public flagCome:boolean;
   @ViewChild(TaskComponent) child: TaskComponent;
@@ -50,69 +53,44 @@ export class StudentMeetingDetailsComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.avrechByStuden
+
+    // this.currentMeeting=new Meeting();
+    // this.sub = this.route.parent.params.subscribe(params => {
+    //   this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
+    
+    // });
+
     this.addTask="הוספת";
-    this.taskSelect = false;
 
+    this.iUserId = this.globalService.getUser()['iUserId'];
+    // this.sysTableList=thi
     this.sub = this.route.parent.params.subscribe(params => {
-      this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
- });
-      //  this.appProxi.post("GetPersonLevel",{iPersonId:this.iPersonId}).then(data=>{
+      this.iPersonId = +params['iPersonId']
+      this.currentMeeting = Object.assign({}, this.meeting);
+      if (this.currentMeeting.iMeetingId == null) {
+        this.meeting.iMeetingType = this.sysTableRowList && this.sysTableRowList[0] ? this.sysTableRowList[0].iSysTableRowId : null;
+        this.currentMeeting = new Meeting();    
+        this.appProxi.post("GetAllAvrechimByStudent", { iPersonId:this.iPersonId }).then(
+      data => {
+        debugger;
+        this.avrechByStuden = data; 
+         this.meeting.iAvrechId=this.avrechByStuden.iPersonId;
+         debugger;
+         this.currentMeeting['avrechName']= this.avrechByStuden.nvFirstName+' '+this.avrechByStuden.nvLastName;
+      
+      },
+    );
+      }
+      else
+      if(this.flagCome)
+      {
+        this.avrech=this.globalService.getAvrech()
+        this.currentMeeting['avrechName']=this.avrech.nvFirstName+' '+this.avrech.nvLastName;
+      }
+      this.currentMeeting['dtDate'] = new Date(this.currentMeeting.dtMeetingDate);
+      this.currentMeeting['dtHour'] =moment(this.currentMeeting.dtMeetingDate).format('HH:mm');
+    })
 
-      //    if(data)
-      //    {
-      //      this.level=data;
-      //     }
-      //   });
-
-
-         
-       
-
-
-    
-
-    if(this.meeting.iMeetingId==null)
-    {
-      this.meeting.iMeetingType=this.sysTableRowList[0].iSysTableRowId
-    }
-    
-    this.currentMeeting = new Meeting();
-    debugger;
-    this.currentMeeting = Object.assign({}, this.meeting);
-    debugger;
-    this.currentMeeting['dtDate'] =new Date((this.currentMeeting.dtMeetingDate));
-    this.currentMeeting['dtHour'] =moment(this.currentMeeting.dtMeetingDate).format('HH:mm');
-    // this.currentMeeting['iAvrechId']=this.currentMeeting.iAvrechId;
-    debugger;
-    if(this.currentMeeting.avrechName==null)
-    {
-      this.avrech=this.globalService.getAvrech()
-    this.currentMeeting.avrechName=this.avrech.nvFirstName+' '+this.avrech.nvLastName;
-
-    }
-    // if(this.level=="אברך")
-    // {
-    //   this.appProxi.post("GetAvrechById",{iPersonId:this.iPersonId}).then(dd=>{
-    //     this.currentMeeting.avrechName=dd.nvFirstName+' '+dd.nvLastName;
-    //   })
-    // }
-    // else
-    // if(this.level=="תלמיד")
-    //       {
-    //       //         this.appProxi.post("GetAllAvrechimByStudent", { iPersonId:this.iPersonId }).then(
-    //       //   data => {
-     
-    //       //     this.avrechByStuden = data; 
-    //       //     // this.a=this.avrechByStuden;
-    //       //     this.currentMeeting.iAvrechId=this.avrechByStuden.iPersonId;
-    //       //         this.text= this.avrechByStuden.nvFirstName+' '+this.avrechByStuden.nvLastName;
-    //       //         this.currentMeeting.avrechName= this.text;
-    
-    //       //     // this.currentMeeting.avrechName=this.avrechByStuden[1]
-    //       //   },
-    //       // );
-    //       }
 
   }
   close() {
@@ -126,11 +104,11 @@ text:string;
 
     this.currentMeeting.dtMeetingDate = new Date(this.currentMeeting['dtDate'] + ' ' + this.currentMeeting['dtHour']);
 debugger;
-    if (this.currentMeeting.iMeetingId == null)
-      this.currentMeeting.iPersonId = this.iPersonId;
-      this.text= this.avrechByStuden.nvFirstName+' '+this.avrechByStuden.nvLastName;
-      this.currentMeeting.avrechName= this.text;
+    
+
       debugger;
+      if (this.currentMeeting.iMeetingId == null)
+      this.currentMeeting.iPersonId = this.iPersonId;
     this.appProxi.post("SetMeeting", { meeting: this.currentMeeting, iUserId: this.globalService.getUser()['iUserId'] }).then(
       data => {
         debugger;
@@ -139,10 +117,17 @@ debugger;
             this.currentMeeting.iMeetingId = data;
             this.text= this.avrechByStuden.nvFirstName+' '+this.avrechByStuden.nvLastName;
             this.currentMeeting.avrechName= this.text;
-            this.NewMeeting.emit(this.currentMeeting);
+            this.NewMeeting.emit(this.currentMeeting);    
+            this.child.saveTask(false,this.currentMeeting.iAvrechId,this.currentMeeting.iPersonId);
+
           }
           else
-            this.UpdateMeeting.emit(this.currentMeeting);
+        {
+          if(this.flagCome)
+          this.refresh.emit(this.currentMeeting);
+          else
+          this.UpdateMeeting.emit(this.currentMeeting);
+        }
 
           // alert("השמירה בוצעה בהצלחה");
           this._parent.openMessagePopup('השמירה בוצעה בהצלחה!');
@@ -155,7 +140,7 @@ debugger;
 
       },
     );
-    this.child.saveTask(false,this.currentMeeting.iAvrechId);
+ 
 
   }
  

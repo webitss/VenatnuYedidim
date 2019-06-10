@@ -47,9 +47,10 @@
     </div>
   </div>
 
-      <app-student-conversation-details *ngIf="conversation!=undefined" (Conversation)="close()" [flagCome]="flagCome" [conversation]="conversation" [sysTableList]="sysTableList"  class="conversationDetails">
+      <app-student-conversation-details *ngIf="conversation!=undefined" (Conversation)="close()" [flagCome]="flagCome" [conversation]="conversation" [sysTableList]="sysTableList"  class="conversationDetails"
+      (refresh)="refreshMe($event)" (saveNewConver)="saveNewConver($event)">
     </app-student-conversation-details>  
-           <app-student-meeting-details *ngIf="meeting!=undefined" [sysTableRowList]="sysTableRowList" [meeting]="meeting" [flagCome]="flagCome" (Close)="close()" >
+           <app-student-meeting-details *ngIf="meeting!=undefined" [sysTableRowList]="sysTableRowList" [meeting]="meeting" [flagCome]="flagCome" (Close)="close()" (refresh)="refreshMe($event)" >
       </app-student-meeting-details> 
 
  

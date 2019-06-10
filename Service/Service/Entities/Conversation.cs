@@ -84,7 +84,7 @@ namespace Service.Entities
         }
 
 
-        public static int SetConversations(Conversation conversation,Task task,int iUserId)
+        public static int SetConversations(Conversation conversation,int iUserId)
         {
 
             try
@@ -92,10 +92,10 @@ namespace Service.Entities
                 List<SqlParameter> parameters = ObjectGenerator<Conversation>.GetSqlParametersFromObject(conversation);
                 parameters.Add(new SqlParameter("iCreatedByUserId", iUserId));
 				int id = int.Parse(SqlDataAccess.ExecuteDatasetSP("TConversation_INS/UPD", parameters).Tables[0].Rows[0][0].ToString());
-                if(task!=null)
-                {
-                    Task.SetTask(task, iUserId);
-                }
+                //if(task!=null)
+                //{
+                //    Task.SetTask(task, iUserId);
+                //}
                 return id;
 
 

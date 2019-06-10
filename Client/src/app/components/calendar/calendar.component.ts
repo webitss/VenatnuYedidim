@@ -86,7 +86,7 @@ export class CalendarComponent implements OnInit {
 
   }
   close() {
-    this.editTask1 = false
+    this.editTask1 = false;
   }
   closeMe(task: Task) {
     this.editTask1 = false;

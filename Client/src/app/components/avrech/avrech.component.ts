@@ -43,7 +43,7 @@ export class AvrechComponent implements OnInit {
 this.globalService.avrech=this.avrech;
 // alert(this.globalService.getAvrech().iPersonId);
         },
-        err => ("err")
+        err => (err)
       );
 
     }

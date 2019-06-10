@@ -31,6 +31,7 @@ f:boolean=false;
   constructor(private router: Router, private route: ActivatedRoute, 
     private appProxy: AppProxy, private sysTableService: SysTableService,
     private _sharedService:ParentChildService,
+    private globalService:GlobalService,
     private cdRef:ChangeDetectorRef) { }
   // subscription:Subscription;
   ngOnInit() {
@@ -54,35 +55,23 @@ f:boolean=false;
 
         this.appProxy.post("GetStudentById", { iStudentId: this.id }).then(data => {
           this.student = data;
+          // this.globalService.avrech=this.avrech;
+// alert(this.globalService.getAvrech().iPersonId);
+
           this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
             this.status = data.filter(x => x.iSysTableRowId == this.student.iStatusType)[0].nvValue;
             //alert(this.status);
           });
         })
+        // this.appProxy.post("GetAvrechById",{iPersonId:this.student.iAvrechId}).then(data=>{
+        //   this.globalService.avrech=data;
+        // })
       }
     });
 
 
   };
-//  changeMe:Event;
-//   ngAfterViewInit(): void {
 
-//     this.changeMe = new CustomEvent("changeButton");
-
-// debugger;
-// alert(this.currentComponent.htm);
-// this.currentComponent.htm.addEventListener("changeButton",function(e:Event){
-//   debugger;
-//   this.disabled=true;
-//   alert(this.disabled)
-// }.bind(this));
-// debugger;
-// this.currentComponent.htm.dispatchEvent(this.changeMe);
-//   }
-  // s(){
-  //   debugger;
-  //  this.f=this.currentComponent.changes();
-  // }
   // ngOnInit() {
   //   this.sub = this.route.params.subscribe(params => {
   //      this.id = +params['id']; // (+) converts string 'id' to a number
@@ -117,11 +106,7 @@ f:boolean=false;
     if (this.currentComponent.saveStudent)
       this.currentComponent.saveStudent();
   }
-  // changeButton(){
-  //   debugger;
-  //   this.disabled=true;
-  //   alert(this.disabled)
-  // }
+
 
 
   close() {

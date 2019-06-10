@@ -34,11 +34,11 @@ export class EventComponent implements OnInit {
   formValid = false;
 
   isDisabled(): boolean {
-    debugger;
+
     if (this.currentComponent.form) {
       return this.currentComponent.form.valid;
     }
-    debugger;
+
     if(this.currentComponent.flagUpdate==true)
     return true;
     return false;

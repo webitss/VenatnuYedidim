@@ -39,6 +39,7 @@ export class StudentConversationDetailsComponent implements OnInit {
 avrech:Avrech;
   // @Output()
   // onSaveTask:EventEmitter<Task>=new EventEmitter<Task>();
+  @Output() refresh = new EventEmitter();
 
   @Output()
   protected updateConver = new EventEmitter();
@@ -59,6 +60,7 @@ avrech:Avrech;
     , @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
+    debugger;
     this.currentMeeting=new Meeting();
     // this.sub = this.route.parent.params.subscribe(params => {
     //   this.iPersonId = +params['iPersonId']; // (+) converts string 'id' to a number
@@ -91,6 +93,7 @@ avrech:Avrech;
       {
         this.avrech=this.globalService.getAvrech()
         this.currentConver['avrechName']=this.avrech.nvFirstName+' '+this.avrech.nvLastName;
+      this.conver.iAvrechId=this.avrech.iPersonId;
       }
       this.currentConver['dtDate'] = new Date(this.currentConver.dtConversationDate);
       this.currentConver['conversationTime'] =moment(this.currentConver.dtConversationDate).format('HH:mm');
@@ -114,6 +117,7 @@ avrech:Avrech;
     this.conver.iConversationId = this.conversation.iConversationId;
     this.conver.iConversationType = this.conversation.iConversationType;
     this.conver.nvConversationSummary = this.currentConver.nvConversationSummary;
+    this.conver.iAvrechId=this.currentConver.iAvrechId;
     // this.onSaveTask.emit(this.task);
     //if(this.conver.iConversationId)
     this.conver.dtConversationDate = new Date(this.currentConver['dtDate'] + ' ' + this.currentConver['conversationTime']);
@@ -122,23 +126,31 @@ avrech:Avrech;
     }
     this.appProxy.post("SetConversations", { conversation: this.conver,task:this.task, iUserId: this.iUserId })
       .then(data => {
-        if (data != 0) {
+          if (data) {
+            if (data != 0) {
           if (this.conver.iConversationId == null) {
             this.conver.iConversationId = data;
             this.saveNewConver.emit(this.conver);
           }
 
           else
+          {
+            if(this.flagCome)
+            this.refresh.emit(this.conver)
+            else
             this.updateConver.emit(this.conver);
+          }
+            
         }
-        if (data) {
           this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
           this.Conversation.emit(null);
-        }
+          
+      }
         else
           this._parent.openMessagePopup("השמירה נכשלה");
       });
       debugger;
+      if (this.conver.iConversationId == null)
 this.child.saveTask(false,this.conver.iAvrechId,this.conver.iPersonId);
       
   }
