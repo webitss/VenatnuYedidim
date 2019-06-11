@@ -33,7 +33,7 @@ export class VyMultySelectComponent implements OnInit {
 
 
   changeSelect() {
-
+debugger;
     // if (this.flag == false) {
       // if(this.selectedList!=null)
       this.selectedList=[];
@@ -56,9 +56,11 @@ export class VyMultySelectComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
+    debugger;
     if (this.eRef.nativeElement.contains(event.target)) {
       //alert("clicked inside");
-    } else {
+    } 
+    else {
       this.flag = false;
       this.clicked = false;
     }

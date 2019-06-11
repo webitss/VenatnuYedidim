@@ -39,6 +39,7 @@ export class EventParticipantsComponent implements OnInit {
   inputTitle: string = "בחר משתתפים";
   flagDelete = false;
   flagUpdate=false;
+  flagParti:boolean=false;
   message = 'האם אתה בטוח שברצונך למחוק משתתף זה?';
   header = 'מחיקת משתתף';
   iPersonId: number;
@@ -61,60 +62,43 @@ export class EventParticipantsComponent implements OnInit {
   ];
   public Columns = [
     new VyTableColumn('בחר', 'checked', 'checkbox'),
-    new VyTableColumn('שם פרטי', 'nvFirstName'),
+    new VyTableColumn('שם', 'nvFirstName'),
     new VyTableColumn('סוג משתמש', 'nvParticipantType'),
 
   ];
   public lstDataRows = [];
 
   addParticipants() {
-    this.listToSelect = [];
-    this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId}).then(res => {
-      if (res.length > 0) {
-        res.forEach(p => {
-          let nvArriveStatusType = this.sysTableRowList.filter(s => s.iSysTableRowId == (p.lstObject ? p.lstObject.iArrivalStatusType : p.iArrivalStatusType));
-          let iArriveStatusType = nvArriveStatusType && nvArriveStatusType[0] ? nvArriveStatusType[0].nvValue : ''
-    
-          // this.participant.forEach(p => {
-          this.lstDataRows.push({
-            delete: '<div class="delete"></div>',
-            iEventId: p.iEventId,
-            nvFirstName: p.nvFirstName,
-            nvLastName: p.nvLastName,
-            nvPhone: p.nvPhone,
-            nvMobile: p.nvMobile,
-            nvEmail: p.nvEmail,
-            nvParticipantType: p.lstObject ? p.lstObject.nvParticipantType : p.nvParticipantType,
-            iArriveStatusType: iArriveStatusType,
-            iPersonId: p.iPersonId
-          });
-        });
-        // this.participantList = res;
-        // this.lstDataRows = res;
+    debugger;
+    this.listToSelect=[];
+this.appProxy.post("GetPersonByUserId",{iUserId:this.id}).then(data=>{
+  
+  if(data)
+  {
+
+    let allPersons=data;
+    allPersons.forEach(
+      p=>{
+ 
+      if(this.participantList.findIndex(x=>x.iPersonId==p.iPersonId)==-1){
+        p['nvFirstName']=p.nvFirstName;
+        p['nvParticipantType']=p.lstObject['nvParticipantType'];
+        this.listToSelect.push(p);
       }
-          debugger;
-
-      this.appProxy.post("GetPersonList").then(
-        data => {
-          debugger;
-          this.allPersons = data;
-          this.flag = true
-          this.listToSelect = this.allPersons.filter(per => (!this.participantList.find(p => p.iPersonId == per.iPersonId)));
-          this.listToSelect.forEach(
-            person => {
-              person['value'] = person.nvFirstName + ' ' + person.lstObject['nvParticipantType'];
-              person['nvParticipantType'] = person.lstObject['nvParticipantType'];
-
-              //this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'], iPersonId: person.iPersonId });
-              //this.iPersonId = person.iPersonId;
-
-            }
-          );
-        });
-    }
-    );
+      this.flag=true;
+      // this.listToSelect.push({
+      //   nvFirstName:p.nvFirstName ,
+      //   nvParticipantType: p.lstObject['nvParticipantType'] 
+      // })
+    })
+    // this.flag=true;
+  }
+   //alert(this.listToSelect.length);
 
 
+}
+  )
+ 
   }
   public inputpdf(str) : SafeHtml {
     return this._sanitizer.bypassSecurityTrustHtml(str);
@@ -188,19 +172,41 @@ else{
 
   }
   ngOnInit() {
+
+
+    // this.listToSelect = new Array<any>();
+
+    // this.activatedRoute.parent.params.subscribe(params => {
+
+
+    //   this.id = params['iPersonId'];
+    // })
+    // this.appProxy.post('GetAvrechStudents', { iPersonId: this.id }).then(data => {
+    //   this.allStudents = data;
+    //   this.allStudents.forEach(
+    //     st => {
+    //       st['delete'] = '<div class="delete"></div>';
+    //     });
+
+    // });
+
+
+
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
     this.listToSelect = new Array<any>();
 
     this.appProxy.post('GetPersonByUserId', { iUserId: this.id }).then(
       data => {
+debugger;
 
 
-
-        this.allPersons = data
+        this.allPersons = data;
 
         this.allPersons.forEach(
           person => {
-            this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'] });
+            this.listToSelect.push({
+              nvFirstName:person.nvFirstName ,
+              nvParticipantType: person.lstObject['nvParticipantType'] });
             
           }
         );
@@ -313,3 +319,62 @@ return this.options;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // this.listToSelect = [];
+    // this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId}).then(res => {
+    //   if (res.length > 0) {
+    //     res.forEach(p => {
+    //       let nvArriveStatusType = this.sysTableRowList.filter(s => s.iSysTableRowId == (p.lstObject ? p.lstObject.iArrivalStatusType : p.iArrivalStatusType));
+    //       let iArriveStatusType = nvArriveStatusType && nvArriveStatusType[0] ? nvArriveStatusType[0].nvValue : ''
+    
+    //       // this.participant.forEach(p => {
+    //       this.lstDataRows.push({
+    //         delete: '<div class="delete"></div>',
+    //         iEventId: p.iEventId,
+    //         nvFirstName: p.nvFirstName,
+    //         nvLastName: p.nvLastName,
+    //         nvPhone: p.nvPhone,
+    //         nvMobile: p.nvMobile,
+    //         nvEmail: p.nvEmail,
+    //         nvParticipantType: p.lstObject ? p.lstObject.nvParticipantType : p.nvParticipantType,
+    //         iArriveStatusType: iArriveStatusType,
+    //         iPersonId: p.iPersonId
+    //       });
+    //     });
+    //     // this.participantList = res;
+    //     // this.lstDataRows = res;
+    //   }
+    //       debugger;
+
+    //   this.appProxy.post("GetPersonList").then(
+    //     data => {
+    //       debugger;
+    //       this.allPersons = data;
+    //       this.flag = true;
+    //       debugger;
+    //       debugger;
+    //       this.listToSelect.forEach(
+    //         person => {
+    //           person['value'] = person.nvFirstName + ' ' + person.lstObject['nvParticipantType'];
+    //           person['nvParticipantType'] = person.lstObject['nvParticipantType'];
+
+    //           //this.listToSelect.push({ value: person.nvFirstName + ' ' + person.lstObject['nvParticipantType'], iPersonId: person.iPersonId });
+    //           //this.iPersonId = person.iPersonId;
+
+    //         }
+    //       );
+    //     });
+    // }
+    // );

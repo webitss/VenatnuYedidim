@@ -12,7 +12,7 @@
 .addParticipants{
     position: fixed;
     z-index: 100;
-    top: 25%;
+    top: 10%;
     right: 40%;
     background:white;
     border: 2px;
@@ -36,7 +36,7 @@
 margin: 3%;
 }
 .row-first{
-    padding-right: 67%;
+    padding-right: 50%;
 }
 
 .item-to-select{

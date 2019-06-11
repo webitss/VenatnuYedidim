@@ -44,11 +44,12 @@ export class AvrechStudentsComponent implements OnInit {
     this.listToSelect = [];
     this.appProxy.post('GetStudentList', { iPersonId: 0 }).then(
       data => {
-        let allStudents = data
+        let allStudents = data;
         allStudents.forEach(
           student => {
             if (this.allStudents.findIndex(s => s.iPersonId == student.iPersonId) == -1) {
               student['value'] = student.nvFirstName + ' ' + student.nvLastName ;
+              debugger;
               this.listToSelect.push(student);
             }
             this.flag = true;
@@ -105,6 +106,7 @@ export class AvrechStudentsComponent implements OnInit {
   }
   item: string;
   ngOnInit() {
+    debugger;
     this.listToSelect = new Array<any>();
 
     this.activatedRoute.parent.params.subscribe(params => {

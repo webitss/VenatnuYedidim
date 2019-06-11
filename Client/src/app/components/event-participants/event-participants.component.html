@@ -7,11 +7,11 @@
   </div>
 </div>
 
-<div *ngIf="flag" class="col-sm-12 addParticipants">
+<div *ngIf="flag==true" class="col-sm-12 addParticipants">
 
-  <div class="row row-first">
-    <button (click)="cancel()" class="btn-close">סגור </button>
-    <button (click)="save()" class="btn-save"> שמור</button>
+  <div class="row row-first">   
+    <button (click)="save()" class="col-sm-4 btn-save"> שמור</button>
+    <button (click)="cancel()" class="col-sm-4 btn-close">סגור </button>
   </div>
   <div class="row">
     <span class="Student-affiliation">שיוך תלמידים</span>

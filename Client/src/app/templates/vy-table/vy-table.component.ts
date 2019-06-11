@@ -55,6 +55,7 @@ export class VyTableComponent implements OnInit {
 
   public ngOnInit() {
     this.lstColumns.forEach(c => {
+      debugger;
       this.lstFilterColumns[c.name] = null
       // alert(c.name);
     })
@@ -64,13 +65,17 @@ export class VyTableComponent implements OnInit {
  
 
   ngOnChanges() {
+    // alert("ngOnChanges");
+    debugger;
     if (this.lstDataRows && this.lstDataRows.length > 0) {
+      debugger;
       this.currentPage = -1;
       this.moveToPage(0);
     }
   }
 
   ngDoCheck() {
+  //  alert ("ngDoCheck")
     if (this.lstDataRows && this.lstDataRows.length > 0 && this.lstCurrentDataRows == null) {
       this.ngOnChanges();
     }
@@ -78,12 +83,14 @@ export class VyTableComponent implements OnInit {
   // const result = words.filter(word => word.length > 6);
 
   filterChange(col) {
+    // alert("filterChange")
+    // alert("come")
     this.flag=true;
     let lst = JSON.parse(JSON.stringify(this.lstDataRows));
     for (let key of Object.keys(this.lstFilterColumns)) {
       if (this.lstFilterColumns[key]) {
         debugger;
-                        //  lst[0].nvMobile.indexOf("5")>0
+       //  lst[0].nvMobile.indexOf("5")>0
         lst = lst.filter(row => row[key].indexOf(this.lstFilterColumns[key]) > -1)
       }
     }
@@ -106,6 +113,7 @@ export class VyTableComponent implements OnInit {
   }
 
   checkAllTable(colName) {
+    // alert("checkAllTable")
     debugger;
     if (this.lstDataRows.find(r => r[colName]) == null)
       this.lstDataRows.forEach(r => r[colName] = true);
@@ -117,11 +125,19 @@ export class VyTableComponent implements OnInit {
   }
   
   public moveToPage(pageNum: number, move = false) {
+    //  alert("come");
+
     if (move || !(pageNum == this.currentPage || pageNum < 0 || (this.iEndNumRow == this.lstDataRows.length && pageNum > this.currentPage))) {
       this.lstCurrentDataRows = this.lstDataRows.slice((pageNum) * this.iCountRows, (pageNum * this.iCountRows) + this.iCountRows);
       this.iStartNumRow = pageNum * this.iCountRows;
       this.iEndNumRow = this.iStartNumRow + this.lstCurrentDataRows.length;
       this.updateLstPagesNum();
+      this.lstCurrentDataRows.forEach(row => {
+        this.lstColumns.forEach(col => {
+          debugger;
+          row
+        });
+      });
     }
   }
 
@@ -316,6 +332,7 @@ this.changeOpt.emit(item);
     
   }
   public refreshTable(newList) {
+    alert("refreshTable")
     this.lstDataRows = newList;
     this.moveToPage(this.currentPage > 0 ? this.currentPage : 0, true);
   }

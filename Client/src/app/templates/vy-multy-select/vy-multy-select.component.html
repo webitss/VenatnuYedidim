@@ -2,18 +2,20 @@
   <!-- <div class="row"> -->
     <div class="form-group multy-select" >
       <label> {{inputTitle}}</label>
-      <div class="form-control" (click)="flag=!flag;  clicked=!clicked;" [ngClass]="{'click': clicked==true }" (mouseover)="onOverFlag=true" (mouseleave)="onOverFlag=false"><span style="color: gainsboro">{{titleStr}}</span>
+      <div class="form-control" (click)="flag=!flag;  clicked=!clicked;" [ngClass]="{'click': clicked==true }" (mouseover)="onOverFlag=true" (mouseleave)="onOverFlag=false">
+        <span style="color: gainsboro" ngModel="item['bMultySelectChecked']" *ngIf="flag" >{{titleStr}}</span> 
+        <div *ngIf="!flag && selectedList.length>0" style="z-index: 999999999;">
+        <span *ngFor="let s of fullList|filterBMultySelectChecked">{{s.value}}
+          <br/>
+        </span>
+      </div>
       <img src="./assets/icons/play-button.png" >
       </div>
     </div>
 
     
 
-      <div *ngIf="onOverFlag==true && selectedList.length>0" class="mouseover" style="z-index: 999999999;">
-        <div *ngFor="let s of fullList|filterBMultySelectChecked">{{s.value}}
-          <br/>
-        </div>
-      </div>
+     
 
     <div class="open-list" *ngIf="flag==true">
       <div class="check-all col-sm-12">
