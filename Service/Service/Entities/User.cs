@@ -90,7 +90,21 @@ namespace Service.Entities
             {
                 List<SqlParameter> parameters = ObjectGenerator<User>.GetSqlParametersFromObject(user);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
+                
+
                 SqlDataAccess.ExecuteDatasetSP("TUser_INS/UPD", parameters);
+                //if (user.iPermissionId==6)
+                //{
+                //    //          ([iPersonId]
+                //    //,[iCreatedByUserId]
+                //    //,[dtCreatedate]
+                //    //,[iLastModifyUserId]
+                //    //,[dtLastModifyDate]
+                //    //,[bSysRowStatus]
+                //    List<SqlParameter> parameters2 = new List<SqlParameter>();
+                //    //parameters.Add(new SqlParameter("iPersonId",))
+                //    SqlDataAccess.ExecuteDatasetSP("TAvrech_INS")
+                //}
                 return true;
 
             }

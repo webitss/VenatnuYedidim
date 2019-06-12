@@ -14,9 +14,12 @@
 
       <input type="text" name="user-name" [(ngModel)]="nvUserName" class="form-control usr-input" placeholder="שם משתמש">
 
-      <input type="password" name="password" [(ngModel)]="nvPassword" class="form-control lock-input hide-password" passwordToggle
+  <input type="password" name="password" [(ngModel)]="nvPassword" class="form-control pass-input" 
         placeholder="סיסמה">
+<div class="eye-pass" passwordToggle></div>
 
+
+      
       <div class="mt-4">
         <button class="btn btn-primary btn-pink" (click)="logIn()">כניסה</button>
       </div>
@@ -26,3 +29,6 @@
 
   </div>
 </div>
+
+
+<!-- passwordToggle -->

@@ -32,7 +32,6 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     debugger;
-    alert(this.users);
     this.iPersonId = this.globalService.getUser()['iUserId'];
     this.appProxy.post("GetUsers", { iPersonId: this.iPersonId }).then(data => {
       this.lstDataRows = data;
@@ -108,7 +107,6 @@ this._parent.openMessagePopup('נמחק בהצלחה!');
 
   downloadExcel() {
     debugger;
-    alert(this.users);
 
     this.users.downloadExcel();
   }

@@ -13,7 +13,6 @@ export class EditAndDeletePipe implements PipeTransform {
     return e;
   });
 
-  alert("come")
     // if(col.title!='עריכה'&&col.title!='מחיקה')
     // return col;
   }

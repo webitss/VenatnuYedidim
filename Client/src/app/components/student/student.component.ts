@@ -110,10 +110,12 @@ f:boolean=false;
 
 
   close() {
+    debugger;
     if (this.student == undefined)
       this.router.navigate(["students"]);
     else {
       this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
+        debugger;
         if (this.student.iStatusType == data.filter(d => d.nvValue == 'תלמיד')[0].iSysTableRowId)
           this.router.navigate(["students"]);
         else

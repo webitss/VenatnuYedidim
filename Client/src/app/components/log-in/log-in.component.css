@@ -37,6 +37,15 @@
 .usr-input{
     background-image: url("../../../assets/icons/usr.png");
 }
+.pass-input{
+
+    background-image: url("../../../assets/icons/password.png");
+    margin-right: 200px;
+}
+.eye-pass{
+    width: 50px;
+    height: 50px;
+}
 .lock-input{
     /* background-image: url("../../../assets/icons/lock.png"); */
 }

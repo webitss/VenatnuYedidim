@@ -11,6 +11,8 @@
     height: 230px;
     width: 223px; */
     /* overflow: hidden; */
+    height: 230px;
+    width: 223px;
 }
 .image>img{
     /* width: 100%;
@@ -61,8 +63,7 @@
 }
 .no{
     background-image: url("../../../assets/icons/noImage.png");
-    height: 230px;
-    width: 223px;
+
     /* overflow: hidden; */
 }
 #date{
