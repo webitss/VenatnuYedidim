@@ -59,7 +59,6 @@ export class VyTableComponent implements OnInit {
       this.lstFilterColumns[c.name] = null
       // alert(c.name);
     })
-
   }
   
  
@@ -332,7 +331,7 @@ this.changeOpt.emit(item);
     
   }
   public refreshTable(newList) {
-    alert("refreshTable")
+    // alert("refreshTable")
     this.lstDataRows = newList;
     this.moveToPage(this.currentPage > 0 ? this.currentPage : 0, true);
   }

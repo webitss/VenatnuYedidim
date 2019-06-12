@@ -492,7 +492,8 @@ debugger;
       }
 
     })      
-    this.selectYeshi=true
+    this.selectYeshi=true;
+    this.Change();
   }
 
   deleteYeshiva(yeshiva: Yeshiva) {

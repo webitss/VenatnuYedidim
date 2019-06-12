@@ -5,7 +5,7 @@
 
     <div *ngFor="let col of lstColumns"
       class="cell cell-title" [ngStyle]="col.titleStyle"
-       [ngClass]="{'col':col.title!='עריכה'&&col.title!='מחיקה','edel':col.title=='עריכה' || col.title=='מחיקה','col-2':lstColumns.length==2&&(col.title=='עריכה'||col.title=='מחיקה'),'col-1':lstColumns.length&lt;7&&(col.title=='עריכה'||col.title=='מחיקה')}">
+       [ngClass]="{'col':col.title!='עריכה'&&col.title!='מחיקה','edel':col.title=='עריכה' || col.title=='מחיקה','col-2':lstColumns.length&lt;4&&(col.title=='עריכה'||col.title=='מחיקה'||col.title=='בחר'),'col-1':lstColumns.length&lt;7&&(col.title=='עריכה'||col.title=='מחיקה')}">
       <div class="small-title">
         <label id='my-table' *ngIf="col.type == 'checkbox'" class="container" style='float: right;'>
           {{col.title}}
@@ -38,7 +38,7 @@
 
   <div name="filters" class="row vy-filter-row">
     <div *ngFor="let col of lstColumns" class="cell cell-filter" [ngStyle]="col.filterStyle"
-    [ngClass]="{'col':col.title!='עריכה'&&col.title!='מחיקה','edel':col.title=='עריכה' || col.title=='מחיקה','col-1':lstColumns.length&lt;7&&(col.title=='עריכה'||col.title=='מחיקה'),'col-2':lstColumns.length==2&&(col.title=='עריכה'||col.title=='מחיקה')}">
+    [ngClass]="{'col':col.title!='עריכה'&&col.title!='מחיקה','edel':col.title=='עריכה' || col.title=='מחיקה','col-1':lstColumns.length&lt;7&&(col.title=='עריכה'||col.title=='מחיקה'),'col-2':lstColumns.length&lt;4&&(col.title=='עריכה'||col.title=='מחיקה'||col.title=='בחר')}">
       <input type="text" [(ngModel)]="lstFilterColumns[col.name]" (keyup)="filterChange(col)"
         class="form-control vy-filter-search">
     </div>
@@ -48,7 +48,7 @@
     <div name="rows" *ngFor="let row of lstCurrentDataRows; let i = index" [ngClass]="{'even': i%2 == 0}"
       class="row vy-row">
       <div *ngFor="let col of lstColumns" class="cell" [ngStyle]="col.cellStyle"
-      [ngClass]="{'col':col.title!='עריכה'&&col.title!='מחיקה','edel':col.title=='עריכה' || col.title=='מחיקה','col-1':lstColumns.length&lt;7&&(col.title=='עריכה'||col.title=='מחיקה'),'col-2':lstColumns.length==2&&(col.title=='עריכה'||col.title=='מחיקה')}"
+      [ngClass]="{'col':col.title!='עריכה'&&col.title!='מחיקה','edel':col.title=='עריכה' || col.title=='מחיקה','col-1':lstColumns.length&lt;7&&(col.title=='עריכה'||col.title=='מחיקה'),'col-2':lstColumns.length&lt;4&&(col.title=='עריכה'||col.title=='מחיקה'||col.title=='בחר')}"
         (click)="col.bClickCell ? clickCellFunc(row, col.name): ''">
         <div *ngIf="col.type == 'html'" [innerHtml]="row[col.name]"></div>
         <div *ngIf="col.type != 'html' && col.type != 'checkbox'&&col.type!='select'"> {{row[col.name]}} </div>

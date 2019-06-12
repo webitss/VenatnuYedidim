@@ -112,7 +112,7 @@ this.appProxy.post("GetPersonByUserId",{iUserId:this.id}).then(data=>{
   save() {
 if(this.flagUpdate)
 {
-  
+
 this.appProxy.post("updateArriveStatus",{lstParticipant: this.lstParticipant ,iUserId:this.id}).then(data=>{
   if(data){
     this._parent.openMessagePopup('עדכון השנויים התבצע בהצלחה!'); 
@@ -150,12 +150,13 @@ else{
 
           // if (sumSave == sumToSave) {
           this._parent.openMessagePopup("השמירה בוצעה בהצלחה!");
-          this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId }).then(res => {
+          this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId ,iUserId:this.id}).then(res => {
             if (res.length > 0) {
              
               this.participantList = res;
               this.lstDataRows = res;
             }
+            
             this.buildGrid(this.lstDataRows, true);
           });
         }
@@ -216,6 +217,9 @@ debugger;
 
     this.sub = this.router.parent.params.subscribe(params => {
       this.iEventId = +params['iEventId'];
+      this.sysTableService.getValues(SysTableService.dataTables.arrivalType.iSysTableId).then(data => {
+            this.sysTableRowList = data;
+          });
       this.appProxy.post("GetParticipantsList", { iEventId: this.iEventId ,iUserId: this.id}).then(res => {
         if (res.length > 0) {
 
@@ -236,8 +240,10 @@ debugger;
   iArriveStatusType:any;
   arrive:Array<number>=new Array<number>();
   buildGrid(lst, refresh) {
+  debugger;
     this.lstDataRows = [];
     lst.forEach(p => {
+     debugger;
       let nvArriveStatusType = this.sysTableRowList.filter(s => s.iSysTableRowId == (p.lstObject ? p.lstObject.iArrivalStatusType : p.iArrivalStatusType));
       this.arrive.push(nvArriveStatusType[0].iSysTableRowId)
       this.createSelect();
