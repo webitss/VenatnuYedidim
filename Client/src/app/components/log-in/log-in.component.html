@@ -1,7 +1,7 @@
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmcJWztCYo2xInukOD2bnFp-lPK-IFuCA&libraries=places" asyncdefer></script> -->
 
 
-<div class="background-logo">
+<div class="background-logo" (keyup.enter)="logIn()">
 
   <div class="mx-auto col-sm-10 with-shadow ">
 
@@ -12,11 +12,35 @@
       <!-- <h1>ונתנו ידידים</h1>
       <h5>כולנו משפחה אחת</h5> -->
 
-      <input type="text" name="user-name" [(ngModel)]="nvUserName" class="form-control usr-input" placeholder="שם משתמש">
+      <!-- <input type="text" name="user-name" [(ngModel)]="nvUserName" class="form-control usr-input" placeholder="שם משתמש"> -->
+  <!-- <input  type="password" name="password" [(ngModel)]="nvPassword"  class="form-control pass-input" 
+        placeholder="סיסמה"> -->
+<!-- <mat-form-field>
+  <input id="mysecretpassword" type="password" placeholder="Password" matInput showHideInput>
+  <i matSuffix
+    class="material-icons"
+    showHideTrigger="mysecretpassword"
+    
+  ></i>
+</mat-form-field> -->
+<mat-form-field>
+  <div class="usr-input"></div>
 
-  <input type="password" name="password" [(ngModel)]="nvPassword" class="form-control pass-input" 
-        placeholder="סיסמה">
-<div class="eye-pass" passwordToggle></div>
+      <input type="text" name="user-name" [(ngModel)]="nvUserName" placeholder="שם משתמש" matInput>
+<i class="material-icons" matSuffix showHideTrigger="password1" btnStyle="success" >h</i>
+</mat-form-field>
+<mat-form-field>
+<div class="pass-input"></div>
+  <input id="password1" type="password" [(ngModel)]="nvPassword" placeholder="סיסמה" matInput showHideInput>
+  <i *ngIf="show" (click)="toogle()" class="material-icons" matSuffix showHideTrigger="password1" btnStyle="success"  >visibility</i>
+  <i *ngIf="!show" (click)="toogle()" class="material-icons" matSuffix showHideTrigger="password1" btnStyle="success"  >visibility_off</i>
+</mat-form-field>
+
+<!-- <show-hide-password  btnStyle="primary" >
+  <input id="password1" type="password" placeholder="Password" matInput showHideInput>
+  <i *ngIf="show" (click)="show=false" class="material-icons" matSuffix showHideTrigger="password1" btnStyle="success" style="position: absolute;left:-12px!important" >visibility</i>
+  <i *ngIf="!show" (click)="show=true" class="material-icons" matSuffix showHideTrigger="password1" btnStyle="success" style="position: absolute;left:-12px!important" >visibility_off</i>
+</show-hide-password> -->
 
 
       
@@ -29,6 +53,10 @@
 
   </div>
 </div>
-
+<style>
+.aaa{
+background-color: red !important;
+}
+</style>
 
 <!-- passwordToggle -->

@@ -69,17 +69,61 @@ namespace Service.Entities
             }
         }
 
-        public static List<Task> GetTasksByPersonIdBetweenDates(int iPersonId,DateTime fromDate,DateTime toDate)
+        public static List<Action> GetActionsByPersonIdBetweenDates(int iPersonId,DateTime fromDate,DateTime toDate)
         {
             try 
             {
+                //string FromDate;
+                //string ToDate;
+                //FromDate = fromDate.GetDateTimeFormats()[7];
+                //ToDate = toDate.GetDateTimeFormats()[7];
+                List<Action> allActions = new List<Action>();
+                Action a = new Action();
                 List<SqlParameter> parameters = new List<SqlParameter>();
                 parameters.Add(new SqlParameter("iPersonId", iPersonId));
-                parameters.Add(new SqlParameter("fromDate", fromDate));
-                parameters.Add(new SqlParameter("toDate", toDate));
+                parameters.Add(new SqlParameter("fromDate", fromDate.GetDateTimeFormats()[7]));
+                parameters.Add(new SqlParameter("toDate", toDate.GetDateTimeFormats()[7]));
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TTaskGetTasksByAvrechIdAndDates_SLCT", parameters).Tables[0].Rows;
                 List<Task> tasks = ObjectGenerator<Task>.GeneratListFromDataRowCollection(drc);
-                return tasks;
+                DataRowCollection drc2 = SqlDataAccess.ExecuteDatasetSP("TMeetingGetMeetingsByAvrechIdAndDates_SLCT", parameters).Tables[0].Rows;
+                List<Meeting> meetings = ObjectGenerator<Meeting>.GeneratListFromDataRowCollection(drc2);
+                DataRowCollection drc3 = SqlDataAccess.ExecuteDatasetSP("TConversationGetConversationByAvrechIdAndDates_SLCT", parameters).Tables[0].Rows;
+                List<Conversation> conversations = ObjectGenerator<Conversation>.GeneratListFromDataRowCollection(drc3);
+                int i = 0;
+                foreach (var t in tasks)
+                {
+                    a.iActionId = i;
+                    a.nvDate = t.dtTaskdatetime.Date.ToString();
+                    a.nvHour = t.dtTaskdatetime.Hour.ToString();
+                    a.nvComment = t.nvComments;
+                    a.iTaskType = t.iTaskType;
+                    allActions.Add(a);
+                    a = new Action();
+                    i++;
+                }
+                foreach (var m in meetings)
+                {
+                    a.iActionId = i;
+                    a.nvDate = m.dtMeetingDate.Date.ToString();
+                    a.nvHour = m.dtMeetingDate.Hour.ToString();
+                    a.nvComment = m.nvSummary;
+                    a.iTaskType = m.iMeetingId;
+                    allActions.Add(a);
+                    a = new Action();
+                    i++;
+                }
+                foreach (var c in conversations)
+                {
+                    a.iActionId = i;
+                    a.nvDate = c.dtConversationDate.Date.ToString();
+                    a.nvHour = c.dtConversationDate.Hour.ToString();
+                    a.nvComment = c.nvConversationSummary;
+                    a.iTaskType = c.iConversationType;
+                    allActions.Add(a);
+                    a = new Action();
+                    i++;
+                }
+                return allActions;
             }
             catch (Exception ex)
             {

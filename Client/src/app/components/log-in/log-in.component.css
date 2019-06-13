@@ -36,11 +36,24 @@
 }
 .usr-input{
     background-image: url("../../../assets/icons/usr.png");
-}
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 185px;}
+p {
+    font-family: Lato;
+  }
 .pass-input{
-
+/* margin-left: 100px; */
     background-image: url("../../../assets/icons/password.png");
-    margin-right: 200px;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 185px;
+    padding-bottom: 24px;
+    padding-right: 20px;
 }
 .eye-pass{
     width: 50px;
@@ -88,4 +101,8 @@ h5{
 }
 h1{
     font-size: 2.5rem
+}
+.input-group-addon .ng-star-inserted{
+visibility: hidden !important;
+
 }

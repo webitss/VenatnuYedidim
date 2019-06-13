@@ -109,6 +109,7 @@
     <Content Include="wkhtmltopdf.exe" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Action.cs" />
     <Compile Include="Entities\Conversation.cs" />
     <Compile Include="Entities\Event1.cs" />
     <Compile Include="Entities\Document.cs" />

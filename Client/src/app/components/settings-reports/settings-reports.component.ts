@@ -8,6 +8,7 @@ import { SysTableService } from '../../services/sys-table.service';
 import { SysTableRow } from '../../classes/SysTableRow';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { GlobalService } from '../../services/global.service';
+import { Action } from '../../classes/action';
 
 @Component({
   selector: 'app-settings-reports',
@@ -23,14 +24,17 @@ export class SettingsReportsComponent implements OnInit {
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;
 
   iUserId:number;
-  tasksList=[];
+  actionList=[];
+  tasksToExcel=[];
   flag=0;
   public iReportId: number;
   // public iAvrechId:number;
-
+currentAction:Action=new Action();
   avrechList:Avrech[];
   AvrechSelected:Avrech=null;
-  lstValues: SysTableRow[];
+  lstValues1: SysTableRow[];
+  lstValues2: SysTableRow[];
+  lstValues3: SysTableRow[];
   fromDate:Date;
   toDate:Date;
 
@@ -53,10 +57,11 @@ export class SettingsReportsComponent implements OnInit {
     this.tasks.downloadExcel(t)
   }
 
-  public lstColumns = [
+  public lstColumns = [    
+    new VyTableColumn('תאריך','nvDate'),
     new VyTableColumn('שעה', 'nvHour'),
     new VyTableColumn('סוג משימה', 'taskType'),
-    new VyTableColumn('הערה', 'nvComment'),
+    new VyTableColumn('הערה', 'nvComment')
   ];
 
   selectAv(event: any) {
@@ -71,30 +76,39 @@ export class SettingsReportsComponent implements OnInit {
     debugger;
   }
   produceReport(){
+    this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data1 => {
+      this.lstValues1 = data1;
+  });
+  this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(data2 => {
+    this.lstValues2 = data2;
+});
+this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(data3 => {
+  this.lstValues3 = data3;
+});
 
-// debugger;
-    this.appProxy.post("GetTasksByPersonIdBetweenDates", { iPersonId: this.AvrechSelected.iPersonId,fromDate:this.fromDate,toDate:this.toDate }).then(data => {
-      // debugger;
-      this.tasksList = data;
-      debugger;
-      this.tasksList.forEach(e => {
-// debugger;
-        e["nvHour"] = e.dtTaskdatetime.toLocaleTimeString();
-        e["nvComment"]=e.nvComments;
-      });
+  this.appProxy.post("GetActionsByPersonIdBetweenDates", { iPersonId: this.AvrechSelected.iPersonId,fromDate:this.fromDate,toDate:this.toDate }).then(data => {
+      this.actionList = data;
+      this.actionList.forEach(e => {
+        debugger;
+        this.currentAction.nvDate=e.nvDate;
+        this.currentAction.nvHour = e.nvHour;
+
+        this.currentAction.nvComment=e.nvComment;
+
+        //נעצרתי פה, צריך לפי אם זה משימה, שיחה או פגישה ללכת לlstvalue המתאים ולשלוף את הסוג
+        if(this.lstValues1.findIndex(e["iTaskType"]))
+        this.currentAction.taskType = this.lstValues1.filter(s => s.iSysTableRowId == e["iTaskType"])[0].nvValue;
+debugger;
+      this.tasksToExcel.push(this.currentAction);
+      this.currentAction=new Action();
+      });        
+       this.downloadExcel(this.tasksToExcel);
+
       }); 
 
-     
-      this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data => {
-        this.tasksList.forEach(e => {
-          this.lstValues = data;
-// debugger;
-          e["taskType"] = data.filter(s => s.iSysTableRowId == e["iTaskType"])[0].nvValue;
-        });
-      });
+      
 
-// debugger;
-      this.downloadExcel(this.tasksList);
+        this.tasksToExcel=[];
   }
 
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using System.ServiceModel;
 using System.ServiceModel.Web;
+using Action = Service.Entities.Action;
 
 namespace Service
 {
@@ -788,11 +789,11 @@ RequestFormat = WebMessageFormat.Json)]
 
         [WebInvoke(
         Method = "POST",
-        UriTemplate = "GetTasksByPersonIdBetweenDates",
+        UriTemplate = "GetActionsByPersonIdBetweenDates",
         BodyStyle = WebMessageBodyStyle.WrappedRequest,
         ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Task> GetTasksByPersonIdBetweenDates(int iPersonId, DateTime fromDate, DateTime toDate);
+        List<Action> GetActionsByPersonIdBetweenDates(int iPersonId, DateTime fromDate, DateTime toDate);
 
         [WebInvoke(
          Method = "POST",

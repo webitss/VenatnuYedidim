@@ -3,6 +3,7 @@ using Service.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Net.Mail;
+using Action = Service.Entities.Action;
 
 namespace Service
 {
@@ -97,9 +98,9 @@ namespace Service
             return Task.GetTasksByPersonId(iPersonId);
         }
 
-        public List<Task> GetTasksByPersonIdBetweenDates(int iPersonId, DateTime fromDate, DateTime toDate)
+        public List<Action> GetActionsByPersonIdBetweenDates(int iPersonId, DateTime fromDate, DateTime toDate)
         {
-            return Task.GetTasksByPersonIdBetweenDates(iPersonId,fromDate,toDate);
+            return Task.GetActionsByPersonIdBetweenDates(iPersonId,fromDate,toDate);
         }
 
         public bool DeleteTask(int iTaskId, int iPersonId)

@@ -89,8 +89,14 @@ import { GoogleCity } from './directives/googleCity';
 import { FitElement } from './directives/fit-element';
 import { GraduatesComponent } from './components/graduates/graduates.component';
 import { EditAndDeletePipe } from './pipes/edit-and-delete.pipe';
-
-
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
+import {
+  MatButtonModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatRippleModule,MatIconModule
+} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
@@ -194,6 +200,13 @@ import { EditAndDeletePipe } from './pipes/edit-and-delete.pipe';
 
   //],
   imports: [
+  
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
+    BrowserAnimationsModule,
+    MatIconModule,
     // SelectModule,
     AngularEditorModule,
     NgSelectModule,
@@ -209,6 +222,7 @@ import { EditAndDeletePipe } from './pipes/edit-and-delete.pipe';
     // Ng2SearchPipeModule,
     NgxGalleryModule,
     BrowserModule,
+     ShowHidePasswordModule,
     FormsModule,
     HttpModule,
     HttpClientModule,

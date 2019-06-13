@@ -92,19 +92,16 @@ namespace Service.Entities
                 parameters.Add(new SqlParameter("iUserId", iUserId));
                 
 
-                SqlDataAccess.ExecuteDatasetSP("TUser_INS/UPD", parameters);
-                //if (user.iPermissionId==6)
-                //{
-                //    //          ([iPersonId]
-                //    //,[iCreatedByUserId]
-                //    //,[dtCreatedate]
-                //    //,[iLastModifyUserId]
-                //    //,[dtLastModifyDate]
-                //    //,[bSysRowStatus]
-                //    List<SqlParameter> parameters2 = new List<SqlParameter>();
-                //    //parameters.Add(new SqlParameter("iPersonId",))
-                //    SqlDataAccess.ExecuteDatasetSP("TAvrech_INS")
-                //}
+                int id=int.Parse(SqlDataAccess.ExecuteDatasetSP("TUser_INS/UPD", parameters).Tables[0].Rows[0].ItemArray[0].ToString());
+
+                if (user.iPermissionId == 6)
+                {
+                    List<SqlParameter> parameters2 = new List<SqlParameter>();
+
+                    parameters2.Add(new SqlParameter("iPersonId", id));
+                    parameters2.Add(new SqlParameter("iUserId", iUserId));
+                    SqlDataAccess.ExecuteDatasetSP("TAvrech_INS", parameters2);
+                }
                 return true;
 
             }

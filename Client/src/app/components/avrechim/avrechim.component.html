@@ -8,7 +8,7 @@
             <i class="icon-pdf-file"></i>
         </button>
         <button class="btn btn-circle1 btn-orange ml-3" (click)="mailToAvrechim()"> שליחת מייל</button>
-        <button class="btn btn-circle1 btn-pink" routerLink="avrech/0/avrech-details">אברך חדש</button>
+        <button class="btn btn-circle1 btn-pink" [class.btn-disabled]="globalService.getUser().iPermissionId != 5" routerLink="avrech/0/avrech-details">אברך חדש</button>
     </div>
 </div>
 

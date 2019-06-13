@@ -17,7 +17,7 @@ import { SysTableService } from '../../services/sys-table.service';
 export class LogInComponent implements OnInit {
 
   constructor(private appProxy: AppProxy, private router: Router, private appComponent: AppComponent, private globalService: GlobalService, private dialogService: DialogService, private _parent: AppComponent) { }
-
+  show=false;
   ngOnInit() {
     this.imgHeight = window.innerHeight;
     
@@ -86,6 +86,16 @@ debugger;
   }
 ;
 
+toogle(){
+  this.show=!this.show;
+   var x = <HTMLInputElement>document.getElementById("password1");
+  debugger;
+if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
   canDeactivate() {
     if (this.globalService.getUser() != null)
       return true;
@@ -94,3 +104,4 @@ debugger;
 
   }
 }
+
