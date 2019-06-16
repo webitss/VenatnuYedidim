@@ -40,7 +40,8 @@ currentAction:Action=new Action();
 
   ngOnInit() {
     this.reports = [
-      { id: 1, text: "משימות לאברך" }
+      { id: 1, text: "משימות לאברך" },
+      { id: 2, text:"ימי הולדת"}
     ];
     this.iUserId = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
 

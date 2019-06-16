@@ -97,6 +97,8 @@ import {
   MatRippleModule,MatIconModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReportsTasksToAvrechComponent } from './components/reports-tasks-to-avrech/reports-tasks-to-avrech.component';
+import { ReportsBirthdayComponent } from './components/reports-birthday/reports-birthday.component';
 
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
@@ -192,6 +194,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     VyPopUpComponent,
     EditMailComponent,
     EditAndDeletePipe,
+    ReportsTasksToAvrechComponent,
+    ReportsBirthdayComponent,
 
   ],
   //imports: [ 

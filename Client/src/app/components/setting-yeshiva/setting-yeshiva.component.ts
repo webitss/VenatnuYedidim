@@ -30,7 +30,7 @@ export class SettingYeshivaComponent implements OnInit {
   public yeshiva: Yeshiva = new Yeshiva();
   protected yeshivaList = new Array();
   protected isNew = false;
-  protected header="";
+  public header="";
 
   @ViewChild(NgForm) form;
   @ViewChild(VyTableComponent) vyTableComponent: VyTableComponent;

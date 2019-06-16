@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   protected PicUrl: any;
   protected nvBase64File: string;
   protected name: string;
-  protected flag = false;
+  public flag = false;
   protected message = '';
   protected header = '';
   protected tubsName = { student: 1, avrechim: 2, events: 3, graduates: 4, users: 5, settings: 6 };
