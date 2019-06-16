@@ -63,19 +63,21 @@ export class CalendarComponent implements OnInit {
     this.editTask1 = true;
     this.task = this.taskList.find(t => t.iTaskId == taskId);
     this.conversation=this.conversationList.find(c=>c.iConversationId==taskId);
+    //alert(this.conversation);
 // alert(this.conversation.nvConversationSummary);
     this.meeting=this.meetingList.find(m=>m.iMeetingId==taskId);
+    //alert(this.meeting)
     if(this.conversation)
     {
             this.getConversationType();
-// alert("con")
+ //alert("con")
     }
       else
       {
               if(this.meeting)
               {
                       this.getMeetingType();
-// alert("meet")
+ //alert("meet")
 
               }
       }
@@ -141,23 +143,25 @@ export class CalendarComponent implements OnInit {
   }
 
 getConversationType(){
-  this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
-    if(val)
-    {
-          this.sysTableList = val;
-
-    }
-  });
+  this.sysTableList=this.conversationTypeList;
+  // this.sysTableService.getValues(SysTableService.dataTables.conversationType.iSysTableId).then(val => {
+  //   if(val)
+  //   {
+  //         this.sysTableList = val;
+  //         alert(this.sysTableList.length);
+  //       }
+  // });
 }
 getMeetingType(){
+  this.sysTableRowList=this.meetingType;
   // alert("come");
-this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(val=>{
-  if(val){
-      this.sysTableRowList=val;
-  // alert(this.sysTableRowList.length);
+// this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableId).then(val=>{
+//   if(val){
+//       this.sysTableRowList=val;
+//    alert(this.sysTableRowList.length);
 
-  }
-})
+//   }
+// })
 }
 
   ngOnInit() {

@@ -93,8 +93,7 @@ namespace Service.Entities
                 foreach (var t in tasks)
                 {
                     a.iActionId = i;
-                    a.nvDate = t.dtTaskdatetime.Date.ToString();
-                    a.nvHour = t.dtTaskdatetime.Hour.ToString();
+                    a.nvDate = t.dtTaskdatetime.ToString();
                     a.nvComment = t.nvComments;
                     a.iTaskType = t.iTaskType;
                     allActions.Add(a);
@@ -104,10 +103,10 @@ namespace Service.Entities
                 foreach (var m in meetings)
                 {
                     a.iActionId = i;
-                    a.nvDate = m.dtMeetingDate.Date.ToString();
-                    a.nvHour = m.dtMeetingDate.Hour.ToString();
+                    a.nvDate = m.dtMeetingDate.ToString();
+                    //a.nvHour = m.dtMeetingDate.Hour.ToString();
                     a.nvComment = m.nvSummary;
-                    a.iTaskType = m.iMeetingId;
+                    a.iTaskType = m.iMeetingType;
                     allActions.Add(a);
                     a = new Action();
                     i++;
@@ -115,8 +114,8 @@ namespace Service.Entities
                 foreach (var c in conversations)
                 {
                     a.iActionId = i;
-                    a.nvDate = c.dtConversationDate.Date.ToString();
-                    a.nvHour = c.dtConversationDate.Hour.ToString();
+                    a.nvDate = c.dtConversationDate.ToString();
+                    //a.nvHour = c.dtConversationDate.Hour.ToString();
                     a.nvComment = c.nvConversationSummary;
                     a.iTaskType = c.iConversationType;
                     allActions.Add(a);

@@ -12,6 +12,7 @@ import { GlobalService } from '../../services/global.service';
 import { AppComponent } from '../app/app.component';
 import * as moment from 'moment';
 import { Avrech } from '../../classes/avrech';
+import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 @Component({
   selector: 'app-student-meeting-details',
   templateUrl: './student-meeting-details.component.html',
@@ -39,7 +40,7 @@ export class StudentMeetingDetailsComponent implements OnInit {
   protected iUserId: number;
   avrech:Avrech;
   @Output() refresh = new EventEmitter();
-
+  @ViewChild(VyTableComponent) cc:VyTableComponent;
   @Input()
   public flagCome:boolean;
   @ViewChild(TaskComponent) child: TaskComponent;
@@ -91,7 +92,7 @@ export class StudentMeetingDetailsComponent implements OnInit {
       this.currentMeeting['dtHour'] =moment(this.currentMeeting.dtMeetingDate).format('HH:mm');
     })
 
-
+// this.cc.refreshTable(this.sysTableRowList);
   }
   close() {
     this.Close.emit(null);
@@ -108,7 +109,11 @@ debugger;
 
       debugger;
       if (this.currentMeeting.iMeetingId == null)
-      this.currentMeeting.iPersonId = this.iPersonId;
+      {
+      this.currentMeeting.iPersonId = this.iPersonId; 
+      this.currentMeeting.iAvrechId=this.avrechByStuden.iPersonId;
+      }
+
     this.appProxi.post("SetMeeting", { meeting: this.currentMeeting, iUserId: this.globalService.getUser()['iUserId'] }).then(
       data => {
         debugger;

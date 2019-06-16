@@ -90,14 +90,21 @@ this.sysTableService.getValues(SysTableService.dataTables.meetingType.iSysTableI
       this.actionList = data;
       this.actionList.forEach(e => {
         debugger;
-        this.currentAction.nvDate=e.nvDate;
-        this.currentAction.nvHour = e.nvHour;
+        this.currentAction.nvDate=e.nvDate.split(" ")[0];
+        this.currentAction.nvHour = e.nvDate.split(" ")[1];
 
         this.currentAction.nvComment=e.nvComment;
 
         //נעצרתי פה, צריך לפי אם זה משימה, שיחה או פגישה ללכת לlstvalue המתאים ולשלוף את הסוג
-        if(this.lstValues1.findIndex(e["iTaskType"]))
+        if(this.lstValues1.find(x=>x.iSysTableRowId==e["iTaskType"]))
         this.currentAction.taskType = this.lstValues1.filter(s => s.iSysTableRowId == e["iTaskType"])[0].nvValue;
+        else
+        if(this.lstValues2.find(x=>x.iSysTableRowId==e["iTaskType"]))
+        this.currentAction.taskType = this.lstValues2.filter(s => s.iSysTableRowId == e["iTaskType"])[0].nvValue;
+        else
+        if(this.lstValues3.find(x=>x.iSysTableRowId==e["iTaskType"]))
+        this.currentAction.taskType = this.lstValues3.filter(s => s.iSysTableRowId == e["iTaskType"])[0].nvValue;
+
 debugger;
       this.tasksToExcel.push(this.currentAction);
       this.currentAction=new Action();

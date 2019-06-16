@@ -61,9 +61,10 @@ len:number;
   f:boolean=false;
   it:number;
   t:any;
+  studId:number;
   currentStu:Student;
   ngOnInit() {
-
+debugger
     this.currentTask = Object.assign({}, this.task);
 
 
@@ -71,17 +72,22 @@ len:number;
       this.task = new Task();
       this.isNew = true;
     }
-
-
+this.studId=this.currentTask.iStudentId;
+// alert(this.studId);
 debugger;
     this.route.parent.params.subscribe(params => {
       debugger;
       this.personId = +params['iPersonId'];
+      //alert("personId: "+this.personId)
 // alert(this.personId);
+});
         this.appProxy.post('GetStudentsByAvrechId',{ iAvrechId: this.personId}).then(data => { 
 
           if(data)
-          this.studentsList = data; 
+          {
+                      this.studentsList = data; 
+// alert("studentsLength: "+this.studentsList.length)
+          }
         })
 // if(this.task.iTaskType==73)
 // this.it=10;
@@ -182,7 +188,7 @@ debugger;
       });
       
               
-    });
+  
 
   }
   // selectStudent(event: any) {
@@ -274,6 +280,7 @@ debugger;
     //      })
     //    }
     // }
+    this.task.iStudentId=this.studId;
 debugger;
 if(iAvrechId)
 {

@@ -81,7 +81,7 @@ avrech:Avrech;
       data => {
         debugger;
         this.avrechByStuden = data; 
-         this.conver.iAvrechId=this.avrechByStuden.iPersonId;
+         this.currentConver.iAvrechId=this.avrechByStuden.iPersonId;
          debugger;
          this.currentConver['avrechName']= this.avrechByStuden.nvFirstName+' '+this.avrechByStuden.nvLastName;
       

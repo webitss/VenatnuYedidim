@@ -39,7 +39,7 @@
     </div> -->
     <div class="form-group col-sm-3" *ngIf="t==null">
       <label for="studentId">תלמיד</label>
-      <select name="studentId" class="form-control"  *ngIf="studentsList" [(ngModel)]="task.iStudentId" (change)="changeType()">
+      <select name="studentId" class="form-control"  *ngIf="studentsList" [(ngModel)]="studId">
         <option *ngFor="let s of studentsList" [value]="s.iPersonId">{{s.nvFirstName}} {{s.nvLastName}}</option>
       </select>
     </div>
