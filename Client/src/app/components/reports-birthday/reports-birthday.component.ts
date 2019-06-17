@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { GlobalService } from '../../services/global.service';
 import { AppComponent } from '../app/app.component';
 import { SysTableService } from '../../services/sys-table.service';
+import { callbackify } from 'util';
 
 @Component({
   selector: 'app-reports-birthday',
@@ -104,8 +105,9 @@ studentList:Student[];
   }
   produceReport(){
 debugger;
- this.getStudents();
-    this.downloadExcel(this.studentsToExcel),this.studentsToExcel=[];
+ this.getStudents(),this.downloadExcel(this.studentsToExcel);
+ this.studentsToExcel=[];
+    
   }
   downloadExcel(t) {
 debugger;
