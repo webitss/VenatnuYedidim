@@ -1,4 +1,7 @@
-
+h3{
+    text-align: center;
+    color:  rgb(207, 37, 94);
+}
 .labels{
     padding-top: 0.5%;
     padding-right: 8%;
@@ -8,4 +11,8 @@
 }
 .btn-save{
     cursor: pointer;
+    margin-right: 48%;
+}
+.hidden{
+    height: 50px;
 }

@@ -99,6 +99,16 @@ namespace Service
 
         [OperationContract]
         [WebInvoke(
+        Method = "POST",
+        UriTemplate = "GetStudentsByMonth",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        List<Student> GetStudentsByMonth(string month);
+
+
+        [OperationContract]
+        [WebInvoke(
         Method = "GET",
         UriTemplate = "GetStudentsAssociatedToAvrechim",
         BodyStyle = WebMessageBodyStyle.WrappedRequest,

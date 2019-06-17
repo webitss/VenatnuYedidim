@@ -64,7 +64,22 @@ namespace Service.Entities
             }
         }
 
+        public static List<Student> GetStudentsByMonth(string month)
+        {
+            try
+            {
+                SqlParameter parameter = new SqlParameter("month",month);
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TStudent_GetStudentsByMonth_SLCT", parameter).Tables[0].Rows;
+                List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
 
+                return students;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetStudentsByMonth / TStudent_GetStudentsByMonth_SLCT", "ex" + ex);
+                return null;
+            }
+        }
 
         public static List<Student> GetStudentList(int iUserId)
         {

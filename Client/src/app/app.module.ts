@@ -99,6 +99,7 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReportsTasksToAvrechComponent } from './components/reports-tasks-to-avrech/reports-tasks-to-avrech.component';
 import { ReportsBirthdayComponent } from './components/reports-birthday/reports-birthday.component';
+import { from } from 'rxjs';
 
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
@@ -156,6 +157,8 @@ import { ReportsBirthdayComponent } from './components/reports-birthday/reports-
     SettingsYeshivotComponent,
     SettingsDocumentsComponent,
     SettingsFrontendComponent,
+    ReportsTasksToAvrechComponent,
+    ReportsBirthdayComponent,
 
     SettingYeshivaComponent,
 
@@ -195,7 +198,7 @@ import { ReportsBirthdayComponent } from './components/reports-birthday/reports-
     EditMailComponent,
     EditAndDeletePipe,
     ReportsTasksToAvrechComponent,
-    ReportsBirthdayComponent,
+    ReportsBirthdayComponent
 
   ],
   //imports: [ 
@@ -320,7 +323,12 @@ import { ReportsBirthdayComponent } from './components/reports-birthday/reports-
         children: [
           { path: "", component: SettingsCodeTableComponent },
           { path: "settings-code-tables", component: SettingsCodeTableComponent },
-          { path: "settings-reports", component: SettingsReportsComponent },
+          { path: "settings-reports", component: SettingsReportsComponent,
+          // children: [
+          //   {path:"ReportsTasksToAvrechComponent", component:ReportsTasksToAvrechComponent},
+          //   {path: "ReportsBirthdayComponent",component:  ReportsBirthdayComponent}
+          // ]
+         },
           {
             path: "settings-yeshivot", component: SettingsYeshivotComponent,
             children: [

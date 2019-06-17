@@ -116,6 +116,11 @@ namespace Service
         {
             return Student.GetStudentList(iUserId);
         }
+        public List<Student> GetStudentsByMonth(string month)
+        {
+            return Student.GetStudentsByMonth(month);
+        }
+
         public List<Student> GetBugrimList(int iUserId)
         {
             return Student.GetBugrimList(iUserId);

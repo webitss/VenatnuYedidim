@@ -65,9 +65,7 @@ export class VyTableComponent implements OnInit {
 
   ngOnChanges() {
     // alert("ngOnChanges");
-    debugger;
     if (this.lstDataRows && this.lstDataRows.length > 0) {
-      debugger;
       this.currentPage = -1;
       this.moveToPage(0);
     }
@@ -131,12 +129,12 @@ export class VyTableComponent implements OnInit {
       this.iStartNumRow = pageNum * this.iCountRows;
       this.iEndNumRow = this.iStartNumRow + this.lstCurrentDataRows.length;
       this.updateLstPagesNum();
-      this.lstCurrentDataRows.forEach(row => {
-        this.lstColumns.forEach(col => {
-          debugger;
-          row
-        });
-      });
+      // this.lstCurrentDataRows.forEach(row => {
+      //   this.lstColumns.forEach(col => {
+      //     debugger;
+      //     row
+      //   });
+      // });
     }
   }
 
@@ -229,6 +227,7 @@ this.changeOpt.emit(item);
   }
 
   public downloadExcel(tasksList?) {
+    debugger;
     let uri = 'data:application/vnd.ms-excel;base64,'
       , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"/><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
       , base64 = function (s) { return window.btoa(eval('unescape(encodeURIComponent(s))')) }
