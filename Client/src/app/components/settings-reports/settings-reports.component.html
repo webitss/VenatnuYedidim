@@ -4,48 +4,21 @@
         <div class='form-group row-sm-3 row'>
           <label class="lbl col-2 labels">בחר דו"ח</label>
           <div class="col-2">
-              <select class="form-control" (change)="getValues()" [(ngModel)]="iReportId">
+              <select #report class="form-control" (change)="choose(report)" [(ngModel)]="iReportId">
                   <option [ngValue]="undefined" disabled>בחר</option>
                   <option *ngFor="let name of reports" value={{name.id}}>{{name.text}}</option>
               </select>
           </div>     
         </div>
-        <div class="form-group row-sm-3 row">
-            <label for="yeshivaName" class="col-2 labels">בחר אברך :</label>
-            <div class="col-2">
-              <select class="form-control" id="avrechId" name="avrechName" (change)="selectAv($event)">
-                <option disabled> בחר אברך </option>
-                <option *ngFor="let av of avrechList">{{av.nvFirstName}} {{av.nvLastName}}</option>
-            </select>
-            </div>
-            
-        </div> 
-      <div class="form-group row-sm-3 row">
-        <label for="dateAdd" class="col-2 labels" > מתאריך :</label>
-        <div class="col-2">
-          <input class="form-control" id="dtFrom" name="dtFrom" [(ngModel)]="fromDate" ngui-datetime-picker date-only="true"
- [ngModelOptions]="{standalone: true}"
-            style='width: 160px'>
-        </div>
-        
-        <!-- <input class="form-control" [(ngModel)]="currentMeeting['dtDate']" ngui-datetime-picker date-only="true" close-on-select="false"
-        id="dtDate" name="dtDate"> -->
-        <!-- [(ngModel)]="currentMeeting['dtDate']" ngui-datetime-picker date-only="true" -->
+        <h3 *ngIf="header!=null">דו"ח {{header}}</h3><br/><br/>
+<app-reports-tasks-to-avrech *ngIf="flags[0]"></app-reports-tasks-to-avrech>
+<app-reports-birthday *ngIf="flags[1]"></app-reports-birthday>
+<!-- <div class="main-table hidden">
+    <app-vy-table #tasks [lstColumns]="lstColumns" [lstDataRows]="tasksList" (clickCell)="click($event)" ></app-vy-table>
+  </div> -->
 
-      </div>
-      <div class="form-group row-sm-3 row">
-        <label for="dateAdd" class="col-2 labels"> עד תאריך :</label>
-        <div class="col-2">
-          <input class="form-control" id="dtTo" name="dtTo" [(ngModel)]="toDate" ngui-datetime-picker date-only="true"
- (change)="change=true" [ngModelOptions]="{standalone: true}"
-            style='width: 160px'>
-        </div>
-      
-      </div>
-      <button class="btn-circle btn-save" (click)="produceReport()">הפק דו"ח</button>
+      <!-- <button *ngIf="flagSave" class="btn-circle btn-save" (click)="produceReport()">הפק דו"ח</button> -->
 
 </div>
   </div>
-  <div class="main-table">
-    <app-vy-table #tasks [lstColumns]="lstColumns" [lstDataRows]="tasksList" (clickCell)="click($event)" ></app-vy-table>
-</div>
+  
