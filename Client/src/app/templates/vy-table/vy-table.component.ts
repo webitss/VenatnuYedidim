@@ -80,15 +80,14 @@ export class VyTableComponent implements OnInit {
   // const result = words.filter(word => word.length > 6);
 
   filterChange(col) {
-    // alert("filterChange")
-    // alert("come")
+ debugger;
     this.flag=true;
     let lst = JSON.parse(JSON.stringify(this.lstDataRows));
     for (let key of Object.keys(this.lstFilterColumns)) {
       if (this.lstFilterColumns[key]) {
         debugger;
        //  lst[0].nvMobile.indexOf("5")>0
-        lst = lst.filter(row => row[key].indexOf(this.lstFilterColumns[key]) > -1)
+        lst = lst.filter(row =>row[key]!=null&&row[key].indexOf(this.lstFilterColumns[key]) > -1);
       }
     }
     this.lstCurrentDataRows = lst;

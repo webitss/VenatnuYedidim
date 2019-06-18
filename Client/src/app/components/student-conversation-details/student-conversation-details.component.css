@@ -38,6 +38,10 @@ button{
     right: 30%;
     z-index: 99999;
     position: fixed;
+    overflow-x: hidden;
+    width: 50%;
+    height: 70%;
+    overflow-y: auto;
 }
 
 #overlay {

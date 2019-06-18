@@ -129,6 +129,10 @@ namespace Service
         {
             return Student.GetStudentsAssociatedToAvrechim();
         }
+        public Dictionary<int, string> GetStudentsAssociatedToAvrechimNames()
+        {
+            return Student.GetStudentsAssociatedToAvrechimNames();
+        }
         public Dictionary<int, string> GetCurrentYeshivaOfStudent()
         {
             return Student.GetCurrentYeshivaOfStudent();

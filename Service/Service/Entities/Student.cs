@@ -52,9 +52,16 @@ namespace Service.Entities
 
                 List<SqlParameter> sqlParameters = new List<SqlParameter>();
                 sqlParameters.Add(new SqlParameter("iUserId", iUserId));
-                sqlParameters.Add(new SqlParameter("studentAndAvrechArr", ObjectGenerator<T2Int>.GetDataTable(studentAndAvrechArr)));
+                sqlParameters.Add(new SqlParameter("iAvrechId", studentAndAvrechArr[0].iId1));
 
-                SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_INS/UPD", sqlParameters);
+                foreach (var item in studentAndAvrechArr)
+                {
+                    sqlParameters.Add(new SqlParameter("iStudentId", item.iId2));
+                    SqlDataAccess.ExecuteDatasetSP("TAvrechStudent_INS_UPD", sqlParameters);
+                    sqlParameters.RemoveAt(2);
+                }
+
+                
                 //List<Student> students = ObjectGenerator<Student>.GeneratListFromDataRowCollection(drc);
                 return true;
             }
@@ -138,7 +145,27 @@ namespace Service.Entities
 				return null;
 			}
 		}
-		public static Dictionary<int,string> GetCurrentYeshivaOfStudent()
+        public static Dictionary<int, string> GetStudentsAssociatedToAvrechimNames()
+        {
+            try
+            {
+                Dictionary<int, string> studentsAv = new Dictionary<int, string>();
+                DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechNameStudents_SLCT").Tables[0].Rows;
+                foreach (DataRow row in drc)
+                {
+
+                    studentsAv.Add(int.Parse(row["iStudentId"].ToString()), row["avrechName"].ToString());
+                }
+                return studentsAv;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError("GetStudentsAssociatedToAvrechimNames / TAvrechNameStudents_SLCT", "ex" + ex);
+                return null;
+            }
+        }
+
+        public static Dictionary<int,string> GetCurrentYeshivaOfStudent()
 		{
 			try
 			{

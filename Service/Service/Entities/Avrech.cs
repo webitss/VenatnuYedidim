@@ -158,7 +158,6 @@ namespace Service.Entities
 
 
 
-	
         public static bool MailToAvrechim(string[] mailList, string subject, string body)
         {
 

@@ -116,6 +116,16 @@ namespace Service
         RequestFormat = WebMessageFormat.Json)]
         Dictionary<int, int> GetStudentsAssociatedToAvrechim();
 
+
+        [OperationContract]
+        [WebInvoke(
+        Method = "GET",
+        UriTemplate = "GetStudentsAssociatedToAvrechimNames",
+        BodyStyle = WebMessageBodyStyle.WrappedRequest,
+        ResponseFormat = WebMessageFormat.Json,
+        RequestFormat = WebMessageFormat.Json)]
+        Dictionary<int, string> GetStudentsAssociatedToAvrechimNames();
+
         [OperationContract]
         [WebInvoke(
         Method = "GET",

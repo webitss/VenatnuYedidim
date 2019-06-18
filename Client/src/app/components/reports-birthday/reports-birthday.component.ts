@@ -23,7 +23,7 @@ month:string=null;
 id: number;
 component;
 nvYeshivaCityOfStudents:Map<number,string>;
-studentsAssociatedToAvrech:Map<number,number> ;
+studentsAssociatedToAvrech:Map<number,string> ;
 avrechStudent: Avrech=null;
 currentYeshivaOfStudent: Map<number, string>;
 citiesOfYeshivotOfStudents: Map<number,string>;
@@ -54,58 +54,65 @@ studentList:Student[];
     this.month=m.value;
   }
   getStudents(){
-    this.appProxy.post("GetStudentsByMonth",{month:this.month}).then(data=>{
-      if(data)
-      {
-        this.studentList=data;
-          // this.appProxy.get("GetStudentsAssociatedToAvrechim").then(data => {
-          //   this.studentsAssociatedToAvrech = data;
-            this.appProxy.get("GetCurrentYeshivaOfStudent").then(data => {
-              this.currentYeshivaOfStudent = data;
-  
-              this.appProxy.get("GetCitiesOfYeshivotOfStudents").then(data => {
-                this.citiesOfYeshivotOfStudents = data;
-              this.studentList.forEach(student => {
-              
-                student['nvBirthDate']=student.nvBirthdate;
-              if((student.bDeathFather==true)&&(student.bDeathMother==true))
-                  student['orphan']="אב ואם";
-                else
-                if(student.bDeathFather==true)
-                  student['orphan']="אב";
-                  else
-                    student['orphan']="אם";
-
-              if(this.currentYeshivaOfStudent[student.iPersonId])
-              {
-                student['nvYeshivaName'] = this.currentYeshivaOfStudent[student.iPersonId];
-                student['nvCityName'] = this.citiesOfYeshivotOfStudents[student.iPersonId];
-              }
-  debugger;
-                this.appProxy.post("GetAvrechByStudentId", { iPersonId: student.iPersonId }).then(data => {
-                  debugger;
-                  this.avrechStudent = data;
-                  student['nvAvrechName'] = "";
-                    student['nvAvrechName'] += " " + this.avrechStudent[0].nvFirstName + " " + this.avrechStudent[0].nvLastName;
-                  
-                            
-}),  this.studentsToExcel.push(student); 
-
-              })
-     
-     
-            });
-          });
-        // });
-        
-      }    
-      
-
-    }, err => { alert(err); });
+    
   }
   produceReport(){
 debugger;
- this.getStudents(),this.downloadExcel(this.studentsToExcel);
+
+this.appProxy.post("GetStudentsByMonth",{month:this.month}).then(data=>{
+  if(data)
+  {
+    this.studentList=data;
+      this.appProxy.get("GetStudentsAssociatedToAvrechimNames").then(data => {
+        debugger;
+        this.studentsAssociatedToAvrech = data;
+        this.appProxy.get("GetCurrentYeshivaOfStudent").then(data => {
+          this.currentYeshivaOfStudent = data;
+
+          this.appProxy.get("GetCitiesOfYeshivotOfStudents").then(data => {
+            this.citiesOfYeshivotOfStudents = data;
+          this.studentList.forEach(student => {
+          
+            student['nvBirthDate']=student.nvBirthdate;
+          if((student.bDeathFather==true)&&(student.bDeathMother==true))
+              student['orphan']="אב ואם";
+            else
+            if(student.bDeathFather==true)
+              student['orphan']="אב";
+              else
+                student['orphan']="אם";
+
+          if(this.currentYeshivaOfStudent[student.iPersonId])
+          {
+            student['nvYeshivaName'] = this.currentYeshivaOfStudent[student.iPersonId];
+            student['nvCityName'] = this.citiesOfYeshivotOfStudents[student.iPersonId];
+          }
+debugger;
+student['nvAvrechName']=this.studentsAssociatedToAvrech[student.iPersonId];
+//             this.appProxy.post("GetAvrechByStudentId", { iPersonId: student.iPersonId }).then(data => {
+//               debugger;
+//               this.avrechStudent = data;
+//               student['nvAvrechName'] = "";
+//                 student['nvAvrechName'] += " " + this.avrechStudent[0].nvFirstName + " " + this.avrechStudent[0].nvLastName;
+              
+                        
+// }),  
+this.studentsToExcel.push(student); 
+
+          })
+  this.downloadExcel(this.studentsToExcel);
+ 
+        });
+      });
+     });
+    
+  }    
+  
+
+}, err => { alert(err); });
+
+
+ 
  this.studentsToExcel=[];
     
   }
