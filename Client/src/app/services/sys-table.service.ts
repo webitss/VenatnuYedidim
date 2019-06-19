@@ -60,6 +60,7 @@ export class SysTableService {
   constructor(private appProxy: AppProxy,private globalService:GlobalService) { }
   ////#region מקבל ID של טבלה מחזיר ערכים מאותה טבלה 
   getValues(iSysTableId: number, col?:any): Promise<Array<SysTableRow>> {
+    debugger;
 // alert(iSysTableId)
     // console.log(iSysTableId + "arived");
     for (let key in SysTableService.dataTables) {
@@ -69,11 +70,12 @@ export class SysTableService {
 
       if (SysTableService.dataTables[key].iSysTableId == iSysTableId) {
         this.Mykey = key;
-        if (SysTableService.dataTables[key].SysTableRow.length > 0) {
-          if(col)col(SysTableService.dataTables[key].SysTableRow)
-          return Promise.resolve(SysTableService.dataTables[key].SysTableRow);
+        // if (SysTableService.dataTables[key].SysTableRow.length > 0) {
+        //   if(col)
+        //   col(SysTableService.dataTables[key].SysTableRow)
+        //   return Promise.resolve(SysTableService.dataTables[key].SysTableRow);
 
-        }
+        // }
       }
     }
 

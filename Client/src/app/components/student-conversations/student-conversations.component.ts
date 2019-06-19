@@ -54,15 +54,16 @@ public flagCome:boolean;
       name: 'delete',
       bClickCell: true,
       type: 'html'
+    }, 
+    {
+      title: 'סוג שיחה',
+      name: 'nvConversationType'
     },
     {
       title: 'שם אברך',
       name: 'avrechName',
     },
-    {
-      title: 'סוג שיחה',
-      name: 'nvConversationType'
-    },
+   
     {
       title: 'תאריך שיחה',
       name: 'nvConversationDate'
@@ -146,7 +147,17 @@ debugger;
     this.vyTableComponent.refreshTable(this.conversationsList);
   }
 
+  // m['nvDate'] = m.dtMeetingDate.toLocaleDateString();
+  // m['nvHour'] = m.dtMeetingDate.toLocaleTimeString();
+  // m['edit'] = '<div class="edit"></div>';
+  // m['delete'] = '<div class="delete"></div>';
+  // m['nvMeetingType'] = this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)?this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0]?this.sysTableRowList.filter(s => s.iSysTableRowId == m.iMeetingType)[0].nvValue:'':'';
+  // m['iAvrechId']=m.iAvrechId;
+  // m['avrechName']=m.avrechName;
+
+
   changeTable(c: Conversation) {
+    debugger;
     c['nvConversationDate'] = c.dtConversationDate.toLocaleDateString();
     c['nvConversationTime'] = c.dtConversationDate.toLocaleTimeString();
 
@@ -156,7 +167,11 @@ debugger;
     c['delete'] = '<div class="delete"></div>';
     this.conv=c;
   }
-  selecList(id) {
+  selecList(id,iAvrechId) {
+    debugger;
+    this.appProxy.post("GetAvrechById",{iPersonId:iAvrechId}).then(d=>{
+      if(d){
+          this.name=d.nvFirstName+' '+d.nvLastName;
     this.appProxy.post("GetConversations", { iPersonId: id })
       .then(data => {
         debugger;
@@ -172,6 +187,8 @@ debugger;
           });
         });
       })
+      }
+    })
 
   }
   ngOnInit() {
@@ -188,10 +205,11 @@ debugger;
       this.student=dd;      
       this.globalService.student=this.student;
 debugger;
-    })
+   
     this.iUserId = this.globalService.getUser()['iUserId'];
-
-    this.selecList(this.iPersonId);
+debugger;
+    this.selecList(this.iPersonId,this.student.iAvrechId);
+   })
   }
 }
 

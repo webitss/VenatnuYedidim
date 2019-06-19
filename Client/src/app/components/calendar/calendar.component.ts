@@ -61,6 +61,7 @@ export class CalendarComponent implements OnInit {
 
     this.flag = true;
     this.editTask1 = true;
+    debugger;
     this.task = this.taskList.find(t => t.iTaskId == taskId);
     this.conversation=this.conversationList.find(c=>c.iConversationId==taskId);
     //alert(this.conversation);

@@ -9,7 +9,7 @@
         </div> -->
     
         <div class="imageStudent" [class.no]="(!student || !student.nvImgStudent) && save.image==''">
-            <div class="image">
+            <div class="image" (change)="Change()">
                 <img *ngIf="student && student.nvImgStudent && save.image==''" [src]="baseFileUrl + student.nvImgStudent">
                 <img *ngIf="save.image" [src]="save.image">
             </div>

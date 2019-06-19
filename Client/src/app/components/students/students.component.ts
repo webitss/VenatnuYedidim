@@ -42,10 +42,13 @@ export class StudentsComponent implements OnInit {
   citiesOfYeshivotOfStudents: Map<number,string>;
   private alert: any;
   @ViewChild('students') students: any;
+  @ViewChild('student') studentsv: any;
 
   
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
   public ngOnInit() {
+
+    debugger;
     this.currentYeshivaOfStudent = new Map<number, string>();
     this.component = this.router.url;
     this.id = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
@@ -132,15 +135,55 @@ debugger;
     this.lstColumns.push(new VyTableColumn('יתום מ', 'orphan'));
 
   }
+
+  cc() {
+    this.alert("gfhf")
+    debugger;
+    this.studentsv.Change();
+  }
+
   lstDataRows = [];
   onClose(e) {
-    if (e.iPersonId) {
+    debugger;
+    if (e) {
       this.appProxy.post('GetStudentList', { iUserId: this.id }).then(data => {
         this.studentList = data;
-        this.studentList.forEach(student => {
-          student['edit'] = '<div class="edit"></div>'
-          student['delete'] = '<div class = "delete"></>';
+
+        this.appProxy.get("GetStudentsAssociatedToAvrechim").then(data => {
+          this.studentsAssociatedToAvrech = data;
+          this.appProxy.get("GetCurrentYeshivaOfStudent").then(data => {
+            this.currentYeshivaOfStudent = data;
+
+            this.appProxy.get("GetCitiesOfYeshivotOfStudents").then(data => {
+              this.citiesOfYeshivotOfStudents = data;
+            this.studentList.forEach(student => {
+              student['edit'] = '<div class="edit"></div>'
+              student['delete'] = '<div class = "delete"></>';
+
+            if((student.bDeathFather==true)&&(student.bDeathMother==true))
+                student['orphan']="אב ואם";
+              else
+              if(student.bDeathFather==true)
+                student['orphan']="אב";
+                else
+                  student['orphan']="אם";
+debugger;
+            if(this.currentYeshivaOfStudent[student.iPersonId])
+            {
+              student['nvYeshivaName'] = this.currentYeshivaOfStudent[student.iPersonId];
+              student['nvCityName'] = this.citiesOfYeshivotOfStudents[student.iPersonId];
+            }
+
+              this.appProxy.post("GetAvrechByStudentId", { iPersonId: student.iPersonId }).then(data => {
+                this.avrechStudent = data;
+                student['nvAvrechName'] = "";
+                  student['nvAvrechName'] += " " + this.avrechStudent[0].nvFirstName + " " + this.avrechStudent[0].nvLastName;
+                });
+            });
+          });
         });
+      });
+      }, err => { alert(err); 
      
         this.vyTableComponent.refreshTable(this.studentList);
       
@@ -148,9 +191,14 @@ debugger;
        
      
     }
+    debugger;
     this.flag = false;
   }
   
+  Change(){
+    
+  }
+
   editStudent(e) {
     this.router.navigate(['students/student/' + e.iPersonId + '/' + 'student-details']);
   }

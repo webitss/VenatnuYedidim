@@ -7,6 +7,7 @@ import { SysTableService } from '../../services/sys-table.service';
 import { AppComponent } from '../app/app.component';
 import { StudentsComponent } from '../students/students.component';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
+import { CDK_DESCRIBEDBY_HOST_ATTRIBUTE } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-cards-union',
@@ -55,6 +56,7 @@ export class CardsUnionComponent implements OnInit {
     );
   }
   student1Change(event: any) {
+    debugger;
     this.studentList.forEach(e => {
       if (e.iPersonId == event.currentTarget.value) {
         this.student1 = e;
@@ -69,6 +71,7 @@ export class CardsUnionComponent implements OnInit {
     });
   }
   student2Change(event: any) {
+    debugger;
     this.studentList.forEach(e => {
       if (e.iPersonId == event.currentTarget.value) {
         this.student2 = e;
@@ -88,6 +91,7 @@ export class CardsUnionComponent implements OnInit {
   }
 
   unionOk() {
+ 
 
     for (var f in this.student) {
       if (this.student[f] == null)

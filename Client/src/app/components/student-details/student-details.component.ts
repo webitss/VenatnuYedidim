@@ -150,9 +150,7 @@ changeMe = new EventEmitter();
       this.paramRout = params['iPersonId'];
 
       if (params['iPersonId'] != '0') {
-debugger;
         this.appProxy.post("GetStudentById", { iStudentId: this.paramRout }).then(data => {
-debugger;
           this.student = data;
           this.appProxy.post("GetAvrechIdByStudentId",{iStudentId:this.student.iPersonId}).then(data=>{
             this.student.iAvrechId=data;
@@ -160,16 +158,14 @@ debugger;
 // alert(this.student.iCauseOfDeathFather||this.student.iCauseOfDeathMother)
           if (!this.student || !this.student.iPersonId)
             this.change = true;
+            debugger;
+            SysTableService.dataTables.participationType.iSysTableId
           this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
-
+debugger;
             this.status = data.filter(x => x.iSysTableRowId == this.student.iStatusType)[0].nvValue;
-// alert(this.status)
  
           });
-                     this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => {
-
-               this.sysTableRowList = data;
-               });
+                     
           this.student['fYears'] = this.student.dtBirthdate ? this.student.dtBirthdate.getFullYear() : 0;
           // this.student['fMonthes'] = this.foreignMonthes[this.student.dtBirthdate?this.student.dtBirthdate.getMonth().toString():null];
           this.student['fMonthes'] = this.student.dtBirthdate.getMonth()+1;
@@ -232,7 +228,9 @@ debugger;
       //  alert(this.yeshivaListOfStudent.length)
       //  alert(this.yeshivaListOfStudent!=undefined)
       }
-
+      this.sysTableService.getValues(SysTableService.dataTables.deathType.iSysTableId).then(data => {
+        this.sysTableRowList = data;
+        });
     });     
       this.newYeshivaListOfStudent=new Array<Yeshiva>();
        this.yeshivaListOfStudent=new Array<Yeshiva>();
@@ -500,7 +498,7 @@ debugger;
     this.flagDelete = true;
     this.yeshivaId = yeshiva.iYeshivaId;
     this.message = 'האם אתה בטוח שברצונך למחוק את ישיבת ' + yeshiva.nvYeshivaName + ' מתלמיד זה?';
-
+this.Change();
   }
 
   //מחיקת ישיבה לתלמיד
@@ -577,6 +575,7 @@ debugger;
  
     this.selectYeshi=false;
    this.yeshivaSelected=new Yeshiva();
+   this.Change();
   }
 
 
@@ -623,11 +622,10 @@ debugger;
 
 
   saveStudent(destroy = false) {
-debugger;
     if (this.save.name != '')
       this.student.nvImgStudent = this.save.name;
 
-
+if(this.student.dtBirthdate)
       this.student.dtBirthdate=new Date(this.foreignMonthes[this.student.fMonthes-1].text+" "+this.student.fDays+" "+this.student.fYears);
 
     this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;
@@ -650,10 +648,8 @@ debugger;
       this.student.iCauseOfDeathMother=null;
     }
     if (this.paramRout != '0') {
-      debugger;
       if(this.newYeshivaListOfStudent.length>0)
       {  
-        debugger;
       this.newYeshivaListOfStudent.forEach(ny => {
         var flag=false;
         this.yeshivaListOfStudent.forEach(y => {
@@ -669,12 +665,13 @@ debugger;
         }
       });
     }
-    if(this.yeshivotId.length>0)
-    this.AddYeshiva();
+
+    // if(this.yeshivotId.length>0)
+    // this.AddYeshiva();
       this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId }).then(data => {
 
         if(data){
-     
+     alert(this.status);
         if (this.status == 'תלמיד')
         {
           this._parent.openMessagePopup("פרטי התלמיד עודכנו בהצלחה!");
@@ -684,8 +681,8 @@ debugger;
         else
           this._parent.openMessagePopup("פרטי הבוגר עודכנו בהצלחה!");
         this.change = false;
-        // if (!destroy)
-        //   this.backToGridStudent();
+        if (!destroy)
+          this.backToGridStudent();
         }
 
       }, err => {
@@ -701,14 +698,18 @@ debugger;
 
     else
     {
-      if(this.newYeshivaListOfStudent.length>0)
-
-this.AddYeshiva();
-
-this.appProxy.post("AddStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId}).then(data => {
+      debugger;
+      
+this.appProxy.post("AddStudent", { student: this.student,lstYeshivaId:this.yeshivotId, base64Image: this.save.image, iUserId: this.iUserId}).then(data => {
 
 if(data)
-        this._parent.openMessagePopup("התלמיד נוסף בהצלחה!");
+{
+          this._parent.openMessagePopup("התלמיד נוסף בהצלחה!");
+//         if(this.newYeshivaListOfStudent.length>0)
+
+// this.AddYeshiva();
+}
+
         this.change = false;
         if (!destroy)
           this.backToGridStudent();
@@ -718,28 +719,29 @@ if(data)
     }
   }
 
-AddYeshiva(){
-  debugger;
-  this.appProxy.post("AddYeshivaToStudent", {
-    iPersonId: this.paramRout, lstYeshivaId:
-      this.yeshivotId, iUserId: this.iUserId
-  }).then(data => {
-    debugger;
-    if (data)
-    {
-      return true;
-    }
-    else 
-    return false;
-  }
-    , err => this._parent.openMessagePopup("שגיאה"))
+// AddYeshiva(){
+//   debugger;
+//   this.appProxy.post("AddYeshivaToStudent", {
+//     iPersonId: this.paramRout, lstYeshivaId:
+//       this.yeshivotId, iUserId: this.iUserId
+//   }).then(data => {
+//     debugger;
+//     if (data)
+//     {
+//       return true;
+//     }
+//     else 
+//     return false;
+//   }
+//     , err => this._parent.openMessagePopup("שגיאה"))
 
-}
+// }
 
   backToGridStudent() {
     if (this.student == undefined)
       this.router.navigate(["students"]);
     else {
+      debugger;
       this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
         if (this.student.iStatusType == data.filter(d => d.nvValue == 'תלמיד')[0].iSysTableRowId)
           this.router.navigate(["students"]);
@@ -775,7 +777,7 @@ AddYeshiva(){
 
       }
     }
-
+this.Change();
   }
 
   message2;

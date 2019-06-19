@@ -55,7 +55,6 @@ export class VyTableComponent implements OnInit {
 
   public ngOnInit() {
     this.lstColumns.forEach(c => {
-      debugger;
       this.lstFilterColumns[c.name] = null
       // alert(c.name);
     })
@@ -80,12 +79,12 @@ export class VyTableComponent implements OnInit {
   // const result = words.filter(word => word.length > 6);
 
   filterChange(col) {
- debugger;
+
     this.flag=true;
     let lst = JSON.parse(JSON.stringify(this.lstDataRows));
     for (let key of Object.keys(this.lstFilterColumns)) {
       if (this.lstFilterColumns[key]) {
-        debugger;
+
        //  lst[0].nvMobile.indexOf("5")>0
         lst = lst.filter(row =>row[key]!=null&&row[key].indexOf(this.lstFilterColumns[key]) > -1);
       }
@@ -110,7 +109,7 @@ export class VyTableComponent implements OnInit {
 
   checkAllTable(colName) {
     // alert("checkAllTable")
-    debugger;
+
     if (this.lstDataRows.find(r => r[colName]) == null)
       this.lstDataRows.forEach(r => r[colName] = true);
     else if (this.lstDataRows.find(r => !r[colName]) == null)

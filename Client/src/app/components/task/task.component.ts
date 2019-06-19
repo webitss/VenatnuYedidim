@@ -86,18 +86,7 @@ debugger;
           if(data)
           {
                       this.studentsList = data; 
-// alert("studentsLength: "+this.studentsList.length)
-          }
-        })
-// if(this.task.iTaskType==73)
-// this.it=10;
-// else
-// if(this.task.iTaskType==75)
-// this.it=9;
-// this.appProxy.post('GetValues',{iSysTableId:this.it}).then(d=>{
-
-//   this.sysTable=d;
-// })
+      
 this.t=document.getElementById("t");
 if(this.t)
 {
@@ -113,20 +102,6 @@ this.task['nvName']=this.currentStu.nvFirstName+" "+this.currentStu.nvLastName;
         this.currentTask['dtDate'] = this.task.dtTaskdatetime;
         this.currentTask['dtHour'] =moment(this.task.dtTaskdatetime).format('HH:mm'); //this.hours + ':' + this.minutes;
 
-// this.taskType=this.taskTypeList.find(x=>x.iSysTableRowId==this.task.iTaskType).nvValue; 
-// if(this.taskType=="שיחה")
-// this.it=10;
-// else
-// if(this.taskType=="פגישה")
-// this.it=9;
-// this.appProxy.post('GetValues',{iSysTableId:this.it}).then(d=>{
-
-//   this.sysTable=d;
-//   alert(this.sysTable.length);
-//   alert("jg")
-// })
-// alert(this.sysTable.length);
-// this.InitConversationType();
 debugger;
       if (this.router.url == "/avrechim/avrech/" + this.personId + "/avrech-diary")//אברכים->יומן
     this.taskStu=true;
@@ -188,7 +163,8 @@ debugger;
       });
       
               
-  
+    }
+  })
 
   }
   // selectStudent(event: any) {

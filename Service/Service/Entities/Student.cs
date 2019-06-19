@@ -231,7 +231,7 @@ namespace Service.Entities
             }
         }
 
-        public static bool AddStudent(Student student, string base64Image, int iUserId)
+        public static bool AddStudent(Student student,int[] lstYeshivaId, string base64Image, int iUserId)
         {
             try
 			{
@@ -248,6 +248,8 @@ namespace Service.Entities
                 parameters2.Add(new SqlParameter("iStudentId", id));
                 parameters2.Add(new SqlParameter("iUserId", iUserId));
                 SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_INS", parameters2);
+                if (lstYeshivaId.Length > 0)
+                    Yeshivot.AddYeshivaToStudent(id, lstYeshivaId, iUserId);
                 return true;
 
             }
@@ -278,7 +280,7 @@ namespace Service.Entities
 
         
 
-        public static bool UpdateStudent(Student student, string base64Image, int iUserId)
+        public static bool UpdateStudent(Student student, int[] lstYeshivaId, string base64Image, int iUserId)
         {
             try
             {
@@ -300,6 +302,8 @@ namespace Service.Entities
                 parameters.Remove(parameters.Find(x => x.ParameterName == "iAvrechId"));
                 SqlDataAccess.ExecuteDatasetSP("TStudent_UPD", parameters);
                 SqlDataAccess.ExecuteDatasetSP("TAvrechStudent_INS_UPD", parameters2);
+                if (lstYeshivaId !=null)
+                    Yeshivot.AddYeshivaToStudent(student.iPersonId, lstYeshivaId, iUserId);
                 return true;
             }
             catch (Exception ex)
@@ -331,7 +335,9 @@ namespace Service.Entities
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
+
                 parameters.Add(new SqlParameter("iStudent2", iStudent2));
+                parameters.RemoveAt(5);
                 SqlDataAccess.ExecuteDatasetSP("TStudentUnionCards_UPD", parameters);
                 return true;
             }

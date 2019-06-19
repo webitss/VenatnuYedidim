@@ -18,7 +18,7 @@
 </div>
 
 <div class="main-table">
-    <app-vy-table #students [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="editAndDeleteStudent($event)"></app-vy-table>
+    <app-vy-table #students [lstColumns]="lstColumns"  [lstDataRows]="studentList" (clickCell)="editAndDeleteStudent($event)"></app-vy-table>
 </div>
 
 <div *ngIf="flag==true">

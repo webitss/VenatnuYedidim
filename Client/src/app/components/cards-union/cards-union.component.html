@@ -3,22 +3,29 @@
  <div  class="content-modal">
    <div class="close" (click)="close()">x</div>
   <span class="caption-cardsUnion">איחוד כרטיסים</span>
-
-  <div class="form-group">
+<div class="selects col-4 ">
+  <div class="row-sm-6 row">
+        <div class="form-group col-sm-6">
 
   <select class="form-control" (change)="student1Change($event)">
     <option>בחר תלמיד</option>
-      <option *ngFor="let student of studentList" value="{{student.iPersonId}}">{{student.iPersonId}}  {{student.nvFirstName}}  {{student.nvLastName}}</option>
+      <option *ngFor="let student of studentList" value="{{student.iPersonId}}">{{student.iPersonId}} -  {{student.nvFirstName}}  {{student.nvLastName}}</option>
     </select>
 
   </div>
-  <div class="form-group">
+  <div class="form-group col-sm-6">
     <select class="form-control" (change)="student2Change($event)">
     <option>בחר תלמיד</option>
-        <option *ngFor="let student of studentList" value="{{student.iPersonId}}">{{student.iPersonId}}  {{student.nvFirstName}}  {{student.nvLastName}}</option>
+        <option *ngFor="let student of studentList" value="{{student.iPersonId}}">{{student.iPersonId}} -  {{student.nvFirstName}}  {{student.nvLastName}}</option>
       </select>
-      </div>
-      <div *ngIf="sameNameStudents==false"><span class="msg">יש לבחור שני תלמידים שונים לאיחוד</span></div>
+</div>
+  </div>
+  <!-- <div class="col-sm-3"></div> -->
+
+      <div class="row-sm-6" *ngIf="sameNameStudents==false"><span class="msg">יש לבחור שני תלמידים שונים לאיחוד</span></div>
+
+</div>
+
   <button class="btn-pink1" (click)="students=true">הצג</button>
 
   <form *ngIf="student1&&student2&&students&&sameNameStudents" class="students" #form1>
