@@ -6,3 +6,9 @@
 .main-table{
     visibility: hidden;
 }
+.msg{
+    color: rgb(207, 37, 94);
+}
+.btn-save{
+    cursor: pointer;
+}

@@ -148,7 +148,6 @@ changeMe = new EventEmitter();
     this.route.parent.params.subscribe(params => {
 
       this.paramRout = params['iPersonId'];
-
       if (params['iPersonId'] != '0') {
         this.appProxy.post("GetStudentById", { iStudentId: this.paramRout }).then(data => {
           this.student = data;
@@ -158,14 +157,14 @@ changeMe = new EventEmitter();
 // alert(this.student.iCauseOfDeathFather||this.student.iCauseOfDeathMother)
           if (!this.student || !this.student.iPersonId)
             this.change = true;
-            debugger;
+   debugger;
             SysTableService.dataTables.participationType.iSysTableId
           this.sysTableService.getValues(SysTableService.dataTables.participationType.iSysTableId).then(data => {
-debugger;
+
             this.status = data.filter(x => x.iSysTableRowId == this.student.iStatusType)[0].nvValue;
  
           });
-                     
+             debugger;        
           this.student['fYears'] = this.student.dtBirthdate ? this.student.dtBirthdate.getFullYear() : 0;
           // this.student['fMonthes'] = this.foreignMonthes[this.student.dtBirthdate?this.student.dtBirthdate.getMonth().toString():null];
           this.student['fMonthes'] = this.student.dtBirthdate.getMonth()+1;
@@ -218,13 +217,16 @@ debugger;
       }
       else {
         this.student = new Student();
+      
+        this.student.dtBirthdate=null;
+
         this.student.iPersonId = 0;
         this.student.iStatusType = 159;
 
         this.student.iStudentId = 0;
         this.student.bDeathFather = false;
         this.student.bDeathMother = false;
-        this.change = true;
+        // this.change = true;
       //  alert(this.yeshivaListOfStudent.length)
       //  alert(this.yeshivaListOfStudent!=undefined)
       }
@@ -336,8 +338,12 @@ debugger;
   shift(newStatus) {
     this.appProxy.post("UpdateStatusStudent", { iPersonId: this.student.iPersonId, iStatusType: newStatus }).then(
       data => {
-        this._parent.openMessagePopup("השמירה בוצעה בהצלחה");
+        this._parent.openMessagePopup("ההעברה בוצעה בהצלחה");
         this.student.iStatusType = newStatus;
+        if(newStatus==160)
+        this.router.navigate(['/graduates']);
+        else
+        this.router.navigate(['/students']);
       }
     );
 
@@ -396,6 +402,7 @@ while(year!=0)
 return yearString;
   }
   Change(){
+    debugger;
     this.change=true;
     this._sharedService.emitChange();
    }
@@ -622,6 +629,7 @@ debugger;
 
 
   saveStudent(destroy = false) {
+    debugger;
     if (this.save.name != '')
       this.student.nvImgStudent = this.save.name;
 
@@ -668,10 +676,9 @@ if(this.student.dtBirthdate)
 
     // if(this.yeshivotId.length>0)
     // this.AddYeshiva();
-      this.appProxy.post("UpdateStudent", { student: this.student, base64Image: this.save.image, iUserId: this.iUserId }).then(data => {
+      this.appProxy.post("UpdateStudent", { student: this.student,lstYeshivaId:this.yeshivotId, base64Image: this.save.image, iUserId: this.iUserId }).then(data => {
 
         if(data){
-     alert(this.status);
         if (this.status == 'תלמיד')
         {
           this._parent.openMessagePopup("פרטי התלמיד עודכנו בהצלחה!");
@@ -799,18 +806,22 @@ this.Change();
 
   }
   keyPress(event: any) {
+    debugger;
     const pattern = /[0-9]/;
     let inputChar = String.fromCharCode(event.charCode);
     if (!(event.keyCode != 8 && !pattern.test(inputChar))) {
       event.preventDefault();
     }
+    this.Change();
   }
   onKeyPress(event: any) {
+    debugger;
     const pattern = /[0-9]/;
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
       event.preventDefault();
     }
+    this.Change();
   }
 
 changes(){

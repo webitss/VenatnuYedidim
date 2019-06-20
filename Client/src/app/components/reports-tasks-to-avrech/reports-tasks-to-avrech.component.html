@@ -3,9 +3,9 @@
   <div class="col-sm-4"></div>
   <div class="col-sm-4">
       <div class="form-group row">
-          <label for="yeshivaName" class="col-6 labels">בחר אברך :</label>
+          <label for="yeshivaName" class="col-6 lbl">בחר אברך :</label>
           <div class="col-6">
-            <select class="form-control" id="avrechId" name="avrechName" (change)="selectAv($event)">
+            <select #avrech class="form-control" id="avrechId" name="avrechName" (change)="selectAv($event); exist=true">
               <option disabled> בחר אברך </option>
               <option *ngFor="let av of avrechList">{{av.nvFirstName}} {{av.nvLastName}}</option>
           </select>
@@ -13,9 +13,9 @@
           
         </div> 
         <div class="form-group row-sm-3 row">
-        <label for="dateAdd" class="col-6 labels" > מתאריך :</label>
+        <label for="dateAdd" class="col-6 lbl" > מתאריך :</label>
         <div class="col-6">
-        <input class="form-control" id="dtFrom" name="dtFrom" [(ngModel)]="fromDate" ngui-datetime-picker date-only="true"
+        <input class="form-control" id="dtFrom" name="dtFrom" [(ngModel)]="fromDate" ngui-datetime-picker date-only="true" (focus)="exist=true"
         [ngModelOptions]="{standalone: true}"
           style='width: 160px'>
         </div>
@@ -26,20 +26,22 @@
         
         </div>
         <div class="form-group row-sm-3 row">
-        <label for="dateAdd" class="col-6 labels"> עד תאריך :</label>
+        <label for="dateAdd" class="col-6 lbl"> עד תאריך :</label>
         <div class="col-6">
         <input class="form-control" id="dtTo" name="dtTo" [(ngModel)]="toDate" ngui-datetime-picker date-only="true"
-        (change)="change=true" [ngModelOptions]="{standalone: true}"
+        (change)="change=true" (focus)="exist=true" [ngModelOptions]="{standalone: true}"
           style='width: 160px'>
         </div>
         
         </div>
         
   </div>
-  <div class="col-sm-4"></div>
+  <div class="col-sm-3"></div>
   <button class="btn-circle btn-save" (click)="produceReport()">הפק דו"ח</button>
-  <div class="main-table hidden">
+  <div class="row-sm-12" *ngIf="!exist"><span class="msg">לא נמצאו משימות ל{{avrech.value}} בין התאריכים: {{fromDate}}    -    {{toDate}}</span></div>
+
+  <div class="main-table">
       <app-vy-table #tasks [lstColumns]="lstColumns" (clickCell)="click($event)" ></app-vy-table>
-    </div>
+  </div>
   
 </div>

@@ -7,6 +7,7 @@ import { GlobalService } from '../../services/global.service';
 import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { NgForm } from '../../../../node_modules/@angular/forms';
 import { AppComponent } from '../app/app.component';
+import { ParentChildService } from '../../services/parent-child.service';
 
 @Component({
   selector: 'app-avrech-details',
@@ -23,7 +24,7 @@ export class AvrechDetailsComponent implements OnInit {
   isDetails: boolean;
   change: boolean;
   @ViewChild(NgForm) form;
-  constructor(private activatedRoute: ActivatedRoute, private appProxy: AppProxy, private globalService: GlobalService, private router: Router, private _parent: AppComponent) { }
+  constructor(private activatedRoute: ActivatedRoute,private _sharedService: ParentChildService, private appProxy: AppProxy, private globalService: GlobalService, private router: Router, private _parent: AppComponent) { }
 
   ngOnInit() {
     this.activatedRoute.parent.params.subscribe(params => {
@@ -51,7 +52,11 @@ export class AvrechDetailsComponent implements OnInit {
       }
     });
   }
-
+  Change(){
+    debugger;
+    this.change=true;
+    this._sharedService.emitChange();
+   }
 
   save() {
     this.appProxy.post("UpdateAvrech", { avrech: this.avrech, iUserId: this.globalService.getUser()['iUserId'] }).then(res=>
@@ -63,7 +68,16 @@ export class AvrechDetailsComponent implements OnInit {
   }
  
   ngOnDestroy() {
-   
+    if (this.change) {
+      let v = confirm("האם ברצונך לשמור?");
+      if (v)
+      {
+        debugger;
+        this.save();
+  
+
+      }
+    }
 
   }
 }

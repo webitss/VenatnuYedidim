@@ -14,7 +14,7 @@
     </nav>
 
     <div class="btn-area">
-      <button class="btn-circle btn-save " [class.disabled]="!isDisabled()" (click)="saveUser()" [disabled]="!isDisabled()">שמור </button>
+      <button class="btn-circle btn-save "  [disabled]="!f" [ngClass]="{'disabled': !f }" (click)="saveUser()">שמור </button>
       <button class="btn-circle btn-close" routerLink="/users">סגור </button>
     </div>
   </div>

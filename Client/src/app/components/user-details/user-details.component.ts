@@ -7,6 +7,7 @@ import { SysTableService } from '../../services/sys-table.service';
 import { GlobalService } from '../../services/global.service';
 import { NgForm } from '@angular/forms';
 import { AppComponent } from '../app/app.component';
+import { ParentChildService } from '../../services/parent-child.service';
 
 @Component({
   selector: 'app-user-details',
@@ -15,7 +16,7 @@ import { AppComponent } from '../app/app.component';
 })
 export class UserDetailsComponent implements OnInit {
 
-  constructor(private appProxy: AppProxy, private globalService: GlobalService, private router: Router, private route: ActivatedRoute
+  constructor(private appProxy: AppProxy, private globalService: GlobalService, private router: Router, private route: ActivatedRoute,private _sharedService: ParentChildService
     , private sysTableService: SysTableService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
 
   ngOnInit() {
@@ -39,7 +40,8 @@ export class UserDetailsComponent implements OnInit {
     });
     if (this.globalService.getUser().iPermissionId == 5)
       this.isManeger = true;
-    else this.isManeger = false;
+    else 
+      this.isManeger = false;
   }
   @Input()
   @Output()
@@ -48,6 +50,7 @@ export class UserDetailsComponent implements OnInit {
   @Input()
   @Output()
   public person: Person;
+  change: boolean=false;
 
   @Output()
   isManeger: boolean = false;
@@ -59,9 +62,15 @@ export class UserDetailsComponent implements OnInit {
   @ViewChild(NgForm) form;
 
   public lst: Array<any>;
-
+  Change(){
+    debugger;
+    this.change=true;
+    this._sharedService.emitChange();
+   }
   saveUser() {
+    debugger;
     this.appProxy.post("SetUser", { user: this.user, iUserId: this.globalService.getUser().iPersonId }).then(data => {
+      debugger;
       if (data == true) {
         this._parent.openMessagePopup("השמירה התבצעה בהצלחה!");
         this.router.navigate(['users']);

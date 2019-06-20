@@ -90,9 +90,8 @@ namespace Service.Entities
             {
                 List<SqlParameter> parameters = ObjectGenerator<User>.GetSqlParametersFromObject(user);
                 parameters.Add(new SqlParameter("iUserId", iUserId));
-                
 
-                int id=int.Parse(SqlDataAccess.ExecuteDatasetSP("TUser_INS/UPD", parameters).Tables[0].Rows[0].ItemArray[0].ToString());
+                int id = int.Parse(SqlDataAccess.ExecuteDatasetSP("TUser_INS/UPD", parameters).Tables[0].Rows[0].ItemArray[0].ToString());
 
                 if (user.iPermissionId == 6)
                 {

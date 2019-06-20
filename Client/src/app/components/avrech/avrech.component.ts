@@ -7,6 +7,7 @@ import { VyTableComponent } from '../../templates/vy-table/vy-table.component';
 import { Avrech } from '../../classes/avrech';
 import { NgForm } from '@angular/forms';
 import { GlobalService } from '../../services/global.service';
+import { ParentChildService } from '../../services/parent-child.service';
 
 
 @Component({
@@ -18,10 +19,12 @@ export class AvrechComponent implements OnInit {
 
   public currentComponent: any;
 
+  f:boolean=false;
 
 
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private appProxy: AppProxy,private globalService:GlobalService) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,    private _sharedService:ParentChildService,
+    private appProxy: AppProxy,private globalService:GlobalService) {
   }
   @ViewChild(NgForm) form;
 
@@ -29,6 +32,11 @@ export class AvrechComponent implements OnInit {
   id: number;
   avrech: Avrech;
   ngOnInit() {
+    this._sharedService.changeEmitted$.subscribe(
+      text => {
+        debugger;
+          this.f=true;
+      });
     debugger;
     this.id = this.activatedRoute.snapshot.params["iPersonId"];
 

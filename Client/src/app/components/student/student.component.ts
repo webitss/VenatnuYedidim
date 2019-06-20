@@ -23,6 +23,7 @@ export class StudentComponent implements OnInit, OnDestroy {
   public currentComponent: any;
   student: Student;
   id: number;
+  name:string;
 f:boolean=false;
   disabled:boolean=false;
   htm:any;
@@ -38,6 +39,7 @@ f:boolean=false;
 
     this._sharedService.changeEmitted$.subscribe(
       text => {
+    
           this.f=true;
       });
 
@@ -55,6 +57,7 @@ f:boolean=false;
 
         this.appProxy.post("GetStudentById", { iStudentId: this.id }).then(data => {
           this.student = data;
+          this.name=this.student.nvFirstName+' '+this.student.nvLastName;
           // this.globalService.avrech=this.avrech;
 // alert(this.globalService.getAvrech().iPersonId);
 
@@ -67,6 +70,8 @@ f:boolean=false;
         //   this.globalService.avrech=data;
         // })
       }
+      else
+      this.name="תלמיד חדש";
     });
 
 
@@ -84,6 +89,7 @@ f:boolean=false;
   onRouterOutletActivate(event) {
 
     this.currentComponent = event;
+
   }
 
   isDisabled(): boolean {

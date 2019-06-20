@@ -7,11 +7,14 @@
     <option [ngValue]="undefined" disabled >בחר</option>
   <option *ngFor="let m of monthesRegular">{{m}}</option>
 </select>
+
 </div>
 <div class="col-sm-3"></div>
 <button class="btn-circle btn-save" (click)="produceReport()">הפק דו"ח</button>
+<div class="row-sm-12" *ngIf="!exist"><span class="msg">לא נמצאו תלמידים בחודש {{month.value}}</span></div>
+
 <div class="main-table hidden">
-    <app-vy-table #students [lstColumns]="lstColumns" [lstDataRows]="studentList" (clickCell)="click($event)" ></app-vy-table>
+    <app-vy-table #students [lstColumns]="lstColumns" [lstDataRows]="studentList" ></app-vy-table>
   </div>
 
 </div>

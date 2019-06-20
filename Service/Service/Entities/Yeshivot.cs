@@ -145,13 +145,13 @@ namespace Service.Entities
 				parameters.Add(new SqlParameter("iPersonId", iPersonId));
 				parameters.Add(new SqlParameter("iYeshivaId", id));
 				parameters.Add(new SqlParameter("iUserId", iUserId));
-                    SqlDataAccess.ExecuteDatasetSP("TYeshivotOfStudent_INS", parameters);
+                    SqlDataAccess.ExecuteDatasetSP("TYeshivotOfStudent_INS/UPD", parameters);
                 }
 				return true;
 			}
 			catch (Exception ex)
 			{
-				Log.LogError("AddYeshivaToStudent / TYeshivotOfStudent_INS", "ex" + ex);
+				Log.LogError("AddYeshivaToStudent / TYeshivotOfStudent_INS/UPD", "ex" + ex);
 				return false;
 			}
 		}

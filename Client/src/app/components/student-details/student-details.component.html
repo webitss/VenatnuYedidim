@@ -9,7 +9,7 @@
         </div> -->
     
         <div class="imageStudent" [class.no]="(!student || !student.nvImgStudent) && save.image==''">
-            <div class="image" (change)="Change()">
+            <div class="image">
                 <img *ngIf="student && student.nvImgStudent && save.image==''" [src]="baseFileUrl + student.nvImgStudent">
                 <img *ngIf="save.image" [src]="save.image">
             </div>
@@ -31,7 +31,7 @@
                         <div class="form-group col-sm-3">
                             <label for="lastName">שם משפחה : *</label>
                             <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="student.nvLastName" required #lastName="ngModel"
-                                (keypress)="keyPress($event)" (change)="Change()">
+                                (keypress)="keyPress($event)" (input)="Change()">
                             <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
                                 <div *ngIf="(lastName.errors.required)" class="text-danger text-right">
                                     <strong>! </strong>שדה נדרש</div>
@@ -40,7 +40,7 @@
                         <div class="form-group col-sm-3">
                             <label for="lastName">שם פרטי : *</label>
                             <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="student.nvFirstName" required #firstName="ngModel"
-                                (keypress)="keyPress($event)" (change)="Change()">
+                                (keypress)="keyPress($event)" (input)="Change()">
                             <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
                                 <div *ngIf="(firstName.errors.required)" class="text-danger text-right">
                                     <strong>! </strong>שדה נדרש</div>
@@ -49,9 +49,9 @@
     
                         <div class="form-group col-sm-3">
                             <label for="identity">תעודת זהות :</label>
-                            <input type="text" class="form-control" id="identity" name="identity" [(ngModel)]="student.nvIdentityCard" (change)="Change()"
+                            <input type="text" class="form-control" id="identity" name="identity" [(ngModel)]="student.nvIdentityCard"
                                 [ngModelOptions]="{standalone: true}" minlength="9" maxlength="9" pattern="^[0-9]*$" #identity="ngModel"
-                                (keypress)="onKeyPress($event)">
+                                (keypress)="onKeyPress($event)" (input)="Change()">
                             <div *ngIf="identity.invalid && (identity.dirty || identity.touched)" class="text-danger">
                                 <div *ngIf="(identity.errors.minlength || identity.errors.maxlength)">
                                     <p>תעודת זהות חייבת להכיל 9 ספרות </p>
@@ -66,9 +66,9 @@
     
                         <div class="form-group col-sm-3">
                             <label for="phone"> טלפון :</label>
-                            <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="student.nvPhone" (change)="Change()" [ngModelOptions]="{standalone: true}"
+                            <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="student.nvPhone" [ngModelOptions]="{standalone: true}"
                                 minlength="9" maxlength="10" pattern="^\(?([0-9]{2})\)?[0-9]??[-. ]?([0-9]{3})[-. ]?([0-9]{4})$"
-                                #phone="ngModel" (keypress)="onKeyPress($event)">
+                                #phone="ngModel" (keypress)="onKeyPress($event)" (input)="Change()">
                             <div *ngIf="phone.invalid && (phone.dirty || phone.touched)">
                                 <div *ngIf="phone.errors && (phone.errors.pattern)">
                                     <p class="text-danger">מספר טלפון אינו תקין </p>
@@ -78,8 +78,8 @@
     
                         <div class="form-group col-sm-3">
                             <label for="mobile"> נייד :</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile" [(ngModel)]="student.nvMobile" (change)="Change()" [ngModelOptions]="{standalone: true}"
-                                pattern="^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$" #mobile="ngModel" (keypress)="onKeyPress($event)">
+                            <input type="text" class="form-control" id="mobile" name="mobile" [(ngModel)]="student.nvMobile" [ngModelOptions]="{standalone: true}"
+                                pattern="^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$" #mobile="ngModel" (keypress)="onKeyPress($event)" (input)="Change()">
                             <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
                                 <div *ngIf="mobile.errors && (mobile.errors.pattern)">
                                     <p class="text-danger">מספר נייד אינו תקין </p>
@@ -90,7 +90,7 @@
                         <div class="form-group col-sm-3">
                             <label for="email"> מייל :</label>
                             <input type="email" class="form-control" id="email" name="email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-                                [(ngModel)]="student.nvEmail" (change)="Change()" [ngModelOptions]="{standalone: true}">
+                                [(ngModel)]="student.nvEmail" (input)="Change()" [ngModelOptions]="{standalone: true}">
                             <div *ngIf="email.errors && email.errors.pattern">
                                 מייל לא תקין
                             </div>
@@ -98,23 +98,23 @@
                         </div>
     
                         <div class="form-group col-sm-3">
-                            <ng-select [items]="days" placeholder="תאריך לידה עברי" id="nvBornDateDay" name="nvBornDateDay" (change)="Change()" [(ngModel)]="bornDateHebrewStudent.Day" (change)="gregorianDate()"
+                            <ng-select [items]="days" placeholder="תאריך לידה עברי" id="nvBornDateDay" name="nvBornDateDay"  [(ngModel)]="bornDateHebrewStudent.Day" (change)="gregorianDate();Change()"
                                 [ngModelOptions]="{standalone: true}">
                             </ng-select>
                         </div>
     
                         <div class="form-group  col-sm-3" id="m">
-                            <ng-select *ngIf="flagMonth" [items]="monthesMeuberet" placeholder="חודש" (change)="Change()" id="nvBornDateMonthHebreo" name="nvBornDateMonthHebreo" (change)="gregorianDate()"
+                            <ng-select *ngIf="flagMonth" [items]="monthesMeuberet" placeholder="חודש"  id="nvBornDateMonthHebreo" name="nvBornDateMonthHebreo" (change)="gregorianDate();Change()"
                                 [(ngModel)]="bornDateHebrewStudent.Month">
                             </ng-select>
-                            <ng-select *ngIf="!flagMonth" [items]="monthesRegular" placeholder="חודש" (change)="Change()" id="nvBornDateMonthHebreo" name="nvBornDateMonthHebreo" (change)="gregorianDate()"
+                            <ng-select *ngIf="!flagMonth" [items]="monthesRegular" placeholder="חודש"  id="nvBornDateMonthHebreo" name="nvBornDateMonthHebreo" (change)="gregorianDate();Change()"
                             [(ngModel)]="bornDateHebrewStudent.Month">
                         </ng-select>
     
                         </div>
     
                         <div class="form-group  col-sm-3">
-                            <ng-select [items]="hebrewYearsList" placeholder="שנה" id="nvBornDateYear" name="nvBornDateYear" (change)="Change()" (change)="gregorianDate()" [(ngModel)]="bornDateHebrewStudent.Year"
+                            <ng-select [items]="hebrewYearsList" placeholder="שנה" id="nvBornDateYear" name="nvBornDateYear"  (change)="gregorianDate();Change()" [(ngModel)]="bornDateHebrewStudent.Year"
                                 [ngModelOptions]="{standalone: true}">
                             </ng-select>
                         </div>
@@ -131,21 +131,21 @@
                 </div> -->
     
                     <div class="form-group  col-sm-3">
-                        <ng-select [items]="foreignDays" placeholder="תאריך לידה לועזי" id="nvBornDateDay" name="nvBornDateDay" (change)="Change();dateDay()" (change)="hebrewDate()"
+                        <ng-select [items]="foreignDays" placeholder="תאריך לידה לועזי" id="nvBornDateDay" name="nvBornDateDay" (change)="hebrewDate();dateDay();Change()"
                             [(ngModel)]="student.fDays" [ngModelOptions]="{standalone: true}">
                         </ng-select>
                     </div>
                     <div class="form-group  col-sm-3">
     
     
-                        <ng-select [items]="foreignMonthes" placeholder="חודש" (change)="Change();dateDay()" id="nvBornDateMonth" name="nvBornDateMonth" (change)="hebrewDate()"
+                        <ng-select [items]="foreignMonthes" placeholder="חודש" id="nvBornDateMonth" name="nvBornDateMonth" (change)="hebrewDate();dateDay();Change()"
                             bindValue='id' bindLabel="text" [(ngModel)]="student.fMonthes">
                         </ng-select>
     
                     </div>
     
                     <div class="form-group  col-sm-3">
-                        <ng-select [items]="foreignYearsList" placeholder="שנה" id="nvBornDateYear" name="nvBornDateYear" (change)="Change();dateDay()" (change)="hebrewDate()"
+                        <ng-select [items]="foreignYearsList" placeholder="שנה" id="nvBornDateYear" name="nvBornDateYear" (change)="hebrewDate();dateDay();Change()"
                             [(ngModel)]="student.fYears" [ngModelOptions]="{standalone: true}">
                         </ng-select>
                     </div>
@@ -159,14 +159,14 @@
                     </div>
                     <div class="form-group  col-sm-3">
                         <label for="street"> כתובת :</label>
-                        <input type="text" class="form-control" id="street" name="street" (change)="Change()" [(ngModel)]="student.nvAddress"
+                        <input type="text" class="form-control" id="street" name="street" (input)="Change()" [(ngModel)]="student.nvAddress"
                             [ngModelOptions]="{standalone: true}">
                     </div>
     
     
                     <div class="form-group  col-sm-3">
                         <label for="city"> עיר :</label>
-                        <input type="text" class="form-control" id="city" name="city" (change)="Change()" [(ngModel)]="student.nvCity" [ngModelOptions]="{standalone: true}">
+                        <input type="text" class="form-control" id="city" name="city" (input)="Change()" [(ngModel)]="student.nvCity" [ngModelOptions]="{standalone: true}">
                     </div>
                 </div>
     
@@ -190,10 +190,10 @@
                             </div>
     
                             <div class="form-group  col-sm-6">
-                            <ng-select *ngIf="flagMonth" [items]="monthesMeuberet" placeholder="חודש" (change)="Change()" id="diedDateHebrewFather" name="diedDateHebrewFather"  (change)="gregorianDate()"
+                            <ng-select *ngIf="flagMonth" [items]="monthesMeuberet" placeholder="חודש" id="diedDateHebrewFather" name="diedDateHebrewFather"  (change)="gregorianDate();Change()"
                             [(ngModel)]="diedDateHebrewFather.Month">
                         </ng-select>
-                        <ng-select *ngIf="!flagMonth" [items]="monthesRegular" placeholder="חודש" (change)="Change()" id="diedDateHebrewFather" name="diedDateHebrewFather"  (change)="gregorianDate()"
+                        <ng-select *ngIf="!flagMonth" [items]="monthesRegular" placeholder="חודש" id="diedDateHebrewFather" name="diedDateHebrewFather"  (change)="gregorianDate();Change()"
                         [(ngModel)]="diedDateHebrewFather.Month"></ng-select>
     
                             </div>
@@ -207,7 +207,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="couseOfdeadF"> נפטר מ:</label>
     
-                                <select class="form-control" id="couseOfdeadF" name="couseOfdeadF" [(ngModel)]="student.iCauseOfDeathFather">
+                                <select class="form-control" id="couseOfdeadF" name="couseOfdeadF" (change)="Change()" [(ngModel)]="student.iCauseOfDeathFather">
                                     <option *ngFor="let s of sysTableRowList" [value]="s.iSysTableRowId">
                                         {{s.nvValue}}
                                     </option>
@@ -220,7 +220,7 @@
                         <div class="form-group">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="motherDead" (change)="changeStatusParent(2)" [checked]="isCheckedMother"> יתום מאם
+                                    <input type="checkbox" name="motherDead" (click)="changeStatusParent(2)" (change)="Change()" [checked]="isCheckedMother"> יתום מאם
                                 </label>
                             </div>
                         </div>
@@ -232,10 +232,10 @@
                             </div>
     
                             <div class="form-group  col-sm-6">
-                            <ng-select *ngIf="flagMonth" [items]="monthesMeuberet" placeholder="חודש" (change)="Change()" id="diedDateHebrewMother" name="diedDateHebrewMother"  (change)="gregorianDate()"
+                            <ng-select *ngIf="flagMonth" [items]="monthesMeuberet" placeholder="חודש" id="diedDateHebrewMother" name="diedDateHebrewMother"  (change)="gregorianDate();Change()"
                             [(ngModel)]="diedDateHebrewMother.Month">
                         </ng-select>
-                        <ng-select *ngIf="!flagMonth" [items]="monthesRegular" placeholder="חודש" (change)="Change()" id="diedDateHebrewMother" name="diedDateHebrewMother"  (change)="gregorianDate()"
+                        <ng-select *ngIf="!flagMonth" [items]="monthesRegular" placeholder="חודש" id="diedDateHebrewMother" name="diedDateHebrewMother"  (change)="gregorianDate();Change()"
                         [(ngModel)]="diedDateHebrewMother.Month"></ng-select>
     
                             </div>
@@ -249,7 +249,7 @@
                             <div class="form-group col-sm-6">
                                 <label for="couseOfdeadM"> נפטרה מ:</label>
     
-                                <select class="form-control" id="couseOfdeadM" name="couseOfdeadM" [(ngModel)]="student.iCauseOfDeathMother">
+                                <select class="form-control" id="couseOfdeadM" name="couseOfdeadM" (change)="Change()" [(ngModel)]="student.iCauseOfDeathMother">
                                     <option *ngFor="let s of sysTableRowList" [value]="s.iSysTableRowId">
                                         {{s.nvValue}}
                                     </option>
@@ -315,17 +315,22 @@
         
                     </div> 
                     <div class="form-group col-sm-3">
-                        <label for="avrechId">שיוך לאברך :</label>
-                        <select class="form-control" id="avrechId" [(ngModel)]="student.iAvrechId" required #type="ngModel" (change)="Change()">
+                        <label for="avrechId">שיוך לאברך : *</label>
+                        <select class="form-control" id="avrechId" name="avrechId" [(ngModel)]="student.iAvrechId"  required #avrechId="ngModel" #type="ngModel" (change)="Change()">
                             <option disabled> בחר אברך </option>
                             <option *ngFor="let av of avrechList" [value]="av.iPersonId">{{av.nvFirstName}} {{av.nvLastName}}</option>
                         </select>
+                        <div *ngIf="avrechId.invalid && (avrechId.dirty || avrechId.touched)">
+                            <div *ngIf="(avrechId.errors.required)" class="text-danger text-right">
+                                <strong>! </strong>שדה נדרש
+                            </div>
+                        </div>
                     </div>
     
     
                     <div class="col-sm-12">
                         <label for='comment'>הערות</label>
-                        <textarea name='comment' class="form-control" id="comment" name="comment" [(ngModel)]="student.nvComment" [ngModelOptions]="{standalone: true}"></textarea>
+                        <textarea name='comment' class="form-control" id="comment" name="comment" (input)="Change()" [(ngModel)]="student.nvComment" [ngModelOptions]="{standalone: true}"></textarea>
                     </div>
     
                 </div>

@@ -15,6 +15,7 @@ import { GlobalService } from '../../services/global.service';
   styleUrls: ['./reports-tasks-to-avrech.component.css']
 })
 export class ReportsTasksToAvrechComponent implements OnInit {
+  exist: boolean=true;
 
   constructor(private appProxy: AppProxy,private sysTableService:SysTableService,private globalService: GlobalService) { }
 
@@ -36,17 +37,16 @@ export class ReportsTasksToAvrechComponent implements OnInit {
   iUserId:number;
   tasksToExcel=[];
   flag=0;
-  public iReportId: number;
   // public iAvrechId:number;
 
 
   ngOnInit() {
+    debugger;
     this.iUserId = this.globalService.getUser().iPermissionId == SysTableService.permissionType.Management ? 0 : this.globalService.getUser().iPersonId;
 
     this.appProxy.post("GetAllAvrechim",{iPersonId:this.iUserId}).then(data => { 
       this.avrechList = data; 
     })
-    this.iReportId = this.reports[0].id;
     // this.iAvrechId=this.avrechList[0].iPersonId;
     
   }
@@ -101,9 +101,11 @@ this.appProxy.post("GetActionsByPersonIdBetweenDates", { iPersonId: this.AvrechS
 
     this.tasksToExcel.push(this.currentAction);
     this.currentAction=new Action();
-    });        
+    }); 
+    if(this.tasksToExcel.length>0)       
     this.downloadExcel(this.tasksToExcel);
-
+    else
+    this.exist=false;
     }); 
 
     

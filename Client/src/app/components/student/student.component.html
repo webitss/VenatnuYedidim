@@ -1,5 +1,6 @@
-<div class="name-area" *ngIf="status=='תלמיד'"> תלמידים | {{student.nvFirstName+" "+student.nvLastName}} </div>
-<div class="name-area" *ngIf="status=='בוגר'"> בוגרים | {{student.nvFirstName+" "+student.nvLastName}} </div>
+<div class="name-area" *ngIf="status=='תלמיד'"> תלמידים | {{name}} </div>
+<div class="name-area" *ngIf="status=='בוגר'"> בוגרים | {{name}} </div>
+<div class="name-area" *ngIf="status==null"> תלמידים | {{name}} </div>
 <div class="content-area">
   <div class="header row">
     <nav class="navbar navbar-expand-sm nav header-navbar">

@@ -18,6 +18,7 @@ export class GraduatesComponent implements OnInit {
   constructor(public globalService:GlobalService, private appProxy: AppProxy, private router: Router, private route: ActivatedRoute,@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) { }
   param: any;
   id: number;
+  currentYeshivaOfStudent: Map<number, string>;
   studentList: Student[];
   private iPersonId:number;
   @ViewChild('graduates') graduates: any;
@@ -34,11 +35,17 @@ export class GraduatesComponent implements OnInit {
     this.appProxy.post('GetGraduatesList', { iUserId: this.id }).then(data => {
       debugger;
       this.studentList = data;
-
+      this.appProxy.get("GetCurrentYeshivaOfStudent").then(data => {
+        this.currentYeshivaOfStudent = data;
       this.studentList.forEach(
         st => {
           st['edit'] = '<div class="edit"></div>';
+          if(this.currentYeshivaOfStudent[st.iPersonId])
+            {
+              st['nvYeshivaName'] = this.currentYeshivaOfStudent[st.iPersonId];
+            }
         })
+      });
     }, err => { this._parent.openMessagePopup("שגיאה בשליפת הנתונים!"); });
 
 

@@ -12,9 +12,11 @@ export class ParentChildService {
        // Observable string sources
        private emitChangeSource = new Subject<any>();
        // Observable string streams
+      
        changeEmitted$ = this.emitChangeSource.asObservable();
        // Service message commands
        emitChange() {
+         debugger;
            this.emitChangeSource.next();
        }
 }

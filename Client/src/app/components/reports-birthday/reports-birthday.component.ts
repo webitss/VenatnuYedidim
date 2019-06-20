@@ -15,6 +15,7 @@ import { callbackify } from 'util';
   styleUrls: ['./reports-birthday.component.css']
 })
 export class ReportsBirthdayComponent implements OnInit {
+  exist: boolean=true;;
 
   constructor(private appProxy: AppProxy, private router: Router, private globalService: GlobalService, @Inject(forwardRef(() => AppComponent)) private _parent: AppComponent) { }
   public lstColumns: Array<VyTableColumn> = new Array<VyTableColumn>();
@@ -52,6 +53,7 @@ studentList:Student[];
   }
   choose(m){
     this.month=m.value;
+    this.exist=true;
   }
   getStudents(){
     
@@ -63,6 +65,10 @@ this.appProxy.post("GetStudentsByMonth",{month:this.month}).then(data=>{
   if(data)
   {
     this.studentList=data;
+    if(this.studentList.length>0)
+    {
+
+    
       this.appProxy.get("GetStudentsAssociatedToAvrechimNames").then(data => {
         debugger;
         this.studentsAssociatedToAvrech = data;
@@ -105,7 +111,9 @@ this.studentsToExcel.push(student);
         });
       });
      });
-    
+  }
+  else
+  this.exist=false;
   }    
   
 

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { AppProxy } from '../../services/app.proxy';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../classes/user';
+import { ParentChildService } from '../../services/parent-child.service';
 
 @Component({
   selector: 'app-user',
@@ -14,10 +15,16 @@ export class UserComponent implements OnInit {
   @Output()
   public user: User;
   public title: string;
+  f:boolean=false;
 
-  constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute) { }
+  constructor(private appProxy: AppProxy, private router: Router, private route: ActivatedRoute,private _sharedService:ParentChildService) { }
 
   ngOnInit() {
+    this._sharedService.changeEmitted$.subscribe(
+      text => {
+        debugger;
+          this.f=true;
+      });
     this.route.params.subscribe(params => {
       if (params['iPersonId'] != '0') {
         this.appProxy.post("GetUser", { iPersonId: params['iPersonId'] })

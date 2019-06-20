@@ -1,6 +1,6 @@
 
-.labels{
-    padding-top: 0.5%;
+.lbl{
+    padding-top: 1.5%;
     padding-right: 8%;
 }
 .main-table{
@@ -10,3 +10,6 @@
     cursor: pointer;
 }
 
+.msg{
+    color: rgb(207, 37, 94);
+}
