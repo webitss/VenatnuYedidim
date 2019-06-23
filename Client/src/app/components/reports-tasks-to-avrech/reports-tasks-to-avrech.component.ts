@@ -8,6 +8,7 @@ import { VyTableColumn } from '../../templates/vy-table/vy-table.classes';
 import { AppProxy } from '../../services/app.proxy';
 import { SysTableService } from '../../services/sys-table.service';
 import { GlobalService } from '../../services/global.service';
+import { NguiDatetime } from '@ngui/datetime-picker';
 
 @Component({
   selector: 'app-reports-tasks-to-avrech',
@@ -51,7 +52,7 @@ export class ReportsTasksToAvrechComponent implements OnInit {
     
   }
 
-
+  
   public lstColumns = [    
     new VyTableColumn('תאריך','nvDate'),
     new VyTableColumn('שעה', 'nvHour'),
@@ -69,6 +70,9 @@ export class ReportsTasksToAvrechComponent implements OnInit {
       }
     })
     debugger;
+  }
+  checkDate(){
+   debugger;
   }
   produceReport(){
   this.sysTableService.getValues(SysTableService.dataTables.Task.iSysTableId).then(data1 => {
@@ -89,7 +93,6 @@ this.appProxy.post("GetActionsByPersonIdBetweenDates", { iPersonId: this.AvrechS
 
       this.currentAction.nvComment=e.nvComment;
 
-      //נעצרתי פה, צריך לפי אם זה משימה, שיחה או פגישה ללכת לlstvalue המתאים ולשלוף את הסוג
       if(this.lstValues1.find(x=>x.iSysTableRowId==e["iTaskType"]))
       this.currentAction.taskType = this.lstValues1.filter(s => s.iSysTableRowId == e["iTaskType"])[0].nvValue;
       else

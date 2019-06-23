@@ -28,8 +28,8 @@
         <div class="form-group row-sm-3 row">
         <label for="dateAdd" class="col-6 lbl"> עד תאריך :</label>
         <div class="col-6">
-        <input class="form-control" id="dtTo" name="dtTo" [(ngModel)]="toDate" ngui-datetime-picker date-only="true"
-        (change)="change=true" (focus)="exist=true" [ngModelOptions]="{standalone: true}"
+        <input (change)="checkDate()" class="form-control" id="dtTo" name="dtTo" [(ngModel)]="toDate" ngui-datetime-picker date-only="true" [min-date]="fromDate"
+        (focus)="exist=true" [ngModelOptions]="{standalone: true}"
           style='width: 160px'>
         </div>
         
@@ -41,7 +41,7 @@
   <div class="row-sm-12" *ngIf="!exist"><span class="msg">לא נמצאו משימות ל{{avrech.value}} בין התאריכים: {{fromDate}}    -    {{toDate}}</span></div>
 
   <div class="main-table">
-      <app-vy-table #tasks [lstColumns]="lstColumns" (clickCell)="click($event)" ></app-vy-table>
+      <app-vy-table #tasks [lstColumns]="lstColumns" ></app-vy-table>
   </div>
   
 </div>

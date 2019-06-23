@@ -130,6 +130,7 @@ namespace Service.Entities
 		{
 			try
 			{
+                Log.LogError("1");
                 Dictionary<int, int> studentsId = new Dictionary<int, int>();
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TAvrechStudents_SLCT").Tables[0].Rows;
                 foreach (DataRow row in drc)
@@ -335,10 +336,13 @@ namespace Service.Entities
             try
             {
                 List<SqlParameter> parameters = ObjectGenerator<Student>.GetSqlParametersFromObject(student);
-
+                Log.LogError("1");
                 parameters.Add(new SqlParameter("iStudent2", iStudent2));
                 parameters.RemoveAt(5);
+                foreach (var p in parameters)
+                    Log.LogError(p.ToString());
                 SqlDataAccess.ExecuteDatasetSP("TStudentUnionCards_UPD", parameters);
+                Log.LogError("hello");
                 return true;
             }
             catch (Exception ex)

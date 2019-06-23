@@ -452,7 +452,7 @@ gregorianDate(){
   }
   else
   this.flagMonth=true;
-debugger;
+
 
   debugger;
    this.student.fDays=date.greg().toString().slice(8,10);
@@ -633,7 +633,8 @@ debugger;
     if (this.save.name != '')
       this.student.nvImgStudent = this.save.name;
 
-if(this.student.dtBirthdate)
+// if(this.student.dtBirthdate)
+  
       this.student.dtBirthdate=new Date(this.foreignMonthes[this.student.fMonthes-1].text+" "+this.student.fDays+" "+this.student.fYears);
 
     this.student.nvBirthdate = this.bornDateHebrewStudent.Day + " " + this.bornDateHebrewStudent.Month + " " + this.bornDateHebrewStudent.Year;

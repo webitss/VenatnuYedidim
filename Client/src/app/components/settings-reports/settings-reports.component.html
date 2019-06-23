@@ -4,7 +4,7 @@
         <div class='form-group row-sm-3 row'>
           <label class="lbl col-2 labels">בחר דו"ח</label>
           <div class="col-2">
-              <select #report class="form-control" (change)="choose(report)" [(ngModel)]="iReportId">
+              <select #report class="form-control" (change)="choose(report)">
                   <option [ngValue]="undefined" disabled>בחר</option>
                   <option *ngFor="let name of reports" value={{name.id}}>{{name.text}}</option>
               </select>

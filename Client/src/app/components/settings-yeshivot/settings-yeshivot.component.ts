@@ -33,7 +33,7 @@ export class SettingsYeshivotComponent implements OnInit {
 
   // @Output()
   // public closeYeshiva = new EventEmitter();
-  protected yeshivaList = new Array();
+  public yeshivaList = new Array();
 
   @Output()
   protected sysTableList: SysTableRow[];

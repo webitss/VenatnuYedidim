@@ -77,12 +77,15 @@ namespace Service.Entities
                 //string ToDate;
                 //FromDate = fromDate.GetDateTimeFormats()[7];
                 //ToDate = toDate.GetDateTimeFormats()[7];
-                List<Action> allActions = new List<Action>();
+                List <Action> allActions = new List<Action>();
                 Action a = new Action();
                 List<SqlParameter> parameters = new List<SqlParameter>();
+                DateTime fd = DateTime.Parse(fromDate.GetDateTimeFormats()[7]);
+                DateTime td = DateTime.Parse(toDate.GetDateTimeFormats()[7]);
                 parameters.Add(new SqlParameter("iPersonId", iPersonId));
-                parameters.Add(new SqlParameter("fromDate", fromDate.GetDateTimeFormats()[7]));
-                parameters.Add(new SqlParameter("toDate", toDate.GetDateTimeFormats()[7]));
+                parameters.Add(new SqlParameter("fromDate",fd ));
+                parameters.Add(new SqlParameter("toDate",td));
+                //Log.LogError(toDate.GetDateTimeFormats()[7]+"2"+ fromDate.GetDateTimeFormats()[7].GetType());
                 DataRowCollection drc = SqlDataAccess.ExecuteDatasetSP("TTaskGetTasksByAvrechIdAndDates_SLCT", parameters).Tables[0].Rows;
                 List<Task> tasks = ObjectGenerator<Task>.GeneratListFromDataRowCollection(drc);
                 DataRowCollection drc2 = SqlDataAccess.ExecuteDatasetSP("TMeetingGetMeetingsByAvrechIdAndDates_SLCT", parameters).Tables[0].Rows;
@@ -126,7 +129,7 @@ namespace Service.Entities
             }
             catch (Exception ex)
             {
-                Log.LogError("GetTasksByPersonIdBetweenDates / TTaskGetTasksByAvrechIdAndDates_SLCT", ", ex " + ex);
+                Log.LogError("GetActionsByPersonIdBetweenDates / TTaskGetTasksByAvrechIdAndDates_SLCT", ", ex " + ex);
                 return null;
             }
         }
